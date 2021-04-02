@@ -26,7 +26,7 @@
     },
     {
       "type": "item",
-      "title": "Endpoints",
+      "title": "Chargify API",
       "uri": "reference/Chargify.v1.yaml"
     }
   ]
