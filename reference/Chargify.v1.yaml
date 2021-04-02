@@ -79,12 +79,7 @@ paths:
                         description: The end of the billing period period for which the adjustment applies
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
-        ## Adjustments Documentation 
-
-        Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
-
-
-        ## Scenarios for adjustments
+        # Scenarios for adjustments
 
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
         |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
@@ -94,6 +89,10 @@ paths:
         | Scenario 5 | To set the Subscription balance to an exact dollar amount, include the following attributes to the request:                          | `"adjustment_method":"target", "amount":"100.00"`            |
         | Scenario 6 | To set the Subscription balance to an exact positive amount of cents, the request must contain the following attributes:             | `"adjustment_method":"target",` `"amount_in_cents":"10000"`  |
         | Scenario 7 | To set the Subscription balance to an exact negative amount of cents, use the following attributes in the request:                   | `"adjustment_method":"target",` `"amount_in_cents":"-10000"` |
+
+        ## Help Documentation 
+
+        Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
       requestBody:
         content:
           application/json:
@@ -132,6 +131,167 @@ paths:
                   required:
                     - amount
                     - memo
+  '/subscriptions/{subscription_id}/charges.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription to which the charge applies
+    post:
+      summary: Create Charge
+      tags:
+        - Legacy Subscription Balance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  charge:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      subscription_id:
+                        type: string
+                      type:
+                        type: string
+                      kind:
+                        type: string
+                      transaction_type:
+                        type: string
+                      success:
+                        type: string
+                      amount_in_cents:
+                        type: string
+                      memo:
+                        type: string
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      starting_balance_in_cents:
+                        type: string
+                      ending_balance_in_cents:
+                        type: string
+                      gateway_used:
+                        type: string
+                      gateway_transaction_id:
+                        type: string
+                      gateway_order_id:
+                        type: string
+                      payment_id:
+                        type: string
+                      product_id:
+                        type: string
+                      tax_id:
+                        type: string
+                      component_id:
+                        type: string
+                      statement_id:
+                        type: string
+                      customer_id:
+                        type: string
+                      item_name:
+                        type: string
+                      period_range_start:
+                        type: string
+                      period_range_end:
+                        type: string
+                      original_amount_in_cents:
+                        type: string
+                      discount_amount_in_cents:
+                        type: string
+                      taxable_amount_in_cents:
+                        type: string
+                      price_point_id:
+                        type: string
+                      price_point_handle:
+                        type: string
+                      taxations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tax_id:
+                              type: string
+                            tax_chage_id:
+                              type: string
+                            tax_name:
+                              type: string
+                            rate:
+                              type: string
+                            tax_amount_in_cents:
+                              type: string
+                            tax_rules:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  tax_rule_id:
+                                    type: string
+                                  country_code:
+                                    type: string
+                                  subdivision_code:
+                                    type: string
+                                  rate:
+                                    type: string
+                                  tax_amount_in_cents:
+                                    type: string
+                                  '':
+                                    type: string
+      operationId: post-subscriptions-subscription_id-charges.json
+      description: |-
+        # Create Charge
+
+        Creating a charge requires a valid, live subscription (i.e. subscriptions that are not canceled or expired). The subscription must be referenced by `subscription_id`.
+
+        When a charge is created, a payment in the amount of the assessed charge is automatically captured from the credit card on file for the subscription. For this purpose, the subscription must have a payment method in order to support adding a charge. Payment collection will not be attempted if:
+
+        + the subscription is on legacy invoice billing
+        + the charge is accrued to the next renewal (`delay_capture` = true)
+
+        ## Limitations of attribute combinations
+
+        When you add a charge to an existing subscription, you may not use the following combination of attribute values:
+
+        + `delay_capture` = true
+        + `accrue_on_failure` = true
+
+        ## Help Documentation
+
+        This method of recording a charge against a subscription is referred to as a **"One-time Charge"** in the Chargify Help Documentation.
+
+        Full documentation on how to record a One-time Charge in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/one-time-charges.html).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                charge:
+                  type: object
+                  properties:
+                    memo:
+                      type: string
+                    amount:
+                      type: string
+                    amount_in_cents:
+                      type: string
+                    accrue_on_failure:
+                      type: string
+                    delay_capture:
+                      type: string
+                    taxable:
+                      type: string
+                    period_range_start:
+                      type: string
+                    period_range_end:
+                      type: string
 components:
   schemas: {}
 servers:
