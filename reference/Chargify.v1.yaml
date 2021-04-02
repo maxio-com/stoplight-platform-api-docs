@@ -134,3 +134,6 @@ paths:
                     - memo
 components:
   schemas: {}
+servers:
+  - url: 'https://subdomain.chargify.com'
+    description: ''
