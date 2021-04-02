@@ -202,6 +202,9 @@ paths:
                       - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
         # Create Adjustment
 
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
@@ -459,6 +462,9 @@ paths:
                       - This subscription is not eligible to accept charges.
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
         # Create Charge
 
         Creating a charge requires a valid, live subscription (i.e. subscriptions that are not canceled or expired). The subscription must be referenced by `subscription_id`.
