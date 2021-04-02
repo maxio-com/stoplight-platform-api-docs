@@ -202,7 +202,7 @@ paths:
                       - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
-        # Scenarios for adjustments
+        # Create Adjustment
 
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
         |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
