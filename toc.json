@@ -16,6 +16,11 @@
     },
     {
       "type": "item",
+      "title": "Secure Applications",
+      "uri": "docs/basics/Secure-Applications.md"
+    },
+    {
+      "type": "item",
       "title": "API Access Limitations",
       "uri": "docs/basics/API-Access-Limitations.md"
     },
