@@ -22,6 +22,7 @@ paths:
       summary: Get User Info by User ID
       tags:
         - Users
+        - Test
       responses:
         '200':
           description: User Found
