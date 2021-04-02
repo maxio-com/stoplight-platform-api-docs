@@ -8,19 +8,76 @@ info:
 tags:
   - name: Users
 paths:
-  '/subscriptions/{subscriptionId}/adjustments.json':
+  '/subscriptions/{subscription_id}/adjustments.json':
     parameters:
       - schema:
-          type: integer
-        name: subscriptionId
+          type: string
+        name: subscription_id
         in: path
         required: true
-        description: The Chargify id of the subscription to which the adjustment belongs
+        description: The Chargify id of the subscription to which the adjustment applies
     post:
       summary: Create Adjustment
       tags:
         - Legacy Subscription Balance
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  adjustment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The Chargify id of the adjustment
+                      success:
+                        type: boolean
+                        description: Boolean indicating if the adjustment was successfully applied to the subscription balance
+                      memo:
+                        type: string
+                        description: The supplied description of the adjustment
+                        maxLength: 255
+                      amount_in_cents:
+                        type: integer
+                        description: The amount of the adjustment represented in cents
+                      ending_balance_in_cents:
+                        type: integer
+                        description: The subscription balance after the adjustment was applied
+                      type:
+                        type: string
+                      transaction_type:
+                        type: string
+                      subscription_id:
+                        type: integer
+                        description: The Chargify id of the subscription associated with this adjustment
+                      product_id:
+                        type: integer
+                        description: The Chargify id of the product associated with the subscription's at the time of the adjustment
+                      created_at:
+                        type: string
+                        description: The time that the adjustment was created
+                      updated_at:
+                        type: string
+                        description: The time at which the adjustment was last updated
+                      payment_id:
+                        type: 'null'
+                      period_range_start:
+                        type:
+                          - string
+                          - 'null'
+                        format: date
+                        description: The start of the billing period for which the adjustment applies
+                      period_range_end:
+                        type:
+                          - string
+                          - 'null'
+                        format: date
+                        description: The end of the billing period period for which the adjustment applies
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
         ## Adjustments Documentation 
@@ -55,6 +112,7 @@ paths:
                     memo:
                       type: string
                       description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
+                      maxLength: 255
                     amount_in_cents:
                       type:
                         - string
