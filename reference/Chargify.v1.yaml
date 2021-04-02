@@ -37,33 +37,94 @@ paths:
                         description: The Chargify id of the adjustment
                       success:
                         type: boolean
-                        description: Boolean indicating if the adjustment was successfully applied to the subscription balance
+                        description: 'Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true'
                       memo:
-                        type: string
                         description: The supplied description of the adjustment
-                        maxLength: 255
+                        type: string
+                        nullable: true
                       amount_in_cents:
                         type: integer
                         description: The amount of the adjustment represented in cents
+                      starting_balance_in_cents:
+                        type: integer
+                        description: The subscription balance in cents before the adjustment applied
                       ending_balance_in_cents:
                         type: integer
-                        description: The subscription balance after the adjustment was applied
+                        description: The subscription balance in cents after the adjustment applied
                       type:
                         type: string
+                        enum:
+                          - Adjustment
+                      kind:
+                        type: string
+                        nullable: true
                       transaction_type:
                         type: string
+                        enum:
+                          - adjustment
                       subscription_id:
                         type: integer
                         description: The Chargify id of the subscription associated with this adjustment
                       product_id:
                         type: integer
                         description: The Chargify id of the product associated with the subscription's at the time of the adjustment
+                      component_id:
+                        type: integer
+                        nullable: true
+                      component_handle:
+                        type: string
+                        nullable: true
+                      component_price_point_id:
+                        type: integer
+                        nullable: true
+                      component_price_point_handle:
+                        type: string
+                        nullable: true
+                      statement_id:
+                        type: integer
+                        description: The Chargify id of the statement to which this adjustment was applied
+                      customer_id:
+                        type: integer
+                        description: The Chargify id of the customer to which the subscription belongs
+                      item_name:
+                        type: string
+                        nullable: true
+                      currency:
+                        type: string
+                        description: The currency ISO code associated with the currency which was used to make the adjustment
+                        enum:
+                          - AUD
+                          - BRL
+                          - CAD
+                          - CHF
+                          - CNY
+                          - CZK
+                          - DKK
+                          - EUR
+                          - GBP
+                          - HKD
+                          - INR
+                          - JPY
+                          - MXN
+                          - MYR
+                          - NOK
+                          - NZD
+                          - PHP
+                          - PLN
+                          - RON
+                          - RUB
+                          - SEK
+                          - SGD
+                          - USD
+                          - ZAR
+                          - AED
+                          - SAR
+                          - ILS
+                      exchange_rate:
+                        type: integer
                       created_at:
                         type: string
                         description: The time that the adjustment was created
-                      updated_at:
-                        type: string
-                        description: The time at which the adjustment was last updated
                       payment_id:
                         type: integer
                         nullable: true
@@ -72,11 +133,73 @@ paths:
                         nullable: true
                         format: date
                         description: The start of the billing period for which the adjustment applies
+                        example: '2021-04-02'
                       period_range_end:
                         type: string
                         nullable: true
                         format: date
                         description: The end of the billing period period for which the adjustment applies
+                        example: '2021-04-02'
+                      gateway_used:
+                        type: string
+                        nullable: true
+                      gateway_transaction_id:
+                        type: integer
+                        nullable: true
+                      gateway_order_id:
+                        type: integer
+                        nullable: true
+                      tax_id:
+                        type: integer
+                        nullable: true
+              examples:
+                Example:
+                  value:
+                    adjustment:
+                      id: 12345
+                      subscription_id: 54321
+                      type: Adjustment
+                      kind: null
+                      transaction_type: adjustment
+                      success: true
+                      amount_in_cents: 1000
+                      memo: null
+                      created_at: '2021-04-02T15:54:10-04:00'
+                      starting_balance_in_cents: 8800
+                      ending_balance_in_cents: 9800
+                      gateway_used: null
+                      gateway_transaction_id: null
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 98765
+                      tax_id: null
+                      component_id: null
+                      statement_id: 56789
+                      customer_id: 38921
+                      item_name: null
+                      period_range_start: '2021-04-02'
+                      period_range_end: '2021-04-02'
+                      currency: USD
+                      exchange_rate: 1
+                      component_handle: null
+                      component_price_point_id: null
+                      component_price_point_handle: null
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
         # Scenarios for adjustments
@@ -102,19 +225,22 @@ paths:
                 adjustment:
                   type: object
                   properties:
+                    amount_in_cents:
+                      oneOf:
+                        - type: string
+                          pattern: ^\d+$
+                        - type: number
+                      description: '(either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both `amount` and `amount_in_cents`, the value in `amount_in_cents` will be used and `amount` will be discarded.'
                     amount:
                       oneOf:
                         - type: string
+                          pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                      description: '(either `amount` or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
                     memo:
                       type: string
                       description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
                       maxLength: 255
-                    amount_in_cents:
-                      oneOf:
-                        - type: string
-                        - type: number
                     period_range_start:
                       type: string
                       description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
@@ -129,8 +255,7 @@ paths:
                         - target
                       description: 'A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.'
                   required:
-                    - amount
-                    - memo
+                    - amount_in_cents
   '/subscriptions/{subscription_id}/charges.json':
     parameters:
       - schema:
@@ -155,85 +280,156 @@ paths:
                     type: object
                     properties:
                       id:
-                        type: string
+                        type: integer
                       subscription_id:
-                        type: string
+                        type: integer
                       type:
                         type: string
+                        enum:
+                          - Charge
                       kind:
                         type: string
+                        enum:
+                          - one_time
                       transaction_type:
                         type: string
+                        enum:
+                          - charge
                       success:
-                        type: string
+                        description: 'The success of the charge. At this time, all charges that are returned will return true here'
+                        type: boolean
                       amount_in_cents:
-                        type: string
+                        description: 'The amount of the charge and captured payment, represented in cents.'
+                        type: integer
                       memo:
+                        description: The supplied memo for the charge
                         type: string
+                        nullable: true
                       created_at:
                         type: string
-                      updated_at:
-                        type: string
+                        description: The time that the charge was created
                       starting_balance_in_cents:
-                        type: string
+                        type: integer
+                        description: The subscription balance in cents before the charge was applied
                       ending_balance_in_cents:
-                        type: string
+                        type: integer
+                        description: The subscription balance in cents after the charge was applied
                       gateway_used:
                         type: string
+                        nullable: true
                       gateway_transaction_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       gateway_order_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       payment_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       product_id:
+                        type: integer
+                        nullable: true
+                      price_point_id:
+                        type: integer
+                        nullable: true
+                      price_point_handle:
                         type: string
+                        nullable: true
                       tax_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       component_id:
+                        type: integer
+                        nullable: true
+                      component_handle:
                         type: string
+                        nullable: true
+                      component_price_point_id:
+                        type: integer
+                        nullable: true
+                      component_price_point_handle:
+                        type: string
+                        nullable: true
                       statement_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       customer_id:
-                        type: string
+                        type: integer
+                        nullable: true
                       item_name:
                         type: string
                       period_range_start:
                         type: string
+                        nullable: true
                       period_range_end:
                         type: string
+                        nullable: true
+                      currency:
+                        type: string
+                        enum:
+                          - AUD
+                          - BRL
+                          - CAD
+                          - CHF
+                          - CNY
+                          - CZK
+                          - DKK
+                          - EUR
+                          - GBP
+                          - HKD
+                          - INR
+                          - JPY
+                          - MXN
+                          - MYR
+                          - NOK
+                          - NZD
+                          - PHP
+                          - PLN
+                          - RON
+                          - RUB
+                          - SEK
+                          - SGD
+                          - USD
+                          - ZAR
+                          - AED
+                          - SAR
+                          - ILS
+                      exchange_rate:
+                        type: integer
+                      quantity:
+                        type: string
+                        enum:
+                          - '1.0'
                       original_amount_in_cents:
-                        type: string
+                        type: integer
                       discount_amount_in_cents:
-                        type: string
+                        type: integer
                       taxable_amount_in_cents:
-                        type: string
-                      price_point_id:
-                        type: string
-                      price_point_handle:
-                        type: string
+                        type: integer
+                        nullable: true
                       taxations:
                         type: array
+                        nullable: true
                         items:
                           type: object
                           properties:
                             tax_id:
-                              type: string
-                            tax_chage_id:
-                              type: string
+                              type: integer
+                            tax_charge_id:
+                              type: integer
                             tax_name:
                               type: string
                             rate:
                               type: string
                             tax_amount_in_cents:
-                              type: string
+                              type: integer
                             tax_rules:
                               type: array
                               items:
                                 type: object
                                 properties:
                                   tax_rule_id:
-                                    type: string
+                                    type: integer
                                   country_code:
                                     type: string
                                   subdivision_code:
@@ -241,9 +437,26 @@ paths:
                                   rate:
                                     type: string
                                   tax_amount_in_cents:
+                                    type: integer
+                                  description:
                                     type: string
-                                  '':
-                                    type: string
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Memo: cannot be blank.'
+                      - This subscription is not eligible to accept charges.
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
         # Create Charge
@@ -276,22 +489,126 @@ paths:
                 charge:
                   type: object
                   properties:
+                    amount_in_cents:
+                      description: '(either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both ‘amount’ and ‘amount_in_cents’, the value in ‘amount_in_cents’ will be used and ‘amount’ will be discarded.'
+                      oneOf:
+                        - type: string
+                          pattern: ^\d+$
+                        - type: number
                     memo:
+                      description: A helpful explanation for the charge. This amount will remind you and your customer for the reason for the assessment of the charge.
                       type: string
                     amount:
-                      type: string
-                    amount_in_cents:
-                      type: string
+                      description: '(either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
+                      oneOf:
+                        - type: string
+                          pattern: '^[1-9]\d*(\.\d+)?$'
+                        - type: number
                     accrue_on_failure:
-                      type: string
+                      description: 'If true, the charge will be added to the subscription whether or not the payment succeeds. If false, only the failed payment will be recorded, and the balance will not be increased. This attribute is ignored if delay_capture is true.'
+                      default: false
+                      oneOf:
+                        - type: boolean
+                        - type: integer
+                          enum:
+                            - 0
+                            - 1
+                        - type: string
+                          enum:
+                            - '0'
+                            - '1'
                     delay_capture:
-                      type: string
+                      description: 'If true, Chargify does not attempt to immediately capture a payment for this charge (instead, wait until the next assessment date). Note if this option is used use_negative_balance is assumed as false.'
+                      oneOf:
+                        - type: boolean
+                        - type: integer
+                          enum:
+                            - 0
+                            - 1
+                        - type: string
+                          enum:
+                            - '0'
+                            - '1'
                     taxable:
+                      description: 'If true, taxes will be assessed on the charge.'
+                      default: false
+                      oneOf:
+                        - type: boolean
+                        - type: integer
+                          enum:
+                            - 0
+                            - 1
+                        - type: string
+                          enum:
+                            - '0'
+                            - '1'
+                    payment_collection_method:
                       type: string
+                      description: '(for subscriptions using legacy invoice billing only) When delay_capture is set to false, and payment_collection_method is set to invoice, a mid-period invoice will be created from this charge. The charge will not appear on the invoice created at the next renewal'
+                      default: automatic
+                      enum:
+                        - automatic
+                        - invoice
                     period_range_start:
+                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       type: string
                     period_range_end:
+                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       type: string
+                    use_negative_balance:
+                      description: 'This option specifies whether or not a negative current balance should be used when creating the new charge. If true, use the negative balance on the subscription to calculate the charge. If false, do not use the negative balance.'
+                      oneOf:
+                        - type: boolean
+                        - type: integer
+                          enum:
+                            - 0
+                            - 1
+                        - type: string
+                          enum:
+                            - '0'
+                            - '1'
+                  required:
+                    - amount_in_cents
+                    - memo
+            examples:
+              Example:
+                value:
+                  charge:
+                    id: 3944471
+                    subscription_id: 108287
+                    type: Charge
+                    kind: one_time
+                    transaction_type: charge
+                    success: true
+                    amount_in_cents: 1000
+                    memo: Upcharge
+                    created_at: '2021-04-02T17:52:09-04:00'
+                    starting_balance_in_cents: -7486
+                    ending_balance_in_cents: -6486
+                    gateway_used: null
+                    gateway_transaction_id: null
+                    gateway_order_id: null
+                    payment_id: 3944472
+                    product_id: 7580
+                    tax_id: null
+                    component_id: null
+                    statement_id: 1220246
+                    customer_id: 171137
+                    item_name: prod_10430
+                    period_range_start: '2021-04-02'
+                    period_range_end: '2021-04-02'
+                    currency: USD
+                    exchange_rate: 1
+                    component_handle: null
+                    component_price_point_id: null
+                    component_price_point_handle: null
+                    quantity: '1.0'
+                    original_amount_in_cents: 1000
+                    discount_amount_in_cents: 0
+                    taxable_amount_in_cents: null
+                    price_point_id: null
+                    price_point_handle: null
+                    taxations: []
 components:
   schemas: {}
 servers:
