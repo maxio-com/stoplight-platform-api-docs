@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "type": "divider",
+      "title": "basics"
+    },
+    {
+      "type": "item",
+      "title": "Introduction",
+      "uri": "docs/basics/Introduction.md"
+    },
+    {
+      "type": "item",
+      "title": "API Overview",
+      "uri": "docs/basics/Overview.md"
+    },
+    {
+      "type": "item",
+      "title": "API Access Limitations",
+      "uri": "docs/basics/API-Access-Limitations.md"
+    },
+    {
+      "type": "item",
+      "title": "Endpoints",
+      "uri": "reference/Chargify.v1.yaml"
+    }
+  ]
+}
