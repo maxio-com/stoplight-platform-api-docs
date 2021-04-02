@@ -10,136 +10,72 @@ servers:
 tags:
   - name: Users
 paths:
-  '/users/{userId}':
+  '/subscriptions/{subscriptionId}/adjustments.json':
     parameters:
       - schema:
           type: integer
-        name: userId
+        name: subscriptionId
         in: path
         required: true
-        description: Id of an existing user.
-    get:
-      summary: Get User Info by User ID
-      tags:
-        - Users
-        - Test
-      responses:
-        '200':
-          description: User Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-  /user:
+        description: The Chargify id of the subscription to which the adjustment belongs
     post:
-      summary: Create New User
-      operationId: post-user
-      responses:
-        '200':
-          description: User Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
-                  value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
+      summary: Create Adjustment
+      tags:
+        - Legacy Subscription Balance
+      responses: {}
+      operationId: post-subscriptions-subscriptionId-adjustments.json
+      description: |-
+        ## Adjustments Documentation 
+
+        Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
+
+
+        ## Scenarios for adjustments
+
+        | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
+        |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+        | Scenario 2 | To increase the Subscription balance by a certain amount of cents, use the following attribute in your request:                      | `"amount_in_cents":100`                                      |
+        | Scenario 3 | To decrease the Subscription balance by a certain dollar amount, the request must contain:                                           | `"amount":"-4.00"`                                           |
+        | Scenario 4 | To decrease the Subscription balance by a certain amount of cents, use:                                                              | `"amount_in_cents":"-400"`                                   |
+        | Scenario 5 | To set the Subscription balance to an exact dollar amount, include the following attributes to the request:                          | `"adjustment_method":"target", "amount":"100.00"`            |
+        | Scenario 6 | To set the Subscription balance to an exact positive amount of cents, the request must contain the following attributes:             | `"adjustment_method":"target",` `"amount_in_cents":"10000"`  |
+        | Scenario 7 | To set the Subscription balance to an exact negative amount of cents, use the following attributes in the request:                   | `"adjustment_method":"target",` `"amount_in_cents":"-10000"` |
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
-      tags:
-        - Users
+                adjustment:
+                  type: object
+                  properties:
+                    amount:
+                      type:
+                        - string
+                        - number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                    memo:
+                      type: string
+                      description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
+                    amount_in_cents:
+                      type:
+                        - string
+                        - number
+                    period_range_start:
+                      type: string
+                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      format: date
+                    period_range_end:
+                      type: string
+                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      format: date
+                    adjustment_method:
+                      type: string
+                      enum:
+                        - target
+                      description: 'A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.'
+                  required:
+                    - amount
+                    - memo
 components:
-  schemas:
-    User:
-      title: User
-      type: object
-      description: ''
-      x-examples:
-        Alice Smith:
-          id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+  schemas: {}
