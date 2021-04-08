@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Chargify
-  version: 1.0
+  version: 1
   contact:
     email: support@chargify.com
   description: Manage your company's subscriptions through the Chargify API.
@@ -37,7 +37,7 @@ paths:
                         description: The Chargify id of the adjustment
                       success:
                         type: boolean
-                        description: Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true
+                        description: 'Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true'
                       memo:
                         description: The supplied description of the adjustment
                         type: string
@@ -233,30 +233,30 @@ paths:
                         - type: string
                           pattern: ^\d+$
                         - type: number
-                      description: (either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both `amount` and `amount_in_cents`, the value in `amount_in_cents` will be used and `amount` will be discarded.
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
                     amount:
                       oneOf:
                         - type: string
-                          pattern: ^[1-9]\d*(\.\d+)?$
+                          pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
-                      description: (either `amount` or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
                     memo:
                       type: string
                       description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
                       maxLength: 255
                     period_range_start:
                       type: string
-                      description: A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.
+                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       format: date
                     period_range_end:
                       type: string
-                      description: A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.
+                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       format: date
                     adjustment_method:
                       type: string
                       enum:
                         - target
-                      description: A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.
+                      description: 'A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.'
                   required:
                     - amount_in_cents
   '/subscriptions/{subscription_id}/charges.json':
@@ -299,10 +299,10 @@ paths:
                         enum:
                           - charge
                       success:
-                        description: The success of the charge. At this time, all charges that are returned will return true here
+                        description: 'The success of the charge. At this time, all charges that are returned will return true here'
                         type: boolean
                       amount_in_cents:
-                        description: The amount of the charge and captured payment, represented in cents.
+                        description: 'The amount of the charge and captured payment, represented in cents.'
                         type: integer
                       memo:
                         description: The supplied memo for the charge
@@ -496,7 +496,7 @@ paths:
                   type: object
                   properties:
                     amount_in_cents:
-                      description: (either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both ‘amount’ and ‘amount_in_cents’, the value in ‘amount_in_cents’ will be used and ‘amount’ will be discarded.
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
                       oneOf:
                         - type: string
                           pattern: ^\d+$
@@ -505,13 +505,13 @@ paths:
                       description: A helpful explanation for the charge. This amount will remind you and your customer for the reason for the assessment of the charge.
                       type: string
                     amount:
-                      description: (either `amount` or `amount_in_cents` is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
                     accrue_on_failure:
-                      description: If true, the charge will be added to the subscription whether or not the payment succeeds. If false, only the failed payment will be recorded, and the balance will not be increased. This attribute is ignored if delay_capture is true.
+                      description: 'If true, the charge will be added to the subscription whether or not the payment succeeds. If false, only the failed payment will be recorded, and the balance will not be increased. This attribute is ignored if delay_capture is true.'
                       default: false
                       oneOf:
                         - type: boolean
@@ -524,7 +524,7 @@ paths:
                             - '0'
                             - '1'
                     delay_capture:
-                      description: If true, Chargify does not attempt to immediately capture a payment for this charge (instead, wait until the next assessment date). Note if this option is used use_negative_balance is assumed as false.
+                      description: 'If true, Chargify does not attempt to immediately capture a payment for this charge (instead, wait until the next assessment date). Note if this option is used use_negative_balance is assumed as false.'
                       oneOf:
                         - type: boolean
                         - type: integer
@@ -536,7 +536,7 @@ paths:
                             - '0'
                             - '1'
                     taxable:
-                      description: If true, taxes will be assessed on the charge.
+                      description: 'If true, taxes will be assessed on the charge.'
                       default: false
                       oneOf:
                         - type: boolean
@@ -550,19 +550,19 @@ paths:
                             - '1'
                     payment_collection_method:
                       type: string
-                      description: (for subscriptions using legacy invoice billing only) When delay_capture is set to false, and payment_collection_method is set to invoice, a mid-period invoice will be created from this charge. The charge will not appear on the invoice created at the next renewal
+                      description: '(for subscriptions using legacy invoice billing only) When delay_capture is set to false, and payment_collection_method is set to invoice, a mid-period invoice will be created from this charge. The charge will not appear on the invoice created at the next renewal'
                       default: automatic
                       enum:
                         - automatic
                         - invoice
                     period_range_start:
-                      description: A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.
+                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       type: string
                     period_range_end:
-                      description: A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.
+                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
                       type: string
                     use_negative_balance:
-                      description: This option specifies whether or not a negative current balance should be used when creating the new charge. If true, use the negative balance on the subscription to calculate the charge. If false, do not use the negative balance.
+                      description: 'This option specifies whether or not a negative current balance should be used when creating the new charge. If true, use the negative balance on the subscription to calculate the charge. If false, do not use the negative balance.'
                       oneOf:
                         - type: boolean
                         - type: integer
@@ -615,6 +615,181 @@ paths:
                     price_point_id: null
                     price_point_handle: null
                     taxations: []
+  '/subscriptions/{subscription_id}/payments.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription to which the payment applies
+    post:
+      summary: Create Payment
+      tags:
+        - Legacy Subscription Balance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  payment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      subscription_id:
+                        type: integer
+                      type:
+                        type: string
+                        enum:
+                          - Payment
+                      kind:
+                        type: string
+                        enum:
+                          - manual
+                      transaction_type:
+                        type: string
+                        enum:
+                          - payment
+                      success:
+                        type: boolean
+                      amount_in_cents:
+                        type: integer
+                      memo:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                      starting_balance_in_cents:
+                        type: integer
+                      ending_balance_in_cents:
+                        type: integer
+                      gateway_used:
+                        type: string
+                        nullable: true
+                      gateway_transaction_id:
+                        type: integer
+                        nullable: true
+                      gateway_order_id:
+                        type: integer
+                        nullable: true
+                      payment_id:
+                        type: integer
+                        nullable: true
+                      product_id:
+                        type: integer
+                        nullable: true
+                      tax_id:
+                        type: integer
+                        nullable: true
+                      component_id:
+                        type: integer
+                        nullable: true
+                      statement_id:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      item_name:
+                        type: string
+                        nullable: true
+                      period_range_start:
+                        type: string
+                        nullable: true
+                      period_range_end:
+                        type: string
+                        nullable: true
+                      currency:
+                        type: string
+                      exchange_rate:
+                        type: number
+                      component_handle:
+                        type: string
+                        nullable: true
+                      component_price_point_id:
+                        type: integer
+                        nullable: true
+                      component_price_point_handle:
+                        type: string
+                        nullable: true
+                      parent_id:
+                        type: integer
+                        nullable: true
+                      role:
+                        type: string
+                        nullable: true
+                      card_number:
+                        type: string
+                        nullable: true
+                      card_expiration:
+                        type: string
+                        nullable: true
+                      card_type:
+                        type: string
+                        nullable: true
+                      refunded_amount_in_cents:
+                        type: integer
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: object
+              examples:
+                Example:
+                  value:
+                    errors:
+                      amount_in_cents:
+                        - 'Amount: is not a number.'
+      operationId: post-subscriptions-subscription_id-payments.json
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
+        |---------------------------------------------------------------------------|
+
+        ## Payments Intro
+
+        If you are using the modern Relationship Invoicing feature, see the [corresponding invoicing docs](#endpoint:fS5WvuG5ByqjTzG6C). Relationship Invoicing requires you to create a prepayment rather than an external payment against the subscription. The prepayment endpoint is [defined here](#endpoint:aD6oLHshxgsTvmGCg).
+
+        Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
+        These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
+
+        ## Payment Documentation
+
+        Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment:
+                  type: object
+                  properties:
+                    amount_in_cents:
+                      oneOf:
+                        - type: string
+                          pattern: ^\d+$
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                    amount:
+                      oneOf:
+                        - type: string
+                          pattern: '^[1-9]\d*(\.\d+)?$'
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
+                    memo:
+                      type: string
+                      description: Typically the description of why the payment occured
+                  required:
+                    - amount_in_cents
 components:
   schemas: {}
 servers:
