@@ -227,6 +227,8 @@ paths:
               properties:
                 adjustment:
                   type: object
+                  required:
+                    - amount_in_cents
                   properties:
                     amount_in_cents:
                       oneOf:
@@ -257,8 +259,8 @@ paths:
                       enum:
                         - target
                       description: 'A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.'
-                  required:
-                    - amount_in_cents
+              required:
+                - adjustment
   '/subscriptions/{subscription_id}/charges.json':
     parameters:
       - schema:
@@ -494,6 +496,9 @@ paths:
               properties:
                 charge:
                   type: object
+                  required:
+                    - amount_in_cents
+                    - memo
                   properties:
                     amount_in_cents:
                       description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
@@ -573,9 +578,8 @@ paths:
                           enum:
                             - '0'
                             - '1'
-                  required:
-                    - amount_in_cents
-                    - memo
+              required:
+                - charge
             examples:
               Example:
                 value:
@@ -768,6 +772,8 @@ paths:
               properties:
                 payment:
                   type: object
+                  required:
+                    - amount_in_cents
                   properties:
                     amount_in_cents:
                       oneOf:
@@ -784,8 +790,234 @@ paths:
                     memo:
                       type: string
                       description: Typically the description of why the payment occured
+              required:
+                - payment
+  '/subscriptions/{subscription_id}/refunds.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription to which the refund applies
+    post:
+      summary: Create Refund
+      tags:
+        - Legacy Subscription Balance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  refund:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      subscription_id:
+                        type: integer
+                      type:
+                        type: string
+                        enum:
+                          - Refund
+                      kind:
+                        type: string
+                        enum:
+                          - manual
+                        nullable: true
+                      transaction_type:
+                        type: string
+                        enum:
+                          - refund
+                      success:
+                        type: boolean
+                      amount_in_cents:
+                        type: number
+                      memo:
+                        type: string
+                      created_at:
+                        type: string
+                      starting_balance_in_cents:
+                        type: integer
+                      ending_balance_in_cents:
+                        type: integer
+                      gateway_used:
+                        type: string
+                        nullable: true
+                      gateway_transaction_id:
+                        type: integer
+                        nullable: true
+                      gateway_order_id:
+                        type: integer
+                        nullable: true
+                      payment_id:
+                        type: integer
+                        nullable: true
+                      product_id:
+                        type: integer
+                      tax_id:
+                        type: integer
+                        nullable: true
+                      component_id:
+                        type: integer
+                        nullable: true
+                      statement_id:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      item_name:
+                        type: string
+                        nullable: true
+                      period_range_start:
+                        type: string
+                        nullable: true
+                      period_range_end:
+                        type: string
+                        nullable: true
+                      currency:
+                        type: string
+                      exchange_rate:
+                        type: number
+                      component_handle:
+                        type: string
+                        nullable: true
+                      component_price_point_id:
+                        type: integer
+                        nullable: true
+                      component_price_point_handle:
+                        type: string
+                        nullable: true
+              examples:
+                Example:
+                  value:
+                    refund:
+                      id: 3992912
+                      subscription_id: 144009
+                      type: Refund
+                      kind: manual
+                      transaction_type: refund
+                      success: true
+                      amount_in_cents: 1000
+                      memo: Incorrectly billed
+                      created_at: '2021-04-08T14:26:23-04:00'
+                      starting_balance_in_cents: 8800
+                      ending_balance_in_cents: 8800
+                      gateway_used: null
+                      gateway_transaction_id: null
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 7579
+                      tax_id: null
+                      component_id: null
+                      statement_id: 1220172
+                      customer_id: 229248
+                      item_name: null
+                      period_range_start: null
+                      period_range_end: null
+                      currency: USD
+                      exchange_rate: 1
+                      component_handle: null
+                      component_price_point_id: null
+                      component_price_point_handle: null
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: array
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Memo: cannot be blank.'
+      operationId: post-subscriptions-subscription_id-refunds.json
+      description: |-
+        # Refunds
+
+        With Chargify you have the ability to apply a refund to a payment that has been processed at the gateway. There are two types of refunds:
+        - **Internal** - a refund which interacts with the Gateway to return the amount back to the customer
+        - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
+
+        Note that external refunds will reduce revenue, but they do not affect the balance due for the subscription.
+
+        For more information on creating refunds in general, please see [Refunds](https://help.chargify.com/subscriptions/refunds.html).
+
+        ## External Refund Use Cases
+         
+        The use case for this type of refund is as follows:
+
+        + You have a gateway that does not do **direct** refunds back to a Customer's bank account
+        + To process a refund, you process the refund **through** your gateway account.
+        + Afterwards, record the refund within Chargify
+
+        ## Supported Gateways
+
+        Interal refunds are only supported for the following gateways:
+
+        + Authorize.Net
+        + Braintree Blue
+        + CyberSource
+        + Elavon
+        + eWay Rapid
+        + Litle
+        + Moneris
+        + Orbital
+        + Payeezy (First Data)
+        + Pin Payments
+        + Payment Express
+        + Paymill
+        + QuickPay
+        + Stripe
+        + Trust Commerce
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                refund:
+                  type: object
                   required:
+                    - payment_id
                     - amount_in_cents
+                    - memo
+                  properties:
+                    payment_id:
+                      type: integer
+                      description: (required only if external is 0) The id of the payment which should be refunded to the customer through the Gateway
+                    amount_in_cents:
+                      oneOf:
+                        - type: string
+                          pattern: ^\d+$
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                    amount:
+                      oneOf:
+                        - type: string
+                          pattern: '^[1-9]\d*(\.\d+)?$'
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                    memo:
+                      type: string
+                      description: A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
+                external:
+                  type: integer
+                  enum:
+                    - 0
+                    - 1
+                  default: 0
+                  description: 0 indicates that the refund was externally processed and should simply be recorded in Chargify. 1 indicates that Chargify should communicate with the Gateway to fully process the refund.
+              required:
+                - refund
 components:
   schemas: {}
 servers:
