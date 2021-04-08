@@ -1063,7 +1063,8 @@ paths:
                         type: boolean
                       amount_in_cents:
                         type: integer
-                      memo: {}
+                      memo:
+                        type: string
                       created_at:
                         type: string
                         minLength: 1
