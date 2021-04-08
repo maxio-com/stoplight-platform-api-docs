@@ -940,6 +940,9 @@ paths:
                       - 'Memo: cannot be blank.'
       operationId: post-subscriptions-subscription_id-refunds.json
       description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
+        |---------------------------------------------------------------------------|
+
         # Refunds
 
         With Chargify you have the ability to apply a refund to a payment that has been processed at the gateway. There are two types of refunds:
