@@ -1044,151 +1044,7 @@ paths:
                 type: object
                 properties:
                   transaction:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: The Chargify id for the Transaction
-                      subscription_id:
-                        type: integer
-                        description: The Chargify id for the associated Subscription
-                      type:
-                        type: string
-                        enum:
-                          - Charge
-                          - Credit
-                          - Adjustment
-                          - Payment
-                          - Refund
-                        nullable: true
-                        description: The type of the transaction
-                      kind:
-                        type: string
-                        enum:
-                          - trial
-                          - initial
-                          - baseline
-                          - one_time
-                          - delay_capture
-                          - quantity_based_component
-                          - on_off_component
-                          - metered_component
-                          - metered
-                          - tax
-                          - coupon
-                          - prorated
-                          - reactivation
-                          - referral
-                          - voided_invoice
-                          - cancelation
-                          - component_proration
-                          - manual
-                        nullable: true
-                        description: The specific “subtype” for the transaction_type
-                      transaction_type:
-                        type: string
-                        enum:
-                          - charge
-                          - credit
-                          - adjustment
-                          - payment
-                          - refund
-                        nullable: true
-                      success:
-                        type: boolean
-                        description: Whether or not the Transaction was successful
-                      amount_in_cents:
-                        type: integer
-                        description: The amount in cents of the Transaction
-                      memo:
-                        type: string
-                        description: A note about the Transaction
-                        nullable: true
-                      created_at:
-                        type: string
-                        description: Timestamp indicating when the Transaction was created
-                      starting_balance_in_cents:
-                        type: integer
-                        description: The initial balance on the subscription before the Transaction has been processed
-                      ending_balance_in_cents:
-                        type: integer
-                        description: The remaining balance on the subscription after the Transaction has been processed
-                      gateway_used:
-                        type: string
-                        nullable: true
-                      gateway_transaction_id:
-                        type: integer
-                        description: 'The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists'
-                        nullable: true
-                      gateway_order_id:
-                        type: integer
-                        description: 'A gateway-specific identifier for the transaction, separate from the gateway_transaction_id'
-                        nullable: true
-                      payment_id:
-                        type: integer
-                        description: 'The unique identifier for the payment being explicitly refunded (in whole or in part) by this transaction. Will be null for all transaction types except for “Refund”. May be null even for Refunds. For partial refunds, more than one Refund transaction may reference the same payment_id.'
-                        nullable: true
-                      product_id:
-                        type: integer
-                        description: The Chargify id for the product associated with the subscription
-                        nullable: true
-                      tax_id:
-                        type: integer
-                        nullable: true
-                      component_id:
-                        type: integer
-                        description: 'The Chargify id of the component, only available for a charge'
-                        nullable: true
-                      statement_id:
-                        type: integer
-                        nullable: true
-                      customer_id:
-                        type: integer
-                        description: The Chargify id for the customer
-                      item_name:
-                        type: string
-                        description: The name of the product or component
-                        nullable: true
-                      period_range_start:
-                        type: string
-                        description: The start date of the transaction period
-                        nullable: true
-                      period_range_end:
-                        type: string
-                        description: The end date of the transaction period
-                        nullable: true
-                      currency:
-                        type: string
-                      exchange_rate:
-                        type: number
-                      component_handle:
-                        type: string
-                        nullable: true
-                      component_price_point_id:
-                        type: integer
-                        nullable: true
-                      component_price_point_handle:
-                        type: string
-                        nullable: true
-                      parent_id:
-                        type: integer
-                        description: '(Experimental, only for Payments) Some payments modify earlier payments, such as when a payment from one subscription is "split" and applied to other subscriptions in Invoice Consolidation. In those cases, this field identifies the original Payment from which this one derived.'
-                        nullable: true
-                      role:
-                        type: string
-                        description: '(Experimental, only for Payments) Payments may be marked with a role to define the context in which they were applied. Valid values are currently reserved for invoicing and consolidated invoicing: invoice_payment, consolidated_invoice_payment, invoice_segment_payment, payment_split'
-                        nullable: true
-                      card_number:
-                        type: string
-                        nullable: true
-                      card_expiration:
-                        type: string
-                        nullable: true
-                      card_type:
-                        type: string
-                        nullable: true
-                      refunded_amount_in_cents:
-                        type: integer
+                    $ref: ../models/Legacy-Transaction.v1.yaml
       operationId: get-transactions-transaction_id-.json
       description: |-
         # Transactions
@@ -1266,6 +1122,114 @@ paths:
         |-------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
         | refund                  | manual | A refund recorded “manually” via the Admin UI or API to reflect a refund already given outside of Chargify. Chargify does not actually submit this kind of refund to the payment gateway. |
         | refund                  |        | A generic refund resulting from any sitation not described above. This kind of refund is submitted by Chargify to the payment gateway to return money to the subscriber.                  |
+  /transactions.json:
+    get:
+      summary: List Transactions
+      tags:
+        - Legacy Transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    transaction:
+                      $ref: ../models/Legacy-Transaction.v1.yaml
+      operationId: get-transactions.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+        - schema:
+            type: string
+            enum:
+              - charge
+              - credit
+              - adjustment
+              - payment
+              - refund
+          in: query
+          name: kinds
+          description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+        - schema:
+            type: integer
+          in: query
+          name: since_id
+          description: Returns transactions with an id greater than or equal to the one specified
+        - schema:
+            type: integer
+          in: query
+          name: max_id
+          description: Returns transactions with an id less than or equal to the one specified
+        - schema:
+            type: string
+          in: query
+          name: since_date
+          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: until_date
+          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          in: query
+          name: direction
+          description: The sort order is based on the created_at timestamp then id for transactions within the same second.
+        - schema:
+            type: string
+            enum:
+              - id
+              - created_at
+          in: query
+          name: order_by
+          description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
+      description: |-
+        ## List Transactions for Site
+
+        This method will return the full list of transactions for a Site. Pay close attention to filters and pagination in order to control results.
+
+        **Notes about ID/Date Filters**
+
+        - Using `since_id` and/or `max_id` is known as creating an “ID Filter”.
+
+        - Using `since_date` and/or `until_date` is known as creating a “Date Filter”.
+
+        - You may ONLY make use of either an ID Filter or a Date Filter in any one request.
+
+        - If you specify both an ID Filter and a Date Filter, the Date Filter will be ignored.
+
+        **Pagination Notes**
+
+        Stepping through pages of results by incrementing the page number is typically less performant than using an ID Filter with `since_id`, especially at high values of page.
+        For example, instead of these successive requests to traverse pagination:
+
+            GET /transactions.json?page=1&per_page=200
+            GET /transactions.json?page=2&per_page=200
+
+        It is usually faster to use `since_id` to continue fetching from the last ID you observed:
+
+            GET /transactions.json?since_id=0&per_page=200&direction=asc
+            GET /transactions.json?since_id=1567&per_page=200&direction=asc
+
+        In the above example, 1567 is derived by adding 1 to the “last” ID you received from the first request.
 components:
   schemas: {}
 servers:
