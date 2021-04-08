@@ -1048,75 +1048,145 @@ paths:
                     properties:
                       id:
                         type: integer
+                        description: The Chargify id for the Transaction
                       subscription_id:
                         type: integer
+                        description: The Chargify id for the associated Subscription
                       type:
                         type: string
-                        minLength: 1
+                        enum:
+                          - Charge
+                          - Credit
+                          - Adjustment
+                          - Payment
+                          - Refund
+                        nullable: true
+                        description: The type of the transaction
                       kind:
                         type: string
-                        minLength: 1
+                        enum:
+                          - trial
+                          - initial
+                          - baseline
+                          - one_time
+                          - delay_capture
+                          - quantity_based_component
+                          - on_off_component
+                          - metered_component
+                          - metered
+                          - tax
+                          - coupon
+                          - prorated
+                          - reactivation
+                          - referral
+                          - voided_invoice
+                          - cancelation
+                          - component_proration
+                          - manual
+                        nullable: true
+                        description: The specific “subtype” for the transaction_type
                       transaction_type:
                         type: string
-                        minLength: 1
+                        enum:
+                          - charge
+                          - credit
+                          - adjustment
+                          - payment
+                          - refund
+                        nullable: true
                       success:
                         type: boolean
+                        description: Whether or not the Transaction was successful
                       amount_in_cents:
                         type: integer
+                        description: The amount in cents of the Transaction
                       memo:
                         type: string
+                        description: A note about the Transaction
+                        nullable: true
                       created_at:
                         type: string
-                        minLength: 1
+                        description: Timestamp indicating when the Transaction was created
                       starting_balance_in_cents:
                         type: integer
+                        description: The initial balance on the subscription before the Transaction has been processed
                       ending_balance_in_cents:
                         type: integer
+                        description: The remaining balance on the subscription after the Transaction has been processed
                       gateway_used:
                         type: string
+                        nullable: true
                       gateway_transaction_id:
                         type: integer
+                        description: 'The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists'
+                        nullable: true
                       gateway_order_id:
                         type: integer
+                        description: 'A gateway-specific identifier for the transaction, separate from the gateway_transaction_id'
+                        nullable: true
                       payment_id:
                         type: integer
+                        description: 'The unique identifier for the payment being explicitly refunded (in whole or in part) by this transaction. Will be null for all transaction types except for “Refund”. May be null even for Refunds. For partial refunds, more than one Refund transaction may reference the same payment_id.'
+                        nullable: true
                       product_id:
                         type: integer
+                        description: The Chargify id for the product associated with the subscription
+                        nullable: true
                       tax_id:
                         type: integer
+                        nullable: true
                       component_id:
                         type: integer
+                        description: 'The Chargify id of the component, only available for a charge'
+                        nullable: true
                       statement_id:
                         type: integer
+                        nullable: true
                       customer_id:
                         type: integer
+                        description: The Chargify id for the customer
                       item_name:
                         type: string
+                        description: The name of the product or component
+                        nullable: true
                       period_range_start:
                         type: string
+                        description: The start date of the transaction period
+                        nullable: true
                       period_range_end:
                         type: string
+                        description: The end date of the transaction period
+                        nullable: true
                       currency:
                         type: string
-                        minLength: 1
                       exchange_rate:
                         type: number
                       component_handle:
                         type: string
+                        nullable: true
                       component_price_point_id:
                         type: integer
+                        nullable: true
                       component_price_point_handle:
                         type: string
+                        nullable: true
                       parent_id:
                         type: integer
+                        description: '(Experimental, only for Payments) Some payments modify earlier payments, such as when a payment from one subscription is "split" and applied to other subscriptions in Invoice Consolidation. In those cases, this field identifies the original Payment from which this one derived.'
+                        nullable: true
                       role:
                         type: string
+                        description: '(Experimental, only for Payments) Payments may be marked with a role to define the context in which they were applied. Valid values are currently reserved for invoicing and consolidated invoicing: invoice_payment, consolidated_invoice_payment, invoice_segment_payment, payment_split'
+                        nullable: true
                       card_number:
                         type: string
+                        nullable: true
                       card_expiration:
                         type: string
+                        nullable: true
                       card_type:
                         type: string
+                        nullable: true
                       refunded_amount_in_cents:
                         type: integer
       operationId: get-transactions-transaction_id-.json
