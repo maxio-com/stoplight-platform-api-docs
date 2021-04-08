@@ -753,14 +753,10 @@ paths:
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
 
-        ## Payments Intro
-
-        If you are using the modern Relationship Invoicing feature, see the [corresponding invoicing docs](#endpoint:fS5WvuG5ByqjTzG6C). Relationship Invoicing requires you to create a prepayment rather than an external payment against the subscription. The prepayment endpoint is [defined here](#endpoint:aD6oLHshxgsTvmGCg).
+        ## External Payments
 
         Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
-
-        ## Payment Documentation
 
         Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
       parameters: []
