@@ -1120,26 +1120,14 @@ paths:
                         type: integer
       operationId: get-transactions-transaction_id-.json
       description: |-
-        ## Transactions Intro
-
-        The Transactions API allows you to view a list of all transactions both for a site and for an individual subscription.
-
-        ## Transaction Array Request
-
-        Requests for `kinds`can be for a singular attribute or an array. Multiple values can be passed in the url, for example:
-
-        ```
-        http://example.com?kinds[]=charge&kinds[]=payment&kinds[]=credit
-        ```
-
-        ## Transactions Documentation
+        # Transactions
 
         Documentation in relation to transactions is broken up into two major sections within Chargify:
 
         + [Recorded Transactions](http://help.chargify.com/subscriptions/subscription-summary.html#transactions)
         + [Transactions Export](http://help.chargify.com/reports/exporting-data.html#transactions-line-item-export)
 
-        ## Transaction Types
+        ## Types
 
         | Type / Transaction Type | Description                                                                                                                                                                                                                                                | Effect on Subscriber Balance Due   | Effect on “Revenue” (money collected) |
         |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|---------------------------------------|
@@ -1151,9 +1139,9 @@ paths:
         | InfoTransaction / info  | An informational transaction whose description provides context for transactions nearby in time, or serves as a placeholder for another transaction that could not be attempted (i.e. when payment cannot be attempted because no card is on file)         | N/A                                | N/A                                   |
         | payment_authorization   | Deprecated. No longer appears in transactions listing                                                                                                                                                                                                      | N/A                                | N/A                                   |
 
-        ## Transaction Kinds (Subtypes)
+        ## Kinds (Subtypes)
 
-        #### Kinds for the ```charge``` transaction type
+        ### Kinds for the ```charge``` transaction type
 
         | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                  |
         |-------------------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
