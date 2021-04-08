@@ -1313,6 +1313,31 @@ paths:
         Given that you have subscriber's ID, you can retrieve a list of transactions associated with the subscription.
 
         The sort order is based on the `created_at` timestamp and cannot be changed.
+  /transactions/count.json:
+    get:
+      summary: Transactions Count
+      tags:
+        - Legacy Transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  count:
+                    type: integer
+              examples:
+                Example:
+                  value:
+                    count: 290
+      operationId: get-transactions-count.json
+      description: |-
+        ## Read the Count of Transactions for a Site
+
+        This method returns the full count of transactions associated with a Site.
 components:
   schemas: {}
 servers:
