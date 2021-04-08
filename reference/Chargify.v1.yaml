@@ -7,6 +7,7 @@ info:
   description: Manage your company's subscriptions through the Chargify API.
 tags:
   - name: Legacy Subscription Balance
+  - name: Legacy Transactions
 paths:
   '/subscriptions/{subscription_id}/adjustments.json':
     parameters:
@@ -1021,6 +1022,191 @@ paths:
                   description: 0 indicates that the refund was externally processed and should simply be recorded in Chargify. 1 indicates that Chargify should communicate with the Gateway to fully process the refund.
               required:
                 - refund
+  '/transactions/{transaction_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: transaction_id
+        in: path
+        required: true
+        description: The Chargify id of the transaction
+    get:
+      summary: Read Transaction
+      tags:
+        - Legacy Transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  transaction:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      subscription_id:
+                        type: integer
+                      type:
+                        type: string
+                        minLength: 1
+                      kind:
+                        type: string
+                        minLength: 1
+                      transaction_type:
+                        type: string
+                        minLength: 1
+                      success:
+                        type: boolean
+                      amount_in_cents:
+                        type: integer
+                      memo: {}
+                      created_at:
+                        type: string
+                        minLength: 1
+                      starting_balance_in_cents:
+                        type: integer
+                      ending_balance_in_cents:
+                        type: integer
+                      gateway_used:
+                        type: string
+                      gateway_transaction_id:
+                        type: integer
+                      gateway_order_id:
+                        type: integer
+                      payment_id:
+                        type: integer
+                      product_id:
+                        type: integer
+                      tax_id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      statement_id:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      item_name:
+                        type: string
+                      period_range_start:
+                        type: string
+                      period_range_end:
+                        type: string
+                      currency:
+                        type: string
+                        minLength: 1
+                      exchange_rate:
+                        type: number
+                      component_handle:
+                        type: string
+                      component_price_point_id:
+                        type: integer
+                      component_price_point_handle:
+                        type: string
+                      parent_id:
+                        type: integer
+                      role:
+                        type: string
+                      card_number:
+                        type: string
+                      card_expiration:
+                        type: string
+                      card_type:
+                        type: string
+                      refunded_amount_in_cents:
+                        type: integer
+      operationId: get-transactions-transaction_id-.json
+      description: |-
+        ## Transactions Intro
+
+        The Transactions API allows you to view a list of all transactions both for a site and for an individual subscription.
+
+        ## Transaction Array Request
+
+        Requests for `kinds`can be for a singular attribute or an array. Multiple values can be passed in the url, for example:
+
+        ```
+        http://example.com?kinds[]=charge&kinds[]=payment&kinds[]=credit
+        ```
+
+        ## Transactions Documentation
+
+        Documentation in relation to transactions is broken up into two major sections within Chargify:
+
+        + [Recorded Transactions](http://help.chargify.com/subscriptions/subscription-summary.html#transactions)
+        + [Transactions Export](http://help.chargify.com/reports/exporting-data.html#transactions-line-item-export)
+
+        ## Transaction Types
+
+        | Type / Transaction Type | Description                                                                                                                                                                                                                                                | Effect on Subscriber Balance Due   | Effect on “Revenue” (money collected) |
+        |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|---------------------------------------|
+        | charge                  | A positive amount assessed to a subscription for an item (i.e. a Product or Component) sale. Usually assessed at signup or renewal time.                                                                                                                   | Increases balance due              | No effect on revenue                  |
+        | credit                  | A negative amount assessed to a subscription that indicates a “return” or “credit” for an item (i.e. a Product or Component). Usually offsets an earlier charge, i.e. in the case of a prorated downgrade.                                                 | Decreases balance due              | No effect on revenue                  |
+        | adjustment              | A postive or negative amount that adjusts the subscription balance but cannot usually be directly attributed to a single item (Product or Component)                                                                                                       | Increases or decreases balance due | No effect on revenue                  |
+        | payment                 | A postive amount that denotes amount paid to you by the subscriber, usually on their credit card or bank account via your payment gateway. Payments may also be recorded “manually” in the case of checks received, or money received outside of Chargify. | Decreases balance due              | Increases revenue                     |
+        | refund                  | A positive amount that denotes “cash” given back to a subscriber (i.e. put back on their card) via a refund or credit at the gateway.                                                                                                                      | No effect on balance due           | Decreases revenue                     |
+        | InfoTransaction / info  | An informational transaction whose description provides context for transactions nearby in time, or serves as a placeholder for another transaction that could not be attempted (i.e. when payment cannot be attempted because no card is on file)         | N/A                                | N/A                                   |
+        | payment_authorization   | Deprecated. No longer appears in transactions listing                                                                                                                                                                                                      | N/A                                | N/A                                   |
+
+        ## Transaction Kinds (Subtypes)
+
+        #### Kinds for the ```charge``` transaction type
+
+        | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                  |
+        |-------------------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | charge                  | trial                    | A charge for a subscription’s trial period. Usually applied at the time of signup, but sometimes after a migration where a trial is allowed.                                                 |
+        | charge                  | initial                  | A charge for the initial/setup fee assessed according to the product setup settings. Usually applied at the time of signup, but sometimes after a migration where the setup fee is included. |
+        | charge                  | baseline                 | A charge for the normal, recurring fee.                                                                                                                                                      |
+        | charge                  | one_time                 | A one-time fee applied to a subscription, usually between normal renewals. Can be added in the Chargify UI or the API, and is captured (via credit card payment) immediately.                |
+        | charge                  | delay_capture            | Like a one_time charge, but not captured (i.e. not paid) until the next normal renewal. Sometimes called an “accrued charge”.                                                                |
+        | charge                  | quantity_based_component | A charge for the currently allocated quantity of a quantity-based component (i.e. seat licenses). Applied at renewal based on the quantity allocated at that time.                           |
+        | charge                  | on_off_component         | A charge for the current status (on or off) of an on/off component. Applied at renewal.                                                                                                      |
+        | charge                  | metered_component        | A charge for the usage of a metered component (i.e. minutes). Applied at renewal based on the usage during the last period.                                                                  |
+        | charge                  | metered                  | Deprecated. May exist for very old transactions. Can be considered an alias for “metered_component”.                                                                                        |
+        | charge                  | tax                      | A charge for the taxes computed on taxable line items for the billing event (signup or renewal).                                                                                             |
+        | charge                  |                          | A generic charge that is not otherwise classified by any of the above values for `kind`.                                                                                                     |
+
+        ### Kinds for the ```credit``` transaction type
+
+        | Type / Transaction Type | Kind                     | Description                                                                                                                         |
+        |-------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+        | credit                  | quantity_based_component | A credit against a quantity-based component charge. Usually generated during a prorated downgrade for an amount previously charged. |
+        | credit                  | on_off_component         | A credit against an on/off component charge. Usually generated during a prorated downgrade for an amount previously charged.        |
+        | credit                  | tax                      | A credit against tax charges. Usually generated during a prorated downgrade to offset a tax amount already assessed.                |
+        | credit                  |                          | A generic credit that is not otherwise classified by any of the above values for `kind`.                                            |
+        ### Kinds for the ```adjustment``` transaction type
+
+        | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                         |
+        |-------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | adjustment              | coupon                   | An adjustment that reflects the discount provided by a coupon. Is almost always a negative amount.                                                                                                  |
+        | adjustment              | prorated                 | An adjustment applied during a migration proration that offsets overpayments resulting from the shortened period on the old product. Followed by the assessment of new charges for the new product. |
+        | adjustment              | reactivation             | An adjustment as a result of a reactivation of a canceled subscription. A balance is cleared before the subscription reactivates.                                                                   |
+        | adjustment              | quantity_based_component | Deprecated. Like a quantity_based_component credit in function but no longer used (since credits can be taxable but adjustments cannot).                                                            |
+        | adjustment              | on_off_component         | Deprecated. Like an on_off_component credit in function but no longer used (since credits can be taxable but adjustments cannot).                                                                   |
+        | adjustment              | tax                      | Deprecated. Like a tax credit in function but no longer used.                                                                                                                                       |
+        | adjustment              | referral                 | An adjustment that acts like a coupon but is the discount applied to the referring subscriber in a Refer-A-Friend scenario.                                                                         |
+        | adjustment              |                          | A generic adjustment that is not otherwise classified by any of the above values for `kind`. This is the kind of ad-hoc adjustment that can be created via the API.                                 |
+        | adjustment              | voided_invoice           | (Relationship Invoicing only) An adjustment as a result of a voided invoice.                                                                                                                        |
+        | adjustment              | cancelation              | (Relationship Invoicing only) An adjustment as a result of a canceled subscription.                                                                                                                 |
+
+        ### Kinds for the ```payment``` transaction type
+
+        | Type / Transaction Type | Kind                | Description                                                                                                                                                |
+        |-------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | payment                 | one_time            | A payment received for a mid-period one-time charge (i.e. for a charge with kind one_time).                                                                |
+        | payment                 | component_proration | A payment received for a mid-period component proration (allocation change).                                                                               |
+        | payment                 | manual              | A payment recorded “manually” via the Admin UI or API. This kind of payment was not one automatically processed by Chargify, but instead entered manually. |
+        | payment                 |                     | A generic payment received in any sitation not described above. Usually an automatically captured payment for a normal signup or renewal.                  |
+
+        ### Kinds for the ```refund``` transaction type
+
+        | Type / Transaction Type | Kind   | Description                                                                                                                                                                               |
+        |-------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | refund                  | manual | A refund recorded “manually” via the Admin UI or API to reflect a refund already given outside of Chargify. Chargify does not actually submit this kind of refund to the payment gateway. |
+        | refund                  |        | A generic refund resulting from any sitation not described above. This kind of refund is submitted by Chargify to the payment gateway to return money to the subscriber.                  |
 components:
   schemas: {}
 servers:
