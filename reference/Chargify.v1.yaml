@@ -6,6 +6,7 @@ info:
     email: support@chargify.com
   description: Manage your company's subscriptions through the Chargify API.
 tags:
+  - name: Legacy Invoices
   - name: Legacy Subscription Balance
   - name: Legacy Transactions
   - name: Legacy Statements
@@ -1150,7 +1151,6 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1158,7 +1158,6 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1170,31 +1169,26 @@ paths:
           in: query
           name: kinds
           description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: since_id
           description: Returns transactions with an id greater than or equal to the one specified
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: max_id
           description: Returns transactions with an id less than or equal to the one specified
-          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: since_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
-          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: until_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1204,7 +1198,6 @@ paths:
           in: query
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1213,7 +1206,6 @@ paths:
           in: query
           name: order_by
           description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1277,7 +1269,6 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1285,7 +1276,6 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1297,31 +1287,26 @@ paths:
           in: query
           name: kinds
           description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: since_id
           description: Returns transactions with an id greater than or equal to the one specified
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: max_id
           description: Returns transactions with an id less than or equal to the one specified
-          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: since_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
-          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: until_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1331,7 +1316,6 @@ paths:
           in: query
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1440,7 +1424,6 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1448,7 +1431,6 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1459,7 +1441,6 @@ paths:
           in: query
           name: sort
           description: Allows specification of the order of the returned list
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1468,7 +1449,6 @@ paths:
           in: query
           description: Specifies the direction of the sort on the given sort key
           name: direction
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1508,7 +1488,6 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1516,7 +1495,6 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1527,7 +1505,6 @@ paths:
           in: query
           name: sort
           description: Allows specification of the order of the returned list
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1536,7 +1513,6 @@ paths:
           in: query
           description: Specifies the direction of the sort on the given sort key
           name: direction
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1568,19 +1544,16 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             default: 10000
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: settled_since
-          allowEmptyValue: true
           description: 'Format: UNIX timestamp'
         - schema:
             type: string
@@ -1592,7 +1565,6 @@ paths:
           in: query
           name: sort
           description: Allows specification of the order of the returned list
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1601,7 +1573,6 @@ paths:
           in: query
           description: Specifies the direction of the sort on the given sort key
           name: direction
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1640,19 +1611,16 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          allowEmptyValue: true
         - schema:
             type: integer
             default: 10000
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: settled_since
-          allowEmptyValue: true
           description: 'Format: UNIX timestamp'
         - schema:
             type: string
@@ -1664,7 +1632,6 @@ paths:
           in: query
           name: sort
           description: Allows specification of the order of the returned list
-          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1673,7 +1640,6 @@ paths:
           in: query
           description: Specifies the direction of the sort on the given sort key
           name: direction
-          allowEmptyValue: true
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1712,16 +1678,126 @@ paths:
   '/invoices/{invoice_id}.json':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: invoice_id
         in: path
         required: true
+        description: The Chargify id of the invoice
     get:
       summary: Read Legacy Invoice
       tags:
         - Legacy Invoices
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  invoice:
+                    $ref: ../models/Legacy-Invoice.v1.yaml
       operationId: get-invoices-invoice_id-.json
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
+        ## PDF Invoice retrieval
+
+        Individual PDF Invoices can be retrieved by using the "Accept/Content-Type" header application/pdf or appending .pdf as the format portion of the URL:
+
+        ```curl -u <api_key>:x -H 
+        Accept:application/pdf -H 
+        Content-Type:application/pdf 
+        https://acme.chargify.com/invoices/1.pdf > output_file.pdf
+
+        URL: `https://<subdomain>.chargify.com/invoices/<invoice_id>.<format>`
+        Method: GET
+        Required parameters: `invoice_id`
+        Response: A single Invoice.
+        ```
+  /invoices.json:
+    get:
+      summary: List Legacy Invoices
+      tags:
+        - Legacy Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    transaction:
+                      $ref: ../models/Legacy-Invoice.v1.yaml
+      operationId: get-invoices.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+        - schema:
+            type: string
+            enum:
+              - charge
+              - credit
+              - adjustment
+              - payment
+              - refund
+          in: query
+          name: kinds
+          description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: '(format YYYY-MM-DD) Returns invoices with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: '(format YYYY-MM-DD) Returns invoices with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+            enum:
+              - paid
+              - unpaid
+              - partial
+              - archived
+          in: query
+          name: status
+          description: The status of the invoices
+        - schema:
+            type: integer
+          in: query
+          name: subscription_id
+          description: The Chargify id for the subscription for which invoices should be returned
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
+        ## List Legacy Invoices
+
+        This endpoint handles Legacy Invoices for Sites using Statement-Based Billing (Site created prior to January 2018).
+
+
+        ## Legacy Invoice Documentation
+
+        Full documentation on how invoices function within the Chargify UI can be located [here](https://help.chargify.com/invoices/invoice-intro.html).
+
+        For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#invoices)
 components:
   schemas: {}
 servers:
