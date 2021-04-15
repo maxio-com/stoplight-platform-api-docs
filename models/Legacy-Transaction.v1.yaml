@@ -92,6 +92,8 @@ properties:
   tax_id:
     type: integer
     nullable: true
+  taxations:
+    type: array
   component_id:
     type: integer
     description: 'The Chargify id of the component, only available for a charge'

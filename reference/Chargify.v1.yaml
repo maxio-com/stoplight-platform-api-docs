@@ -8,6 +8,7 @@ info:
 tags:
   - name: Legacy Subscription Balance
   - name: Legacy Transactions
+  - name: Legacy Statements
 paths:
   '/subscriptions/{subscription_id}/adjustments.json':
     parameters:
@@ -1237,6 +1238,7 @@ paths:
         name: subscription_id
         in: path
         required: true
+        description: The Chargify id of the subscription to which the transactions belong
     get:
       summary: List Transactions for Subscription
       tags:
@@ -1338,6 +1340,192 @@ paths:
         ## Read the Count of Transactions for a Site
 
         This method returns the full count of transactions associated with a Site.
+  '/statements/{statement_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: statement_id
+        in: path
+        required: true
+        description: The Chargify id of the statement
+    get:
+      summary: Read Statement
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statement:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      basic_html_view:
+                        type: string
+                        description: A simple HTML representation of the statement
+                      html_view:
+                        type: string
+                        description: A more robust HTML representation of the statement
+                      text_view:
+                        type: string
+                        description: A text representation of the statement
+                      opened_at:
+                        type: string
+                        description: The date that the statement was opened
+                      settled_at:
+                        type: string
+                        description: The date that the statement was settled
+                        nullable: true
+                      closed_at:
+                        type: string
+                        description: The date that the statement was closed
+                        nullable: true
+                      created_at:
+                        type: string
+                        description: The date that the statement was created
+                      updated_at:
+                        type: string
+                        description: The date of last update for this statement
+                      customer_first_name:
+                        type: string
+                        description: The customer’s first name
+                      customer_last_name:
+                        type: string
+                        description: The customer’s last name
+                      customer_billing_address:
+                        type: string
+                        description: The customer’s billing address
+                        nullable: true
+                      customer_billing_address_2:
+                        type: string
+                        description: 'The customer’s billing address, line 2'
+                        nullable: true
+                      customer_billing_city:
+                        type: string
+                        description: The customer’s billing city
+                        nullable: true
+                      customer_billing_country:
+                        type: string
+                        description: The customer’s billing country
+                        nullable: true
+                      customer_billing_state:
+                        type: string
+                        description: The customer’s billing state
+                        nullable: true
+                      customer_billing_zip:
+                        type: string
+                        description: The customer’s billing zip
+                        nullable: true
+                      customer_organization:
+                        type: string
+                        description: The customer’s organization
+                        nullable: true
+                      customer_shipping_address:
+                        type: string
+                        description: The customer’s shipping address
+                        nullable: true
+                      customer_shipping_address_2:
+                        type: string
+                        description: 'The customer’s shipping address, line 2'
+                        nullable: true
+                      customer_shipping_city:
+                        type: string
+                        description: The customer’s shipping city
+                        nullable: true
+                      customer_shipping_country:
+                        type: string
+                        description: The customer’s shipping country
+                        nullable: true
+                      customer_shipping_state:
+                        type: string
+                        description: The customer’s shipping state
+                        nullable: true
+                      customer_shipping_zip:
+                        type: string
+                        description: The customer’s shipping zip
+                        nullable: true
+                      starting_balance_in_cents:
+                        type: integer
+                        description: The subscription’s balance at the time the statement was opened
+                      ending_balance_in_cents:
+                        type: integer
+                        description: The subscription’s balance at the time the statement was closed
+                      future_payments:
+                        type: array
+                        items:
+                          type: object
+                      memo:
+                        type: string
+                      subscription_id:
+                        type: integer
+                        description: The Chargify id of the subscription associated with the statement
+                      total_in_cents:
+                        type: integer
+                        description: The total amount billed
+                      transactions:
+                        type: array
+                        description: A collection of the transaction objects associated with the statement
+                        items:
+                          type: object
+                          properties:
+                            transaction:
+                              $ref: ../models/Legacy-Transaction.v1.yaml
+                      events:
+                        type: array
+                        description: A collection of the event objects associated with the statement
+                        items:
+                          type: object
+                          properties:
+                            event:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                key:
+                                  type: string
+                                message:
+                                  type: string
+                                subscription_id:
+                                  type: integer
+                                created_at:
+                                  type: string
+                                event_specific_data:
+                                  type: object
+                                  properties:
+                                    product_id:
+                                      type: integer
+                                    account_transaction_id:
+                                      type: integer
+                                      nullable: true
+      operationId: get-statements-statement_id-.json
+      description: |-
+        ## Statements Intro
+
+        Chargify Statements give you and your customers a breakdown of Subscription charges, payments, credits, and activity on a period-by-period basis. A Statement is similar to an “Invoice” because it is marked as currently paid or unpaid. Statements display all account activity for a specific usage period.
+
+        ## Statements Documentation
+
+        Documentation for Statements in the Chargify UI can be accessed via the following links / topics:
+
+        + [Statements Reference](http://help.chargify.com/statements/statements-intro.html)
+        + [Viewing Statements](http://help.chargify.com/subscriptions/subscription-summary.html#statements)
+        + [Statement Settings](http://help.chargify.com/settings/statements.html)
+
+        ## Statement Presentation
+
+        The Statements API offers three ways to easily render a statement on your site. You can include a text representation of the statement or one of two HTML views that can be styled to your liking.
+
+        | text_view       | A text representation of the statement             |
+        |-----------------|----------------------------------------------------|
+        | basic_html_view | A simple HTML representation of the statement      |
+        | html_view       | A more robust HTML representation of the statement |
+
+        Rendering individual statements can also be done as PDF by using the Accept/Content-Type header application/pdf or appending .pdf as the `<format>` portion of the URL: `/statements/1.pdf`.
 components:
   schemas: {}
 servers:
