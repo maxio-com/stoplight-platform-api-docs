@@ -69,6 +69,8 @@ paths:
                       component_handle: null
                       component_price_point_id: null
                       component_price_point_handle: null
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -168,6 +170,8 @@ paths:
                 properties:
                   charge:
                     $ref: ../models/Legacy-Charge.v1.yaml
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -184,7 +188,9 @@ paths:
                   value:
                     errors:
                       - 'Memo: cannot be blank.'
+                      - 'Amount: is not a number.'
                       - This subscription is not eligible to accept charges.
+                      - 'Bogus Gateway: Forced failure'
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -365,6 +371,34 @@ paths:
                 properties:
                   payment:
                     $ref: ../models/Legacy-Payment.v1.yaml
+              examples:
+                Example:
+                  value:
+                    payment:
+                      id: 160873334
+                      subscription_id: 15054201
+                      type: Payment
+                      kind: manual
+                      transaction_type: payment
+                      success: true
+                      amount_in_cents: 1000
+                      memo: Client x paid with $10.00 of nickles
+                      created_at: '2016-11-03T14:58:30-04:00'
+                      starting_balance_in_cents: -13989
+                      ending_balance_in_cents: -14989
+                      gateway_used: null
+                      gateway_transaction_id: null
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 3861800
+                      tax_id: null
+                      component_id: null
+                      statement_id: 79870822
+                      customer_id: 14543792
+                      card_number: null
+                      card_expiration: null
+                      card_type: null
+                      refunded_amount_in_cents: 0
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -632,6 +666,7 @@ paths:
                   description: 0 indicates that the refund was externally processed and should simply be recorded in Chargify. 1 indicates that Chargify should communicate with the Gateway to fully process the refund.
               required:
                 - refund
+            examples: {}
   '/transactions/{transaction_id}.json':
     parameters:
       - schema:
@@ -1075,6 +1110,8 @@ paths:
                         discount_amount_in_cents: 0
                         taxable_amount_in_cents: null
                         taxations: []
+        '404':
+          description: Not Found
       operationId: get-subscriptions-subscription_id-transactions.json
       parameters:
         - schema:
@@ -1188,6 +1225,488 @@ paths:
                 properties:
                   statement:
                     $ref: ../models/Legacy-Statement-with-UI-Tools.v1.yaml
+              examples:
+                Example:
+                  value:
+                    statement:
+                      id: 79221109
+                      basic_html_view: |
+                        <table id="billing_statement" cellpadding="0" cellspacing="0" border="0">
+                          <tbody>
+                            <tr id="billing_statement_logo">
+                              <td colspan="2" id="billing_statement_logo_cell">
+                                <img src="https://s3.amazonaws.com/production.chargify/sites/31615/small.png?1464882101" alt="Logo">
+                              </td>
+                            </tr>
+                            <tr id="billing_statement_masthead">
+                              <td id="billing_statement_merchant_information">
+                                <div id="billing_statement_merchant_name">My Awesome Company</div>
+                                <div id="billing_statement_merchant_email"><a href="mailto:billing@example.com">billing@example.com</a></div>
+                              </td>
+                              <td id="billing_statement_information">
+                                <div id="billing_statement_title"> (79221109)</div>
+                                <div id="billing_statement_product">Acme Projects - Trial Product</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td id="billing_statement_account_information">
+                                <h2 class="billing_statement_section_title">Account Information</h2>
+                                <div class="billing_statement_section_content vcard">
+                          <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                          <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                          <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                          <div id="billing_statement_shipping_address" class="adr">
+                            <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                            <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                            <div id="billing_statement_shipping_address_locality_region_postal_code">
+                              <span class="locality">Anywhere</span>,
+                              <abbr class="region">MA</abbr>
+                              <span class="postal-code">02120</span>
+                            </div>
+                            <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                          </div>
+
+                          <div id="billing_statement_billing_address" class="adr">
+                            <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                            <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                            <div id="billing_statement_billing_address_locality_region_postal_code">
+                              <span class="locality">Anywhere</span>,
+                              <abbr class="region">MA</abbr>
+                              <span class="postal-code">02120</span>
+                            </div>
+                            <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                          </div>
+                          
+                        </div>
+
+                              </td>
+                              <td id="billing_statement_summary">
+                                <h2 class="billing_statement_section_title"> Summary</h2>
+                                <div class="billing_statement_section_content">
+                          <div id="billing_statement_summary_statement_date">
+                            <span class="billing_statement_summary_label"> Date:</span>
+                            <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                          </div>
+                          <div id="billing_statement_summary_usage_period">
+                            <span class="billing_statement_summary_label">Billing Date:</span>
+                            <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                          </div>
+
+                          <div id="billing_statement_summary_balance_summary">
+                            <div id="billing_statement_summary_starting_balance">
+                              <span class="billing_statement_summary_label">Starting Balance:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_current_charges">
+                              <span class="billing_statement_summary_label">Current Charges:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_current_payments_and_credits">
+                              <span class="billing_statement_summary_label">Payments:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_balance_due">
+                              <span class="billing_statement_summary_label">Ending Balance:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                          </div>
+
+                          <div id="billing_statement_summary_balance_paid">
+                            <div id="billing_statement_summary_balance_paid_date">
+                              <span class="billing_statement_summary_label">Balance Paid:</span>
+                              <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                            </div>
+                              <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                PAID
+                              </div>
+                          </div>
+                        </div>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td id="billing_statement_detail" colspan="2">
+                                <h2 class="billing_statement_section_title"> Detail</h2>
+                                <div class="billing_statement_section_content">
+                          <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                            <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                            <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_type">Type</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                  <th class="billing_statement_listing_cell_money">Charge</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Recurring</td>
+                                  <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                                <tr class="billing_statement_listing_tfoot">
+                                  <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                            <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                            <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_type">Type</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                  <th class="billing_statement_listing_cell_money">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="billing_statement_listing_empty_results_row">
+                                  <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                </tr>
+                                <tr class="billing_statement_listing_tfoot">
+                                  <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+
+                        </div>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td id="billing_statement_period_activity" colspan="2">
+                                <h2 class="billing_statement_section_title">Period Activity</h2>
+                                <div class="billing_statement_section_content">
+                          <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                            <thead>
+                              <tr>
+                                <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                <th class="billing_statement_listing_cell_event">Event</th>
+                                <th class="billing_statement_listing_cell_detail">Detail</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                <td>Signup Success</td>
+                                <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                              </td>
+                            </tr>
+                            <tr>
+                              <td  colspan="2">
+                                <p>We thank you for your continued business!</p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      closed_at: '2016-10-24T16:20:13-04:00'
+                      created_at: '2016-10-24T16:20:12-04:00'
+                      customer_billing_address: 123 Anywhere Street
+                      customer_billing_address_2: ''
+                      customer_billing_city: Anywhere
+                      customer_billing_country: US
+                      customer_billing_state: MA
+                      customer_billing_zip: '02120'
+                      customer_first_name: Amelia
+                      customer_last_name: Example
+                      customer_organization: ''
+                      customer_shipping_address: 123 Anywhere Street
+                      customer_shipping_address_2: ''
+                      customer_shipping_city: Anywhere
+                      customer_shipping_country: US
+                      customer_shipping_state: MA
+                      customer_shipping_zip: '02120'
+                      ending_balance_in_cents: 0
+                      future_payments: []
+                      html_view: |
+                        <div id="billing_statement">
+                          <div id="billing_statement_account_information_section" class="billing_statement_section">
+                            <h2 id="billing_statement_account_information_section_title" class="billing_statement_section_title">Account Information</h2>
+                            <div class="billing_statement_section_content vcard">
+                          <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                          <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                          <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                          <div id="billing_statement_shipping_address" class="adr">
+                            <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                            <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                            <div id="billing_statement_shipping_address_locality_region_postal_code">
+                              <span class="locality">Anywhere</span>,
+                              <abbr class="region">MA</abbr>
+                              <span class="postal-code">02120</span>
+                            </div>
+                            <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                          </div>
+
+                          <div id="billing_statement_billing_address" class="adr">
+                            <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                            <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                            <div id="billing_statement_billing_address_locality_region_postal_code">
+                              <span class="locality">Anywhere</span>,
+                              <abbr class="region">MA</abbr>
+                              <span class="postal-code">02120</span>
+                            </div>
+                            <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                          </div>
+                          
+                        </div>
+
+                          </div>
+
+                          <div id="billing_statement_summary_section" class="billing_statement_section">
+                            <h2 id="billing_statement_summary_section_title" class="billing_statement_section_title"> Summary</h2>
+                            <div class="billing_statement_section_content">
+                          <div id="billing_statement_summary_statement_date">
+                            <span class="billing_statement_summary_label"> Date:</span>
+                            <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                          </div>
+                          <div id="billing_statement_summary_usage_period">
+                            <span class="billing_statement_summary_label">Billing Date:</span>
+                            <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                          </div>
+
+                          <div id="billing_statement_summary_balance_summary">
+                            <div id="billing_statement_summary_starting_balance">
+                              <span class="billing_statement_summary_label">Starting Balance:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_current_charges">
+                              <span class="billing_statement_summary_label">Current Charges:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_current_payments_and_credits">
+                              <span class="billing_statement_summary_label">Payments:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                            <div id="billing_statement_summary_balance_due">
+                              <span class="billing_statement_summary_label">Ending Balance:</span>
+                              <span class="billing_statement_summary_value">$0.00</span>
+                            </div>
+                          </div>
+
+                          <div id="billing_statement_summary_balance_paid">
+                            <div id="billing_statement_summary_balance_paid_date">
+                              <span class="billing_statement_summary_label">Balance Paid:</span>
+                              <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                            </div>
+                              <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                PAID
+                              </div>
+                          </div>
+                        </div>
+
+                          </div>
+
+                          <div id="billing_statement_detail_section" class="billing_statement_section">
+                            <h2 id="billing_statement_detail_section_title" class="billing_statement_section_title"> Detail</h2>
+                            <div class="billing_statement_section_content">
+                          <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                            <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                            <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_type">Type</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                  <th class="billing_statement_listing_cell_money">Charge</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Recurring</td>
+                                  <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                                <tr class="billing_statement_listing_tfoot">
+                                  <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                            <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                            <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_type">Type</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                  <th class="billing_statement_listing_cell_money">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="billing_statement_listing_empty_results_row">
+                                  <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                </tr>
+                                <tr class="billing_statement_listing_tfoot">
+                                  <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                  <td class="billing_statement_listing_cell_money">$0.00</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+
+                        </div>
+
+                          </div>
+
+                          <div id="billing_statement_period_activity_section" class="billing_statement_section">
+                            <h2 id="billing_statement_period_activity_section_title" class="billing_statement_section_title">Period Activity</h2>
+                            <div class="billing_statement_section_content">
+                          <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                            <thead>
+                              <tr>
+                                <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                <th class="billing_statement_listing_cell_event">Event</th>
+                                <th class="billing_statement_listing_cell_detail">Detail</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                <td>Signup Success</td>
+                                <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                          </div>
+                          <div>
+                            <p>We thank you for your continued business!</p>
+                          </div>
+                        </div>
+                      memo: We thank you for your continued business!
+                      opened_at: '2016-10-24T16:20:12-04:00'
+                      settled_at: '2016-10-24T16:20:13-04:00'
+                      starting_balance_in_cents: 0
+                      subscription_id: 14900541
+                      text_view: |
+                        My Awesome Company                                                    (79221109)
+                        billing@example.com                                Acme Projects - Trial Product
+                        ================================================================================
+
+                        --------
+                         Summary
+                        --------
+
+                         ID......: 79221109
+                         Date....: 10/24/2016
+                        Billing Date......: 10/24/2016
+
+                        Starting Balance..: $0.00
+                        Current Charges...: $0.00
+                        Payments..........: $0.00
+                        Ending Balance....: $0.00
+
+                        Balance Paid......: 10/24/2016 04:20PM EDT
+
+                        -------------------
+                        Account Information
+                        -------------------
+
+                        Amelia Example
+                        amelia@example.com
+                        555-555-1212
+
+                        ### Shipping Address
+                        123 Anywhere Street
+                        Anywhere, MA 02120
+                        US
+
+                        ### Billing Address
+                        123 Anywhere Street
+                        Anywhere, MA 02120
+                        US
+
+
+                        -------
+                         Detail
+                        -------
+
+                        ### Current Charges and Adjustments
+
+                        Date/Time     Type   Detail                                              Charges
+                        ............  .....  ...............................................  ..........
+                        10/24/2016
+                        04:20PM EDT   Recur  Trial Price (10/24/2016 - 10/31/2016)                 $0.00
+                        ............  .....  ...............................................  ..........
+                                                                                     Totals:       $0.00
+
+                        ### Payments
+
+                        No payments this period
+
+
+                        ---------------
+                        Period Activity
+                        ---------------
+
+                        Date/Time     Event/Details                                                     
+                        ............  ..................................................................
+                        10/24/2016    Signup Success                                                    
+                        04:20PM EDT   Successful signup for Amelia Example's subscription to Trial Produ
+                                      ct                                                                
+                        ............  ..................................................................
+
+                        We thank you for your continued business!
+                      updated_at: '2016-10-24T16:20:13-04:00'
+                      total_in_cents: 0
+                      transactions:
+                        - id: 159423810
+                          subscription_id: 14900541
+                          type: Charge
+                          kind: trial
+                          transaction_type: charge
+                          success: true
+                          amount_in_cents: 0
+                          memo: Trial Price (10/24/2016 - 10/31/2016)
+                          created_at: '2016-10-24T16:20:12-04:00'
+                          starting_balance_in_cents: 0
+                          ending_balance_in_cents: 0
+                          gateway_used: null
+                          gateway_transaction_id: null
+                          gateway_order_id: null
+                          payment_id: null
+                          product_id: 3861800
+                          tax_id: null
+                          component_id: null
+                          statement_id: 79221109
+                          customer_id: 14399371
+                          item_name: Trial Price
+                          original_amount_in_cents: null
+                          discount_amount_in_cents: null
+                          taxable_amount_in_cents: null
+                          taxations: []
+                      events:
+                        - event:
+                            id: 342036408
+                            key: signup_success
+                            message: Successful signup for Amelia Example's subscription to Trial Product
+                            subscription_id: 14900541
+                            created_at: '2016-10-24T16:20:13-04:00'
+                            event_specific_data:
+                              product_id: 3861800
+                              account_transaction_id: null
       operationId: get-statements-statement_id-.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -1230,6 +1749,1151 @@ paths:
                   properties:
                     statement:
                       $ref: ../models/Legacy-Statement.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - statement:
+                        id: 79221109
+                        basic_html_view: |
+                          <table id="billing_statement" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                              <tr id="billing_statement_logo">
+                                <td colspan="2" id="billing_statement_logo_cell">
+                                  <img src="https://s3.amazonaws.com/production.chargify/sites/31615/small.png?1464882101" alt="Logo">
+                                </td>
+                              </tr>
+                              <tr id="billing_statement_masthead">
+                                <td id="billing_statement_merchant_information">
+                                  <div id="billing_statement_merchant_name">My Awesome Company</div>
+                                  <div id="billing_statement_merchant_email"><a href="mailto:billing@example.com">billing@example.com</a></div>
+                                </td>
+                                <td id="billing_statement_information">
+                                  <div id="billing_statement_title"> (79221109)</div>
+                                  <div id="billing_statement_product">Acme Projects - Trial Product</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_account_information">
+                                  <h2 class="billing_statement_section_title">Account Information</h2>
+                                  <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                                </td>
+                                <td id="billing_statement_summary">
+                                  <h2 class="billing_statement_section_title"> Summary</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_detail" colspan="2">
+                                  <h2 class="billing_statement_section_title"> Detail</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="billing_statement_listing_empty_results_row">
+                                    <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_period_activity" colspan="2">
+                                  <h2 class="billing_statement_section_title">Period Activity</h2>
+                                  <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Signup Success</td>
+                                  <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td  colspan="2">
+                                  <p>We thank you for your continued business!</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        closed_at: '2016-10-24T16:20:13-04:00'
+                        created_at: '2016-10-24T16:20:12-04:00'
+                        customer_billing_address: 123 Anywhere Street
+                        customer_billing_address_2: ''
+                        customer_billing_city: Anywhere
+                        customer_billing_country: US
+                        customer_billing_state: MA
+                        customer_billing_zip: '02120'
+                        customer_first_name: Amelia
+                        customer_last_name: Example
+                        customer_organization: ''
+                        customer_shipping_address: 123 Anywhere Street
+                        customer_shipping_address_2: ''
+                        customer_shipping_city: Anywhere
+                        customer_shipping_country: US
+                        customer_shipping_state: MA
+                        customer_shipping_zip: '02120'
+                        ending_balance_in_cents: 0
+                        future_payments: []
+                        html_view: |
+                          <div id="billing_statement">
+                            <div id="billing_statement_account_information_section" class="billing_statement_section">
+                              <h2 id="billing_statement_account_information_section_title" class="billing_statement_section_title">Account Information</h2>
+                              <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_summary_section" class="billing_statement_section">
+                              <h2 id="billing_statement_summary_section_title" class="billing_statement_section_title"> Summary</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_detail_section" class="billing_statement_section">
+                              <h2 id="billing_statement_detail_section_title" class="billing_statement_section_title"> Detail</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="billing_statement_listing_empty_results_row">
+                                    <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_period_activity_section" class="billing_statement_section">
+                              <h2 id="billing_statement_period_activity_section_title" class="billing_statement_section_title">Period Activity</h2>
+                              <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Signup Success</td>
+                                  <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                            </div>
+                            <div>
+                              <p>We thank you for your continued business!</p>
+                            </div>
+                          </div>
+                        memo: We thank you for your continued business!
+                        opened_at: '2016-10-24T16:20:12-04:00'
+                        settled_at: '2016-10-24T16:20:13-04:00'
+                        starting_balance_in_cents: 0
+                        subscription_id: 14900541
+                        text_view: |
+                          My Awesome Company                                                    (79221109)
+                          billing@example.com                                Acme Projects - Trial Product
+                          ================================================================================
+
+                          --------
+                           Summary
+                          --------
+
+                           ID......: 79221109
+                           Date....: 10/24/2016
+                          Billing Date......: 10/24/2016
+
+                          Starting Balance..: $0.00
+                          Current Charges...: $0.00
+                          Payments..........: $0.00
+                          Ending Balance....: $0.00
+
+                          Balance Paid......: 10/24/2016 04:20PM EDT
+
+                          -------------------
+                          Account Information
+                          -------------------
+
+                          Amelia Example
+                          amelia@example.com
+                          555-555-1212
+
+                          ### Shipping Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+                          ### Billing Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+
+                          -------
+                           Detail
+                          -------
+
+                          ### Current Charges and Adjustments
+
+                          Date/Time     Type   Detail                                              Charges
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:20PM EDT   Recur  Trial Price (10/24/2016 - 10/31/2016)                 $0.00
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:       $0.00
+
+                          ### Payments
+
+                          No payments this period
+
+
+                          ---------------
+                          Period Activity
+                          ---------------
+
+                          Date/Time     Event/Details                                                     
+                          ............  ..................................................................
+                          10/24/2016    Signup Success                                                    
+                          04:20PM EDT   Successful signup for Amelia Example's subscription to Trial Produ
+                                        ct                                                                
+                          ............  ..................................................................
+
+                          We thank you for your continued business!
+                        updated_at: '2016-10-24T16:20:13-04:00'
+                        total_in_cents: 0
+                        transactions:
+                          - id: 159423810
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: trial
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 0
+                            memo: Trial Price (10/24/2016 - 10/31/2016)
+                            created_at: '2016-10-24T16:20:12-04:00'
+                            starting_balance_in_cents: 0
+                            ending_balance_in_cents: 0
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: null
+                            product_id: 3861800
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221109
+                            customer_id: 14399371
+                            item_name: Trial Price
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: null
+                            taxations: []
+                        events:
+                          - event:
+                              id: 342036408
+                              key: signup_success
+                              message: Successful signup for Amelia Example's subscription to Trial Product
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:13-04:00'
+                              event_specific_data:
+                                product_id: 3861800
+                                account_transaction_id: null
+                    - statement:
+                        id: 79221381
+                        basic_html_view: |
+                          <table id="billing_statement" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                              <tr id="billing_statement_logo">
+                                <td colspan="2" id="billing_statement_logo_cell">
+                                  <img src="https://s3.amazonaws.com/production.chargify/sites/31615/small.png?1464882101" alt="Logo">
+                                </td>
+                              </tr>
+                              <tr id="billing_statement_masthead">
+                                <td id="billing_statement_merchant_information">
+                                  <div id="billing_statement_merchant_name">My Awesome Company</div>
+                                  <div id="billing_statement_merchant_email"><a href="mailto:billing@example.com">billing@example.com</a></div>
+                                </td>
+                                <td id="billing_statement_information">
+                                  <div id="billing_statement_title"> (79221381)</div>
+                                  <div id="billing_statement_product">Acme Projects - Basic Plan</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_account_information">
+                                  <h2 class="billing_statement_section_title">Account Information</h2>
+                                  <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                                </td>
+                                <td id="billing_statement_summary">
+                                  <h2 class="billing_statement_section_title"> Summary</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:21:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:14Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:21PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_detail" colspan="2">
+                                  <h2 class="billing_statement_section_title"> Detail</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Basic Plan (10/24/2016 - 11/24/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$40.00</td>
+                                  </tr>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Tax</td>
+                                    <td>MA Tax (6.25%)</td>
+                                    <td class="billing_statement_listing_cell_money">$2.50</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:13Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>CC Payment</td>
+                                    <td>
+                                      <div>Amelia Example - Basic Plan: Renewal payment</div>
+                                      XXXX-XXXX-XXXX-1 bogus (01/2026)
+                                    </td>
+                                    <td class="billing_statement_listing_cell_money">
+                                      $42.50
+                                    </td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_period_activity" colspan="2">
+                                  <h2 class="billing_statement_section_title">Period Activity</h2>
+                                  <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription State Change</td>
+                                  <td>State changed on Amelia Example&#39;s subscription to Basic Plan from trialing to active</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription Product Change</td>
+                                  <td>Product changed on Amelia Example&#39;s subscription from &#39;Trial Product&#39; to &#39;Basic Plan&#39;</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:11Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Billing Date Change</td>
+                                  <td>Billing date changed on Amelia Example&#39;s subscription to Basic Plan from 10/31/2016 to 10/24/2016</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Renewal Success</td>
+                                  <td>Successful renewal for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Payment Success</td>
+                                  <td>Successful payment of $42.50 for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td  colspan="2">
+                                  <p>We thank you for your continued business!</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        closed_at: '2016-10-24T16:21:13-04:00'
+                        created_at: '2016-10-24T16:21:12-04:00'
+                        customer_billing_address: 123 Anywhere Street
+                        customer_billing_address_2: ''
+                        customer_billing_city: Anywhere
+                        customer_billing_country: US
+                        customer_billing_state: MA
+                        customer_billing_zip: '02120'
+                        customer_first_name: Amelia
+                        customer_last_name: Example
+                        customer_organization: ''
+                        customer_shipping_address: 123 Anywhere Street
+                        customer_shipping_address_2: ''
+                        customer_shipping_city: Anywhere
+                        customer_shipping_country: US
+                        customer_shipping_state: MA
+                        customer_shipping_zip: '02120'
+                        ending_balance_in_cents: 0
+                        future_payments: []
+                        html_view: |
+                          <div id="billing_statement">
+                            <div id="billing_statement_account_information_section" class="billing_statement_section">
+                              <h2 id="billing_statement_account_information_section_title" class="billing_statement_section_title">Account Information</h2>
+                              <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_summary_section" class="billing_statement_section">
+                              <h2 id="billing_statement_summary_section_title" class="billing_statement_section_title"> Summary</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:21:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:14Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:21PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_detail_section" class="billing_statement_section">
+                              <h2 id="billing_statement_detail_section_title" class="billing_statement_section_title"> Detail</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Basic Plan (10/24/2016 - 11/24/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$40.00</td>
+                                  </tr>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Tax</td>
+                                    <td>MA Tax (6.25%)</td>
+                                    <td class="billing_statement_listing_cell_money">$2.50</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:13Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>CC Payment</td>
+                                    <td>
+                                      <div>Amelia Example - Basic Plan: Renewal payment</div>
+                                      XXXX-XXXX-XXXX-1 bogus (01/2026)
+                                    </td>
+                                    <td class="billing_statement_listing_cell_money">
+                                      $42.50
+                                    </td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_period_activity_section" class="billing_statement_section">
+                              <h2 id="billing_statement_period_activity_section_title" class="billing_statement_section_title">Period Activity</h2>
+                              <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription State Change</td>
+                                  <td>State changed on Amelia Example&#39;s subscription to Basic Plan from trialing to active</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription Product Change</td>
+                                  <td>Product changed on Amelia Example&#39;s subscription from &#39;Trial Product&#39; to &#39;Basic Plan&#39;</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:11Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Billing Date Change</td>
+                                  <td>Billing date changed on Amelia Example&#39;s subscription to Basic Plan from 10/31/2016 to 10/24/2016</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Renewal Success</td>
+                                  <td>Successful renewal for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Payment Success</td>
+                                  <td>Successful payment of $42.50 for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                            </div>
+                            <div>
+                              <p>We thank you for your continued business!</p>
+                            </div>
+                          </div>
+                        memo: We thank you for your continued business!
+                        opened_at: '2016-10-24T16:20:14-04:00'
+                        settled_at: '2016-10-24T16:21:13-04:00'
+                        starting_balance_in_cents: 0
+                        subscription_id: 14900541
+                        text_view: |
+                          My Awesome Company                                                    (79221381)
+                          billing@example.com                                   Acme Projects - Basic Plan
+                          ================================================================================
+
+                          --------
+                           Summary
+                          --------
+
+                           ID......: 79221381
+                           Date....: 10/24/2016
+                          Billing Date......: 10/24/2016
+
+                          Starting Balance..:  $0.00
+                          Current Charges...: $42.50
+                          Payments..........: $42.50
+                          Ending Balance....:  $0.00
+
+                          Balance Paid......: 10/24/2016 04:21PM EDT
+
+                          -------------------
+                          Account Information
+                          -------------------
+
+                          Amelia Example
+                          amelia@example.com
+                          555-555-1212
+
+                          ### Shipping Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+                          ### Billing Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+
+                          -------
+                           Detail
+                          -------
+
+                          ### Current Charges and Adjustments
+
+                          Date/Time     Type   Detail                                              Charges
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:21PM EDT   Recur  Basic Plan (10/24/2016 - 11/24/2016)                 $40.00
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:21PM EDT   Tax    MA Tax (6.25%)                                        $2.50
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:      $42.50
+
+                          ### Payments
+
+                          Date/Time     Type   Detail                                               Amount
+                          ............  .....  ...............................................  ..........
+                          10/24/2016             XXXX-XXXX-XXXX-1 bogus (01/2026)               
+                          04:21PM EDT   CCPay  Amelia Example - Basic Plan: Renewal payment         $42.50
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:      $42.50
+
+
+                          ---------------
+                          Period Activity
+                          ---------------
+
+                          Date/Time     Event/Details                                                     
+                          ............  ..................................................................
+                          10/24/2016    Subscription State Change                                         
+                          04:20PM EDT   State changed on Amelia Example's subscription to Basic Plan from 
+                                        trialing to active                                                
+                          ............  ..................................................................
+                          10/24/2016    Subscription Product Change                                       
+                          04:20PM EDT   Product changed on Amelia Example's subscription from 'Trial Produ
+                                        ct' to 'Basic Plan'                                               
+                          ............  ..................................................................
+                          10/24/2016    Billing Date Change                                               
+                          04:21PM EDT   Billing date changed on Amelia Example's subscription to Basic Pla
+                                        n from 10/31/2016 to 10/24/2016                                   
+                          ............  ..................................................................
+                          10/24/2016    Renewal Success                                                   
+                          04:21PM EDT   Successful renewal for Amelia Example's subscription to Basic Plan
+                          ............  ..................................................................
+                          10/24/2016    Payment Success                                                   
+                          04:21PM EDT   Successful payment of $42.50 for Amelia Example's subscription to 
+                                        Basic Plan                                                        
+                          ............  ..................................................................
+
+                          We thank you for your continued business!
+                        updated_at: '2016-10-24T16:21:13-04:00'
+                        total_in_cents: 4250
+                        transactions:
+                          - id: 159424439
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: baseline
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 4000
+                            memo: Basic Plan (10/24/2016 - 11/24/2016)
+                            created_at: '2016-10-24T16:21:12-04:00'
+                            starting_balance_in_cents: 0
+                            ending_balance_in_cents: 4000
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: 159424449
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: 4000
+                            taxations:
+                              - tax_id: null
+                                tax_charge_id: 159424444
+                                tax_name: MA Tax
+                                rate: '0.0625'
+                                tax_amount_in_cents: 250
+                                tax_rules:
+                                  - tax_rule_id: null
+                                    country_code: US
+                                    subdivision_code: MA
+                                    rate: '0.0625'
+                                    tax_amount_in_cents: 250
+                                    description: MA STATE TAX - MASSACHUSETTS
+                          - id: 159424444
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: tax
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 250
+                            memo: MA Tax (6.25%)
+                            created_at: '2016-10-24T16:21:12-04:00'
+                            starting_balance_in_cents: 4000
+                            ending_balance_in_cents: 4250
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: 159424449
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: null
+                            taxations: []
+                          - id: 159424449
+                            subscription_id: 14900541
+                            type: Payment
+                            kind: null
+                            transaction_type: payment
+                            success: true
+                            amount_in_cents: 4250
+                            memo: 'Amelia Example - Basic Plan: Renewal payment'
+                            created_at: '2016-10-24T16:21:13-04:00'
+                            starting_balance_in_cents: 4250
+                            ending_balance_in_cents: 0
+                            gateway_used: bogus
+                            gateway_transaction_id: '53433'
+                            gateway_order_id: null
+                            payment_id: null
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            card_number: XXXX-XXXX-XXXX-1
+                            card_expiration: 01/2026
+                            card_type: bogus
+                            refunded_amount_in_cents: 0
+                        events:
+                          - event:
+                              id: 342036536
+                              key: subscription_state_change
+                              message: State changed on Amelia Example's subscription to Basic Plan from trialing to active
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:43-04:00'
+                              event_specific_data:
+                                previous_subscription_state: trialing
+                                new_subscription_state: active
+                          - event:
+                              id: 342036540
+                              key: subscription_product_change
+                              message: Product changed on Amelia Example's subscription from 'Trial Product' to 'Basic Plan'
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:43-04:00'
+                              event_specific_data:
+                                previous_product_id: 3861800
+                                new_product_id: 3792003
+                          - event:
+                              id: 342037380
+                              key: billing_date_change
+                              message: Billing date changed on Amelia Example's subscription to Basic Plan from 10/31/2016 to 10/24/2016
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:11-04:00'
+                              event_specific_data: null
+                          - event:
+                              id: 342037470
+                              key: renewal_success
+                              message: Successful renewal for Amelia Example's subscription to Basic Plan
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:14-04:00'
+                              event_specific_data:
+                                product_id: 3792003
+                                account_transaction_id: 159424449
+                          - event:
+                              id: 342037482
+                              key: payment_success
+                              message: Successful payment of $42.50 for Amelia Example's subscription to Basic Plan
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:14-04:00'
+                              event_specific_data:
+                                product_id: 3792003
+                                account_transaction_id: 159424449
       operationId: get-statements.json
       parameters:
         - schema:
@@ -1294,6 +2958,1151 @@ paths:
                   properties:
                     statement:
                       $ref: ../models/Legacy-Statement-with-UI-Tools.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - statement:
+                        id: 79221109
+                        basic_html_view: |
+                          <table id="billing_statement" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                              <tr id="billing_statement_logo">
+                                <td colspan="2" id="billing_statement_logo_cell">
+                                  <img src="https://s3.amazonaws.com/production.chargify/sites/31615/small.png?1464882101" alt="Logo">
+                                </td>
+                              </tr>
+                              <tr id="billing_statement_masthead">
+                                <td id="billing_statement_merchant_information">
+                                  <div id="billing_statement_merchant_name">My Awesome Company</div>
+                                  <div id="billing_statement_merchant_email"><a href="mailto:billing@example.com">billing@example.com</a></div>
+                                </td>
+                                <td id="billing_statement_information">
+                                  <div id="billing_statement_title"> (79221109)</div>
+                                  <div id="billing_statement_product">Acme Projects - Trial Product</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_account_information">
+                                  <h2 class="billing_statement_section_title">Account Information</h2>
+                                  <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                                </td>
+                                <td id="billing_statement_summary">
+                                  <h2 class="billing_statement_section_title"> Summary</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_detail" colspan="2">
+                                  <h2 class="billing_statement_section_title"> Detail</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="billing_statement_listing_empty_results_row">
+                                    <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_period_activity" colspan="2">
+                                  <h2 class="billing_statement_section_title">Period Activity</h2>
+                                  <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Signup Success</td>
+                                  <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td  colspan="2">
+                                  <p>We thank you for your continued business!</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        closed_at: '2016-10-24T16:20:13-04:00'
+                        created_at: '2016-10-24T16:20:12-04:00'
+                        customer_billing_address: 123 Anywhere Street
+                        customer_billing_address_2: ''
+                        customer_billing_city: Anywhere
+                        customer_billing_country: US
+                        customer_billing_state: MA
+                        customer_billing_zip: '02120'
+                        customer_first_name: Amelia
+                        customer_last_name: Example
+                        customer_organization: ''
+                        customer_shipping_address: 123 Anywhere Street
+                        customer_shipping_address_2: ''
+                        customer_shipping_city: Anywhere
+                        customer_shipping_country: US
+                        customer_shipping_state: MA
+                        customer_shipping_zip: '02120'
+                        ending_balance_in_cents: 0
+                        future_payments: []
+                        html_view: |
+                          <div id="billing_statement">
+                            <div id="billing_statement_account_information_section" class="billing_statement_section">
+                              <h2 id="billing_statement_account_information_section_title" class="billing_statement_section_title">Account Information</h2>
+                              <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_summary_section" class="billing_statement_section">
+                              <h2 id="billing_statement_summary_section_title" class="billing_statement_section_title"> Summary</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:12Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:20PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_detail_section" class="billing_statement_section">
+                              <h2 id="billing_statement_detail_section_title" class="billing_statement_section_title"> Detail</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:20:12Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Trial Price (10/24/2016 - 10/31/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="billing_statement_listing_empty_results_row">
+                                    <td colspan="4" class="billing_statement_listing_empty_results_cell">No payments this period</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$0.00</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_period_activity_section" class="billing_statement_section">
+                              <h2 id="billing_statement_period_activity_section_title" class="billing_statement_section_title">Period Activity</h2>
+                              <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:13Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Signup Success</td>
+                                  <td>Successful signup for Amelia Example&#39;s subscription to Trial Product</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                            </div>
+                            <div>
+                              <p>We thank you for your continued business!</p>
+                            </div>
+                          </div>
+                        memo: We thank you for your continued business!
+                        opened_at: '2016-10-24T16:20:12-04:00'
+                        settled_at: '2016-10-24T16:20:13-04:00'
+                        starting_balance_in_cents: 0
+                        subscription_id: 14900541
+                        text_view: |
+                          My Awesome Company                                                    (79221109)
+                          billing@example.com                                Acme Projects - Trial Product
+                          ================================================================================
+
+                          --------
+                           Summary
+                          --------
+
+                           ID......: 79221109
+                           Date....: 10/24/2016
+                          Billing Date......: 10/24/2016
+
+                          Starting Balance..: $0.00
+                          Current Charges...: $0.00
+                          Payments..........: $0.00
+                          Ending Balance....: $0.00
+
+                          Balance Paid......: 10/24/2016 04:20PM EDT
+
+                          -------------------
+                          Account Information
+                          -------------------
+
+                          Amelia Example
+                          amelia@example.com
+                          555-555-1212
+
+                          ### Shipping Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+                          ### Billing Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+
+                          -------
+                           Detail
+                          -------
+
+                          ### Current Charges and Adjustments
+
+                          Date/Time     Type   Detail                                              Charges
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:20PM EDT   Recur  Trial Price (10/24/2016 - 10/31/2016)                 $0.00
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:       $0.00
+
+                          ### Payments
+
+                          No payments this period
+
+
+                          ---------------
+                          Period Activity
+                          ---------------
+
+                          Date/Time     Event/Details                                                     
+                          ............  ..................................................................
+                          10/24/2016    Signup Success                                                    
+                          04:20PM EDT   Successful signup for Amelia Example's subscription to Trial Produ
+                                        ct                                                                
+                          ............  ..................................................................
+
+                          We thank you for your continued business!
+                        updated_at: '2016-10-24T16:20:13-04:00'
+                        total_in_cents: 0
+                        transactions:
+                          - id: 159423810
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: trial
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 0
+                            memo: Trial Price (10/24/2016 - 10/31/2016)
+                            created_at: '2016-10-24T16:20:12-04:00'
+                            starting_balance_in_cents: 0
+                            ending_balance_in_cents: 0
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: null
+                            product_id: 3861800
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221109
+                            customer_id: 14399371
+                            item_name: Trial Price
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: null
+                            taxations: []
+                        events:
+                          - event:
+                              id: 342036408
+                              key: signup_success
+                              message: Successful signup for Amelia Example's subscription to Trial Product
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:13-04:00'
+                              event_specific_data:
+                                product_id: 3861800
+                                account_transaction_id: null
+                    - statement:
+                        id: 79221381
+                        basic_html_view: |
+                          <table id="billing_statement" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                              <tr id="billing_statement_logo">
+                                <td colspan="2" id="billing_statement_logo_cell">
+                                  <img src="https://s3.amazonaws.com/production.chargify/sites/31615/small.png?1464882101" alt="Logo">
+                                </td>
+                              </tr>
+                              <tr id="billing_statement_masthead">
+                                <td id="billing_statement_merchant_information">
+                                  <div id="billing_statement_merchant_name">My Awesome Company</div>
+                                  <div id="billing_statement_merchant_email"><a href="mailto:billing@example.com">billing@example.com</a></div>
+                                </td>
+                                <td id="billing_statement_information">
+                                  <div id="billing_statement_title"> (79221381)</div>
+                                  <div id="billing_statement_product">Acme Projects - Basic Plan</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_account_information">
+                                  <h2 class="billing_statement_section_title">Account Information</h2>
+                                  <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                                </td>
+                                <td id="billing_statement_summary">
+                                  <h2 class="billing_statement_section_title"> Summary</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:21:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:14Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:21PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_detail" colspan="2">
+                                  <h2 class="billing_statement_section_title"> Detail</h2>
+                                  <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Basic Plan (10/24/2016 - 11/24/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$40.00</td>
+                                  </tr>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Tax</td>
+                                    <td>MA Tax (6.25%)</td>
+                                    <td class="billing_statement_listing_cell_money">$2.50</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:13Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>CC Payment</td>
+                                    <td>
+                                      <div>Amelia Example - Basic Plan: Renewal payment</div>
+                                      XXXX-XXXX-XXXX-1 bogus (01/2026)
+                                    </td>
+                                    <td class="billing_statement_listing_cell_money">
+                                      $42.50
+                                    </td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td id="billing_statement_period_activity" colspan="2">
+                                  <h2 class="billing_statement_section_title">Period Activity</h2>
+                                  <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription State Change</td>
+                                  <td>State changed on Amelia Example&#39;s subscription to Basic Plan from trialing to active</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription Product Change</td>
+                                  <td>Product changed on Amelia Example&#39;s subscription from &#39;Trial Product&#39; to &#39;Basic Plan&#39;</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:11Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Billing Date Change</td>
+                                  <td>Billing date changed on Amelia Example&#39;s subscription to Basic Plan from 10/31/2016 to 10/24/2016</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Renewal Success</td>
+                                  <td>Successful renewal for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Payment Success</td>
+                                  <td>Successful payment of $42.50 for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                                </td>
+                              </tr>
+                              <tr>
+                                <td  colspan="2">
+                                  <p>We thank you for your continued business!</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        closed_at: '2016-10-24T16:21:13-04:00'
+                        created_at: '2016-10-24T16:21:12-04:00'
+                        customer_billing_address: 123 Anywhere Street
+                        customer_billing_address_2: ''
+                        customer_billing_city: Anywhere
+                        customer_billing_country: US
+                        customer_billing_state: MA
+                        customer_billing_zip: '02120'
+                        customer_first_name: Amelia
+                        customer_last_name: Example
+                        customer_organization: ''
+                        customer_shipping_address: 123 Anywhere Street
+                        customer_shipping_address_2: ''
+                        customer_shipping_city: Anywhere
+                        customer_shipping_country: US
+                        customer_shipping_state: MA
+                        customer_shipping_zip: '02120'
+                        ending_balance_in_cents: 0
+                        future_payments: []
+                        html_view: |
+                          <div id="billing_statement">
+                            <div id="billing_statement_account_information_section" class="billing_statement_section">
+                              <h2 id="billing_statement_account_information_section_title" class="billing_statement_section_title">Account Information</h2>
+                              <div class="billing_statement_section_content vcard">
+                            <div id="billing_statement_customer_name" class="fn">Amelia Example</div>
+                            <div id="billing_statement_customer_email"><a class="email" href="mailto:amelia@example.com">amelia@example.com</a></div>
+                            <div id="billing_statement_customer_phone" class="tel"><span class="value">555-555-1212</span></div>
+
+                            <div id="billing_statement_shipping_address" class="adr">
+                              <h3 id="billing_statement_shipping_address_title" class="billing_statement_subsection_title">Shipping Address</h3>
+                              <div id="billing_statement_shipping_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_shipping_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_shipping_address_country_name" class="country-name">US</div>
+                            </div>
+
+                            <div id="billing_statement_billing_address" class="adr">
+                              <h3 id="billing_statement_billing_address_title" class="billing_statement_subsection_title">Billing Address</h3>
+                              <div id="billing_statement_billing_address_street_address" class="street-address">123 Anywhere Street</div>
+                              <div id="billing_statement_billing_address_locality_region_postal_code">
+                                <span class="locality">Anywhere</span>,
+                                <abbr class="region">MA</abbr>
+                                <span class="postal-code">02120</span>
+                              </div>
+                              <div id="billing_statement_billing_address_country_name" class="country-name">US</div>
+                            </div>
+                            
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_summary_section" class="billing_statement_section">
+                              <h2 id="billing_statement_summary_section_title" class="billing_statement_section_title"> Summary</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_summary_statement_date">
+                              <span class="billing_statement_summary_label"> Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:21:13Z">10/24/2016</abbr></span>
+                            </div>
+                            <div id="billing_statement_summary_usage_period">
+                              <span class="billing_statement_summary_label">Billing Date:</span>
+                              <span class="billing_statement_summary_value"><abbr title="2016-10-24T20:20:14Z">10/24/2016</abbr></span>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_summary">
+                              <div id="billing_statement_summary_starting_balance">
+                                <span class="billing_statement_summary_label">Starting Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                              <div id="billing_statement_summary_current_charges">
+                                <span class="billing_statement_summary_label">Current Charges:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_current_payments_and_credits">
+                                <span class="billing_statement_summary_label">Payments:</span>
+                                <span class="billing_statement_summary_value">$42.50</span>
+                              </div>
+                              <div id="billing_statement_summary_balance_due">
+                                <span class="billing_statement_summary_label">Ending Balance:</span>
+                                <span class="billing_statement_summary_value">$0.00</span>
+                              </div>
+                            </div>
+
+                            <div id="billing_statement_summary_balance_paid">
+                              <div id="billing_statement_summary_balance_paid_date">
+                                <span class="billing_statement_summary_label">Balance Paid:</span>
+                                <span class="billing_statement_summary_value">10/24/2016 04:21PM EDT</span>
+                              </div>
+                                <div id="billing_statement_summary_balance_paid_stamp" class="billing_statement_balance_paid_stamp_paid">
+                                  PAID
+                                </div>
+                            </div>
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_detail_section" class="billing_statement_section">
+                              <h2 id="billing_statement_detail_section_title" class="billing_statement_section_title"> Detail</h2>
+                              <div class="billing_statement_section_content">
+                            <div id="billing_statement_detail_current_charges_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_current_charges_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Current Charges and Adjustments</h3>
+                              <table id="billing_statement_detail_current_charges_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Charge</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Recurring</td>
+                                    <td>Basic Plan (10/24/2016 - 11/24/2016)</td>
+                                    <td class="billing_statement_listing_cell_money">$40.00</td>
+                                  </tr>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:12Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>Tax</td>
+                                    <td>MA Tax (6.25%)</td>
+                                    <td class="billing_statement_listing_cell_money">$2.50</td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+                            <div id="billing_statement_detail_payments_credits_subsection" class="billing_statement_detail_subsection billing_statement_subsection">
+                              <h3 id="billing_statement_detail_payments_credits_title" class="billing_statement_detail_subsection_title billing_statement_subsection_title">Payments</h3>
+                              <table id="billing_statement_detail_payments_credits_listing" class="billing_statement_detail_listing billing_statement_listing">
+                                <thead>
+                                  <tr>
+                                    <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                    <th class="billing_statement_listing_cell_type">Type</th>
+                                    <th class="billing_statement_listing_cell_detail">Detail</th>
+                                    <th class="billing_statement_listing_cell_money">Amount</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td><abbr title="2016-10-24T20:21:13Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                    <td>CC Payment</td>
+                                    <td>
+                                      <div>Amelia Example - Basic Plan: Renewal payment</div>
+                                      XXXX-XXXX-XXXX-1 bogus (01/2026)
+                                    </td>
+                                    <td class="billing_statement_listing_cell_money">
+                                      $42.50
+                                    </td>
+                                  </tr>
+                                  <tr class="billing_statement_listing_tfoot">
+                                    <td colspan="3" class="billing_statement_listing_cell_totals_label">Totals</td>
+                                    <td class="billing_statement_listing_cell_money">$42.50</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+
+
+                          </div>
+
+                            </div>
+
+                            <div id="billing_statement_period_activity_section" class="billing_statement_section">
+                              <h2 id="billing_statement_period_activity_section_title" class="billing_statement_section_title">Period Activity</h2>
+                              <div class="billing_statement_section_content">
+                            <table id="billing_statement_period_activity_listing" class="billing_statement_period_activity_listing billing_statement_listing">
+                              <thead>
+                                <tr>
+                                  <th class="billing_statement_listing_cell_datetime">Date/Time</th>
+                                  <th class="billing_statement_listing_cell_event">Event</th>
+                                  <th class="billing_statement_listing_cell_detail">Detail</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription State Change</td>
+                                  <td>State changed on Amelia Example&#39;s subscription to Basic Plan from trialing to active</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:20:43Z">10/24/2016 <span class='time_and_zone'>04:20PM EDT</span></abbr></td>
+                                  <td>Subscription Product Change</td>
+                                  <td>Product changed on Amelia Example&#39;s subscription from &#39;Trial Product&#39; to &#39;Basic Plan&#39;</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:11Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Billing Date Change</td>
+                                  <td>Billing date changed on Amelia Example&#39;s subscription to Basic Plan from 10/31/2016 to 10/24/2016</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Renewal Success</td>
+                                  <td>Successful renewal for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                                <tr>
+                                  <td><abbr title="2016-10-24T20:21:14Z">10/24/2016 <span class='time_and_zone'>04:21PM EDT</span></abbr></td>
+                                  <td>Payment Success</td>
+                                  <td>Successful payment of $42.50 for Amelia Example&#39;s subscription to Basic Plan</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                            </div>
+                            <div>
+                              <p>We thank you for your continued business!</p>
+                            </div>
+                          </div>
+                        memo: We thank you for your continued business!
+                        opened_at: '2016-10-24T16:20:14-04:00'
+                        settled_at: '2016-10-24T16:21:13-04:00'
+                        starting_balance_in_cents: 0
+                        subscription_id: 14900541
+                        text_view: |
+                          My Awesome Company                                                    (79221381)
+                          billing@example.com                                   Acme Projects - Basic Plan
+                          ================================================================================
+
+                          --------
+                           Summary
+                          --------
+
+                           ID......: 79221381
+                           Date....: 10/24/2016
+                          Billing Date......: 10/24/2016
+
+                          Starting Balance..:  $0.00
+                          Current Charges...: $42.50
+                          Payments..........: $42.50
+                          Ending Balance....:  $0.00
+
+                          Balance Paid......: 10/24/2016 04:21PM EDT
+
+                          -------------------
+                          Account Information
+                          -------------------
+
+                          Amelia Example
+                          amelia@example.com
+                          555-555-1212
+
+                          ### Shipping Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+                          ### Billing Address
+                          123 Anywhere Street
+                          Anywhere, MA 02120
+                          US
+
+
+                          -------
+                           Detail
+                          -------
+
+                          ### Current Charges and Adjustments
+
+                          Date/Time     Type   Detail                                              Charges
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:21PM EDT   Recur  Basic Plan (10/24/2016 - 11/24/2016)                 $40.00
+                          ............  .....  ...............................................  ..........
+                          10/24/2016
+                          04:21PM EDT   Tax    MA Tax (6.25%)                                        $2.50
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:      $42.50
+
+                          ### Payments
+
+                          Date/Time     Type   Detail                                               Amount
+                          ............  .....  ...............................................  ..........
+                          10/24/2016             XXXX-XXXX-XXXX-1 bogus (01/2026)               
+                          04:21PM EDT   CCPay  Amelia Example - Basic Plan: Renewal payment         $42.50
+                          ............  .....  ...............................................  ..........
+                                                                                       Totals:      $42.50
+
+
+                          ---------------
+                          Period Activity
+                          ---------------
+
+                          Date/Time     Event/Details                                                     
+                          ............  ..................................................................
+                          10/24/2016    Subscription State Change                                         
+                          04:20PM EDT   State changed on Amelia Example's subscription to Basic Plan from 
+                                        trialing to active                                                
+                          ............  ..................................................................
+                          10/24/2016    Subscription Product Change                                       
+                          04:20PM EDT   Product changed on Amelia Example's subscription from 'Trial Produ
+                                        ct' to 'Basic Plan'                                               
+                          ............  ..................................................................
+                          10/24/2016    Billing Date Change                                               
+                          04:21PM EDT   Billing date changed on Amelia Example's subscription to Basic Pla
+                                        n from 10/31/2016 to 10/24/2016                                   
+                          ............  ..................................................................
+                          10/24/2016    Renewal Success                                                   
+                          04:21PM EDT   Successful renewal for Amelia Example's subscription to Basic Plan
+                          ............  ..................................................................
+                          10/24/2016    Payment Success                                                   
+                          04:21PM EDT   Successful payment of $42.50 for Amelia Example's subscription to 
+                                        Basic Plan                                                        
+                          ............  ..................................................................
+
+                          We thank you for your continued business!
+                        updated_at: '2016-10-24T16:21:13-04:00'
+                        total_in_cents: 4250
+                        transactions:
+                          - id: 159424439
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: baseline
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 4000
+                            memo: Basic Plan (10/24/2016 - 11/24/2016)
+                            created_at: '2016-10-24T16:21:12-04:00'
+                            starting_balance_in_cents: 0
+                            ending_balance_in_cents: 4000
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: 159424449
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: 4000
+                            taxations:
+                              - tax_id: null
+                                tax_charge_id: 159424444
+                                tax_name: MA Tax
+                                rate: '0.0625'
+                                tax_amount_in_cents: 250
+                                tax_rules:
+                                  - tax_rule_id: null
+                                    country_code: US
+                                    subdivision_code: MA
+                                    rate: '0.0625'
+                                    tax_amount_in_cents: 250
+                                    description: MA STATE TAX - MASSACHUSETTS
+                          - id: 159424444
+                            subscription_id: 14900541
+                            type: Charge
+                            kind: tax
+                            transaction_type: charge
+                            success: true
+                            amount_in_cents: 250
+                            memo: MA Tax (6.25%)
+                            created_at: '2016-10-24T16:21:12-04:00'
+                            starting_balance_in_cents: 4000
+                            ending_balance_in_cents: 4250
+                            gateway_used: null
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            payment_id: 159424449
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            original_amount_in_cents: null
+                            discount_amount_in_cents: null
+                            taxable_amount_in_cents: null
+                            taxations: []
+                          - id: 159424449
+                            subscription_id: 14900541
+                            type: Payment
+                            kind: null
+                            transaction_type: payment
+                            success: true
+                            amount_in_cents: 4250
+                            memo: 'Amelia Example - Basic Plan: Renewal payment'
+                            created_at: '2016-10-24T16:21:13-04:00'
+                            starting_balance_in_cents: 4250
+                            ending_balance_in_cents: 0
+                            gateway_used: bogus
+                            gateway_transaction_id: '53433'
+                            gateway_order_id: null
+                            payment_id: null
+                            product_id: 3792003
+                            tax_id: null
+                            component_id: null
+                            statement_id: 79221381
+                            customer_id: 14399371
+                            card_number: XXXX-XXXX-XXXX-1
+                            card_expiration: 01/2026
+                            card_type: bogus
+                            refunded_amount_in_cents: 0
+                        events:
+                          - event:
+                              id: 342036536
+                              key: subscription_state_change
+                              message: State changed on Amelia Example's subscription to Basic Plan from trialing to active
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:43-04:00'
+                              event_specific_data:
+                                previous_subscription_state: trialing
+                                new_subscription_state: active
+                          - event:
+                              id: 342036540
+                              key: subscription_product_change
+                              message: Product changed on Amelia Example's subscription from 'Trial Product' to 'Basic Plan'
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:20:43-04:00'
+                              event_specific_data:
+                                previous_product_id: 3861800
+                                new_product_id: 3792003
+                          - event:
+                              id: 342037380
+                              key: billing_date_change
+                              message: Billing date changed on Amelia Example's subscription to Basic Plan from 10/31/2016 to 10/24/2016
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:11-04:00'
+                              event_specific_data: null
+                          - event:
+                              id: 342037470
+                              key: renewal_success
+                              message: Successful renewal for Amelia Example's subscription to Basic Plan
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:14-04:00'
+                              event_specific_data:
+                                product_id: 3792003
+                                account_transaction_id: 159424449
+                          - event:
+                              id: 342037482
+                              key: payment_success
+                              message: Successful payment of $42.50 for Amelia Example's subscription to Basic Plan
+                              subscription_id: 14900541
+                              created_at: '2016-10-24T16:21:14-04:00'
+                              event_specific_data:
+                                product_id: 3792003
+                                account_transaction_id: 159424449
       operationId: get-subscriptions-subscription_id-statements.json
       parameters:
         - schema:
@@ -1350,6 +4159,17 @@ paths:
                     type: array
                     items:
                       type: integer
+              examples:
+                Example:
+                  value:
+                    statement_ids:
+                      - 67201893
+                      - 67266652
+                      - 67301249
+                      - 67301813
+                      - 80499378
+                      - 80499379
+                      - 80500632
       operationId: get-statements-ids.json
       parameters:
         - schema:
@@ -1417,6 +4237,17 @@ paths:
                     type: array
                     items:
                       type: integer
+              examples:
+                Example:
+                  value:
+                    statement_ids:
+                      - 79221109
+                      - 79221381
+                      - 79221642
+                      - 79221742
+                      - 79334531
+                      - 79702531
+                      - 79733833
       operationId: get-subscriptions-subscription_id-statements-ids.json
       parameters:
         - schema:

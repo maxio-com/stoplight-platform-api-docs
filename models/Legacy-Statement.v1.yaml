@@ -127,6 +127,7 @@ properties:
               type: string
             event_specific_data:
               type: object
+              nullable: true
               properties:
                 product_id:
                   type: integer
