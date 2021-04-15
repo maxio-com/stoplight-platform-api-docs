@@ -644,101 +644,7 @@ paths:
                 type: object
                 properties:
                   payment:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      subscription_id:
-                        type: integer
-                      type:
-                        type: string
-                        enum:
-                          - Payment
-                      kind:
-                        type: string
-                        enum:
-                          - manual
-                      transaction_type:
-                        type: string
-                        enum:
-                          - payment
-                      success:
-                        type: boolean
-                      amount_in_cents:
-                        type: integer
-                      memo:
-                        type: string
-                        nullable: true
-                      created_at:
-                        type: string
-                      starting_balance_in_cents:
-                        type: integer
-                      ending_balance_in_cents:
-                        type: integer
-                      gateway_used:
-                        type: string
-                        nullable: true
-                      gateway_transaction_id:
-                        type: integer
-                        nullable: true
-                      gateway_order_id:
-                        type: integer
-                        nullable: true
-                      payment_id:
-                        type: integer
-                        nullable: true
-                      product_id:
-                        type: integer
-                        nullable: true
-                      tax_id:
-                        type: integer
-                        nullable: true
-                      component_id:
-                        type: integer
-                        nullable: true
-                      statement_id:
-                        type: integer
-                      customer_id:
-                        type: integer
-                      item_name:
-                        type: string
-                        nullable: true
-                      period_range_start:
-                        type: string
-                        nullable: true
-                      period_range_end:
-                        type: string
-                        nullable: true
-                      currency:
-                        type: string
-                      exchange_rate:
-                        type: number
-                      component_handle:
-                        type: string
-                        nullable: true
-                      component_price_point_id:
-                        type: integer
-                        nullable: true
-                      component_price_point_handle:
-                        type: string
-                        nullable: true
-                      parent_id:
-                        type: integer
-                        nullable: true
-                      role:
-                        type: string
-                        nullable: true
-                      card_number:
-                        type: string
-                        nullable: true
-                      card_expiration:
-                        type: string
-                        nullable: true
-                      card_type:
-                        type: string
-                        nullable: true
-                      refunded_amount_in_cents:
-                        type: integer
+                    $ref: ../models/Legacy-Payment.v1.yaml
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -774,25 +680,7 @@ paths:
               type: object
               properties:
                 payment:
-                  type: object
-                  required:
-                    - amount_in_cents
-                  properties:
-                    amount_in_cents:
-                      oneOf:
-                        - type: string
-                          pattern: ^\d+$
-                        - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
-                    amount:
-                      oneOf:
-                        - type: string
-                          pattern: '^[1-9]\d*(\.\d+)?$'
-                        - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
-                    memo:
-                      type: string
-                      description: Typically the description of why the payment occured
+                  $ref: ../models/Create-Legacy-Payment.v1.yaml
               required:
                 - payment
   '/subscriptions/{subscription_id}/refunds.json':
@@ -1732,7 +1620,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    transaction:
+                    invoice:
                       $ref: ../models/Legacy-Invoice.v1.yaml
       operationId: get-invoices.json
       parameters:
@@ -1798,6 +1686,65 @@ paths:
         Full documentation on how invoices function within the Chargify UI can be located [here](https://help.chargify.com/invoices/invoice-intro.html).
 
         For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#invoices)
+  '/invoices/{invoice_id}/payments.json':
+    parameters:
+      - schema:
+          type: number
+        name: invoice_id
+        in: path
+        required: true
+        description: The Chargify id for which the payment applies
+    post:
+      summary: Create Payment
+      tags:
+        - Legacy Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  payment:
+                    $ref: ../models/Legacy-Payment.v1.yaml
+      operationId: post-invoices-invoice_id-payments.json
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
+        ## Create External Payment for Legacy Invoice
+
+        In order to specify a payment made against an invoice, specify the `amount`. 
+
+        Please note that you may request the payment `amount_in_cents`. You may submit your request in cents as well:
+
+        ```
+        {
+          "payment": {
+            "amount": 10.00,
+            "memo": "Lorem ipsum"
+          }
+        }
+        ```
+
+        ## Invoice Payment Documentation
+
+        For more information that on adding a payment to an invoice, please see our payment documentation below:
+
+        + [Pay via Card](https://help.chargify.com/invoices/invoice-reference.html#pay-with-card)
+        + [Offline Payments](https://help.chargify.com/invoices/invoice-reference.html#enter-payment)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment:
+                  $ref: ../models/Create-Legacy-Payment.v1.yaml
+              required:
+                - payment
 components:
   schemas: {}
 servers:
