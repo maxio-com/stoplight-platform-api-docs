@@ -35,126 +35,8 @@ paths:
                   adjustment:
                     type: object
                     properties:
-                      id:
-                        type: integer
-                        description: The Chargify id of the adjustment
-                      success:
-                        type: boolean
-                        description: 'Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true'
-                      memo:
-                        description: The supplied description of the adjustment
-                        type: string
-                        nullable: true
-                      amount_in_cents:
-                        type: integer
-                        description: The amount of the adjustment represented in cents
-                      starting_balance_in_cents:
-                        type: integer
-                        description: The subscription balance in cents before the adjustment applied
-                      ending_balance_in_cents:
-                        type: integer
-                        description: The subscription balance in cents after the adjustment applied
-                      type:
-                        type: string
-                        enum:
-                          - Adjustment
-                      kind:
-                        type: string
-                        nullable: true
-                      transaction_type:
-                        type: string
-                        enum:
-                          - adjustment
-                      subscription_id:
-                        type: integer
-                        description: The Chargify id of the subscription associated with this adjustment
-                      product_id:
-                        type: integer
-                        description: The Chargify id of the product associated with the subscription's at the time of the adjustment
-                      component_id:
-                        type: integer
-                        nullable: true
-                      component_handle:
-                        type: string
-                        nullable: true
-                      component_price_point_id:
-                        type: integer
-                        nullable: true
-                      component_price_point_handle:
-                        type: string
-                        nullable: true
-                      statement_id:
-                        type: integer
-                        description: The Chargify id of the statement to which this adjustment was applied
-                      customer_id:
-                        type: integer
-                        description: The Chargify id of the customer to which the subscription belongs
-                      item_name:
-                        type: string
-                        nullable: true
-                      currency:
-                        type: string
-                        description: The currency ISO code associated with the currency which was used to make the adjustment
-                        enum:
-                          - AUD
-                          - BRL
-                          - CAD
-                          - CHF
-                          - CNY
-                          - CZK
-                          - DKK
-                          - EUR
-                          - GBP
-                          - HKD
-                          - INR
-                          - JPY
-                          - MXN
-                          - MYR
-                          - NOK
-                          - NZD
-                          - PHP
-                          - PLN
-                          - RON
-                          - RUB
-                          - SEK
-                          - SGD
-                          - USD
-                          - ZAR
-                          - AED
-                          - SAR
-                          - ILS
-                      exchange_rate:
-                        type: integer
-                      created_at:
-                        type: string
-                        description: The time that the adjustment was created
-                      payment_id:
-                        type: integer
-                        nullable: true
-                      period_range_start:
-                        type: string
-                        nullable: true
-                        format: date
-                        description: The start of the billing period for which the adjustment applies
-                        example: '2021-04-02'
-                      period_range_end:
-                        type: string
-                        nullable: true
-                        format: date
-                        description: The end of the billing period period for which the adjustment applies
-                        example: '2021-04-02'
-                      gateway_used:
-                        type: string
-                        nullable: true
-                      gateway_transaction_id:
-                        type: integer
-                        nullable: true
-                      gateway_order_id:
-                        type: integer
-                        nullable: true
-                      tax_id:
-                        type: integer
-                        nullable: true
+                      adjustment:
+                        $ref: ../models/Legacy-Adjustment.v1.yaml
               examples:
                 Example:
                   value:
@@ -1424,6 +1306,80 @@ paths:
                 properties:
                   invoice:
                     $ref: ../models/Legacy-Invoice.v1.yaml
+              examples:
+                Example:
+                  value:
+                    invoice:
+                      id: 1240345
+                      subscription_id: 14900541
+                      statement_id: 79334531
+                      site_id: 31615
+                      state: paid
+                      total_amount_in_cents: 4250
+                      paid_at: '2016-11-01T12:20:21-04:00'
+                      created_at: '2016-10-26T14:38:40-04:00'
+                      updated_at: '2016-11-01T12:20:21-04:00'
+                      amount_due_in_cents: 0
+                      number: '000014'
+                      charges:
+                        - created_at: '2016-10-26T14:38:39-04:00'
+                          subscription_id: 14900541
+                          type: Charge
+                          memo: Basic Plan (10/26/2016 - 11/26/2016)
+                          kind: baseline
+                          amount_in_cents: 4000
+                          ending_balance_in_cents: 4000
+                          success: true
+                          id: 159670144
+                          payment_id: 160493169
+                          product_id: 3792003
+                          transaction_type: charge
+                          gateway_transaction_id: null
+                          gateway_order_id: null
+                          starting_balance_in_cents: 0
+                          component_id: null
+                          tax_id: null
+                          customer_id: 14399371
+                        - created_at: '2016-10-26T14:38:39-04:00'
+                          subscription_id: 14900541
+                          type: Charge
+                          memo: MA Tax (6.25%)
+                          kind: tax
+                          amount_in_cents: 250
+                          ending_balance_in_cents: 4250
+                          success: true
+                          id: 159670145
+                          payment_id: 160493169
+                          product_id: 3792003
+                          transaction_type: charge
+                          gateway_transaction_id: null
+                          gateway_order_id: null
+                          starting_balance_in_cents: 4000
+                          component_id: null
+                          tax_id: null
+                          customer_id: 14399371
+                      payments_and_credits:
+                        - created_at: '2016-11-01T12:20:20-04:00'
+                          subscription_id: 14900541
+                          type: Payment
+                          memo: One Time Credit Card Payment for Invoice
+                          kind: one_time
+                          amount_in_cents: 4250
+                          ending_balance_in_cents: -4450
+                          success: true
+                          id: 160493169
+                          payment_id: null
+                          product_id: 3792003
+                          transaction_type: payment
+                          gateway_transaction_id: '53433'
+                          gateway_order_id: null
+                          starting_balance_in_cents: -200
+                          component_id: null
+                          tax_id: null
+                          customer_id: 14399371
+                          card_number: XXXX-XXXX-XXXX-1
+                          card_expiration: 01/2026
+                          card_type: bogus
       operationId: get-invoices-invoice_id-.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -1460,6 +1416,105 @@ paths:
                   properties:
                     invoice:
                       $ref: ../models/Legacy-Invoice.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - invoice:
+                        id: 1231028
+                        subscription_id: 14735881
+                        statement_id: 79006022
+                        site_id: 31615
+                        state: unpaid
+                        total_amount_in_cents: 1000
+                        paid_at: null
+                        created_at: '2016-10-20T17:04:14-04:00'
+                        updated_at: '2016-10-20T17:04:14-04:00'
+                        amount_due_in_cents: 1000
+                        number: '000013'
+                        charges:
+                          - created_at: '2016-10-20T17:04:14-04:00'
+                            subscription_id: 14735881
+                            type: Charge
+                            memo: Trial Product (10/20/2016 - 11/20/2016)
+                            kind: baseline
+                            amount_in_cents: 1000
+                            ending_balance_in_cents: 1000
+                            success: true
+                            id: 158945783
+                            payment_id: null
+                            product_id: 3861800
+                            transaction_type: charge
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            starting_balance_in_cents: 0
+                            component_id: null
+                            tax_id: null
+                            customer_id: 14254093
+                        payments_and_credits: []
+                    - invoice:
+                        id: 1229888
+                        subscription_id: 14823387
+                        statement_id: 78919321
+                        site_id: 31615
+                        state: unpaid
+                        total_amount_in_cents: 5000
+                        paid_at: null
+                        created_at: '2016-10-19T12:53:02-04:00'
+                        updated_at: '2016-10-19T12:53:02-04:00'
+                        amount_due_in_cents: 5000
+                        number: '000012'
+                        charges:
+                          - created_at: '2016-10-19T12:53:02-04:00'
+                            subscription_id: 14823387
+                            type: Charge
+                            memo: Will this invoice get paid
+                            kind: one_time
+                            amount_in_cents: 5000
+                            ending_balance_in_cents: -2823
+                            success: true
+                            id: 158769854
+                            payment_id: null
+                            product_id: 3794121
+                            transaction_type: charge
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            starting_balance_in_cents: -7823
+                            component_id: null
+                            tax_id: null
+                            customer_id: 14332158
+                        payments_and_credits: []
+                    - invoice:
+                        id: 1227981
+                        subscription_id: 14788195
+                        statement_id: 78808817
+                        site_id: 31615
+                        state: unpaid
+                        total_amount_in_cents: 4000
+                        paid_at: null
+                        created_at: '2016-10-17T12:13:42-04:00'
+                        updated_at: '2016-10-17T12:13:42-04:00'
+                        amount_due_in_cents: 4000
+                        number: '000010'
+                        charges:
+                          - created_at: '2016-10-17T12:13:42-04:00'
+                            subscription_id: 14788195
+                            type: Charge
+                            memo: Basic Plan (10/17/2016 - 11/17/2016)
+                            kind: baseline
+                            amount_in_cents: 4000
+                            ending_balance_in_cents: 4000
+                            success: true
+                            id: 158506054
+                            payment_id: null
+                            product_id: 3792003
+                            transaction_type: charge
+                            gateway_transaction_id: null
+                            gateway_order_id: null
+                            starting_balance_in_cents: 0
+                            component_id: null
+                            tax_id: null
+                            customer_id: 14300992
+                        payments_and_credits: []
       operationId: get-invoices.json
       parameters:
         - schema:
@@ -1547,6 +1602,34 @@ paths:
                 properties:
                   payment:
                     $ref: ../models/Legacy-Payment.v1.yaml
+              examples:
+                Example:
+                  value:
+                    payment:
+                      id: 160567068
+                      subscription_id: 14900541
+                      type: Payment
+                      kind: manual
+                      transaction_type: payment
+                      success: true
+                      amount_in_cents: 1000
+                      memo: Lorem ipsum
+                      created_at: '2016-11-01T16:04:37-04:00'
+                      starting_balance_in_cents: 3750
+                      ending_balance_in_cents: 2750
+                      gateway_used: null
+                      gateway_transaction_id: null
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 3792003
+                      tax_id: null
+                      component_id: null
+                      statement_id: 79733833
+                      customer_id: 14399371
+                      card_number: null
+                      card_expiration: null
+                      card_type: null
+                      refunded_amount_in_cents: 0
       operationId: post-invoices-invoice_id-payments.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -1648,6 +1731,105 @@ paths:
                       type: string
               required:
                 - charge
+            examples:
+              Example:
+                value:
+                  charge:
+                    amount_in_cents: 1000
+                    memo: Support October 2016
+        description: ''
+  '/invoices/{invoice_id}/adjustments.json':
+    parameters:
+      - schema:
+          type: integer
+        name: invoice_id
+        in: path
+        required: true
+        description: The Chargify id for which the credit applies
+    post:
+      summary: Create Credit
+      tags:
+        - Legacy Invoices
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  adjustment:
+                    type: object
+                    properties:
+                      adjustment:
+                        $ref: ../models/Legacy-Adjustment.v1.yaml
+              examples:
+                Example:
+                  value:
+                    adjustment:
+                      id: 165068820
+                      subscription_id: 14823581
+                      type: Adjustment
+                      kind: null
+                      transaction_type: adjustment
+                      success: true
+                      amount_in_cents: -1000
+                      memo: Credit for recycling old computers
+                      created_at: '2016-12-05T13:37:28-05:00'
+                      starting_balance_in_cents: 177
+                      ending_balance_in_cents: -823
+                      gateway_used: null
+                      gateway_transaction_id: null
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 3794121
+                      tax_id: null
+                      component_id: null
+                      statement_id: 79335006
+                      customer_id: 14332342
+      operationId: post-invoices-invoice_id-adjustments.json
+      description: |-
+        ## Create Legacy Invoice Credit
+
+        Use this method to add a credit to an existing invoice.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                adjustment:
+                  type: object
+                  required:
+                    - amount_in_cents
+                  properties:
+                    amount_in_cents:
+                      oneOf:
+                        - type: string
+                          pattern: ^\d+$
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                    amount:
+                      oneOf:
+                        - type: string
+                          pattern: '^[1-9]\d*(\.\d+)?$'
+                        - type: number
+                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                    memo:
+                      type: string
+                      description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
+                      maxLength: 255
+                    period_range_start:
+                      type: string
+                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      format: date
+                    period_range_end:
+                      type: string
+                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      format: date
+              required:
+                - adjustment
 components:
   schemas: {}
 servers:
