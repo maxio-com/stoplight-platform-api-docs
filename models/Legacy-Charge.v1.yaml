@@ -1,0 +1,166 @@
+title: Legacy Charge
+type: object
+x-tags:
+  - Legacy
+properties:
+  id:
+    type: integer
+  subscription_id:
+    type: integer
+  type:
+    type: string
+    enum:
+      - Charge
+  kind:
+    type: string
+    enum:
+      - one_time
+  transaction_type:
+    type: string
+    enum:
+      - charge
+  success:
+    description: 'The success of the charge. At this time, all charges that are returned will return true here'
+    type: boolean
+  amount_in_cents:
+    description: 'The amount of the charge and captured payment, represented in cents.'
+    type: integer
+  memo:
+    description: The supplied memo for the charge
+    type: string
+    nullable: true
+  created_at:
+    type: string
+    description: The time that the charge was created
+  starting_balance_in_cents:
+    type: integer
+    description: The subscription balance in cents before the charge was applied
+  ending_balance_in_cents:
+    type: integer
+    description: The subscription balance in cents after the charge was applied
+  gateway_used:
+    type: string
+    nullable: true
+  gateway_transaction_id:
+    type: integer
+    nullable: true
+  gateway_order_id:
+    type: integer
+    nullable: true
+  payment_id:
+    type: integer
+    nullable: true
+  product_id:
+    type: integer
+    nullable: true
+  price_point_id:
+    type: integer
+    nullable: true
+  price_point_handle:
+    type: string
+    nullable: true
+  tax_id:
+    type: integer
+    nullable: true
+  component_id:
+    type: integer
+    nullable: true
+  component_handle:
+    type: string
+    nullable: true
+  component_price_point_id:
+    type: integer
+    nullable: true
+  component_price_point_handle:
+    type: string
+    nullable: true
+  statement_id:
+    type: integer
+    nullable: true
+  customer_id:
+    type: integer
+    nullable: true
+  item_name:
+    type: string
+  period_range_start:
+    type: string
+    nullable: true
+  period_range_end:
+    type: string
+    nullable: true
+  currency:
+    type: string
+    enum:
+      - AUD
+      - BRL
+      - CAD
+      - CHF
+      - CNY
+      - CZK
+      - DKK
+      - EUR
+      - GBP
+      - HKD
+      - INR
+      - JPY
+      - MXN
+      - MYR
+      - NOK
+      - NZD
+      - PHP
+      - PLN
+      - RON
+      - RUB
+      - SEK
+      - SGD
+      - USD
+      - ZAR
+      - AED
+      - SAR
+      - ILS
+  exchange_rate:
+    type: integer
+  quantity:
+    type: string
+    enum:
+      - '1.0'
+  original_amount_in_cents:
+    type: integer
+  discount_amount_in_cents:
+    type: integer
+  taxable_amount_in_cents:
+    type: integer
+    nullable: true
+  taxations:
+    type: array
+    nullable: true
+    items:
+      type: object
+      properties:
+        tax_id:
+          type: integer
+        tax_charge_id:
+          type: integer
+        tax_name:
+          type: string
+        rate:
+          type: string
+        tax_amount_in_cents:
+          type: integer
+        tax_rules:
+          type: array
+          items:
+            type: object
+            properties:
+              tax_rule_id:
+                type: integer
+              country_code:
+                type: string
+              subdivision_code:
+                type: string
+              rate:
+                type: string
+              tax_amount_in_cents:
+                type: integer
+              description:
+                type: string
