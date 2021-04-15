@@ -40,6 +40,7 @@ properties:
       - cancelation
       - component_proration
       - manual
+      - null
     nullable: true
     description: The specific “subtype” for the transaction_type
   transaction_type:
@@ -74,7 +75,7 @@ properties:
     type: string
     nullable: true
   gateway_transaction_id:
-    type: integer
+    type: string
     description: 'The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists'
     nullable: true
   gateway_order_id:

@@ -460,7 +460,7 @@ paths:
                         type: string
                         nullable: true
                       gateway_transaction_id:
-                        type: integer
+                        type: string
                         nullable: true
                       gateway_order_id:
                         type: integer
@@ -655,6 +655,37 @@ paths:
                 properties:
                   transaction:
                     $ref: ../models/Legacy-Transaction.v1.yaml
+              examples:
+                Example:
+                  value:
+                    transaction:
+                      id: 237759849
+                      subscription_id: 21607180
+                      type: Payment
+                      kind: one_time
+                      transaction_type: payment
+                      success: true
+                      amount_in_cents: 10000
+                      memo: 'Payment for: 123'
+                      created_at: '2018-04-24T16:48:19-05:00'
+                      starting_balance_in_cents: 10000
+                      ending_balance_in_cents: 0
+                      gateway_used: bogus
+                      gateway_transaction_id: '53433'
+                      gateway_order_id: null
+                      payment_id: null
+                      product_id: 4610619
+                      tax_id: null
+                      component_id: null
+                      statement_id: 113513284
+                      customer_id: 21259051
+                      item_name: null
+                      parent_id: null
+                      role: null
+                      card_number: XXXX-XXXX-XXXX-1
+                      card_expiration: 01/2028
+                      card_type: bogus
+                      refunded_amount_in_cents: 0
       operationId: get-transactions-transaction_id-.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -752,6 +783,65 @@ paths:
                   properties:
                     transaction:
                       $ref: ../models/Legacy-Transaction.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - transaction:
+                        id: 162640678
+                        subscription_id: 15268262
+                        type: Payment
+                        kind: null
+                        transaction_type: payment
+                        success: true
+                        amount_in_cents: 1000
+                        memo: 'Pookie Test - $10 Basic Plan: Renewal payment'
+                        created_at: '2016-11-17T14:03:14-05:00'
+                        starting_balance_in_cents: 1000
+                        ending_balance_in_cents: 0
+                        gateway_used: bogus
+                        gateway_transaction_id: '53433'
+                        gateway_order_id: null
+                        payment_id: null
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80669157
+                        customer_id: 14743839
+                        item_name: null
+                        parent_id: null
+                        role: null
+                        card_number: XXXX-XXXX-XXXX-1
+                        card_expiration: 10/2020
+                        card_type: bogus
+                        refunded_amount_in_cents: 0
+                    - transaction:
+                        id: 162640676
+                        subscription_id: 15268319
+                        type: Payment
+                        kind: null
+                        transaction_type: payment
+                        success: true
+                        amount_in_cents: 2000
+                        memo: 'Pookie Test - $10 Basic Plan: Renewal payment'
+                        created_at: '2016-11-17T14:03:14-05:00'
+                        starting_balance_in_cents: 2000
+                        ending_balance_in_cents: 0
+                        gateway_used: bogus
+                        gateway_transaction_id: '53433'
+                        gateway_order_id: null
+                        payment_id: null
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80669162
+                        customer_id: 14743895
+                        item_name: null
+                        parent_id: null
+                        role: null
+                        card_number: XXXX-XXXX-XXXX-1
+                        card_expiration: 10/2020
+                        card_type: bogus
+                        refunded_amount_in_cents: 0
       operationId: get-transactions.json
       parameters:
         - schema:
@@ -870,6 +960,121 @@ paths:
                   properties:
                     transaction:
                       $ref: ../models/Legacy-Transaction.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - transaction:
+                        id: 162640678
+                        subscription_id: 15268262
+                        type: Payment
+                        kind: null
+                        transaction_type: payment
+                        success: true
+                        amount_in_cents: 1000
+                        memo: 'Amelia Example - $10 Basic Plan: Renewal payment'
+                        created_at: '2016-11-17T14:03:14-05:00'
+                        starting_balance_in_cents: 1000
+                        ending_balance_in_cents: 0
+                        gateway_used: bogus
+                        gateway_transaction_id: '53433'
+                        gateway_order_id: null
+                        payment_id: null
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80669157
+                        customer_id: 14743839
+                        item_name: null
+                        parent_id: null
+                        role: null
+                        card_number: XXXX-XXXX-XXXX-1
+                        card_expiration: 10/2020
+                        card_type: bogus
+                        refunded_amount_in_cents: 0
+                    - transaction:
+                        id: 162640663
+                        subscription_id: 15268262
+                        type: Charge
+                        kind: baseline
+                        transaction_type: charge
+                        success: true
+                        amount_in_cents: 1000
+                        memo: $10 Basic Plan (11/17/2016 - 11/18/2016)
+                        created_at: '2016-11-17T14:03:13-05:00'
+                        starting_balance_in_cents: 0
+                        ending_balance_in_cents: 1000
+                        gateway_used: null
+                        gateway_transaction_id: null
+                        gateway_order_id: null
+                        payment_id: 162640678
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80669157
+                        customer_id: 14743839
+                        item_name: $10 Basic Plan
+                        parent_id: null
+                        role: null
+                        original_amount_in_cents: 1000
+                        discount_amount_in_cents: 0
+                        taxable_amount_in_cents: null
+                        taxations: []
+                    - transaction:
+                        id: 162520504
+                        subscription_id: 15268262
+                        type: Payment
+                        kind: null
+                        transaction_type: payment
+                        success: true
+                        amount_in_cents: 1000
+                        memo: 'Amelia Example - $10 Basic Plan: Signup payment'
+                        created_at: '2016-11-16T13:47:44-05:00'
+                        starting_balance_in_cents: 1000
+                        ending_balance_in_cents: 0
+                        gateway_used: bogus
+                        gateway_transaction_id: '53433'
+                        gateway_order_id: null
+                        payment_id: null
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80612887
+                        customer_id: 14743839
+                        item_name: null
+                        parent_id: null
+                        role: null
+                        card_number: XXXX-XXXX-XXXX-1
+                        card_expiration: 10/2020
+                        card_type: bogus
+                        refunded_amount_in_cents: 0
+                    - transaction:
+                        id: 162520501
+                        subscription_id: 15268262
+                        type: Charge
+                        kind: baseline
+                        transaction_type: charge
+                        success: true
+                        amount_in_cents: 1000
+                        memo: $10 Basic Plan (11/16/2016 - 11/17/2016)
+                        created_at: '2016-11-16T13:47:43-05:00'
+                        starting_balance_in_cents: 0
+                        ending_balance_in_cents: 1000
+                        gateway_used: null
+                        gateway_transaction_id: null
+                        gateway_order_id: null
+                        payment_id: 162520504
+                        product_id: 3792003
+                        tax_id: null
+                        component_id: null
+                        statement_id: 80612887
+                        customer_id: 14743839
+                        item_name: $10 Basic Plan
+                        parent_id: null
+                        role: null
+                        original_amount_in_cents: 1000
+                        discount_amount_in_cents: 0
+                        taxable_amount_in_cents: null
+                        taxations: []
       operationId: get-subscriptions-subscription_id-transactions.json
       parameters:
         - schema:
@@ -1380,6 +1585,8 @@ paths:
                           card_number: XXXX-XXXX-XXXX-1
                           card_expiration: 01/2026
                           card_type: bogus
+        '404':
+          description: Not Found
       operationId: get-invoices-invoice_id-.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |

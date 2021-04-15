@@ -74,7 +74,7 @@ properties:
         transaction_type:
           type: string
         gateway_transaction_id:
-          type: integer
+          type: string
           nullable: true
         gateway_order_id:
           type: integer
@@ -175,7 +175,7 @@ properties:
         transaction_type:
           type: string
         gateway_transaction_id:
-          type: integer
+          type: string
           nullable: true
         gateway_order_id:
           type: integer
