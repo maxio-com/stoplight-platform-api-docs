@@ -1400,8 +1400,6 @@ paths:
 
         Chargify Statements give you and your customers a breakdown of Subscription charges, payments, credits, and activity on a period-by-period basis. A Statement is similar to an “Invoice” because it is marked as currently paid or unpaid. Statements display all account activity for a specific usage period.
 
-        ## Statements Documentation
-
         Documentation for Statements in the Chargify UI can be accessed via the following links / topics:
 
         + [Statements Reference](http://help.chargify.com/statements/statements-intro.html)
@@ -1711,6 +1709,19 @@ paths:
         ## Read the Count of Statements for a Site
 
         This method returns the full count of statements associated with a Site.
+  '/invoices/{invoice_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: invoice_id
+        in: path
+        required: true
+    get:
+      summary: Read Legacy Invoice
+      tags:
+        - Legacy Invoices
+      responses: {}
+      operationId: get-invoices-invoice_id-.json
 components:
   schemas: {}
 servers:
