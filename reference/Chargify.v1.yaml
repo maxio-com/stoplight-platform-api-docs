@@ -1683,6 +1683,34 @@ paths:
         ## List Statement IDs for a Subscription
 
         This method will return a list of Statement IDs associated with one subscription.
+  /statements/count.json:
+    get:
+      summary: Statements Count
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  count:
+                    type: integer
+              examples:
+                Example:
+                  value:
+                    count: 290
+      operationId: get-statements-count.json
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
+        ## Read the Count of Statements for a Site
+
+        This method returns the full count of statements associated with a Site.
 components:
   schemas: {}
 servers:
