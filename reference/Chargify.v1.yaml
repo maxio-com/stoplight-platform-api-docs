@@ -1611,6 +1611,78 @@ paths:
         ## List Statement IDs for a Site
 
         This method will return a list of Statement IDs associated with an entire Site. 
+  '/subscriptions/{subscription_id}/statements/ids.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription to which the statements belong
+    get:
+      summary: List Statement Ids for Subscription
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statement_ids:
+                    type: array
+                    items:
+                      type: integer
+      operationId: get-subscriptions-subscription_id-statements-ids.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            default: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
+        - schema:
+            type: integer
+          in: query
+          name: settled_since
+          allowEmptyValue: true
+          description: 'Format: UNIX timestamp'
+        - schema:
+            type: string
+            enum:
+              - closed_at
+              - created_at
+              - opened_at
+              - settled_at
+          in: query
+          name: sort
+          description: Allows specification of the order of the returned list
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          description: Specifies the direction of the sort on the given sort key
+          name: direction
+          allowEmptyValue: true
+      description: |-
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
+
+        ## List Statement IDs for a Subscription
+
+        This method will return a list of Statement IDs associated with one subscription.
 components:
   schemas: {}
 servers:
