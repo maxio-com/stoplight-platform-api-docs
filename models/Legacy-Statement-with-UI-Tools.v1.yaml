@@ -1,10 +1,19 @@
-title: Legacy Statement
+title: Legacy Statement with UI Tools
 type: object
 x-tags:
   - Legacy
 properties:
   id:
     type: integer
+  basic_html_view:
+    type: string
+    description: A simple HTML representation of the statement
+  html_view:
+    type: string
+    description: A more robust HTML representation of the statement
+  text_view:
+    type: string
+    description: A text representation of the statement
   opened_at:
     type: string
     description: The date that the statement was opened

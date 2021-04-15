@@ -1147,6 +1147,7 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1154,6 +1155,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1165,26 +1167,31 @@ paths:
           in: query
           name: kinds
           description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: since_id
           description: Returns transactions with an id greater than or equal to the one specified
+          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: max_id
           description: Returns transactions with an id less than or equal to the one specified
+          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: since_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: until_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1194,6 +1201,7 @@ paths:
           in: query
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
+          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1202,6 +1210,7 @@ paths:
           in: query
           name: order_by
           description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
+          allowEmptyValue: true
       description: |-
         ## List Transactions for Site
 
@@ -1262,6 +1271,7 @@ paths:
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
         - schema:
             type: integer
             maximum: 200
@@ -1269,6 +1279,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1280,26 +1291,31 @@ paths:
           in: query
           name: kinds
           description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: since_id
           description: Returns transactions with an id greater than or equal to the one specified
+          allowEmptyValue: true
         - schema:
             type: integer
           in: query
           name: max_id
           description: Returns transactions with an id less than or equal to the one specified
+          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: since_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          allowEmptyValue: true
         - schema:
             type: string
           in: query
           name: until_date
           description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          allowEmptyValue: true
         - schema:
             type: string
             enum:
@@ -1309,6 +1325,7 @@ paths:
           in: query
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
+          allowEmptyValue: true
       description: |-
         ## List Transactions for Subscription.
 
@@ -1361,7 +1378,7 @@ paths:
                 type: object
                 properties:
                   statement:
-                    $ref: ../models/Legacy-Statement.v1.yaml
+                    $ref: ../models/Legacy-Statement-with-UI-Tools.v1.yaml
       operationId: get-statements-statement_id-.json
       description: |-
         ## Statements Intro
@@ -1386,6 +1403,190 @@ paths:
         | html_view       | A more robust HTML representation of the statement |
 
         Rendering individual statements can also be done as PDF by using the Accept/Content-Type header application/pdf or appending .pdf as the `<format>` portion of the URL: `/statements/1.pdf`.
+  /statements.json:
+    get:
+      summary: List Statements
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    statement:
+                      $ref: ../models/Legacy-Statement.v1.yaml
+      operationId: get-statements.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - closed_at
+              - created_at
+              - opened_at
+              - settled_at
+          in: query
+          name: sort
+          description: Allows specification of the order of the returned list
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          description: Specifies the direction of the sort on the given sort key
+          name: direction
+          allowEmptyValue: true
+      description: |-
+        ## List Statements for a Site
+
+        This method will return a paginated list of all Statements generated by the Subscriptions in your Site.
+
+        Note that this endpoint returns a "lighter" set of the Statement attributes than the "List Statements for a Subscription" endpoint.  This endpoint omits the HTML and textual representations for the Statement: `basic_html_view`, `html_view`, and `text_view`.  If you require these attributes, you can either build them yourself based on the other data returned or fetch a single subscription via the "Read/Show by Chargify ID" endpoint.
+  '/subscriptions/{subscription_id}/statements.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    get:
+      summary: List Statements for Subscription
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    statement:
+                      $ref: ../models/Legacy-Statement-with-UI-Tools.v1.yaml
+      operationId: get-subscriptions-subscription_id-statements.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - closed_at
+              - created_at
+              - opened_at
+              - settled_at
+          in: query
+          name: sort
+          description: Allows specification of the order of the returned list
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          description: Specifies the direction of the sort on the given sort key
+          name: direction
+          allowEmptyValue: true
+      description: |-
+        ## List Statements for Subscription
+
+        This method will return the full HTML and content associated with a subscription on your Site.
+  /statements/ids.json:
+    get:
+      summary: List Statement Ids
+      tags:
+        - Legacy Statements
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statement_ids:
+                    type: array
+                    items:
+                      type: integer
+      operationId: get-statements-ids.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          allowEmptyValue: true
+        - schema:
+            type: integer
+            default: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+          allowEmptyValue: true
+        - schema:
+            type: integer
+          in: query
+          name: settled_since
+          allowEmptyValue: true
+          description: 'Format: UNIX timestamp'
+        - schema:
+            type: string
+            enum:
+              - closed_at
+              - created_at
+              - opened_at
+              - settled_at
+          in: query
+          name: sort
+          description: Allows specification of the order of the returned list
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          description: Specifies the direction of the sort on the given sort key
+          name: direction
+          allowEmptyValue: true
+      description: |-
+        ## List Statement IDs for a Site
+
+        This method will return a list of Statement IDs associated with an entire Site. 
 components:
   schemas: {}
 servers:
