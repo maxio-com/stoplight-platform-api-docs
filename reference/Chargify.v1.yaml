@@ -508,6 +508,58 @@ paths:
           description: OK
         '403':
           description: Forbidden
+  '/subscriptions/{subscription_id}/notes.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    get:
+      summary: Create Note
+      tags:
+        - Subscription Notes
+      responses: {}
+      operationId: get-subscriptions-subscription_id-notes.json
+      description: |-
+        ## Notes Intro
+
+        Notes allow you to record information about a particular Subscription in a free text format.
+
+        If you have structured data such as birth date, color, etc., consider using Metadata instead.
+
+        Full documentation on how to use Notes in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-summary.html#notes).
+
+        ## Create Note
+
+        Use the following method to create a note for a subscription.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                note:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      minLength: 1
+                    sticky:
+                      type: boolean
+                  required:
+                    - body
+                    - sticky
+              required:
+                - note
+            examples:
+              Example:
+                value:
+                  note:
+                    body: New test note.
+                    sticky: true
 components:
   schemas: {}
 servers:
