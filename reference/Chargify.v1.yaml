@@ -255,6 +255,42 @@ paths:
                     webhook_subscriptions:
                       - payment_success
                       - payment_failure
+    get:
+      summary: List Endpoints
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Endpoint.v1.yaml
+              examples:
+                Example:
+                  value:
+                    - id: 11
+                      url: 'https://foobar.com/webhooks'
+                      site_id: 1
+                      status: enabled
+                      webhook_subscriptions:
+                        - payment_success
+                        - payment_failure
+                    - id: 12
+                      url: 'https:/example.com/webhooks'
+                      site_id: 1
+                      status: enabled
+                      webhook_subscriptions:
+                        - payment_success
+                        - payment_failure
+                        - refund_failure
+      operationId: get-endpoints.json
+      description: |-
+        ## List of endpoints for site
+
+        This method returns created endpoints for site.
   '/endpoints/{endpoint_id}.json':
     parameters:
       - schema:
