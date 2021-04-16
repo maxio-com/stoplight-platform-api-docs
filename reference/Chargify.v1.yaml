@@ -141,6 +141,51 @@ paths:
           in: query
           name: subscription
           description: The Chargify id of a subscription you'd like to filter for
+  /webhooks/replay.json:
+    post:
+      summary: Replay Webhooks
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    status: ok
+      operationId: post-webhooks-replay.json
+      description: |-
+        ## Replay Webhooks for Site
+
+        Posting to the replay endpoint does not immediately resend the webhooks. They are added to a queue and will be sent as soon as possible, depending on available system resources.
+
+        You may submit an array of up to 1000 webhook IDs to replay in the request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: integer
+              required:
+                - ids
+            examples:
+              Example:
+                value:
+                  ids:
+                    - 123456789
+                    - 123456788
+        description: ''
 components:
   schemas: {}
 servers:
