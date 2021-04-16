@@ -533,7 +533,23 @@ paths:
                   properties:
                     note:
                       $ref: ../models/Subscription-Note.v1.yaml
-              examples: {}
+              examples:
+                Example:
+                  value:
+                    - note:
+                        body: Test note.
+                        created_at: '2015-06-15T13:26:47-04:00'
+                        id: 5
+                        sticky: false
+                        subscription_id: 100046
+                        updated_at: '2015-06-15T13:28:12-04:00'
+                    - note:
+                        body: Another test note.
+                        created_at: '2015-06-15T12:04:46-04:00'
+                        id: 4
+                        sticky: false
+                        subscription_id: 100046
+                        updated_at: '2015-06-15T13:26:33-04:00'
       operationId: get-subscriptions-subscription_id-notes.json
       description: |-
         ## List Notes for a Subscription
@@ -567,6 +583,8 @@ paths:
                 properties:
                   note:
                     $ref: ../models/Subscription-Note.v1.yaml
+                required:
+                  - note
       description: |-
         ## Create a Note
 
@@ -575,7 +593,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+              type: object
+              properties:
+                note:
+                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+            examples:
+              Example:
+                value:
+                  note:
+                    body: New test note.
+                    sticky: true
+    delete:
+      summary: Delete Subscription Note
+      operationId: delete-subscriptions-subscription_id-notes.json
+      tags:
+        - Subscription Notes
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: |-
+        ## Delete a Note
+
+        Use the following method to delete a note for a Subscription.
   '/subscriptions/{subscription_id}/notes/{note_id}.json':
     parameters:
       - schema:
@@ -642,7 +683,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+              type: object
+              properties:
+                note:
+                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+              required:
+                - note
+            examples:
+              Example:
+                value:
+                  note:
+                    body: Modified test note.
+                    sticky: true
 components:
   schemas: {}
 servers:
