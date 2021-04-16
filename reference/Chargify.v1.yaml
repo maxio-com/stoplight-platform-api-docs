@@ -586,11 +586,13 @@ paths:
         name: subscription_id
         in: path
         required: true
+        description: The Chargify id of the subscription associated with the note
       - schema:
           type: string
         name: note_id
         in: path
         required: true
+        description: The Chargify id of the note
     get:
       summary: Read Note
       tags:
