@@ -443,10 +443,10 @@ paths:
                       whopays_default_payer:
                         type: string
                         enum:
-                        - self-ungrouped
-                        - self
-                        - parent
-                        - eldest
+                          - self-ungrouped
+                          - self
+                          - parent
+                          - eldest
                       default_payment_collection_method:
                         type: string
               examples:
@@ -468,6 +468,10 @@ paths:
       description: |-
         ## Read Site Data
         This endpoint allows you to fetch some site data.
+
+        Full documentation on Sites in the Chargify UI can be located [here](http://help.chargify.com/sites/sites-intro.html).
+
+        Specifically, the [Clearing Site Data](http://help.chargify.com/sites/clearing-site-data.html) section is extremely relevant to this endpoint documentation.
 
         #### Relationship invoicing enabled
         If site has RI enabled then you will see more settings like: 
