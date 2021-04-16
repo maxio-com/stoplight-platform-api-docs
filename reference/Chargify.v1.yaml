@@ -185,7 +185,6 @@ paths:
                   ids:
                     - 123456789
                     - 123456788
-        description: ''
   /endpoints.json:
     post:
       summary: Create Endpoint
@@ -197,34 +196,10 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
                 type: object
                 properties:
                   endpoint:
-                    type: object
-                    required:
-                      - id
-                      - url
-                      - site_id
-                      - status
-                      - webhook_subscriptions
-                    properties:
-                      id:
-                        type: integer
-                      url:
-                        type: string
-                        minLength: 1
-                      site_id:
-                        type: integer
-                      status:
-                        type: string
-                        minLength: 1
-                      webhook_subscriptions:
-                        type: array
-                        items:
-                          type: string
-                required:
-                  - endpoint
+                    $ref: ../models/Endpoint.v1.yaml
               examples:
                 Example:
                   value:
@@ -241,7 +216,6 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
                 type: object
                 properties:
                   errors:
@@ -270,49 +244,9 @@ paths:
               type: object
               properties:
                 endpoint:
-                  type: object
-                  properties:
-                    url:
-                      type: string
-                    webhook_subscriptions:
-                      type: array
-                      description: ''
-                      items:
-                        type: string
-                        enum:
-                          - billing_date_change
-                          - component_allocation_change
-                          - customer_create
-                          - customer_update
-                          - dunning_step_reached
-                          - expiring_card
-                          - expiration_date_change
-                          - invoice_issued
-                          - metered_usage
-                          - payment_failure
-                          - payment_success
-                          - direct_debit_payment_pending
-                          - direct_debit_payment_paid_out
-                          - direct_debit_payment_rejected
-                          - prepaid_subscription_balance_changed
-                          - prepaid_usage
-                          - refund_failure
-                          - refund_success
-                          - renewal_failure
-                          - renewal_success
-                          - signup_failure
-                          - signup_success
-                          - statement_closed
-                          - statement_settled
-                          - subscription_card_update
-                          - subscription_group_card_update
-                          - subscription_product_change
-                          - subscription_state_change
-                          - trial_end_notice
-                          - upcoming_renewal_notice
-                          - upgrade_downgrade_failure
-                          - upgrade_downgrade_success
-                          - pending_cancellation_change
+                  $ref: ../models/Create-or-Update-Endpoint.v1.yaml
+              required:
+                - endpoint
             examples:
               Example:
                 value:
@@ -321,8 +255,79 @@ paths:
                     webhook_subscriptions:
                       - payment_success
                       - payment_failure
+  '/endpoints/{endpoint_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: endpoint_id
+        in: path
+        required: true
+        description: The Chargify id for the endpoint that should be updated
+    put:
+      summary: Update Endpoint
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint:
+                    $ref: ../models/Endpoint.v1.yaml
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Event key is not valid - foobar
+      operationId: post-endpoints-endpoint_id-.json
+      description: |-
+        ## Update an Endpoint
+
+        You can update an Endpoint via the API with a PUT request to the resource endpoint.
+
+        You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.   
+        Check available [Event keys](https://help.chargify.com/webhooks/webhooks-reference.html).
+
+        Always send a complete list of events which you want subscribe/watch.
+        Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end with unsubscribe from all events.
+
+        If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the specific event key.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                endpoint:
+                  $ref: ../models/Create-or-Update-Endpoint.v1.yaml
+              required:
+                - endpoint
+            examples:
+              Example:
+                value:
+                  endpoint:
+                    url: 'https://yout.site/webhooks/1/json.'
+                    webhook_subscriptions:
+                      - payment_failure
+                      - payment_success
+                      - refund_failure
 components:
   schemas: {}
 servers:
   - url: 'https://subdomain.chargify.com'
-    description: ''
