@@ -3,20 +3,15 @@ type: object
 x-tags:
   - Subscription Notes
 properties:
-  type: object
-  properties:
-    note:
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          type: string
-        subscription_id:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        sticky:
-          type: boolean
+  id:
+    type: integer
+  body:
+    type: string
+  subscription_id:
+    type: integer
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  sticky:
+    type: boolean  
