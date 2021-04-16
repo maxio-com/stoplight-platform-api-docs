@@ -517,6 +517,55 @@ paths:
         in: path
         required: true
         description: The Chargify id of the subscription
+    post:
+      summary: Create Subscription Note
+      operationId: post-subscriptions-subscription_id-notes.json
+      tags:
+        - Subscription Notes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  note:
+                    $ref: ../models/Subscription-Note.v1.yaml
+                required:
+                  - note
+      description: |-
+        ## Create a Note
+
+        Use the following method to create a note for a subscription.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+            examples:
+              Example:
+                value:
+                  note:
+                    body: New test note.
+                    sticky: true
+    delete:
+      summary: Delete Subscription Note
+      operationId: delete-subscriptions-subscription_id-notes.json
+      tags:
+        - Subscription Notes
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: |-
+        ## Delete a Note
+
+        Use the following method to delete a note for a Subscription.
     get:
       summary: List Subscription Notes
       tags:
@@ -568,55 +617,6 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request.
-    post:
-      summary: Create Subscription Note
-      operationId: post-subscriptions-subscription_id-notes.json
-      tags:
-        - Subscription Notes
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  note:
-                    $ref: ../models/Subscription-Note.v1.yaml
-                required:
-                  - note
-      description: |-
-        ## Create a Note
-
-        Use the following method to create a note for a subscription.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                note:
-                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
-            examples:
-              Example:
-                value:
-                  note:
-                    body: New test note.
-                    sticky: true
-    delete:
-      summary: Delete Subscription Note
-      operationId: delete-subscriptions-subscription_id-notes.json
-      tags:
-        - Subscription Notes
-      responses:
-        '200':
-          description: OK
-        '422':
-          description: Unprocessable Entity (WebDAV)
-      description: |-
-        ## Delete a Note
-
-        Use the following method to delete a note for a Subscription.
   '/subscriptions/{subscription_id}/notes/{note_id}.json':
     parameters:
       - schema:
