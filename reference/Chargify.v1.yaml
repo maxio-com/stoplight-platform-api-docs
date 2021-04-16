@@ -6,6 +6,7 @@ info:
     email: support@chargify.com
   description: Manage your company's subscriptions through the Chargify API.
 tags:
+  - name: Sites
   - name: Webhooks
 paths:
   /webhooks.json:
@@ -403,6 +404,79 @@ paths:
                       - payment_failure
                       - payment_success
                       - refund_failure
+  /site.json:
+    get:
+      summary: Read Site
+      tags:
+        - Sites
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  site:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      subdomain:
+                        type: string
+                      currency:
+                        type: string
+                      seller_id:
+                        type: integer
+                      non_primary_currencies:
+                        type: array
+                        items:
+                          type: string
+                      relationship_invoicing_enabled:
+                        type: boolean
+                      customer_hierarchy_enabled:
+                        type: boolean
+                      whopays_enabled:
+                        type: boolean
+                      whopays_default_payer:
+                        type: string
+                        enum:
+                        - self-ungrouped
+                        - self
+                        - parent
+                        - eldest
+                      default_payment_collection_method:
+                        type: string
+              examples:
+                Example:
+                  value:
+                    site:
+                      id: 68
+                      name: Invoice Centric Billing
+                      subdomain: invoices
+                      currency: USD
+                      seller_id: 2
+                      non_primary_currencies:
+                        - GBP
+                      relationship_invoicing_enabled: true
+                      customer_hierarchy_enabled: true
+                      whopays_enabled: true
+                      whopays_default_payer: eldest
+      operationId: get-site.json
+      description: |-
+        ## Read Site Data
+        This endpoint allows you to fetch some site data.
+
+        #### Relationship invoicing enabled
+        If site has RI enabled then you will see more settings like: 
+
+            "customer_hierarchy_enabled": true,
+            "whopays_enabled": true,
+            "whopays_default_payer": "self"
+        You can read more about these settings here:
+         [Who Pays & Customer Hierarchy](https://help.chargify.com/invoices/customer-hierarchies-whopays.html)
 components:
   schemas: {}
 servers:
