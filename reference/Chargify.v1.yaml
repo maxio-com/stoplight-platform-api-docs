@@ -15,6 +15,41 @@ paths:
         - Webhooks
       responses: {}
       operationId: get-webhooks.json
+      description: |-
+        ## Webhooks Intro
+
+        The Webhooks API allows you to view a list of all webhooks and to selectively resend individual or groups of webhooks. Webhooks will be sent on endpoints specified by you. Endpoints can be added via API or Web UI. There is also an option to enable / disable webhooks via API request. 
+
+        We recommend that you review Chargify's webhook documentation located in our help site. The following resources will help guide you on how to use webhooks in Chargify, in addition to these webhook endpoints:
+
+        + [Adding/editing new webhooks](https://help.chargify.com/settings/webhooks.html)
+        + [Webhooks introduction and delivery information](https://help.chargify.com/webhooks/introduction.html)
+        + [Main webhook overview](https://help.chargify.com/webhooks/webhooks-reference.html)
+        + [Available webhooks and payloads](https://help.chargify.com/webhooks/webhooks-reference.html#example-payloads)
+
+        ## List Webhooks for a Site
+
+        This method allows you to fetch data about webhooks. You can pass query parameters if you want to filter webhooks.
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - successful
+              - failed
+              - pending
+              - paused
+          in: query
+          name: status
+        - schema:
+            type: string
+          in: query
+          name: since_date
+          description: Format YYYY-MM-DD. Returns Webhooks with the created_at date greater than or equal to the one specified.
+        - schema:
+            type: string
+          in: query
+          name: until_date
+          description: ' Format YYYY-MM-DD. Returns Webhooks with the created_at date less than or equal to the one specified.'
 components:
   schemas: {}
 servers:
