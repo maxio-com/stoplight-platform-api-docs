@@ -7,6 +7,7 @@ info:
   description: Manage your company's subscriptions through the Chargify API.
 tags:
   - name: Sites
+  - name: Subscription Notes
   - name: Webhooks
 paths:
   /webhooks.json:
@@ -520,7 +521,26 @@ paths:
       summary: Create Note
       tags:
         - Subscription Notes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  note:
+                    $ref: ../models/Subscription-Note.v1.yaml
+              examples:
+                Example:
+                  value:
+                    note:
+                      id: 105025
+                      body: New test note.
+                      subscription_id: 15054201
+                      created_at: '2016-11-03T14:47:08-04:00'
+                      updated_at: '2016-11-03T14:47:08-04:00'
+                      sticky: true
       operationId: get-subscriptions-subscription_id-notes.json
       description: |-
         ## Notes Intro
@@ -543,15 +563,14 @@ paths:
               properties:
                 note:
                   type: object
-                  properties:
-                    body:
-                      type: string
-                      minLength: 1
-                    sticky:
-                      type: boolean
                   required:
                     - body
                     - sticky
+                  properties:
+                    body:
+                      type: string
+                    sticky:
+                      type: boolean
               required:
                 - note
             examples:
