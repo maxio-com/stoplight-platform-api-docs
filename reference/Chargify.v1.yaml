@@ -512,13 +512,13 @@ paths:
   '/subscriptions/{subscription_id}/notes.json':
     parameters:
       - schema:
-          type: integer
+          type: string
         name: subscription_id
         in: path
         required: true
         description: The Chargify id of the subscription
     get:
-      summary: Create Note
+      summary: List Notes for Subscription
       tags:
         - Subscription Notes
       responses:
@@ -527,58 +527,31 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  note:
-                    $ref: ../models/Subscription-Note.v1.yaml
-              examples:
-                Example:
-                  value:
+                type: array
+                items:
+                  type: object
+                  properties:
                     note:
-                      id: 105025
-                      body: New test note.
-                      subscription_id: 15054201
-                      created_at: '2016-11-03T14:47:08-04:00'
-                      updated_at: '2016-11-03T14:47:08-04:00'
-                      sticky: true
+                      $ref: ../models/Subscription-Note.v1.yaml
+              examples: {}
       operationId: get-subscriptions-subscription_id-notes.json
       description: |-
-        ## Notes Intro
+        ## List Notes for a Subscription
 
-        Notes allow you to record information about a particular Subscription in a free text format.
-
-        If you have structured data such as birth date, color, etc., consider using Metadata instead.
-
-        Full documentation on how to use Notes in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-summary.html#notes).
-
-        ## Create Note
-
-        Use the following method to create a note for a subscription.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              properties:
-                note:
-                  type: object
-                  required:
-                    - body
-                    - sticky
-                  properties:
-                    body:
-                      type: string
-                    sticky:
-                      type: boolean
-              required:
-                - note
-            examples:
-              Example:
-                value:
-                  note:
-                    body: New test note.
-                    sticky: true
+        Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
   '/subscriptions/{subscription_id}/notes/{note_id}.json':
     parameters:
       - schema:
