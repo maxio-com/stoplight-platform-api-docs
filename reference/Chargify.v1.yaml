@@ -141,6 +141,46 @@ paths:
           in: query
           name: subscription
           description: The Chargify id of a subscription you'd like to filter for
+  /webhooks/settings.json:
+    put:
+      summary: Enable Webhooks
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  webhooks_enabled:
+                    type: boolean
+              examples:
+                Example:
+                  value:
+                    webhooks_enabled: true
+      operationId: put-webhooks-settings.json
+      description: |-
+        ## Enable webhooks for site
+
+        This method allows you to enable webhooks via API for your site
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                webhooks_enabled:
+                  type: boolean
+              required:
+                - webhooks_enabled
+            examples:
+              Example:
+                value:
+                  webhooks_enabled: true
   /webhooks/replay.json:
     post:
       summary: Replay Webhooks
@@ -363,46 +403,6 @@ paths:
                       - payment_failure
                       - payment_success
                       - refund_failure
-  /webhooks/settings.json:
-    put:
-      summary: Enable Webhooks
-      tags:
-        - Webhooks
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  webhooks_enabled:
-                    type: boolean
-              examples:
-                Example:
-                  value:
-                    webhooks_enabled: true
-      operationId: put-webhooks-settings.json
-      description: |-
-        ## Enable webhooks for site
-
-        This method allows you to enable webhooks via API for your site
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              properties:
-                webhooks_enabled:
-                  type: boolean
-              required:
-                - webhooks_enabled
-            examples:
-              Example:
-                value:
-                  webhooks_enabled: true
 components:
   schemas: {}
 servers:
