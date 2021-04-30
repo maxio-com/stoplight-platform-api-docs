@@ -741,6 +741,35 @@ paths:
                       vat_number: null
                       parent_id: null
                       locale: en-US
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - properties:
+                      errors:
+                        type: object
+                        properties:
+                          customer:
+                            type: string
+                  - properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    errors:
+                      customer: can't be blank
+                Example 2:
+                  value:
+                    errors:
+                      - 'First name: cannot be blank.'
+                      - 'Last name: cannot be blank.'
+                      - 'Email address: cannot be blank.'
       operationId: post-customers.json
       description: |-
         ## Create Customer Customer
@@ -807,6 +836,10 @@ paths:
                     locale:
                       type: string
                       description: Set a specific language on a customer record.
+                  required:
+                    - first_name
+                    - last_name
+                    - email
             examples:
               Example:
                 value:
@@ -829,7 +862,86 @@ paths:
       summary: List Customers
       tags:
         - Customers
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Customer.yaml
+              examples:
+                Example:
+                  value:
+                    - customer:
+                        first_name: Kayla
+                        last_name: Test
+                        email: kayla@example.com
+                        cc_emails: 'john@example.com, sue@example.com'
+                        organization: ''
+                        reference: null
+                        id: 14126091
+                        created_at: '2016-10-04T15:22:27-04:00'
+                        updated_at: '2016-10-04T15:22:30-04:00'
+                        address: ''
+                        address_2: ''
+                        city: ''
+                        state: ''
+                        zip: ''
+                        country: ''
+                        phone: ''
+                        verified: null
+                        portal_customer_created_at: '2016-10-04T15:22:29-04:00'
+                        portal_invite_last_sent_at: '2016-10-04T15:22:30-04:00'
+                        portal_invite_last_accepted_at: null
+                        tax_exempt: false
+                    - customer:
+                        first_name: 'Nick '
+                        last_name: Test
+                        email: nick@example.com
+                        cc_emails: 'john@example.com, sue@example.com'
+                        organization: ''
+                        reference: null
+                        id: 14254093
+                        created_at: '2016-10-13T16:52:51-04:00'
+                        updated_at: '2016-10-13T16:52:54-04:00'
+                        address: ''
+                        address_2: ''
+                        city: ''
+                        state: ''
+                        zip: ''
+                        country: ''
+                        phone: ''
+                        verified: null
+                        portal_customer_created_at: '2016-10-13T16:52:54-04:00'
+                        portal_invite_last_sent_at: '2016-10-13T16:52:54-04:00'
+                        portal_invite_last_accepted_at: null
+                        tax_exempt: false
+                        parent_id: 123
+                    - customer:
+                        first_name: Don
+                        last_name: Test
+                        email: don@example.com
+                        cc_emails: 'john@example.com, sue@example.com'
+                        organization: ''
+                        reference: null
+                        id: 14332342
+                        created_at: '2016-10-19T10:49:13-04:00'
+                        updated_at: '2016-10-19T10:49:19-04:00'
+                        address: 1737 15th St
+                        address_2: ''
+                        city: Boulder
+                        state: CO
+                        zip: '80302'
+                        country: US
+                        phone: ''
+                        verified: null
+                        portal_customer_created_at: '2016-10-19T10:49:19-04:00'
+                        portal_invite_last_sent_at: '2016-10-19T10:49:19-04:00'
+                        portal_invite_last_accepted_at: null
+                        tax_exempt: false
+                        parent_id: null
       operationId: get-customers.json
       description: |-
         ## List Customers
@@ -849,6 +961,42 @@ paths:
             type: integer
           in: query
           name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            default: 50
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request.
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+          in: query
+          name: date_field
+          description: The type of filter you would like to apply to your search.
+        - schema:
+            type: string
+          in: query
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          name: start_date
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
 components:
   schemas: {}
 servers:
