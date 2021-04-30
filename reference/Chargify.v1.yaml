@@ -8,6 +8,7 @@ info:
 tags:
   - name: Billing Portal
   - name: Customers
+  - name: Custom Fields
   - name: Insights
   - name: Reason Codes
   - name: Referral Codes
@@ -1789,6 +1790,211 @@ paths:
         ## Delete Reason Code
 
         This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
+  '/{resource_type}/metafields.json':
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - subscriptions
+            - customers
+        name: resource_type
+        in: path
+        required: true
+        description: the resource type to which the metafields belong
+    post:
+      summary: Create Metafields
+      tags:
+        - Custom Fields
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Metafield.yaml
+              examples:
+                Example:
+                  value:
+                    - name: Color
+                      scope:
+                        hosted: []
+                        csv: '0'
+                        statements: '0'
+                        invoices: '0'
+                        portal: '0'
+                      data_count: 0
+                      input_type: text
+                      enum: null
+                    - name: Brand
+                      scope:
+                        hosted: []
+                        csv: '0'
+                        statements: '0'
+                        invoices: '0'
+                        portal: '0'
+                      data_count: 0
+                      input_type: text
+                      enum: null
+      operationId: post-resource_type-metafields.json
+      description: |-
+        ## Custom Fields: Metafields Intro
+
+        **Chargify refers to Custom Fields in the API documentation as metafields and metadata.** Within the Chargify UI, metadata and metafields are grouped together under the umbrella of "Custom Fields." All of our UI-based documentation that references custom fields will not cite the terminology metafields or metadata. 
+
+        + **Metafield is the custom field**
+        + **Metadata is the data populating the custom field.**
+
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://help.chargify.com/custom-fields/custom-fields-intro.html). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#custom-fields)
+
+        Metafield are the place where you will set up your resource to accept additional data. It is scoped to the site instead of a specific customer or subscription. Think of it as the key, and Metadata as the value on every record.
+
+        ## Create Metafields
+
+        Use this endpoint to create metafields for your Site. Metafields can be populated with metadata after the fact.
+
+        Each site is limited to 100 unique Metafields (i.e. keys, or names) per resource. This means you can have 100 Metafields for Subscription and another 100 for Customer.
+
+        ### Metafields "On-the-Fly"
+
+        It is possible to create Metafields “on the fly” when you create your Metadata – if a non-existant name is passed when creating Metadata, a Metafield for that key will be automatically created. The Metafield API, however, gives you more control over your “keys”.
+
+        ### Metafield Scope Warning
+
+        If configuring metafields in the Admin UI or via the API, be careful sending updates to metafields with the scope attribute – **if a partial update is sent it will overwrite the current configuration**.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metafields:
+                  oneOf:
+                    - $ref: ../models/Create-Metafield.yaml
+                    - type: array
+                      items:
+                        $ref: ../models/Create-Metafield.yaml
+            examples:
+              Single Metafield:
+                value:
+                  metafields:
+                    name: Dropdown field
+                    input_type: dropdown
+                    enum:
+                      - option 1
+                      - option 2
+              Multiple Metafields:
+                value:
+                  metafields:
+                    - name: Color
+                    - name: Brand
+    get:
+      summary: List Metafields
+      tags:
+        - Custom Fields
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                  current_page:
+                    type: integer
+                  total_pages:
+                    type: integer
+                  per_page:
+                    type: integer
+                  metafields:
+                    type: array
+                    items:
+                      $ref: ../models/Metafield.yaml
+      operationId: get-resource_type-metafields.json
+      description: |-
+        ## List Metafields
+
+        This endpoint lists metafields associated with a Site. The metafield description and usage is contained in the response.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: filter by the name of the metafield
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+    put:
+      summary: Update Metafield
+      tags:
+        - Custom Fields
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Metafield.yaml
+      operationId: put-resource_type-metafields.json
+      description: |-
+        ## Update Metafield
+
+        Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metafields:
+                  oneOf:
+                    - $ref: ../models/Update-Metafield.yaml
+                    - type: array
+                      items:
+                        $ref: ../models/Update-Metafield.yaml
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: The name of the metafield which is to be updated
+    delete:
+      tags:
+        - Custom Fields
+      summary: Delete Metafield
+      operationId: delete-resource_type-metafields.json
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      description: |-
+        ## Delete Metafield
+
+        Use the following method to delete a metafield. This will remove the metafield from the Site. 
+
+        Additionally, this will remove the metafield and associated metadata with all Subscriptions on the Site.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          description: The name of the metafield to be deleted
 components:
   schemas: {}
 servers:
