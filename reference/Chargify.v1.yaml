@@ -2001,6 +2001,90 @@ paths:
           in: query
           name: name
           description: The name of the metafield to be deleted
+  '/{resource_type}/{resource_id}/metadata.json':
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - customers
+            - subscriptions
+        name: resource_type
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: resource_id
+        in: path
+        required: true
+        description: The Chargify id of the customer or the subscription for which the metadata applies
+    post:
+      summary: Create Metadata
+      tags:
+        - Custom Fields
+      operationId: post-resource_type-resource_id-metadata.json
+      description: |-
+        ## Custom Fields: Metadata Intro
+
+        **Chargify refers to Custom Fields in the API documentation as metafields and metadata.** Within the Chargify UI, metadata and metafields are grouped together under the umbrella of "Custom Fields." All of our UI-based documentation that references custom fields will not cite the terminology metafields or metadata. 
+
+        + **Metafield is the custom field**
+        + **Metadata is the data populating the custom field.**
+
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://help.chargify.com/custom-fields/custom-fields-intro.html). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#custom-fields)
+
+        Metadata is associated to a customer or subscription, and corresponds to a Metafield. When creating a new metadata object for a given record, **if the metafield is not present it will be created**.
+
+        ## Metadata limits
+
+        Metadata values are limited to 2kB in size. Additonally, there are limits on the number of unique metafields available per resource.
+
+        ## Create Metadata
+
+        This method will create a metafield for the site on the fly if it does not already exist, and populate the metadata value.
+
+        ### Subscription or Customer Resource
+
+        Please pay special attention to the resource you use when creating metadata.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: value
+          description: Can be a single item or a list of metadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  $ref: ../models/Metadata.yaml
+            examples:
+              Example:
+                value:
+                  metadata:
+                    - name: Color
+                      value: Blue
+                    - name: Something
+                      value: Useful
+    get:
+      summary: List Metadata
+      tags:
+        - Custom Fields
+      responses: {}
+      operationId: get-resource_type-resource_id-metadata.json
+    put:
+      summary: Update Metadata
+      tags:
+        - Custom Fields
+      responses: {}
+      operationId: put-resource_type-resource_id-metadata.json
+    delete:
+      summary: Delete Metadata
+      tags:
+        - Custom Fields
+      responses: {}
+      operationId: delete-resource_type-resource_id-metadata.json
 components:
   schemas: {}
 servers:

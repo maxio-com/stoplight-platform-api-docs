@@ -1,0 +1,13 @@
+title: Metadata
+type: object
+x-tags:
+  - Metadata
+properties:
+  value:
+    type: string
+  resource_id:
+    type: integer
+  name:
+    type: string
+  id:
+    type: integer
