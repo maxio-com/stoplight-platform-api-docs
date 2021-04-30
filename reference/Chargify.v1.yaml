@@ -1889,6 +1889,7 @@ paths:
                   metafields:
                     - name: Color
                     - name: Brand
+      parameters: []
     get:
       summary: List Metafields
       tags:
@@ -1972,7 +1973,12 @@ paths:
             type: string
           in: query
           name: name
-          description: The name of the metafield which is to be updated
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: current_name
+          description: This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field
     delete:
       tags:
         - Custom Fields
