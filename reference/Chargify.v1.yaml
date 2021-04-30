@@ -9,6 +9,7 @@ tags:
   - name: Billing Portal
   - name: Customers
   - name: Insights
+  - name: Referral Codes
   - name: Sites
   - name: Subscription Notes
   - name: Webhooks
@@ -1493,6 +1494,71 @@ paths:
         ```
         https://subdomain.chargify.com/dashboard
         ```
+  /referral_codes/validate.json:
+    get:
+      summary: Validate Referral Code
+      tags:
+        - Referral Codes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  referral_code:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      site_id:
+                        type: integer
+                      subscription_id:
+                        type: integer
+                      code:
+                        type: string
+              examples:
+                Example:
+                  value:
+                    referral_code:
+                      id: 1032514
+                      site_id: 31615
+                      subscription_id: 16254270
+                      code: 9b6cdw
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    errors: Referral code is invalid.
+      operationId: get-referral_codes-validate.json
+      parameters:
+        - schema:
+            type: string
+          in: query
+          required: true
+          name: code
+          description: The referral code you are trying to validate
+      description: |-
+        ## Validate Referral Code
+
+        Use this method to determine if the referral code is valid and applicable within your Site. This method is useful for validating referral codes that are entered by a customer.
+
+        ## Referrals Documentation
+
+        Full documentation on how to use the referrals feature in the Chargify UI can be located [here](http://help.chargify.com/referrals/introduction.html).
+
+        ## Server Response
+
+        If the referral code is valid the status code will be `200` and the referral code will be returned. If the referral code is invalid, a `404` response will be returned.
 components:
   schemas: {}
 servers:
