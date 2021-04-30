@@ -805,41 +805,7 @@ paths:
               type: object
               properties:
                 customer:
-                  type: object
-                  properties:
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    email:
-                      type: string
-                    cc_emails:
-                      type: string
-                    organization:
-                      type: string
-                    reference:
-                      type: string
-                    address:
-                      type: string
-                    address2:
-                      type: string
-                    city:
-                      type: string
-                    state:
-                      type: string
-                    zip:
-                      type: string
-                    country:
-                      type: string
-                    phone:
-                      type: string
-                    locale:
-                      type: string
-                      description: Set a specific language on a customer record.
-                  required:
-                    - first_name
-                    - last_name
-                    - email
+                  $ref: ../models/Create-Customer.yaml
             examples:
               Example:
                 value:
@@ -859,7 +825,7 @@ paths:
                     phone: 555-555-1212
                     locale: es-MX
     get:
-      summary: List Customers
+      summary: Find Customers
       tags:
         - Customers
       responses:
@@ -944,9 +910,20 @@ paths:
                         parent_id: null
       operationId: get-customers.json
       description: |-
-        ## List Customers
+        ## Find Customers
 
-        This request will list all customers associated with your Site.
+        This request will by default list all customers associated with your Site.
+
+        ## Search for Customer
+
+        Use the search feature to retrieve a single or group of customers. 
+
+        Common use cases are:
+
+        + Search by email
+        + Search by Chargify ID
+        + Search by Reference (Your App)
+        + Search by Organization
       parameters:
         - schema:
             type: string
@@ -997,6 +974,183 @@ paths:
           in: query
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
           name: end_datetime
+        - schema:
+            type: string
+          in: query
+          name: q
+          description: 'A search query by which to filter customers (can be an email, an ID, a reference, organization)'
+  '/customers/{id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+        description: The Chargify id of the customer
+    get:
+      summary: Read Customer
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    $ref: ../models/Customer.yaml
+      operationId: get-customers-id-.json
+      description: |-
+        ## Read Customer Data
+
+        This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+      parameters: []
+    put:
+      summary: Update Customer
+      tags:
+        - Customers
+      operationId: put-customers-id-.json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Customer.yaml
+              examples:
+                Example:
+                  value:
+                    customer:
+                      first_name: Martha
+                      last_name: Washington
+                      email: martha.washington@example.com
+                      cc_emails: george.washington@example.com
+                      organization: null
+                      reference: null
+                      id: 14967442
+                      created_at: '2016-12-05T10:33:07-05:00'
+                      updated_at: '2016-12-05T10:38:00-05:00'
+                      address: null
+                      address_2: null
+                      city: null
+                      state: null
+                      zip: null
+                      country: null
+                      phone: null
+                      verified: false
+                      portal_customer_created_at: null
+                      portal_invite_last_sent_at: null
+                      portal_invite_last_accepted_at: null
+                      tax_exempt: false
+                      vat_number: '012345678'
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Email: must be a valid email address'
+      description: |-
+        ## Update Customer
+
+        This method allows to update the Customer.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer:
+                  $ref: ../models/Update-Customer.yaml
+            examples:
+              Example:
+                value:
+                  customer:
+                    first_name: Martha
+                    last_name: Washington
+                    email: martha.washington@example.com
+    delete:
+      summary: Delete Customer
+      tags:
+        - Customers
+      operationId: delete-customers-id-.json
+      responses:
+        '204':
+          description: No Content
+      description: |-
+        ## Delete Customer
+
+        This method allows to delete the Customer.
+  /customers/lookup.json:
+    get:
+      summary: Read Customer by Reference
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer:
+                    $ref: ../models/Customer.yaml
+      operationId: get-customers-lookup.json
+      description: |-
+        ## Read Customer by Reference Value
+
+        Use this method to return the customer object if you have the **Reference ID (Your App)** value.
+
+        ### Endpoint Deprecated
+
+        Use the Find Customer endpoint instead.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: reference
+          required: true
+      deprecated: true
+  '/customers/{customer_id}/subscriptions.json':
+    parameters:
+      - schema:
+          type: integer
+        name: customer_id
+        in: path
+        required: true
+        description: The Chargify id of the customer
+    get:
+      summary: List Customer Subscriptions
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Subscription.yaml
+      operationId: get-customers-customer_id-subscriptions.json
+      description: |-
+        ## List Subscriptions for a Customer
+
+        This method lists all subscriptions that belong to a customer.
 components:
   schemas: {}
 servers:

@@ -1,0 +1,66 @@
+title: Product
+type: object
+x-tags:
+  - Products
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  handle:
+    type: string
+  description:
+    type: string
+  accounting_code:
+    type: string
+  price_in_cents:
+    type: integer
+  interval:
+    type: integer
+  interval_unit:
+    type: string
+  initial_charge_in_cents:
+    type: 'null'
+  expiration_interval:
+    type: 'null'
+  expiration_interval_unit:
+    type: string
+  trial_price_in_cents:
+    type: 'null'
+  trial_interval:
+    type: 'null'
+  trial_interval_unit:
+    type: string
+  initial_charge_after_trial:
+    type: boolean
+  return_params:
+    type: string
+  request_credit_card:
+    type: boolean
+  require_credit_card:
+    type: boolean
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  archived_at:
+    type: 'null'
+  update_return_url:
+    type: string
+  update_return_params:
+    type: string
+  product_family:
+    $ref: ./Product-Family.yaml
+  public_signup_pages:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+  taxable:
+    type: boolean
+  version_number:
+    type: integer

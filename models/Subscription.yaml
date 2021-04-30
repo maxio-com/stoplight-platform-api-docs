@@ -1,0 +1,73 @@
+title: Subscription
+type: object
+x-tags:
+  - Subscriptions
+properties:
+  id:
+    type: integer
+  state:
+    type: string
+  balance_in_cents:
+    type: integer
+  total_revenue_in_cents:
+    type: integer
+  product_price_in_cents:
+    type: integer
+  product_version_number:
+    type: integer
+  current_period_ends_at:
+    type: string
+  next_assessment_at:
+    type: string
+  trial_started_at:
+    type: 'null'
+  trial_ended_at:
+    type: 'null'
+  activated_at:
+    type: string
+  expires_at:
+    type: 'null'
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  cancellation_message:
+    type: 'null'
+  cancellation_method:
+    type: 'null'
+  cancel_at_end_of_period:
+    type: boolean
+  canceled_at:
+    type: 'null'
+  current_period_started_at:
+    type: string
+  previous_state:
+    type: string
+  signup_payment_id:
+    type: integer
+  signup_revenue:
+    type: string
+  delayed_cancel_at:
+    type: 'null'
+  coupon_code:
+    type: 'null'
+  payment_collection_method:
+    type: string
+  snap_day:
+    type: 'null'
+  customer:
+    $ref: ./Customer.yaml
+  product:
+    $ref: ./Product.yaml
+  credit_card:
+    $ref: ./Payment-Profile.yaml
+  payment_type:
+    type: string
+  referral_code:
+    type: string
+  next_product_id:
+    type: 'null'
+  coupon_use_count:
+    type: 'null'
+  coupon_uses_allowed:
+    type: 'null'
