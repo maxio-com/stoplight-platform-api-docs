@@ -3170,6 +3170,8 @@ paths:
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
     put:
       summary: Update Coupon Subcodes
+      tags:
+        - Coupons
       operationId: put-coupons-coupon_id-codes.json
       responses:
         '200':
@@ -3222,6 +3224,52 @@ paths:
                     - AAAA
                     - BBBB
                     - CCCC
+  '/coupons/{coupon_id}/codes/{subcode}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon to which the subcode belongs
+      - schema:
+          type: string
+        name: subcode
+        in: path
+        required: true
+    delete:
+      summary: Delete Coupon Subcode
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-coupons-coupon_id-codes-subcode-.json
+      description: |-
+        ## Example
+
+        Given a coupon with an ID of 567, and a coupon subcode of 20OFF, the URL to `DELETE` this coupon subcode would be: 
+
+        ```
+        http://subdomain.chargify.com/coupons/567/codes/20OFF.<format>
+        ```
+
+        Note: If you are using any of the allowed special characters (“%”, “@”, “+”, “-”, “_”, and “.”), you must encode them for use in the URL.
+
+        | Special character | Encoding |
+        |-------------------|----------|
+        | %                 | %25      |
+        | @                 | %40      |
+        | +                 | %2B      |
+        | –                 | %2D      |
+        | _                 | %5F      |
+        | .                 | %2E      |
+
+        ## Percent Encoding Example
+
+        Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
 components:
   schemas: {}
 servers:
