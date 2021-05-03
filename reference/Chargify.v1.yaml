@@ -3010,6 +3010,106 @@ paths:
                       price: 10
                     - currency: GBP
                       price: 9
+  '/coupons/{coupon_id}/codes.json':
+    parameters:
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon
+    post:
+      summary: Create Coupon Subcodes
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created_codes:
+                    type: array
+                    items:
+                      type: string
+                  duplicate_codes:
+                    type: array
+                    items:
+                      type: string
+                  invalid_codes:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    created_codes:
+                      - BALTIMOREFALL
+                      - ORLANDOFALL
+                      - DETROITFALL
+                    duplicate_codes: []
+                    invalid_codes: []
+      operationId: post-coupons-coupon_id-codes.json
+      description: |-
+        ## Coupon Subcodes Intro
+
+        Coupon Subcodes allow you to create a set of unique codes that allow you to expand the use of one coupon.
+
+        For example:
+
+        Master Coupon Code: 
+
+        + SPRING2020
+
+        Coupon Subcodes: 
+
+        + SPRING90210
+        + DP80302
+        + SPRINGBALTIMORE
+
+        Coupon subcodes can be administered in the Admin Interface or via the API.
+
+        When creating a coupon subcode, you must specify a coupon to attach it to using the coupon_id. Valid coupon subcodes are all capital letters, contain only letters and numbers, and do not have any spaces. Lowercase letters will be capitalized before the subcode is created.
+
+        ## Coupon Subcodes Documentation
+
+        Full documentation on how to create coupon subcodes in the Chargify UI can be located [here](https://help.chargify.com/products/product-coupons.html#coupon-codes).
+
+        Additionally, for documentation on how to apply a coupon to a Subscription within the Chargify UI, please see our documentation [here](https://help.chargify.com/subscriptions/subscription-summary.html#coupon).
+
+        ## Create Coupon Subcode
+
+        This request allows you to create specific subcodes underneath an existing coupon code.
+
+        *Note*: If you are using any of the allowed special characters ("%", "@", "+", "-", "_", and "."), you must encode them for use in the URL.
+
+            % to %25
+            @ to %40
+            + to %2B
+            - to %2D
+            _ to %5F
+            . to %2E
+            
+        So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode would be: `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codes:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  codes:
+                    - BALTIMOREFALL
+                    - ORLANDOFALL
+                    - DETROITFALL
 components:
   schemas: {}
 servers:
