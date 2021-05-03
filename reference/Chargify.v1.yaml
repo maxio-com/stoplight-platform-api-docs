@@ -3468,6 +3468,216 @@ paths:
           in: query
           name: end_datetime
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+  '/subscriptions/{subscription_id}/events.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    get:
+      summary: List Events for Subscription
+      tags:
+        - Events
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Event.yaml
+              examples:
+                Example:
+                  value:
+                    - event:
+                        id: 344799837
+                        key: statement_settled
+                        message: Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan
+                        subscription_id: 14900541
+                        created_at: '2016-11-01T12:41:29-04:00'
+                        event_specific_data: null
+                    - event:
+                        id: 344799815
+                        key: renewal_success
+                        message: Successful renewal for Amelia Example's subscription to Basic Plan
+                        subscription_id: 14900541
+                        created_at: '2016-11-01T12:41:28-04:00'
+                        event_specific_data:
+                          product_id: 3792003
+                          account_transaction_id: null
+                    - event:
+                        id: 344799705
+                        key: billing_date_change
+                        message: Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016
+                        subscription_id: 14900541
+                        created_at: '2016-11-01T12:41:25-04:00'
+                        event_specific_data: null
+      operationId: get-subscriptions-subscription_id-events.json
+      description: |-
+        ## List Events for Subscription
+
+        The following request will return a list of events for a subscription.
+
+        Each event type has its own `event_specific_data` specified.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: integer
+          in: query
+          name: since_id
+        - schema:
+            type: integer
+          in: query
+          name: max_id
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          in: query
+          name: direction
+        - schema:
+            type: string
+            enum:
+              - account_transaction_changed
+              - billing_date_change
+              - component_allocation_change
+              - customer_update
+              - customer_create
+              - dunning_step_reached
+              - expiration_date_change
+              - expiring_card
+              - metered_usage
+              - payment_success
+              - payment_success_recreated
+              - payment_failure
+              - payment_failure_recreated
+              - refund_failure
+              - refund_success
+              - renewal_success
+              - renewal_success_recreated
+              - renewal_failure
+              - signup_success
+              - signup_failure
+              - statement_closed
+              - statement_settled
+              - subscription_bank_account_update
+              - subscription_deletion
+              - subscription_paypal_account_update
+              - subscription_product_change
+              - subscription_state_change
+              - trial_end_notice
+              - upgrade_downgrade_success
+              - upgrade_downgrade_failure
+              - upcoming_renewal_notice
+          in: query
+          name: filter
+          description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
+  /events/count.json:
+    get:
+      summary: Total Event Count
+      tags:
+        - Events
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+              examples:
+                Example:
+                  value:
+                    count: 144
+      operationId: get-events-count.json
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: integer
+          in: query
+          name: since_id
+        - schema:
+            type: integer
+          in: query
+          name: max_id
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          in: query
+          name: direction
+        - schema:
+            type: string
+            enum:
+              - account_transaction_changed
+              - billing_date_change
+              - component_allocation_change
+              - customer_update
+              - customer_create
+              - dunning_step_reached
+              - expiration_date_change
+              - expiring_card
+              - metered_usage
+              - payment_success
+              - payment_success_recreated
+              - payment_failure
+              - payment_failure_recreated
+              - refund_failure
+              - refund_success
+              - renewal_success
+              - renewal_success_recreated
+              - renewal_failure
+              - signup_success
+              - signup_failure
+              - statement_closed
+              - statement_settled
+              - subscription_bank_account_update
+              - subscription_deletion
+              - subscription_paypal_account_update
+              - subscription_product_change
+              - subscription_state_change
+              - trial_end_notice
+              - upgrade_downgrade_success
+              - upgrade_downgrade_failure
+              - upcoming_renewal_notice
+          in: query
+          name: filter
+          description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
+      description: |-
+        ## Read the Total Event Count for a Site
+
+        Obtain a count of the entire events for a given site by using this method.
 components:
   schemas: {}
 servers:
