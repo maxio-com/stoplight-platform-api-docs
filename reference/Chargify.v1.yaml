@@ -3168,6 +3168,60 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+    put:
+      summary: Update Coupon Subcodes
+      operationId: put-coupons-coupon_id-codes.json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created_codes:
+                    type: array
+                    items:
+                      type: string
+                  duplicate_codes:
+                    type: array
+                    items:
+                      type: string
+                  invalid_codes:
+                    type: array
+                    items:
+                      type: string
+      description: |-
+        ## Update Coupon Subcodes
+
+        You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
+        Send an array of new coupon subcodes.
+
+        **Note**: All current subcodes for that Coupon will be deleted first, and replaced with the list of subcodes sent to this endpoint.
+        The response will contain:
+
+        + The created subcodes,
+
+        + Subcodes that were not created because they already exist,
+
+        + Any subcodes not created because they are invalid.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codes:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  codes:
+                    - AAAA
+                    - BBBB
+                    - CCCC
 components:
   schemas: {}
 servers:
