@@ -11,3 +11,7 @@ properties:
     type: string
   id:
     type: integer
+  deleted_at:
+    type: 
+      - string
+      - 'null'
