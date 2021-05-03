@@ -1,4 +1,4 @@
-title: Create Percentage Coupon
+title: Create or Update Flat Amount Coupon
 type: object
 x-tags:
   - Coupons
@@ -11,10 +11,8 @@ properties:
     description: 'may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”'
   description:
     type: string
-  percentage:
-    type: 
-      - number
-      - string
+  amount_in_cents:
+    type: integer
   allow_negative_balance:
     type: string
   recurring:
@@ -32,4 +30,4 @@ properties:
 required:
   - name
   - code
-  - percentage
+  - amount_in_cents

@@ -2345,26 +2345,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                coupon:
-                  oneOf:
-                    - $ref: ../models/Create-Flat-Amount-Coupon.yaml
-                    - $ref: ../models/Create-Percentage-Coupon.yaml
-                restricted_products:
-                  type: object
-                  description: An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product
-                  properties:
-                    '1':
-                      type: boolean
-                restricted_components:
-                  type: object
-                  description: An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component
-                  properties:
-                    '1':
-                      type: boolean
-                    '2':
-                      type: boolean
+              $ref: ../models/Create-or-Update-Coupon.yaml
             examples:
               Percentage Coupon Example:
                 value:
@@ -2512,6 +2493,411 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+  /coupons/find.json:
+    get:
+      summary: Find Coupon
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coupon:
+                    $ref: ../models/Coupon.yaml
+      operationId: get-coupons-find.json
+      description: |-
+        ## Find Coupon
+
+        You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
+
+        If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: product_family_id
+          description: The Chargify id of the product family to which the coupon belongs
+        - schema:
+            type: string
+          in: query
+          name: code
+  '/product_families/{product_family_id}/coupons/{coupon_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: product_family_id
+        in: path
+        required: true
+        description: The Chargify id of the product family to which the coupon belongs
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon
+    get:
+      summary: Read Coupon
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coupon:
+                    $ref: ../models/Coupon.yaml
+              examples:
+                Example:
+                  value:
+                    coupon:
+                      id: 67
+                      name: Foo Bar
+                      code: YEPPER99934
+                      description: my cool coupon
+                      amount_in_cents: null
+                      product_family_id: 4
+                      product_family_name: Billing Plans
+                      created_at: '2017-11-08T10:01:15-05:00'
+                      updated_at: '2017-11-08T10:01:15-05:00'
+                      start_date: '2017-11-08T10:01:15-05:00'
+                      end_date: null
+                      percentage: 33.3333
+                      duration_period_count: null
+                      duration_interval: null
+                      duration_interval_unit: null
+                      allow_negative_balance: false
+                      archived_at: null
+                      conversion_limit: null
+                      stackable: true
+                      compounding_strategy: compound
+                      coupon_restrictions: []
+      operationId: get-product_families-product_family_id-coupons-coupon_id-.json
+      description: |-
+        ## Read a Coupon
+
+        You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
+        If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
+
+        When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+
+        If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+      parameters: []
+    put:
+      summary: Update Coupon
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coupon:
+                    $ref: ../models/Coupon.yaml
+              examples:
+                Example:
+                  value:
+                    coupon:
+                      id: 67
+                      name: Foo Bar
+                      code: YEPPER99934
+                      description: my cool coupon
+                      amount_in_cents: 10000
+                      product_family_id: 4
+                      created_at: '2017-11-08T10:01:15-05:00'
+                      updated_at: '2017-11-08T10:01:15-05:00'
+                      start_date: '2017-11-08T10:01:15-05:00'
+                      end_date: null
+                      percentage: null
+                      recurring: false
+                      duration_period_count: null
+                      duration_interval: null
+                      duration_interval_unit: null
+                      allow_negative_balance: false
+                      archived_at: null
+                      conversion_limit: null
+                      stackable: true
+                      compounding_strategy: compound
+                      coupon_restrictions: []
+      operationId: put-product_families-product_family_id-coupons-coupon_id-.json
+      description: |-
+        ## Update Coupon
+
+        You can update a Coupon via the API with a PUT request to the resource endpoint.
+
+        You can restrict a coupon to only apply to specific products / components by optionally passing in hashes of `restricted_products` and/or `restricted_components` in the format:
+        `{ "<product/component_id>": boolean_value }`
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Create-or-Update-Coupon.yaml
+            examples:
+              Example:
+                value:
+                  coupon:
+                    name: 15% off
+                    code: 15OFF
+                    description: 15% off for life
+                    percentage: '15'
+                    allow_negative_balance: 'false'
+                    recurring: 'false'
+                    end_date: '2012-08-29T12:00:00-04:00'
+                    product_family_id: '2'
+                    stackable: 'true'
+                    compounding_strategy: compound
+                  restricted_products:
+                    '1': true
+                  restricted_components:
+                    '1': true
+                    '2': false
+        description: ''
+  /coupons.json:
+    get:
+      summary: List Coupons for Default Product Family
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Coupon.yaml
+      operationId: get-coupons.json
+      description: |-
+        ## List Coupons for Default Product Family
+
+        You can retrieve a list of coupons that belong to the default product family for a site via this method.
+
+        The default product family is the one that was created first for the site, (with the lowest ID number) that has not been archived.
+
+        When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+
+        If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          name: page
+        - schema:
+            type: integer
+            default: 30
+            maximum: 200
+          in: query
+          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+          name: per_page
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+          in: query
+          description: The type of filter you would like to apply to your search.
+          name: date_field
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          name: end_date
+        - schema:
+            type: string
+          in: query
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          name: start_datetime
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+  '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
+    parameters:
+      - schema:
+          type: integer
+        name: product_family_id
+        in: path
+        required: true
+        description: The Chargify id of the product family to which the coupon belongs
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon
+    get:
+      summary: List Coupon Usages
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: The Chargify id of the product
+                    name:
+                      type: string
+                      description: Name of the product
+                    signups:
+                      type: integer
+                      description: Number of times the coupon has been applied
+                    savings:
+                      type: integer
+                      description: Dollar amount of customer savings as a result of the coupon.
+                      nullable: true
+                    savings_in_cents:
+                      type: integer
+                      description: Dollar amount of customer savings as a result of the coupon.
+                      nullable: true
+                    revenue:
+                      type: integer
+                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
+                      nullable: true
+                    revenue_in_cents:
+                      type: integer
+                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
+              examples:
+                Example:
+                  value:
+                    - name: No cost product
+                      id: 3903594
+                      signups: 0
+                      savings: 0
+                      savings_in_cents: 0
+                      revenue: 0
+                      revenue_in_cents: 0
+                    - name: Product that expires
+                      id: 3853680
+                      signups: 0
+                      savings: 0
+                      savings_in_cents: 0
+                      revenue: 0
+                      revenue_in_cents: 0
+                    - name: Trial Product
+                      id: 3861800
+                      signups: 1
+                      savings: 30
+                      savings_in_cents: 3000
+                      revenue: 20
+                      revenue_in_cents: 2000
+      operationId: get-product_families-product_family_id-coupons-coupon_id-usage.json
+      description: |-
+        ## Read Coupon Usage for a Site
+
+        This request will provide details about the coupon usage as an array of data hashes, one per product.
+  /coupons/validate.json:
+    get:
+      summary: Validate Coupon
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coupon:
+                    $ref: ../models/Coupon.yaml
+              examples:
+                Example:
+                  value:
+                    coupon:
+                      id: 66
+                      name: Foo Bar
+                      code: YEPPER9993
+                      description: my cool coupon
+                      amount_in_cents: 10000
+                      product_family_id: 4
+                      created_at: '2017-11-07T14:51:52-05:00'
+                      updated_at: '2017-11-07T15:14:24-05:00'
+                      start_date: '2017-11-07T14:51:52-05:00'
+                      end_date: null
+                      percentage: null
+                      recurring: false
+                      duration_period_count: null
+                      duration_interval: null
+                      duration_interval_unit: null
+                      allow_negative_balance: false
+                      archived_at: null
+                      conversion_limit: null
+                      stackable: true
+                      compounding_strategy: full-price
+                      coupon_restrictions: []
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    errors: Coupon code could not be found.
+      operationId: get-coupons-validate.json
+      description: |-
+        ## Validate a Coupon
+
+        You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
+
+        If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
+
+        + Coupon not found
+        + Coupon is invalid
+        + Coupon expired
+
+        If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, then you will need to specify the product family, either in the url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
+
+        Eg.
+
+        ```
+        https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.<format>?code=<coupon_code>
+        ```
+
+        Or:
+
+        ```
+        https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&product_family_id=<id>
+        ```
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: product_family_id
+          description: The Chargify id of the product family to which the coupon belongs
+        - schema:
+            type: string
+          in: query
+          name: code
+          required: true
+          description: The code of the coupon
 components:
   schemas: {}
 servers:
