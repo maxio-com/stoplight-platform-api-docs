@@ -2863,7 +2863,7 @@ paths:
                     errors: Coupon code could not be found.
       operationId: get-coupons-validate.json
       description: |-
-        ## Validate a Coupon
+        ## Validate Coupon
 
         You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
 
@@ -2898,6 +2898,72 @@ paths:
           name: code
           required: true
           description: The code of the coupon
+  '/coupon/{coupon_id}/currency_prices.json':
+    parameters:
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon
+    put:
+      summary: Create / Update Currency Prices
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    currency:
+                      type: string
+                    price:
+                      type: integer
+                    coupon_id:
+                      type: integer
+      operationId: put-coupon-coupon_id-currency_prices.json
+      description: |-
+        This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
+
+        Currency pricing for coupons must mirror the setup of the primary coupon pricing - if the primary coupon is percentage based, you will not be able to define pricing in non-primary currencies.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency_prices:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      currency:
+                        type: string
+                        description: ISO code for the site defined currency.
+                      price:
+                        type: integer
+                        description: |
+                          Price for the given currency.
+                    required:
+                      - currency
+                      - price
+              required:
+                - currency_prices
+            examples:
+              Example:
+                value:
+                  currency_prices:
+                    - currency: EUR
+                      price: 10
+                    - currency: GBP
+                      price: 9
 components:
   schemas: {}
 servers:
