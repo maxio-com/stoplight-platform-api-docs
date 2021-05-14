@@ -3771,6 +3771,162 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  component:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The unique ID assigned to the component by Chargify. This ID
+                          can be used to fetch the component from the API.
+                      name:
+                        type: string
+                        description: The name of the Component, suitable for display on statements.
+                          i.e. Text Messages.
+                      pricing_scheme:
+                        type: string
+                        description: 'The handle for the pricing scheme. Available options: per_unit,
+                          volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
+                          for an overview of pricing schemes.'
+                      unit_name:
+                        type: string
+                        description: The name of the unit that the component’s usage is measured in.
+                          i.e. message
+                      unit_price:
+                        type: string
+                        description: The amount the customer will be charged per unit. This field
+                          is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.
+                        nullable: true
+                      product_family_id:
+                        type: integer
+                        description: The id of the Product Family to which the Component belongs
+                      price_per_unit_in_cents:
+                        type: integer
+                        description: deprecated - use unit_price instead
+                        nullable: true
+                      kind:
+                        type: string
+                        description: A handle for the component type
+                        enum:
+                        - metered_component
+                        - quantity_based_component
+                        - on_off_component
+                        - prepaid_usage_component
+                      archived:
+                        type: boolean
+                        description: Boolean flag describing whether a component is archived or not.
+                      taxable:
+                        type: boolean
+                        description: Boolean flag describing whether a component is taxable or not.
+                      description:
+                        type: string
+                        description: The description of the component.
+                        nullable: true
+                      default_price_point_id:
+                        type: integer
+                      price_point_count:
+                        type: integer
+                        description: Count for the number of of amount of price points associated
+                          with the the component
+                      price_points_url:
+                        type: string
+                        description: URL that points to the location to read the existing price points
+                          via GET request
+                      tax_code:
+                        type: string
+                        description: A string representing the tax code related to the component type.
+                          This is especially important when using the Avalara service to tax based
+                          on locale. This attribute has a max length of 10 characters.
+                      recurring:
+                        type: boolean
+                      upgrade_charge:
+                        type: string
+                        nullable: true
+                      downgrade_credit:
+                        type: string
+                        nullable: true
+                      created_at:
+                        type: string
+                      prices:
+                        type: array
+                        nullable: true
+                        description: An array of price brackets. If the component uses the ‘per_unit’
+                          pricing scheme, this array will be empty.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type: integer
+                              nullable: true
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                      default_price_point_name:
+                        type: string
+                      product_family_name:
+                        type: string
+                      hide_date_range_on_invoice:
+                        type: boolean
+                        description: "(Only available on Relationship Invoicing sites) Boolean flag
+                          describing if the service date range should show for the component on generated
+                          invoices."
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 292609
+                      name: Text messages
+                      pricing_scheme: stairstep
+                      unit_name: text message
+                      unit_price: null
+                      product_family_id: 528484
+                      price_per_unit_in_cents: null
+                      kind: metered_component
+                      archived: false
+                      taxable: false
+                      description: null
+                      created_at: '2019-08-02T05:54:53-04:00'
+                      prices:
+                        - id: 47
+                          component_id: 292609
+                          starting_quantity: 1
+                          ending_quantity: null
+                          unit_price: '1.0'
+                          price_point_id: 173
+                          formatted_unit_price: $1.00
+                      default_price_point_name: Original
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Name: cannot be blank.'
+                      - 'Unit name: cannot be blank.'
+                      - 'Pricing scheme: cannot be blank.'
+                      - At least 1 price bracket must be defined
       operationId: post-product_families-product_family_id-plural_kind-.json
       parameters: []
       description: |-
