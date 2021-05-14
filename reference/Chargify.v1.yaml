@@ -3678,6 +3678,72 @@ paths:
         ## Read the Total Event Count for a Site
 
         Obtain a count of the entire events for a given site by using this method.
+  /mrr.json:
+    get:
+      summary: Read MRR
+      tags:
+        - Insights
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mrr:
+                    type: object
+                    properties:
+                      amount_in_cents:
+                        type: integer
+                      amount_formatted:
+                        type: string
+                      currency:
+                        type: string
+                      currency_symbol:
+                        type: string
+                      breakouts:
+                        type: object
+                        properties:
+                          plan_amount_in_cents:
+                            type: integer
+                          plan_amount_formatted:
+                            type: string
+                          usage_amount_in_cents:
+                            type: integer
+                          usage_amount_formatted:
+                            type: string
+                      at_time:
+                        type: string
+                        description: ISO8601 timestamp
+              examples:
+                Example:
+                  value:
+                    mrr:
+                      amount_in_cents: 9915593
+                      amount_formatted: '$99,155.93'
+                      currency: USD
+                      currency_symbol: $
+                      at_time: '2021-02-03T14:23:17-05:00'
+                      breakouts:
+                        plan_amount_in_cents: 9913593
+                        plan_amount_formatted: '$99,135.93'
+                        usage_amount_in_cents: 2000
+                        usage_amount_formatted: $20.00
+      operationId: get-mrr.json
+      description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts.'
+      parameters:
+        - schema:
+            type: string
+            format: date-time
+          in: query
+          name: at_time
+          description: submit a timestamp in ISO8601 format to request MRR for a historic time
+        - schema:
+            type: integer
+          in: query
+          name: subscription_id
+          description: submit the id of a subscription in order to limit results
 components:
   schemas: {}
 servers:
