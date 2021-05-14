@@ -832,7 +832,7 @@ paths:
                     phone: 555-555-1212
                     locale: es-MX
     get:
-      summary: Find Customers
+      summary: List or Find Customers
       tags:
         - Customers
       responses:
@@ -917,11 +917,11 @@ paths:
                         parent_id: null
       operationId: get-customers.json
       description: |-
-        ## Find Customers
+        ## List Customers
 
         This request will by default list all customers associated with your Site.
 
-        ## Search for Customer
+        ## Find Customer
 
         Use the search feature to retrieve a single or group of customers. 
 
