@@ -4929,7 +4929,52 @@ paths:
       summary: List Price Points
       tags:
         - Components
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_points:
+                    type: array
+                    items:
+                      $ref: ../models/Component-Price-Point.yaml
+              examples:
+                Example:
+                  value:
+                    price_points:
+                      - id: 80
+                        default: false
+                        name: Wholesale Two
+                        pricing_scheme: per_unit
+                        component_id: 74
+                        handle: wholesale-two
+                        archived_at: null
+                        created_at: '2017-07-05T13:55:40-04:00'
+                        updated_at: '2017-07-05T13:55:40-04:00'
+                        prices:
+                          - id: 121
+                            component_id: 74
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '5.0'
+                      - id: 81
+                        default: false
+                        name: MSRP
+                        pricing_scheme: per_unit
+                        component_id: 74
+                        handle: msrp
+                        archived_at: null
+                        created_at: '2017-07-05T13:55:40-04:00'
+                        updated_at: '2017-07-05T13:55:40-04:00'
+                        prices:
+                          - id: 122
+                            component_id: 74
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '4.0'
       operationId: get-components-component_id-price_points.json
       description: |-
         ## List Price Points
