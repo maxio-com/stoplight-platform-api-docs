@@ -4263,7 +4263,7 @@ paths:
                           description: deprecated May 2011 - use unit_price instead
                         overage_pricing:
                           $ref: ../models/Overage-Pricing.yaml
-                        rollover_prepaid_reminder:
+                        rollover_prepaid_remainder:
                           type: boolean
                           description: Boolean which controls whether or not remaining units should be rolled over to the next period
                         renew_prepaid_allocation:
@@ -4851,6 +4851,179 @@ paths:
           in: query
           name: include_archived
           description: Include archived items
+  '/components/{component_id}/price_points.json':
+    parameters:
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: The Chargify id of the component
+    post:
+      summary: Create Component Price Point
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Component-Price-Point.yaml
+              examples:
+                Example:
+                  value:
+                    price_point:
+                      id: 79
+                      default: false
+                      name: Wholesale
+                      pricing_scheme: stairstep
+                      component_id: 74
+                      handle: wholesale-handle
+                      archived_at: null
+                      created_at: '2017-07-05T13:44:30-04:00'
+                      updated_at: '2017-07-05T13:44:30-04:00'
+                      prices:
+                        - id: 119
+                          component_id: 74
+                          starting_quantity: 1
+                          ending_quantity: 100
+                          unit_price: '5.0'
+                        - id: 120
+                          component_id: 74
+                          starting_quantity: 101
+                          ending_quantity: null
+                          unit_price: '4.0'
+      operationId: post-components-component_id-price_points.json
+      description: |-
+        ## Create Component Price Point
+
+        This endpoint can be used to create a new price point for an existing component.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - properties:
+                    price_point:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        handle:
+                          type: string
+                        pricing_scheme:
+                          type: string
+                        prices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              starting_quantity:
+                                type:
+                                  - integer
+                                  - string
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - string
+                              unit_price:
+                                type:
+                                  - integer
+                                  - string
+                            required:
+                              - starting_quantity
+                              - ending_quantity
+                              - unit_price
+                        use_site_exchange_rate:
+                          type: boolean
+                          default: true
+                          description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
+                      required:
+                        - name
+                        - pricing_scheme
+                        - prices
+                - properties:
+                    price_point:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        handle:
+                          type: string
+                        pricing_scheme:
+                          type: string
+                        prices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              starting_quantity:
+                                type:
+                                  - integer
+                                  - string
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - string
+                              unit_price:
+                                type:
+                                  - integer
+                                  - string
+                            required:
+                              - starting_quantity
+                              - ending_quantity
+                              - unit_price
+                        overage_pricing:
+                          type: object
+                          properties:
+                            pricing_scheme:
+                              type: string
+                            prices:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  starting_quantity:
+                                    type: integer
+                                  ending_quantity:
+                                    type: integer
+                                  unit_price:
+                                    type:
+                                      - integer
+                                      - string
+                                  formatted_unit_price:
+                                    type: string
+                                required:
+                                  - starting_quantity
+                                  - ending_quantity
+                                  - unit_price
+                          required:
+                            - pricing_scheme
+                        use_site_exchange_rate:
+                          type: boolean
+                          default: true
+                          description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
+                        rollover_prepaid_remainder:
+                          type: boolean
+                          description: Boolean which controls whether or not remaining units should be rolled over to the next period
+                        renew_prepaid_allocation:
+                          type: boolean
+                          description: Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period
+                        expiration_interval:
+                          type: number
+                          description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
+                        expiration_interval_unit:
+                          type: string
+                          description: ''
+                          enum:
+                            - day
+                            - month
+                      required:
+                        - name
+                        - pricing_scheme
+                        - prices
+              type: object
 components:
   schemas: {}
 servers:
