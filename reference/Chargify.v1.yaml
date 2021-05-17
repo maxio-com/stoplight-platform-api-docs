@@ -5077,6 +5077,80 @@ paths:
                       prices:
                         - starting_quantity: 1
                           unit_price: 4
+  '/components/{component_id}/price_points/{price_point_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: The Chargify id of the component to which the price point belongs
+      - schema:
+          type: integer
+        name: price_point_id
+        in: path
+        required: true
+        description: The Chargify id of the price point
+    put:
+      summary: Update Price Point
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_point:
+                    $ref: ../models/Component-Price-Point.yaml
+      operationId: put-components-component_id-price_points-price_point_id-.json
+      description: |-
+        When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
+
+        Passing in a price bracket without an `id` will attempt to create a new price. 
+
+        Including an `id` will update the corresponding price, and including the `_destroy` flag set to true along with the `id` will remove that price.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_point:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type: integer
+                          _destroy:
+                            type: string
+                          starting_quantity:
+                            type: integer
+            examples:
+              Example:
+                value:
+                  price_point:
+                    name: Default
+                    prices:
+                      - id: 1
+                        ending_quantity: 100
+                        unit_price: 5
+                      - id: 2
+                        _destroy: 'true'
+                      - starting_quantity: 101
+                        unit_price: 4
 components:
   schemas: {}
 servers:
