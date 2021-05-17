@@ -4572,8 +4572,27 @@ paths:
                       default_price_point_name: cupidatat Lorem non aliqua
                       product_family_name: do elit
                       hide_date_range_on_invoice: false
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Component cannot be archived. Please make sure it hasn't already been archived.
       operationId: delete-product_families-product_family_id-components-component_id-.json
-      description: Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
+      description: |-
+        # Archive Component
+
+        Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
   /components.json:
     get:
       summary: List Components
@@ -5250,6 +5269,107 @@ paths:
                           unit_price: '4.0'
       operationId: put-components-component_id-price_points-price_point_id-unarchive.json
       description: '# Unarchive Price Point'
+  '/price_points/{price_point_id}/currency_prices.json':
+    parameters:
+      - schema:
+          type: integer
+        name: price_point_id
+        in: path
+        required: true
+        description: The Chargify id of the price point
+    post:
+      summary: Create Currency Prices
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Currency-Price.yaml
+      operationId: post-price_points-price_point_id-currency_prices.json
+      description: |-
+        # Create Currency Prices
+
+        This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
+
+        When creating currency prices, they need to mirror the structure of your primary pricing. For each price level defined on the component price point, there should be a matching price level created in the given currency.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency_prices:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      currency:
+                        type: string
+                        description: ISO code for a currency defined on the site level
+                      price:
+                        type: integer
+                        description: Price for the price level in this currency
+                      price_id:
+                        type: integer
+                        description: ID of the price that this corresponds with
+            examples:
+              Example:
+                value:
+                  currency_prices:
+                    - currency: EUR
+                      price: 50
+                      price_id: 20
+                    - currency: EUR
+                      price: 40
+                      price_id: 21
+    put:
+      summary: Update Currency Prices
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Currency-Price.yaml
+      operationId: put-price_points-price_point_id-currency_prices.json
+      description: |-
+        # Update Currency Prices
+
+        This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency_prices:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: ID of the currency price record being updated
+                      price:
+                        type: integer
+                        description: New price for the given currency
+            examples:
+              Example:
+                value:
+                  currency_prices:
+                    - id: 100
+                      price: 51
+                    - id: 101
+                      price: 41
 components:
   schemas: {}
 servers:
