@@ -4925,6 +4925,26 @@ paths:
                         - starting_quantity: 1
                           ending_quantity: 100
                           unit_price: 4
+    get:
+      summary: List Price Points
+      tags:
+        - Components
+      responses: {}
+      operationId: get-components-component_id-price_points.json
+      description: |-
+        ## List Price Points
+
+        Use this endpoint to read current price points that are associated with a component.
+
+        You may specify the component by using either the numeric id or the `handle:gold` syntax.
+
+        If the price point is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: currency_prices
+          description: Include an array of currency price data
   '/components/{component_id}/price_points/bulk.json':
     parameters:
       - schema:
