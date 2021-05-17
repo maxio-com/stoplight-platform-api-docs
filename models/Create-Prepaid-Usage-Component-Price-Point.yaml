@@ -53,8 +53,6 @@ properties:
               type:
                 - integer
                 - string
-            formatted_unit_price:
-              type: string
           required:
             - starting_quantity
             - unit_price

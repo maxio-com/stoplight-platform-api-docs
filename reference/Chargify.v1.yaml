@@ -4925,7 +4925,93 @@ paths:
                         - starting_quantity: 1
                           ending_quantity: 100
                           unit_price: 4
-                          formatted_unit_price: $4.00
+  '/components/{component_id}/price_points/bulk.json':
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+    post:
+      summary: Bulk Create Component Price Points
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_points:
+                    type: array
+                    items:
+                      $ref: ../models/Component-Price-Point.yaml
+              examples:
+                Example:
+                  value:
+                    price_points:
+                      - id: 80
+                        default: false
+                        name: Wholesale Two
+                        pricing_scheme: per_unit
+                        component_id: 74
+                        handle: wholesale-two
+                        archived_at: null
+                        created_at: '2017-07-05T13:55:40-04:00'
+                        updated_at: '2017-07-05T13:55:40-04:00'
+                        prices:
+                          - id: 121
+                            component_id: 74
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '5.0'
+                      - id: 81
+                        default: false
+                        name: MSRP
+                        pricing_scheme: per_unit
+                        component_id: 74
+                        handle: msrp
+                        archived_at: null
+                        created_at: '2017-07-05T13:55:40-04:00'
+                        updated_at: '2017-07-05T13:55:40-04:00'
+                        prices:
+                          - id: 122
+                            component_id: 74
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '4.0'
+      operationId: post-components-component_id-price_points-bulk.json
+      description: '# Bulk Create Component Price Points'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_points:
+                  type: array
+                  items:
+                    anyOf:
+                      - $ref: ../models/Create-Component-Price-Point.yaml
+                      - $ref: ../models/Create-Prepaid-Usage-Component-Price-Point.yaml
+            examples:
+              Example:
+                value:
+                  price_points:
+                    - name: Wholesale
+                      handle: wholesale
+                      pricing_scheme: per_unit
+                      prices:
+                        - starting_quantity: 1
+                          unit_price: 5
+                    - name: MSRP
+                      handle: msrp
+                      pricing_scheme: per_unit
+                      prices:
+                        - starting_quantity: 1
+                          unit_price: 4
 components:
   schemas: {}
 servers:
