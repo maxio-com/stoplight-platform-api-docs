@@ -5107,6 +5107,8 @@ paths:
                     $ref: ../models/Component-Price-Point.yaml
       operationId: put-components-component_id-price_points-price_point_id-.json
       description: |-
+        # Update Price Point
+
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
 
         Passing in a price bracket without an `id` will attempt to create a new price. 
@@ -5151,6 +5153,103 @@ paths:
                         _destroy: 'true'
                       - starting_quantity: 101
                         unit_price: 4
+    delete:
+      summary: Archive Price Point
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_point:
+                    $ref: ../models/Component-Price-Point.yaml
+              examples:
+                Example:
+                  value:
+                    price_point:
+                      id: 79
+                      default: false
+                      name: Wholesale
+                      pricing_scheme: stairstep
+                      component_id: 74
+                      handle: wholesale-handle
+                      archived_at: '2017-07-06T15:04:00-04:00'
+                      created_at: '2017-07-05T13:44:30-04:00'
+                      updated_at: '2017-07-05T13:44:30-04:00'
+                      prices:
+                        - id: 119
+                          component_id: 74
+                          starting_quantity: 1
+                          ending_quantity: 100
+                          unit_price: '5.0'
+                        - id: 120
+                          component_id: 74
+                          starting_quantity: 101
+                          ending_quantity: null
+                          unit_price: '4.0'
+      operationId: delete-components-component_id-price_points-price_point_id-.json
+      description: |-
+        # Archive Price Point
+
+        A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
+  '/components/{component_id}/price_points/{price_point_id}/unarchive.json':
+    parameters:
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: The Chargify id of the component to which the price point belongs
+      - schema:
+          type: integer
+        name: price_point_id
+        in: path
+        required: true
+        description: The Chargify id of the price point
+    put:
+      summary: Unarchive Price Point
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_point:
+                    $ref: ../models/Component-Price-Point.yaml
+              examples:
+                Example:
+                  value:
+                    price_point:
+                      id: 79
+                      default: false
+                      name: Wholesale
+                      pricing_scheme: stairstep
+                      component_id: 74
+                      handle: wholesale-handle
+                      archived_at: null
+                      created_at: '2017-07-05T13:44:30-04:00'
+                      updated_at: '2017-07-05T13:44:30-04:00'
+                      prices:
+                        - id: 119
+                          component_id: 74
+                          starting_quantity: 1
+                          ending_quantity: 100
+                          unit_price: '5.0'
+                        - id: 120
+                          component_id: 74
+                          starting_quantity: 101
+                          ending_quantity: null
+                          unit_price: '4.0'
+      operationId: put-components-component_id-price_points-price_point_id-unarchive.json
+      description: '# Unarchive Price Point'
 components:
   schemas: {}
 servers:
