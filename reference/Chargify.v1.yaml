@@ -4870,30 +4870,7 @@ paths:
             application/json:
               schema:
                 $ref: ../models/Component-Price-Point.yaml
-              examples:
-                Example:
-                  value:
-                    price_point:
-                      id: 79
-                      default: false
-                      name: Wholesale
-                      pricing_scheme: stairstep
-                      component_id: 74
-                      handle: wholesale-handle
-                      archived_at: null
-                      created_at: '2017-07-05T13:44:30-04:00'
-                      updated_at: '2017-07-05T13:44:30-04:00'
-                      prices:
-                        - id: 119
-                          component_id: 74
-                          starting_quantity: 1
-                          ending_quantity: 100
-                          unit_price: '5.0'
-                        - id: 120
-                          component_id: 74
-                          starting_quantity: 101
-                          ending_quantity: null
-                          unit_price: '4.0'
+              examples: {}
       operationId: post-components-component_id-price_points.json
       description: |-
         ## Create Component Price Point
@@ -4976,6 +4953,8 @@ paths:
                               - unit_price
                         overage_pricing:
                           type: object
+                          required:
+                            - pricing_scheme
                           properties:
                             pricing_scheme:
                               type: string
@@ -5000,8 +4979,6 @@ paths:
                                 required:
                                   - starting_quantity
                                   - unit_price
-                          required:
-                            - pricing_scheme
                         use_site_exchange_rate:
                           type: boolean
                           default: true
@@ -5025,31 +5002,22 @@ paths:
                         - name
                         - pricing_scheme
                         - prices
+                        - overage_pricing
               type: object
             examples:
               Example:
                 value:
                   price_point:
-                    id: 79
-                    default: false
                     name: Wholesale
-                    pricing_scheme: stairstep
-                    component_id: 74
                     handle: wholesale-handle
-                    archived_at: null
-                    created_at: '2017-07-05T13:44:30-04:00'
-                    updated_at: '2017-07-05T13:44:30-04:00'
+                    pricing_scheme: stairstep
                     prices:
-                      - id: 119
-                        component_id: 74
-                        starting_quantity: 1
-                        ending_quantity: 100
-                        unit_price: '5.0'
-                      - id: 120
-                        component_id: 74
-                        starting_quantity: 101
+                      - starting_quantity: '1'
+                        ending_quantity: '100'
+                        unit_price: '5.00'
+                      - starting_quantity: '101'
                         ending_quantity: null
-                        unit_price: '4.0'
+                        unit_price: '4.00'
               Prepaid Usage Component:
                 value:
                   price_point:
@@ -5065,6 +5033,7 @@ paths:
                         ending_quantity: 100
                         unit_price: 5
                       - starting_quantity: 101
+                        ending_quantity: null
                         unit_price: 4
                     overage_pricing:
                       pricing_scheme: stairstep
