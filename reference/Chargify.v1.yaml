@@ -3781,25 +3781,19 @@ paths:
                     properties:
                       id:
                         type: integer
-                        description: The unique ID assigned to the component by Chargify. This ID
-                          can be used to fetch the component from the API.
+                        description: The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API.
                       name:
                         type: string
-                        description: The name of the Component, suitable for display on statements.
-                          i.e. Text Messages.
+                        description: 'The name of the Component, suitable for display on statements. i.e. Text Messages.'
                       pricing_scheme:
                         type: string
-                        description: 'The handle for the pricing scheme. Available options: per_unit,
-                          volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
-                          for an overview of pricing schemes.'
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
                       unit_name:
                         type: string
-                        description: The name of the unit that the component’s usage is measured in.
-                          i.e. message
+                        description: The name of the unit that the component’s usage is measured in. i.e. message
                       unit_price:
                         type: string
-                        description: The amount the customer will be charged per unit. This field
-                          is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.
+                        description: 'The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.'
                         nullable: true
                       product_family_id:
                         type: integer
@@ -3812,10 +3806,10 @@ paths:
                         type: string
                         description: A handle for the component type
                         enum:
-                        - metered_component
-                        - quantity_based_component
-                        - on_off_component
-                        - prepaid_usage_component
+                          - metered_component
+                          - quantity_based_component
+                          - on_off_component
+                          - prepaid_usage_component
                       archived:
                         type: boolean
                         description: Boolean flag describing whether a component is archived or not.
@@ -3830,17 +3824,13 @@ paths:
                         type: integer
                       price_point_count:
                         type: integer
-                        description: Count for the number of of amount of price points associated
-                          with the the component
+                        description: Count for the number of of amount of price points associated with the the component
                       price_points_url:
                         type: string
-                        description: URL that points to the location to read the existing price points
-                          via GET request
+                        description: URL that points to the location to read the existing price points via GET request
                       tax_code:
                         type: string
-                        description: A string representing the tax code related to the component type.
-                          This is especially important when using the Avalara service to tax based
-                          on locale. This attribute has a max length of 10 characters.
+                        description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
                       recurring:
                         type: boolean
                       upgrade_charge:
@@ -3854,8 +3844,7 @@ paths:
                       prices:
                         type: array
                         nullable: true
-                        description: An array of price brackets. If the component uses the ‘per_unit’
-                          pricing scheme, this array will be empty.
+                        description: 'An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty.'
                         items:
                           type: object
                           properties:
@@ -3880,9 +3869,7 @@ paths:
                         type: string
                       hide_date_range_on_invoice:
                         type: boolean
-                        description: "(Only available on Relationship Invoicing sites) Boolean flag
-                          describing if the service date range should show for the component on generated
-                          invoices."
+                        description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
               examples:
                 Example:
                   value:
@@ -4444,6 +4431,426 @@ paths:
                     upgrade_charge: full
                     downgrade_credit: prorated
         description: ''
+  /components/lookup.json:
+    get:
+      summary: Find Component
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Component.yaml
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 399853
+                      name: Annual Support Services
+                      pricing_scheme: null
+                      unit_name: on/off
+                      unit_price: '100.0'
+                      product_family_id: 997233
+                      price_per_unit_in_cents: null
+                      kind: on_off_component
+                      archived: false
+                      taxable: true
+                      description: Prepay for support services
+                      default_price_point_id: 121003
+                      price_point_count: 4
+                      price_points_url: 'https://general-goods.chargify.com/components/399853/price_points'
+                      tax_code: D0000000
+                      recurring: true
+                      upgrade_charge: null
+                      downgrade_credit: null
+                      created_at: '2019-08-02T05:54:53-04:00'
+                      default_price_point_name: Original
+                      product_family_name: Chargify
+      operationId: get-components-lookup.json
+      parameters:
+        - schema:
+            type: string
+          in: query
+          required: true
+          name: handle
+          description: The handle of the component to find
+      description: |-
+        ## Find Component by Handle
+
+        This request will return information regarding a component having the handle you provide. You can identify your components with a handle so you don't have to save or reference the IDs we generate.
+  '/product_families/{product_family_id}/components/{component_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: product_family_id
+        in: path
+        required: true
+        description: The Chargify id of the product family to which the component belongs
+      - schema:
+          type: string
+          pattern: '/\A(?:\d+|handle:(?:uuid:|[a-z])(?:\w|-)+)\z/'
+        name: component_id
+        in: path
+        required: true
+        description: 'Either the Chargify id of the component or the handle for the component prefixed with `handle:`'
+    get:
+      summary: Read Component
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Component.yaml
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 399853
+                      name: Annual Support Services
+                      pricing_scheme: null
+                      unit_name: on/off
+                      unit_price: '100.0'
+                      product_family_id: 997233
+                      price_per_unit_in_cents: null
+                      kind: on_off_component
+                      archived: false
+                      taxable: true
+                      description: Prepay for support services
+                      default_price_point_id: 121003
+                      price_point_count: 4
+                      price_points_url: 'https://general-goods.chargify.com/components/399853/price_points'
+                      tax_code: D0000000
+                      recurring: true
+                      upgrade_charge: null
+                      downgrade_credit: null
+                      created_at: '2019-08-02T05:54:53-04:00'
+                      default_price_point_name: Original
+                      product_family_name: Chargify
+      operationId: get-product_families-product_family_id-components-component_id-.json
+      description: |-
+        ## Read Component
+
+        This request will return information regarding a component from a specific product family.
+
+        You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
+    delete:
+      summary: Archive Component
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Component.yaml
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 25407138
+                      name: cillum aute
+                      pricing_scheme: in incididu
+                      unit_name: nulla in
+                      unit_price: Excepteur veniam
+                      product_family_id: -56705047
+                      kind: prepaid_usage_component
+                      archived: true
+                      taxable: false
+                      description: reprehenderit laborum qui fugiat
+                      default_price_point_id: -64328176
+                      price_point_count: 15252407
+                      price_points_url: dolor mollit consequat
+                      tax_code: ea nisi
+                      recurring: false
+                      created_at: dolor qui deserunt tempor
+                      default_price_point_name: cupidatat Lorem non aliqua
+                      product_family_name: do elit
+                      hide_date_range_on_invoice: false
+      operationId: delete-product_families-product_family_id-components-component_id-.json
+      description: Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
+  /components.json:
+    get:
+      summary: List Components
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Component.yaml
+              examples:
+                Example:
+                  value:
+                    - component:
+                        id: 399850
+                        name: $1.00 component
+                        pricing_scheme: per_unit
+                        unit_name: Component
+                        unit_price: '1.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: quantity_based_component
+                        archived: false
+                        taxable: false
+                        description: Component
+                        default_price_point_id: 121000
+                        prices:
+                          - id: 630687
+                            component_id: 399850
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '1.0'
+                            price_point_id: 121000
+                            formatted_unit_price: $1.00
+                        price_point_count: 2
+                        price_points_url: 'https://general-goods.chargify.com/components/399850/price_points'
+                        tax_code: null
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:38-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+                    - component:
+                        id: 399853
+                        name: Annual Support Services
+                        pricing_scheme: null
+                        unit_name: on/off
+                        unit_price: '100.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: on_off_component
+                        archived: false
+                        taxable: true
+                        description: Prepay for support services
+                        default_price_point_id: 121003
+                        price_point_count: 4
+                        price_points_url: 'https://general-goods.chargify.com/components/399853/price_points'
+                        tax_code: D0000000
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:37-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+                    - component:
+                        id: 386937
+                        name: Cancellation fee
+                        pricing_scheme: null
+                        unit_name: on/off
+                        unit_price: '35.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: on_off_component
+                        archived: false
+                        taxable: false
+                        description: ''
+                        default_price_point_id: 108307
+                        price_point_count: 1
+                        price_points_url: 'https://general-goods.chargify.com/components/386937/price_points'
+                        tax_code: null
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:38-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+      operationId: get-components.json
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+          in: query
+          name: date_field
+          description: The type of filter you would like to apply to your search.
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: string
+          in: query
+          name: end_datetime
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.  optional'
+        - schema:
+            type: boolean
+          in: query
+          name: include_archived
+          description: Include archived items
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      description: |-
+        ## List Components for a Site
+
+        This request will return a list of components for a site.
+  '/components/{component_id}/price_points/{price_point_id}/default.json':
+    parameters:
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: The Chargify id of the component to which the price point belongs
+      - schema:
+          type: integer
+        name: price_point_id
+        in: path
+        required: true
+        description: The Chargify id of the price point
+    put:
+      summary: Promote Price Point to Default
+      tags:
+        - Components
+      responses:
+        '201':
+          description: Created
+      operationId: put-components-component_id-price_points-price_point_id-default.json
+      description: |-
+        Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
+
+        See [Price Points Documentation](https://help.chargify.com/products/product-components.html#price-points) for more information on price points and moving subscriptions between price points.
+  '/product_families/{product_family_id}/components.json':
+    parameters:
+      - schema:
+          type: integer
+        name: product_family_id
+        in: path
+        required: true
+        description: The Chargify id of the product family
+    get:
+      summary: List Components for Product Family
+      tags:
+        - Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Component.yaml
+              examples:
+                Example:
+                  value:
+                    - component:
+                        id: 399850
+                        name: $1.00 component
+                        pricing_scheme: per_unit
+                        unit_name: Component
+                        unit_price: '1.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: quantity_based_component
+                        archived: false
+                        taxable: false
+                        description: Component
+                        default_price_point_id: 121000
+                        prices:
+                          - id: 630687
+                            component_id: 399850
+                            starting_quantity: 1
+                            ending_quantity: null
+                            unit_price: '1.0'
+                            price_point_id: 121000
+                            formatted_unit_price: $1.00
+                        price_point_count: 2
+                        price_points_url: 'https://general-goods.chargify.com/components/399850/price_points'
+                        tax_code: null
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:38-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+                    - component:
+                        id: 399853
+                        name: Annual Support Services
+                        pricing_scheme: null
+                        unit_name: on/off
+                        unit_price: '100.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: on_off_component
+                        archived: false
+                        taxable: true
+                        description: Prepay for support services
+                        default_price_point_id: 121003
+                        price_point_count: 4
+                        price_points_url: 'https://general-goods.chargify.com/components/399853/price_points'
+                        tax_code: D0000000
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:37-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+                    - component:
+                        id: 386937
+                        name: Cancellation fee
+                        pricing_scheme: null
+                        unit_name: on/off
+                        unit_price: '35.0'
+                        product_family_id: 997233
+                        price_per_unit_in_cents: null
+                        kind: on_off_component
+                        archived: false
+                        taxable: false
+                        description: ''
+                        default_price_point_id: 108307
+                        price_point_count: 1
+                        price_points_url: 'https://general-goods.chargify.com/components/386937/price_points'
+                        tax_code: null
+                        recurring: true
+                        upgrade_charge: null
+                        downgrade_credit: null
+                        created_at: '2019-08-01T09:35:38-04:00'
+                        default_price_point_name: Original
+                        product_family_name: Chargify
+      operationId: get-product_families-product_family_id-components.json
+      description: |-
+        ## List Components for a Product Family
+
+        This request will return a list of components for a particular product family.
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: include_archived
+          description: Include archived items
 components:
   schemas: {}
 servers:
