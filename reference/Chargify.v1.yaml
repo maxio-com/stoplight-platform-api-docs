@@ -4099,6 +4099,8 @@ paths:
                         price_in_cents:
                           type: string
                           description: deprecated May 2011 - use unit_price instead
+                        recurring:
+                          type: boolean
                       required:
                         - name
                         - unit_name
