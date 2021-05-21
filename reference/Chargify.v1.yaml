@@ -7104,6 +7104,157 @@ paths:
                     billing_zip: '92700'
                     billing_country: FR
         description: 'When following the IBAN or the Local Bank details examples, a customer, bank account and mandate will be created in your current vault. If the customer, bank account, and mandate already exist in your vault, follow the Import example to link the payment profile into Chargify.'
+  '/payment_profiles/{payment_profile_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: payment_profile_id
+        in: path
+        required: true
+        description: The Chargify id of the payment profile
+    get:
+      summary: Read Payment Profile
+      tags:
+        - Payment Profiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment_profile:
+                    oneOf:
+                      - properties:
+                          id:
+                            type: integer
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          customer_id:
+                            type: integer
+                          current_vault:
+                            type: string
+                          vault_token:
+                            type: string
+                          billing_address:
+                            type: string
+                          billing_city:
+                            type: string
+                          billing_state:
+                            type: string
+                          billing_zip:
+                            type: string
+                          billing_country:
+                            type: string
+                          customer_vault_token:
+                            type: 'null'
+                          billing_address_2:
+                            type: string
+                          bank_name:
+                            type: string
+                          masked_bank_routing_number:
+                            type: string
+                          masked_bank_account_number:
+                            type: string
+                          bank_account_type:
+                            type: string
+                          bank_account_holder_type:
+                            type: string
+                          payment_type:
+                            type: string
+                          verified:
+                            type: boolean
+                            default: false
+                            description: denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account
+                      - properties:
+                          id:
+                            type: integer
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          masked_card_number:
+                            type: string
+                          card_type:
+                            type: string
+                          expiration_month:
+                            type: integer
+                          expiration_year:
+                            type: integer
+                          customer_id:
+                            type: integer
+                          current_vault:
+                            type: string
+                          vault_token:
+                            type: string
+                          billing_address:
+                            type: string
+                          billing_city:
+                            type: string
+                          billing_state:
+                            type: string
+                          billing_zip:
+                            type: string
+                          billing_country:
+                            type: string
+                          customer_vault_token:
+                            type: 'null'
+                          billing_address_2:
+                            type: string
+                          payment_type:
+                            type: string
+                          disabled:
+                            type: boolean
+                    type: object
+              examples:
+                Card:
+                  value:
+                    payment_profile:
+                      id: 10088716
+                      first_name: Test
+                      last_name: Subscription
+                      masked_card_number: XXXX-XXXX-XXXX-1
+                      card_type: bogus
+                      expiration_month: 1
+                      expiration_year: 2022
+                      customer_id: 14543792
+                      current_vault: bogus
+                      vault_token: '1'
+                      billing_address: 123 Montana Way
+                      billing_city: Billings
+                      billing_state: MT
+                      billing_zip: '59101'
+                      billing_country: US
+                      customer_vault_token: null
+                      billing_address_2: ''
+                      payment_type: credit_card
+                Bank Account:
+                  value:
+                    payment_profile:
+                      id: 10089892
+                      first_name: Chester
+                      last_name: Tester
+                      customer_id: 14543792
+                      current_vault: bogus
+                      vault_token: '0011223344'
+                      billing_address: 456 Juniper Court
+                      billing_city: Boulder
+                      billing_state: CO
+                      billing_zip: '80302'
+                      billing_country: US
+                      customer_vault_token: null
+                      billing_address_2: ''
+                      bank_name: Bank of Kansas City
+                      masked_bank_routing_number: XXXX6789
+                      masked_bank_account_number: XXXX3344
+                      bank_account_type: checking
+                      bank_account_holder_type: personal
+                      payment_type: bank_account
+      operationId: get-payment_profiles-payment_profile_id-.json
+      description: '# Read Payment Profile'
 components:
   schemas: {}
 servers:
