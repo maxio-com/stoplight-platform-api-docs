@@ -5555,6 +5555,11 @@ paths:
                           return_params: null
                           url: 'https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold'
                       product_price_point_name: Default
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: ../models/Product.yaml
       operationId: post-product_families-product_family_id-products.json
       description: |-
         # Create Product
