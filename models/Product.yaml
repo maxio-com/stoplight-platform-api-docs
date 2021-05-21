@@ -9,6 +9,7 @@ properties:
     type: string
   handle:
     type: string
+    nullable: true
   description:
     type: string
   accounting_code:
