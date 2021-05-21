@@ -3714,9 +3714,13 @@ paths:
                             type: integer
                           usage_amount_formatted:
                             type: string
+                          '':
+                            type: string
                       at_time:
                         type: string
                         description: ISO8601 timestamp
+                      '':
+                        type: string
               examples:
                 Example:
                   value:
@@ -5372,6 +5376,126 @@ paths:
                       price: 51
                     - id: 101
                       price: 41
+  /mrr_movements.json:
+    get:
+      summary: List MRR Movements
+      tags:
+        - Insights
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mrr:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      per_page:
+                        type: integer
+                      total_pages:
+                        type: integer
+                      total_entries:
+                        type: integer
+                      currency:
+                        type: string
+                      currency_symbol:
+                        type: string
+                      movements:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                            amount_in_cents:
+                              type: integer
+                            amount_formatted:
+                              type: string
+                            description:
+                              type: string
+                            category:
+                              type: string
+                            breakouts:
+                              type: object
+                              properties:
+                                plan_amount_in_cents:
+                                  type: integer
+                                plan_amount_formatted:
+                                  type: string
+                                usage_amount_in_cents:
+                                  type: integer
+                                usage_amount_formatted:
+                                  type: string
+                            line_items:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  product_id:
+                                    type: integer
+                                  component_id:
+                                    type: integer
+                                    description: 'For Product (or "baseline") line items, this field will have a value of `0`.'
+                                  name:
+                                    type: string
+                                  mrr:
+                                    type: integer
+                                  mrr_movements:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        amount:
+                                          type: integer
+                                        category:
+                                          type: string
+                                  quantity:
+                                    type: integer
+                                  prev_quantity:
+                                    type: integer
+                                  recurring:
+                                    type: boolean
+                                    description: 'When `true`, the line item''s MRR value will contribute to the `plan` breakout. When `false`, the line item contributes to the `usage` breakout.'
+                            subscription_id:
+                              type: integer
+                            subscriber_name:
+                              type: string
+      operationId: get-mrr_movements.json
+      description: |-
+        # List MRR Movements
+
+        This endpoint returns your site's MRR movements.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: subscription_id
+          description: optionally filter results by subscription
+        - schema:
+            type: integer
+            default: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned. '
+        - schema:
+            type: integer
+            default: 10
+            maximum: 50
+          in: query
+          name: per_page
+          description: ' This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 50; any per_page value over 50 will be changed to 10.'
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          name: direction
+          description: The sort direction of the returned records.
 components:
   schemas: {}
 servers:
