@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: Chargify
   version: '1.0'
@@ -13,6 +13,7 @@ tags:
   - name: Custom Fields
   - name: Events
   - name: Insights
+  - name: Payment Profiles
   - name: Product Families
   - name: Products
   - name: 'Product: Price Points'
@@ -6817,6 +6818,292 @@ paths:
                       price: 15
                     - id: 201
                       price: 5
+  /payment_profiles.json:
+    post:
+      summary: Create Payment Profile
+      tags:
+        - Payment Profiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  masked_card_number:
+                    type: string
+                    nullable: true
+                  card_type:
+                    type: string
+                  expiration_month:
+                    type: integer
+                  expiration_year:
+                    type: integer
+                  customer_id:
+                    type: integer
+                  current_vault:
+                    type: string
+                  vault_token:
+                    type: string
+                  billing_address:
+                    type: string
+                  billing_city:
+                    type: string
+                  billing_state:
+                    type: string
+                  billing_zip:
+                    type: string
+                  billing_country:
+                    type: string
+                  customer_vault_token:
+                    type: string
+                    nullable: true
+                  billing_address_2:
+                    type: string
+                    nullable: true
+                  payment_type:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    payment_profile:
+                      first_name: Jessica
+                      last_name: Test
+                      last_four: '1111'
+                      card_type: visa
+                      expiration_month: 10
+                      expiration_year: 2018
+                      customer_id: 19195410
+                      current_vault: bogus
+                      vault_token: '1'
+                      billing_address: 123 Main St.
+                      billing_city: Boston
+                      billing_state: MA
+                      billing_zip: '02120'
+                      billing_country: US
+                      customer_vault_token: null
+                      billing_address_2: null
+                      payment_type: credit_card
+        '404':
+          description: Not Found
+      operationId: post-payment_profiles.json
+      description: |-
+        # Create Payment Profile
+
+        Use this endpoint to create a payment profile for a customer.
+
+        ## Active Payment Methods
+
+        Creating a new payment profile for a Customer via the API will not make that Payment Profile current for any of the Customer’s Subscriptions. In order to utilize the payment profile as the default, it must be set as the default payment profile for the subscription or subscription group.
+
+        ## Requirements
+
+        Either the full_number, expiration_month, and expiration_year or if you have an existing vault_token from your gateway, that vault_token and the current_vault are required.
+
+        ## BraintreeBlue
+        Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided  [Chargify.js](https://developer.chargify.com/content/chargify-js/chargify-js.html) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
+
+        ## GoCardless
+        + [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)
+
+        + [Using Chargify.js with GoCardless - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-gocardless)
+
+        + [Using Chargify.js with GoCardless - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-gocardless)
+
+        ## SEPA Direct Debit
+        + [Full documentation on Stripe SEPA Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+
+        + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+
+        + [Using Chargify.js with Stripe Direct Debit - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-sepa-direct-debit-stripe-gateway)
+
+        ## BECS Direct Debit
+
+        + [Full documentation on Stripe BECS Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+
+        + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+
+        + [Using Chargify.js with Stripe BECS Direct Debit - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-becs-direct-debit-stripe-gateway)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_profile:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    last_four:
+                      type: string
+                    card_type:
+                      type: string
+                    expiration_month:
+                      type: integer
+                    expiration_year:
+                      type: integer
+                    customer_id:
+                      type: integer
+                    current_vault:
+                      type: string
+                      description: Use bogus for testing
+                      enum:
+                        - bogus
+                        - authorizenet
+                        - authorizenet_cim
+                        - beanstream
+                        - bpoint
+                        - braintree_blue
+                        - cybersource
+                        - elavon
+                        - eway
+                        - eway_rapid_std
+                        - firstdata
+                        - forte
+                        - fusebox
+                        - gocardless
+                        - litle
+                        - moneris
+                        - moneris_us
+                        - orbital
+                        - payment_express
+                        - paymill
+                        - pin
+                        - quickpay
+                        - square
+                        - stripe_connect
+                        - trust_commerce
+                        - wirecard
+                    vault_token:
+                      type: string
+                    billing_address:
+                      type: string
+                    billing_city:
+                      type: string
+                    billing_state:
+                      type: string
+                    billing_zip:
+                      type: string
+                    billing_country:
+                      type: string
+                    customer_vault_token:
+                      type:
+                        - string
+                        - 'null'
+                    billing_address_2:
+                      type:
+                        - string
+                        - 'null'
+                    payment_type:
+                      type: string
+                    bank_name:
+                      type: string
+                      description: (Required for ACH and GoCardless. Optional for SEPA and BECS Direct Debit) The name of the bank where the customerʼs account resides
+                    bank_routing_number:
+                      type: string
+                      description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
+                    bank_account_number:
+                      type: string
+                      description: (Required when creating a subscription with ACH and BECS Direct Debit. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
+                    bank_account_type:
+                      type: string
+                    bank_account_holder_type:
+                      type: string
+                    bank_iban:
+                      type: string
+                      description: (Optional when creating a subscription with GoCardless. Required for SEPA Direct Debit.) International Bank Account Number
+                    bank_branch_code:
+                      type: string
+                      description: '(Optional when creating a subscription with GoCardless. Required for BECS Direct Debit.) Branch code. Alternatively, an IBAN can be provided'
+                    chargify_token:
+                      type: string
+            examples:
+              ACH:
+                value:
+                  payment_profile:
+                    customer_id: 123
+                    bank_name: Best Bank
+                    bank_routing_number: '021000089'
+                    bank_account_number: '111111111111'
+                    bank_account_type: checking
+                    bank_account_holder_type: business
+                    payment_type: bank_account
+              Chargify.js:
+                value:
+                  payment_profile:
+                    customer_id: 1036
+                    chargify_token: tok_w68qcpnftyv53jk33jv6wk3w
+              Card:
+                value:
+                  payment_profile:
+                    first_name: Jessica
+                    last_name: Test
+                    last_four: '1111'
+                    card_type: visa
+                    expiration_month: 10
+                    expiration_year: 2018
+                    customer_id: 19195410
+                    current_vault: bogus
+                    vault_token: '1'
+                    billing_address: 123 Main St.
+                    billing_city: Boston
+                    billing_state: MA
+                    billing_zip: '02120'
+                    billing_country: US
+                    customer_vault_token: null
+                    billing_address_2: null
+                    payment_type: credit_card
+              Local Bank Details:
+                value:
+                  payment_profile:
+                    customer_id: 123
+                    bank_name: Royal Bank of France
+                    bank_account_number: '0000000'
+                    bank_routing_number: '0003'
+                    bank_branch_code: '00006'
+                    payment_type: bank_account
+                    billing_address: 20 Place de la Gare
+                    billing_city: Colombes
+                    billing_state: Île-de-France
+                    billing_zip: '92700'
+                    billing_country: FR
+              IBAN:
+                value:
+                  payment_profile:
+                    customer_id: 24907598
+                    bank_name: French Bank
+                    bank_iban: FR1420041010050500013M02606
+                    payment_type: bank_account
+                    billing_address: 20 Place de la Gare
+                    billing_city: Colombes
+                    billing_state: Île-de-France
+                    billing_zip: '92700'
+                    billing_country: FR
+              Import Payment Profile:
+                value:
+                  payment_profile:
+                    customer_id: 24907598
+                    customer_vault_token: '[Existing Vault Customer ID]'
+                    vault_token: '[Existing Vault Mandate ID]'
+                    current_vault: gocardless
+                    bank_name: French Bank
+                    payment_type: bank_account
+                    billing_address: 20 Place de la Gare
+                    billing_city: Colombes
+                    billing_state: Île-de-France
+                    billing_zip: '92700'
+                    billing_country: FR
+        description: 'When following the IBAN or the Local Bank details examples, a customer, bank account and mandate will be created in your current vault. If the customer, bank account, and mandate already exist in your vault, follow the Import example to link the payment profile into Chargify.'
 components:
   schemas: {}
 servers:
