@@ -5572,34 +5572,7 @@ paths:
               type: object
               properties:
                 product:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    handle:
-                      type: string
-                    description:
-                      type: string
-                    accounting_code:
-                      type: string
-                    request_credit_card:
-                      type: boolean
-                    price_in_cents:
-                      type: integer
-                    interval:
-                      type: integer
-                    interval_unit:
-                      type: string
-                    auto_create_signup_page:
-                      type: boolean
-                    tax_code:
-                      type: string
-                  required:
-                    - name
-                    - description
-                    - price_in_cents
-                    - interval
-                    - interval_unit
+                  $ref: ../models/Create-or-Update-Product.yaml
             examples:
               Example:
                 value:
@@ -5832,6 +5805,96 @@ paths:
         ## Read Product
 
         This endpoint allows you to read the current details of a product that you've created in Chargify.
+    put:
+      summary: Update Product
+      operationId: put-products-product_id-.json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: ../models/Product.yaml
+              examples:
+                Example:
+                  value:
+                    product:
+                      id: 4365034
+                      name: Platinum Plan
+                      handle: platinum
+                      description: This is our platinum plan.
+                      accounting_code: '123'
+                      request_credit_card: true
+                      expiration_interval: null
+                      expiration_interval_unit: null
+                      created_at: '2016-11-04T16:34:29-04:00'
+                      updated_at: '2016-11-04T16:37:11-04:00'
+                      price_in_cents: 1000
+                      interval: 1
+                      interval_unit: month
+                      initial_charge_in_cents: null
+                      trial_price_in_cents: null
+                      trial_interval: null
+                      trial_interval_unit: null
+                      archived_at: null
+                      require_credit_card: true
+                      return_params: null
+                      taxable: false
+                      update_return_url: null
+                      initial_charge_after_trial: false
+                      version_number: 1
+                      update_return_params: null
+                      product_family:
+                        id: 527890
+                        name: Acme Projects
+                        description: ''
+                        handle: billing-plans
+                        accounting_code: null
+                      public_signup_pages:
+                        - id: 301079
+                          return_url: null
+                          return_params: null
+                          url: 'https://general-goods.chargify.com/subscribe/wgyd96tb5pj9/platinum'
+                      product_price_point_name: Original
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Name: cannot be blank.'
+      description: |-
+        ## Update Product
+
+        Use this method to change aspects of an existing product. 
+
+        ### Input Attributes Update Notes
+
+        + `update_return_params` The parameters we will append to your `update_return_url`. See Return URLs and Parameters
+
+        ### Product Price Point
+
+        Updating a product using this endpoint will create a new price point and set it as the default price point for this product. If you should like to update an existing product price point, that must be done separately.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  $ref: ../models/Create-or-Update-Product.yaml
   '/products/handle/{api_handle}.json':
     parameters:
       - schema:
