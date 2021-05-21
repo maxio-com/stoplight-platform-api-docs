@@ -31,6 +31,8 @@ properties:
     enum:
       - month
       - day
+      - never
+      - null
   created_at:
     type: string
     description: Timestamp indicating when this product was created
@@ -68,6 +70,7 @@ properties:
     enum:
       - month
       - day
+      - null
   archived_at:
     type: string
     nullable: true
@@ -94,25 +97,7 @@ properties:
     nullable: true
     description: 'The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update)'
   product_family:
-    type: object
-    description: Nested attributes pertaining to the product family to which this product belongs
-    properties:
-      id:
-        type: integer
-        description: The product family id
-      name:
-        type: string
-        description: The product family name
-      description:
-        type: string
-        description: The product family description
-      handle:
-        type: string
-        description: The product family API handle
-      accounting_code:
-        type: string
-        nullable: true
-        description: 'The product family accounting code (has no bearing in Chargify, may be used within your app)'
+    $ref: ./Product-Family.yaml
   public_signup_pages:
     type: array
     items:
