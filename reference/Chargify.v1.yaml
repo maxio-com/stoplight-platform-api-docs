@@ -5514,11 +5514,6 @@ paths:
           description: OK
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
