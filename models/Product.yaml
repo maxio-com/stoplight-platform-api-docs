@@ -42,7 +42,7 @@ properties:
     type: integer
     nullable: true
   trial_interval_unit:
-    type: integer
+    type: string
     nullable: true
   archived_at:
     type: string
