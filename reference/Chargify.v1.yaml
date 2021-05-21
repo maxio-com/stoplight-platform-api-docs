@@ -5565,6 +5565,9 @@ paths:
         # Create Product
 
         Use this method to create a product within your Chargify site.
+
+        + [Products Documentation](http://help.chargify.com/products/products-intro.html)
+        + [Changing a Subscription's Product](http://help.chargify.com/subscriptions/subscription-summary.html#product)
       requestBody:
         content:
           application/json:
