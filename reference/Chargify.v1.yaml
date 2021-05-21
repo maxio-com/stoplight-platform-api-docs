@@ -5518,106 +5518,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      handle:
-                        type: string
-                      description:
-                        type: string
-                      accounting_code:
-                        type: string
-                      request_credit_card:
-                        type: boolean
-                        description: Deprecated value that can be ignored unless you have legacy hosted pages
-                      expiration_interval:
-                        type: integer
-                        nullable: true
-                      expiration_interval_unit:
-                        type: string
-                        nullable: true
-                      created_at:
-                        type: string
-                      updated_at:
-                        type: string
-                      price_in_cents:
-                        type: integer
-                      interval:
-                        type: integer
-                      interval_unit:
-                        type: string
-                      initial_charge_in_cents:
-                        type: integer
-                        nullable: true
-                      trial_price_in_cents:
-                        type: integer
-                        nullable: true
-                      trial_interval:
-                        type: integer
-                        nullable: true
-                      trial_interval_unit:
-                        type: integer
-                        nullable: true
-                      archived_at:
-                        type: string
-                        nullable: true
-                      require_credit_card:
-                        type: boolean
-                      return_params:
-                        type: object
-                        nullable: true
-                      taxable:
-                        type: boolean
-                      update_return_url:
-                        type: string
-                        nullable: true
-                      initial_charge_after_trial:
-                        type: boolean
-                      version_number:
-                        type: integer
-                      update_return_params:
-                        type: object
-                        nullable: true
-                      product_family:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          name:
-                            type: string
-                          description:
-                            type: string
-                          handle:
-                            type: string
-                          accounting_code:
-                            type: string
-                            nullable: true
-                      public_signup_pages:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            return_url:
-                              type: string
-                              nullable: true
-                            return_params:
-                              type: object
-                              nullable: true
-                            url:
-                              type: string
-                      product_price_point_name:
-                        type: string
-                      request_billing_address:
-                        type: boolean
-                      require_billing_address:
-                        type: boolean
-                      require_shipping_address:
-                        type: boolean
+                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -5713,6 +5614,71 @@ paths:
                     interval_unit: month
                     auto_create_signup_page: true
                     tax_code: D0000000
+  '/products/{product_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: product_id
+        in: path
+        required: true
+        description: The Chargify id of the product
+    get:
+      summary: Read Product
+      tags:
+        - Products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: ../models/Product.yaml
+              examples:
+                Example:
+                  value:
+                    product:
+                      id: 4535635
+                      name: Paid Annual Seats
+                      handle: paid-annual-seats
+                      description: Paid annual seats for our commercial enterprise product
+                      accounting_code: paid-annual-seats
+                      request_credit_card: true
+                      expiration_interval: 1
+                      expiration_interval_unit: day
+                      created_at: '2017-08-25T10:25:31-05:00'
+                      updated_at: '2018-01-16T12:58:04-06:00'
+                      price_in_cents: 10000
+                      interval: 12
+                      interval_unit: month
+                      initial_charge_in_cents: 4900
+                      trial_price_in_cents: 1000
+                      trial_interval: 14
+                      trial_interval_unit: day
+                      archived_at: null
+                      require_credit_card: true
+                      return_params: 'id={subscription_id}&ref={customer_reference}'
+                      taxable: true
+                      update_return_url: 'http://www.example.com'
+                      tax_code: D0000000
+                      initial_charge_after_trial: false
+                      version_number: 4
+                      update_return_params: 'id={subscription_id}&ref={customer_reference}'
+                      product_family:
+                        id: 1025627
+                        name: Acme Products
+                        description: ''
+                        handle: acme-products
+                        accounting_code: null
+                      public_signup_pages: []
+                      product_price_point_name: Default
+      operationId: get-products-product_id-.json
+      description: |-
+        ## Read Product
+
+        This endpoint allows you to read the current details of a product that you've created in Chargify.
 components:
   schemas: {}
 servers:

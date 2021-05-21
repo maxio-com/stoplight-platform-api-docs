@@ -1,0 +1,108 @@
+title: Product
+type: object
+x-tags:
+  - Products
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  handle:
+    type: string
+  description:
+    type: string
+  accounting_code:
+    type: string
+  request_credit_card:
+    type: boolean
+    description: Deprecated value that can be ignored unless you have legacy hosted pages
+  expiration_interval:
+    type: integer
+    nullable: true
+  expiration_interval_unit:
+    type: string
+    nullable: true
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  price_in_cents:
+    type: integer
+  interval:
+    type: integer
+  interval_unit:
+    type: string
+  initial_charge_in_cents:
+    type: integer
+    nullable: true
+  trial_price_in_cents:
+    type: integer
+    nullable: true
+  trial_interval:
+    type: integer
+    nullable: true
+  trial_interval_unit:
+    type: integer
+    nullable: true
+  archived_at:
+    type: string
+    nullable: true
+  require_credit_card:
+    type: boolean
+  return_params:
+    type: object
+    nullable: true
+  taxable:
+    type: boolean
+  update_return_url:
+    type: string
+    nullable: true
+  initial_charge_after_trial:
+    type: boolean
+  version_number:
+    type: integer
+  update_return_params:
+    type: object
+    nullable: true
+  product_family:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
+      handle:
+        type: string
+      accounting_code:
+        type: string
+        nullable: true
+  public_signup_pages:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        return_url:
+          type: string
+          nullable: true
+        return_params:
+          type: object
+          nullable: true
+        url:
+          type: string
+  product_price_point_name:
+    type: string
+  request_billing_address:
+    type: boolean
+  require_billing_address:
+    type: boolean
+  require_shipping_address:
+    type: boolean
+  tax_code:
+    type: string
+    nullable: true
+  default_product_price_point_id:
+    type: integer
