@@ -50,7 +50,7 @@ properties:
   require_credit_card:
     type: boolean
   return_params:
-    type: object
+    type: string
     nullable: true
   taxable:
     type: boolean
@@ -62,7 +62,7 @@ properties:
   version_number:
     type: integer
   update_return_params:
-    type: object
+    type: string
     nullable: true
   product_family:
     type: object
@@ -89,7 +89,7 @@ properties:
           type: string
           nullable: true
         return_params:
-          type: object
+          type: string
           nullable: true
         url:
           type: string
