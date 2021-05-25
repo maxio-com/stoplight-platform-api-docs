@@ -10,6 +10,14 @@ properties:
   handle:
     type: string
   accounting_code:
-    type: 'null'
+    type:
+      - 'null'
+      - string
   description:
+    type:
+      - string
+      - 'null'
+  created_at:
+    type: string
+  updated_at:
     type: string
