@@ -3739,21 +3739,6 @@ paths:
                         plan_amount_formatted: '$99,135.93'
                         usage_amount_in_cents: 2000
                         usage_amount_formatted: $20.00
-                example-2:
-                  value:
-                    mrr:
-                      amount_in_cents: 0
-                      amount_formatted: string
-                      currency: string
-                      currency_symbol: string
-                      breakouts:
-                        plan_amount_in_cents: 0
-                        plan_amount_formatted: string
-                        usage_amount_in_cents: 0
-                        usage_amount_formatted: string
-                        '': string
-                      at_time: string
-                      '': string
       operationId: get-mrr.json
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts.'
       parameters:
@@ -5484,7 +5469,7 @@ paths:
                             subscriber_name:
                               type: string
               examples:
-                example-1:
+                Example:
                   value:
                     mrr:
                       page: 0
