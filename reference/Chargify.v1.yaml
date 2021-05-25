@@ -3735,6 +3735,21 @@ paths:
                         plan_amount_formatted: '$99,135.93'
                         usage_amount_in_cents: 2000
                         usage_amount_formatted: $20.00
+                example-2:
+                  value:
+                    mrr:
+                      amount_in_cents: 0
+                      amount_formatted: string
+                      currency: string
+                      currency_symbol: string
+                      breakouts:
+                        plan_amount_in_cents: 0
+                        plan_amount_formatted: string
+                        usage_amount_in_cents: 0
+                        usage_amount_formatted: string
+                        '': string
+                      at_time: string
+                      '': string
       operationId: get-mrr.json
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts.'
       parameters:
@@ -5464,6 +5479,41 @@ paths:
                               type: integer
                             subscriber_name:
                               type: string
+              examples:
+                example-1:
+                  value:
+                    mrr:
+                      page: 0
+                      per_page: 10
+                      total_pages: 80
+                      total_entries: 791
+                      currency: USD
+                      currency_symbol: $
+                      movements:
+                        - timestamp: '2014-12-03T13:59:46-05:00'
+                          amount_in_cents: 2173
+                          amount_formatted: $21.73
+                          description: Awesome Company signed up for Super Product ($21.73/mo)
+                          category: new_business
+                          breakouts:
+                            plan_amount_in_cents: 2173
+                            plan_amount_formatted: $21.73
+                            usage_amount_in_cents: 0
+                            usage_amount_formatted: $0.00
+                          line_items:
+                            - product_id: 306386
+                              component_id: 0
+                              price_point_id: 3856987
+                              name: string
+                              mrr: 2173
+                              mrr_movements:
+                                - amount: 2173
+                                  category: new_business
+                              quantity: 1
+                              prev_quantity: 0
+                              recurring: true
+                          subscription_id: 12355
+                          subscriber_name: Amy Smith
       operationId: get-mrr_movements.json
       description: |-
         # List MRR Movements
