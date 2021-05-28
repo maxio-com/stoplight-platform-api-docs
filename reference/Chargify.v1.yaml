@@ -7762,7 +7762,14 @@ paths:
       summary: Refund Invoice
       tags:
         - Invoices
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Invoice.yaml
+              examples: {}
       operationId: post-invoices-uid-refunds.json
       description: |-
         # Refund Invoice
@@ -7867,7 +7874,6 @@ paths:
                     memo: Refund for basic plan renewal
                     payment_id: 10101
                     segment_uids: all
-      components:
-        schemas: {}
+
 servers:
   - url: 'https://subdomain.chargify.com'
