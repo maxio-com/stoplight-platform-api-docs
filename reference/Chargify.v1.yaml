@@ -21,6 +21,7 @@ tags:
   - name: Reason Codes
   - name: Referral Codes
   - name: Sites
+  - name: Subscription Invoice Account
   - name: Subscription Notes
   - name: Webhooks
 paths:
@@ -9936,5 +9937,56 @@ paths:
           in: query
           name: direction
           description: Sort direction of the returned segments.
+  '/subscriptions/{subscription_id}/account_balances.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    get:
+      summary: Read Account Balances
+      tags:
+        - Subscription Invoice Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  open_invoices:
+                    type: object
+                    properties:
+                      balance_in_cents:
+                        type: integer
+                        description: The balance, in cents, of the sum of the subscription's  open,
+                          payable invoices.
+                  pending_discounts:
+                    type: object
+                    properties:
+                      balance_in_cents:
+                        type: integer
+                        description: The balance, in cents, of the subscription's Pending Discount
+                          account.
+                  service_credits:
+                    type: object
+                    properties:
+                      balance_in_cents:
+                        type: integer
+                        description: The balance, in cents, of the subscription's Service Credit account.
+                  prepayments:
+                    type: object
+                    properties:
+                      balance_in_cents:
+                        type: integer
+                        description: The balance, in cents, of the subscription's Prepayment account.
+      operationId: get-subscriptions-subscription_id-account_balances.json
+      description: |-
+        # Read Account Balances
+
+        Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
 servers:
   - url: 'https://subdomain.chargify.com'
