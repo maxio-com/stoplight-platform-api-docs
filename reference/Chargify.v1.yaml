@@ -9647,5 +9647,294 @@ paths:
                 value:
                   void:
                     reason: Duplicate invoice
+  '/invoices/{invoice_uid}/segments.json':
+    parameters:
+      - schema:
+          type: string
+        name: invoice_uid
+        in: path
+        required: true
+        description: The unique identifier of the consolidated invoice
+    get:
+      summary: List Segments for Consolidated Invoice
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: ../models/Invoice.yaml
+              examples:
+                Example:
+                  value:
+                    invoices:
+                      - uid: inv_8htcd29wcq3q6
+                        site_id: 51288
+                        customer_id: 20153415
+                        subscription_id: 23277588
+                        number: '125'
+                        sequence_number: 125
+                        issue_date: '2018-09-20'
+                        due_date: '2018-09-20'
+                        paid_date: '2018-09-20'
+                        status: paid
+                        collection_method: automatic
+                        payment_instructions: 'Make checks payable to Acme, Inc.'
+                        currency: USD
+                        consolidation_level: parent
+                        parent_invoice_uid: null
+                        parent_invoice_number: null
+                        group_primary_subscription_id: 23277588
+                        product_name: Trial and setup fee
+                        product_family_name: Billing Plans
+                        seller:
+                          name: General Goods
+                          address:
+                            street: 123 General Goods Way
+                            line2: Apt. 10
+                            city: Boston
+                            state: MA
+                            zip: '02120'
+                            country: US
+                          phone: 555-555-1212
+                        customer:
+                          chargify_id: 20153415
+                          first_name: Meg
+                          last_name: Example
+                          organization: ''
+                          email: meg@example.com
+                        memo: Please pay within 15 days.
+                        billing_address:
+                          street: 123 I Love Cats Way
+                          line2: ''
+                          city: Boston
+                          state: MA
+                          zip: '90210'
+                          country: US
+                        shipping_address:
+                          street: 123 I Love Cats Way
+                          line2: ''
+                          city: Boston
+                          state: MA
+                          zip: '90210'
+                          country: US
+                        subtotal_amount: '100.0'
+                        discount_amount: '0.0'
+                        tax_amount: '0.0'
+                        total_amount: '100.0'
+                        credit_amount: '0.0'
+                        paid_amount: '100.0'
+                        refund_amount: '0.0'
+                        due_amount: '0.0'
+                      - uid: inv_8hr3546xp4h8n
+                        site_id: 51288
+                        customer_id: 21687686
+                        subscription_id: 22007644
+                        number: '124'
+                        sequence_number: 124
+                        issue_date: '2018-09-18'
+                        due_date: '2018-09-18'
+                        paid_date: null
+                        status: open
+                        collection_method: remittance
+                        payment_instructions: 'Make checks payable to Acme, Inc.'
+                        currency: USD
+                        consolidation_level: none
+                        parent_invoice_uid: null
+                        parent_invoice_number: null
+                        group_primary_subscription_id: null
+                        product_name: Trial and setup fee
+                        product_family_name: Billing Plans
+                        seller:
+                          name: General Goods
+                          address:
+                            street: 123 General Goods Way
+                            line2: Apt. 10
+                            city: Boston
+                            state: MA
+                            zip: '02120'
+                            country: US
+                          phone: 555-555-1212
+                        customer:
+                          chargify_id: 21687686
+                          first_name: Charlene
+                          last_name: Tester
+                          organization: ''
+                          email: food@example.com
+                        memo: Please pay within 15 days.
+                        billing_address:
+                          street: ''
+                          line2: ''
+                          city: ''
+                          state: ''
+                          zip: ''
+                          country: ''
+                        shipping_address:
+                          street: ''
+                          line2: ''
+                          city: ''
+                          state: ''
+                          zip: ''
+                          country: ''
+                        subtotal_amount: '100.0'
+                        discount_amount: '0.0'
+                        tax_amount: '0.0'
+                        total_amount: '100.0'
+                        credit_amount: '0.0'
+                        paid_amount: '0.0'
+                        refund_amount: '0.0'
+                        due_amount: '100.0'
+                      - uid: inv_8hr3546wdwxkr
+                        site_id: 51288
+                        customer_id: 21687670
+                        subscription_id: 22007627
+                        number: '123'
+                        sequence_number: 123
+                        issue_date: '2018-09-18'
+                        due_date: '2018-09-18'
+                        paid_date: '2018-09-18'
+                        status: paid
+                        collection_method: automatic
+                        payment_instructions: 'Make checks payable to Acme, Inc.'
+                        currency: USD
+                        consolidation_level: none
+                        parent_invoice_uid: null
+                        parent_invoice_number: null
+                        group_primary_subscription_id: null
+                        product_name: Trial End - Free
+                        product_family_name: Billing Plans
+                        seller:
+                          name: General Goods
+                          address:
+                            street: 123 General Goods Way
+                            line2: Apt. 10
+                            city: Boston
+                            state: MA
+                            zip: '02120'
+                            country: US
+                          phone: 555-555-1212
+                        customer:
+                          chargify_id: 21687670
+                          first_name: Hello
+                          last_name: World
+                          organization: '123'
+                          email: example@example.com
+                        memo: Please pay within 15 days.
+                        billing_address:
+                          street: 123 Anywhere Street
+                          line2: ''
+                          city: Boston
+                          state: MA
+                          zip: '02120'
+                          country: US
+                        shipping_address:
+                          street: ''
+                          line2: ''
+                          city: Boston
+                          state: AL
+                          zip: '02120'
+                          country: US
+                        subtotal_amount: '0.0'
+                        discount_amount: '0.0'
+                        tax_amount: '0.0'
+                        total_amount: '0.0'
+                        credit_amount: '0.0'
+                        paid_amount: '0.0'
+                        refund_amount: '0.0'
+                        due_amount: '0.0'
+                      - uid: inv_8hjtk8bz56bbp
+                        site_id: 51288
+                        customer_id: 20137757
+                        subscription_id: 20541100
+                        number: '122'
+                        sequence_number: 122
+                        issue_date: '2018-09-10'
+                        due_date: '2018-09-10'
+                        paid_date: '2018-09-10'
+                        status: paid
+                        collection_method: automatic
+                        payment_instructions: 'Make checks payable to Acme, Inc.'
+                        currency: USD
+                        consolidation_level: none
+                        parent_invoice_uid: null
+                        parent_invoice_number: null
+                        group_primary_subscription_id: null
+                        product_name: $0 Product
+                        product_family_name: Billing Plans
+                        seller:
+                          name: General Goods
+                          address:
+                            street: 123 General Goods Way
+                            line2: Apt. 10
+                            city: Boston
+                            state: MA
+                            zip: '02120'
+                            country: US
+                          phone: 555-555-1212
+                        customer:
+                          chargify_id: 20137757
+                          first_name: Sasha
+                          last_name: Example
+                          organization: ''
+                          email: example@example.com
+                        memo: Please pay within 15 days.
+                        billing_address:
+                          street: 123 I Love Cats Way
+                          line2: ''
+                          city: Catville
+                          state: MA
+                          zip: '90210'
+                          country: US
+                        shipping_address:
+                          street: 123 I Love Cats Way
+                          line2: ''
+                          city: Catville
+                          state: AL
+                          zip: '90210'
+                          country: US
+                        subtotal_amount: '0.0'
+                        discount_amount: '0.0'
+                        tax_amount: '0.0'
+                        total_amount: '0.0'
+                        credit_amount: '0.0'
+                        paid_amount: '0.0'
+                        refund_amount: '0.0'
+                        due_amount: '0.0'
+                    public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
+      operationId: get-invoices-invoice_uid-segments.json
+      description: |-
+        # List Segments for Consolidated Invoice
+
+        Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
+      parameters:
+        - schema:
+            type: integer
+            default: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maxLength: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+          in: query
+          name: direction
+          description: Sort direction of the returned segments.
 servers:
   - url: 'https://subdomain.chargify.com'
