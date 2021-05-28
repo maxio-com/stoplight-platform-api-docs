@@ -9577,5 +9577,71 @@ paths:
         - Recording a payment directly against the invoice
 
         A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
+  '/invoices/{uid}/void.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The unique identifier of the invoice
+    post:
+      summary: Void Invoice
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Invoice.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Invoice status must be ''open'', ''canceled'', or ''pending'' and non-consolidated to be voided.'
+      operationId: post-invoices-uid-void.json
+      description: |-
+        # Void Invoice
+
+        This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                void:
+                  type: object
+                  required:
+                    - reason
+                  properties:
+                    reason:
+                      type: string
+              required:
+                - void
+            examples:
+              Example:
+                value:
+                  void:
+                    reason: Duplicate invoice
 servers:
   - url: 'https://subdomain.chargify.com'
