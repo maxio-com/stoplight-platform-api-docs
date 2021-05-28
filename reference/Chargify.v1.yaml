@@ -7767,16 +7767,13 @@ paths:
       description: |-
         # Refund Invoice
 
-        To refund either a non-consolidated invoice, or a segment of a consoldiated invoice (see below for docs on refunding a consolidated invoice). This endpoint accepts an `amount`, `memo`, and the `payment_id` of the payment that is being refunded. The `amount` is a dollar amount, not in cents, and cannot exceed to remaining refundable balance of the payment.
+        Refund an invoice, segment, or consolidated invoice.
 
-        # Refund Consolidated Invoice
+        ## Partial Refund for Consolidated Invoice
 
-        This relates to refunding a consolidated invoice (see above for docs on refunding a non-consolidated or segment invoice). This endpoint accepts an `amount`, `memo`, `payment_id`, and array of `segment_uids`, which are the segments of the consolidated invoice that you would like to be refunded or `segment_uids: 'all'` to indicate that the entire invoice should be refunded.
+        A refund less than the total of a consolidated invoice will be split across its segments.
 
-        If you would like to refund the invoice in full, you may omit the `amount`, otherwise the amount passed in will be split evenly across each of the segments.
-
-        **Partial Refund Example**:
-        For a $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
+        A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
       requestBody:
         content:
           application/json:
@@ -7845,6 +7842,31 @@ paths:
                   required:
                     - refund
               type: object
+            examples:
+              Refund Invoice:
+                value:
+                  refund:
+                    amount: '100.00'
+                    memo: Refund for Basic Plan renewal
+                    payment_id: 12345
+                    external: false
+                    apply_credit: false
+                    void_invoice: true
+              Refund Consolidated Invoice:
+                value:
+                  refund:
+                    memo: Refund for basic plan renewal
+                    payment_id: 101
+                    amount: '125.00'
+                    segment_uids:
+                      - inv_123
+                      - inv_789
+              Refund All Segments of Consolidated Invoice:
+                value:
+                  refund:
+                    memo: Refund for basic plan renewal
+                    payment_id: 10101
+                    segment_uids: all
       components:
         schemas: {}
 servers:
