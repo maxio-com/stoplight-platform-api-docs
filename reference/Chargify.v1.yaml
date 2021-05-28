@@ -13,6 +13,7 @@ tags:
   - name: Custom Fields
   - name: Events
   - name: Insights
+  - name: Invoices
   - name: Payment Profiles
   - name: Product Families
   - name: Products
@@ -7750,7 +7751,101 @@ paths:
                   bank_account_verification:
                     deposit_1_in_cents: 32
                     deposit_2_in_cents: 45
-components:
-  schemas: {}
+  '/invoices/{uid}/refunds.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+    post:
+      summary: Refund Invoice
+      tags:
+        - Invoices
+      responses: {}
+      operationId: post-invoices-uid-refunds.json
+      description: |-
+        # Refund Invoice
+
+        To refund either a non-consolidated invoice, or a segment of a consoldiated invoice (see below for docs on refunding a consolidated invoice). This endpoint accepts an `amount`, `memo`, and the `payment_id` of the payment that is being refunded. The `amount` is a dollar amount, not in cents, and cannot exceed to remaining refundable balance of the payment.
+
+        # Refund Consolidated Invoice
+
+        This relates to refunding a consolidated invoice (see above for docs on refunding a non-consolidated or segment invoice). This endpoint accepts an `amount`, `memo`, `payment_id`, and array of `segment_uids`, which are the segments of the consolidated invoice that you would like to be refunded or `segment_uids: 'all'` to indicate that the entire invoice should be refunded.
+
+        If you would like to refund the invoice in full, you may omit the `amount`, otherwise the amount passed in will be split evenly across each of the segments.
+
+        **Partial Refund Example**:
+        For a $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - properties:
+                    refund:
+                      type: object
+                      required:
+                        - amount
+                        - memo
+                        - payment_id
+                      description: Refund an invoice or a segment of a consolidated invoice.
+                      properties:
+                        amount:
+                          type: string
+                          description: 'The amount to be refunded in decimal format as a string. Example: "10.50". Must not exceed the remaining refundable balance of the payment.'
+                        memo:
+                          type: string
+                          description: A description that will be attached to the refund
+                        payment_id:
+                          type: integer
+                          description: The ID of the payment to be refunded
+                        external:
+                          type: boolean
+                          description: Flag that marks refund as external (no money is returned to the customer). Defaults to `false`.
+                        apply_credit:
+                          type: boolean
+                          description: 'If set to true, creates credit and applies it to an invoice. Defaults to `false`.'
+                        void_invoice:
+                          type: boolean
+                          description: 'If `apply_credit` set to false and refunding full amount, if `void_invoice` set to true, invoice will be voided after refund. Defaults to `false`.'
+                  required:
+                    - refund
+                - properties:
+                    refund:
+                      type: object
+                      required:
+                        - memo
+                        - payment_id
+                        - segment_uids
+                      description: Refund consolidated invoice
+                      properties:
+                        memo:
+                          type: string
+                          description: A description for the refund
+                        payment_id:
+                          type: integer
+                          description: The ID of the payment to be refunded
+                        segment_uids:
+                          type:
+                            - array
+                            - string
+                          description: An array of segment uids to refund or the string 'all' to indicate that all segments should be refunded
+                          items:
+                            type: string
+                        external:
+                          type: boolean
+                          description: Flag that marks refund as external (no money is returned to the customer). Defaults to `false`.
+                        apply_credit:
+                          type: boolean
+                          description: 'If set to true, creates credit and applies it to an invoice. Defaults to `false`.'
+                        amount:
+                          type: string
+                          description: 'The amount of payment to be refunded in decimal format. Example: "10.50". This will default to the full amount of the payment if not provided.'
+                  required:
+                    - refund
+              type: object
+      components:
+        schemas: {}
 servers:
   - url: 'https://subdomain.chargify.com'
