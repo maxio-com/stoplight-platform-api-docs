@@ -7885,9 +7885,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: ../models/Invoice.yaml
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: ../models/Invoice.yaml
               examples:
                 Example:
                   value:

@@ -5,8 +5,7 @@ x-tags:
 properties:
   uid:
     type: string
-    description: Unique identifier for the invoice. It is generated automatically
-      by Chargify and has the prefix "inv_" followed by alphanumeric characters.
+    description: Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters.
   site_id:
     type: integer
     description: ID of the site to which the invoice belongs.
@@ -24,9 +23,7 @@ properties:
       While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
   sequence_number:
     type: integer
-    description: A monotonically increasing number assigned to invoices as they are
-      created.  This number is unique within a site and can be used to sort and order
-      invoices.
+    description: A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices.
   issue_date:
     type: string
     description: |-
@@ -40,7 +37,9 @@ properties:
 
       The format is `"YYYY-MM-DD"`.
   paid_date:
-    type: string
+    type:
+      - string
+      - 'null'
     description: |-
       Date the invoice became fully paid.
 
@@ -62,18 +61,13 @@ properties:
       See [Invoice Statuses](https://help.chargify.com/invoices/index.html#invoice-statuses) for more.
   collection_method:
     type: string
-    description: The collection method of the invoice, which is either "automatic"
-      (tried and retried on an existing payment method by Chargify) or "remittance"
-      (payment must be remitted by the customer or keyed in by the merchant).
+    description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'
   payment_instructions:
     type: string
-    description: A message that is printed on the invoice when it is marked for remittance
-      collection. It is intended to describe to the customer how they may make payment,
-      and is configured by the merchant.
+    description: 'A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant.'
   currency:
     type: string
-    description: The ISO 4217 currency code (3 character string) representing the
-      currency of invoice transaction.
+    description: The ISO 4217 currency code (3 character string) representing the currency of invoice transaction.
   consolidation_level:
     type: string
     description: |-
@@ -87,18 +81,20 @@ properties:
 
       See also the [invoice consolidation documentation](https://help.chargify.com/invoices/consolidation.html).
   parent_invoice_uid:
-    type: 'null'
-    description: For invoices with `consolidation_level` of `child`, this specifies
-      the UID of the parent (consolidated) invoice.
+    type:
+      - 'null'
+      - string
+    description: 'For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice.'
   parent_invoice_number:
-    type: 'null'
-    description: For invoices with `consolidation_level` of `child`, this specifies
-      the number of the parent (consolidated) invoice.
+    type:
+      - 'null'
+      - integer
+    description: 'For invoices with `consolidation_level` of `child`, this specifies the number of the parent (consolidated) invoice.'
   group_primary_subscription_id:
-    type: 'null'
-    description: For invoices with `consolidation_level` of `parent`, this specifies
-      the ID of the subscription which was the primary subscription of the subscription
-      group that generated the invoice.
+    type:
+      - 'null'
+      - integer
+    description: 'For invoices with `consolidation_level` of `parent`, this specifies the ID of the subscription which was the primary subscription of the subscription group that generated the invoice.'
   product_name:
     type: string
     description: The name of the product subscribed when the invoice was generated.
@@ -107,8 +103,7 @@ properties:
     description: The name of the product family subscribed when the invoice was generated.
   seller:
     type: object
-    description: Information about the seller (merchant) listed on the masthead of
-      the invoice.
+    description: Information about the seller (merchant) listed on the masthead of the invoice.
     properties:
       name:
         type: string
@@ -116,25 +111,36 @@ properties:
         type: object
         properties:
           street:
-            type: 'null'
+            type:
+              - 'null'
+              - string
           line2:
-            type: 'null'
+            type:
+              - 'null'
+              - string
           city:
-            type: 'null'
+            type:
+              - 'null'
+              - string
           state:
-            type: 'null'
+            type:
+              - 'null'
+              - string
           zip:
-            type: 'null'
+            type:
+              - 'null'
+              - string
           country:
-            type: 'null'
+            type:
+              - 'null'
+              - string
       phone:
         type: string
       '':
         type: string
   customer:
     type: object
-    description: Information about the customer who is owner or recipient the invoiced
-      subscription.
+    description: Information about the customer who is owner or recipient the invoiced subscription.
     properties:
       chargify_id:
         type: integer
@@ -143,13 +149,14 @@ properties:
       last_name:
         type: string
       organization:
-        type: 'null'
+        type:
+          - 'null'
+          - string
       email:
         type: string
   memo:
     type: string
-    description: The memo printed on invoices of any collection type.  This message
-      is in control of the merchant.
+    description: The memo printed on invoices of any collection type.  This message is in control of the merchant.
   billing_address:
     type: object
     description: The invoice billing address.
@@ -184,8 +191,7 @@ properties:
         type: string
   subtotal_amount:
     type: string
-    description: Subtotal of the invoice, which is the sum of all line items before
-      discounts or taxes.
+    description: 'Subtotal of the invoice, which is the sum of all line items before discounts or taxes.'
   discount_amount:
     type: string
     description: Total discount applied to the invoice.
@@ -194,8 +200,7 @@ properties:
     description: Total tax on the invoice.
   total_amount:
     type: string
-    description: The invoice total, which is `subtotal_amount - discount_amount +
-      tax_amount`.'
+    description: 'The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.'''
   credit_amount:
     type: string
     description: |-
@@ -209,8 +214,7 @@ properties:
     description: The amount paid on the invoice by the customer.
   due_amount:
     type: string
-    description: Amount due on the invoice, which is `total_amount - credit_amount
-      - paid_amount`.
+    description: 'Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`.'
   line_items:
     type: array
     description: Line items on the invoice.
@@ -219,12 +223,10 @@ properties:
       properties:
         uid:
           type: string
-          description: Unique identifier for the line item.  Useful when cross-referencing
-            the line against individual discounts in the `discounts` or `taxes` lists.
+          description: Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists.
         title:
           type: string
-          description: A short descriptor for the charge or item represented by this
-            line.
+          description: A short descriptor for the charge or item represented by this line.
         description:
           type: string
           description: |-
@@ -245,11 +247,7 @@ properties:
             When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
         subtotal_amount:
           type: string
-          description: The line subtotal, generally calculated as `quantity * unit_price`.
-            This is the canonical amount of record for the line - when rounding differences
-            are in play, `subtotal_amount` takes precedence over the value derived
-            from `quantity * unit_price` (which may not have the proper precision
-            to exactly equal this amount).
+          description: 'The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount).'
         discount_amount:
           type: string
           description: |-
@@ -270,9 +268,7 @@ properties:
             `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
         tiered_unit_price:
           type: boolean
-          description: When `true`, indicates that the actual pricing scheme for the
-            line was tiered, so the `unit_price` shown is the blended average for
-            all units.
+          description: 'When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units.'
         period_range_start:
           type: string
           description: |-
@@ -300,20 +296,18 @@ properties:
           description: The version of the product subscribed when the charge was made.
         component_id:
           type:
-          - integer
-          - 'null'
-          description: The ID of the component being billed. Will be `nil` for non-component
-            charges.
+            - integer
+            - 'null'
+          description: The ID of the component being billed. Will be `nil` for non-component charges.
         price_point_id:
           type:
-          - integer
-          - 'null'
-          description: The price point ID of the component being billed. Will be `nil`
-            for non-component charges.
+            - integer
+            - 'null'
+          description: The price point ID of the component being billed. Will be `nil` for non-component charges.
         product_price_point_id:
           type:
-          - 'null'
-          - integer
+            - 'null'
+            - integer
           description: The price point ID of the line item's product
   discounts:
     type: array
@@ -415,10 +409,9 @@ properties:
           type: string
         gateway_transaction_id:
           type:
-          - string
-          - 'null'
-          description: The transaction ID for the refund as returned from the payment
-            gateway
+            - string
+            - 'null'
+          description: The transaction ID for the refund as returned from the payment gateway
   payments:
     type: array
     items:
@@ -457,10 +450,9 @@ properties:
           type: boolean
         gateway_transaction_id:
           type:
-          - string
-          - 'null'
-          description: The transaction ID for the payment as returned from the payment
-            gateway
+            - string
+            - 'null'
+          description: The transaction ID for the payment as returned from the payment gateway
   custom_fields:
     type: array
     items:
