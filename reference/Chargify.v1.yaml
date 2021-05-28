@@ -7874,6 +7874,16 @@ paths:
                     memo: Refund for basic plan renewal
                     payment_id: 10101
                     segment_uids: all
+  /invoices.json:
+    get:
+      summary: List Invoices
+      tags:
+        - Invoices
+      responses: {}
+      operationId: get-invoices.json
+      description: |-
+        # List Invoices
 
+        By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
 servers:
   - url: 'https://subdomain.chargify.com'

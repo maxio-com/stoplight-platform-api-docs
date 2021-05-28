@@ -61,6 +61,22 @@ POST and PUT request data may be formatted as either XML (`application/xml`) or 
 
 Note that Chargify does not accept PUT or POST data sent as query params or form encoded data – data must be sent as either XML or JSON. If you fail to set your `Content-Type` to either `application/xml` or `application/json`, your request may fail due to triggering of forgery protection mechanisms.
 
+### About Decimal Numbers
+
+In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
+
+We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
+
+### About Amount Fields
+
+Fields holding amount values are given as a string representing a decimal whole currency amount.
+
+For example, `"1.23"` in currency `"USD"` would equate to `$1.23`.
+
+Not all fields will be rounded to the smallest currency denomination.  Intermediate results, such as those that derive from line-level tax calculations, may hold precision up to 8 decimal places.  However, the top-level totals we provide (e.g. `total_amount`) will be rounded to the smallest currency denomination.
+
+It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
+
 ## Debugging
 
 If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
