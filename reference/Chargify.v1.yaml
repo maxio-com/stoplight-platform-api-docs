@@ -9524,5 +9524,58 @@ paths:
                     memo: to pay the bills
                     payment_details: check number 8675309
                     payment_method: check
+  '/invoices/{uid}/reopen.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The unique identifier of the invoice
+    post:
+      summary: Reopen Invoice
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Invoice.yaml
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - The invoice must be in canceled status to be reopened.
+      operationId: post-invoices-uid-reopen.json
+      description: |-
+        # Reopen Invoice
+
+        This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
+
+        Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
+
+        - Reactivating the subscription, which will capture all open invoices (See note below about automatic reopening of invoices.)
+        - Recording a payment directly against the invoice
+
+        A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
 servers:
   - url: 'https://subdomain.chargify.com'
