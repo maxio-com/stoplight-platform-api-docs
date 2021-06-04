@@ -10036,5 +10036,54 @@ paths:
         # Read Subscription Component
 
         This request will list information regarding a specific component owned by a subscription.
+  '/subscriptions/{subscription_id}/components.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    get:
+      summary: List Subscription Components
+      tags:
+        - Subscription Items
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    component:
+                      $ref: ../models/Subscriptions-Component.yaml
+              examples:
+                Example:
+                  value:
+                    - component:
+                        unit_name: Text messages
+                        name: text_messages
+                        kind: metered_component
+                        component_id: 98322708341
+                        subscription_id: 38855254509
+                        allocated_quantity: 1500
+                        unit_balance: 5000
+                    - component:
+                        enabled: true
+                        subscription_id: 30336331837
+                        unit_balance: 5000
+                        name: text messages
+      operationId: get-subscriptions-subscription_id-components.json
+      description: |-
+        # List Subscription Components
+
+        This request will list a subscription's applied components.
+
+        ## Archived Components
+
+        When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
 servers:
   - url: 'https://subdomain.chargify.com'
