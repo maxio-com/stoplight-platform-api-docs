@@ -11477,5 +11477,126 @@ paths:
                       - component_id: 399853
                         enabled: true
                         price_point_id: 123456
+  '/{subdomain}/events/{api_handle}.json':
+    parameters:
+      - schema:
+          type: string
+        name: subdomain
+        in: path
+        required: true
+        description: Your site's subdomain
+      - schema:
+          type: string
+        name: api_handle
+        in: path
+        required: true
+        description: Identifies the Stream for which the event should be published.
+    post:
+      summary: Event Ingestion
+      tags:
+        - Subscription Components
+      responses:
+        '201':
+          description: Created
+      operationId: post-subdomain-events-api_handle-.json
+      description: |-
+        # Event Ingestion
+
+        ## Documentation
+
+        Events-Based Billing is an evolved form of metered billing that is based on data-rich events streamed in real-time from your system to Chargify.
+
+        These events can then be transformed, enriched, or analyzed to form the computed totals of usage charges billed to your customers.
+
+        This API allows you to stream events into the Chargify data ingestion engine.
+
+        Learn more about the feature in general in the [Events-Based Billing help docs](https://help.chargify.com/events/).
+
+        ## Record Event
+
+        Use this endpoint to record a single event.
+
+        *Note: this endpoint differs from the standard Chargify endpoints in that the URL subdomain will be `events` and your site subdomain will be included in the URL path. For example:*
+
+        ```
+        https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
+        ```
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: store_uid
+          description: 'If you''ve attached your own Keen project as a Chargify event data-store, use this parameter to indicate the data-store.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chargify:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: string
+                      description: 'This timestamp determines what billing period the event will be billed in. If your request payload does not include it, Chargify will add `chargify.timestamp` to the event payload and set the value to `now`.'
+                    id:
+                      type: string
+                      description: 'A unique ID set by Chargify. Please note that this field is reserved. If `chargify.id` is present in the request payload, it will be overwritten. '
+                    created_at:
+                      type: string
+                      description: 'An ISO-8601 timestamp, set by Chargify at the time each event is recorded. Please note that this field is reserved. If `chargify.created_at` is present in the request payload, it will be overwritten. '
+                    uniqueness_token:
+                      type: string
+                      description: User-defined string scoped per-stream. Duplicate events within a stream will be silently ignored. Tokens expire after 31 days.
+                      maxLength: 64
+            examples:
+              Example:
+                value:
+                  chargify:
+                    subscription_id: 1
+                    timestamp: '2020-02-27T17:45:50-05:00'
+                  messages: 150
+                  country: US
+  '/{subdomain}/events/{api_handle}/bulk.json':
+    parameters:
+      - schema:
+          type: string
+        name: subdomain
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: api_handle
+        in: path
+        required: true
+    post:
+      summary: Bulk Event Ingestion
+      tags:
+        - Subscription Components
+      responses:
+        '201':
+          description: Created
+      operationId: post-subdomain-events-api_handle-bulk.json
+      description: |-
+        # Bulk Event Ingestion
+
+        Use this endpoint to record a collection of events.
+
+        *Note: this endpoint differs from the standard Chargify endpoints in that the subdomain will be `events` and your site subdomain will be included in the URL path.*
+
+        A maximum of 1000 events can be published in a single request. A 422 will be returned if this limit is exceeded.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: store_uid
+          description: 'If you''ve attached your own Keen project as a Chargify event data-store, use this parameter to indicate the data-store.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
 servers:
   - url: 'https://subdomain.chargify.com'
