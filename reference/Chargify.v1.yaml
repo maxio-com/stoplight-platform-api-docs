@@ -10341,59 +10341,7 @@ paths:
                 type: object
                 properties:
                   allocation:
-                    type: object
-                    properties:
-                      component_id:
-                        type: integer
-                        description: The integer component ID for the allocation. This references a component that you have created in your Product setup
-                      subscription_id:
-                        type: integer
-                        description: The integer subscription ID for the allocation. This references a unique subscription in your Site
-                      quantity:
-                        type: integer
-                        description: The allocated quantity set in to effect by the allocation
-                      previous_quantity:
-                        type: integer
-                        description: The allocated quantity that was in effect before this allocation was created
-                      memo:
-                        type: string
-                        description: The memo passed when the allocation was created
-                      timestamp:
-                        type: string
-                        description: 'The time that the allocation was recorded, in  format and UTC timezone, i.e. 2012-11-20T22:00:37Z'
-                      proration_upgrade_scheme:
-                        type: string
-                        description: The scheme used if the proration was an upgrade. This is only present when the allocation was created mid-period.
-                      proration_downgrade_scheme:
-                        type: string
-                        description: The scheme used if the proration was a downgrade. This is only present when the allocation was created mid-period.
-                      price_point_id:
-                        type: integer
-                      previous_price_point_id:
-                        type: integer
-                      accrue_charge:
-                        type: boolean
-                        description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately.'
-                      upgrade_charge:
-                        type: string
-                        description: The type of charge to be created if the change in cost is an upgrade.
-                      downgrade_credit:
-                        type: string
-                        description: The type of credit to be created if the change in cost is a downgrade.
-                      payment:
-                        type:
-                          - object
-                          - 'null'
-                        description: 'Information for captured payment, if applicable'
-                        properties:
-                          id:
-                            type: number
-                          amout_in_cents:
-                            type: string
-                          success:
-                            type: boolean
-                          memo:
-                            type: string
+                    $ref: ../models/Allocation.yaml
               examples:
                 Example:
                   value:
@@ -10409,8 +10357,8 @@ paths:
                       price_point_id: -69720370
                       previous_price_point_id: -76493052
                       accrue_charge: true
-                      upgrade_charge: ipsum consectetur
-                      downgrade_credit: nulla Ut in do
+                      upgrade_charge: full
+                      downgrade_credit: full
                       payment:
                         id: -44566528
                         amout_in_cents: labore in minim ad
@@ -10425,59 +10373,7 @@ paths:
               type: object
               properties:
                 allocation:
-                  type: object
-                  properties:
-                    quantity:
-                      type:
-                        - integer
-                        - number
-                      description: 'The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off.'
-                    memo:
-                      type: string
-                      description: A memo to record along with the allocation
-                    proration_downgrade_scheme:
-                      type: string
-                      description: The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided.
-                      deprecated: true
-                    proration_upgrade_scheme:
-                      type: string
-                      description: The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided.
-                      deprecated: true
-                    proration_collection_method:
-                      type: string
-                      default: automatic
-                      description: ''
-                    accrue_charge:
-                      type: boolean
-                      description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided.'
-                    upgrade_charge:
-                      type: string
-                      description: The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided.
-                      enum:
-                        - full
-                        - prorated
-                        - none
-                    downgrade_credit:
-                      type: string
-                      description: The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided.
-                      enum:
-                        - full
-                        - prorated
-                        - none
-                    payment_collection_method:
-                      type: string
-                      description: '(deprecated, ignored) The payment_collection_method set on the subscription will be used. For subscriptions on invoice billing, when accrue_charge is false, a mid-period invoice will be created from any charges that are a result of the allocation change.'
-                    component_id:
-                      type: integer
-                      description: (required for the multiple allocations endpoint) The id associated with the component for which the allocation is being made
-                    price_point_id:
-                      type:
-                        - string
-                        - integer
-                        - 'null'
-                      description: 'Price point that the allocation should be charged at. Accepts either the price point''s id (integer) or handle (string). When not specified, the default price point will be used.'
-                  required:
-                    - quantity
+                  $ref: ../models/Create-Allocation.yaml
             examples:
               Quantity Based:
                 value:
@@ -10494,5 +10390,135 @@ paths:
                   allocation:
                     quantity: 0
                     memo: Recoding component purchase of Acme Support
+  '/subscriptions/{subscription_id}/allocations.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Allocate Components
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    allocation:
+                      $ref: ../models/Allocation.yaml
+              examples:
+                Example:
+                  value:
+                    - allocation:
+                        component_id: 193159
+                        subscription_id: 15540611
+                        quantity: 10
+                        previous_quantity: 0
+                        memo: foo
+                        timestamp: '2016-12-08T19:09:15Z'
+                        proration_upgrade_scheme: prorate-attempt-capture
+                        proration_downgrade_scheme: no-prorate
+                        payment:
+                          amount_in_cents: 1451
+                          success: true
+                          memo: 'Payment for: Prorated component allocation changes.'
+                          id: 165473487
+                    - allocation:
+                        component_id: 277221
+                        subscription_id: 15540611
+                        quantity: 5
+                        previous_quantity: 0
+                        memo: bar
+                        timestamp: '2016-12-08T19:09:15Z'
+                        proration_upgrade_scheme: prorate-attempt-capture
+                        proration_downgrade_scheme: no-prorate
+                        payment:
+                          amount_in_cents: 1451
+                          success: true
+                          memo: 'Payment for: Prorated component allocation changes.'
+                          id: 165473487
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  Example:
+                    errors:
+                      - 'Quantity: cannot be blank.'
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Quantity: cannot be blank.'
+      operationId: post-subscriptions-subscription_id-allocations.json
+      description: |-
+        # Allocate Components
+
+        Creates multiple allocations, setting the current allocated quantity for each of the components and recording a memo. The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of Resolutions explained below in determining the proration scheme.
+
+        A `component_id` is required for each allocation.
+
+        This endpoint only responds to JSON. It is not available for XML.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                proration_upgrade_scheme:
+                  type: string
+                  default: no-prorate
+                  description: ''
+                  deprecated: true
+                proration_downgrade_scheme:
+                  type: string
+                  description: ''
+                  default: no-prorate
+                  deprecated: true
+                allocations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      allocation:
+                        $ref: ../models/Create-Allocation.yaml
+                accrue_charge:
+                  type: boolean
+                upgrade_charge:
+                  type: string
+                downgrade_credit:
+                  type: string
+            examples:
+              Example:
+                value:
+                  proration_upgrade_scheme: prorate-attempt-capture
+                  proration_downgrade_scheme: no-prorate
+                  allocations:
+                    - component_id: 123
+                      quantity: 10
+                      memo: foo
+                    - component_id: 456
+                      quantity: 5
+                      memo: bar
 servers:
   - url: 'https://subdomain.chargify.com'
