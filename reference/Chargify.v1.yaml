@@ -3684,7 +3684,7 @@ paths:
       description: |-
         ## Read the Total Event Count for a Site
 
-        Obtain a count of the entire events for a given site by using this method.
+        Get a count of all the events for a given site by using this method.
   /mrr.json:
     get:
       summary: Read MRR
@@ -9962,27 +9962,25 @@ paths:
                     properties:
                       balance_in_cents:
                         type: integer
-                        description: The balance, in cents, of the sum of the subscription's  open,
-                          payable invoices.
+                        description: 'The balance, in cents, of the sum of the subscription''s  open, payable invoices.'
                   pending_discounts:
                     type: object
                     properties:
                       balance_in_cents:
                         type: integer
-                        description: The balance, in cents, of the subscription's Pending Discount
-                          account.
+                        description: 'The balance, in cents, of the subscription''s Pending Discount account.'
                   service_credits:
                     type: object
                     properties:
                       balance_in_cents:
                         type: integer
-                        description: The balance, in cents, of the subscription's Service Credit account.
+                        description: 'The balance, in cents, of the subscription''s Service Credit account.'
                   prepayments:
                     type: object
                     properties:
                       balance_in_cents:
                         type: integer
-                        description: The balance, in cents, of the subscription's Prepayment account.
+                        description: 'The balance, in cents, of the subscription''s Prepayment account.'
       operationId: get-subscriptions-subscription_id-account_balances.json
       description: |-
         # Read Account Balances
