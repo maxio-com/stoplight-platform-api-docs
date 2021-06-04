@@ -21,8 +21,8 @@ tags:
   - name: Reason Codes
   - name: Referral Codes
   - name: Sites
+  - name: Subscription Components
   - name: Subscription Invoice Account
-  - name: Subscription Items
   - name: Subscription Notes
   - name: Webhooks
 paths:
@@ -10004,7 +10004,7 @@ paths:
     get:
       summary: Read Subscription Component
       tags:
-        - Subscription Items
+        - Subscription Components
       responses:
         '200':
           description: OK
@@ -10047,7 +10047,7 @@ paths:
     get:
       summary: List Subscription Components
       tags:
-        - Subscription Items
+        - Subscription Components
       responses:
         '200':
           description: OK
@@ -10085,5 +10085,55 @@ paths:
         ## Archived Components
 
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
+  '/subscriptions/{subscription_id}/price_points.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Bulk Update Subscription Components' Price Points
+      tags:
+        - Subscription Components
+      operationId: post-subscriptions-subscription_id-price_points.json
+      description: |-
+        # Bulk Update Subscriptions Components' Price Points
+
+        Updates the price points on one or more of a subscription's components.
+
+        The `price_point` key can take either a:
+        1. Price point id (integer)
+        2. Price point handle (string)
+        3. `"_default"` string, which will reset the price point to the component's current default price point.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                components:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      component_id:
+                        type: integer
+                      price_point:
+                        type:
+                          - string
+                          - integer
+            examples:
+              Example:
+                value:
+                  components:
+                    - component_id: 997
+                      price_point: 1022
+                    - component_id: 998
+                      price_point: wholesale-handle
+                    - component_id: 999
+                      price_point: _default
+        description: ''
 servers:
   - url: 'https://subdomain.chargify.com'
