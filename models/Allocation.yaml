@@ -21,6 +21,7 @@ properties:
   memo:
     type: string
     description: The memo passed when the allocation was created
+    nullable: true
   timestamp:
     type: string
     description: The time that the allocation was recorded, in  format and UTC

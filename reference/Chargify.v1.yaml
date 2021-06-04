@@ -10390,6 +10390,83 @@ paths:
                   allocation:
                     quantity: 0
                     memo: Recoding component purchase of Acme Support
+    get:
+      summary: List Allocations
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    allocation:
+                      $ref: ../models/Allocation.yaml
+              examples:
+                Example:
+                  value:
+                    - allocation:
+                        memo: moving to 7
+                        timestamp: '2012-11-20T22:00:37Z'
+                        quantity: 7
+                        previous_quantity: 3
+                        component_id: 11960
+                        subscription_id: 2585595
+                        proration_upgrade_scheme: no-prorate
+                        proration_downgrade_scheme: no-prorate
+                    - allocation:
+                        memo: null
+                        timestamp: '2012-11-20T21:48:09Z'
+                        quantity: 3
+                        previous_quantity: 0
+                        component_id: 11960
+                        subscription_id: 2585595
+                        proration_upgrade_scheme: no-prorate
+                        proration_downgrade_scheme: no-prorate
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      operationId: get-subscriptions-subscription_id-components-component_id-allocations.json
+      description: |-
+        # List Allocations
+
+        This endpoint returns the 50 most recent Allocations, ordered by most recent first.
+
+        ## On/Off Components
+
+        When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be logged in this response.
+
+        ## Querying data via Chargify gem
+
+        You can also query the current quantity via the [official Chargify Gem.]( http://github.com/chargify/chargify_api_ares)
+
+        ```# First way
+        component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
+        puts component.allocated_quantity
+        # => 23
+
+        # Second way
+        component = Chargify::Subscription.find(7).component(1)
+        puts component.allocated_quantity
+        # => 23
+        ```
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: Pass an integer in the page parameter via the query string to access subsequent pages of 50 allocations
   '/subscriptions/{subscription_id}/allocations.json':
     parameters:
       - schema:
