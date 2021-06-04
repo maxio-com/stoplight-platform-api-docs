@@ -14,6 +14,7 @@ tags:
   - name: Events
   - name: Insights
   - name: Invoices
+  - name: Offers
   - name: Payment Profiles
   - name: Product Families
   - name: Products
@@ -11598,5 +11599,269 @@ paths:
               type: array
               items:
                 type: object
+  /offers.json:
+    post:
+      summary: Create Offer
+      tags:
+        - Offers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offer:
+                    $ref: ../models/Offer.yaml
+              examples:
+                Example:
+                  value:
+                    offer:
+                      id: 3
+                      site_id: 2
+                      product_family_id: 4
+                      product_family_name: Chargify
+                      product_id: 31
+                      product_name: 30-Day Square Trial
+                      product_price_in_cents: 2000
+                      product_revisable_number: 0
+                      name: Solo
+                      handle: han_shot_first
+                      description: A Star Wars Story
+                      created_at: '2018-06-08T14:51:52-04:00'
+                      updated_at: '2018-06-08T14:51:52-04:00'
+                      archived_at: null
+                      product_price_point_name: Default
+                      offer_items:
+                        - component_id: 24
+                          component_name: Invoices
+                          component_unit_price: '3.0'
+                          price_point_id: 104
+                          price_point_name: Original
+                          starting_quantity: '1.0'
+                          editable: false
+                      offer_discounts:
+                        - coupon_id: 3
+                          coupon_code: DEF456
+                          coupon_name: IB Loyalty
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      components:
+                        type: array
+                        items:
+                          type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      components:
+                        - 'starting_quantity for an On/Off component can only be ''1'' or ''0'': 24'
+      operationId: post-offers.json
+      description: |-
+        # Create Offer
+
+        Create an offer within your Chargify site by sending a POST request.
+
+        ## Documentation
+
+        Offers allow you to package complicated combinations of products, components and coupons into a convenient package which can then be subscribed to just like products.
+
+        Once an offer is defined it can be used as an alternative to the product when creating subscriptions.
+
+        Full documentation on how to use offers in the Chargify UI can be located [here](https://help.chargify.com/offers/offers-introduction.html).
+
+        ## Using a Product Price Point
+
+        You can optionally pass in a `product_price_point_id` that corresponds with the `product_id` and the offer will use that price point. If a `product_price_point_id` is not passed in, the product's default price point will be used.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offer:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    handle:
+                      type: string
+                    description:
+                      type: string
+                    product_id:
+                      type: integer
+                    product_price_point_id:
+                      type: integer
+                    components:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          component_id:
+                            type: integer
+                          starting_quantity:
+                            type: integer
+                    coupons:
+                      type: array
+                      items:
+                        type: string
+            examples:
+              Example:
+                value:
+                  offer:
+                    name: Solo
+                    handle: han_shot_first
+                    description: A Star Wars Story
+                    product_id: 31
+                    product_price_point_id: 102
+                    components:
+                      - component_id: 24
+                        starting_quantity: 1
+                    coupons:
+                      - DEF456
+    get:
+      summary: List Offers
+      tags:
+        - Offers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offers:
+                    type: array
+                    items:
+                      $ref: ../models/Offer.yaml
+              examples:
+                Example:
+                  value:
+                    offers:
+                      - id: 239
+                        site_id: 48110
+                        product_family_id: 1025627
+                        product_family_name: Gold
+                        product_id: 110
+                        product_name: Pro
+                        product_price_in_cents: 1000
+                        product_revisable_number: 0
+                        product_price_point_id: 138
+                        product_price_point_name: Default
+                        name: Third Offer
+                        handle: third
+                        description: ''
+                        created_at: '2018-08-03T09:56:11-05:00'
+                        updated_at: '2018-08-03T09:56:11-05:00'
+                        archived_at: null
+                        offer_items:
+                          - component_id: 426665
+                            component_name: Database Size (GB)
+                            component_unit_price: '1.0'
+                            price_point_id: 149438
+                            price_point_name: Auto-created
+                            starting_quantity: '0.0'
+                            editable: false
+                            currency_prices: []
+                        offer_discounts:
+                          - coupon_id: 234
+                            coupon_code: GR8_CUSTOMER
+                            coupon_name: Multi-service Discount
+                        offer_signup_pages:
+                          - id: 356482
+                            nickname: ggoods
+                            enabled: true
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargifypay.com/subscribe/hjpvhnw63tzy'
+      operationId: get-offers.json
+      description: |-
+        # List Offers
+
+        This endpoint will list offers for a site.
+  '/offers/{offer_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: offer_id
+        in: path
+        required: true
+        description: The Chargify id of the offer
+    get:
+      summary: Read Offer
+      tags:
+        - Offers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  offer:
+                    $ref: ../models/Offer.yaml
+              examples: {}
+        '401':
+          description: Unauthorized
+      operationId: get-offers-offer_id-.json
+      description: |-
+        # Read Offer
+
+        This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
+  '/offers/{offer_id}/archive.json':
+    parameters:
+      - schema:
+          type: integer
+        name: offer_id
+        in: path
+        required: true
+        description: The Chargify id of the offer
+    put:
+      summary: Archive Offer
+      tags:
+        - Offers
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      operationId: put-offers-offer_id-archive.json
+      description: |-
+        # Archive Offer
+
+        Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+  '/offers/{offer_id}/unarchive.json':
+    parameters:
+      - schema:
+          type: integer
+        name: offer_id
+        in: path
+        required: true
+        description: The Chargify id of the offer
+    put:
+      summary: Unarchive Offer
+      tags:
+        - Offers
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      operationId: put-offers-offer_id-unarchive.json
+      description: |-
+        # Unarchive Offer
+
+        Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
 servers:
   - url: 'https://subdomain.chargify.com'
