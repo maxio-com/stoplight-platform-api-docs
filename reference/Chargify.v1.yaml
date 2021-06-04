@@ -22,6 +22,7 @@ tags:
   - name: Referral Codes
   - name: Sites
   - name: Subscription Invoice Account
+  - name: Subscription Items
   - name: Subscription Notes
   - name: Webhooks
 paths:
@@ -9986,5 +9987,54 @@ paths:
         # Read Account Balances
 
         Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+  '/subscriptions/{subscription_id}/components/{component_id}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: 'The Chargify id of the component. Alternatively, the component''s handle prefixed by `handle:`'
+    get:
+      summary: Read Subscription Component
+      tags:
+        - Subscription Items
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  component:
+                    $ref: ../models/Subscriptions-Component.yaml
+              examples:
+                Example:
+                  value:
+                    component:
+                      component_id: 193028
+                      subscription_id: 14593192
+                      allocated_quantity: 1
+                      pricing_scheme: per_unit
+                      name: Users
+                      kind: quantity_based_component
+                      unit_name: Users
+                      price_point_id: 1
+                      price_point_handle: top-tier
+                      enabled: true
+        '404':
+          description: Not Found
+      operationId: get-subscriptions-subscription_id-components-component_id-.json
+      description: |-
+        # Read Subscription Component
+
+        This request will list information regarding a specific component owned by a subscription.
 servers:
   - url: 'https://subdomain.chargify.com'
