@@ -10437,23 +10437,33 @@ paths:
                       description: A memo to record along with the allocation
                     proration_downgrade_scheme:
                       type: string
-                      description: (deprecated) The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided.
+                      description: The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided.
+                      deprecated: true
+                    proration_upgrade_scheme:
+                      type: string
+                      description: The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided.
+                      deprecated: true
                     proration_collection_method:
                       type: string
                       default: automatic
                       description: ''
-                    proration_upgrade_scheme:
-                      type: string
-                      description: (deprecated) The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided.
                     accrue_charge:
                       type: boolean
                       description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided.'
                     upgrade_charge:
                       type: string
                       description: The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided.
+                      enum:
+                        - full
+                        - prorated
+                        - none
                     downgrade_credit:
                       type: string
                       description: The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided.
+                      enum:
+                        - full
+                        - prorated
+                        - none
                     payment_collection_method:
                       type: string
                       description: '(deprecated, ignored) The payment_collection_method set on the subscription will be used. For subscriptions on invoice billing, when accrue_charge is false, a mid-period invoice will be created from any charges that are a result of the allocation change.'
