@@ -10520,5 +10520,251 @@ paths:
                     - component_id: 456
                       quantity: 5
                       memo: bar
+  '/subscriptions/{subscription_id}/allocations/preview.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Preview Allocations
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  allocation_preview:
+                    type: object
+                    properties:
+                      start_date:
+                        type: string
+                      end_date:
+                        type: string
+                      subtotal_in_cents:
+                        type: integer
+                      total_tax_in_cents:
+                        type: integer
+                      total_discount_in_cents:
+                        type: integer
+                      total_in_cents:
+                        type: integer
+                      direction:
+                        type: string
+                      proration_scheme:
+                        type: string
+                      line_items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            transaction_type:
+                              type: string
+                            kind:
+                              type: string
+                            amount_in_cents:
+                              type: integer
+                            memo:
+                              type: string
+                            discount_amount_in_cents:
+                              type: integer
+                            taxable_amount_in_cents:
+                              type: integer
+                            component_id:
+                              type: integer
+                            direction:
+                              type: string
+                      accrue_charge:
+                        type: boolean
+                      allocations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            component_id:
+                              type: integer
+                            subscription_id:
+                              type: integer
+                            quantity:
+                              type:
+                                - number
+                                - integer
+                            previous_quantity:
+                              type: integer
+                            memo:
+                              type: string
+                            timestamp:
+                              type:
+                                - string
+                                - 'null'
+                            proration_upgrade_scheme:
+                              type: string
+                            proration_downgrade_scheme:
+                              type: string
+                            accrue_charge:
+                              type: boolean
+                            upgrade_charge:
+                              type: string
+                            downgrade_credit:
+                              type: string
+              examples:
+                Example:
+                  value:
+                    allocation_preview:
+                      start_date: '2019-05-02T15:26:46Z'
+                      end_date: '2019-05-08T15:26:46Z'
+                      period_type: prorated
+                      total_in_cents: 150
+                      total_discount_in_cents: 0
+                      total_tax_in_cents: 0
+                      subtotal_in_cents: 150
+                      existing_balance_in_cents: 0
+                      accrue_charge: true
+                      line_items:
+                        - direction: upgrade
+                          transaction_type: charge
+                          kind: quantity_based_component
+                          amount_in_cents: 100
+                          taxable_amount_in_cents: 0
+                          discount_amount_in_cents: 0
+                          memo: 'Foo: 0 to 10 foo'
+                          component_id: 123
+                          component_handle: foo
+                        - direction: downgrade
+                          transaction_type: credit
+                          kind: quantity_based_component
+                          amount_in_cents: -20
+                          taxable_amount_in_cents: 0
+                          discount_amount_in_cents: 0
+                          memo: 'Foo: 10 to 5 bar'
+                          component_id: 456
+                          component_handle: bar
+                        - direction: upgrade
+                          transaction_type: credit
+                          kind: quantity_based_component
+                          amount_in_cents: 70
+                          taxable_amount_in_cents: 0
+                          discount_amount_in_cents: 0
+                          memo: 'Foo: 0 to 10 baz'
+                          component_id: 789
+                          component_handle: baz
+                      allocations:
+                        - accrue_charge: true
+                          upgrade_charge: prorated
+                          downgrade_credit: full
+                          component_handle: foo
+                          component_id: 123
+                          memo: foo
+                          previous_price_point_id: 123
+                          previous_quantity: 0
+                          price_point_id: 123
+                          proration_downgrade_scheme: full
+                          proration_upgrade_scheme: prorate-delay-capture
+                          quantity: 10
+                          subscription_id: 123456
+                          timestamp: null
+                        - accrue_charge: true
+                          upgrade_charge: full
+                          downgrade_credit: prorated
+                          component_handle: bar
+                          component_id: 456
+                          memo: foo
+                          previous_price_point_id: 456
+                          previous_quantity: 10
+                          price_point_id: 456
+                          proration_downgrade_scheme: prorate
+                          proration_upgrade_scheme: full-price-delay-capture
+                          quantity: 5
+                          subscription_id: 123456
+                          timestamp: null
+                        - accrue_charge: true
+                          upgrade_charge: full
+                          downgrade_credit: none
+                          component_handle: baz
+                          component_id: 789
+                          memo: foo
+                          previous_price_point_id: 789
+                          previous_quantity: 0
+                          price_point_id: 789
+                          proration_downgrade_scheme: no-prorate
+                          proration_upgrade_scheme: full-price-delay-capture
+                          quantity: 10
+                          subscription_id: 123456
+                          timestamp: null
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      - kind: allocation
+                        component_id: 379512
+                        'on': base
+                        message: Allocations can only be updated for quantity and on/off components.
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kind:
+                          type: string
+                        component_id:
+                          type: number
+                        'on':
+                          type: string
+                        message:
+                          type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - kind: allocation
+                        component_id: 379512
+                        'on': base
+                        message: Allocations can only be updated for quantity and on/off components.
+      operationId: post-subscriptions-subscription_id-allocations-preview.json
+      description: |-
+        # Preview Allocations
+
+        Chargify offers the ability to preview a potential subscription's **quantity-based** or **on/off** component allocation in the middle of the current billing period.  This is useful if you want users to be able to see the effect of a component operation before actually doing it.
+
+        ## Fine-grained Component Control: Use with multiple `upgrade_charge`s or `downgrade_credits`
+
+        When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the response will not include `direction` and `proration` within the `allocation_preview` at the `line_items` and `allocations` level respectfully.
+
+        See example below for Fine-Grained Component Control response.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                allocation:
+                  $ref: ../models/Create-Allocation.yaml
+            examples:
+              Example:
+                value:
+                  proration_upgrade_scheme: prorate-attempt-capture
+                  proration_downgrade_scheme: prorate
+                  allocations:
+                    - component_id: 554108
+                      price_point_id: 325826
+                      quantity: 10
+                      memo: NOW
+                    - component_id: 565236
+                      price_point_id: 341315
+                      quantity: 10
+                      memo: NOW
 servers:
   - url: 'https://subdomain.chargify.com'
