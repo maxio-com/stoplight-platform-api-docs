@@ -10142,6 +10142,23 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: {}
+                properties:
+                  components:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        component_id:
+                          type: integer
+                        price_point:
+                          type: integer
+              examples:
+                Example:
+                  value:
+                    components:
+                      - component_id: 123
+                        price_point: 456
+                      - component_id: 789
+                        price_point: 987
 servers:
   - url: 'https://subdomain.chargify.com'
