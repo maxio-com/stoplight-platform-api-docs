@@ -10135,5 +10135,13 @@ paths:
                     - component_id: 999
                       price_point: _default
         description: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
 servers:
   - url: 'https://subdomain.chargify.com'
