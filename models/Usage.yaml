@@ -1,0 +1,15 @@
+title: Usage
+type: object
+x-tags:
+  - Subscription Components
+properties:
+  id: 
+    type: integer
+  memo: 
+    type: string
+  created_at:
+    type: string
+  price_point_id:
+    type: integer
+  quantity:
+    type: integer

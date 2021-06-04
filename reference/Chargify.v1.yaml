@@ -10993,5 +10993,143 @@ paths:
               Example:
                 value:
                   credit_scheme: none
+  '/subscriptions/{subscription_id}/components/{component_id}/usages.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+      - schema:
+          type: integer
+        name: component_id
+        in: path
+        required: true
+        description: 'Either the Chargify id for the component or the component''s handle prefixed by `handle:`'
+    post:
+      summary: Create Usage
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  usage:
+                    $ref: ../models/Usage.yaml
+              examples:
+                Example:
+                  value:
+                    usage:
+                      id: 138522957
+                      memo: My memo
+                      created_at: '2017-11-13T10:05:32-06:00'
+                      price_point_id: 149416
+                      quantity: 1000
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Price point: could not be found.'
+      operationId: post-subscriptions-subscription_id-components-component_id-usages.json
+      description: |-
+        # Create Usage
+
+        ## Documentation
+
+        Full documentation on how to create Components in the Chargify UI can be located [here](https://help.chargify.com/products/product-components.html). Additionally, for information on how to record component usage against a subscription, please see the following resources:
+
+        + [Recording Metered Component Usage](https://help.chargify.com/subscriptions/setting-component-allocations.html#reporting-metered-component-usage)
+        + [Reporting Prepaid Component Status](https://help.chargify.com/subscriptions/setting-component-allocations.html#reporting-prepaid-component-status)
+
+        You may choose to report metered or prepaid usage to Chargify as often as you wish. You may report usage as it happens. You may also report usage periodically, such as each night or once per billing period. If usage events occur in your system very frequently (on the order of thousands of times an hour), it is best to accumulate usage into batches on your side, and then report those batches less frequently, such as daily. This will ensure you remain below any API throttling limits. If your use case requires higher rates of usage reporting, we recommend utilizing Events Based Components.
+
+        ## Create Usage for Subscription
+
+        This endpoint allows you to record an instance of metered or prepaid usage for a subscription. The `quantity` from usage for each component is accumulated to the `unit_balance` on the [Component Line Item](https://reference.chargify.com/v1/component-line-items/component-line-items) for the subscription.
+
+        ## Price Point ID usage
+
+        If you are using price points, for metered and prepaid usage components, Chargify gives you the option to specify a price point in your request.
+
+        You do not need to specify a price point ID. If a price point is not included, the default price point for the component will be used when the usage is recorded.
+
+        If an invalid `price_point_id` is submitted, the endpoint will return an error. 
+
+        ## Deducting Usage
+
+        In the event that you need to reverse a previous usage report or otherwise deduct from the current usage balance, you may provide a negative quantity.
+
+        Example:
+
+        Previously recorded:
+
+        ```
+        {
+          "usage": {
+            "quantity": 5000,
+            "memo": "Recording 5000 units"
+          }
+        }
+        ```
+
+        At this point, `unit_balance` would be `5000`. To reduce the balance to `0`, POST the following payload:
+
+        ```
+        {
+          "usage": {
+            "quantity": -5000,
+            "memo": "Deducting 5000 units"
+          }
+        }
+        ```
+
+        The `unit_balance` has a floor of `0`; negative unit balances are never allowed. For example, if the usage balance is 100 and you deduct 200 units, the unit balance would then be `0`, not `-100`.
+
+        ## FAQ
+
+        Q. Is it possible to record metered usage for more than one component at a time?
+
+        A. No. Usage should be reported as one API call per component on a single subscription. For example, to record that a subscriber has sent both an SMS Message and an Email, send an API call for each.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usage:
+                  type: object
+                  properties:
+                    quantity:
+                      type:
+                        - integer
+                        - number
+                      description: integer by default or decimal number if fractional quantities are enabled for the component
+                    price_point_id:
+                      type: string
+                    memo:
+                      type: string
+            examples:
+              Example:
+                value:
+                  usage:
+                    quantity: 1000
+                    price_point_id: '149416'
+                    memo: My memo
 servers:
   - url: 'https://subdomain.chargify.com'
