@@ -760,7 +760,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
+                anyOf:
                   - properties:
                       errors:
                         type: object
@@ -1879,7 +1879,7 @@ paths:
               type: object
               properties:
                 metafields:
-                  oneOf:
+                  anyOf:
                     - $ref: ../models/Create-Metafield.yaml
                     - type: array
                       items:
@@ -3949,7 +3949,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
+              anyOf:
                 - properties:
                     metered_component:
                       type: object
@@ -4911,7 +4911,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
+              anyOf:
                 - properties:
                     price_point:
                       $ref: ../models/Create-Component-Price-Point.yaml
@@ -7277,7 +7277,7 @@ paths:
                 type: object
                 properties:
                   payment_profile:
-                    oneOf:
+                    anyOf:
                       - properties:
                           id:
                             type: integer
@@ -7787,7 +7787,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
+              anyOf:
                 - properties:
                     refund:
                       type: object
@@ -8382,7 +8382,7 @@ paths:
                             - change_invoice_status
                         event_data:
                           description: 'The event data is the data that, when combined with the command, results in the output invoice found in the invoice field.'
-                          oneOf:
+                          anyOf:
                             - description: Example schema for an `apply_payment` event
                               properties:
                                 memo:
