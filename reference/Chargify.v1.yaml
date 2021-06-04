@@ -11131,5 +11131,95 @@ paths:
                     quantity: 1000
                     price_point_id: '149416'
                     memo: My memo
+    get:
+      summary: List Usages
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    usage:
+                      $ref: ../models/Usage.yaml
+              examples:
+                Example:
+                  value:
+                    - usage:
+                        id: 178534642
+                        memo: '20'
+                        created_at: '2018-08-03T11:58:42-05:00'
+                        price_point_id: 242632
+                        quantity: '20.0'
+                        component_id: 500093
+                        component_handle: handle
+                        subscription_id: 22824464
+                    - usage:
+                        id: 178534591
+                        memo: '10'
+                        created_at: '2018-08-03T11:58:29-05:00'
+                        price_point_id: 242632
+                        quantity: '10.0'
+                        component_id: 500093
+                        component_handle: handle
+                        subscription_id: 22824464
+      operationId: get-subscriptions-subscription_id-components-component_id-usages.json
+      description: |-
+        # List Usages
+
+        This request will return a list of the usages associated with a subscription for a particular metered component. This will display the previously recorded components for a subscription.
+
+        This endpoint is not compatible with quantity-based components.
+
+        ## Since Date and Until Date Usage 
+
+        Note: The `since_date` and `until_date` attributes each default to midnight on the date specified. For example, in order to list usages for January 20th, you would need to append the following to the URL. 
+
+        ```
+        ?since_date=2016-01-20&until_date=2016-01-21
+        ```
+
+        ## Read Usage by Handle
+
+        Use this endpoint to read the previously recorded components for a subscription.  You can now specify either the component id (integer) or the component handle prefixed by "handle:" to specify the unique identifier for the component you are working with.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: since_id
+          description: Returns usages with an id greater than or equal to the one specified
+        - schema:
+            type: integer
+          in: query
+          name: max_id
+          description: Returns usages with an id less than or equal to the one specified
+        - schema:
+            type: string
+          in: query
+          name: since_date
+          description: 'Returns usages with a created_at date greater than or equal to midnight (12:00 AM) on the date specified.'
+        - schema:
+            type: string
+          in: query
+          name: until_date
+          description: 'Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified.'
+        - schema:
+            type: integer
+            default: 1
+          in: query
+          name: page
+          description: The page number used for pagination.
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: The number of results used for pagination.
 servers:
   - url: 'https://subdomain.chargify.com'
