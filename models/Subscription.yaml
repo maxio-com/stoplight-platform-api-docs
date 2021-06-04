@@ -20,25 +20,31 @@ properties:
   next_assessment_at:
     type: string
   trial_started_at:
-    type: 'null'
+    type: string
+    nullable: true
   trial_ended_at:
-    type: 'null'
+    type: string
+    nullable: true
   activated_at:
     type: string
   expires_at:
-    type: 'null'
+    type: string
+    nullable: true
   created_at:
     type: string
   updated_at:
     type: string
   cancellation_message:
-    type: 'null'
+    type: string
+    nullable: true
   cancellation_method:
-    type: 'null'
+    type: string
+    nullable: true
   cancel_at_end_of_period:
     type: boolean
   canceled_at:
-    type: 'null'
+    type: string
+    nullable: true
   current_period_started_at:
     type: string
   previous_state:
@@ -48,13 +54,17 @@ properties:
   signup_revenue:
     type: string
   delayed_cancel_at:
-    type: 'null'
+    type: string
+    nullable: true
   coupon_code:
-    type: 'null'
+    type: string
+    nullable: true
   payment_collection_method:
     type: string
+    nullable: true
   snap_day:
-    type: 'null'
+    type: string
+    nullable: true
   customer:
     $ref: ./Customer.yaml
   product:
@@ -63,11 +73,16 @@ properties:
     $ref: ./Payment-Profile.yaml
   payment_type:
     type: string
+    nullable: true
   referral_code:
     type: string
+    nullable: true
   next_product_id:
-    type: 'null'
+    type: integer
+    nullable: true
   coupon_use_count:
-    type: 'null'
+    type: integer
+    nullable: true
   coupon_uses_allowed:
-    type: 'null'
+    type: integer
+    nullable: true

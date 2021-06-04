@@ -10160,5 +10160,159 @@ paths:
                         price_point: 456
                       - component_id: 789
                         price_point: 987
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      - component_id: 6474
+                        price_point: 12140
+                        message: Price Point does not belong to Component
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        component_id:
+                          type: number
+                        price_point:
+                          type: number
+                        message:
+                          type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - component_id: 6474
+                        price_point: 12140
+                        message: Price Point does not belong to Component
+  '/subscriptions/{subscription_id}/price_points/reset.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Bulk Reset Subscription Components' Price Points
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      id: -80293620
+                      state: mollit exercitation ipsum
+                      trial_started_at: null
+                      trial_ended_at: null
+                      activated_at: nostrud nulla et
+                      created_at: qui L
+                      updated_at: in veniam aute in
+                      expires_at: null
+                      balance_in_cents: 50504234
+                      current_period_ends_at: Lorem anim eu
+                      next_assessment_at: adipisicing ullamco
+                      canceled_at: null
+                      cancellation_message: lorem ipsum
+                      next_product_id: null
+                      cancel_at_end_of_period: false
+                      payment_collection_method: Duis qui Excepteur laboris reprehenderit
+                      snap_day: null
+                      cancellation_method: eiusmod ipsum pariatur et adipisicing
+                      current_period_started_at: Ut quis non
+                      previous_state: 'occaecat proident sunt cillum '
+                      signup_payment_id: -45156092
+                      signup_revenue: do aliquip ea
+                      delayed_cancel_at: null
+                      coupon_code: null
+                      total_revenue_in_cents: -49740952
+                      product_price_in_cents: 87617888
+                      product_version_number: 13656635
+                      payment_type: null
+                      referral_code: null
+                      coupon_use_count: null
+                      coupon_uses_allowed: null
+                      reason_code: null
+                      automatically_resume_at: null
+                      current_billing_amount_in_cents: -26151968
+                      customer:
+                        id: 15208337
+                        first_name: ipsum culpa in labore eiusmod
+                        last_name: esse
+                        organization: null
+                        email: ex eiusmod
+                        created_at: ad occaecat cillum
+                        updated_at: ut aute proident est
+                        reference: laboris ea cupidatat
+                        address: null
+                        address_2: null
+                        city: id eiusmod proident
+                        state: magna eiusmod anim non
+                        zip: null
+                        country: null
+                        phone: null
+                        portal_invite_last_sent_at: null
+                        portal_invite_last_accepted_at: reprehenderit labore voluptate
+                        portal_customer_created_at: nisi aute reprehenderit Excepteur Duis
+                        cc_emails: eiusmod sunt
+                        tax_exempt: true
+                      product:
+                        id: -74447756
+                        name: eu mollit nulla ut aute
+                        handle: esse dolor anim
+                        description: Lorem ut et non
+                        accounting_code: nisi
+                        request_credit_card: false
+                        expiration_interval: 1
+                        expiration_interval_unit: day
+                        created_at: officia sint
+                        updated_at: sed
+                        price_in_cents: -4151649
+                        interval: 20680876
+                        interval_unit: day
+                        initial_charge_in_cents: null
+                        trial_price_in_cents: null
+                        trial_interval: null
+                        trial_interval_unit: day
+                        archived_at: null
+                        require_credit_card: true
+                        return_params: magna eu
+                        taxable: true
+                        update_return_url: exercitation in
+                        tax_code: Excepteur aliqua sunt in
+                        initial_charge_after_trial: true
+                        version_number: 41642597
+                        update_return_params: dolore labore
+                        product_family:
+                          id: -5356997
+                          name: officia amet Lorem proident enim
+                          description: Duis
+                          handle: ea dolore dolore sunt
+                          accounting_code: null
+                        public_signup_pages: []
+      operationId: post-subscriptions-subscription_id-price_points-reset.json
+      description: |-
+        # Bulk Reset Subscription Components' Price Points
+
+        Resets all of a subscription's components to use the current default.
+
+        **Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
 servers:
   - url: 'https://subdomain.chargify.com'
