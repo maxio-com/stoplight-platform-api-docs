@@ -84,6 +84,7 @@ properties:
   verified:
     type: boolean
     description: Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway
+    nullable: true
   portal_customer_created_at:
     type:
       - string

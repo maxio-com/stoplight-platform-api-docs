@@ -12436,12 +12436,13 @@ paths:
   '/subscriptions/{subscription_id}.json':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: subscription_id
         in: path
         required: true
+        description: The Chargify id of the subscription
     put:
-      summary: Update Subscription Payment Method 
+      summary: Update Subscription Payment Method
       tags:
         - Payment Profiles
       responses:
@@ -12590,5 +12591,468 @@ paths:
                       full_number: '4111111111111111'
                       expiration_month: '10'
                       expiration_year: '2030'
+  '/subscriptions/{subscription_id}/resume.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Resume Subscription
+      tags:
+        - Subscription Status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      id: 18220670
+                      state: active
+                      trial_started_at: null
+                      trial_ended_at: null
+                      activated_at: '2017-06-27T13:45:15-05:00'
+                      created_at: '2017-06-27T13:45:13-05:00'
+                      updated_at: '2017-06-30T09:26:50-05:00'
+                      expires_at: null
+                      balance_in_cents: 10000
+                      current_period_ends_at: '2017-06-30T12:00:00-05:00'
+                      next_assessment_at: '2017-06-30T12:00:00-05:00'
+                      canceled_at: null
+                      cancellation_message: null
+                      next_product_id: null
+                      cancel_at_end_of_period: false
+                      payment_collection_method: automatic
+                      snap_day: end
+                      cancellation_method: null
+                      current_period_started_at: '2017-06-27T13:45:13-05:00'
+                      previous_state: active
+                      signup_payment_id: 191819284
+                      signup_revenue: '0.00'
+                      delayed_cancel_at: null
+                      coupon_code: null
+                      total_revenue_in_cents: 0
+                      product_price_in_cents: 0
+                      product_version_number: 1
+                      payment_type: null
+                      referral_code: d3pw7f
+                      coupon_use_count: null
+                      coupon_uses_allowed: null
+                      reason_code: null
+                      automatically_resume_at: null
+                      current_billing_amount_in_cents: 10000
+                      customer:
+                        id: 17780587
+                        first_name: Catie
+                        last_name: Test
+                        organization: 'Acme, Inc.'
+                        email: catie@example.com
+                        created_at: '2017-06-27T13:01:05-05:00'
+                        updated_at: '2017-06-30T09:23:10-05:00'
+                        reference: 123ABC
+                        address: 123 Anywhere Street
+                        address_2: 'Apartment #10'
+                        city: Los Angeles
+                        state: CA
+                        zip: '90210'
+                        country: US
+                        phone: 555-555-5555
+                        portal_invite_last_sent_at: '2017-06-27T13:45:16-05:00'
+                        portal_invite_last_accepted_at: null
+                        verified: true
+                        portal_customer_created_at: '2017-06-27T13:01:08-05:00'
+                        cc_emails: support@example.com
+                        tax_exempt: true
+                      product:
+                        id: 4470347
+                        name: Zero Dollar Product
+                        handle: zero-dollar-product
+                        description: ''
+                        accounting_code: ''
+                        request_credit_card: true
+                        expiration_interval: null
+                        expiration_interval_unit: never
+                        created_at: '2017-03-23T10:54:12-05:00'
+                        updated_at: '2017-04-20T15:18:46-05:00'
+                        price_in_cents: 0
+                        interval: 1
+                        interval_unit: month
+                        initial_charge_in_cents: null
+                        trial_price_in_cents: null
+                        trial_interval: null
+                        trial_interval_unit: month
+                        archived_at: null
+                        require_credit_card: false
+                        return_params: ''
+                        taxable: false
+                        update_return_url: ''
+                        tax_code: ''
+                        initial_charge_after_trial: false
+                        version_number: 1
+                        update_return_params: ''
+                        product_family:
+                          id: 997233
+                          name: Acme Products
+                          description: ''
+                          handle: acme-products
+                          accounting_code: null
+                        public_signup_pages:
+                          - id: 316810
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product'
+      operationId: post-subscriptions-subscription_id-resume.json
+      description: |-
+        # Resume Subscription
+
+        Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.
+      parameters:
+        - schema:
+            type: string
+            default: prorated
+            enum:
+              - prorated
+              - immediate
+              - delayed
+          in: query
+          name: 'calendar_billing[''resumption_charge'']'
+          description: (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled
+  '/subscriptions/{subscription_id}/hold.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Hold / Pause Subscription
+      tags:
+        - Subscription Status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      id: 18220670
+                      state: on-hold
+                      trial_started_at: null
+                      trial_ended_at: null
+                      activated_at: '2017-06-27T13:45:15-05:00'
+                      created_at: '2017-06-27T13:45:13-05:00'
+                      updated_at: '2017-06-30T09:26:50-05:00'
+                      expires_at: null
+                      balance_in_cents: 10000
+                      current_period_ends_at: '2017-06-30T12:00:00-05:00'
+                      next_assessment_at: '2017-06-30T12:00:00-05:00'
+                      canceled_at: null
+                      cancellation_message: null
+                      next_product_id: null
+                      cancel_at_end_of_period: false
+                      payment_collection_method: automatic
+                      snap_day: end
+                      cancellation_method: null
+                      current_period_started_at: '2017-06-27T13:45:13-05:00'
+                      previous_state: active
+                      signup_payment_id: 191819284
+                      signup_revenue: '0.00'
+                      delayed_cancel_at: null
+                      coupon_code: null
+                      total_revenue_in_cents: 0
+                      product_price_in_cents: 0
+                      product_version_number: 1
+                      payment_type: null
+                      referral_code: d3pw7f
+                      coupon_use_count: null
+                      coupon_uses_allowed: null
+                      reason_code: null
+                      automatically_resume_at: null
+                      current_billing_amount_in_cents: 10000
+                      customer:
+                        id: 17780587
+                        first_name: Catie
+                        last_name: Test
+                        organization: 'Acme, Inc.'
+                        email: catie@example.com
+                        created_at: '2017-06-27T13:01:05-05:00'
+                        updated_at: '2017-06-30T09:23:10-05:00'
+                        reference: 123ABC
+                        address: 123 Anywhere Street
+                        address_2: 'Apartment #10'
+                        city: Los Angeles
+                        state: CA
+                        zip: '90210'
+                        country: US
+                        phone: 555-555-5555
+                        portal_invite_last_sent_at: '2017-06-27T13:45:16-05:00'
+                        portal_invite_last_accepted_at: null
+                        verified: true
+                        portal_customer_created_at: '2017-06-27T13:01:08-05:00'
+                        cc_emails: support@example.com
+                        tax_exempt: true
+                      product:
+                        id: 4470347
+                        name: Zero Dollar Product
+                        handle: zero-dollar-product
+                        description: ''
+                        accounting_code: ''
+                        request_credit_card: true
+                        expiration_interval: null
+                        expiration_interval_unit: never
+                        created_at: '2017-03-23T10:54:12-05:00'
+                        updated_at: '2017-04-20T15:18:46-05:00'
+                        price_in_cents: 0
+                        interval: 1
+                        interval_unit: month
+                        initial_charge_in_cents: null
+                        trial_price_in_cents: null
+                        trial_interval: null
+                        trial_interval_unit: month
+                        archived_at: null
+                        require_credit_card: false
+                        return_params: ''
+                        taxable: false
+                        update_return_url: ''
+                        tax_code: ''
+                        initial_charge_after_trial: false
+                        version_number: 1
+                        update_return_params: ''
+                        product_family:
+                          id: 997233
+                          name: Acme Products
+                          description: ''
+                          handle: acme-products
+                          accounting_code: null
+                        public_signup_pages:
+                          - id: 316810
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - This subscription is not eligible to be put on hold.
+      operationId: post-subscriptions-subscription_id-hold.json
+      description: |-
+        # Hold / Pause Subscription
+
+        This will place the subscription in the on_hold state and it will not renew.
+
+        ## Limitations
+
+        You may not place a subscription on hold if the `next_billing` date is within 24 hours.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  hold:
+                    automatically_resume_at: '2017-05-25T11:25:00Z'
+              properties:
+                hold:
+                  type: object
+                  properties:
+                    automatically_resume_at:
+                      type: string
+            examples:
+              Example:
+                value:
+                  hold:
+                    automatically_resume_at: '2017-05-25T11:25:00Z'
+    put:
+      summary: Update Automatic Subscription Resumption
+      tags:
+        - Subscription Status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      id: 20359140
+                      state: on_hold
+                      trial_started_at: null
+                      trial_ended_at: null
+                      activated_at: '2018-01-05T17:15:50-06:00'
+                      created_at: '2018-01-05T17:15:49-06:00'
+                      updated_at: '2018-01-09T10:26:14-06:00'
+                      expires_at: null
+                      balance_in_cents: 0
+                      current_period_ends_at: '2023-01-05T17:15:00-06:00'
+                      next_assessment_at: '2023-01-05T17:15:00-06:00'
+                      canceled_at: null
+                      cancellation_message: null
+                      next_product_id: null
+                      cancel_at_end_of_period: false
+                      payment_collection_method: automatic
+                      snap_day: null
+                      cancellation_method: null
+                      current_period_started_at: '2018-01-05T17:15:49-06:00'
+                      previous_state: active
+                      signup_payment_id: 219829722
+                      signup_revenue: '100.00'
+                      delayed_cancel_at: null
+                      coupon_code: null
+                      total_revenue_in_cents: 10009991
+                      product_price_in_cents: 10000
+                      product_version_number: 1
+                      payment_type: credit_card
+                      referral_code: 8y7jqr
+                      coupon_use_count: null
+                      coupon_uses_allowed: null
+                      reason_code: null
+                      automatically_resume_at: '2019-01-20T00:00:00-06:00'
+                      coupon_codes: []
+                      customer:
+                        id: 19948683
+                        first_name: Vanessa
+                        last_name: Test
+                        organization: ''
+                        email: vanessa@example.com
+                        created_at: '2018-01-05T17:15:49-06:00'
+                        updated_at: '2018-01-05T17:15:51-06:00'
+                        reference: null
+                        address: 123 Anywhere Ln
+                        address_2: ''
+                        city: Boston
+                        state: MA
+                        zip: '02120'
+                        country: US
+                        phone: 555-555-1212
+                        portal_invite_last_sent_at: '2018-01-05T17:15:51-06:00'
+                        portal_invite_last_accepted_at: null
+                        verified: null
+                        portal_customer_created_at: '2018-01-05T17:15:51-06:00'
+                        cc_emails: null
+                        tax_exempt: false
+                      product:
+                        id: 4535643
+                        name: Annual Product
+                        handle: annual-product
+                        description: ''
+                        accounting_code: ''
+                        request_credit_card: true
+                        expiration_interval: null
+                        expiration_interval_unit: never
+                        created_at: '2017-08-25T10:25:31-05:00'
+                        updated_at: '2017-08-25T10:25:31-05:00'
+                        price_in_cents: 10000
+                        interval: 12
+                        interval_unit: month
+                        initial_charge_in_cents: null
+                        trial_price_in_cents: null
+                        trial_interval: null
+                        trial_interval_unit: month
+                        archived_at: null
+                        require_credit_card: true
+                        return_params: ''
+                        taxable: false
+                        update_return_url: ''
+                        tax_code: ''
+                        initial_charge_after_trial: false
+                        version_number: 1
+                        update_return_params: ''
+                        product_family:
+                          id: 1025627
+                          name: Acme Products
+                          description: ''
+                          handle: acme-products
+                          accounting_code: null
+                        public_signup_pages: []
+                      credit_card:
+                        id: 13826563
+                        first_name: Bomb 3
+                        last_name: Test
+                        masked_card_number: XXXX-XXXX-XXXX-1
+                        card_type: bogus
+                        expiration_month: 1
+                        expiration_year: 2028
+                        customer_id: 19948683
+                        current_vault: bogus
+                        vault_token: '1'
+                        billing_address: 123 Anywhere Lane
+                        billing_city: Boston
+                        billing_state: Ma
+                        billing_zip: '02120'
+                        billing_country: US
+                        customer_vault_token: null
+                        billing_address_2: ''
+                        payment_type: credit_card
+      operationId: put-subscriptions-subscription_id-hold.json
+      description: |-
+        # Update Automatic Subscription Resumption
+
+        Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
+
+        To update a subscription's resume date, use this method to change or update the `automatically_resume_at` date.
+
+        ### Remove the resume date
+
+        Alternately, you can change the `automatically_resume_at` to `null` if you would like the subscription to not have a resume date.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  hold:
+                    automatically_resume_at: '2019-01-20'
+              properties:
+                hold:
+                  type: object
+                  properties:
+                    automatically_resume_at:
+                      type:
+                        - string
+                        - 'null'
+            examples:
+              Example:
+                value:
+                  hold:
+                    automatically_resume_at: '2019-01-20'
 servers:
   - url: 'https://subdomain.chargify.com'
