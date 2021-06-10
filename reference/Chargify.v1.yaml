@@ -13054,5 +13054,118 @@ paths:
                 value:
                   hold:
                     automatically_resume_at: '2019-01-20'
+  '/subscriptions/{subscription_id}/reactivate.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    put:
+      summary: Reactivate Subscription
+      tags:
+        - Subscription Status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Cannot reactivate a subscription that is not marked "Canceled", "Unpaid", or "Trial Ended".'
+                      - 'Request was ''resume only'', but this subscription cannot be resumed.'
+                      - The credit card on file could not be charged.
+      operationId: put-subscriptions-subscription_id-reactivate.json
+      description: |
+        # Reactivate Subscription
+
+        Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://help.chargify.com/subscriptions/reactivation.html).
+
+        **Please note: The term 
+        "resume" is used also during another process in Chargify. This occurs when an on-hold subscription is "resumed". This returns the subscription to an active state.**
+
+        + The response returns the subscription object in the `active` or `trialing` state. 
+        + The `canceled_at` and `cancellation_message` fields do not have values.
+        + The method works for "Canceled" or "Trial Ended" subscriptions. 
+        + It will not work for items not marked as "Canceled", "Unpaid", or "Trial Ended".
+
+        ## Resume the current billing period for a subscription
+
+        A subscription is considered "resumable" if you are attempting to reactivate within the billing period the subscription was canceled in.
+
+        A resumed subscription's billing date remains the same as before it was canceled. In other words, it does not start a new billing period. Payment may or may not be collected for a resumed subscription, depending on whether or not the subscription had a balance when it was canceled (for example, if it was canceled because of dunning).
+
+        Consider a subscription which was created on June 1st, and would renew on July 1st. The subscription is then canceled on June 15. 
+
+        If a reactivation with `resume: true` were attempted _before_ what would have been the next billing date of July 1st, then Chargify would resume the subscription.
+
+        If a reactivation with `resume: true` were attempted _after_ what would have been the next billing date of July 1st, then Chargify would not resume the subscription, and instead it would be reactivated with a new billing period.
+         
+        | Canceled | Reactivation | Resumable? |
+        |---|---|---|
+        | Jun 15 | June 28 | Yes |
+        | Jun 15 | July 2 | No |
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                calendar_billing:
+                  type: object
+                  description: These values are only applicable to subscriptions using calendar billing
+                  properties:
+                    reactivation_charge:
+                      type: string
+                      enum:
+                        - prorated
+                        - immediate
+                        - delayed
+                      description: 'You may choose how to handle the reactivation charge for that subscription: 1) `prorated` A prorated charge for the product price will be attempted for to complete the period 2) `immediate` A full-price charge for the product price will be attempted immediately 3) `delayed` A full-price charge for the product price will be attempted at the next renewal'
+                      default: prorated
+                include_trial:
+                  type: boolean
+                  description: 'If `true` is sent, the reactivated Subscription will include a trial if one is available. If `false` is sent, the trial period will be ignored.'
+                preserve_balance:
+                  type: boolean
+                  description: 'If `true` is passed, the existing subscription balance will NOT be cleared/reset before adding the additional reactivation charges.'
+                coupon_code:
+                  type: string
+                  description: The coupon code to be applied during reactivation.
+                use_credits_and_prepayments:
+                  type: boolean
+                  description: 'If true is sent, Chargify will use service credits and prepayments upon reactivation. If false is sent, the service credits and prepayments will be ignored.'
+                resume:
+                  type:
+                    - boolean
+                    - object
+                  description: 'If `true`, Chargify will attempt to resume the subscription''s billing period. if not resumable, the subscription will be reactivated with a new billing period. If `false`: Chargify will only attempt to reactivate the subscription.'
+                  properties:
+                    require_resume:
+                      type: boolean
+                      description: 'Chargify will only attempt to resume the subscription''s billing period. If not resumable, the subscription will be left in it''s current state.'
+                    forgive_balance:
+                      type: boolean
+                      description: 'Indicates whether or not Chargify should clear the subscription''s existing balance before attempting to resume the subscription. If subscription cannot be resumed, the balance will remain as it was before the attempt to resume was made.'
 servers:
   - url: 'https://subdomain.chargify.com'
