@@ -12443,7 +12443,7 @@ paths:
         required: true
         description: The Chargify id of the subscription
     put:
-      summary: Update Subscription Payment Method
+      summary: Update Subscription
       tags:
         - Payment Profiles
       responses:
@@ -12559,13 +12559,31 @@ paths:
           description: Unprocessable Entity (WebDAV)
       operationId: put-subscriptions-subscription_id-.json
       description: |-
-        # Update Subscription Payment Method
+        # Update Subscription
+
+        ## Update Subscription Payment Method
 
         Change the card that your Subscriber uses for their subscription. You can also use this method to simply change the expiration date of the card **if your gateway allows**.
 
         Note that partial card updates for **Authorize.Net** are not allowed via this endpoint. The existing Payment Profile must be directly updated instead.
 
         You also use this method to change the subscription to a different product by setting a new value for product_handle. A product change can be done in two different ways, **product change** or **delayed product change**.
+
+        ## Product Change
+
+        This endpoint may be used to change a subscription's product. The new payment amount is calculated and charged at the normal start of the next period. If you desire complex product changes or prorated upgrades and downgrades instead, please see the documentation on Migrating Subscription Products.
+
+        To perform a product change, simply set either the `product_handle` or `product_id` attribute to that of a different product from the same site as the subscription. You can also change the price point by passing in either `product_price_point_id` or `product_price_point_handle` - otherwise the new product's default price point will be used.
+
+        ### Delayed Product Change
+
+        This method also changes the product and/or price point, and the new payment amount is calculated and charged at the normal start of the next period. 
+
+        This method schedules the product change to happen automatically at the subscription’s next renewal date. To perform a Delayed Product Change, set the `product_handle` attribute as you would in a regular product change, but also set the `product_change_delayed` attribute to `true`. No proration applies in this case.
+
+        You can also perform a delayed change to the price point by passing in either `product_price_point_id` or `product_price_point_handle`
+
+        **Note: To cancel a delayed product change, set `next_product_id` to an empty string.**
       requestBody:
         content:
           application/json:
@@ -12584,6 +12602,20 @@ paths:
                           type: string
                         expiration_year:
                           type: string
+                    product_handle:
+                      type: string
+                      description: Set to the handle of a different product to change the subscription's product
+                    product_id:
+                      type: integer
+                      description: Set to the id of a different product to change the subscription's product
+                    product_change_delayed:
+                      type: boolean
+                      default: false
+                    next_product_id:
+                      type: string
+                      description: Set to an empty string to cancel a delayed product change.
+                    next_product_price_point_id:
+                      type: string
             examples:
               Example:
                 value:
