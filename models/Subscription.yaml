@@ -42,6 +42,7 @@ properties:
     nullable: true
   cancel_at_end_of_period:
     type: boolean
+    nullable: true
   canceled_at:
     type: string
     nullable: true

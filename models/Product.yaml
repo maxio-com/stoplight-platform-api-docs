@@ -32,6 +32,7 @@ properties:
       - month
       - day
       - never
+      - ''
       - null
   created_at:
     type: string
