@@ -15144,6 +15144,110 @@ paths:
         #### Current Billing Amount in Cents
 
         Current billing amount for the subscription group is not returned by default. If this information is desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
+    put:
+      summary: Update Subscription Group
+      tags:
+        - Subscription Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription_group:
+                    type: object
+                    properties:
+                      customer_id:
+                        type: integer
+                      payment_profile:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          masked_card_number:
+                            type: string
+                      payment_collection_method:
+                        type: string
+                      subscription_ids:
+                        type: array
+                        items:
+                          type: integer
+                      created_at:
+                        type: string
+                examples:
+                  Example:
+                    value:
+                      subscription_group: null
+                      customer_id: 1
+                      payment_profile:
+                        id: 1
+                        first_name: t
+                        last_name: t
+                        masked_card_number: XXXX-XXXX-XXXX-1
+                      payment_collection_method: automatic
+                      subscription_ids:
+                        - 1
+                      created_at: '2021-01-21T05:47:38-05:00'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      members:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            type:
+                              type: string
+                            message:
+                              type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      members:
+                        - id: 10101
+                          type: not_found
+                          message: Subscription could not be found
+      operationId: put-subscription_groups-uid-.json
+      description: |-
+        # Update Subscription Group
+
+        Use this endpoint to update subscription group members.
+        `"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_group:
+                  type: object
+                  properties:
+                    member_ids:
+                      type: array
+                      items:
+                        type: integer
+            examples:
+              Example:
+                value:
+                  subscription_group:
+                    members_ids:
+                      - 1
   /subscription_groups/lookup.json:
     get:
       summary: Find Subscription Group
