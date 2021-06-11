@@ -14297,7 +14297,7 @@ paths:
                           - integer
                         description: 'Either the component''s Chargify id or its handle prefixed with `handle:`'
                       quantity:
-                        type: string
+                        type: integer
                         description: |-
                           The quantity for which you wish to preview billing. This is useful if you want to preview a predicted, higher usage value than is currently present on the subscription.
 
@@ -14611,5 +14611,98 @@ paths:
                       zip: string
                       country: string
         description: ''
+  '/subscriptions/{subscription_id}/prepayments.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Create Prepayment
+      tags:
+        - Subscription Invoice Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prepayment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      subscription_id:
+                        type: integer
+                      amount_in_cents:
+                        type: integer
+                      memo:
+                        type: string
+                      created_at:
+                        type: string
+                      starting_balance_in_cents:
+                        type: integer
+                      ending_balance_in_cents:
+                        type: integer
+              examples:
+                Example:
+                  value:
+                    prepayment:
+                      id: 1
+                      subscription_id: 1
+                      amount_in_cents: 10000
+                      memo: John Doe - Prepayment
+                      created_at: '2020-07-31T05:52:32-04:00'
+                      starting_balance_in_cents: 0
+                      ending_balance_in_cents: -10000
+      operationId: post-subscriptions-subscription_id-prepayments.json
+      description: |
+        # Create Prepayment 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prepayment:
+                  type: object
+                  required:
+                    - amount
+                    - details
+                    - memo
+                    - method
+                  properties:
+                    amount:
+                      type: number
+                    details:
+                      type: string
+                    memo:
+                      type: string
+                    method:
+                      type: string
+                      enum:
+                        - check
+                        - cash
+                        - money_order
+                        - ach
+                        - paypal_account
+                        - credit_card_on_file
+                        - other
+                      description: 'When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance.  This is especially useful for manual replenishment of prepaid subscriptions.'
+                    payment_profile_id:
+                      type: integer
+              required:
+                - prepayment
+            examples:
+              Example:
+                value:
+                  prepayment:
+                    amount: 100
+                    details: John Doe signup for $100
+                    memo: Signup for $100
+                    method: check
 servers:
   - url: 'https://subdomain.chargify.com'

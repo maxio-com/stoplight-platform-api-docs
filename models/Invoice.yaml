@@ -311,12 +311,14 @@ properties:
             * For non-periodic charges, this date and the start date will match.
         product_id:
           type: integer
+          nullable: true
           description: |-
             The ID of the product subscribed when the charge was made.
 
             This may be set even for component charges, so true product-only (non-component) charges will also have a nil `component_id`.
         product_version:
           type: integer
+          nullable: true
           description: The version of the product subscribed when the charge was made.
         component_id:
           type:
