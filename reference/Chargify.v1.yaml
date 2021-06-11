@@ -16669,5 +16669,45 @@ paths:
         You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
         When changing for a subscription group, the new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
+  '/subscriptions/{subscription_id}/purge.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Purge Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      operationId: post-subscriptions-subscription_id-purge.json
+      description: |-
+        # Purge Subscription
+
+        For sites in test mode, you may purge individual subscriptions.
+
+        Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string `ack` parameter. You may also delete the customer record and/or payment profiles by passing `cascade` parameters. For example, to delete just the customer record, the query params would be: `?ack={customer_id}&cascade[]=customer`
+
+        If you need to remove subscriptions from a live site, please contact support to discuss your use case.
+
+        ### Delete customer and payment profile
+
+        The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: ack
+        - schema:
+            type: array
+          in: query
+          name: cascade
+          description: Options are "customer" or "payment_profile"
 servers:
   - url: 'https://subdomain.chargify.com'
