@@ -15519,5 +15519,71 @@ paths:
               Example:
                 value:
                   charge_unbilled_usage: true
+  '/subscription_groups/{uid}/delayed_cancel.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    post:
+      summary: Initiate Delayed Group Cancellation
+      tags:
+        - Subscription Group Status
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Subscriptions group is in a past due state
+      operationId: post-subscription_groups-uid-delayed_cancel.json
+      description: |-
+        # Initiate Delayed Group Cancellation
+
+        This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
+
+        All subscriptions in the group must be on automatic billing in order to successfully cancel them, and the group must not be in a "past_due" state.
+    delete:
+      summary: Cancel Delayed Group Cancellation
+      tags:
+        - Subscription Group Status
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Subscriptions group does not have a pending delayed cancellation
+      operationId: delete-subscription_groups-uid-delayed_cancel.json
+      description: |-
+        # Cancel Delayed Group Cancellation
+
+        Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
 servers:
   - url: 'https://subdomain.chargify.com'
