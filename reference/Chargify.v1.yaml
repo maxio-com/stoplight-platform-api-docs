@@ -14704,5 +14704,51 @@ paths:
                     details: John Doe signup for $100
                     memo: Signup for $100
                     method: check
+  '/subscriptions/{subscription_id}/service_credits.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Issue Service Credit
+      tags:
+        - Subscription Invoice Account
+      responses:
+        '201':
+          description: Created
+      operationId: post-subscriptions-subscription_id-service_credits.json
+      description: |-
+        # Issue Service Credit
+
+        Credit will be added to the subscription in the amount specified in the request body.The credit is subsequently applied to the next generated invoice.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_credit:
+                  type: object
+                  required:
+                    - amount
+                    - memo
+                  properties:
+                    amount:
+                      type:
+                        - number
+                        - string
+                    memo:
+                      type: string
+              required:
+                - service_credit
+            examples:
+              Example:
+                value:
+                  service_credit:
+                    amount: '1'
+                    memo: Courtesy credit
 servers:
   - url: 'https://subdomain.chargify.com'
