@@ -13072,9 +13072,26 @@ paths:
                             url: 'https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product'
         '422':
           description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Payment collection method cannot be set to 'invoice' when the subscription is past due
+                      - '''expires_at'' cannot be set for subscriptions on calendar billing'
       operationId: put-subscriptions-subscription_id-.json
       description: |-
         # Update Subscription
+
+        The subscription endpoint allows you to instantly update one or many attributes about a subscription in a single call.
 
         ## Update Subscription Payment Method
 
@@ -13159,6 +13176,16 @@ paths:
                     next_billing_at:
                       type: string
                       description: ''
+                    payment_collection_method:
+                      type: string
+                    receives_invoice_emails:
+                      type: boolean
+                    net_terms:
+                      type:
+                        - string
+                        - integer
+                    stored_credential_transaction_id:
+                      type: integer
             examples:
               Example:
                 value:
