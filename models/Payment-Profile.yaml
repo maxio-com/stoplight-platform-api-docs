@@ -25,18 +25,25 @@ properties:
     type: string
   billing_address:
     type: string
+    nullable: true
   billing_city:
     type: string
+    nullable: true
   billing_state:
     type: string
+    nullable: true
   billing_zip:
     type: string
+    nullable: true
   billing_country:
     type: string
+    nullable: true
   customer_vault_token:
-    type: 'null'
+    type: string
+    nullable: true
   billing_address_2:
     type: string
+    nullable: true
   payment_type:
     type: string
   disabled:
