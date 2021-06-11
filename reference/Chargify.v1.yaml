@@ -14912,5 +14912,123 @@ paths:
                     members_ids:
                       - 2
                       - 3
+  '/subscription_groups/{uid}.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    get:
+      summary: Read Subscription Group
+      tags:
+        - Subscription Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                  scheme:
+                    type: integer
+                  customer_id:
+                    type: integer
+                  payment_profile_id:
+                    type: integer
+                  subscription_ids:
+                    type: array
+                    items:
+                      type: integer
+                  primary_subscription_id:
+                    type: integer
+                  next_assessment_at:
+                    type: string
+                  state:
+                    type: string
+                  cancel_at_end_of_period:
+                    type: boolean
+                  current_billing_amount_in_cents:
+                    type: integer
+                  customer:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      organization:
+                        type: string
+                      email:
+                        type: string
+                      reference:
+                        type: string
+                  account_balances:
+                    type: object
+                    properties:
+                      prepayments:
+                        type: object
+                        properties:
+                          balance_in_cents:
+                            type: integer
+                      service_credits:
+                        type: object
+                        properties:
+                          balance_in_cents:
+                            type: integer
+                      open_invoices:
+                        type: object
+                        properties:
+                          balance_in_cents:
+                            type: integer
+                      pending_discounts:
+                        type: object
+                        properties:
+                          balance_in_cents:
+                            type: integer
+              examples:
+                Example:
+                  value:
+                    uid: grp_939ktzq8v4477
+                    scheme: 1
+                    customer_id: 400
+                    payment_profile_id: 567
+                    subscription_ids:
+                      - 101
+                      - 102
+                      - 103
+                    primary_subscription_id: 101
+                    next_assessment_at: '2020-08-01T14:00:00-05:00'
+                    state: active
+                    cancel_at_end_of_period: false
+                    current_billing_amount_in_cents: 11500
+                    customer:
+                      first_name: Mark
+                      last_name: Wannabewahlberg
+                      organization: The Funky Bunch
+                      email: markymark@example.com
+                      reference: 4c92223b-bc16-4d0d-87ff-b177a89a2655
+                    account_balances:
+                      prepayments:
+                        balance_in_cents: 0
+                      service_credits:
+                        balance_in_cents: 0
+                      open_invoices:
+                        balance_in_cents: 4400
+                      pending_discounts:
+                        balance_in_cents: 0
+      operationId: get-subscription_groups-uid-.json
+      description: |-
+        # Read Subscription Group
+
+        Use this endpoint to find subscription group details.
+
+        #### Current Billing Amount in Cents
+
+        Current billing amount for the subscription group is not returned by default. If this information is desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
 servers:
   - url: 'https://subdomain.chargify.com'
