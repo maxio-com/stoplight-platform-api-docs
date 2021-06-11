@@ -11723,7 +11723,7 @@ paths:
                       type: string
                       description: 'The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given.'
                     group:
-                      type: string
+                      type: object
                       description: Group attributes including the target subscription with which to group the new subscription and optional billing attributes.
                     ref:
                       type: string
