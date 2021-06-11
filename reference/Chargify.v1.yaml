@@ -15716,5 +15716,103 @@ paths:
         This will delete a Payment Profile belonging to a Subscription Group.
 
         **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
+  '/subscription_groups/{uid}/prepayments.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    post:
+      summary: Create Prepayment
+      tags:
+        - Subscription Group Invoice Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  amount_in_cents:
+                    type: integer
+                    description: The amount in cents of the entry.
+                  ending_balance_in_cents:
+                    type: integer
+                    description: The ending balance in cents of the account.
+                  entry_type:
+                    type: string
+                    description: The type of account entry
+                    enum:
+                      - Credit
+                      - Debit
+                  memo:
+                    type: string
+                    description: |
+                      A memo attached to the entry.
+              examples:
+                Example:
+                  value:
+                    id: 6049554
+                    amount_in_cents: 10000
+                    ending_balance_in_cents: 5000
+                    entry_type: Debit
+                    memo: Debit from invoice account.
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Amount must be greater than 0
+      operationId: post-subscription_groups-uid-prepayments.json
+      description: |-
+        # Create Prepayment
+
+        A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prepayment:
+                  type: object
+                  required:
+                    - amount
+                    - details
+                    - memo
+                    - method
+                  properties:
+                    amount:
+                      type: integer
+                    details:
+                      type: string
+                    memo:
+                      type: string
+                    method:
+                      type: string
+                      enum:
+                        - check
+                        - cash
+                        - money_order
+                        - ach
+                        - paypal_account
+                        - other
+              required:
+                - prepayment
 servers:
   - url: 'https://subdomain.chargify.com'
