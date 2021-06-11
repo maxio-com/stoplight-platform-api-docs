@@ -16079,82 +16079,6 @@ paths:
           name: subscription_id
           required: true
           description: The Chargify id of the subscription associated with the subscription group
-  '/subscriptions/{subscription_group_uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
-    parameters:
-      - schema:
-          type: string
-        name: subscription_group_uid
-        in: path
-        required: true
-        description: The uid of the subscription group
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile to be set as default
-    post:
-      summary: Change Default Payment Profile
-      tags:
-        - Subscription Groups
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  payment_profile:
-                    $ref: ../models/Payment-Profile.yaml
-              examples:
-                Example:
-                  value:
-                    payment_profile:
-                      id: 3
-                      first_name: Leland
-                      last_name: Considine
-                      masked_card_number: XXXX-XXXX-XXXX-1
-                      card_type: bogus
-                      expiration_month: 12
-                      expiration_year: 2022
-                      customer_id: 1
-                      current_vault: null
-                      vault_token: null
-                      billing_address: null
-                      billing_city: null
-                      billing_state: null
-                      billing_zip: null
-                      billing_country: null
-                      customer_vault_token: null
-                      billing_address_2: null
-                      site_gateway_setting_id: null
-                      payment_type: credit_card
-                      disabled: false
-        '422':
-          description: Unprocessable Entity (WebDAV)
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-              examples:
-                Example:
-                  value:
-                    errors:
-                      - Cannot switch to a payment profile outside of the group
-      operationId: post-subscriptions-subscription_group_uid-payment_profiles-payment_profile_id-change_payment_profile.json
-      description: |-
-        # Change Default Payment Profile
-
-        This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
-
-        You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
-        The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
   '/subscription_groups/{uid}/cancel.json':
     parameters:
       - schema:
@@ -16670,5 +16594,80 @@ paths:
           in: query
           name: reference
       description: '# Find Subscription'
+  '/subscriptions/{identifier}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
+    parameters:
+      - schema:
+          type: integer
+        name: identifier
+        in: path
+        required: true
+        description: The Chargify id of the subscription or the uid of the subscription's group
+      - schema:
+          type: integer
+        name: payment_profile_id
+        in: path
+        required: true
+        description: The Chargify id of the payment profile
+    post:
+      summary: Change Default Payment Profile
+      tags:
+        - Payment Profiles
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment_profile:
+                    $ref: ../models/Payment-Profile.yaml
+              examples:
+                Example:
+                  value:
+                    payment_profile:
+                      id: 10211899
+                      first_name: Amelia
+                      last_name: Example
+                      masked_card_number: XXXX-XXXX-XXXX-1
+                      card_type: bogus
+                      expiration_month: 2
+                      expiration_year: 2018
+                      customer_id: 14399371
+                      current_vault: bogus
+                      vault_token: '1'
+                      billing_address: ''
+                      billing_city: ''
+                      billing_state: ''
+                      billing_zip: ''
+                      billing_country: ''
+                      customer_vault_token: null
+                      billing_address_2: ''
+                      payment_type: credit_card
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - This is already the current payment profile
+      operationId: post-subscriptions-subscription_id-payment_profiles-payment_profile_id-change_payment_profile.json
+      description: |-
+        # Change Default Payment Profile
+
+        This will change the default payment profile on the subscription or subscription group to the existing payment profile with the id specified.
+
+        You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
+
+        When changing for a subscription group, the new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
 servers:
   - url: 'https://subdomain.chargify.com'
