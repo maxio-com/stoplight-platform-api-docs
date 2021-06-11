@@ -12446,7 +12446,7 @@ paths:
     put:
       summary: Update Subscription
       tags:
-        - Payment Profiles
+        - Subscriptions
       responses:
         '200':
           description: OK
