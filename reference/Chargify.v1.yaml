@@ -15814,5 +15814,154 @@ paths:
                         - other
               required:
                 - prepayment
+  '/subscription_groups/{uid}/service_credits.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    post:
+      summary: Issue Service Credit
+      tags:
+        - Subscription Group Invoice Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_credit:
+                    $ref: ../models/Service-Credit.yaml
+              examples:
+                Example:
+                  value:
+                    id: 101
+                    amount_in_cents: 1000
+                    ending_balance_in_cents: 2000
+                    entry_type: Credit
+                    memo: Credit to group account
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Amount must be greater than 0
+      operationId: post-subscription_groups-uid-service_credits.json
+      description: |-
+        # Issue Service Credit
+
+        Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_credit:
+                  type: object
+                  required:
+                    - amount
+                    - memo
+                  properties:
+                    amount:
+                      type: integer
+                    memo:
+                      type: string
+              required:
+                - service_credit
+            examples:
+              Example:
+                value:
+                  service_credit:
+                    amount: 10
+                    memo: Credit the group account
+  '/subscription_groups/{uid}/service_credit_deductions.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    post:
+      summary: Deduct Service Credit
+      tags:
+        - Subscription Group Invoice Account
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Service-Credit.yaml
+              examples:
+                Example:
+                  value:
+                    id: 100
+                    amount_in_cents: 1000
+                    ending_balance_in_cents: 0
+                    entry_type: Debit
+                    memo: Debit from group account
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Amount must be greater than 0
+      operationId: post-subscription_groups-uid-service_credit_deductions.json
+      description: |-
+        # Deduct Service Credit
+
+        Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deduction:
+                  type: object
+                  required:
+                    - amount
+                    - memo
+                  properties:
+                    amount:
+                      type:
+                        - string
+                        - number
+                    memo:
+                      type: string
+              required:
+                - deduction
+            examples:
+              Example:
+                value:
+                  deduction:
+                    amount: 10
+                    memo: Deduct from group account
 servers:
   - url: 'https://subdomain.chargify.com'
