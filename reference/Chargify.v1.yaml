@@ -7618,7 +7618,7 @@ paths:
     delete:
       summary: Delete Subscription Payment Profile
       tags:
-        - Payment Profiles
+        - Subscription Invoice Account
       responses:
         '204':
           description: No Content
