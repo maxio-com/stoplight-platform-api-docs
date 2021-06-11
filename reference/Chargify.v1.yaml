@@ -13684,5 +13684,77 @@ paths:
                     proration_date:
                       type: string
                       description: The date that the proration is calculated from for the preview
+  '/subscriptions/{subscription_id}/override.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    put:
+      summary: Override Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      operationId: put-subscriptions-subscription_id-override.json
+      description: |-
+        # Override Subscription
+
+        This API endpoint allows you to set certain subscription fields that are usually managed for you automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can only be set using this endpoint.
+
+        This endpoint is provided for cases where you need to “align” Chargify data with data that happened in your system, perhaps before you started using Chargify. For example, you may choose to import your historical subscription data, and would like the activation and cancellation dates in Chargify to match your existing historical dates. Chargify does not backfill historical events (i.e. from the Events API), but some static data can be changed via this API.
+
+        Why are some fields only settable from this endpoint, and not the normal subscription create and update endpoints? Because we want users of this endpoint to be aware that these fields are usually managed by Chargify, and using this API means **you are stepping out on your own.**
+
+        Changing these fields will not affect any other attributes. For example, adding an expiration date will not affect the next assessment date on the subscription.
+
+        If you regularly need to override the current_period_starts_at for new subscriptions, this can also be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation. See the documentation on [Importing Subscriptions](https://reference.chargify.com/v1/subscriptions-import/importing-subscriptions) for more information.
+
+        ## Limitations
+
+        When passing `current_period_starts_at` some validations are made:
+
+        1. The subscription needs to be unbilled (no statements or invoices).
+        2. The value passed must be a valid date/time.
+        3. The value passed must be before the current date/time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription:
+                  type: object
+                  properties:
+                    activated_at:
+                      type: string
+                      description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
+                    canceled_at:
+                      type: string
+                      description: 'Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.'
+                    cancellation_message:
+                      type: string
+                      description: Can be used to record a reason for the original cancellation.
+                    expires_at:
+                      type: string
+                      description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
+                    current_period_starts_at:
+                      type: string
+                      description: 'Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.'
+            examples:
+              Example:
+                value:
+                  subscription:
+                    activated_at: '1999-12-01'
+                    canceled_at: '2000-12-31'
+                    cancellation_message: Original cancellation in 2000
+                    expires_at: '2001-07-15'
 servers:
   - url: 'https://subdomain.chargify.com'
