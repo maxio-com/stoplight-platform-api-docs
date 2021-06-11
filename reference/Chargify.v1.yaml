@@ -14325,5 +14325,291 @@ paths:
                       quantity: 100
                       price_point_id: 'handle:startup-pricing'
         description: ''
+  '/subscriptions/{subscription_id}/invoices.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Create Invoice
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice:
+                    $ref: ../models/Invoice.yaml
+              examples:
+                Example:
+                  value:
+                    invoice:
+                      uid: inv_98nbmb93gxjz8
+                      site_id: 5
+                      customer_id: 13
+                      subscription_id: 17
+                      number: '1'
+                      sequence_number: 1
+                      issue_date: '2020-12-02'
+                      due_date: '2020-12-02'
+                      paid_date: null
+                      status: open
+                      collection_method: remittance
+                      payment_instructions: ''
+                      currency: USD
+                      consolidation_level: none
+                      parent_invoice_uid: null
+                      parent_invoice_number: null
+                      group_primary_subscription_id: null
+                      product_name: Digitized discrete initiative
+                      product_family_name: Networked bottom-line orchestration
+                      role: adhoc
+                      seller:
+                        name: 'Steuber, West and Hegmann 1'
+                        address:
+                          street: null
+                          line2: null
+                          city: null
+                          state: null
+                          zip: null
+                          country: null
+                        phone: (766) 316-0492
+                      customer:
+                        chargify_id: 13
+                        first_name: Dean
+                        last_name: Adams
+                        organization: null
+                        email: brandi1@example.com
+                        vat_number: null
+                        reference: null
+                      memo: ''
+                      billing_address:
+                        street: null
+                        line2: null
+                        city: null
+                        state: null
+                        zip: null
+                        country: null
+                      shipping_address:
+                        street: null
+                        line2: null
+                        city: null
+                        state: null
+                        zip: null
+                        country: null
+                      subtotal_amount: '1800.0'
+                      discount_amount: '0.0'
+                      tax_amount: '0.0'
+                      total_amount: '1800.0'
+                      credit_amount: '0.0'
+                      paid_amount: '0.0'
+                      refund_amount: '0.0'
+                      due_amount: '1800.0'
+                      line_items:
+                        - uid: li_98nbmb9jgz84c
+                          title: Some product
+                          description: 12/02/2020 - 12/02/2020
+                          quantity: '12.0'
+                          unit_price: '150.0'
+                          subtotal_amount: '1800.0'
+                          discount_amount: '0.0'
+                          tax_amount: '0.0'
+                          total_amount: '1800.0'
+                          tiered_unit_price: false
+                          period_range_start: '2020-12-02'
+                          period_range_end: '2020-12-02'
+                          product_id: null
+                          product_version: null
+                          product_price_point_id: null
+                          component_id: null
+                          price_point_id: null
+                      discounts: []
+                      taxes: []
+                      credits: []
+                      payments: []
+                      refunds: []
+                      custom_fields: []
+                      public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+      operationId: post-subscriptions-subscription_id-invoices.json
+      description: |-
+        # Create Invoice
+
+        This endpoint will allow you to create an ad-hoc, remittance invoice.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invoice:
+                  type: object
+                  properties:
+                    line_items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                          quantity:
+                            type: integer
+                          unit_price:
+                            type: string
+                          taxable:
+                            type: boolean
+                            description: |-
+                              Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes.
+
+                              If using Avalara, a tax_code parameter must also be sent.
+                          tax_code:
+                            type: string
+                          period_range_start:
+                            type: string
+                            description: YYYY-MM-DD
+                          period_range_end:
+                            type: string
+                            description: YYYY-MM-DD
+                    net_terms:
+                      type: integer
+                      description: 'By default, invoices will be created with a due date matching the date of invoice creation. If a different due date is desired, the net_terms parameter can be sent indicating the number of days in advance the due date should be.'
+                    payment_instructions:
+                      type: string
+                    memo:
+                      type: string
+                      description: A custom memo can be sent to override the site's default.
+                    seller_address:
+                      type: object
+                      description: Overrides the defaults for the site
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        phone:
+                          type: string
+                        address:
+                          type: string
+                        address_2:
+                          type: string
+                        city:
+                          type: string
+                        state:
+                          type: string
+                        zip:
+                          type: string
+                        country:
+                          type: string
+                    billing_address:
+                      type: object
+                      description: Overrides the default for the customer
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        phone:
+                          type: string
+                        address:
+                          type: string
+                        address_2:
+                          type: string
+                        city:
+                          type: string
+                        state:
+                          type: string
+                        zip:
+                          type: string
+                        country:
+                          type: string
+                    shipping_address:
+                      type: object
+                      description: Overrides the default for the customer
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        phone:
+                          type: string
+                        address:
+                          type: string
+                        address_2:
+                          type: string
+                        city:
+                          type: string
+                        state:
+                          type: string
+                        zip:
+                          type: string
+                        country:
+                          type: string
+            examples:
+              Minimal Invoice (Relies on site defaults):
+                value:
+                  invoice:
+                    line_items:
+                      - title: A Product
+                        quantity: 12
+                        unit_price: '150.00'
+              Example:
+                value:
+                  invoice:
+                    line_items:
+                      - title: Widgets
+                        quantity: 1
+                        unit_price: '10.0'
+                        taxable: true
+                        tax_code: A1999
+                        period_range_start: '2021-01-31'
+                        period_range_end: '2021-02-28'
+                    net_terms: 20
+                    payment_instructions: Pay upon receipt
+                    memo: This is a memo
+                    seller_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    billing_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    shipping_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+        description: ''
 servers:
   - url: 'https://subdomain.chargify.com'
