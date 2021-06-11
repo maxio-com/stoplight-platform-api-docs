@@ -12584,6 +12584,22 @@ paths:
         You can also perform a delayed change to the price point by passing in either `product_price_point_id` or `product_price_point_handle`
 
         **Note: To cancel a delayed product change, set `next_product_id` to an empty string.**
+
+        ## Billing Date Changes
+
+        ### Regular Billing Date Changes
+
+        Send the `next_billing_at` to set the next billing date for the subscription. After that date passes and the subscription is processed, the following billing date will be set according to the subscription's product period.
+
+        Note that if you pass an invalid date, we will automatically interpret and set the correct date. For example, when February 30 is entered, the next billing will be set to March 2nd in a non-leap year.
+
+        The server response will not return data under the key/value pair of `next_billing`. Please view the key/value pair of `current_period_ends_at` to verify that the `next_billing` date has been changed successfully.
+
+        ### Snap Day Changes
+
+        For a subscription using Calendar Billing, setting the next billing date is a bit different. Send the `snap_day` attribute to change the calendar billing date for **a subscription using a product eligible for calendar billing**.
+
+        Note: If you change the product associated with a subscription that contains a `snap_date` and immediately `READ/GET` the subscription data, it will still contain evidence of the existing `snap_date`. This is due to the fact that a product change is instantanous and only affects the product associated with a subscription. After the `next_billing` date arrives, the `snap_day` associated with the subscription will return to `null.` Another way of looking at this is that you willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null.
       requestBody:
         content:
           application/json:
@@ -12616,6 +12632,18 @@ paths:
                       description: Set to an empty string to cancel a delayed product change.
                     next_product_price_point_id:
                       type: string
+                    snap_day:
+                      type:
+                        - string
+                        - integer
+                      minimum: 1
+                      maximum: 28
+                      enum:
+                        - end
+                      description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
+                    next_billing_at:
+                      type: string
+                      description: ''
             examples:
               Example:
                 value:
@@ -12624,6 +12652,7 @@ paths:
                       full_number: '4111111111111111'
                       expiration_month: '10'
                       expiration_year: '2030'
+                    next_billing_at: '2010-08-06T15:34:00Z'
   '/subscriptions/{subscription_id}/resume.json':
     parameters:
       - schema:
