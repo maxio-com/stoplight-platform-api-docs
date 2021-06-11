@@ -10241,9 +10241,9 @@ paths:
                       cancellation_message: lorem ipsum
                       next_product_id: null
                       cancel_at_end_of_period: false
-                      payment_collection_method: Duis qui Excepteur laboris reprehenderit
+                      payment_collection_method: remittance
                       snap_day: null
-                      cancellation_method: eiusmod ipsum pariatur et adipisicing
+                      cancellation_method: dunning
                       current_period_started_at: Ut quis non
                       previous_state: 'occaecat proident sunt cillum '
                       signup_payment_id: -45156092
@@ -11321,7 +11321,7 @@ paths:
                       created_at: '2016-11-14T14:48:10-05:00'
                       updated_at: '2016-11-14T15:24:41-05:00'
                       cancellation_message: null
-                      cancellation_method: null
+                      cancellation_method: merchant_api
                       cancel_at_end_of_period: null
                       canceled_at: null
                       current_period_started_at: '2016-11-14T14:48:10-05:00'
@@ -11488,6 +11488,7 @@ paths:
                       description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://help.chargify.com/subscriptions/subscriptions-import.html). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
                     stored_credential_transaction_id:
                       type: integer
+                      description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
                     sales_rep_id:
                       type: integer
                     payment_profile_id:
@@ -11523,6 +11524,7 @@ paths:
                         address_2:
                           type: string
                           description: (Optional) Second line of the customer’s shipping address i.e. “Apt. 100”
+                          nullable: true
                         city:
                           type: string
                           description: (Optional) The customer’s shipping address city (i.e. “Boston”).
@@ -11599,6 +11601,7 @@ paths:
                         billing_address_2:
                           type: string
                           description: Optional) Second line of the customer’s billing address i.e. Apt. 100
+                          nullable: true
                         billing_city:
                           type: string
                           description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.'
@@ -11755,9 +11758,6 @@ paths:
                     calendar_billing_first_charge:
                       type: string
                       description: '(Optional) One of “prorated” (the default – the prorated product price will be charged immediately), “immediate” (the full product price will be charged immediately), or “delayed” (the full product price will be charged with the first scheduled renewal).'
-                    "stored_credential_transaction_id\t":
-                      type: string
-                      description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
                     reason_code:
                       type: string
                       description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to indicate why a subscription was canceled.
@@ -16669,5 +16669,6 @@ paths:
             type: string
           in: query
           name: reference
+      description: '# Find Subscription'
 servers:
   - url: 'https://subdomain.chargify.com'

@@ -42,10 +42,13 @@ properties:
     type: integer
     description: The Chargify-assigned id for the customer record to which the card belongs
   current_vault:
-    type: string
+    type: 
+      - string
+      - 'null'
     nullable: true
     description: The vault that stores the payment profile with the provided vault_token.
     enum:
+      - bogus
       - authorizenet
       - trust_commerce
       - payment_express
@@ -56,6 +59,7 @@ properties:
       - eway
       - stripe
       - wirecard
+      - null
   vault_token:
     type: string
     nullable: true

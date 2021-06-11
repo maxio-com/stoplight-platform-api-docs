@@ -63,6 +63,7 @@ properties:
       - merchant_api
       - dunning
       - billing_portal
+      - null
   cancel_at_end_of_period:
     type: boolean
     nullable: true
@@ -206,6 +207,7 @@ properties:
   next_product_handle:
     type: string
     description: 'If a delayed product change is scheduled, the handle of the product that the subscription will be changed to at the next renewal.'
+    nullable: true
   coupon_use_count:
     type: integer
     nullable: true
@@ -219,9 +221,11 @@ properties:
   reason_code:
     type: string
     description: 'If the subscription is canceled, this is their churn code.'
+    nullable: true
   automatically_resume_at:
     type: string
     description: The date the subscription is scheduled to automatically resume from the on_hold state.
+    nullable: true
   coupon_codes:
     type: array
     description: An array for all the coupons attached to the subscription.
@@ -230,30 +234,37 @@ properties:
   offer_id:
     type: string
     description: The ID of the offer associated with the subscription.
+    nullable: true
   payer_id:
-    type: string
+    type: integer
     description: 'On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the ''Customer Hierarchies & WhoPays'' feature is enabled.'
   current_billing_amount_in_cents:
-    type: string
+    type: integer
     description: The balance in cents plus the estimated renewal amount in cents.
   product_price_point_id:
-    type: string
+    type: integer
     description: The product price point currently subscribed to.
   next_product_price_point_id:
-    type: string
+    type: integer
     description: 'If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal.'
+    nullable: true
   net_terms:
-    type: string
+    type: integer
     description: "\tOn Relationship Invoicing, the number of days before a renewal invoice is due."
+    nullable: true
   stored_credential_transaction_id:
-    type: string
+    type: integer
     description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
+    nullable: true
   reference:
     type: string
     description: The reference value (provided by your app) for the subscription itelf.
+    nullable: true
   on_hold_at:
     type: string
     description: The timestamp of the most recent on hold action.
+    nullable: true
   prepaid_dunning:
     type: boolean
     description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
+    nullable: true
