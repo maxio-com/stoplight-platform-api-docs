@@ -26,6 +26,7 @@ tags:
   - name: Subscriptions
   - name: Subscription Components
   - name: Subscription Groups
+  - name: Subscription Group Status
   - name: Subscription Invoice Account
   - name: Subscription Notes
   - name: Subscription Products
@@ -15468,5 +15469,55 @@ paths:
 
         You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
         The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
+  '/subscription_groups/{uid}/cancel.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+    post:
+      summary: Cancel Grouped Subscriptions
+      tags:
+        - Subscription Group Status
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - One or more subscriptions are not on automatic billing
+      operationId: post-subscription_groups-uid-cancel.json
+      description: |-
+        # Cancel Grouped Subscriptions
+
+        This endpoint will immediately cancel all subscriptions within the specified group. The group is identified by it's `uid` passed in the URL. To successfully cancel the group, the primary subscription must be on automatic billing. The group members as well must be on automatic billing or they must be prepaid.
+
+        In order to cancel a subscription group while also charging for any unbilled usage on metered or prepaid components, the `charge_unbilled_usage=true` parameter must be included in the request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                charge_unbilled_usage:
+                  type: boolean
+            examples:
+              Example:
+                value:
+                  charge_unbilled_usage: true
 servers:
   - url: 'https://subdomain.chargify.com'
