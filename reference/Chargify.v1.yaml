@@ -11441,94 +11441,7 @@ paths:
                       - 'Bank routing number: cannot be blank.'
                       - 'Bank account number: cannot be blank. '
       operationId: post-subscriptions.json
-      description: |-
-        # Create Subscription
-
-        Full documentation on how subscriptions operate within Chargify can be located under the following topics:
-
-        + [Subscriptions Reference](https://help.chargify.com/subscriptions/subscription-intro.html)
-        + [Subscriptions Actions](https://help.chargify.com/subscriptions/subscription-actions.html)
-        + [Subscription Cancellation](https://help.chargify.com/subscriptions/cancellation.html)
-        + [Subscription Reactivation](https://help.chargify.com/subscriptions/reactivation.html)
-        + [Subscription Import](https://help.chargify.com/subscriptions/subscriptions-import.html)
-
-        When creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://help.chargify.com/products/product-options.html)).
-
-        The product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.
-
-        An existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). A new customer may be created by providing `customer_attributes`.
-
-        Credit card details may be required, depending on the options for the Product being subscribed. The Product can be specified by `product_id` or by `product_handle` (API Handle).
-
-        If you are creating a subscription with a payment profile, the attribute to send will be `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you read the subscription after creation, we return the profile details under `credit_card` or `bank_account`.
-
-        ## Components
-
-        Components are optional at signup, and can be passed using their IDs or their handles. The base field to pass for both will be `component_id` and `price_point_id`; to pass a handle, simple set the appropriate attribute to `handle:handle-name-here`.
-
-        For example:
-
-              "component_id": "handle:texts",
-              "price_point_id": "handle:100-included"
-
-        ## Calendar Billing
-
-        The `calendar_billing` cannot be used when also specifying `next_billing_at`.
-
-        ## Taxable Subscriptions
-
-        If your intent is to charge your subscribers tax via [Avalara Taxes](https://help.chargify.com/taxes/avalara-managed-sales-tax.html) or [Custom Taxes](https://help.chargify.com/taxes/custom-taxes.html), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
-
-        + A subscription to a [taxable product](https://help.chargify.com/products/product-editing.html#tax-settings)
-        + [Full valid billing or shipping address](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#full-address-required-for-taxable-subscriptions) to identify the tax locale
-        + The portion of the address that houses the [state information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.
-        The portion of the address that houses the [country information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.
-
-        ## Create Subscription with Quantity-based Component
-
-        You may set the quantity when you create the subscription by including some extra data in your POST request. 
-
-        In addition to the normal post data, also include a 'components’ attribute, as indicated below:
-
-        ```
-        {
-          "subscription": {
-            ...normal subscription attributes...
-            "components":[
-              {
-                "component_id": 1,
-                "allocated_quantity": 18
-              }
-            ]
-          }
-        }
-        ```
-
-        You can also optionally include a `price_point_id` along with the `component_id` to set a specific price point to use, otherwise the component's default price point will be used.
-
-        ### Via the Chargify Gem
-
-        Link to [official Chargify Gem](http://github.com/chargify/chargify_api_ares)
-
-        ```
-        Chargify::Subscription.create(
-          :product_id => 2,
-          :customer_id => 1,
-          :credit_card_attributes => {
-            :full_number => 1,
-            :first_name => "John",
-            :last_name => "Doe",
-            :expiration_month => "2",
-            :expiration_year => "2020"
-          },
-          :components => [
-            {
-              :component_id => 1,
-              :allocated_quantity => 15
-            }
-          ]
-        )
-        ```
+      description: "# Create Subscription\n\nFull documentation on how subscriptions operate within Chargify can be located under the following topics:\n\n+ [Subscriptions Reference](https://help.chargify.com/subscriptions/subscription-intro.html)\n+ [Subscriptions Actions](https://help.chargify.com/subscriptions/subscription-actions.html)\n+ [Subscription Cancellation](https://help.chargify.com/subscriptions/cancellation.html)\n+ [Subscription Reactivation](https://help.chargify.com/subscriptions/reactivation.html)\n+ [Subscription Import](https://help.chargify.com/subscriptions/subscriptions-import.html)\n\nWhen creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://help.chargify.com/products/product-options.html)).\n\nThe product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.\n\nAn existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). A new customer may be created by providing `customer_attributes`.\n\nCredit card details may be required, depending on the options for the Product being subscribed. The Product can be specified by `product_id` or by `product_handle` (API Handle).\n\nIf you are creating a subscription with a payment profile, the attribute to send will be `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you read the subscription after creation, we return the profile details under `credit_card` or `bank_account`.\n\n## Components\n\nComponents are optional at signup, and can be passed using their IDs or their handles. The base field to pass for both will be `component_id` and `price_point_id`; to pass a handle, simple set the appropriate attribute to `handle:handle-name-here`.\n\nFor example:\n\n      \"component_id\": \"handle:texts\",\n      \"price_point_id\": \"handle:100-included\"\n\n## Calendar Billing\n\nThe `calendar_billing` cannot be used when also specifying `next_billing_at`.\n\n## Taxable Subscriptions\n\nIf your intent is to charge your subscribers tax via [Avalara Taxes](https://help.chargify.com/taxes/avalara-managed-sales-tax.html) or [Custom Taxes](https://help.chargify.com/taxes/custom-taxes.html), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:\n\n+ A subscription to a [taxable product](https://help.chargify.com/products/product-editing.html#tax-settings)\n+ [Full valid billing or shipping address](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#full-address-required-for-taxable-subscriptions) to identify the tax locale\n+ The portion of the address that houses the [state information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.\nThe portion of the address that houses the [country information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.\n\n\n# Passing Payment Information\n\n## Subscription with Chargify.js token\n\nThe `chargify_token` can be obtained using [chargify.js](https://developer.chargify.com/content/chargify-js/chargify-js.html). The token represents payment profile attributes that were provided by the customer in their browser and stored at the payment gateway.\n\nThe `payment_type` attribute may either be `credit_card` or `bank_account`, depending on the type of payment method being added. If a bank account is being passed, the payment attributes should be changed to `bank_account_attributes`.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      \"chargify_token\": \"tok_cwhvpfcnbtgkd8nfkzf9dnjn\",\n      \"payment_type\": \"credit_card\"\n    }\n  }\n}\n```\n\n## Subscription with vault token\n\nIf you already have a customer and card stored in your payment gateway, you may create a subscription with a `vault_token`.  Providing the last_four, card type and expiration date will allow the card to be displayed properly in the Chargify UI.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      first_name: \"Joe,\n      last_name: \"Smith\",\n      card_type: \"visa\",\n      expiration_month: \"05\",\n      expiration_year: \"2025\",\n      last_four: \"1234\",\n      vault_token: \"12345abc\",\n      current_vault: \"braintree_blue\"\n  }\n}\n```\n\n## Existing Customer with Existing Payment Profile\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"product-xyz\",\n    \"customer_id\": 17346006,\n    \"payment_profile_id\": 11991557\n  }\n}\n```\n\n## Subscription with Credit Card\n\n```\n\"subscription\": {\n\t\t\"product_handle\": \"basic\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"credit_card_attributes\": {\n\t\t\t\"last_name\": \"Smith\",\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"full_number\": \"4111111111111111\",\n\t\t\t\"expiration_year\": \"2021\",\n\t\t\t\"expiration_month\": \"1\",\n\t\t\t\"card_type\": \"visa\",\n\t\t\t\"billing_zip\": \"02120\",\n\t\t\t\"billing_state\": \"MA\",\n\t\t\t\"billing_country\": \"US\",\n\t\t\t\"billing_city\": \"Boston\",\n\t\t\t\"billing_address_2\": null,\n\t\t\t\"billing_address\": \"123 Mass Ave.\"\n\t\t}\n}\n```\n\n## Subscription with ACH as Payment Profile\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Best Bank\",\n\t\t\t\"bank_routing_number\": \"021000089\",\n\t\t\t\"bank_account_number\": \"111111111111\",\n\t\t\t\"bank_account_type\": \"checking\",\n\t\t\t\"bank_account_holder_type\": \"business\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription with PayPal payment profile \n\n### With the nonce from Braintree JS\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"payment_method_nonce\":\"abc123\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n\n### With the Braintree Customer ID as the vault token:\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"vault_token\":\"58271347\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n## Subscription using GoCardless Bank Number\n\nThese examples creates a customer, bank account and mandate in GoCardless.\n\nFor more information on GoCardless, please view the following two resources:\n\n+ [Payment Profiles via API for GoCardless](#endpoint:CaR3rApsyniuZtoEH)\n+ [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)\n\n+ [Using Chargify.js with GoCardless - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-gocardless)\n\n+ [Using Chargify.js with GoCardless - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-gocardless)\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Royal Bank of France\",\n\t\t\t\"bank_account_number\": \"0000000\",\n\t\t\t\"bank_routing_number\": \"0003\",\n\t\t\t\"bank_branch_code\": \"00006\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using GoCardless IBAN Number\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"French Bank\",\n\t\t\t\"bank_iban\": \"FR1420041010050500013M02606\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe SEPA Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe SEPA Direct Debit](#endpoint:NasuhQCFDimxYmBh4)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe SEPA Direct Debit - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-sepa-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_iban\": \"DE89370400440532013000\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe BECS Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe BECS Direct Debit](#endpoint:H4z4BsLgSCd68A45W)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developer.chargify.com/content/chargify-js/example.html#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe BECS Direct Debit - full example](https://developer.chargify.com/content/chargify-js/example.html#full-example-with-becs-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_branch_code\": \"000000\",\n      \"bank_account_number\": \"000123456\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## 3D Secure - Stripe\n\nIt may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:\n\n```\n{\n  \"errors\": [\n    \"Your card was declined. This transaction requires 3D secure authentication.\"\n  ],\n  \"gateway_payment_id\": \"pi_1F0aGoJ2UDb3Q4av7zU3sHPh\",\n  \"description\": \"This card requires 3D secure authentication. Redirect the customer to the URL from the action_link attribute to authenticate. Attach callback_url param to this URL if you want to be notified about the result of 3D Secure authentication. Attach redirect_url param to this URL if you want to redirect a customer back to your page after 3D Secure authentication. Example: https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com will do a POST request to https://localhost:4000 after payment is authenticated and will redirect a customer to https://yourpage.com after 3DS authentication.\",\n  \"action_link\": \"http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_time_token_id=242\"\n}\n```\n\nTo let the customer go through 3D Secure Authentication, they need to be redirected to the URL specified in `action_link`.\nOptionally, you can specify `callback_url` parameter in the `action_link` URL if you’d like to be notified about the result of 3D Secure Authentication. The `callback_url` will return the following information:\n\n- whether the authentication was successful (`success`)\n- the gateway ID for the payment (`gateway_payment_id`)\n- the subscription ID (`subscription_id`)\n \nLastly, you can also specify a `redirect_url` within the `action_link` URL if you’d like to redirect a customer back to your site. \n\nThe final URL that you send a customer to to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com`\n\n### Example Redirect Flow\n\nYou may wish to redirect customers to different pages depending on whether their SCA was performed successfully. Here's an example flow to use as a reference:\n\n1. Create a subscription via API; it requires 3DS\n2. You receive a `gateway_payment_id` in the `action_link` along other params in the response.\n3. Use this `gateway_payment_id` to, for example, connect with your internal resources or generate a session_id\n4. Include 1 of those attributes inside the `callback_url` and `redirect_url` to be aware which “session” this applies to\n5. Redirect the customer to the `action_link` with `callback_url` and `redirect_url` applied\n6. After the customer finishes 3DS authentication, we let you know the result by making a request to applied `callback_url`.\n7. After that, we redirect the customer to the `redirect_url`; at this point the result of authentication is known \n8. Optionally, you can use the applied \"msg\" param in the `redirect_url` to determine whether it was successful or not"
       requestBody:
         content:
           application/json:
@@ -11852,7 +11765,37 @@ paths:
                       type: boolean
                       description: '(Optional, used only for Delayed Product Change When set to true, indicates that a changed value for product_handle should schedule the product change to the next subscription renewal.'
             examples:
-              Example:
+              Basic:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                      zip: '02120'
+                      state: MA
+                      reference: XYZ
+                      phone: (617) 111 - 0000
+                      organization: Acme
+                      country: US
+                      city: Boston
+                      address_2: null
+                      address: 123 Mass Ave.
+                    credit_card_attributes:
+                      last_name: Smith
+                      first_name: Joe
+                      full_number: '4111111111111111'
+                      expiration_year: '2021'
+                      expiration_month: '1'
+                      card_type: visa
+                      billing_zip: '02120'
+                      billing_state: MA
+                      billing_country: US
+                      billing_city: Boston
+                      billing_address_2: null
+                      billing_address: 123 Mass Ave.
+              With Quantity-based component:
                 value:
                   subscription:
                     product_handle: basic
@@ -11864,6 +11807,58 @@ paths:
                       full_number: '1'
                       expiration_month: '10'
                       expiration_year: '2020'
+                    components:
+                      - component_id: 1
+                        allocated_quantity: 18
+                        price_point_id: 3
+              With On/Off Component:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 2500
+                        enabled: true
+              With Metered Component:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe1049am@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 195268
+                        unit_balance: 20
+              With Calendar Billing:
+                value:
+                  subscription:
+                    product_handle: gold
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                      zip: '02120'
+                      state: MA
+                      reference: XYZ
+                      phone: (617) 111 - 0000
+                      organization: Acme
+                      country: US
+                      city: Boston
+                      address_2: null
+                      address: 123 Mass Ave.
+                    calendar_billing:
+                      snap_day: 1
+                      calendar_billing_first_charge: immediate
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
         description: ''
   '/{subdomain}/events/{api_handle}.json':
     parameters:
