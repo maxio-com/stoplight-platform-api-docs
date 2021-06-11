@@ -14120,5 +14120,32 @@ paths:
         Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
 
         This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
+  '/subscriptions/{subscription_id}/cancel_dunning.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Cancel Dunning
+      tags:
+        - Subscription Status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+      operationId: post-subscriptions-subscription_id-cancel_dunning.json
+      description: |-
+        # Cancel Dunning
+
+        If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.
 servers:
   - url: 'https://subdomain.chargify.com'
