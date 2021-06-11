@@ -26,6 +26,7 @@ tags:
   - name: Subscriptions
   - name: Subscription Components
   - name: Subscription Groups
+  - name: Subscription Group Invoice Account
   - name: Subscription Group Status
   - name: Subscription Invoice Account
   - name: Subscription Notes
@@ -15687,5 +15688,33 @@ paths:
               Example:
                 value:
                   resume: true
+  '/subscription_groups/{subscription_group_uid}/payment_profiles/{payment_profile_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_group_uid
+        in: path
+        required: true
+        description: The uid of the subscription group
+      - schema:
+          type: integer
+        name: payment_profile_id
+        in: path
+        required: true
+        description: The Chargify id of the payment profile
+    delete:
+      summary: Delete Subscription Group Payment Profile
+      tags:
+        - Subscription Group Invoice Account
+      responses:
+        '204':
+          description: No Content
+      operationId: delete-subscription_groups-subscription_group_uid-payment_profiles-payment_profile_id-.json
+      description: |-
+        # Delete Subscription Group Payment Profile
+
+        This will delete a Payment Profile belonging to a Subscription Group.
+
+        **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
 servers:
   - url: 'https://subdomain.chargify.com'
