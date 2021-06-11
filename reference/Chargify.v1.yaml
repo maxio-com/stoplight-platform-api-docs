@@ -15248,6 +15248,35 @@ paths:
                   subscription_group:
                     members_ids:
                       - 1
+    delete:
+      summary: Delete Subscription Group
+      tags:
+        - Subscription Groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                  deleted:
+                    type: boolean
+              examples:
+                Example:
+                  value:
+                    uid: grp_99w5xp9y5xycy
+                    deleted: true
+        '404':
+          description: Not Found
+      operationId: delete-subscription_groups-uid-.json
+      description: |-
+        # Delete Subscription Group
+
+        Use this endpoint to delete subscription group.
+        Only groups without members can be deleted
   /subscription_groups/lookup.json:
     get:
       summary: Find Subscription Group
