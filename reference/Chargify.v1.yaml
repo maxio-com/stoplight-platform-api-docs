@@ -16621,5 +16621,26 @@ paths:
                   deduction:
                     amount: 10
                     memo: Deduct from group account
+  /subscriptions/lookup.json:
+    get:
+      summary: Find Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+      operationId: get-subscriptions-lookup.json
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: reference
 servers:
   - url: 'https://subdomain.chargify.com'
