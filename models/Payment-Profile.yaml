@@ -21,8 +21,10 @@ properties:
     type: integer
   current_vault:
     type: string
+    nullable: true
   vault_token:
     type: string
+    nullable: true
   billing_address:
     type: string
     nullable: true
