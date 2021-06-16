@@ -11770,24 +11770,7 @@ paths:
                         - integer
                       description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er'
                     prepaid_subscription_configuration:
-                      type: object
-                      description: Required for prepaid subscriptions (`payment_collection_method` is `prepaid`)
-                      properties:
-                        initial_funding_amount_in_cents:
-                          type: integer
-                          description: The initial amount of prepayment to be collected
-                        replenish_to_amount_in_cents:
-                          type: integer
-                          description: The amount to automatically be replenished to when the minimum balance is reached
-                        auto_replenish:
-                          type: boolean
-                          description: A flag indicating whether or not to automatically replenish the balance
-                          default: false
-                        replenish_threshold_amount_in_cents:
-                          type: integer
-                          description: The minimum balance to trigger automatic replenishment
-                      required:
-                        - initial_funding_amount_in_cents
+                      $ref: ../models/Create-or-Update-Prepaid-Configuration.yaml
             examples:
               Basic:
                 value:
@@ -16793,5 +16776,65 @@ paths:
           in: query
           name: cascade
           description: Options are "customer" or "payment_profile"
+  '/subscriptions/{subscription_id}/prepaid_configurations.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Update Prepaid Subscription Configuration
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prepaid_configuration:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      initial_funding_amount_in_cents:
+                        type: integer
+                      replenish_to_amount_in_cents:
+                        type: integer
+                      auto_replenish:
+                        type: boolean
+                      replenish_threshold_amount_in_cents:
+                        type: integer
+              examples:
+                Example:
+                  value:
+                    prepaid_configuration:
+                      id: 55
+                      initial_funding_amount_in_cents: 2500
+                      auto_replenish: true
+                      replenish_to_amount_in_cents: 50000
+                      replenish_threshold_amount_in_cents: 10000
+      operationId: post-subscriptions-subscription_id-prepaid_configurations.json
+      description: '# Update Prepaid Subscription Configuration'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prepaid_configuration:
+                  $ref: ../models/Create-or-Update-Prepaid-Configuration.yaml
+            examples:
+              Example:
+                value:
+                  prepaid_configuration:
+                    initial_funding_amount_in_cents: 50000
+                    replenish_to_amount_in_cents: 50000
+                    auto_replenish: true
+                    replenish_threshold_amount_in_cents: 10000
 servers:
   - url: 'https://subdomain.chargify.com'
