@@ -15138,6 +15138,54 @@ paths:
         # Create Invoice
 
         This endpoint will allow you to create an ad-hoc, remittance invoice.
+
+        ### Basic Behavior
+
+        You can create a basic invoice by sending an array of line items to this endpoint. Each line item, at a minimum, must include a title, a quantity and a unit price. Example:
+
+        ```
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "title": "A Product",
+                "quantity": 12,
+                "unit_price": "150.00"
+              }
+            ]
+          }
+        }
+        ```
+
+        The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
+
+        ### Line Item Options
+
+        #### Period Date Range
+
+        A custom period date range can be defined for each line item with the `period_range_start` and `period_range_end` parameters. Dates must be sent in the `YYYY-MM-DD` format.
+
+        #### Taxes
+
+        The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent.
+
+        ### Invoice Options
+
+        #### Issue Date
+
+        By default, invoices will be created with a issue date set to today. `issue_date` parameter can be send to alter that. Only dates in the past can be send. `issue_date` should be send in `YYYY-MM-DD` format.
+
+        #### Net Terms
+
+        By default, invoices will be created with a due date matching the date of invoice creation. If a different due date is desired, the `net_terms` parameter can be sent indicating the number of days in advance the due date should be.
+
+        #### Addresses
+
+        The seller, shipping and billing addresses can be sent to override the site's defaults. Each address requires to send a `first_name` at a minimum in order to work. Please see below for the details on which parameters can be sent for each address object.
+
+        #### Memo and Payment Instructions
+
+        A custom memo can be sent with the `memo` parameter to override the site's default. Likewise, custom payment instructions can be sent with the `payment_instrucions` parameter.
       requestBody:
         content:
           application/json:
