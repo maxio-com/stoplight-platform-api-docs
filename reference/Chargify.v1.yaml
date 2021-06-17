@@ -17427,5 +17427,74 @@ paths:
           in: query
           name: custom_fields
           description: Include custom fields data
+  '/proforma_invoices/{proforma_invoice_uid}/void.json':
+    parameters:
+      - schema:
+          type: string
+        name: proforma_invoice_uid
+        in: path
+        required: true
+        description: The uid of the proforma invoice
+    post:
+      summary: Void Proforma Invoice
+      tags:
+        - Proforma Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Proforma-Invoice.yaml
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - You must provide a reason for voiding the proforma invoice.
+                      - Only draft proforma invoices may be voided.
+      operationId: post-proforma_invoices-proforma_invoice_uid-void.json
+      description: |-
+        # Void Proforma Invoice
+
+        This endpoint will void a proforma invoice that has the status "draft".
+
+        ## Restrictions
+
+        Proforma invoices are only available on Relationship Invoicing sites.
+
+        Only proforma invoices that have the appropriate status may be reopened. If the invoice identified by {uid} does not have the appropriate status, the response will have HTTP status code 422 and an error message.
+
+        A reason for the void operation is required to be included in the request body. If one is not provided, the response will have HTTP status code 422 and an error message.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                void:
+                  type: object
+                  required:
+                    - reason
+                  properties:
+                    reason:
+                      type: string
+              required:
+                - void
+        description: ''
 servers:
   - url: 'https://subdomain.chargify.com'
