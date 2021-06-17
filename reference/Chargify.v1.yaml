@@ -16924,7 +16924,7 @@ paths:
     post:
       summary: Add Subscription to Group
       tags:
-        - Subscriptions
+        - Subscription Groups
       responses:
         '200':
           description: OK
