@@ -1,0 +1,185 @@
+title: Proforma Invoice
+type: object
+x-tags:
+  - Proforma Invoices
+properties:
+  uid:
+    type: string
+  site_id:
+    type: integer
+  customer_id:
+    type: integer
+  subscription_id:
+    type: integer
+  number:
+    type: integer
+  sequence_number:
+    type: integer
+  created_at:
+    type: string
+  delivery_date:
+    type: string
+  status:
+    type: string
+  collection_method:
+    type: string
+  payment_instructions:
+    type: string
+  currency:
+    type: string
+  consolidation_level:
+    type: string
+  product_name:
+    type: string
+  product_family_name:
+    type: string
+  role:
+    type: string
+  seller:
+    type: object
+    properties:
+      name:
+        type: string
+      address:
+        type: object
+        properties:
+          street:
+            type: 'null'
+          line2:
+            type: 'null'
+          city:
+            type: 'null'
+          state:
+            type: 'null'
+          zip:
+            type: 'null'
+          country:
+            type: 'null'
+      phone:
+        type: string
+  customer:
+    type: object
+    properties:
+      chargify_id:
+        type: integer
+      first_name:
+        type: string
+      last_name:
+        type: string
+      organization:
+        type: string
+      email:
+        type: string
+      vat_number:
+        type: 'null'
+      reference:
+        type: 'null'
+  memo:
+    type: string
+  billing_address:
+    type: object
+    properties:
+      street:
+        type: string
+      line2:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+      country:
+        type: string
+  shipping_address:
+    type: object
+    properties:
+      street:
+        type: string
+      line2:
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+      country:
+        type: string
+  subtotal_amount:
+    type: string
+  discount_amount:
+    type: string
+  tax_amount:
+    type: string
+  total_amount:
+    type: string
+  credit_amount:
+    type: string
+  paid_amount:
+    type: string
+  refund_amount:
+    type: string
+  due_amount:
+    type: string
+  line_items:
+    type: array
+    items:
+      type: object
+      properties:
+        uid:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: string
+        unit_price:
+          type: string
+        subtotal_amount:
+          type: string
+        discount_amount:
+          type: string
+        tax_amount:
+          type: string
+        total_amount:
+          type: string
+        tiered_unit_price:
+          type: boolean
+        period_range_start:
+          type: string
+        period_range_end:
+          type: string
+        product_id:
+          type: integer
+        product_version:
+          type: integer
+        product_price_point_id:
+          type: integer
+        component_id:
+          type: 'null'
+        price_point_id:
+          type: 'null'
+  discounts:
+    type: array
+    items:
+      type: object
+  taxes:
+    type: array
+    items:
+      type: object
+  credits:
+    type: array
+    items:
+      type: object
+  payments:
+    type: array
+    items:
+      type: object
+  custom_fields:
+    type: array
+    items:
+      type: object
+  public_url:
+    type: string

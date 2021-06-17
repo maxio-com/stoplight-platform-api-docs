@@ -17001,6 +17001,17 @@ paths:
         ## Restrictions
 
         Proforma invoices are only available on Relationship Invoicing sites.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Proforma-Invoice.yaml
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
   '/subscriptions/{subscription_id}/add_coupon.json':
     parameters:
       - schema:
@@ -17271,5 +17282,150 @@ paths:
           in: query
           name: coupon_code
           description: The coupon code
+  '/subscriptions/{subscription_id}/proforma_invoices.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Create Proforma Invoice
+      tags:
+        - Proforma Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Proforma-Invoice.yaml
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - this subscription is not eligible to create proforma invoices
+      operationId: post-subscriptions-subscription_id-proforma_invoices.json
+      description: |-
+        # Create Proforma Invoice
+
+        This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
+
+        If you would like to preview the next billing amounts without generating a full proforma invoice, please use the renewal preview endpoint.
+
+        ## Restrictions
+
+        Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice, the subscription must not be in a group, must not be prepaid, and must be in a live state.
+    get:
+      summary: List Subscription Proforma Invoices
+      tags:
+        - Proforma Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Proforma-Invoice.yaml
+      operationId: get-subscriptions-subscription_id-proforma_invoices.json
+      description: |-
+        # List Subscription Proforma Invoices
+
+        By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: ' The beginning date range for the invoice''s Due Date, in the YYYY-MM-DD format.'
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The ending date range for the invoice''s Due Date, in the YYYY-MM-DD format.'
+        - schema:
+            type: string
+            enum:
+              - draft
+              - open
+              - paid
+              - pending
+              - voided
+          in: query
+          name: status
+          description: 'The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided'
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            default: 20
+            maximum: 200
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: desc
+          in: query
+          name: direction
+          description: The sort direction of the returned invoices.
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: line_items
+          description: Include line items data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: discounts
+          description: Include discounts data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: taxes
+          description: Include taxes data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: credits
+          description: Include credits data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: payments
+          description: Include payments data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: custom_fields
+          description: Include custom fields data
 servers:
   - url: 'https://subdomain.chargify.com'
