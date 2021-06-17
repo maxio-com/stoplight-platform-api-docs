@@ -17220,5 +17220,56 @@ paths:
                   codes:
                     - COUPON_1
                     - COUPON_2
+  '/subscriptions/{subscription_id}/remove_coupon.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargidy id of the subscription
+    delete:
+      summary: Remove Coupon from Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Example:
+                  value: Coupon succesfully removed
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      - There's no coupon applied to this subscription
+      operationId: delete-subscriptions-subscription_id-remove_coupon.json
+      description: |-
+        # Remove Coupon from Subscription
+
+        Use this endpoint to remove a coupon from an existing subscription.
+
+        For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://help.chargify.com/subscriptions/coupons.html#removing-a-coupon)
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: coupon_code
+          description: The coupon code
 servers:
   - url: 'https://subdomain.chargify.com'
