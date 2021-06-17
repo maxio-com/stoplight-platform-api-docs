@@ -17,6 +17,7 @@ properties:
     description: The product description
   accounting_code:
     type: string
+    nullable: true
   request_credit_card:
     type: boolean
     description: 'Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page.'

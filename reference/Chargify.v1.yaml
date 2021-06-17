@@ -17001,5 +17001,224 @@ paths:
         ## Restrictions
 
         Proforma invoices are only available on Relationship Invoicing sites.
+  '/subscriptions/{subscription_id}/add_coupon.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Add Coupons to Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples:
+                Example:
+                  value:
+                    subscription:
+                      id: 21607180
+                      state: active
+                      trial_started_at: null
+                      trial_ended_at: null
+                      activated_at: '2018-04-20T14:20:57-05:00'
+                      created_at: '2018-04-20T14:20:57-05:00'
+                      updated_at: '2018-05-11T13:53:44-05:00'
+                      expires_at: null
+                      balance_in_cents: 49000
+                      current_period_ends_at: '2018-05-12T11:33:03-05:00'
+                      next_assessment_at: '2018-05-12T11:33:03-05:00'
+                      canceled_at: null
+                      cancellation_message: null
+                      next_product_id: null
+                      cancel_at_end_of_period: false
+                      payment_collection_method: invoice
+                      snap_day: null
+                      cancellation_method: null
+                      current_period_started_at: '2018-05-11T11:33:03-05:00'
+                      previous_state: active
+                      signup_payment_id: 237154761
+                      signup_revenue: '0.00'
+                      delayed_cancel_at: null
+                      coupon_code: COUPONA
+                      total_revenue_in_cents: 52762
+                      product_price_in_cents: 100000
+                      product_version_number: 2
+                      payment_type: credit_card
+                      referral_code: x45nc8
+                      coupon_use_count: 0
+                      coupon_uses_allowed: 1
+                      reason_code: null
+                      automatically_resume_at: null
+                      coupon_codes:
+                        - COUPONA
+                        - COUPONB
+                      customer:
+                        id: 21259051
+                        first_name: K
+                        last_name: C
+                        organization: ''
+                        email: example@chargify.com
+                        created_at: '2018-04-20T14:20:57-05:00'
+                        updated_at: '2018-04-23T15:29:28-05:00'
+                        reference: null
+                        address: ''
+                        address_2: ''
+                        city: ''
+                        state: ''
+                        zip: ''
+                        country: ''
+                        phone: ''
+                        portal_invite_last_sent_at: '2018-04-20T14:20:59-05:00'
+                        portal_invite_last_accepted_at: null
+                        verified: false
+                        portal_customer_created_at: '2018-04-20T14:20:59-05:00'
+                        cc_emails: ''
+                        tax_exempt: false
+                      product:
+                        id: 4581816
+                        name: Basic
+                        handle: basic
+                        description: ''
+                        accounting_code: ''
+                        request_credit_card: true
+                        expiration_interval: null
+                        expiration_interval_unit: never
+                        created_at: '2017-11-02T15:00:11-05:00'
+                        updated_at: '2018-04-10T09:02:59-05:00'
+                        price_in_cents: 100000
+                        interval: 1
+                        interval_unit: month
+                        initial_charge_in_cents: 100000
+                        trial_price_in_cents: 1000
+                        trial_interval: 10
+                        trial_interval_unit: month
+                        archived_at: null
+                        require_credit_card: true
+                        return_params: ''
+                        taxable: false
+                        update_return_url: ''
+                        tax_code: ''
+                        initial_charge_after_trial: false
+                        version_number: 2
+                        update_return_params: ''
+                        product_family:
+                          id: 1025627
+                          name: My Product Family
+                          description: ''
+                          handle: acme-products
+                          accounting_code: null
+                        public_signup_pages:
+                          - id: 333589
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargifypay.com/subscribe/hbwtd98j3hk2/basic'
+                          - id: 335926
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargifypay.com/subscribe/g366zy67c7rm/basic'
+                          - id: 345555
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargifypay.com/subscribe/txqyyqk7d8rz/basic'
+                          - id: 345556
+                            return_url: ''
+                            return_params: ''
+                            url: 'https://general-goods.chargifypay.com/subscribe/2zss3qpf4249/basic'
+                      credit_card:
+                        id: 14839830
+                        first_name: John
+                        last_name: Doe
+                        masked_card_number: XXXX-XXXX-XXXX-1
+                        card_type: bogus
+                        expiration_month: 1
+                        expiration_year: 2028
+                        customer_id: 21259051
+                        current_vault: bogus
+                        vault_token: '1'
+                        billing_address: null
+                        billing_city: null
+                        billing_state: null
+                        billing_zip: '99999'
+                        billing_country: null
+                        customer_vault_token: null
+                        billing_address_2: null
+                        payment_type: credit_card
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - properties:
+                      codes:
+                        type: array
+                        items:
+                          type: string
+                      subscription:
+                        type: array
+                        items:
+                          type: string
+                  - properties:
+                      coupon_codes:
+                        type: array
+                        items:
+                          type: string
+                      subscription:
+                        type: array
+                        items:
+                          type: string
+                type: object
+              examples:
+                Example:
+                  value:
+                    coupon_codes:
+                      - 'Coupon Codes: ''COUPONA'' - That coupon is not stackable'
+                      - 'Coupon Codes: ''COUPONB'' - That coupon is not stackable'
+                    subscription:
+                      - Coupon is invalid.
+      operationId: post-subscriptions-subscription_id-add_coupon.json
+      description: |-
+        # Add Coupons to Subscription
+
+        An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://help.chargify.com/products/product-coupons.html#stackable-coupons)
+
+        ## Query Parameters vs Request Body Parameters
+
+        Passing in a coupon code as a query parameter will add the code to the subscription, completely replacing all existing coupon codes on the subscription.
+
+        For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codes:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  codes:
+                    - COUPON_1
+                    - COUPON_2
 servers:
   - url: 'https://subdomain.chargify.com'
