@@ -17003,5 +17003,35 @@ paths:
                       accrue: true
                       align_date: true
                       prorate: true
+    delete:
+      summary: Remove Subscription from Group
+      tags:
+        - Subscription Groups
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - You can not remove primary subscription when there are others in group
+      operationId: delete-subscriptions-subscription_id-group.json
+      description: |-
+        # Remove Subscription from Group
+
+        For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to remove existing subscription from subscription group.
 servers:
   - url: 'https://subdomain.chargify.com'
