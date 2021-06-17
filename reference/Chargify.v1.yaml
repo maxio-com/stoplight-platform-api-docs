@@ -7,7 +7,6 @@ info:
   description: Manage your company's subscriptions through the Chargify API.
 tags:
   - name: Billing Portal
-  - name: Chargify.js
   - name: Coupons
   - name: Components
   - name: Customers
@@ -16895,7 +16894,7 @@ paths:
     get:
       summary: List Chargify.js Public Keys
       tags:
-        - Chargify.js
+        - Sites
       responses:
         '200':
           description: OK
