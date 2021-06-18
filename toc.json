@@ -27,7 +27,12 @@
     {
       "type": "item",
       "title": "Chargify API",
-      "uri": "reference/Chargify.v1.yaml"
+      "uri": "reference/Chargify-API.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Chargify Legacy API",
+      "uri": "reference/Chargify-Legacy-API.yaml"
     }
   ]
 }

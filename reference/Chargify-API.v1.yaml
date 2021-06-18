@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Chargify
+  title: Chargify API
   version: '1.0'
   contact:
     email: support@chargify.com
@@ -734,7 +734,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: '#/components/schemas/Customer'
+                    $ref: ../models/Customer.yaml
               examples:
                 Example:
                   value:
@@ -860,7 +860,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Customer'
+                  $ref: ../models/Customer.yaml
               examples:
                 Example:
                   value:
@@ -1024,7 +1024,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: '#/components/schemas/Customer'
+                    $ref: ../models/Customer.yaml
       operationId: get-customers-id-.json
       description: |-
         ## Read Customer Data
@@ -1042,7 +1042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Customer'
+                $ref: ../models/Customer.yaml
               examples:
                 Example:
                   value:
@@ -1132,7 +1132,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: '#/components/schemas/Customer'
+                    $ref: ../models/Customer.yaml
       operationId: get-customers-lookup.json
       description: |-
         ## Read Customer by Reference Value
@@ -1169,7 +1169,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Subscription'
+                  $ref: ../models/Subscription.yaml
       operationId: get-customers-customer_id-subscriptions.json
       description: |-
         ## List Subscriptions for a Customer
@@ -1196,7 +1196,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: '#/components/schemas/Customer'
+                    $ref: ../models/Customer.yaml
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -5609,7 +5609,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: '#/components/schemas/Product'
+                    $ref: ../models/Product.yaml
       operationId: post-product_families-product_family_id-products.json
       description: |-
         # Create Product
@@ -5656,7 +5656,7 @@ paths:
                   type: object
                   properties:
                     product:
-                      $ref: '#/components/schemas/Product'
+                      $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -5816,7 +5816,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: '#/components/schemas/Product'
+                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -5874,7 +5874,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: '#/components/schemas/Product'
+                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -5966,7 +5966,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: '#/components/schemas/Product'
+                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -6032,7 +6032,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: '#/components/schemas/Product'
+                    $ref: ../models/Product.yaml
               examples:
                 Example:
                   value:
@@ -6105,7 +6105,7 @@ paths:
                 type: object
                 properties:
                   product_family:
-                    $ref: '#/components/schemas/Product-Family'
+                    $ref: ../models/Product-Family.yaml
               examples:
                 Example:
                   value:
@@ -6156,7 +6156,7 @@ paths:
                   type: object
                   properties:
                     product_family:
-                      $ref: '#/components/schemas/Product-Family'
+                      $ref: ../models/Product-Family.yaml
               examples:
                 Example:
                   value:
@@ -6231,7 +6231,7 @@ paths:
                 type: object
                 properties:
                   product_family:
-                    $ref: '#/components/schemas/Product-Family'
+                    $ref: ../models/Product-Family.yaml
               examples:
                 Example:
                   value:
@@ -10227,7 +10227,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -11307,7 +11307,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -11646,7 +11646,7 @@ paths:
                   type: object
                   properties:
                     subscription:
-                      $ref: '#/components/schemas/Subscription'
+                      $ref: ../models/Subscription.yaml
       operationId: get-subscriptions.json
       description: |-
         # List Subscriptions
@@ -12565,7 +12565,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -12741,7 +12741,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -12980,7 +12980,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13154,7 +13154,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13308,7 +13308,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13444,7 +13444,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13602,7 +13602,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13771,7 +13771,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -13993,7 +13993,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -14471,7 +14471,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -14600,7 +14600,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
       operationId: post-subscriptions-subscription_id-cancel_dunning.json
       description: |-
         # Cancel Dunning
@@ -16407,7 +16407,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
       operationId: get-subscriptions-lookup.json
       parameters:
         - schema:
@@ -16442,7 +16442,7 @@ paths:
                 type: object
                 properties:
                   payment_profile:
-                    $ref: '#/components/schemas/Payment-Profile'
+                    $ref: ../models/Payment-Profile.yaml
               examples:
                 Example:
                   value:
@@ -17040,7 +17040,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: '#/components/schemas/Subscription'
+                    $ref: ../models/Subscription.yaml
               examples:
                 Example:
                   value:
@@ -17515,55 +17515,47 @@ components:
       properties:
         component_id:
           type: integer
-          description: The integer component ID for the allocation. This references
-            a component that you have created in your Product setup
+          description: The integer component ID for the allocation. This references a component that you have created in your Product setup
         subscription_id:
           type: integer
-          description: The integer subscription ID for the allocation. This references
-            a unique subscription in your Site
+          description: The integer subscription ID for the allocation. This references a unique subscription in your Site
         quantity:
           type: integer
           description: The allocated quantity set in to effect by the allocation
         previous_quantity:
           type: integer
-          description: The allocated quantity that was in effect before this allocation
-            was created
+          description: The allocated quantity that was in effect before this allocation was created
         memo:
           type: string
           description: The memo passed when the allocation was created
           nullable: true
         timestamp:
           type: string
-          description: The time that the allocation was recorded, in  format and UTC
-            timezone, i.e. 2012-11-20T22:00:37Z
+          description: 'The time that the allocation was recorded, in  format and UTC timezone, i.e. 2012-11-20T22:00:37Z'
         proration_upgrade_scheme:
           type: string
-          description: The scheme used if the proration was an upgrade. This is only
-            present when the allocation was created mid-period.
+          description: The scheme used if the proration was an upgrade. This is only present when the allocation was created mid-period.
         proration_downgrade_scheme:
           type: string
-          description: The scheme used if the proration was a downgrade. This is only
-            present when the allocation was created mid-period.
+          description: The scheme used if the proration was a downgrade. This is only present when the allocation was created mid-period.
         price_point_id:
           type: integer
         previous_price_point_id:
           type: integer
         accrue_charge:
           type: boolean
-          description: If the change in cost is an upgrade, this determines if the charge
-            should accrue to the next renewal or if capture should be attempted immediately.
+          description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately.'
         upgrade_charge:
           type: string
-          description: The type of charge to be created if the change in cost is an
-            upgrade.
+          description: The type of charge to be created if the change in cost is an upgrade.
         downgrade_credit:
           type: string
           description: The type of credit to be created if the change in cost is a downgrade.
         payment:
           type:
-          - object
-          - 'null'
-          description: Information for captured payment, if applicable
+            - object
+            - 'null'
+          description: 'Information for captured payment, if applicable'
           properties:
             id:
               type: number
@@ -17654,15 +17646,13 @@ components:
                     type: integer
                   ending_quantity:
                     type:
-                    - integer
-                    - 'null'
+                      - integer
+                      - 'null'
                   unit_price:
                     type: string
             use_site_exchange_rate:
               type: boolean
-              description: Whether to use the site level exchange rate or define your own
-                prices for each currency if you have multiple currencies defined on the
-                site.
+              description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
               default: true
     Component:
       title: Component
@@ -17675,26 +17665,20 @@ components:
           properties:
             id:
               type: integer
-              description: The unique ID assigned to the component by Chargify. This ID
-                can be used to fetch the component from the API.
+              description: The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API.
             name:
               type: string
-              description: The name of the Component, suitable for display on statements.
-                i.e. Text Messages.
+              description: 'The name of the Component, suitable for display on statements. i.e. Text Messages.'
             pricing_scheme:
               type: string
-              description: 'The handle for the pricing scheme. Available options: per_unit,
-                volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
-                for an overview of pricing schemes.'
+              description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
               nullable: true
             unit_name:
               type: string
-              description: The name of the unit that the component’s usage is measured in.
-                i.e. message
+              description: The name of the unit that the component’s usage is measured in. i.e. message
             unit_price:
               type: string
-              description: The amount the customer will be charged per unit. This field
-                is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.
+              description: 'The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.'
             product_family_id:
               type: integer
               description: The id of the Product Family to which the Component belongs
@@ -17705,10 +17689,10 @@ components:
               type: string
               description: A handle for the component type
               enum:
-              - metered_component
-              - quantity_based_component
-              - on_off_component
-              - prepaid_usage_component
+                - metered_component
+                - quantity_based_component
+                - on_off_component
+                - prepaid_usage_component
             archived:
               type: boolean
               description: Boolean flag describing whether a component is archived or not.
@@ -17722,36 +17706,31 @@ components:
               type: integer
             price_point_count:
               type: integer
-              description: Count for the number of of amount of price points associated
-                with the the component
+              description: Count for the number of of amount of price points associated with the the component
             price_points_url:
               type: string
-              description: URL that points to the location to read the existing price points
-                via GET request
+              description: URL that points to the location to read the existing price points via GET request
             tax_code:
               type: string
-              description: A string representing the tax code related to the component type.
-                This is especially important when using the Avalara service to tax based
-                on locale. This attribute has a max length of 10 characters.
+              description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
               nullable: true
             recurring:
               type: boolean
             upgrade_charge:
               type:
-              - 'null'
-              - string
+                - 'null'
+                - string
             downgrade_credit:
               type:
-              - 'null'
-              - string
+                - 'null'
+                - string
             created_at:
               type: string
             prices:
               type:
-              - 'null'
-              - array
-              description: An array of price brackets. If the component uses the ‘per_unit’
-                pricing scheme, this array will be empty.
+                - 'null'
+                - array
+              description: 'An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty.'
               items:
                 type: object
                 properties:
@@ -17775,9 +17754,7 @@ components:
               type: string
             hide_date_range_on_invoice:
               type: boolean
-              description: "(Only available on Relationship Invoicing sites) Boolean flag
-                describing if the service date range should show for the component on generated
-                invoices."
+              description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
     Coupon:
       title: Coupon
       type: object
@@ -17822,15 +17799,15 @@ components:
             - do_not_recur
             - recur_indefinitely
         duration_period_count:
-          type: 
+          type:
             - integer
             - 'null'
         duration_interval:
-          type: 
+          type:
             - integer
             - 'null'
         duration_interval_unit:
-          type: 
+          type:
             - string
             - 'null'
         duration_interval_span:
@@ -17838,17 +17815,17 @@ components:
         allow_negative_balance:
           type: boolean
         archived_at:
-          type: 
+          type:
             - string
             - 'null'
         conversion_limit:
-          type: 
+          type:
             - string
             - 'null'
         stackable:
           type: boolean
         compounding_strategy:
-          type: 
+          type:
             - string
             - 'null'
           enum:
@@ -17884,7 +17861,7 @@ components:
               name:
                 type: string
               handle:
-                type: 
+                type:
                   - string
                   - 'null'
     Create-Allocation:
@@ -18399,14 +18376,13 @@ components:
           type: string
         use_site_exchange_rate:
           type: boolean
-          description: Whether or not to use the site's exchange rate or define your
-            own pricing when your site has multiple currencies defined.
+          description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
           default: true
       required:
-      - name
-      - price_in_cents
-      - interval
-      - interval_unit
+        - name
+        - price_in_cents
+        - interval
+        - interval_unit
     Create-Subscription:
       title: Create Subscription
       type: object
@@ -18751,8 +18727,7 @@ components:
       properties:
         uid:
           type: string
-          description: Unique identifier for the credit note. It is generated automatically
-            by Chargify and has the prefix "cn_" followed by alphanumeric characters.
+          description: Unique identifier for the credit note. It is generated automatically by Chargify and has the prefix "cn_" followed by alphanumeric characters.
         site_id:
           type: integer
           description: ID of the site to which the credit note belongs.
@@ -18770,9 +18745,7 @@ components:
             While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
         sequence_number:
           type: integer
-          description: A monotonically increasing number assigned to credit notes as they
-            are created.  This number is unique within a site and can be used to sort and
-            order credit notes.
+          description: A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes.
         issue_date:
           type: string
           description: |-
@@ -18796,16 +18769,13 @@ components:
             * applied
         currency:
           type: string
-          description: The ISO 4217 currency code (3 character string) representing the
-            currency of the credit note amount fields.
+          description: The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields.
         memo:
           type: string
-          description: The memo printed on credit note, which is a description of the reason
-            for the credit.
+          description: 'The memo printed on credit note, which is a description of the reason for the credit.'
         seller:
           type: object
-          description: Information about the seller (merchant) listed on the masthead of
-            the credit note.
+          description: Information about the seller (merchant) listed on the masthead of the credit note.
           properties:
             name:
               type: string
@@ -18828,8 +18798,7 @@ components:
               type: string
         customer:
           type: object
-          description: Information about the customer who is owner or recipient the credited
-            subscription.
+          description: Information about the customer who is owner or recipient the credited subscription.
           properties:
             chargify_id:
               type: integer
@@ -18877,34 +18846,22 @@ components:
               type: string
         subtotal_amount:
           type: string
-          description: Subtotal of the credit note, which is the sum of all line items before
-            discounts or taxes. Note that this is a positive amount representing the credit
-            back to the customer.
+          description: 'Subtotal of the credit note, which is the sum of all line items before discounts or taxes. Note that this is a positive amount representing the credit back to the customer.'
         discount_amount:
           type: string
-          description: Total discount applied to the credit note. Note that this is a positive
-            amount representing the discount amount being credited back to the customer
-            (i.e. a credit on an earlier discount). For example, if the original purchase
-            was $1.00 and the original discount was $0.10, a credit of $0.50 of the original
-            purchase (half) would have a discount credit of $0.05 (also half).
+          description: 'Total discount applied to the credit note. Note that this is a positive amount representing the discount amount being credited back to the customer (i.e. a credit on an earlier discount). For example, if the original purchase was $1.00 and the original discount was $0.10, a credit of $0.50 of the original purchase (half) would have a discount credit of $0.05 (also half).'
         tax_amount:
           type: string
-          description: Total tax of the credit note. Note that this is a positive amount
-            representing a previously taxex amount being credited back to the customer (i.e.
-            a credit of an earlier tax). For example, if the original purchase was $1.00
-            and the original tax was $0.10, a credit of $0.50 of the original purchase (half)
-            would also have a tax credit of $0.05 (also half).
+          description: 'Total tax of the credit note. Note that this is a positive amount representing a previously taxex amount being credited back to the customer (i.e. a credit of an earlier tax). For example, if the original purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of the original purchase (half) would also have a tax credit of $0.05 (also half).'
         total_amount:
           type: string
-          description: The credit note total, which is `subtotal_amount - discount_amount
-            + tax_amount`.'
+          description: 'The credit note total, which is `subtotal_amount - discount_amount + tax_amount`.'''
         applied_amount:
           type: string
           description: The amount of the credit note that has already been applied to invoices.
         remaining_amount:
           type: string
-          description: The amount of the credit note remaining to be applied to invoices,
-            which is `total_amount - applied_amount`.
+          description: 'The amount of the credit note remaining to be applied to invoices, which is `total_amount - applied_amount`.'
         line_items:
           type: array
           description: Line items on the credit note.
@@ -18913,8 +18870,7 @@ components:
             properties:
               uid:
                 type: string
-                description: Unique identifier for the line item.  Useful when cross-referencing
-                  the line against individual discounts in the `discounts` or `taxes` lists.
+                description: Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists.
               title:
                 type: string
                 description: A short descriptor for the credit given by this line.
@@ -18938,11 +18894,7 @@ components:
                   When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
               subtotal_amount:
                 type: string
-                description: The line subtotal, generally calculated as `quantity * unit_price`.
-                  This is the canonical amount of record for the line - when rounding differences
-                  are in play, `subtotal_amount` takes precedence over the value derived
-                  from `quantity * unit_price` (which may not have the proper precision
-                  to exactly equal this amount).
+                description: 'The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount).'
               discount_amount:
                 type: string
                 description: |-
@@ -18963,17 +18915,13 @@ components:
                   `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
               tiered_unit_price:
                 type: boolean
-                description: When `true`, indicates that the actual pricing scheme for the
-                  line was tiered, so the `unit_price` shown is the blended average for
-                  all units.
+                description: 'When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units.'
               period_range_start:
                 type: string
-                description: Start date for the period credited by this line. The format
-                  is `"YYYY-MM-DD"`.
+                description: Start date for the period credited by this line. The format is `"YYYY-MM-DD"`.
               period_range_end:
                 type: string
-                description: End date for the period credited by this line. The format is
-                  `"YYYY-MM-DD"`.
+                description: End date for the period credited by this line. The format is `"YYYY-MM-DD"`.
               product_id:
                 type: integer
                 description: |-
@@ -18985,16 +18933,14 @@ components:
                 description: The version of the product being credited.
               component_id:
                 type:
-                - integer
-                - 'null'
-                description: The ID of the component being credited. Will be `nil` for non-component
-                  credits.
+                  - integer
+                  - 'null'
+                description: The ID of the component being credited. Will be `nil` for non-component credits.
               price_point_id:
                 type:
-                - integer
-                - 'null'
-                description: The price point ID of the component being credited. Will be
-                  `nil` for non-component credits.
+                  - integer
+                  - 'null'
+                description: The price point ID of the component being credited. Will be `nil` for non-component credits.
         discounts:
           type: array
           items:
@@ -19091,8 +19037,7 @@ components:
                 type: string
         origin_invoices:
           type: array
-          description: An array of origin invoices for the credit note. Learn more about
-            [Origin Invoice from our docs](https://help.chargify.com/invoices/credit-notes.html#origin-invoices)
+          description: 'An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://help.chargify.com/invoices/credit-notes.html#origin-invoices)'
           items:
             type: object
             properties:
@@ -19120,131 +19065,6 @@ components:
           type: integer
         price_point_id:
           type: integer
-    Customer:
-      title: Customer
-      type: object
-      x-tags:
-        - Customers
-      properties:
-        first_name:
-          type: string
-          description: The first name of the customer
-        last_name:
-          type: string
-          description: The last name of the customer
-        email:
-          type: string
-          description: The email address of the customer
-        cc_emails:
-          type:
-            - string
-            - 'null'
-          description: 'A comma-separated list of emails that should be cc’d on all customer communications (i.e. “joe@example.com, sue@example.com”)'
-        organization:
-          type:
-            - string
-            - 'null'
-          description: The organization of the customer
-        reference:
-          type:
-            - string
-            - 'null'
-          description: The unique identifier used within your own application for this customer
-        id:
-          type: integer
-          description: The customer ID in Chargify
-        created_at:
-          type: string
-          description: The timestamp in which the customer object was created in Chargify
-        updated_at:
-          type: string
-          description: The timestamp in which the customer object was last edited
-        address:
-          type:
-            - string
-            - 'null'
-          description: The customer’s shipping street address (i.e. “123 Main St.”)
-        address_2:
-          type:
-            - string
-            - 'null'
-          description: Second line of the customer’s shipping address i.e. “Apt. 100”
-        city:
-          type:
-            - string
-            - 'null'
-          description: The customer’s shipping address city (i.e. “Boston”)
-        state:
-          type:
-            - string
-            - 'null'
-          description: The customer’s shipping address state (i.e. “MA”)
-        state_name:
-          type:
-            - string
-            - 'null'
-          description: The customer's full name of state
-        zip:
-          type:
-            - string
-            - 'null'
-          description: The customer’s shipping address zip code (i.e. “12345”)
-        country:
-          type:
-            - string
-            - 'null'
-          description: "\tThe customer shipping address country"
-        country_name:
-          type:
-            - string
-            - 'null'
-          description: The customer's full name of country
-        phone:
-          type:
-            - string
-            - 'null'
-          description: The phone number of the customer
-        verified:
-          type: boolean
-          description: Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway
-          nullable: true
-        portal_customer_created_at:
-          type:
-            - string
-            - 'null'
-          description: The timestamp of when the Billing Portal entry was created at for the customer
-        portal_invite_last_sent_at:
-          type:
-            - string
-            - 'null'
-          description: The timestamp of when the Billing Portal invite was last sent at
-        portal_invite_last_accepted_at:
-          description: The timestamp of when the Billing Portal invite was last accepted
-          type:
-            - string
-            - 'null'
-        tax_exempt:
-          type: boolean
-          description: The tax exempt status for the customer. Acceptable values are true or 1 for true and false or 0 for false.
-        vat_number:
-          type:
-            - string
-            - 'null'
-          description: 'The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out.'
-        parent_id:
-          description: The parent ID in Chargify if applicable. Parent is another Customer object.
-          type:
-            - integer
-            - 'null'
-        locale:
-          type: 
-            - string
-            - 'null'
-          description: The locale for the customer to identify language-region
-        default_subscription_group_uid:
-          type: 
-            - string
-            - 'null'
     Endpoint:
       title: Endpoint
       type: object
@@ -19283,13 +19103,13 @@ components:
           type: string
         event_specific_data:
           type:
-          - 'null'
-          - object
+            - 'null'
+            - object
           properties:
             previous_subscription_state:
               type: string
             new_subscription_state:
-              type: string    
+              type: string
     Group-Attributes:
       title: Group Attributes
       x-tags:
@@ -19866,7 +19686,7 @@ components:
         id:
           type: integer
         deleted_at:
-          type: 
+          type:
             - string
             - 'null'
     Metafield:
@@ -20028,132 +19848,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Metadata'
-    Payment-Profile:
-      title: Payment Profile
-      type: object
-      x-tags:
-        - Payment Profiles
-      properties:
-        id:
-          type: integer
-          description: 'The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer'
-        first_name:
-          type: string
-          description: The first name of the card holder
-        last_name:
-          type: string
-          description: The last name of the card holder
-        masked_card_number:
-          type: string
-          description: A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’)
-        card_type:
-          type: string
-          description: The type of card used
-          enum:
-            - bogus
-            - visa
-            - master
-            - discover
-            - american_express
-            - diners_club
-            - jcb
-            - switch
-            - solo
-            - dankort
-            - maestro
-            - forbrugsforeningen
-            - laser
-        expiration_month:
-          type: integer
-          description: An integer representing the expiration month of the card(1 – 12)
-        expiration_year:
-          type: integer
-          description: An integer representing the 4-digit expiration year of the card(i.e. ‘2012’)
-        customer_id:
-          type: integer
-          description: The Chargify-assigned id for the customer record to which the card belongs
-        current_vault:
-          type: 
-            - string
-            - 'null'
-          nullable: true
-          description: The vault that stores the payment profile with the provided vault_token.
-          enum:
-            - bogus
-            - authorizenet
-            - trust_commerce
-            - payment_express
-            - beanstream
-            - braintree_blue
-            - paypal
-            - quickpay
-            - eway
-            - stripe
-            - wirecard
-            - null
-        vault_token:
-          type: string
-          nullable: true
-          description: The “token” provided by your vault storage for an already stored payment profile
-        billing_address:
-          type: string
-          nullable: true
-          description: The current billing street address for the card
-        billing_city:
-          type: string
-          nullable: true
-          description: The current billing address city for the card
-        billing_state:
-          type: string
-          nullable: true
-          description: The current billing address state for the card
-        billing_zip:
-          type: string
-          nullable: true
-          description: The current billing address zip code for the card
-        billing_country:
-          type: string
-          nullable: true
-          description: The current billing address country for the card
-        customer_vault_token:
-          type: string
-          nullable: true
-          description: '(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
-        billing_address_2:
-          type: string
-          nullable: true
-          description: 'The current billing street address, second line, for the card'
-        payment_type:
-          type: string
-        disabled:
-          type: boolean
-        chargify_token:
-          type: string
-          description: Token received after sending billing informations using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
-    Product-Family:
-      title: Product Family
-      type: object
-      x-tags:
-        - Product Families
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        handle:
-          type: string
-        accounting_code:
-          type:
-            - 'null'
-            - string
-        description:
-          type:
-            - string
-            - 'null'
-        created_at:
-          type: string
-        updated_at:
-          type: string
     Product-Price-Point-Currency-Price:
       title: Product Price Point Currency Price
       type: object
@@ -20173,9 +19867,9 @@ components:
         role:
           type: string
           enum:
-          - baseline
-          - trial
-          - initial
+            - baseline
+            - trial
+            - initial
     Product-Price-Point:
       title: Product Price Point
       type: object
@@ -20223,147 +19917,7 @@ components:
           type: string
         use_site_exchange_rate:
           type: boolean
-          description: Whether or not to use the site's exchange rate or define your
-            own pricing when your site has multiple currencies defined.
-    Product:
-      title: Product
-      type: object
-      x-tags:
-        - Products
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-          description: The product name
-        handle:
-          type: string
-          nullable: true
-          description: The product API handle
-        description:
-          type: string
-          description: The product description
-        accounting_code:
-          type: string
-          nullable: true
-        request_credit_card:
-          type: boolean
-          description: 'Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page.'
-        expiration_interval:
-          type: integer
-          nullable: true
-          description: A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
-        expiration_interval_unit:
-          type: string
-          nullable: true
-          description: 'A string representing the trial interval unit for this product, either month or day'
-          enum:
-            - month
-            - day
-            - never
-            - ''
-            - null
-        created_at:
-          type: string
-          description: Timestamp indicating when this product was created
-        updated_at:
-          type: string
-          description: Timestamp indicating when this product was last updated
-        price_in_cents:
-          type: integer
-          description: 'The product price, in integer cents'
-        interval:
-          type: integer
-          description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days
-        interval_unit:
-          type: string
-          description: 'A string representing the interval unit for this product, either month or day'
-          enum:
-            - month
-            - day
-        initial_charge_in_cents:
-          type: integer
-          nullable: true
-          description: The up front charge you have specified.
-        trial_price_in_cents:
-          type: integer
-          nullable: true
-          description: 'The price of the trial period for a subscription to this product, in integer cents.'
-        trial_interval:
-          type: integer
-          nullable: true
-          description: A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
-        trial_interval_unit:
-          type: string
-          nullable: true
-          description: 'A string representing the trial interval unit for this product, either month or day'
-          enum:
-            - month
-            - day
-            - null
-        archived_at:
-          type: string
-          nullable: true
-          description: Timestamp indicating when this product was archived
-        require_credit_card:
-          type: boolean
-          description: Boolean that controls whether a payment profile is required to be entered for customers wishing to sign up on this product.
-        return_params:
-          type: string
-          nullable: true
-        taxable:
-          type: boolean
-        update_return_url:
-          type: string
-          nullable: true
-          description: The url to which a customer will be returned after a successful account update
-        initial_charge_after_trial:
-          type: boolean
-        version_number:
-          type: integer
-          description: The version of the product
-        update_return_params:
-          type: string
-          nullable: true
-          description: 'The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update)'
-        product_family:
-          $ref: '#/components/schemas/Product-Family'
-        public_signup_pages:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: The id of the signup page (public_signup_pages only)
-              return_url:
-                type: string
-                nullable: true
-                description: The url to which a customer will be returned after a successful signup (public_signup_pages only)
-              return_params:
-                type: string
-                nullable: true
-                description: The params to be appended to the return_url (public_signup_pages only)
-              url:
-                type: string
-                description: The url where the signup page can be viewed (public_signup_pages only)
-        product_price_point_name:
-          type: string
-        request_billing_address:
-          type: boolean
-          description: A boolean indicating whether to request a billing address on any Self-Service Pages that are used by subscribers of this product.
-        require_billing_address:
-          type: boolean
-          description: 'A boolean indicating whether a billing address is required to add a payment profile, especially at signup.'
-        require_shipping_address:
-          type: boolean
-          description: 'A boolean indicating whether a shipping address is required for the customer, especially at signup.'
-        tax_code:
-          type: string
-          nullable: true
-          description: A string representing the tax code related to the product type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-        default_product_price_point_id:
-          type: integer
+          description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
@@ -20613,278 +20167,7 @@ components:
         updated_at:
           type: string
         sticky:
-          type: boolean  
-    Subscription:
-      title: Subscription
-      type: object
-      x-tags:
-        - Subscriptions
-      properties:
-        id:
-          type: integer
-          description: The subscription unique id within Chargify.
-        state:
-          type: string
-          description: 'The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html)'
-        balance_in_cents:
-          type: integer
-          description: Gives the current outstanding subscription balance in the number of cents.
-        total_revenue_in_cents:
-          type: integer
-          description: Gives the total revenue from the subscription in the number of cents.
-        product_price_in_cents:
-          type: integer
-          description: '(Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version.'
-        product_version_number:
-          type: integer
-          description: The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility.
-        current_period_ends_at:
-          type: string
-          description: 'Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur)'
-        next_assessment_at:
-          type: string
-          description: 'Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases)'
-        trial_started_at:
-          type: string
-          nullable: true
-          description: Timestamp for when the trial period (if any) began
-        trial_ended_at:
-          type: string
-          nullable: true
-          description: Timestamp for when the trial period (if any) ended
-        activated_at:
-          type: string
-          description: 'Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial)'
-        expires_at:
-          type: string
-          nullable: true
-          description: Timestamp giving the expiration date of this subscription (if any)
-        created_at:
-          type: string
-          description: The creation date for this subscription
-        updated_at:
-          type: string
-          description: The date of last update for this subscription
-        cancellation_message:
-          type: string
-          nullable: true
-          description: 'Seller-provided reason for, or note about, the cancellation.'
-        cancellation_method:
-          type:
-            - string
-            - 'null'
-          nullable: true
-          description: 'The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription''s state is not canceled.'
-          enum:
-            - merchant_ui
-            - merchant_api
-            - dunning
-            - billing_portal
-            - null
-        cancel_at_end_of_period:
           type: boolean
-          nullable: true
-          description: Whether or not the subscription will (or has) canceled at the end of the period.
-        canceled_at:
-          type: string
-          nullable: true
-          description: The timestamp of the most recent cancellation
-        current_period_started_at:
-          type: string
-          description: Timestamp relating to the start of the current (recurring) period
-        previous_state:
-          type: string
-          description: 'Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state)'
-        signup_payment_id:
-          type: integer
-          description: The ID of the transaction that generated the revenue
-        signup_revenue:
-          type: string
-          description: 'The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00)'
-        delayed_cancel_at:
-          type: string
-          nullable: true
-          description: Timestamp for when the subscription is currently set to cancel.
-        coupon_code:
-          type: string
-          nullable: true
-          description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
-          deprecated: true
-        snap_day:
-          type: string
-          nullable: true
-          description: 'The day of the month that the subscription will charge according to calendar billing rules, if used.'
-        payment_collection_method:
-          type: string
-          nullable: true
-          description: The type of payment collection to be used in the subscription.
-          enum:
-            - automatic
-            - invoice
-            - remittance
-            - prepaid
-        customer:
-          $ref: '#/components/schemas/Customer'
-        product:
-          $ref: '#/components/schemas/Product'
-        credit_card:
-          $ref: '#/components/schemas/Payment-Profile'
-        group:
-          type:
-            - object
-            - 'null'
-          properties:
-            uid:
-              type: string
-              description: The UID for the group
-            scheme:
-              type: string
-              description: 'Whether the group is configured to rely on a primary subscription for billing. At this time, it will always be 1.'
-            primary_subscription_id:
-              type: string
-              description: The subscription ID of the primary within the group. Applicable to scheme 1.
-            primary:
-              type: string
-              description: A boolean indicating whether the subscription is the primary in the group. Applicable to scheme 1.
-        bank_account:
-          type: object
-          properties:
-            bank_account_holder_type:
-              type: string
-              description: Defaults to personal
-            bank_account_type:
-              type: string
-              description: Defaults to checking
-            bank_name:
-              type: string
-              description: The bank where the account resides
-            billing_address:
-              type: string
-              description: The current billing street address for the bank account
-            billing_address_2:
-              type: string
-              description: 'The current billing street address, second line, for the bank account'
-            billing_city:
-              type: string
-              description: The current billing address city for the bank account
-            billing_state:
-              type: string
-              description: The current billing address state for the bank account
-            billing_zip:
-              type: string
-              description: The current billing address zip code for the bank account
-            billing_country:
-              type: string
-              description: The current billing address country for the bank account
-            current_vault:
-              type: string
-              description: The vault that stores the payment profile with the provided vault_token.
-              enum:
-                - authorizenet
-                - stripe
-            customer_id:
-              type: integer
-              description: The Chargify-assigned id for the customer record to which the bank account belongs
-            customer_vault_token:
-              type: string
-              description: '(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
-            first_name:
-              type: string
-              description: The first name of the bank account holder
-            last_name:
-              type: string
-              description: The last name of the bank account holder
-            id:
-              type: integer
-              description: 'The Chargify-assigned ID of the stored bank account. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer'
-            masked_bank_account_number:
-              type: string
-              description: A string representation of the stored bank account number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’)
-            masked_bank_routing_number:
-              type: string
-              description: A string representation of the stored bank routing number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’). payment_type will be bank_account
-            vault_token:
-              type: string
-              description: The “token” provided by your vault storage for an already stored payment profile
-            chargify_token:
-              type: string
-              description: Token received after sending billing informations using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
-        payment_type:
-          type: string
-          nullable: true
-          description: The payment profile type for the active profile on file.
-        referral_code:
-          type: string
-          nullable: true
-          description: The subscription's unique code that can be given to referrals.
-        next_product_id:
-          type: integer
-          nullable: true
-          description: 'If a delayed product change is scheduled, the ID of the product that the subscription will be changed to at the next renewal.'
-        next_product_handle:
-          type: string
-          description: 'If a delayed product change is scheduled, the handle of the product that the subscription will be changed to at the next renewal.'
-          nullable: true
-        coupon_use_count:
-          type: integer
-          nullable: true
-          description: (deprecated) How many times the subscription's single coupon has been used. This field has no replacement for multiple coupons.
-          deprecated: true
-        coupon_uses_allowed:
-          type: integer
-          nullable: true
-          description: (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons.
-          deprecated: true
-        reason_code:
-          type: string
-          description: 'If the subscription is canceled, this is their churn code.'
-          nullable: true
-        automatically_resume_at:
-          type: string
-          description: The date the subscription is scheduled to automatically resume from the on_hold state.
-          nullable: true
-        coupon_codes:
-          type: array
-          description: An array for all the coupons attached to the subscription.
-          items:
-            type: string
-        offer_id:
-          type: string
-          description: The ID of the offer associated with the subscription.
-          nullable: true
-        payer_id:
-          type: integer
-          description: 'On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the ''Customer Hierarchies & WhoPays'' feature is enabled.'
-        current_billing_amount_in_cents:
-          type: integer
-          description: The balance in cents plus the estimated renewal amount in cents.
-        product_price_point_id:
-          type: integer
-          description: The product price point currently subscribed to.
-        next_product_price_point_id:
-          type: integer
-          description: 'If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal.'
-          nullable: true
-        net_terms:
-          type: integer
-          description: "\tOn Relationship Invoicing, the number of days before a renewal invoice is due."
-          nullable: true
-        stored_credential_transaction_id:
-          type: integer
-          description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
-          nullable: true
-        reference:
-          type: string
-          description: The reference value (provided by your app) for the subscription itelf.
-          nullable: true
-        on_hold_at:
-          type: string
-          description: The timestamp of the most recent on hold action.
-          nullable: true
-        prepaid_dunning:
-          type: boolean
-          description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
-          nullable: true
     Subscriptions-Component:
       title: Subscriptions Component
       type: object
