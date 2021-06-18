@@ -8771,6 +8771,11 @@ paths:
           in: query
           description: Use this parameter if you want to fetch also invoice events with change_invoice_status type.
           name: with_change_invoice_status
+        - schema:
+            type: string
+          in: query
+          name: event_types
+          description: 'Filter results by event_type. Supply a comma separated list of event types (listed above). eg: void_invoice,void_remainder'
   '/invoices/{uid}/payments.json':
     parameters:
       - schema:
