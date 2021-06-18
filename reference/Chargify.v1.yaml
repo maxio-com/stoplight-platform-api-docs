@@ -266,7 +266,7 @@ paths:
                 type: object
                 properties:
                   endpoint:
-                    $ref: ../models/Endpoint.v1.yaml
+                    $ref: '#/components/schemas/Endpoint'
               examples:
                 Example:
                   value:
@@ -311,7 +311,7 @@ paths:
               type: object
               properties:
                 endpoint:
-                  $ref: ../models/Create-or-Update-Endpoint.v1.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Endpoint'
               required:
                 - endpoint
             examples:
@@ -334,7 +334,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Endpoint.v1.yaml
+                  $ref: '#/components/schemas/Endpoint'
               examples:
                 Example:
                   value:
@@ -379,7 +379,7 @@ paths:
                 type: object
                 properties:
                   endpoint:
-                    $ref: ../models/Endpoint.v1.yaml
+                    $ref: '#/components/schemas/Endpoint'
         '404':
           description: Not Found
         '422':
@@ -418,7 +418,7 @@ paths:
               type: object
               properties:
                 endpoint:
-                  $ref: ../models/Create-or-Update-Endpoint.v1.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Endpoint'
               required:
                 - endpoint
             examples:
@@ -556,7 +556,7 @@ paths:
                 type: object
                 properties:
                   note:
-                    $ref: ../models/Subscription-Note.v1.yaml
+                    $ref: '#/components/schemas/Subscription-Note'
                 required:
                   - note
       description: |-
@@ -570,7 +570,7 @@ paths:
               type: object
               properties:
                 note:
-                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Subscription-Note'
             examples:
               Example:
                 value:
@@ -606,7 +606,7 @@ paths:
                   type: object
                   properties:
                     note:
-                      $ref: ../models/Subscription-Note.v1.yaml
+                      $ref: '#/components/schemas/Subscription-Note'
               examples:
                 Example:
                   value:
@@ -669,7 +669,7 @@ paths:
                 type: object
                 properties:
                   note:
-                    $ref: ../models/Subscription-Note.v1.yaml
+                    $ref: '#/components/schemas/Subscription-Note'
               examples:
                 Example:
                   value:
@@ -699,7 +699,7 @@ paths:
                 type: object
                 properties:
                   note:
-                    $ref: ../models/Subscription-Note.v1.yaml
+                    $ref: '#/components/schemas/Subscription-Note'
       description: |-
         ## Update a Note
 
@@ -711,7 +711,7 @@ paths:
               type: object
               properties:
                 note:
-                  $ref: ../models/Create-or-Update-Subscription-Note.v1.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Subscription-Note'
               required:
                 - note
             examples:
@@ -734,7 +734,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: ../models/Customer.yaml
+                    $ref: '#/components/schemas/Customer'
               examples:
                 Example:
                   value:
@@ -829,7 +829,7 @@ paths:
               type: object
               properties:
                 customer:
-                  $ref: ../models/Create-Customer.yaml
+                  $ref: '#/components/schemas/Create-Customer'
             examples:
               Example:
                 value:
@@ -860,7 +860,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Customer.yaml
+                  $ref: '#/components/schemas/Customer'
               examples:
                 Example:
                   value:
@@ -1024,7 +1024,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: ../models/Customer.yaml
+                    $ref: '#/components/schemas/Customer'
       operationId: get-customers-id-.json
       description: |-
         ## Read Customer Data
@@ -1042,7 +1042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Customer.yaml
+                $ref: '#/components/schemas/Customer'
               examples:
                 Example:
                   value:
@@ -1098,7 +1098,7 @@ paths:
               type: object
               properties:
                 customer:
-                  $ref: ../models/Update-Customer.yaml
+                  $ref: '#/components/schemas/Update-Customer'
             examples:
               Example:
                 value:
@@ -1132,7 +1132,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: ../models/Customer.yaml
+                    $ref: '#/components/schemas/Customer'
       operationId: get-customers-lookup.json
       description: |-
         ## Read Customer by Reference Value
@@ -1169,7 +1169,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Subscription.yaml
+                  $ref: '#/components/schemas/Subscription'
       operationId: get-customers-customer_id-subscriptions.json
       description: |-
         ## List Subscriptions for a Customer
@@ -1196,7 +1196,7 @@ paths:
                 type: object
                 properties:
                   customer:
-                    $ref: ../models/Customer.yaml
+                    $ref: '#/components/schemas/Customer'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -1594,7 +1594,7 @@ paths:
                 type: object
                 properties:
                   reason_code:
-                    $ref: ../models/Reason-Code.yaml
+                    $ref: '#/components/schemas/Reason-Code'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -1671,7 +1671,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Reason-Code.yaml
+                  $ref: '#/components/schemas/Reason-Code'
               examples:
                 Example:
                   value:
@@ -1737,7 +1737,7 @@ paths:
                 type: object
                 properties:
                   reason_code:
-                    $ref: ../models/Reason-Code.yaml
+                    $ref: '#/components/schemas/Reason-Code'
         '404':
           description: Not Found
       operationId: get-reason_codes-reason_code_id-.json
@@ -1758,7 +1758,7 @@ paths:
                 type: object
                 properties:
                   reason_code:
-                    $ref: ../models/Reason-Code.yaml
+                    $ref: '#/components/schemas/Reason-Code'
         '404':
           description: Not Found
       operationId: put-reason_codes-reason_code_id-.json
@@ -1832,7 +1832,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Metafield.yaml
+                  $ref: '#/components/schemas/Metafield'
               examples:
                 Example:
                   value:
@@ -1890,10 +1890,10 @@ paths:
               properties:
                 metafields:
                   anyOf:
-                    - $ref: ../models/Create-Metafield.yaml
+                    - $ref: '#/components/schemas/Create-Metafield'
                     - type: array
                       items:
-                        $ref: ../models/Create-Metafield.yaml
+                        $ref: '#/components/schemas/Create-Metafield'
             examples:
               Single Metafield:
                 value:
@@ -1932,7 +1932,7 @@ paths:
                   metafields:
                     type: array
                     items:
-                      $ref: ../models/Metafield.yaml
+                      $ref: '#/components/schemas/Metafield'
       operationId: get-resource_type-metafields.json
       description: |-
         ## List Metafields
@@ -1968,7 +1968,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Metafield.yaml
+                  $ref: '#/components/schemas/Metafield'
       operationId: put-resource_type-metafields.json
       description: |-
         ## Update Metafield
@@ -1982,10 +1982,10 @@ paths:
               properties:
                 metafields:
                   oneOf:
-                    - $ref: ../models/Update-Metafield.yaml
+                    - $ref: '#/components/schemas/Update-Metafield'
                     - type: array
                       items:
-                        $ref: ../models/Update-Metafield.yaml
+                        $ref: '#/components/schemas/Update-Metafield'
         description: ''
       parameters:
         - schema:
@@ -2101,7 +2101,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Metadata.yaml
+                  $ref: '#/components/schemas/Metadata'
     get:
       summary: List Metadata
       tags:
@@ -2112,7 +2112,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Paginated-Metadata.yaml
+                $ref: '#/components/schemas/Paginated-Metadata'
       operationId: get-resource_type-resource_id-metadata.json
       description: |-
         ## Read Metadata for a Specific Resource
@@ -2147,7 +2147,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Metadata.yaml
+                  $ref: '#/components/schemas/Metadata'
       operationId: put-resource_type-resource_id-metadata.json
       parameters:
         - schema:
@@ -2235,7 +2235,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Paginated-Metadata.yaml
+                $ref: '#/components/schemas/Paginated-Metadata'
       operationId: get-resource_type-metadata.json
       description: |-
         ## Read Metadata by Resource
@@ -2326,7 +2326,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -2363,7 +2363,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Create-or-Update-Coupon.yaml
+              $ref: '#/components/schemas/Create-or-Update-Coupon'
             examples:
               Percentage Coupon Example:
                 value:
@@ -2414,7 +2414,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Coupon.yaml
+                  $ref: '#/components/schemas/Coupon'
               examples:
                 Example:
                   value:
@@ -2525,7 +2525,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
       operationId: get-coupons-find.json
       description: |-
         ## Find Coupon
@@ -2570,7 +2570,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
               examples:
                 Example:
                   value:
@@ -2620,7 +2620,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
               examples:
                 Example:
                   value:
@@ -2658,7 +2658,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Create-or-Update-Coupon.yaml
+              $ref: '#/components/schemas/Create-or-Update-Coupon'
             examples:
               Example:
                 value:
@@ -2692,7 +2692,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
               examples:
                 Example:
                   value:
@@ -2738,7 +2738,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Coupon.yaml
+                  $ref: '#/components/schemas/Coupon'
       operationId: get-coupons.json
       description: |-
         ## List Coupons for Default Product Family
@@ -2886,7 +2886,7 @@ paths:
                 type: object
                 properties:
                   coupon:
-                    $ref: ../models/Coupon.yaml
+                    $ref: '#/components/schemas/Coupon'
               examples:
                 Example:
                   value:
@@ -3301,7 +3301,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Event.yaml
+                  $ref: '#/components/schemas/Event'
               examples:
                 Example:
                   value:
@@ -3505,7 +3505,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Event.yaml
+                  $ref: '#/components/schemas/Event'
               examples:
                 Example:
                   value:
@@ -4270,7 +4270,7 @@ paths:
                                     unit_price:
                                       type: string
                               overage_pricing:
-                                $ref: ../models/Overage-Pricing.yaml
+                                $ref: '#/components/schemas/Overage-Pricing'
                         unit_price:
                           type: number
                           description: 'The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065'
@@ -4284,7 +4284,7 @@ paths:
                           type: string
                           description: deprecated May 2011 - use unit_price instead
                         overage_pricing:
-                          $ref: ../models/Overage-Pricing.yaml
+                          $ref: '#/components/schemas/Overage-Pricing'
                         rollover_prepaid_remainder:
                           type: boolean
                           description: Boolean which controls whether or not remaining units should be rolled over to the next period
@@ -4464,7 +4464,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Component.yaml
+                $ref: '#/components/schemas/Component'
               examples:
                 Example:
                   value:
@@ -4527,7 +4527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Component.yaml
+                $ref: '#/components/schemas/Component'
               examples:
                 Example:
                   value:
@@ -4570,7 +4570,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Component.yaml
+                $ref: '#/components/schemas/Component'
               examples:
                 Example:
                   value:
@@ -4628,7 +4628,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Component.yaml
+                  $ref: '#/components/schemas/Component'
               examples:
                 Example:
                   value:
@@ -4803,7 +4803,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Component.yaml
+                  $ref: '#/components/schemas/Component'
               examples:
                 Example:
                   value:
@@ -4910,7 +4910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Component-Price-Point.yaml
+                $ref: '#/components/schemas/Component-Price-Point'
               examples: {}
       operationId: post-components-component_id-price_points.json
       description: |-
@@ -4924,10 +4924,10 @@ paths:
               anyOf:
                 - properties:
                     price_point:
-                      $ref: ../models/Create-Component-Price-Point.yaml
+                      $ref: '#/components/schemas/Create-Component-Price-Point'
                 - properties:
                     price_point:
-                      $ref: ../models/Create-Prepaid-Usage-Component-Price-Point.yaml
+                      $ref: '#/components/schemas/Create-Prepaid-Usage-Component-Price-Point'
               type: object
             examples:
               Example:
@@ -4981,7 +4981,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: ../models/Component-Price-Point.yaml
+                      $ref: '#/components/schemas/Component-Price-Point'
               examples:
                 Example:
                   value:
@@ -5053,7 +5053,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: ../models/Component-Price-Point.yaml
+                      $ref: '#/components/schemas/Component-Price-Point'
               examples:
                 Example:
                   value:
@@ -5100,8 +5100,8 @@ paths:
                   type: array
                   items:
                     anyOf:
-                      - $ref: ../models/Create-Component-Price-Point.yaml
-                      - $ref: ../models/Create-Prepaid-Usage-Component-Price-Point.yaml
+                      - $ref: '#/components/schemas/Create-Component-Price-Point'
+                      - $ref: '#/components/schemas/Create-Prepaid-Usage-Component-Price-Point'
             examples:
               Example:
                 value:
@@ -5145,7 +5145,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Component-Price-Point.yaml
+                    $ref: '#/components/schemas/Component-Price-Point'
       operationId: put-components-component_id-price_points-price_point_id-.json
       description: |-
         # Update Price Point
@@ -5207,7 +5207,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Component-Price-Point.yaml
+                    $ref: '#/components/schemas/Component-Price-Point'
               examples:
                 Example:
                   value:
@@ -5264,7 +5264,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Component-Price-Point.yaml
+                    $ref: '#/components/schemas/Component-Price-Point'
               examples:
                 Example:
                   value:
@@ -5311,7 +5311,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Currency-Price.yaml
+                  $ref: '#/components/schemas/Currency-Price'
       operationId: post-price_points-price_point_id-currency_prices.json
       description: |-
         # Create Currency Prices
@@ -5361,7 +5361,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Currency-Price.yaml
+                  $ref: '#/components/schemas/Currency-Price'
       operationId: put-price_points-price_point_id-currency_prices.json
       description: |-
         # Update Currency Prices
@@ -5609,7 +5609,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: ../models/Product.yaml
+                    $ref: '#/components/schemas/Product'
       operationId: post-product_families-product_family_id-products.json
       description: |-
         # Create Product
@@ -5625,7 +5625,7 @@ paths:
               type: object
               properties:
                 product:
-                  $ref: ../models/Create-or-Update-Product.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Product'
             examples:
               Example:
                 value:
@@ -5656,7 +5656,7 @@ paths:
                   type: object
                   properties:
                     product:
-                      $ref: ../models/Product.yaml
+                      $ref: '#/components/schemas/Product'
               examples:
                 Example:
                   value:
@@ -5816,7 +5816,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: ../models/Product.yaml
+                    $ref: '#/components/schemas/Product'
               examples:
                 Example:
                   value:
@@ -5874,7 +5874,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: ../models/Product.yaml
+                    $ref: '#/components/schemas/Product'
               examples:
                 Example:
                   value:
@@ -5951,7 +5951,7 @@ paths:
               type: object
               properties:
                 product:
-                  $ref: ../models/Create-or-Update-Product.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Product'
     delete:
       summary: Archive Product
       tags:
@@ -5966,7 +5966,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: ../models/Product.yaml
+                    $ref: '#/components/schemas/Product'
               examples:
                 Example:
                   value:
@@ -6032,7 +6032,7 @@ paths:
                 type: object
                 properties:
                   product:
-                    $ref: ../models/Product.yaml
+                    $ref: '#/components/schemas/Product'
               examples:
                 Example:
                   value:
@@ -6105,7 +6105,7 @@ paths:
                 type: object
                 properties:
                   product_family:
-                    $ref: ../models/Product-Family.yaml
+                    $ref: '#/components/schemas/Product-Family'
               examples:
                 Example:
                   value:
@@ -6156,7 +6156,7 @@ paths:
                   type: object
                   properties:
                     product_family:
-                      $ref: ../models/Product-Family.yaml
+                      $ref: '#/components/schemas/Product-Family'
               examples:
                 Example:
                   value:
@@ -6231,7 +6231,7 @@ paths:
                 type: object
                 properties:
                   product_family:
-                    $ref: ../models/Product-Family.yaml
+                    $ref: '#/components/schemas/Product-Family'
               examples:
                 Example:
                   value:
@@ -6269,7 +6269,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6301,7 +6301,7 @@ paths:
               type: object
               properties:
                 price_point:
-                  $ref: ../models/Create-Product-Price-Point.yaml
+                  $ref: '#/components/schemas/Create-Product-Price-Point'
             examples:
               Example:
                 value:
@@ -6334,7 +6334,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: ../models/Product-Price-Point.yaml
+                      $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6404,7 +6404,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6461,7 +6461,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6505,7 +6505,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6557,7 +6557,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6609,7 +6609,7 @@ paths:
                 type: object
                 properties:
                   price_point:
-                    $ref: ../models/Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6657,7 +6657,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: ../models/Product-Price-Point.yaml
+                      $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 Example:
                   value:
@@ -6691,7 +6691,7 @@ paths:
                 price_points:
                   type: array
                   items:
-                    $ref: ../models/Create-Product-Price-Point.yaml
+                    $ref: '#/components/schemas/Create-Product-Price-Point'
             examples:
               Example:
                 value:
@@ -6740,7 +6740,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Product-Price-Point-Currency-Price.yaml
+                $ref: '#/components/schemas/Product-Price-Point-Currency-Price'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -6825,7 +6825,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Product-Price-Point-Currency-Price.yaml
+                  $ref: '#/components/schemas/Product-Price-Point-Currency-Price'
       operationId: put-product_price_points-product_price_point_id-currency_prices.json
       description: |-
         # Update Currency Prices
@@ -7780,7 +7780,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Invoice.yaml
+                $ref: '#/components/schemas/Invoice'
               examples: {}
       operationId: post-invoices-uid-refunds.json
       description: |-
@@ -7902,7 +7902,7 @@ paths:
                   invoices:
                     type: array
                     items:
-                      $ref: ../models/Invoice.yaml
+                      $ref: '#/components/schemas/Invoice'
               examples:
                 Example:
                   value:
@@ -8258,7 +8258,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Invoice.yaml
+                $ref: '#/components/schemas/Invoice'
               examples:
                 Example:
                   value:
@@ -8417,7 +8417,7 @@ paths:
                         timestamp:
                           type: string
                         invoice:
-                          $ref: ../models/Invoice.yaml
+                          $ref: '#/components/schemas/Invoice'
                   page:
                     type: integer
                   per_page:
@@ -8794,7 +8794,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Invoice.yaml
+                $ref: '#/components/schemas/Invoice'
       operationId: post-invoices-uid-payments.json
       description: |-
         ## Create Payment
@@ -8901,7 +8901,7 @@ paths:
                   credit_notes:
                     type: array
                     items:
-                      $ref: ../models/Credit-Note.yaml
+                      $ref: '#/components/schemas/Credit-Note'
               examples:
                 Example:
                   value:
@@ -9193,7 +9193,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Credit-Note.yaml
+                $ref: '#/components/schemas/Credit-Note'
               examples:
                 Example:
                   value:
@@ -9562,7 +9562,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Invoice.yaml
+                $ref: '#/components/schemas/Invoice'
         '404':
           description: Not Found
           content:
@@ -9615,7 +9615,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Invoice.yaml
+                $ref: '#/components/schemas/Invoice'
         '404':
           description: Not Found
           content:
@@ -9686,7 +9686,7 @@ paths:
                   invoices:
                     type: array
                     items:
-                      $ref: ../models/Invoice.yaml
+                      $ref: '#/components/schemas/Invoice'
               examples:
                 Example:
                   value:
@@ -10028,7 +10028,7 @@ paths:
                 type: object
                 properties:
                   component:
-                    $ref: ../models/Subscriptions-Component.yaml
+                    $ref: '#/components/schemas/Subscriptions-Component'
               examples:
                 Example:
                   value:
@@ -10073,7 +10073,7 @@ paths:
                   type: object
                   properties:
                     component:
-                      $ref: ../models/Subscriptions-Component.yaml
+                      $ref: '#/components/schemas/Subscriptions-Component'
               examples:
                 Example:
                   value:
@@ -10227,7 +10227,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -10355,7 +10355,7 @@ paths:
                 type: object
                 properties:
                   allocation:
-                    $ref: ../models/Allocation.yaml
+                    $ref: '#/components/schemas/Allocation'
               examples:
                 Example:
                   value:
@@ -10387,7 +10387,7 @@ paths:
               type: object
               properties:
                 allocation:
-                  $ref: ../models/Create-Allocation.yaml
+                  $ref: '#/components/schemas/Create-Allocation'
             examples:
               Quantity Based:
                 value:
@@ -10419,7 +10419,7 @@ paths:
                   type: object
                   properties:
                     allocation:
-                      $ref: ../models/Allocation.yaml
+                      $ref: '#/components/schemas/Allocation'
               examples:
                 Example:
                   value:
@@ -10504,7 +10504,7 @@ paths:
                   type: object
                   properties:
                     allocation:
-                      $ref: ../models/Allocation.yaml
+                      $ref: '#/components/schemas/Allocation'
               examples:
                 Example:
                   value:
@@ -10592,7 +10592,7 @@ paths:
                     type: object
                     properties:
                       allocation:
-                        $ref: ../models/Create-Allocation.yaml
+                        $ref: '#/components/schemas/Create-Allocation'
                 accrue_charge:
                   type: boolean
                 upgrade_charge:
@@ -10842,7 +10842,7 @@ paths:
               type: object
               properties:
                 allocation:
-                  $ref: ../models/Create-Allocation.yaml
+                  $ref: '#/components/schemas/Create-Allocation'
             examples:
               Example:
                 value:
@@ -11034,7 +11034,7 @@ paths:
                 type: object
                 properties:
                   usage:
-                    $ref: ../models/Usage.yaml
+                    $ref: '#/components/schemas/Usage'
               examples:
                 Example:
                   value:
@@ -11160,7 +11160,7 @@ paths:
                   type: object
                   properties:
                     usage:
-                      $ref: ../models/Usage.yaml
+                      $ref: '#/components/schemas/Usage'
               examples:
                 Example:
                   value:
@@ -11307,7 +11307,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -11455,7 +11455,7 @@ paths:
               type: object
               properties:
                 subscription:
-                  $ref: ../models/Create-Subscription.yaml
+                  $ref: '#/components/schemas/Create-Subscription'
             examples:
               Basic:
                 value:
@@ -11646,7 +11646,7 @@ paths:
                   type: object
                   properties:
                     subscription:
-                      $ref: ../models/Subscription.yaml
+                      $ref: '#/components/schemas/Subscription'
       operationId: get-subscriptions.json
       description: |-
         # List Subscriptions
@@ -11902,7 +11902,7 @@ paths:
                 type: object
                 properties:
                   offer:
-                    $ref: ../models/Offer.yaml
+                    $ref: '#/components/schemas/Offer'
               examples:
                 Example:
                   value:
@@ -12032,7 +12032,7 @@ paths:
                   offers:
                     type: array
                     items:
-                      $ref: ../models/Offer.yaml
+                      $ref: '#/components/schemas/Offer'
               examples:
                 Example:
                   value:
@@ -12099,7 +12099,7 @@ paths:
                 type: object
                 properties:
                   offer:
-                    $ref: ../models/Offer.yaml
+                    $ref: '#/components/schemas/Offer'
               examples: {}
         '401':
           description: Unauthorized
@@ -12565,7 +12565,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -12741,7 +12741,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -12980,7 +12980,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13154,7 +13154,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13308,7 +13308,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13444,7 +13444,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13602,7 +13602,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13771,7 +13771,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -13993,7 +13993,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -14471,7 +14471,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -14600,7 +14600,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
       operationId: post-subscriptions-subscription_id-cancel_dunning.json
       description: |-
         # Cancel Dunning
@@ -14804,7 +14804,7 @@ paths:
                 type: object
                 properties:
                   invoice:
-                    $ref: ../models/Invoice.yaml
+                    $ref: '#/components/schemas/Invoice'
               examples:
                 Example:
                   value:
@@ -16265,7 +16265,7 @@ paths:
                 type: object
                 properties:
                   service_credit:
-                    $ref: ../models/Service-Credit.yaml
+                    $ref: '#/components/schemas/Service-Credit'
               examples:
                 Example:
                   value:
@@ -16337,7 +16337,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Service-Credit.yaml
+                $ref: '#/components/schemas/Service-Credit'
               examples:
                 Example:
                   value:
@@ -16407,7 +16407,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
       operationId: get-subscriptions-lookup.json
       parameters:
         - schema:
@@ -16442,7 +16442,7 @@ paths:
                 type: object
                 properties:
                   payment_profile:
-                    $ref: ../models/Payment-Profile.yaml
+                    $ref: '#/components/schemas/Payment-Profile'
               examples:
                 Example:
                   value:
@@ -16581,7 +16581,7 @@ paths:
               type: object
               properties:
                 prepaid_configuration:
-                  $ref: ../models/Create-or-Update-Prepaid-Configuration.yaml
+                  $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
             examples:
               Example:
                 value:
@@ -16668,7 +16668,7 @@ paths:
               type: object
               properties:
                 group:
-                  $ref: ../models/Group-Attributes.yaml
+                  $ref: '#/components/schemas/Group-Attributes'
             examples:
               Example:
                 value:
@@ -16727,9 +16727,9 @@ paths:
                     type: object
                     properties:
                       current_billing_manifest:
-                        $ref: ../models/Billing-Manifest.yaml
+                        $ref: '#/components/schemas/Billing-Manifest'
                       next_billing_manifest:
-                        $ref: ../models/Billing-Manifest.yaml
+                        $ref: '#/components/schemas/Billing-Manifest'
               examples:
                 Example:
                   value:
@@ -16857,7 +16857,7 @@ paths:
               type: object
               properties:
                 subscription:
-                  $ref: ../models/Create-Subscription.yaml
+                  $ref: '#/components/schemas/Create-Subscription'
             examples:
               Product Only:
                 value:
@@ -17014,7 +17014,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Proforma-Invoice.yaml
+                $ref: '#/components/schemas/Proforma-Invoice'
         '403':
           description: Forbidden
         '404':
@@ -17040,7 +17040,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription'
               examples:
                 Example:
                   value:
@@ -17307,7 +17307,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Proforma-Invoice.yaml
+                $ref: '#/components/schemas/Proforma-Invoice'
         '403':
           description: Forbidden
         '422':
@@ -17349,7 +17349,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Proforma-Invoice.yaml
+                  $ref: '#/components/schemas/Proforma-Invoice'
       operationId: get-subscriptions-subscription_id-proforma_invoices.json
       description: |-
         # List Subscription Proforma Invoices
@@ -17452,7 +17452,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Proforma-Invoice.yaml
+                $ref: '#/components/schemas/Proforma-Invoice'
         '403':
           description: Forbidden
         '404':
@@ -18269,7 +18269,7 @@ components:
         - price_in_cents
         - interval
         - interval_unit
-    Create-or-Update-Subscription:
+    Create-or-Update-Subscription-Note:
       title: Create or Update Subscription Note
       type: object
       x-tags:
@@ -18689,7 +18689,7 @@ components:
           type: string
           description: 'The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given.'
         group:
-          $ref: ../models/Group-Attributes.yaml
+          $ref: '#/components/schemas/Group-Attributes'
         ref:
           type: string
           description: 'A valid referral code. (optional, see [Referrals](https://help.chargify.com/referrals/introduction.html) for more details). If supplied, must be valid, or else subscription creation will fail.'
@@ -18732,7 +18732,7 @@ components:
             - integer
           description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er'
         prepaid_subscription_configuration:
-          $ref: ../models/Create-or-Update-Prepaid-Configuration.yaml
+          $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
         previous_billing_at:
           type: string
           description: Providing a previous_billing_at that is in the past will set the current_period_starts_at when the subscription is created. It will also set activated_at if not explicitly passed during the subscription import. Can only be used if next_billing_at is also passed. Using this option will allow you to set the period start for the subscription so mid period component allocations have the correct prorated amount.
