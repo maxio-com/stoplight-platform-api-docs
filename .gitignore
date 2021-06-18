@@ -1,0 +1,13 @@
+./bundle
+.bundle/*
+vendor/*
+log/*
+.env
+tmp/*
+.sas_ftp_cred
+**.DS_Store
+
+# Rubymine
+.idea/
+.idea/*
+public/system/**
