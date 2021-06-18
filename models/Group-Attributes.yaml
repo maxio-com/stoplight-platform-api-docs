@@ -1,0 +1,44 @@
+title: Group Attributes
+x-tags:
+  - Subscription Groups
+anyOf:
+  - type: object
+    properties:
+      target:
+        type: object
+        description: Attributes of the target customer who will be the responsible payer of the created subscription. Required.
+        required:
+          - type
+        properties:
+          type:
+            type: string
+            description: The type of object indicated by the id attribute.
+            enum:
+              - customer
+              - subscription
+              - self
+              - parent
+              - eldest
+          id:
+            type: integer
+            description: 'The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self" , "parent", or "eldest"'
+      billing:
+        type: object
+        description: Optional attributes related to billing date and accrual.
+        properties:
+          accrue:
+            type: boolean
+            default: false
+            description: A flag indicating whether or not to accrue charges on the new subscription.
+          align_date:
+            type: boolean
+            default: false
+            description: A flag indicating whether or not to align the billing date of the new subscription with the billing date of the primary subscription of the hierarchy's default subscription group. Required to be true if prorate is also true.
+          prorate:
+            type: boolean
+            default: false
+            description: A flag indicating whether or not to prorate billing of the new subscription for the current period. A value of true is ignored unless align_date is also true.
+    required:
+      - target
+  - type: boolean
+    properties: {}

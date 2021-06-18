@@ -1,0 +1,29 @@
+title: Subscriptions Component
+type: object
+x-tags:
+  - Subscriptions Components
+properties:
+  component_id:
+    type: integer
+  subscription_id:
+    type: integer
+  allocated_quantity:
+    type: integer
+    description: 'For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off.'
+  pricing_scheme:
+    type: string
+  name:
+    type: string
+  kind:
+    type: string
+  unit_name:
+    type: string
+  price_point_id:
+    type: integer
+  price_point_handle:
+    type: string
+  enabled:
+    type: boolean
+    description: (for on/off components) indicates if the component is enabled for the subscription
+  unit_balance:
+    type: integer

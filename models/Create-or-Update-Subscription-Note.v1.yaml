@@ -1,0 +1,12 @@
+title: Create or Update Subscription Note
+type: object
+x-tags:
+  - Subscription Notes
+required:
+  - body
+  - sticky
+properties:
+  body:
+    type: string
+  sticky:
+    type: boolean

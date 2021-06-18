@@ -1,0 +1,33 @@
+title: Create or Update Flat Amount Coupon
+type: object
+x-tags:
+  - Coupons
+properties:
+  name:
+    type: string
+    description: the name of the coupon
+  code:
+    type: string
+    description: 'may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”'
+  description:
+    type: string
+  amount_in_cents:
+    type: integer
+  allow_negative_balance:
+    type: string
+  recurring:
+    type: string
+  end_date:
+    type: string
+  product_family_id:
+    type: string
+  stackable:
+    type: string
+  compounding_strategy:
+    type: string
+  exclude_mid_period_allocations:
+    type: boolean
+required:
+  - name
+  - code
+  - amount_in_cents

@@ -1,0 +1,40 @@
+title: Create Component Price Point
+x-tags:
+  - Components
+type: object
+properties:
+  name:
+    type: string
+  handle:
+    type: string
+  pricing_scheme:
+    type: string
+  prices:
+    type: array
+    items:
+      type: object
+      properties:
+        starting_quantity:
+          type:
+            - integer
+            - string
+        ending_quantity:
+          type:
+            - integer
+            - string
+          nullable: true
+        unit_price:
+          type:
+            - integer
+            - string
+      required:
+        - starting_quantity
+        - unit_price
+  use_site_exchange_rate:
+    type: boolean
+    default: true
+    description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
+required:
+  - name
+  - pricing_scheme
+  - prices
