@@ -1,7 +1,5 @@
 title: Customer
 type: object
-x-tags:
-  - Customers
 properties:
   first_name:
     type: string

@@ -1,7 +1,5 @@
 title: Product Family
 type: object
-x-tags:
-  - Product Families
 properties:
   id:
     type: integer

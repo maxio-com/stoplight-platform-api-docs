@@ -5039,8 +5039,6 @@ components:
     Create-Legacy-Payment:
       title: Create Legacy Payment
       type: object
-      x-tags:
-        - Legacy
       properties:
         amount_in_cents:
           oneOf:
@@ -5060,8 +5058,6 @@ components:
     Legacy-Adjustment:
       title: Legacy Adjustment
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5186,8 +5182,6 @@ components:
     Legacy-Charge:
       title: Legacy Charge
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5353,8 +5347,6 @@ components:
     Legacy-Invoice:
       title: Legacy Invoice
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5545,8 +5537,6 @@ components:
     Legacy-Payment:
       title: Legacy Payment
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5644,8 +5634,6 @@ components:
     Legacy-Statement-with-UI-Tools:
       title: Legacy Statement with UI Tools
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5790,8 +5778,6 @@ components:
     Legacy-Statement:
       title: Legacy Statement
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer
@@ -5927,8 +5913,6 @@ components:
     Legacy-Transaction:
       title: Legacy Transaction
       type: object
-      x-tags:
-        - Legacy
       properties:
         id:
           type: integer

@@ -17510,8 +17510,6 @@ components:
     Allocation:
       title: Allocation
       type: object
-      x-tags:
-        - Subscription Components
       properties:
         component_id:
           type: integer
@@ -17568,8 +17566,6 @@ components:
     Billing-Manifest:
       title: Billing Manifest
       type: object
-      x-tags:
-        - Subscriptions
       properties:
         line_items:
           type: array
@@ -17609,8 +17605,6 @@ components:
     Component-Price-Point:
       title: Component Price Point
       type: object
-      x-tags:
-        - Components
       properties:
         price_point:
           type: object
@@ -17657,8 +17651,6 @@ components:
     Component:
       title: Component
       type: object
-      x-tags:
-        - Components
       properties:
         component:
           type: object
@@ -17758,8 +17750,6 @@ components:
     Coupon:
       title: Coupon
       type: object
-      x-tags:
-        - Coupons
       properties:
         id:
           type: number
@@ -17867,8 +17857,6 @@ components:
     Create-Allocation:
       title: Create Allocation
       type: object
-      x-tags:
-        - Subscription Components
       properties:
         quantity:
           type:
@@ -17923,8 +17911,6 @@ components:
         - quantity
     Create-Component-Price-Point:
       title: Create Component Price Point
-      x-tags:
-        - Components
       type: object
       properties:
         name:
@@ -17965,8 +17951,6 @@ components:
     Create-Customer:
       title: Create Customer
       type: object
-      x-tags:
-        - Customers
       properties:
         first_name:
           type: string
@@ -18010,8 +17994,6 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
-      x-tags:
-        - Metafields
       properties:
         name:
           type: string
@@ -18059,8 +18041,6 @@ components:
     Create-or-Update-Coupon:
       title: Create or Update Coupon
       type: object
-      x-tags:
-        - Coupons
       properties:
         coupon:
           oneOf:
@@ -18083,8 +18063,6 @@ components:
     Create-or-Update-Endpoint:
       title: Create or Update Endpoint
       type: object
-      x-tags:
-        - Webooks
       required:
         - url
         - webhook_subscriptions
@@ -18133,8 +18111,6 @@ components:
     Create-or-Update-Flat-Amount-Coupon:
       title: Create or Update Flat Amount Coupon
       type: object
-      x-tags:
-        - Coupons
       properties:
         name:
           type: string
@@ -18167,8 +18143,6 @@ components:
     Create-or-Update-Percentage-Coupon:
       title: Create or Update Percentage Coupon
       type: object
-      x-tags:
-        - Coupons
       properties:
         name:
           type: string
@@ -18203,8 +18177,6 @@ components:
     Create-or-Update-Prepaid-Configuration:
       title: Create or Update Prepaid Configuration
       type: object
-      x-tags:
-        - Subscriptions
       properties:
         initial_funding_amount_in_cents:
           type: integer
@@ -18217,8 +18189,6 @@ components:
     Create-or-Update-Product:
       title: Create or Update Product
       type: object
-      x-tags:
-        - Products
       properties:
         name:
           type: string
@@ -18249,8 +18219,6 @@ components:
     Create-or-Update-Subscription-Note:
       title: Create or Update Subscription Note
       type: object
-      x-tags:
-        - Subscription Notes
       required:
         - body
         - sticky
@@ -18262,8 +18230,6 @@ components:
     Create-Prepaid-Usage-Component-Price-Point:
       title: Create Prepaid Usage Component Price Point
       type: object
-      x-tags:
-        - Components
       properties:
         name:
           type: string
@@ -18345,8 +18311,6 @@ components:
     Create-Product-Price-Point:
       title: Create Product Price Point
       type: object
-      x-tags:
-        - Product Price Points
       properties:
         name:
           type: string
@@ -18386,8 +18350,6 @@ components:
     Create-Subscription:
       title: Create Subscription
       type: object
-      x-tags:
-        - Subscriptions
       properties:
         product_handle:
           type: string
@@ -18722,8 +18684,6 @@ components:
     Credit-Note:
       title: Credit Note
       type: object
-      x-tags:
-        - Invoices
       properties:
         uid:
           type: string
@@ -19050,8 +19010,6 @@ components:
     Currency-Price:
       title: Currency Price
       type: object
-      x-tags:
-        - Currency Prices
       properties:
         id:
           type: integer
@@ -19068,8 +19026,6 @@ components:
     Endpoint:
       title: Endpoint
       type: object
-      x-tags:
-        - Webhooks
       properties:
         id:
           type: integer
@@ -19086,8 +19042,6 @@ components:
     Event:
       title: Event
       type: object
-      x-tags:
-        - Events
       properties:
         id:
           type: integer
@@ -19112,8 +19066,6 @@ components:
               type: string
     Group-Attributes:
       title: Group Attributes
-      x-tags:
-        - Subscription Groups
       anyOf:
         - type: object
           properties:
@@ -19158,8 +19110,6 @@ components:
     Invoice:
       title: Invoice
       type: object
-      x-tags:
-        - Invoices
       properties:
         uid:
           type: string
@@ -19674,8 +19624,6 @@ components:
     Metadata:
       title: Metadata
       type: object
-      x-tags:
-        - Metadata
       properties:
         value:
           type: string
@@ -19692,8 +19640,6 @@ components:
     Metafield:
       title: Metafield
       type: object
-      x-tags:
-        - Metafields
       properties:
         name:
           type: string
@@ -19726,8 +19672,6 @@ components:
     Offer:
       title: Offer
       type: object
-      x-tags:
-        - Offers
       properties:
         id:
           type: integer
@@ -19814,8 +19758,6 @@ components:
     Overage-Pricing:
       title: Overage Pricing
       type: object
-      x-tags:
-        - Component Price Points
       properties:
         pricing_scheme:
           type: string
@@ -19833,8 +19775,6 @@ components:
     Paginated-Metadata:
       title: Paginated Metadata
       type: object
-      x-tags:
-        - Metadata
       properties:
         total_count:
           type: integer
@@ -19851,8 +19791,6 @@ components:
     Product-Price-Point-Currency-Price:
       title: Product Price Point Currency Price
       type: object
-      x-tags:
-        - Product Price Points
       properties:
         id:
           type: integer
@@ -19873,8 +19811,6 @@ components:
     Product-Price-Point:
       title: Product Price Point
       type: object
-      x-tags:
-        - Product Price Points
       properties:
         id:
           type: integer
@@ -19921,8 +19857,6 @@ components:
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
-      x-tags:
-        - Proforma Invoices
       properties:
         uid:
           type: string
@@ -20107,8 +20041,6 @@ components:
     Reason-Code:
       title: Reason Code
       type: object
-      x-tags:
-        - Reason Codes
       properties:
         id:
           type: integer
@@ -20127,8 +20059,6 @@ components:
     Service-Credit:
       title: Service Credit
       type: object
-      x-tags:
-        - Invoice Account
       properties:
         id:
           type: integer
@@ -20153,8 +20083,6 @@ components:
     Subscription-Note:
       title: Subscription Note
       type: object
-      x-tags:
-        - Subscription Notes
       properties:
         id:
           type: integer
@@ -20171,8 +20099,6 @@ components:
     Subscriptions-Component:
       title: Subscriptions Component
       type: object
-      x-tags:
-        - Subscriptions Components
       properties:
         component_id:
           type: integer
@@ -20201,8 +20127,6 @@ components:
     Update-Customer:
       title: Update Customer
       type: object
-      x-tags:
-        - Customers
       properties:
         first_name:
           type: string
@@ -20242,8 +20166,6 @@ components:
     Update-Metafield:
       title: Update Metafield
       type: object
-      x-tags:
-        - Metafields
       properties:
         current_name:
           type: string
@@ -20293,8 +20215,6 @@ components:
     Usage:
       title: Usage
       type: object
-      x-tags:
-        - Subscription Components
       properties:
         id:
           type: integer
