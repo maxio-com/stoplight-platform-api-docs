@@ -4756,7 +4756,7 @@ paths:
       description: |-
         ## List Components for a Site
 
-        This endpoint will return a list of components for a site.
+        This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
       - schema:
