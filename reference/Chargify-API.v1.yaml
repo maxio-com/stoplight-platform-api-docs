@@ -1937,7 +1937,7 @@ paths:
       description: |-
         ## List Metafields
 
-        This endpoint lists metafields associated with a Site. The metafield description and usage is contained in the response.
+        This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
         - schema:
             type: string
