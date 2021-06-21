@@ -90,9 +90,11 @@ paths:
                       - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
+        # Create Adjustment
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        # Create Adjustment
+
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
         |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
         | Scenario 2 | To increase the Subscription balance by a certain amount of cents, use the following attribute in your request:                      | `"amount_in_cents":100`                                      |
@@ -190,9 +192,11 @@ paths:
                       - 'Bogus Gateway: Forced failure'
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
+        # Create Charge
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        # Create Charge
+
         Creating a charge requires a valid, live subscription (i.e. subscriptions that are not canceled or expired). The subscription must be referenced by `subscription_id`.
         When a charge is created, a payment in the amount of the assessed charge is automatically captured from the credit card on file for the subscription. For this purpose, the subscription must have a payment method in order to support adding a charge. Payment collection will not be attempted if:
         + the subscription is on legacy invoice billing
@@ -404,8 +408,11 @@ paths:
                         - 'Amount: is not a number.'
       operationId: post-subscriptions-subscription_id-payments.json
       description: |-
+        # Create Payment
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
+
         ## External Payments
         Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
@@ -569,9 +576,12 @@ paths:
                       - 'Memo: cannot be blank.'
       operationId: post-subscriptions-subscription_id-refunds.json
       description: |-
+        # Create Refund
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
-        # Refunds
+
+        ## Refunds
         With Chargify you have the ability to apply a refund to a payment that has been processed at the gateway. There are two types of refunds:
         - **Internal** - a refund which interacts with the Gateway to return the amount back to the customer
         - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
@@ -698,9 +708,11 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: get-transactions-transaction_id-.json
       description: |-
+        # Read Transaction
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        # Transactions
+
         Documentation in relation to transactions is broken up into two major sections within Chargify:
         + [Recorded Transactions](http://help.chargify.com/subscriptions/subscription-summary.html#transactions)
         + [Transactions Export](http://help.chargify.com/reports/exporting-data.html#transactions-line-item-export)
@@ -900,9 +912,11 @@ paths:
           name: order_by
           description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
       description: |-
+        # List Transactions
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Transactions for Site
+
         This method will return the full list of transactions for a Site. Pay close attention to filters and pagination in order to control results.
         **Notes about ID/Date Filters**
         - Using `since_id` and/or `max_id` is known as creating an “ID Filter”.
@@ -1114,9 +1128,11 @@ paths:
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
       description: |-
+        # List Transactions for Subscription
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Transactions for Subscription.
+
         Given that you have subscriber's ID, you can retrieve a list of transactions associated with the subscription.
         The sort order is based on the `created_at` timestamp and cannot be changed.
   /transactions/count.json:
@@ -1141,9 +1157,11 @@ paths:
                     count: 290
       operationId: get-transactions-count.json
       description: |-
+        # Transactions Count
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## Read the Count of Transactions for a Site
+
         This method returns the full count of transactions associated with a Site.
   '/statements/{statement_id}.json':
     parameters:
@@ -1608,8 +1626,11 @@ paths:
                               account_transaction_id: null
       operationId: get-statements-statement_id-.json
       description: |-
+        # Read Statement
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
+
         ## Statements Intro
         Chargify Statements give you and your customers a breakdown of Subscription charges, payments, credits, and activity on a period-by-period basis. A Statement is similar to an “Invoice” because it is marked as currently paid or unpaid. Statements display all account activity for a specific usage period.
         Documentation for Statements in the Chargify UI can be accessed via the following links / topics:
@@ -2732,9 +2753,11 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
+        # List Statements
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Statements for a Site
+
         This method will return a paginated list of all Statements generated by the Subscriptions in your Site.
         Note that this endpoint returns a "lighter" set of the Statement attributes than the "List Statements for a Subscription" endpoint.  This endpoint omits the HTML and textual representations for the Statement: `basic_html_view`, `html_view`, and `text_view`.  If you require these attributes, you can either build them yourself based on the other data returned or fetch a single subscription via the "Read/Show by Chargify ID" endpoint.
   '/subscriptions/{subscription_id}/statements.json':
@@ -3852,13 +3875,15 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
+        # List Statements for Subscription
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Statements for Subscription
+
         This method will return the full HTML and content associated with a subscription on your Site.
   /statements/ids.json:
     get:
-      summary: List Statement Ids
+      summary: List Statement IDs
       tags:
         - Legacy Statements
       responses:
@@ -3921,9 +3946,11 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
+        # List Statement IDs
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Statement IDs for a Site
+
         This method will return a list of Statement IDs associated with an entire Site. 
   '/subscriptions/{subscription_id}/statements/ids.json':
     parameters:
@@ -3997,9 +4024,11 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
+        # List Statement IDs for Subscription
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Statement IDs for a Subscription
+
         This method will return a list of Statement IDs associated with one subscription.
   /statements/count.json:
     get:
@@ -4023,9 +4052,11 @@ paths:
                     count: 290
       operationId: get-statements-count.json
       description: |-
+        # Statements Count
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## Read the Count of Statements for a Site
+
         This method returns the full count of statements associated with a Site.
   '/invoices/{invoice_id}.json':
     parameters:
@@ -4036,7 +4067,7 @@ paths:
         required: true
         description: The Chargify id of the invoice
     get:
-      summary: Read Legacy Invoice
+      summary: Read Invoice
       tags:
         - Legacy Invoices
       responses:
@@ -4128,9 +4159,13 @@ paths:
           description: Not Found
       operationId: get-invoices-invoice_id-.json
       description: |-
+        # Read Invoice
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
+
         ## PDF Invoice retrieval
+
         Individual PDF Invoices can be retrieved by using the "Accept/Content-Type" header application/pdf or appending .pdf as the format portion of the URL:
         ```curl -u <api_key>:x -H 
         Accept:application/pdf -H 
@@ -4143,7 +4178,7 @@ paths:
         ```
   /invoices.json:
     get:
-      summary: List Legacy Invoices
+      summary: List Invoices
       tags:
         - Legacy Invoices
       responses:
@@ -4308,11 +4343,15 @@ paths:
           name: subscription_id
           description: The Chargify id for the subscription for which invoices should be returned
       description: |-
+        # List Invoices
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## List Legacy Invoices
+
         This endpoint handles Legacy Invoices for Sites using Statement-Based Billing (Site created prior to January 2018).
+
         ## Legacy Invoice Documentation
+
         Full documentation on how invoices function within the Chargify UI can be located [here](https://help.chargify.com/invoices/invoice-intro.html).
         For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#invoices)
   '/invoices/{invoice_id}/payments.json':
@@ -4324,7 +4363,7 @@ paths:
         required: true
         description: The Chargify id for which the payment applies
     post:
-      summary: Create Payment
+      summary: Create Invoice Payment
       tags:
         - Legacy Invoices
       responses:
@@ -4368,9 +4407,13 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: post-invoices-invoice_id-payments.json
       description: |-
+        # Create Invoice Payment 
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
+
         ## Create External Payment for Legacy Invoice
+
         In order to specify a payment made against an invoice, specify the `amount`. 
         Please note that you may request the payment `amount_in_cents`. You may submit your request in cents as well:
         ```
@@ -4381,7 +4424,9 @@ paths:
           }
         }
         ```
+
         ## Invoice Payment Documentation
+
         For more information that on adding a payment to an invoice, please see our payment documentation below:
         + [Pay via Card](https://help.chargify.com/invoices/invoice-reference.html#pay-with-card)
         + [Offline Payments](https://help.chargify.com/invoices/invoice-reference.html#enter-payment)
@@ -4419,8 +4464,11 @@ paths:
                     $ref: '#/components/schemas/Legacy-Charge'
       operationId: post-invoices-invoice_id-charges.json
       description: |-
+        # Create Charge
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
+
         ## Legacy Invoice Charges Documentation
         For more information on adding a charge to an invoice, please see our documentation [here](https://help.chargify.com/invoices/invoice-reference.html#add-charge).
       requestBody:
@@ -4474,7 +4522,7 @@ paths:
         required: true
         description: The Chargify id for which the credit applies
     post:
-      summary: Create Credit
+      summary: Create Invoice Credit
       tags:
         - Legacy Invoices
       responses:
@@ -4517,7 +4565,8 @@ paths:
                       customer_id: 14332342
       operationId: post-invoices-invoice_id-adjustments.json
       description: |-
-        ## Create Legacy Invoice Credit
+        # Create Invoice Credit
+
         Use this method to add a credit to an existing invoice.
       requestBody:
         content:
@@ -4972,163 +5021,16 @@ paths:
                       scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
       operationId: put-subscriptions-subscription_id-reset_balance.json
       description: |-
+        # Reset Subscription Balance
+
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
-        ## Reset a Subscription Balance
+
         If you are on the legacy architecture, Chargify offers the ability to reset the balance of a subscription to zero. Attempting to use this endpoint on a Relationship Invoicing site will not work; In order to reduce the balance of a subscription, please void or apply a service credit directly to an invoice.
         If a Subscription has a positive balance, this API call will issue a credit to the Subscription for the outstanding balance.
         This is particularly helpful if you want to reactivate a canceled Subscription without charging the Customer for their previously owed balance.
         ## Past Due & Unpaid Subscriptions
         If you have a subscription that is in the `past_due` or `unpaid` state, when you reset the balance, the subscription will transition to `active`.
-  '/subscriptions/{subscription_id}/add_coupon.json':
-    parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        description: ID of the subscription
-        required: true
-    post:
-      summary: Replace Coupons
-      tags:
-        - Legacy Subscription Coupons
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
-              examples:
-                Example:
-                  value:
-                    subscription:
-                      id: 50
-                      state: active
-                      trial_started_at: null
-                      trial_ended_at: null
-                      activated_at: '2017-11-01T04:17:47-04:00'
-                      created_at: '2017-11-01T04:17:46-04:00'
-                      updated_at: '2017-11-08T09:17:44-05:00'
-                      expires_at: null
-                      balance_in_cents: 0
-                      current_period_ends_at: '2017-12-01T03:17:46-05:00'
-                      next_assessment_at: '2017-12-01T03:17:46-05:00'
-                      canceled_at: null
-                      cancellation_message: null
-                      next_product_id: null
-                      cancel_at_end_of_period: false
-                      payment_collection_method: automatic
-                      snap_day: null
-                      cancellation_method: null
-                      current_period_started_at: '2017-11-01T04:17:46-04:00'
-                      previous_state: active
-                      signup_payment_id: 109
-                      signup_revenue: '10.00'
-                      delayed_cancel_at: null
-                      coupon_code: ABC123
-                      total_revenue_in_cents: 1000
-                      product_price_in_cents: 1000
-                      product_version_number: 1
-                      payment_type: credit_card
-                      referral_code: null
-                      coupon_use_count: 0
-                      coupon_uses_allowed: 1
-                      reason_code: null
-                      automatically_resume_at: null
-                      coupon_codes:
-                        - ABC123
-                      customer:
-                        id: 50
-                        first_name: Fred
-                        last_name: Jones
-                        organization: ''
-                        email: fred@jones.com
-                        created_at: '2017-11-01T04:17:46-04:00'
-                        updated_at: '2017-11-01T04:17:46-04:00'
-                        reference: null
-                        address: ''
-                        address_2: ''
-                        city: ''
-                        state: ''
-                        zip: ''
-                        country: ''
-                        phone: ''
-                        portal_invite_last_sent_at: null
-                        portal_invite_last_accepted_at: null
-                        verified: false
-                        portal_customer_created_at: null
-                        cc_emails: null
-                        tax_exempt: false
-                      product:
-                        id: 97
-                        name: User-friendly systemic matrices
-                        handle: handle_1d382acd0
-                        description: Fugiat quis mollitia.  Ex et sunt sed qui.  Facilis qui et sequi laudantium quos autem eos.
-                        accounting_code: null
-                        request_credit_card: true
-                        expiration_interval: null
-                        expiration_interval_unit: null
-                        created_at: '2017-09-13T12:45:35-04:00'
-                        updated_at: '2017-09-13T12:45:35-04:00'
-                        price_in_cents: 1000
-                        interval: 1
-                        interval_unit: month
-                        initial_charge_in_cents: null
-                        trial_price_in_cents: null
-                        trial_interval: null
-                        trial_interval_unit: null
-                        archived_at: null
-                        require_credit_card: true
-                        return_params: null
-                        taxable: false
-                        update_return_url: null
-                        tax_code: null
-                        initial_charge_after_trial: false
-                        version_number: 1
-                        update_return_params: null
-                        product_family:
-                          id: 4
-                          name: Acme Online
-                          description: null
-                          handle: acme-online
-                          accounting_code: null
-                        public_signup_pages: []
-                      credit_card:
-                        id: 36
-                        first_name: Fred
-                        last_name: Jones
-                        masked_card_number: XXXX-XXXX-XXXX-1
-                        card_type: bogus
-                        expiration_month: 2
-                        expiration_year: 2025
-                        customer_id: 50
-                        current_vault: bogus
-                        vault_token: '1'
-                        billing_address: ''
-                        billing_city: ''
-                        billing_state: AL
-                        billing_zip: ''
-                        billing_country: US
-                        customer_vault_token: null
-                        billing_address_2: ''
-                        payment_type: credit_card
-                      payer_id: 50
-      operationId: post-subscriptions-subscription_id-add_coupon.json
-      description: |
-        # Replace Coupons
-        Sending this request will overwrite ALL (single and multiple) coupons previously applied to the subscription.
-        We recommend using the `codes` query string, which supports multiple coupons, with this endpoint instead.
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          description: The coupon code
-          required: true
 servers:
   - url: 'https://subdomain.chargify.com'
     description: ''
@@ -5470,10 +5372,10 @@ components:
           type: string
           description: "\tThe current state of the invoice."
           enum:
-          - paid
-          - unpaid
-          - partial
-          - archived
+            - paid
+            - unpaid
+            - partial
+            - archived
         total_amount_in_cents:
           type: integer
           description: Gives the current invoice amount in the number of cents (ie. the sum of charges)
