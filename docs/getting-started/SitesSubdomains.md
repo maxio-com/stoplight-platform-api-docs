@@ -40,7 +40,7 @@ curl -u <API_KEY>:X -H Accept:application/json -X GET https://acme.chargify.com/
 
 The host is always in the form `https://<SUBDOMAIN>.chargify.com` followed by the URI for the API resource you are trying to access. In this last example, that would be `/subscriptions.json` as that is the URI of the resource to get a list of subscriptions in JSON.
 
-Please see our [API documentation](https://chargify.stoplight.io/) for more information.
+Please see our [API documentation](../../reference/Chargify-API.v1.yaml) for more information.
 
 ## Clearing Site Data
 
@@ -66,12 +66,12 @@ There are a few options for clearing your site data, which match the settings av
 curl -u <API_KEY>:X -H Accept:application/json -X POST https://acme.chargify.com/sites/clear_data.json
 ```
 
-For more information about the parameters for clearing your site data using the API, please see the [API documentation](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1sites~1clear_data.json/post).
+For more information about the parameters for clearing your site data using the API, please see the [API documentation](../../reference/Chargify-API.v1.yaml/paths/~1sites~1clear_data.json/post).
 
 # Next Steps
 
 After you've created a new site, you should check out the following articles:
 
-* [Products](/content/getting-started/products.html)
-* [Subscriptions](/content/basics/signups.html)
+* [Products](./Products.md)
+* [Subscriptions](../basics/Signups.md)
 

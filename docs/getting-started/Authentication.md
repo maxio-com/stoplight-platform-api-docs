@@ -10,8 +10,8 @@ Learn how to use API authentication to communicate directly with Chargify from a
 
 There are two methods of authentication, depending on what you are accessing:
 
-* [Chargify API](https://chargify.stoplight.io) 
-* [Chargify Direct](/content/chargify-direct/chargify-direct.html) (also called "transparent redirect").
+* [Chargify API](../../reference/Chargify-API.v1.yaml) 
+* [Chargify Direct](../chargify-direct/Introduction.md) (also called "transparent redirect").
 
 Both methods of authentication assume you have previously generated API keys securely stored them for later use. For more information, see ["Obtaining Credentials"](https://help.chargify.com/integrations/api-keys-chargify-direct.html).
 
@@ -41,11 +41,11 @@ curl --request GET \
   --header 'content-type: application/json'
 ```
 
-For more information about API authentication, please see our [API documentation/example](https://chargify.stoplight.io/docs/api-documentation/docs/basics/Overview.md#authentication).
+For more information about API authentication, please see our [API documentation/example](../basics/Overview.md#authentication).
 
 ## Chargify Direct
 
-Please see our dedicated section on how to [authenticate with Chargify Direct.](https://developer.chargify.com/content/chargify-direct/authentication.html)
+Please see our dedicated section on how to [authenticate with Chargify Direct.](../chargify-direct/Authentication.md)
 
 ----------
 
@@ -53,6 +53,6 @@ Please see our dedicated section on how to [authenticate with Chargify Direct.](
 
 After you've mastered authentication, you should check out the following articles:
 
-* Managing [sites](/content/getting-started/sites.html)
-* Creating [products](/content/getting-started/products.html) and how they control what you bill customers
-* Creating [subscriptions](/content/basics/subscriptions.html), (ie. signing up customers)
+* Managing [sites](./SitesSubdomains.md)
+* Creating [products](./Products.md) and how they control what you bill customers
+* Creating [subscriptions](../basics/Subscriptions.md), (ie. signing up customers)

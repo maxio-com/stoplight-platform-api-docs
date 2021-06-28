@@ -9,8 +9,8 @@ Learn how to setup products for use when creating subscriptions. Products contro
 ----------
 With regards to products, there are three important aspects that are required for using products when interacting with the API:
 
-* Creating the [product family](/content/getting-started/products.html#product-family)
-* Creating the [product](/content/getting-started/products.html#product)
+* Creating the [product family](#product-family)
+* Creating the [product](#product)
 
 Before delving into this section, we recommend reviewing our [product documentation](https://help.chargify.com/products/products-intro.html) located in the main section of the Chargify help documents. 
 
@@ -38,7 +38,7 @@ An example of our input attributes might look like the following:
 }
 ```
 
-That data should be posted to the [Product Family Create](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) API Endpoint.
+That data should be posted to the [Product Family Create](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) API Endpoint.
 
 A simple curl example would be the following: 
 
@@ -48,7 +48,7 @@ curl -u <API_KEY>:X -H Accept:application/json -d @product_family.json -X POST h
 
 To create a product family using the application, please see the following documentation: [Creating Product Families](https://help.chargify.com/products/product-families.html#creating-product-families)
 
-Please see [API Documentation](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) for complete listing of input/output schema along with code examples in multiple programming languages.
+Please see [API Documentation](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) for complete listing of input/output schema along with code examples in multiple programming languages.
 
 ## Product
 
@@ -75,7 +75,7 @@ You can create a product using the API, like so:
 }
 ```
 
-That data should be posted to the [Product Create](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) API Endpoint.
+That data should be posted to the [Product Create](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) API Endpoint.
 
 To create a product family using the Admin UI, please see the following documentation: [Creating Product Families](https://help.chargify.com/products/creating-a-product.html)
 
@@ -83,7 +83,7 @@ To create a product family using the Admin UI, please see the following document
 
 After you've created a product to use, you should check out the following articles:
 
-* [Create Components](/content/basics/components.html)
-* [Create Coupons](/content/basics/subscriptions.html#coupons-and-adjustments)
-* [Signup Customers](/content/basics/signups.html)
+* [Create Components](../basics/Components.md)
+* [Create Coupons](../basics/Subscriptions.md#coupons-and-adjustments)
+* [Signup Customers](../basics/Signups.md)
 

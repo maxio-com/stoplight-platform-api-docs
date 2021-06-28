@@ -14,7 +14,7 @@ Here are some tips and best-practices to help keep both your site and ours runni
 
 ## Getting Subscription States
 
-You likely want to check if your customer has an active account, has cancelled, or is behind on his/her payments. The best approach is to keep a local cached copy of the subscription’s state in your own database. You can use [Webhooks](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post) to keep up-to-date in near real-time on any changes that occur. This keeps your website up, reduces your coupling to Chargify, and ensures both sites remain as fast as possible.
+You likely want to check if your customer has an active account, has cancelled, or is behind on his/her payments. The best approach is to keep a local cached copy of the subscription’s state in your own database. You can use [Webhooks](../../reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post) to keep up-to-date in near real-time on any changes that occur. This keeps your website up, reduces your coupling to Chargify, and ensures both sites remain as fast as possible.
 
 Avoid querying Chargify in-line as part of a customer’s request to your site. Doing so could result in:
 
@@ -24,7 +24,7 @@ Avoid querying Chargify in-line as part of a customer’s request to your site. 
 
 ## Synchronizing Your Database
 
-Normally you should keep your local customer database in sync by using [webhooks](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post). But if you think your database has become out of sync with Chargify, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
+Normally you should keep your local customer database in sync by using [webhooks](../../reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post). But if you think your database has become out of sync with Chargify, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
 
 It’s perfectly okay to do this as needed. But it should generally only be relied upon in exceptional circumstances or for periodic reconciliation (usually no more than once a month).
 
@@ -41,8 +41,8 @@ Instead:
 
 For more information on reporting component usage or allocations, please see the specific section for the type of component used:
 
-+ [API docs for reporting metered usage](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1usages.json/post)
-+ [API docs for allocating quantity-based components](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1allocations.json/post)
++ [API docs for reporting metered usage](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1usages.json/post)
++ [API docs for allocating quantity-based components](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1allocations.json/post)
 
 ## Downloading Bulk Data
 
@@ -67,19 +67,17 @@ To help illustrate this, we've provided a diagram below. Presume that each API c
 
 When doing a large synchronization or retrieving a large amount of data, you may trigger a security failsafe used to prevent abuse and protect our site from attacks. We don’t want to block small bursts in usage. So instead of immediately rejecting your requests, Chargify will slow and throttle requests.
 
-<div class="alert alert-warning">
-If you see your responses coming in slower, do not parallelize your requests or try to make more concurrent requests to speed things up. You’ll only have to wait longer for your requests to get through.
-</div>
+❗️ If you see your responses coming in slower, do not parallelize your requests or try to make more concurrent requests to speed things up. You’ll only have to wait longer for your requests to get through.
 
 If you have too many slowed requests, or your individual account queue gets too full with too many concurrent requests, you’ll likely receive an HTTP `429 Too Many Requests` response code with a message and a reference code:
 
-  `Your request was denied due to a usage violation. You can track this request with support by referencing …`
+`Your request was denied due to a usage violation. You can track this request with support by referencing …`
 
 If you receive a `429 Too Many Requests` response, your code should be prepared to handle it by pausing its queries, waiting a few minutes, and then proceeding slower (or with less concurrency). Please feel free to [contact support](https://chargify.zendesk.com/hc/en-us/requests/new) so we can help describe what happened and why the request was blocked.
 
 ### Account-based Blocks
 
-There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials. You can read about them [here](https://chargify.stoplight.io/docs/api-documentation/docs/basics/API-Access-Limitations.md). If you have a request blocked with a `422` status code and an error message, it may be due to this account-based blocking.
+There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials. You can read about them [here](../../reference/Chargify-API.v1.yaml#api-access-limitations). If you have a request blocked with a `422` status code and an error message, it may be due to this account-based blocking.
 
 
 ### Prioritization of Endpoints
