@@ -77,7 +77,7 @@ You can create a product using the API, like so:
 
 That data should be posted to the [Product Create](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1products.json/post) API Endpoint.
 
-To create a product family using the Admin UI, please see the following documentation: [Creating Product Families](https://help.chargify.com/products/creating-a-product.html)
+To create a product family using the Admin UI, please see the following documentation: [Creating Product Families](https://help.chargify.com/products/product-families.html#creating-product-families)
 
 # Next Steps
 
