@@ -12,7 +12,7 @@ A custom Chargify integration requires general programming/developer skills. If 
 
 - [Developer Consultants](https://www.chargify.com/consultants/)
 - [Help Documentation](https://help.chargify.com)
-- [Integrations](./ecosystem/Ecosystem.md#integrations)
+- [Integrations](../ecosystem/Ecosystem.md#integrations)
 
 
 ## Support
