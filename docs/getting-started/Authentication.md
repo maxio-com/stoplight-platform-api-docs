@@ -41,7 +41,7 @@ curl --request GET \
   --header 'content-type: application/json'
 ```
 
-For more information about API authentication, please see our [API documentation/example](../basics/Overview.md#authentication).
+For more information about API authentication, please see our [API documentation/example](../../reference/Chargify-API.v1.yaml#authentication).
 
 ## Chargify Direct
 
