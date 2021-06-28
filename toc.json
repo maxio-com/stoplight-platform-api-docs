@@ -5,6 +5,11 @@
       "title": "Developer Docs"
     },
     {
+      "type": "item",
+      "title": "Overview",
+      "uri": "docs/getting-started/Overview.md"
+    },
+    {
       "type": "group",
       "title": "Getting Started",
       "items": [
