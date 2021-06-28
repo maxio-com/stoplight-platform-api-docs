@@ -19,7 +19,7 @@ For most integrations, the API will be the easiest to implement. Chargify Direct
 
 ## API
 
-The first method of interaction is through the API. API Authentication is implemented as <a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank">HTTP Basic Authentication</a> over TLS (HTTPS).
+The first method of interaction is through the API. API Authentication is implemented as [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) over TLS (HTTPS).
 
 Your API login credentials are not the same as the credentials you use to log in to the web interface. You must obtain your API credentials separately, and you must connect to the API via TLS 1.2 (or better) as of [January 2016.](https://help.chargify.com/announcements/tls-upgrade-notice.html)
 
