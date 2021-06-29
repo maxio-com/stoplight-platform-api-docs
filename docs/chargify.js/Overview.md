@@ -306,7 +306,7 @@ By its very nature, Chargify.js allows end-users to submit cardholder data direc
 
 The generation of a security token requires your Chargify.js private key. You may generate or review your Chargify.js key pair from Integrations > Chargify.js. The private key is initially hidden, but you can click-to-reveal and then copy the value.
 
-![Chargify.js Integration Configuration](../../assets/images/docs/chargify.js/Overview.md/chargifyjs-integration-configuration.png)
+![Chargify.js Integration Configuration](../../assets/images/docs/chargify.js/Overview.md/chargifyjs-integration-configuration.jpg)
 
 The private key is required to sign your security token. **Do not share your private key publicly!**. You will need to generate your security token on the server, and then share the resulting token (and not your private key) with your client-side Chargify.js config.
 
