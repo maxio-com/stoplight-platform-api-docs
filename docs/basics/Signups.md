@@ -13,7 +13,7 @@ This guide on signups runs through the basics on creating subscriptions in Charg
 1. Chargify's [signup methods](#signup-methods)
 2. The [payment methods](#payment-methods) available for subscriptions
 3. How to handle customers with [multiple subscriptions](#multiple-subscriptions)
-4. Component [quantities](l#components) and how they can be used to customize billing
+4. Component [quantities](#components) and how they can be used to customize billing
 
 ## Signup Methods
 
