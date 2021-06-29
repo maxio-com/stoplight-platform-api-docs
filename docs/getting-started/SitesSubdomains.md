@@ -4,7 +4,7 @@ tags: [Getting Started]
 
 # Sites/Subdomains
 
-Learn how to use sites to organize your business and provide the setup necessary to interact with Chargify via the API. If you need help after reading this, please [let us know](https://help.chargify.com/#contact) so we can help and also improve this documentation.
+Learn how to use sites to organize your business and provide the setup necessary to interact with Chargify via the API. If you need help after reading this, please [let us know](./Overview.md#support) so we can help and also improve this documentation.
 
 ----------
 
@@ -23,8 +23,6 @@ From here you can:
 * Delete any site
 
 To begin, create a site (make sure to put it in test mode) and pick a subdomain that you will remember for use in your API calls.
-
-Sites are restricted to a single currency, so it is common to create a site that is named using that currency - for example: "Acme USD", "Acme GBP", etc.
 
 For more information about sites, including: switching sites, clearing site data, cloning - please see [this documentation](https://help.chargify.com/sites/sites-intro.html).
 
