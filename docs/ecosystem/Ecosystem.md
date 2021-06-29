@@ -8,7 +8,7 @@ One of the many reasons to use Chargify is the immense feature set and surroundi
 
 ## Integrations
 
-Chargify has partnered with many SaaS solutions to help you manage your business. The complete list of integrations is available [here](https://www.chargify.com/third-party-integrations/).
+Chargify has partnered with many SaaS solutions to help you manage your business. The complete list of integrations is available [here](https://www.chargify.com/integration-marketplace/).
 
 For more information about existing integrations, please see [integrations](https://help.chargify.com/integrations/integrations-intro.html).
 
@@ -20,7 +20,7 @@ Your account can be reached upon logging in at [https://app.chargify.com/login](
 
 If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
 
-Another handy tool is [RequestBin](https://requestbin.fullcontact.com/) You could create a RequestBin and send your request to them instead of us to see visually what it is you’re sending, if you’re not sure.
+Another handy tool is [Webhook.site](https://webhook.site/) You could send your request to their temporary URL instead of us to see visually what it is you’re sending, if you’re not sure.
 
 While you can certainly write your own code to interact with Chargify, it's likely someone has already written code for your platform.
 
@@ -38,4 +38,4 @@ For more information about our PCI auditing and related updates, please see [Wha
 
 # API Reference
 
-The complete API reference documentation is available [here](https://chargify.stoplight.io).
+The complete API reference documentation is available [here](../../reference/Chargify-API.v1.yaml).

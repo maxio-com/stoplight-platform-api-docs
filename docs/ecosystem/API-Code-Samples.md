@@ -4,16 +4,6 @@ tags: [Ecosystem]
 
 # API Code Samples
 
----
-layout: article
-title:  "API Code Samples"
-tags: ["Samples"]
-# Each heading will be a line in the TOC.
-toc: true
-# Lower numbers shown first
-weight: 999
----
-
 The following sample code has been contributed by our community of developers to help you get started with Chargify faster. The code they’ve given back to everyone represents a lot of time & work that you can benefit from as you implement Chargify with your app!
 
 If you have usage examples or code libraries in other languages, please let us know.
@@ -22,7 +12,6 @@ Please note that these samples were graciously given to us by our users, so we d
 
 ## PHP
 
-- [https://github.com/chargely/chargify-sample-app](https://github.com/chargely/chargify-sample-app): Sample PHP app based on Zend Framework, from the makers of Chargely
 - [https://github.com/chargely/chargify-sdk-php](https://github.com/chargely/chargify-sdk-php): A PHP API wrapper, from the makers of Chargely
 - [http://github.com/abraham/chargify](http://github.com/abraham/chargify) Sample PHP app by Abraham Williams. http://abrah.am, @abraham
 - [http://github.com/jforrest/Chargify-PHP-Client](http://github.com/jforrest/Chargify-PHP-Client): A PHP API wrapper from Jason at RigBooks
@@ -40,16 +29,11 @@ Please note that these samples were graciously given to us by our users, so we d
 
 - [http://github.com/gdoermann/django-chargify](http://github.com/gdoermann/django-chargify): A Django wrapper for Chargify by @gdoermann
 - [http://github.com/getyouridx/pychargify](http://github.com/getyouridx/pychargify): A Python API wrapper by one of our active beta testers.
-- [http://github.com/hindsightlabs/chargify-python](http://github.com/hindsightlabs/chargify-python): A simple Python API wrapper.
 
 ## .NET
 
 - [https://github.com/kfrancis/chargify-dot-net](https://github.com/kfrancis/chargify-dot-net): A .NET API wrapper and complete sample app by one of our own (Kori Francis, @korifrancis)
 - [https://github.com/kfrancis/Chargify2](https://github.com/kfrancis/Chargify2): A .NET port of the Chargify Direct Chargify wrapper by Kori Francis.
-
-## ColdFusion
-
-- [https://github.com/GenuineParts/Chargify-Coldfusion-Component](https://github.com/GenuineParts/Chargify-Coldfusion-Component): A simple ColdFusion cfc by Jordan Sitkin (@specifyApp). He says (as of Aug 23, 2010): “At the moment it only includes the basic functionality of the Customers and Subscriptions parts of the API, but can easily be extended to handle the rest.”
 
 ## Java/Scala
 
