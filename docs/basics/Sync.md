@@ -83,7 +83,7 @@ Please see [configuring webhooks](https://help.chargify.com/webhooks/webhooks-re
 
 For initial testing, there are a number of options that you can use.
 
-Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like https://requestbin.fullcontact.com/. Requestbin provides a temporary URL that Chargify may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Chargify will be sending.
+Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like https://webhook.site/. Webhook.site provides a temporary URL that Chargify may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Chargify will be sending.
 
 Chargify's webhook feature provides a test method that will send a simple message to any single webhook URL you specify. This test message is useful for verifying connectivity between your URL and Chargify,
 
