@@ -222,7 +222,7 @@ The resource parameters are nested beneath a key named after the resource, and a
 </form>
 ```
 
-See Chargify [Direct Signups](https://developer.chargify.com/content/chargify-direct/signups.html) for a full listing of input parameters.
+See Chargify [Direct Signups](./Signups.md) for a full listing of input parameters.
 
 ## Response Parameters
 
