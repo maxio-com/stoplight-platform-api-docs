@@ -25,7 +25,7 @@ For example, if you wanted to add a charge of $1 - it would look like the follow
 }
 ```
 
-For more information on the API details for creating charges, see [here](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1charges.json/post).
+For more information on the API details for creating charges, see [here](../../reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1charges.json/post).
 
 ## Coupons and Adjustments
 
@@ -53,11 +53,11 @@ Let's create a coupon that we can then use when creating our next subscription.
 }
 ```
 
-To create a coupon, see [here](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1coupons.json/post).
+To create a coupon, see [here](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1coupons.json/post).
 
-To use a coupon when creating a new subscription, please see [here](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
+To use a coupon when creating a new subscription, please see [here](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
-Please see the full API documentation for [coupons](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1coupons.json/post) for more detailed information.
+Please see the full API documentation for [coupons](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1coupons.json/post) for more detailed information.
 
 ### Adjustments
 
@@ -75,7 +75,7 @@ Let's say you wanted to increase the balance of a subscription by $4 (perhaps fo
 }
 ```
 
-Please see the full API documentation for [adjustments](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1adjustments.json/post) for more detailed information.
+Please see the full API documentation for [adjustments](../../reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1adjustments.json/post) for more detailed information.
 
 ## Billing Dates
 
@@ -92,7 +92,7 @@ A quick example of updating the billing date for a subscription would look like 
 }
 ```
 
-Please see the full API documentation for [updating subscription assessment date](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/put) for more information.
+Please see the full API documentation for [updating subscription assessment date](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/put) for more information.
 
 ## Product Changes
 
@@ -111,13 +111,13 @@ For more information about product versions, please see the following [documenta
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
 
 <div class="alert alert-warning">
-If your subscriber pays taxes on their purchased product, and you are attempting to update the <code>payment_profile</code>, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation <a class="alert-link" href="https://developer.chargify.com/content/basics/signups.html#taxes">here</a>.
+If your subscriber pays taxes on their purchased product, and you are attempting to update the <code>payment_profile</code>, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation <a class="alert-link" href="./Signups.md#taxes">here</a>.
 </div>
 
 You can update the payment details in a few different ways:
 
 * Update via [Self-Service Pages](#updating-via-self-service-pages)
-* Update via [API](#Updating via API)
+* Update via [API](#updating-via-api)
 * Update via [Chargify Direct](#updating-via-chargify-direct)
 
 ### Updating via Self-Service Pages
@@ -182,7 +182,7 @@ Updating the payment profile directly would look like the following:
 }
 ```
 
-Please see the full [API documentation](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles~1%7Bpayment_profile_id%7D.json/put) for more complete documentation about updating payment profiles via the API.
+Please see the full [API documentation](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles~1%7Bpayment_profile_id%7D.json/put) for more complete documentation about updating payment profiles via the API.
 
 ## Cancelling
 
@@ -211,7 +211,7 @@ It is also possible to cancel a subscription at the end of the current billing p
 }
 ```
 
-For information about cancelling using the API, please see [Cancelling via API](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/delete).
+For information about cancelling using the API, please see [Cancelling via API](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/delete).
 
 For information about cancelling subscriptions in general, please see [cancellation](https://help.chargify.com/subscriptions/cancellation.html).
 
@@ -235,7 +235,7 @@ You can perform a non-manual refund using the API, like in the following example
 
 You will substitute values for `payment_id`, `amount` and `memo` in this example. The `payment_id` is the ID of the payment transaction that the credit will be applied to.
 
-For more information, see [API refunds](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1refunds.json/post).
+For more information, see [API refunds](../../reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1refunds.json/post).
 
 For a manual/external refund, the API call will be almost the exact same except you also supply a value for `external`:
 
@@ -252,7 +252,7 @@ For a manual/external refund, the API call will be almost the exact same except 
 
 In the case of a manual or external refund, there will be nothing which is passed through on to your gateway - it will simply be added to the subscription, modifying the balance and adding a transaction record.
 
-For more information, see [API Refunds (External)](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1refunds.json/post).
+For more information, see [API Refunds (External)](../../reference/Chargify-Legacy-API.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1refunds.json/post).
 
 ## Subscription Updates via Billing Portal
 
@@ -270,5 +270,5 @@ For more information on the Chargify Billing Portal, we encourage you to view ou
 ----------
 
 # Next Steps
-- Keeping your application data [synchronized](/content/basics/sync.html) with Chargify
-- Subscription API [documentation](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)
+- Keeping your application data [synchronized](./Sync.md) with Chargify
+- Subscription API [documentation](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)

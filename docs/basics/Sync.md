@@ -10,8 +10,8 @@ After creating and managing subscriptions, you might need a way for your applica
 
 There are three basic methods of either allowing or notifying your application about the state of a customers subscription:
 
-- Using the [API](/content/basics/sync.html#api) to retrieve subscription information
-- Recieving [webhooks](/content/basics/sync.html#receiving-a-webhook-notification)
+- Using the [API](#api) to retrieve subscription information
+- Recieving [webhooks](#receiving-a-webhook-notification)
 - Manually export
 
 ## API
@@ -30,14 +30,14 @@ You will receive all the current information about the subscription, including (
  - Customer details
  - Payment details
 
-For more detailed information, see API documentation on [reading the subscription](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/get).
+For more detailed information, see API documentation on [reading the subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/get).
 
 ### Best Practices
 
 The following are some best practices that we would suggest regarding using API and how you synchronize your application with your Chargify data:
 
 1. Your application should try and not depend on another service to control access directly. Should your API call fail, for any reason, then your customer might not receive the best user experience depending on how you've implemented this.
-2. You should try and limit the direct calls to Chargify if (and when) possible as there is a limit to how fast (and how often) the Chargify API will respond to very quick and numerous API calls. For more information, see [limits and blocks](https://chargify.stoplight.io/docs/api-documentation/docs/basics/API-Access-Limitations.md).
+2. You should try and limit the direct calls to Chargify if (and when) possible as there is a limit to how fast (and how often) the Chargify API will respond to very quick and numerous API calls. For more information, see [limits and blocks](../../reference/Chargify-API.v1.yaml#api-access-limitations).
 
 ## Webhooks
 
@@ -131,5 +131,5 @@ The following are some best practices that we would suggest regarding webhooks:
 ----------
 
 # Next Steps
-- [Managing](/content/basics/subscriptions.html) your subscriptions
-- API documentation for [webhooks](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post)
+- [Managing](./Subscriptions.md) your subscriptions
+- API documentation for [webhooks](../../reference/Chargify-API.v1.yaml/paths/~1endpoints.json/post)

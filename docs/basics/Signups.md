@@ -10,10 +10,10 @@ Learn how to create signups (also called subscriptions) by signing up customers 
 
 This guide on signups runs through the basics on creating subscriptions in Chargify, though Chargify can almost handle any scenario using API integration.
 
-1. Chargify's [signup methods](/content/basics/signups.html#signup-methods)
-2. The [payment methods](/content/basics/signups.html#payment-methods) available for subscriptions
-3. How to handle customers with [multiple subscriptions](/content/basics/signups.html#multiple-subscriptions)
-4. Component [quantities](/content/basics/signups.html#components) and how they can be used to customize billing
+1. Chargify's [signup methods](#signup-methods)
+2. The [payment methods](#payment-methods) available for subscriptions
+3. How to handle customers with [multiple subscriptions](#multiple-subscriptions)
+4. Component [quantities](l#components) and how they can be used to customize billing
 
 ## Signup Methods
 
@@ -21,8 +21,8 @@ There are a number of methods of actually signing up customers to your business.
 
 * [Manually (within Chargify)](https://help.chargify.com/subscriptions/new-subscriptions.html)
 * [Public Signup Pages (PSP)](https://help.chargify.com/public-pages/signup-details.html)
-* [API](/content/basics/signups.html#api)
-* [Chargify Direct](/content/basics/signups.html#chargify-direct)
+* [API](#api)
+* [Chargify Direct](#chargify-direct)
 
 Not all methods will be applicable to your unique business, but the methods we provide can work for just about any business model you could possibly come up with.
 
@@ -88,9 +88,9 @@ For example, the following `POST` to the subscription create API endpoint would 
 }
 ```
 
-For more information, see [API Documentation for Creating a Subscription](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
+For more information, see [API Documentation for Creating a Subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
-For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](/content/advanced/advanced.html#advanced-signup-examples).
+For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](../advanced/Advanced.md#advanced-signup-examples).
 
 ### Chargify Direct
 
@@ -120,7 +120,7 @@ Example:
 </form>
 ```
 
-In the above example, you would need to use the correct `api_id`, set an appropriate `data` value and calculate the correct `signature`. The system will not allow submissions if the basic [authentication](/content/getting-started/authentication.html) requirements are not met.
+In the above example, you would need to use the correct `api_id`, set an appropriate `data` value and calculate the correct `signature`. The system will not allow submissions if the basic [authentication](../getting-started/Authentication.md) requirements are not met.
 
 ## Payment Methods
 
@@ -156,7 +156,7 @@ In the following example, the existing customer with `reference` (shown as `cust
   }
 }
 ```
-For more information about the `customer_reference` and `customer_id `values, please see the [API documentation](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
+For more information about the `customer_reference` and `customer_id `values, please see the [API documentation](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
 Chargify Direct can also be used to create an additional subscription for an existing customer by including the customer reference or customer ID. The subscription can optionally re-use an existing payment profile by including a payment profile ID belonging to that customer.
 
@@ -197,7 +197,7 @@ One very common initial signup step is to allocate a quantity of one or more com
 }
 ```
 
-For more information about components and how to use this great feature to customize your signup process - see [components](/content/basics/components.html).
+For more information about components and how to use this great feature to customize your signup process - see [components](./Components.md).
 
 For deeper learning about how components function within Chargify, we recommend the following resources:
 
@@ -209,5 +209,5 @@ For deeper learning about how components function within Chargify, we recommend 
 
 # Next Steps
 
-* Customizing your billing with [components](/content/components/components.html)
-* API documentation for [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)
+* Customizing your billing with [components](./Components.md)
+* API documentation for [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)

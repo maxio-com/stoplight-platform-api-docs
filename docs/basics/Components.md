@@ -10,8 +10,8 @@ Components are a great way to customize how your customers can use your products
 
 Components allow you to introduce additional “line items” to your products that are often expressed as “add-ons”, upsold features, or pay-per-use items. There are two basic concepts needed to use components that we will discuss:
 
- 1. [Creating](/content/basics/components.html#creating-components) components
- 2. The [usage/allocation](/content/basics/components.html#usageallocation) of components
+ 1. [Creating](#creating-components) components
+ 2. The [usage/allocation](#usageallocation) of components
 
 For more information about components, see our [component](https://help.chargify.com/products/product-components.html) documentation.
 
@@ -38,7 +38,7 @@ If you need to display component pricing to your customers, we recommend caching
 For more information on components, please see the following:
 
  - About [components](https://help.chargify.com/products/product-components.html)
- - Creating components [via the API](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post)
+ - Creating components [via the API](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post)
 
 ## Usage/Allocation
 
@@ -66,6 +66,6 @@ Components can be used in a huge number of varying ways to cover your business m
 ----------
 
 # Next Steps
-- [Managing](/content/basics/subscriptions.html) your subscriptions
-- API documentation for [components](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post), [usage](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1usages.json/post) or [allocations](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1allocations.json/post)
+- [Managing](./Subscriptions.md) your subscriptions
+- API documentation for [components](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post), [usage](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1usages.json/post) or [allocations](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1allocations.json/post)
 
