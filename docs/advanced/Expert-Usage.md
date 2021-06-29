@@ -40,7 +40,7 @@ The following are a few advanced/expert examples of new signups/subscriptions th
 }
 ```
 
-For complete details of this method, please see [API Subscription Import](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)
+For complete details of this method, please see [API Subscription Import](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post)
 
 2. New Subscription with Coupon/Trial/Component
 
@@ -72,7 +72,7 @@ Signups can implement coupons, custom trial periods and components right from th
 }
 ```
 
-For complete details about subscription creation, please see [create subscription](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
+For complete details about subscription creation, please see [create subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
 3. New Subscription with Existing Payment Profile
 
@@ -110,7 +110,7 @@ Second, you would then set the color for a particular cutomer:
 
 The particular customer would then have metadata for metafield "Color" set to "Blue".
 
-For more API information about "metafields" (the containers of your metadata), please see [custom fields: Metafields](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1%7Bresource_type%7D~1metafields.json/post).
+For more API information about "metafields" (the containers of your metadata), please see [custom fields: Metafields](../../reference/Chargify-API.v1.yaml/paths/~1%7Bresource_type%7D~1metafields.json/post).
 
 ## Communication
 
@@ -160,7 +160,7 @@ For more information about referrals, please see [Referrals](https://help.chargi
 
 ## Notes
 
-You can also enter and manage notes on a subscription. Notes allow you to keep non-structured data associated with individual subscriptions. If you need structured data, please consider using [Metafields/Metadata](#metafields-metadata).
+You can also enter and manage notes on a subscription. Notes allow you to keep non-structured data associated with individual subscriptions. If you need structured data, please consider using [Metafields/Metadata](../../reference/Chargify-API.v1.yaml/paths/~1%7Bresource_type%7D~1metafields.json/post).
   
 To create a simple note on a subscription, see the following:
 
@@ -176,4 +176,4 @@ To create a simple note on a subscription, see the following:
 
 Setting the value for `sticky` to `true` will show the note prominently when viewing the subscription.
 
-For complete API information about notes, please see [API Notes](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1notes.json/post).
+For complete API information about notes, please see [API Notes](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1notes.json/post).
