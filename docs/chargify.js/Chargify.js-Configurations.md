@@ -216,9 +216,7 @@ If Chargify.js cannot get a 3D Secure config, or if Strong Customer Authenticati
 
 ## GoCardless Configuration
 
-<div class="alert alert-warning">
-    This configuration has been deprecated in favor of <a class="alert-link" href="#direct-debit-configuration">Direct Debit Configuration</a>
-</div>
+❗️ This configuration has been deprecated in favor of [Direct Debit Configuration](#direct-debit-configuration)
 
 ```javascript
 chargify.load({
@@ -446,7 +444,6 @@ Returned card types: `american-express`, `diners`, `diners-club`, `discover`, `j
 
 ### Global Fields
 
-{:.table.table-bordered}
 | Field name | Example | Required? | Description |
 | ---------- | ------  | -------- | ----------- |
 | selector  | `#chargify-form` | Optional | Pulls in an iframe to the page. Can be defined on the overall form or within each field. |
@@ -472,7 +469,6 @@ Returned card types: `american-express`, `diners`, `diners-club`, `discover`, `j
 
 The fields below are more suited for styling specific fields, but CSS can be specified globally for them:
 
-{:.table.table-bordered}
 | Field name | Example | Required? | Description |
 | ---------- | ------  | -------- | ----------- |
 | label  | `First Name` | Optional | The label above the iframe. |
@@ -487,7 +483,6 @@ Note that styles can be set globally across the whole form, or set individually 
 
 Objects that can be styled:
 
-{:.table.table-bordered}
 | Field name | Description |
 | ---------- | ------  | -------- | ----------- |
 | field  | This will apply to the container of the field. |
@@ -497,7 +492,6 @@ Objects that can be styled:
 
 Available styles:
 
-{:.table.table-bordered}
 | Field name | Example | Description |
 | ---------- | ------  | -------- | ----------- |
 | backgroundColor  | `orange` | Changes the background color. |
@@ -510,7 +504,6 @@ Available styles:
 
 ### Credit Card Fields
 
-{:.table.table-bordered}
 | Field name | Example | Required? | Description |
 | ---------- | ------  | -------- | ----------- |
 | firstName  | `Joe` | Optional | Cardholder first name |
@@ -528,7 +521,6 @@ Available styles:
 
 ### ACH Fields
 
-{:.table.table-bordered}
 | Field name        | Example | Required | Description |
 | ----------------- | ------- | -------- | ----------- |
 | firstName         | `Joe` | Optional | First name on bank account |
@@ -547,7 +539,6 @@ Available styles:
 
 ### Direct Debit Fields (when you use GoCardless gateway for Direct Debit)
 
-{:.table.table-bordered}
 | Field name        | Example | Required | Description |
 | ----------------- | ------- | -------- | ----------- |
 | firstName         | `Joe` | Required | First name on bank account |
@@ -571,7 +562,6 @@ Available styles:
 
 ### Direct Debit Fields (when you use Stripe gateway for SEPA Direct Debit)
 
-{:.table.table-bordered}
 | Field name        | Example | Required | Description |
 | ----------------- | ------- | -------- | ----------- |
 | firstName         | `Joe` | Required | First name on bank account |
@@ -589,7 +579,6 @@ Available styles:
 
 ### Direct Debit Fields (when you use Stripe gateway for BECS Direct Debit)
 
-{:.table.table-bordered}
 | Field name        | Example | Required | Description |
 | ----------------- | ------- | -------- | ----------- |
 | firstName         | `Joe` | Required | First name on bank account |
@@ -608,7 +597,6 @@ Available styles:
 
 ### Apple Pay Fields
 
-{:.table.table-bordered}
 | Field name | Example | Required | Description |
 | ---------- | ------  | -------- | ----------- |
 | firstName  | `Joe` | Optional | Cardholder first name |
@@ -622,7 +610,6 @@ Available styles:
 
 ### PayPal Fields
 
-{:.table.table-bordered}
 | Field name | Example | Required | Description |
 | ---------- | ------  | -------- | ----------- |
 | firstName  | `Joe` | Optional | Cardholder first name |

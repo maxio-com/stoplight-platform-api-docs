@@ -143,7 +143,7 @@ var chargify = new Chargify();
 
 3) [Generate a public key](https://help.chargify.com/integrations/api-keys-chargify-direct.html#key-pair-chargifyjs). This will be separate from your API key, which must be kept private.
 
-4) Load Chargify with the authentication and customizations you desire. We  have a [full article here dedicated to this topic](/content/chargify-js/configurations.html).
+4) Load Chargify with the authentication and customizations you desire. We  have a [full article here dedicated to this topic](./Chargify.js-Configurations.md).
 
 5) Based on the selectors you have configured within `Chargify.load`, add those to your main form. Here's an example with some basic configuration included inline with a single selector to pull in all iframes:
 
@@ -215,13 +215,11 @@ document.querySelector('#chargify-form').addEventListener('submit', function(eve
 });
 ```
 
-7) After you get the token, you will submit it to your server and use it to [create a subscription](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post) or [payment profile](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post) using our API.
+7) After you get the token, you will submit it to your server and use it to [create a subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post) or [payment profile](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post) using our API.
 
-<div class="alert alert-danger">
-Tokens expire after 20 minutes.
-</div>
+❗️ Tokens expire after 20 minutes.
 
-8) Now that the basic workflow of Chargify.js is working, add some styling to the form! [Here's an example of how it could look](content/chargify-js/example.html#example-of-chargifyjs-form). Additional examples, both minimal and full, may be found at the bottom of that page.
+8) Now that the basic workflow of Chargify.js is working, add some styling to the form! [Here's an example of how it could look](./Examples.md#example-of-chargifyjs-form). Additional examples, both minimal and full, may be found at the bottom of that page.
 
 ## Handling Errors
 
@@ -256,10 +254,7 @@ Specific technical considerations to be aware of:
 * Supports HTTP/2, HTTP/1.1, HTTP/1.0
 * Through the use of AWS Cloudfront, `https://js.chargify.com` is designed for maximum reliability and speed, but is not covered by our SLA, uptime, or performance guarantees.
 
-<div class="alert alert-warning">
-When you use Chargify.js, your workflow is classified as SAQ-A. For more information, please see our documentation on
-<a class="alert-link" href="https://help.chargify.com/my-account/pci-compliance.html">PCI compliance.</a>
-</div>
+❗️ When you use Chargify.js, your workflow is classified as SAQ-A. For more information, please see our documentation on [PCI compliance](https://help.chargify.com/my-account/pci-compliance.html).
 
 ## Passing Pre-Filled Customer Information
 
@@ -345,7 +340,6 @@ An example in Ruby using the [JWT Rubygem](https://github.com/jwt/ruby-jwt) foll
   "chjs_pvt_myprivatekey",
   "HS256"
 )
-# => "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjaGpzX215cHVibGlja2V5IiwianRpIjoiYjhhOTA0NGNiYWRhOGIyNGEyMzBmZjg5MzQ2NjM4NDMiLCJzdWIiOiI0MDM1In0.l9k-aZ8bES0AlTnCMUyDo3XwLMtmYmFhTUOZho2QVos"
 ```
 
 The token should then be provided to your Chargify.js client-side configuration under the key `securityToken`.

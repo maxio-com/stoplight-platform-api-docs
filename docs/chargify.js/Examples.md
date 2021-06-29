@@ -11,10 +11,9 @@ The following examples all include selectors named sequentially as chargify1, ch
 
 ## Example of Chargify.js Form
 
-<figure>
-{% image /img/site/chargify_js/examples/example.png %}
-<figcaption>Example of subscriber-facing HTML form</figcaption>
-</figure>
+| ![Chargify.js Example Form](../../assets/images/docs/chargify.js/Examples.md/example.png) |
+|:--:|
+| **Example of subscriber-facing HTML form** |
 
 ```html
 <!DOCTYPE html>
@@ -324,7 +323,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on GoCardless, please see the following resources:
 
 + [GoCardless introduction](https://help.chargify.com/payment-gateways/gocardless.html)
-+ Using GoCardless via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-gocardless-bank-number) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#gocardless)
++ Using GoCardless via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-gocardless-bank-number) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#gocardless)
 
 
 ```javascript
@@ -349,8 +348,8 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 + [Stripe Direct Debit introduction](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
-+ Using Stripe SEPA Direct Debit via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#sepa-direct-debit)
-+ Using Stripe BECS Direct Debit via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#becs-direct-debit)
++ Using Stripe SEPA Direct Debit via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#sepa-direct-debit)
++ Using Stripe BECS Direct Debit via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#becs-direct-debit)
 
 ```javascript
 <script>
@@ -1172,7 +1171,7 @@ The following is a full example of using Chargify.js with GoCardless.
 For more information on GoCardless, please see the following resources:
 
 + [GoCardless introduction](https://help.chargify.com/payment-gateways/gocardless.html)
-+ Using GoCardless via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-gocardless-bank-number) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#gocardless)
++ Using GoCardless via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-gocardless-bank-number) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#gocardless)
 
 ```javascript
 var chargify = new Chargify();
@@ -1276,7 +1275,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 + [Stripe Direct Debit introduction](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
-+ Using Stripe Direct Debit via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#sepa-direct-debit)
++ Using Stripe Direct Debit via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#sepa-direct-debit)
 
 ```javascript
 var chargify = new Chargify();
@@ -1364,7 +1363,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 + [Stripe Direct Debit introduction](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
-+ Using Stripe BECS Direct Debit via API for creating [subscriptions](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#becs-direct-debit)
++ Using Stripe BECS Direct Debit via API for creating [subscriptions](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post#becs-direct-debit)
 
 ```javascript
 var chargify = new Chargify();

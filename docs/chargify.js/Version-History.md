@@ -11,7 +11,7 @@ The latest version of `chargify.js` is available at the following url:
 ```
 
 We occasionally make updates to improve the functionality of Chargify.js in
-accordance with our [backwards compatibility policy.](https://chargify.stoplight.io/docs/api-documentation/docs/basics/Overview.md#backwards-compatibility)
+accordance with our [backwards compatibility policy.](../../reference/Chargify-API.v1.yaml#backwards-compatibility)
 
 With every release of Chargify.js, we also publish a static version.
 If needed, you can point to a specific version using a release date as shown below in the release history.
@@ -22,11 +22,7 @@ integration, or implement a Content Security Policy (CSP).  Example:
 <script src="https://js.chargify.com/v/2021-01-29a/chargify.js"></script>
 ```
 
-<div class="alert alert-warning">
-We will support previous releases of Chargify.js for a maximum time frame of 6 months.  If
-you use an explicitly versioned path of Chargify.js, you must commit to updating your
-integration regularly.  Versions older than 6 months will be unsupported and may be removed without notice.
-</div>
+❗️ We will support previous releases of Chargify.js for a maximum time frame of 6 months. If you use an explicitly versioned path of Chargify.js, you must commit to updating your integration regularly.  Versions older than 6 months will be unsupported and may be removed without notice.
 
 ## Release History
 * **2021-06-17** **latest**
