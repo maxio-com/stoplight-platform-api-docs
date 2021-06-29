@@ -110,7 +110,7 @@ You can update the payment details in a few different ways:
 
 * Update via [Self-Service Pages](#updating-via-self-service-pages)
 * Update via [API](#updating-via-api)
-* Update via [Chargify Direct](#updating-via-chargify-direct)
+* Update via [Chargify.js](../chargify.js/Overview.md#updating-existing-payment-methods)
 
 ### Updating via Self-Service Pages
 
