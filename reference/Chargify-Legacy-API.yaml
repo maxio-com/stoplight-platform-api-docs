@@ -4,7 +4,10 @@ info:
   version: '1.0'
   contact:
     email: support@chargify.com
-  description: Manage your company's subscriptions through the Chargify API.
+  description: |-
+    This API documentation contains legacy endpoint usages which will not be updated with newer features but will continue to be supported at this time.
+
+    This documentation focuses primarily on the Statement Architecture and its functions.
 tags:
   - name: Legacy Invoices
   - name: Legacy Statements
