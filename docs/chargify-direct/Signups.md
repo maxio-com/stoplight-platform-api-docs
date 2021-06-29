@@ -50,7 +50,6 @@ The product may be specified by either `product[id]` or by `product[handle]`, or
 
 ### Offer Details
 
-{:.table.table-bordered}
 | Parameter      | Description                                                                         | Required |
 |----------------|-------------------------------------------------------------------------------------|----------|
 | `offer_id`     | The `id` or `handle` of the [offer](https://help.chargify.com/offers/offers-introduction.html) your customer is signing up for. | Optional, but required if using offers |
@@ -69,7 +68,6 @@ passing an `offer_id`. An offer has its own product/component/coupon configurati
 
 The customer may be specified by customer[id] or by customer[reference] or by the following attributes as part of the `customer` object.
 
-{:.table.table-bordered}
 | Parameter      | Description                                                                         | Required |
 |----------------|-------------------------------------------------------------------------------------|----------|
 | `first_name`   | The first name of the customer                                                      | Yes      |
@@ -92,7 +90,6 @@ The payment profile may be specified by either payment_profile[id] or by the fol
 
 Parameters that are not marked as required, may be required by your product configuration or gateway settings. Please be aware of this potential requirement.
 
-{:.table.table-bordered}
 | Parameter                  | Description                                                                                                                                                                                                                                                                                                                                  | Required                                                                                       |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | `first_name`               | First name on card or bank account                                                                                                                                                                                                                                                                                                           | Yes                                                                                            |
@@ -124,7 +121,6 @@ Components are attached/allocated to the signup by including the component key. 
 
 ### Other Fields
 
-{:.table.table-bordered}
 | Parameter     | Description                                                                                                                                                                  | Required |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | `metafields`  | set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |          |
@@ -313,13 +309,13 @@ A subscription can be signed up on calendar billing as follows, where the value 
 <input type="hidden" name="secure[data]" value="redirect_uri=http%3A%2F%2Fwww.example.com%2Fparameter=value%26parameter2=value"/>
 ```
 
-For another example on how redirects can be achieved, please see our [Chargify Direct Example](https://developer.chargify.com/content/chargify-direct/example.html).
+For another example on how redirects can be achieved, please see our [Chargify Direct Example](./Example.md).
 
 ## CORS
 
 If you are trying to avoid the redirect and full-page reload, for example if you are developing a single-page application and would like to programmatically submit the form with JavaScript, please note that Cross-Origin Resource Sharing (CORS) is not supported by default.  Chargify Direct is deprecated and no new requests for CORS support will be granted. (Merchants with existing Chargify Direct integrations may request to be grandfathered in for newly added sites in their accounts.)
 
-Please see the [Chargify.js Overview](https://developer.chargify.com/content/chargify-js/chargify-js.html) for new integrations.
+Please see the [Chargify.js Overview](../chargify.js/Overview.md) for new integrations.
 
 ### JSON Signup Example
 

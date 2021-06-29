@@ -22,7 +22,7 @@ The second method of interaction is using Chargify Direct. Chargify Direct has t
 
 ## Chargify Direct via Secure Parameters
 
-Secure parameters are used when using the transparent redirect (posting values directly) to Chargify using a `<form method='POST' \>`. This is done when [creating new subscriptions](/content/basics/signups.html) and [updating payment profile](/content/basics/subscriptions.html#updating-payment-details) information.
+Secure parameters are used when using the transparent redirect (posting values directly) to Chargify using a `<form method='POST' \>`. This is done when [creating new subscriptions](./Signups.md) and [updating payment profile](../basics/Subscriptions.md#updating-payment-details) information.
 
 Every Chargify Direct post must contain a set of cryptographically signed secure parameters. The secure parameters are necessary in order to:
 
@@ -32,14 +32,13 @@ Every Chargify Direct post must contain a set of cryptographically signed secure
 
 The following are the list of secure parameters inputs necessary for authentication:
 
-{:.table.table-bordered}
 | Parameter   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Required |
 |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | `api_id`    | Your API Key/ID, as assigned by Chargify (see ["Obtaining Credentials"](https://help.chargify.com/integrations/api-keys-chargify-direct.html)).                                                                                                                                                                                                                                                                                                              | Yes      |
-| `timestamp` | he time of the request, given as an integer number of seconds elapsed since Jan 1, 1970 00:00:00 UTC (i.e. Unix time). If you provide a timestamp, it will be reflected back to you in the response parameters, and MAY be used to invalidate the request if it is older than a certain threshold. **Do not include miliseconds.** (see [timestamping requests](https://developer.chargify.com/content/chargify-direct/overview.html#timestamping-requests)) |          |
-| `nonce`     | A string (max 40 characters) used to uniquely identify the request. The nonce must be unique when scoped by the timestamp and your API ID. With nonce provided, it will be reflected back to you in the response parameters, and MAY be used to invalidate the request if it matches a previously used value for the same timestamp ([see nonce values](https://developer.chargify.com/content/chargify-direct/overview.html#nonce-values))                  | Yes      |
+| `timestamp` | he time of the request, given as an integer number of seconds elapsed since Jan 1, 1970 00:00:00 UTC (i.e. Unix time). If you provide a timestamp, it will be reflected back to you in the response parameters, and MAY be used to invalidate the request if it is older than a certain threshold. **Do not include miliseconds.** (see [timestamping requests](./Overview.md#timestamping-requests)) |          |
+| `nonce`     | A string (max 40 characters) used to uniquely identify the request. The nonce must be unique when scoped by the timestamp and your API ID. With nonce provided, it will be reflected back to you in the response parameters, and MAY be used to invalidate the request if it matches a previously used value for the same timestamp ([see nonce values](./Overview.md#nonce-values))                  | Yes      |
 | `data`      | A string in URL query-string format that may be used to transmit tamper-proof data to Chargify through the form (see Secure data). Note that you will want to escape any HTML characters in this string before embedding it in your form.                                                                                                                                                                                                                    |          |
-| `signature` | A verification signature based on the other 4 secure inputs and the shared `api_secret` for the API User ([see signature calculation](https://developer.chargify.com/content/chargify-direct/overview.html#signature-calculation))                                                                                                                                                                                                                           | Yes      |
+| `signature` | A verification signature based on the other 4 secure inputs and the shared `api_secret` for the API User ([see signature calculation](./Overview.md#signature-calculation))                                                                                                                                                                                                                           | Yes      |
 
 These secure inputs should be sent to Chargify through the Direct endpoint nested inside the secure parameter. For example, the following form demonstrates how to use hidden form inputs to submit all 5 secure inputs:
 
@@ -61,7 +60,7 @@ The authentication value in this method is the **signature**. The signature is t
 HMAC-SHA1(api_secret, api_id+timestamp+nonce+data)
 ```
 
-For additional information, please see [Chargify Direct](/content/basics/signups.html#chargify-direct).
+For additional information, please see [Chargify Direct](../basics/Signups.md#chargify-direct).
 
 ### Duplicate Prevention
 
@@ -73,7 +72,7 @@ To avoid double charges, we strongly recommend that you supply a `uniqueness_tok
   ...
 ```
 
-You can learn more in the [Duplicate Prevention](/content/advanced/duplicate-prevention.html) documentation.
+You can learn more in the [Duplicate Prevention](../advanced/Duplicate-Prevention.md) documentation.
 
 ### Chargify Direct via REST
 
@@ -112,4 +111,4 @@ Please, review the information on the [upgrade notice](https://help.chargify.com
 
 ## Troubleshooting: Request blocked with `422` response code
 
-Chargify will block requests and return a `422` response code and body with errors if your account is in one of a few certain scenarios. You can read more about this in our [API documentation](https://chargify.stoplight.io/docs/api-documentation/docs/basics/API-Access-Limitations.md)
+Chargify will block requests and return a `422` response code and body with errors if your account is in one of a few certain scenarios. You can read more about this in our [API documentation](../../reference/Chargify-API.v1.yaml#api-access-limitations)

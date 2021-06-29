@@ -27,11 +27,11 @@ Please note that Chargify Direct currently doesn’t support creating Invoice Bi
 
 ## Authentication
 
-+ [Chargify Direct Authentication](https://developer.chargify.com/content/getting-started/authentication.html#chargify-direct)
-+ [Chargify Direct via Secure Parameters](https://developer.chargify.com/content/getting-started/authentication.html#chargify-direct-via-secure-parameters)
-+ [Chargify Direct via REST](https://developer.chargify.com/content/getting-started/authentication.html#chargify-direct-via-rest)
-+ [Obtaining API Credentials](https://developer.chargify.com/content/getting-started/authentication.html#obtaining-credentials)
++ [Chargify Direct Authentication](./Authentication.md#chargify-direct)
++ [Chargify Direct via Secure Parameters](./Authentication.md#chargify-direct-via-secure-parameters)
++ [Chargify Direct via REST](./Authentication.md#chargify-direct-via-rest)
++ [Obtaining API Credentials](./Authentication.md#obtaining-credentials)
 
 ## Signups
 
-+ [Signups via Chargify Direct](https://developer.chargify.com/content/basics/signups.html#chargify-direct)
++ [Signups via Chargify Direct](../basics/Signups.md#chargify-direct)

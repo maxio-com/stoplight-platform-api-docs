@@ -23,21 +23,18 @@ The card_update endpoint is only available for HTML forms and does not respond t
 
 ## Input Attributes
 
-In order for your request to be processed, you must set up secure parameters. See [Chargify Direct Introduction – Secure Parameters](https://developer.chargify.com/content/chargify-direct/authentication.html#chargify-direct-via-secure-parameters) for detailed information on how to authenticate requests to this endpoint.
+In order for your request to be processed, you must set up secure parameters. See [Chargify Direct Introduction – Secure Parameters](./Authentication.md#chargify-direct-via-secure-parameters) for detailed information on how to authenticate requests to this endpoint.
 
 Note: the `subscription_id` **MUST** be part of your `secure[data]` parameter for the card update request to be processed.
 
 ### Taxable Subscriptions
 
-<div class="alert alert-warning">
-If your subscriber pays taxes on their purchased product, and you are attempting to update the <code>payment_profile</code>, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation <a class="alert-link" href="https://developer.chargify.com/content/basics/signups.html#taxes">here</a>.
-</div>
+❗️ If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](../basics/Signups.md#taxes).
 
 ## Card Details
 
 ### Payment Profile
 
-{:.table.table-bordered}
 |          Parameter                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `first_name`               | First name on card or bank account                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -108,7 +105,6 @@ When the application is run, navigating to `http://localhost:9292/card_update/<S
 
 When Chargify redirects back to your redirect URI, it will include the following query-string parameters:
 
-{:.table.table-bordered}
 | Parameters    | Description                                                                                                                                                                     |
 |---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `api_id`      | The API ID that made the original request                                                                                                                                       |

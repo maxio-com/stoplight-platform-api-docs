@@ -23,7 +23,7 @@ In terms of security, Chargify.js is SAQ-A compliant, whereas Chargify Direct is
 
 ## Implementation Comparison
 
-Please feel free to peruse our [Chargify.js documentation for a full overview](/content/chargify-js/chargify-js.html).
+Please feel free to peruse our [Chargify.js documentation for a full overview](../chargify.js/Overview.md).
 
 Chargify Direct involves building a form that is hosted on your website. When a customer signs up, the form is submitted directly to Chargify, then we transparently redirect the customer back to the website for information on the state of their signup.
 
@@ -42,7 +42,7 @@ We strongly recommend building a Chargify.js form against a sandbox site prior t
     - What information is being passed, such as addresses, custom fields, bank accounts?
     - Can existing customers sign up for a second subscription under their existing account? 
     - Are there any after-signup triggers to consider, such as requisitioning an account for the customer on your application?
-2. Build and design your Chargify.js form, and implement the necessary API calls needed to create the subscription. This will match the functionality already in place from step 1, as well as take advantage of any new Relationship Invoicing features you are interested in. We recommend checking out the [getting started guide](/content/chargify-js/chargify-js.html#getting-started) to build the form and API connection.
+2. Build and design your Chargify.js form, and implement the necessary API calls needed to create the subscription. This will match the functionality already in place from step 1, as well as take advantage of any new Relationship Invoicing features you are interested in. We recommend checking out the [getting started guide](../chargify.js/Overview.md#getting-started) to build the form and API connection.
 3. Test the full signup flow: 
     - from generating the one-time use token with Chargify.js 
     - to using the token to create a subscription via API
@@ -73,9 +73,9 @@ A signup API payload passing a Chargify.js token would resemble the following; a
 
 Here are some example API calls for signups that may be helpful:
 
-+ [Request body examples](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post) 
++ [Request body examples](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post) 
 
 These API calls pertain to handling card updates, which involves creating a new payment profile and swapping it to the default.
 
-+ [Creating a new payment profile](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post)
-+ [Changing the default payment profile](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bidentifier%7D~1payment_profiles~1%7Bpayment_profile_id%7D~1change_payment_profile.json/post)
++ [Creating a new payment profile](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post)
++ [Changing the default payment profile](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bidentifier%7D~1payment_profiles~1%7Bpayment_profile_id%7D~1change_payment_profile.json/post)

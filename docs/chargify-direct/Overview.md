@@ -19,9 +19,7 @@ Chargify Direct usually requires a more technically experienced merchant, and so
 
 You’re welcome to use Chargify Direct on any plan level with Chargify. However, please note that if you need assistance, we will ask up-front that you be on a plan that includes advanced technical support.
 
-<div class="alert alert-warning">
-Please note that Chargify Direct currently doesn’t support creating manual invoice-based subscribers.
-</div>
+❗️ Please note that Chargify Direct currently doesn’t support creating manual invoice-based subscribers.
 
 Chargify Direct allows you to create Chargify resources (such as subscriptions) via a form on your own website that posts directly to Chargify. After Chargify receives the form submission, the user is redirected back to your own site. The redirection communicates the result of the submission so that your website can decide how to respond to the user. This flow is sometimes called “transparent redirect” within the industry.
 
@@ -66,7 +64,6 @@ Every Chargify Direct post must contain a set of cryptographically-signed secure
 + Allow you to send tamper-proof data along with the request
 + Specify a redirection URI (or override your default)
 
-{:.table.table-bordered}
 | api_id    | Required | Your API ID, as assigned by Chargify (see API User Credentials)                                                                                                                                                                                                                                                                               |
 |-----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | timestamp | Optional | The time of the request, given as an integer number of seconds elapsed since Jan 1, 1970 00:00:00 UTC (i.e. Unix time). If you provide a timestamp, it will be reflected back to you in the response parameters, and MAY be used to invalidate the request if it is older than a certain threshold (see Timestamping requests below)                |
@@ -200,7 +197,7 @@ Updating a subscription’s payment profile with new information.
 
 Resource URI: `https://api.chargify.com/api/v2/subscriptions/<subscription.id>/card_update`
 
-See API: [Card Update](https://chargify.stoplight.io/docs/api-documentation/reference/Chargify-API.v1.yaml/paths/~1payment_profiles~1%7Bpayment_profile_id%7D.json/put) for more details.
+See API: [Card Update](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles~1%7Bpayment_profile_id%7D.json/put) for more details.
 
 ## Resource Parameters
 
@@ -231,7 +228,6 @@ See Chargify [Direct Signups](https://developer.chargify.com/content/chargify-di
 
 When Chargify redirects back to your redirection URI, it will include the following query-string parameters:
 
-{:.table.table-bordered}
 | api_id      | The API ID that made the original request                                                                                                                                       |
 |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | timestamp   | The reflected or auto-generated timestamp                                                                                                                                       |
@@ -251,7 +247,6 @@ HMAC-SHA1(api_secret, api_id+timestamp+nonce+status_code+result_code+call_id)
 
 ## Result Codes
 
-{:.table.table-bordered}
 | Code   | Description                                                 |
 |--------|-------------------------------------------------------------|
 | `4001` | Authentication failed                                       |
@@ -275,7 +270,7 @@ During development, you may want to use curl to fetch the call to view any error
 curl -u <CHARGIFY_DIRECT_API_ID>:<CHARGIFY_DIRECT_PASSWORD> -H Accept:application/json -H Content-Type:application/json -X GET https://api.chargify.com/api/v2/calls/<CALL_ID>.json
 ```
 
-See [API: Call](https://developer.chargify.com/content/chargify-direct/api-call.html) for a full listing of output fields.
+See [API: Call](./API-Call.md) for a full listing of output fields.
 
 ## Authentication
 
