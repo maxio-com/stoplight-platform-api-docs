@@ -6,7 +6,7 @@ tags: [Basics]
 
 After creating subscriptions, either you or your customers will need to manage them to maintain them under a number of different scenarios.
 
-<hr/>
+------
      
 ## One-Time Charges
 
