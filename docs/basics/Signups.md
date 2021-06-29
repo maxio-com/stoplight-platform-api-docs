@@ -90,7 +90,7 @@ For example, the following `POST` to the subscription create API endpoint would 
 
 For more information, see [API Documentation for Creating a Subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
-For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](../advanced/Advanced.md#advanced-signup-examples).
+For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](../advanced/Expert-Usage.md#advanced-signup-examples).
 
 ### Chargify Direct
 
