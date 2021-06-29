@@ -121,9 +121,7 @@ In addition to creating new subscribers, use Chargify.js to create new payment m
 + An existing subscriber completes a payment-based form on your site, for the purpose of adding a new credit card to their account
 + Chargify returns a one-time token to use for adding a new payment method to an existing subscription
 
-<div class="alert alert-warning">
-Chargify.js is not compatible with updating existing credit cards in Chargify. You may only add new cards to existing subscriptions, or create new subscriptions with recently tokenized card.
-</div>
+❗️ Chargify.js is not compatible with updating existing credit cards in Chargify. You may only add new cards to existing subscriptions, or create new subscriptions with recently tokenized card.
 
 ## Getting Started
 
@@ -308,7 +306,7 @@ By its very nature, Chargify.js allows end-users to submit cardholder data direc
 
 The generation of a security token requires your Chargify.js private key. You may generate or review your Chargify.js key pair from Integrations > Chargify.js. The private key is initially hidden, but you can click-to-reveal and then copy the value.
 
-{% image /img/chargifyjs-integration-configuration.png %}
+![Chargify.js Integration Configuration](../../assets/images/docs/chargify.js/Overview.md/chargifyjs-integration-configuration.png)
 
 The private key is required to sign your security token. **Do not share your private key publicly!**. You will need to generate your security token on the server, and then share the resulting token (and not your private key) with your client-side Chargify.js config.
 
