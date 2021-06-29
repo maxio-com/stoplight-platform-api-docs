@@ -94,25 +94,17 @@ A quick example of updating the billing date for a subscription would look like 
 
 Please see the full API documentation for [updating subscription assessment date](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D.json/put) for more information.
 
-## Product Changes
+## Product Price Points
 
-Every time you make a change to a product, Chargify will create a new "version" of the project. This allows you to:
+Product price points allow you to charge customers different amounts and at different frequencies for the same product.
 
-* Not disrupt users on the original version (before you made changes)
-* Keep a historical record of the product
-* "Move" subscriptions between versions of the product.
-
-In terms of the API, there is no access to move subscriptions or modify old versions. The API will simply return the version along with the product information.
-
-For more information about product versions, please see the following [documentation](https://help.chargify.com/products/product-versions.html).
+Please see the full documentation on [Product Price Points](https://help.chargify.com/products/product-price-points.html)
 
 ## Updating Payment Details
 
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
 
-<div class="alert alert-warning">
-If your subscriber pays taxes on their purchased product, and you are attempting to update the <code>payment_profile</code>, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation <a class="alert-link" href="./Signups.md#taxes">here</a>.
-</div>
+❗️ If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](./Signups.md#taxes).
 
 You can update the payment details in a few different ways:
 
