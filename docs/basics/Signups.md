@@ -49,7 +49,7 @@ If you need information on configuring the look, feel, and behavior of your Publ
 
 When using Public Signup Pages, you have a specific URL to which customers can be sent that will allow them to sign themselves up - creating the subscription that is then added to your site.
 
-We recommend reviewing how [Public Signup Pages work,](https://help.chargify.com/public-pages/signup-details.html) in order to better understand the many ways Chargify can be integrated with your systems. Public Signup Pages can also be a useful tool during development to test a simple signup with our pre-made forms versus your form in order to troubleshoot.
+We recommend reviewing how [Public Signup Pages work](https://help.chargify.com/public-pages/signup-details.html), in order to better understand the many ways Chargify can be integrated with your systems. Public Signup Pages can also be a useful tool during development to test a simple signup with our pre-made forms versus your form in order to troubleshoot.
 
 In some cases, the Public Signup Pages can't quite handle the specific scenario that you might need in your integration with Chargify - that's why we expose a public API for you to consume by your application.
 
@@ -156,7 +156,7 @@ In the following example, the existing customer with `reference` (shown as `cust
   }
 }
 ```
-For more information about the `customer_reference` and `customer_id `values, please see the [API documentation](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
+For more information about the `customer_reference` and `customer_id` values, please see the [API documentation](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post).
 
 Chargify Direct can also be used to create an additional subscription for an existing customer by including the customer reference or customer ID. The subscription can optionally re-use an existing payment profile by including a payment profile ID belonging to that customer.
 
