@@ -58,10 +58,9 @@ Chargify uses a custom algorithmic slot-based limiting that isn't based on typic
 
 To help illustrate this, we've provided a diagram below. Presume that each API call takes a full minute. While this will likely not be the case for your own processes, it does illustrate the limitations for calls.
 
-<figure>
-  {% image /img/site/getting_started/concurrency_graphic.png %}
-  <figcaption>Diagram of concurrency-based rate limiting presuming a limit of 2 threads at a time.</figcaption>
-</figure>
+| ![Concurrency Graphic](../../assets/images/docs/getting-started/concurrency_graphic.png) |
+| -- |
+| **Diagram of concurrency-based rate limiting presuming a limit of 2 threads at a time** |
 
 ### Rate-based Blocks
 
