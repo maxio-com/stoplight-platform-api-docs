@@ -15,10 +15,12 @@ A custom Chargify integration requires general programming/developer skills. If 
 - [Integrations](../ecosystem/Ecosystem.md#integrations)
 
 
-## Support
+## Getting Help & Support
 
-We’re always happy to help our users. You can get support from Chargify in a number of ways:
+We are available 12am-12am CT Monday - Friday, excluding holidays.
 
 - [Contact our sales team](mailto:sales@chargify.com)
-- [Have a question?](https://chargify.zendesk.com/hc/en-us/requests/new)
+- [Open a support ticket](https://chargify.zendesk.com/hc/en-us/requests/new)
 - [Send an email to support](mailto:support@chargify.com)
+- [Twitter](https://twitter.com/chargify)
+- Call 1-800-401-2414 or 1-617-249-4603 (outside U.S.)
