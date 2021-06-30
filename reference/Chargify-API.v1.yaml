@@ -7234,6 +7234,16 @@ paths:
 
         Use this endpoint to create a payment profile for a customer.
 
+        Payment Profiles house the credit card, ACH (Authorize.Net or Stripe only,) or PayPal (Braintree only,) data for a customer. The payment information is attached to the customer within Chargify, as opposed to the Subscription itself.
+
+        ## Payment Profile Documentation
+
+        Full documentation on how Payment Profiles operate within Chargify can be located under the following links:
+
+        + [Subscriber Payment Details](http://help.chargify.com/subscriptions/subscription-summary.html#payment-details)
+        + [Self Service Pages](http://help.chargify.com/public-pages/self-service-pages.html) (Allows credit card updates by Subscriber)
+        + [Public Signup Pages payment settings](http://help.chargify.com/public-pages/public-signup-page-settings.html#credit-card-settings)
+
         ## Active Payment Methods
 
         Creating a new payment profile for a Customer via the API will not make that Payment Profile current for any of the Customer’s Subscriptions. In order to utilize the payment profile as the default, it must be set as the default payment profile for the subscription or subscription group.
@@ -7241,6 +7251,10 @@ paths:
         ## Requirements
 
         Either the full_number, expiration_month, and expiration_year or if you have an existing vault_token from your gateway, that vault_token and the current_vault are required.
+
+        ### Taxable Subscriptions
+
+        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
 
         ## BraintreeBlue
         Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided [Chargify.js](../docs/chargify.js/Overview.md) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
