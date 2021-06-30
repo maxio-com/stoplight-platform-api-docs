@@ -1642,10 +1642,12 @@ paths:
         + [Statement Settings](http://help.chargify.com/settings/statements.html)
         ## Statement Presentation
         The Statements API offers three ways to easily render a statement on your site. You can include a text representation of the statement or one of two HTML views that can be styled to your liking.
+
         | text_view       | A text representation of the statement             |
         |-----------------|----------------------------------------------------|
         | basic_html_view | A simple HTML representation of the statement      |
         | html_view       | A more robust HTML representation of the statement |
+
         Rendering individual statements can also be done as PDF by using the Accept/Content-Type header application/pdf or appending .pdf as the `<format>` portion of the URL: `/statements/1.pdf`.
   /statements.json:
     get:
