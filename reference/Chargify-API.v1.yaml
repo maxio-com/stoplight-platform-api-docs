@@ -819,9 +819,17 @@ paths:
                 required:
                   - note
       description: |-
-        ## Create a Note
+        # Create Subscription Note
 
         Use the following method to create a note for a subscription.
+
+        ## How to Use Subscription Notes
+
+        Notes allow you to record information about a particular Subscription in a free text format.
+
+        If you have structured data such as birth date, color, etc., consider using Metadata instead.
+
+        Full documentation on how to use Notes in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/subscription-summary.html#notes).
       requestBody:
         content:
           application/json:
