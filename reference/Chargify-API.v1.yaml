@@ -227,6 +227,43 @@ info:
     ```Origin 'https://example.com' is therefore not allowed access.` `The response had HTTP status code 404.```
 
     This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
+
+    # Relationship Invoicing
+
+    ## API Compatibility for Relationship Invoicing
+
+    This section describes the API for the new, [Relationship Invoicing](https://help.chargify.com/invoices/index.html) style of invoices introduced in January 2018.
+
+    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json).
+
+    These new invoices provide a single representation of all of your Chargify billing, whether you collect automatically or via remittance.
+
+    ## About Decimal Numbers
+
+    In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
+
+    We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
+
+    ## About Amount Fields
+
+    Fields holding amount values are given as a string representing a decimal whole currency amount.
+
+    For example, `"1.23"` in currency `"USD"` would equate to `$1.23`.
+
+    Not all fields will be rounded to the smallest currency denomination. Intermediate results, such as those that derive from line-level tax calculations, may hold precision up to 8 decimal places.  However, the top-level totals we provide (e.g. `total_amount`) will be rounded to the smallest currency denomination.
+
+    It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
+
+    ### Relationship Invoicing Summary
+
+    + If your site **is** using relationship invoicing, you may only use the methods described in this section for working with invoices.
+
+    + If your site is **not** using relationship invoicing, please use the legacy invoice methods under the titles of any of the following: 
+
+      + [Invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json)
+      + [Invoices: Payments](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1payments.json)
+      + [Invoices: Charges](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1charges.json)
+      + [Invoices: Credits](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1adjustments.json)
 tags:
   - name: Billing Portal
   - name: Coupons
