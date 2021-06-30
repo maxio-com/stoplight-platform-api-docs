@@ -6581,7 +6581,10 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: post-products-product_id-price_points.json
-      description: '# Create Product Price Point'
+      description: |-
+        # Create Product Price Point
+
+        [Product Price Point Documentation](https://help.chargify.com/products/product-price-points.html)
       requestBody:
         content:
           application/json:
