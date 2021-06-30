@@ -7921,8 +7921,6 @@ paths:
         description: The Chargify id of the payment profile
     delete:
       summary: Delete Subscription Payment Profile
-      tags:
-        - Subscription Invoice Account
       responses:
         '204':
           description: No Content
@@ -7935,6 +7933,8 @@ paths:
         + If the customer has multiple subscriptions, the payment profile will be removed from all of them.
 
         + If you delete the default payment profile for a subscription, you will need to specify another payment profile to be the default through the api, or either prompt the user to enter a card in the billing portal or on the self-service page, or visit the Payment Details tab on the subscription in the Admin UI and use the “Add New Credit Card” or “Make Active Payment Method” link, (depending on whether there are other cards present).
+      tags:
+        - Payment Profiles
   '/bank_accounts/{bank_account_id}/verification.json':
     parameters:
       - schema:
@@ -16436,8 +16436,6 @@ paths:
         description: The Chargify id of the payment profile
     delete:
       summary: Delete Subscription Group Payment Profile
-      tags:
-        - Subscription Group Invoice Account
       responses:
         '204':
           description: No Content
@@ -16448,6 +16446,8 @@ paths:
         This will delete a Payment Profile belonging to a Subscription Group.
 
         **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
+      tags:
+        - Payment Profiles
   '/subscription_groups/{uid}/prepayments.json':
     parameters:
       - schema:
