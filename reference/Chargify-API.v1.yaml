@@ -5931,7 +5931,7 @@ paths:
     get:
       tags:
         - Products
-      summary: Read Products
+      summary: List Products
       operationId: get-product_families-product_family_id-products.json
       responses:
         '200':
@@ -6034,7 +6034,7 @@ paths:
                 Example:
                   value: A valid product_family_id is required
       description: |-
-        ## Read Products
+        # List Products
 
         This method allows to retrieve a list of Products belonging to a Product Family.
       parameters:
