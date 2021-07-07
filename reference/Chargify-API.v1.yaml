@@ -17430,7 +17430,7 @@ paths:
 
         Proforma invoices are only available on Relationship Invoicing sites. To create a proforma invoice, the subscription must not be prepaid, and must be in a live state.
     get:
-      summary: Read Proforma Invoice
+      summary: List Subscription Group Proforma Invoices
       tags:
         - Proforma Invoices
       operationId: get-subscription_groups-subscription_group_uid-proforma_invoices.json
@@ -17445,7 +17445,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      description: '# Read Proforma Invoice'
+      description: '# List Subscription Group Proforma Invoices'
   '/proforma_invoices/{proforma_invoice_uid}.json':
     parameters:
       - schema:
