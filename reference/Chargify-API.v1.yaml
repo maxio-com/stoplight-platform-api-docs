@@ -17960,6 +17960,76 @@ paths:
               required:
                 - void
         description: ''
+  '/invoices/{uid}/deliveries.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the invoice
+    post:
+      summary: Send Invoice
+      tags:
+        - Invoices
+      responses:
+        '204':
+          description: No Content
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'cc_recipient_emails: must be a valid email address'
+      operationId: post-invoices-uid-deliveries.json
+      description: |-
+        # Send Invoice
+
+        This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+
+        Please note that if no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
+
+        On success, a 204 no-content response will be returned. Please note that this does not indicate that email(s) have been delivered, but instead indicates that emails have been successfully queued for delivery. If _any_ invalid or malformed email address is found in the request body, the entire request will be rejected and a 422 response will be returned.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipient_emails:
+                  type: array
+                  maxItems: 5
+                  items:
+                    type: string
+                cc_recipient_emails:
+                  type: array
+                  maxItems: 5
+                  items:
+                    type: string
+                bcc_recipient_emails:
+                  type: array
+                  maxItems: 5
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  recipient_emails:
+                    - user0@example.com
+                  cc_recipient_emails:
+                    - user1@example.com
+                  bcc_receipient_emails:
+                    - user2@example.com
 servers:
   - url: 'https://subdomain.chargify.com'
 components:
