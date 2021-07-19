@@ -16975,12 +16975,30 @@ paths:
       summary: Create Consolidated Proforma Invoices
       tags:
         - Proforma Invoices
-      responses: {}
+      responses:
+        '201':
+          description: Created
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Consolidated proforma invoice generation already in progress
       operationId: post-subscription_groups-subscription_group_uid-proforma_invoices.json
       description: |-
         # Create Consolidated Proforma Invoices
 
-        This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will return a success message or any errors. To find and view the new consolidated proforma invoice, you may poll the subscription group listing for proforma invoices.
+        This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will return a 201 with no message, or a 422 with any errors. To find and view the new consolidated proforma invoice, you may poll the subscription group listing for proforma invoices; only one consolidated proforma invoice may be created per group at a time.
 
         If the information becomes outdated, simply void the old consolidated proforma invoice and generate a new one.
 
