@@ -18050,6 +18050,323 @@ paths:
                     - user1@example.com
                   bcc_receipient_emails:
                     - user2@example.com
+  '/invoices/{uid}/customer_information/preview.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the invoice
+    post:
+      summary: Preview Customer Information Changes
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  changes:
+                    type: object
+                    properties:
+                      payer:
+                        type: object
+                        properties:
+                          before:
+                            type: object
+                          after:
+                            type: object
+                      shipping_address:
+                        type: object
+                        properties:
+                          before:
+                            type: object
+                          after:
+                            type: object
+                      billing_address:
+                        type: object
+                        properties:
+                          before:
+                            type: object
+                          after:
+                            type: object
+                      custom_fields:
+                        type: object
+                        properties:
+                          before:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                owner_id:
+                                  type: integer
+                                owner_type:
+                                  type: string
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                                metadatum_id:
+                                  type: integer
+                          after:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                owner_id:
+                                  type: integer
+                                owner_type:
+                                  type: string
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                                metadatum_id:
+                                  type: integer
+              examples:
+                Example:
+                  value:
+                    changes:
+                      payer:
+                        before:
+                          last_name: Beatty
+                        after:
+                          last_name: Doe
+                      shipping_address:
+                        before:
+                          line2: Suite 703
+                        after:
+                          line2: Suite 702
+                      billing_address:
+                        before:
+                          line2: Suite 703
+                        after:
+                          line2: Suite 702
+                      custom_fields:
+                        before:
+                          - owner_id: 1002
+                            owner_type: Customer
+                            name: Color
+                            value: blue
+                            metadatum_id: 20
+                        after:
+                          - owner_id: 1002
+                            owner_type: Customer
+                            name: Color
+                            value: green
+                            metadatum_id: 20
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Invoice not found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Invoice must have an open status
+      operationId: post-invoices-uid-customer_information-preview.json
+      description: |-
+        # Preview Customer Information Changes
+
+        Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
+    put:
+      summary: Update Customer Information
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples:
+                Example:
+                  value:
+                    uid: elit Ut
+                    site_id: 46283786
+                    customer_id: -62349460
+                    subscription_id: 12801726
+                    number: dolore et ut
+                    sequence_number: -84210096
+                    issue_date: in e
+                    due_date: magna elit tempor occaecat amet
+                    paid_date: consectetur elit culpa magna sint
+                    status: veniam in
+                    collection_method: Excepteur
+                    payment_instructions: enim officia
+                    currency: dolore
+                    consolidation_level: exercitation officia labore
+                    product_name: occaecat veniam culpa
+                    product_family_name: qui commodo ea dolore cillum
+                    seller:
+                      name: co
+                      phone: ullamco in officia
+                      '': nostrud
+                    customer:
+                      chargify_id: -55826334
+                      first_name: deserunt
+                      last_name: velit dolore
+                      email: aliquip sed velit Lorem
+                    memo: ea cupidatat deserunt
+                    billing_address:
+                      street: qui commodo cupidatat sunt
+                      line2: ut officia enim
+                      city: velit minim dolore sint nulla
+                      state: velit
+                      zip: ullamco
+                      country: irure est laborum deserun
+                    shipping_address:
+                      street: do fugiat dolore deserunt officia
+                      line2: ipsum cillum
+                      city: aliqua laboris incididunt ut
+                      state: et fugiat sit
+                      zip: dolore do
+                      country: Excepteur consequat cillum
+                    subtotal_amount: dolore mollit
+                    discount_amount: aute
+                    tax_amount: eu aliqua est velit ea
+                    total_amount: ut non
+                    credit_amount: sit
+                    refund_amount: et eiusmod qui sed
+                    paid_amount: amet nulla s
+                    due_amount: non esse ullamco
+                    line_items:
+                      - description: qui
+                        price_point_id: -95020509
+                        tax_amount: occaecat deserunt veniam
+                        subtotal_amount: commodo consequat tempor et Duis
+                      - uid: ''
+                        subtotal_amount: ven
+                      - price_point_id: 94750853
+                        product_id: 79058036
+                        tax_amount: Duis
+                        subtotal_amount: irure officia ipsum
+                      - unit_price: eiusmod consequat ut nostrud
+                        tax_amount: quis nulla proident
+                      - period_range_end: ut dolor
+                        product_id: 57352537
+                        description: minim in dolore Ut Excepteur
+                        uid: sit qui in ullamco anim
+                    discounts:
+                      - title: nostrud
+                    taxes:
+                      - source_type: enim
+                        line_item_breakouts:
+                          - uid: in ipsum
+                            tax_amount: velit
+                            taxable_amount: quis sint
+                          - uid: co
+                      - uid: enim irure in
+                        title: incididunt est mollit irure
+                    credits:
+                      - uid: exercitation eiusmod
+                        transaction_time: Lorem ea
+                        credit_note_number: qui fugiat labore laborum
+                        credit_note_uid: ipsum sunt
+                      - memo: dolor
+                    refunds:
+                      - memo: deserunt elit
+                      - original_amount: Duis nulla
+                    payments:
+                      - prepayment: false
+                        memo: enim Excepteur Lorem magna sit
+                      - transaction_time: deserunt
+                        prepayment: false
+                        payment_method:
+                          details: labore ut et
+                          kind: dolor qui
+                          memo: ea commodo
+                          type: fugiat veniam
+                          card_brand: consequat
+                          card_expiration: aliqua a
+                          last_four: ut in consectetur sed
+                          masked_card_number: minim ea ullamco nostrud tempor
+                      - prepayment: true
+                        transaction_id: 67527234
+                      - original_amount: c
+                        memo: dolore fugiat labore
+                    custom_fields:
+                      - name: non nul
+                        value: consectetur aliqua
+                        owner_type: ad
+                        owner_id: 18482224
+                      - value: anim
+                        owner_type: in
+                      - owner_id: -13438519
+                      - name: ullamco non deserunt in
+                    public_url: dolo
+                    previous_balance_data:
+                      capture_date: aliqua velit quis voluptate
+                      invoices:
+                        - number: veniam dolore labore ipsum cupidatat
+                          uid: tempor
+                          outstanding_amount: Excepteur nostrud irur
+                        - outstanding_amount: id
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Invoice not found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Invoice must have an open status
+      operationId: put-invoices-uid-customer_information-preview.json
+      description: |-
+        # Update Customer Information
+
+        This endpoint updates customer information on an open invoice and returns the updated invoice. If you would like to preview changes that will be applied, use the `/invoices/{uid}/customer_information/preview.json` endpoint before.
 servers:
   - url: 'https://subdomain.chargify.com'
 components:
