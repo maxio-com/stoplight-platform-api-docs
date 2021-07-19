@@ -1,7 +1,5 @@
 title: Product
 type: object
-x-tags:
-  - Products
 properties:
   id:
     type: integer

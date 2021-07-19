@@ -1,7 +1,5 @@
 title: Subscription
 type: object
-x-tags:
-  - Subscriptions
 properties:
   id:
     type: integer
