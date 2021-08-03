@@ -1069,7 +1069,7 @@ paths:
                       - 'Email address: cannot be blank.'
       operationId: post-customers.json
       description: |-
-        ## Create Customer Customer
+        ## Create Customer
 
         You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value. 
 
