@@ -9,7 +9,7 @@ info:
 
     ## API Integration
 
-    Chargify can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](../docs/ecosystem/API-Code-Samples.md) doc for an introduction to the wrappers and available code samples.
+    Chargify can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](./ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
     ## Testing Guide
 
@@ -33,7 +33,7 @@ info:
 
     But don’t worry! There are quite a few options to help you get the answers you need:
 
-    - [Read our documentation for developers](../docs/getting-started/Overview.md)
+    - [Read our documentation for developers](./ZG9jOjM0NjA3MQ-overview)
     - Explore the endpoints of our API Documentation
     - [Watch our videos and tutorials](https://chargify.com/tutorials)
     - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
@@ -63,7 +63,7 @@ info:
 
     ## Authentication
 
-    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](../docs/getting-started/Authentication.md)
+    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](./ZG9jOjE1NTUxNQ-authentication)
 
     ## URL
 
@@ -155,7 +155,7 @@ info:
     # API Access Limitations
 
     There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials.
-    **Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](../docs/chargify-direct/Overview.md).
+    **Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](./ZG9jOjE0NjAzNDE5-overview).
 
     Those scenarios are as follows:
 
@@ -216,7 +216,7 @@ info:
 
     Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data. 
 
-    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](../docs/chargify.js/Overview.md) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
+    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](./ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
 
     ### Troubleshooting
 
@@ -240,7 +240,7 @@ info:
 
     This section describes the API for the new, [Relationship Invoicing](https://help.chargify.com/invoices/index.html) style of invoices introduced in January 2018.
 
-    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json/get).
+    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
     These new invoices provide a single representation of all of your Chargify billing, whether you collect automatically or via remittance.
 
@@ -264,12 +264,12 @@ info:
 
     + If your site **is** using relationship invoicing, you may only use the methods described in this section for working with invoices.
 
-    + If your site is **not** using relationship invoicing, please use the legacy invoice methods under the titles of any of the following: 
+    + If your site is **not** using relationship invoicing, please use the legacy invoice methods: 
 
-      + [Invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json/get)
-      + [Invoices: Payments](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1payments.json/get)
-      + [Invoices: Charges](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1charges.json/get)
-      + [Invoices: Credits](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1adjustments.json/get)
+      + [Invoices](./b3A6MTQxMTA0MTA-read-invoice)
+      + [Invoices: Payments](./b3A6MTQxMTA0MTI-create-invoice-payment)
+      + [Invoices: Charges](./b3A6MTQxMTA0MTM-create-charge)
+      + [Invoices: Credits](./b3A6MTQxMTA0MTQ-create-invoice-credit)
 tags:
   - name: Billing Portal
   - name: Coupons
