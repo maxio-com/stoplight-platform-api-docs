@@ -93,8 +93,6 @@ paths:
                       - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
-        # Create Adjustment
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -197,8 +195,6 @@ paths:
                       - 'Bogus Gateway: Forced failure'
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
-        # Create Charge
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -413,8 +409,6 @@ paths:
                         - 'Amount: is not a number.'
       operationId: post-subscriptions-subscription_id-payments.json
       description: |-
-        # Create Payment
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
 
@@ -581,8 +575,6 @@ paths:
                       - 'Memo: cannot be blank.'
       operationId: post-subscriptions-subscription_id-refunds.json
       description: |-
-        # Create Refund
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
 
@@ -713,8 +705,6 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: get-transactions-transaction_id-.json
       description: |-
-        # Read Transaction
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -922,8 +912,6 @@ paths:
           name: order_by
           description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
       description: |-
-        # List Transactions
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1138,8 +1126,6 @@ paths:
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
       description: |-
-        # List Transactions for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1167,8 +1153,6 @@ paths:
                     count: 290
       operationId: get-transactions-count.json
       description: |-
-        # Transactions Count
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1636,8 +1620,6 @@ paths:
                               account_transaction_id: null
       operationId: get-statements-statement_id-.json
       description: |-
-        # Read Statement
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -2765,8 +2747,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statements
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -3887,8 +3867,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statements for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -3958,8 +3936,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statement IDs
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4036,8 +4012,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statement IDs for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4064,8 +4038,6 @@ paths:
                     count: 290
       operationId: get-statements-count.json
       description: |-
-        # Statements Count
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4171,8 +4143,6 @@ paths:
           description: Not Found
       operationId: get-invoices-invoice_id-.json
       description: |-
-        # Read Invoice
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4355,8 +4325,6 @@ paths:
           name: subscription_id
           description: The Chargify id for the subscription for which invoices should be returned
       description: |-
-        # List Invoices
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4419,8 +4387,6 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: post-invoices-invoice_id-payments.json
       description: |-
-        # Create Invoice Payment 
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4476,8 +4442,6 @@ paths:
                     $ref: '#/components/schemas/Legacy-Charge'
       operationId: post-invoices-invoice_id-charges.json
       description: |-
-        # Create Charge
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4577,7 +4541,8 @@ paths:
                       customer_id: 14332342
       operationId: post-invoices-invoice_id-adjustments.json
       description: |-
-        # Create Invoice Credit
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
 
         Use this method to add a credit to an existing invoice.
       requestBody:
@@ -5033,8 +4998,6 @@ paths:
                       scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
       operationId: put-subscriptions-subscription_id-reset_balance.json
       description: |-
-        # Reset Subscription Balance
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
