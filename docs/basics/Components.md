@@ -67,5 +67,5 @@ Components can be used in a huge number of varying ways to cover your business m
 
 # Next Steps
 - [Managing](./Subscriptions.md) your subscriptions
-- API documentation for [components](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post), [usage](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1usages.json/post) or [allocations](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions~1%7Bsubscription_id%7D~1components~1%7Bcomponent_id%7D~1allocations.json/post)
+- API documentation for [components](../../reference/Chargify-API.v1.yaml/paths/~1product_families~1%7Bproduct_family_id%7D~1%7Bplural_kind%7D.json/post), [usage](./b3A6MTQxMDgzODQ-create-usage) or [allocations](./b3A6MTQxMDgzNzg-allocate-component)
 
