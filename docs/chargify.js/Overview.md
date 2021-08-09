@@ -213,7 +213,7 @@ document.querySelector('#chargify-form').addEventListener('submit', function(eve
 });
 ```
 
-7) After you get the token, you will submit it to your server and use it to [create a subscription](../../reference/Chargify-API.v1.yaml/paths/~1subscriptions.json/post) or [payment profile](../../reference/Chargify-API.v1.yaml/paths/~1payment_profiles.json/post) using our API.
+7) After you get the token, you will submit it to your server and use it to [create a subscription](./b3A6MTQxMDgzODg-create-subscription) or [payment profile](./b3A6MTQxMDgzNTU-create-payment-profile) using our API.
 
 ❗️ Tokens expire after 20 minutes.
 
