@@ -98,8 +98,9 @@ paths:
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
+        |  |  |  |
+        |--|--|--|
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
-        |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
         | Scenario 2 | To increase the Subscription balance by a certain amount of cents, use the following attribute in your request:                      | `"amount_in_cents":100`                                      |
         | Scenario 3 | To decrease the Subscription balance by a certain dollar amount, the request must contain:                                           | `"amount":"-4.00"`                                           |
         | Scenario 4 | To decrease the Subscription balance by a certain amount of cents, use:                                                              | `"amount_in_cents":"-400"`                                   |
@@ -730,6 +731,7 @@ paths:
         | refund                  | A positive amount that denotes “cash” given back to a subscriber (i.e. put back on their card) via a refund or credit at the gateway.                                                                                                                      | No effect on balance due           | Decreases revenue                     |
         | InfoTransaction / info  | An informational transaction whose description provides context for transactions nearby in time, or serves as a placeholder for another transaction that could not be attempted (i.e. when payment cannot be attempted because no card is on file)         | N/A                                | N/A                                   |
         | payment_authorization   | Deprecated. No longer appears in transactions listing                                                                                                                                                                                                      | N/A                                | N/A                                   |
+
         ## Kinds (Subtypes)
         ### Kinds for the ```charge``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                  |
@@ -745,6 +747,7 @@ paths:
         | charge                  | metered                  | Deprecated. May exist for very old transactions. Can be considered an alias for “metered_component”.                                                                                        |
         | charge                  | tax                      | A charge for the taxes computed on taxable line items for the billing event (signup or renewal).                                                                                             |
         | charge                  |                          | A generic charge that is not otherwise classified by any of the above values for `kind`.                                                                                                     |
+
         ### Kinds for the ```credit``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                         |
         |-------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -752,6 +755,7 @@ paths:
         | credit                  | on_off_component         | A credit against an on/off component charge. Usually generated during a prorated downgrade for an amount previously charged.        |
         | credit                  | tax                      | A credit against tax charges. Usually generated during a prorated downgrade to offset a tax amount already assessed.                |
         | credit                  |                          | A generic credit that is not otherwise classified by any of the above values for `kind`.                                            |
+
         ### Kinds for the ```adjustment``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                         |
         |-------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -765,6 +769,7 @@ paths:
         | adjustment              |                          | A generic adjustment that is not otherwise classified by any of the above values for `kind`. This is the kind of ad-hoc adjustment that can be created via the API.                                 |
         | adjustment              | voided_invoice           | (Relationship Invoicing only) An adjustment as a result of a voided invoice.                                                                                                                        |
         | adjustment              | cancelation              | (Relationship Invoicing only) An adjustment as a result of a canceled subscription.                                                                                                                 |
+
         ### Kinds for the ```payment``` transaction type
         | Type / Transaction Type | Kind                | Description                                                                                                                                                |
         |-------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -772,6 +777,7 @@ paths:
         | payment                 | component_proration | A payment received for a mid-period component proration (allocation change).                                                                               |
         | payment                 | manual              | A payment recorded “manually” via the Admin UI or API. This kind of payment was not one automatically processed by Chargify, but instead entered manually. |
         | payment                 |                     | A generic payment received in any sitation not described above. Usually an automatically captured payment for a normal signup or renewal.                  |
+
         ### Kinds for the ```refund``` transaction type
         | Type / Transaction Type | Kind   | Description                                                                                                                                                                               |
         |-------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
