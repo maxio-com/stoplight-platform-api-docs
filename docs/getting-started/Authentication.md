@@ -11,7 +11,7 @@ Learn how to use API authentication to communicate directly with Chargify from a
 There are two methods of authentication, depending on what you are accessing:
 
 * [Chargify API](../../reference/Chargify-API.v1.yaml) 
-* [Chargify Direct](../chargify-direct/Introduction.md) (deprecated in favor of [Chargify.js](../chargify.js/Overview.md))
+* [Chargify Direct](./ZG9jOjE0NjAzNDE3) (deprecated in favor of [Chargify.js](../chargify.js/Overview.md))
 
 Both methods of authentication assume you have previously generated API keys securely stored them for later use. For more information, see ["Obtaining Credentials"](https://help.chargify.com/integrations/api-keys-chargify-direct.html).
 
