@@ -106,6 +106,7 @@ paths:
         | Scenario 5 | To set the Subscription balance to an exact dollar amount, include the following attributes to the request:                          | `"adjustment_method":"target", "amount":"100.00"`            |
         | Scenario 6 | To set the Subscription balance to an exact positive amount of cents, the request must contain the following attributes:             | `"adjustment_method":"target",` `"amount_in_cents":"10000"`  |
         | Scenario 7 | To set the Subscription balance to an exact negative amount of cents, use the following attributes in the request:                   | `"adjustment_method":"target",` `"amount_in_cents":"-10000"` |
+
         ## Help Documentation 
         Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
       requestBody:
