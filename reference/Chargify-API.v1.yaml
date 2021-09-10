@@ -5,13 +5,13 @@ info:
   contact:
     email: support@chargify.com
   description: |-
-    # Introduction
+    ## Introduction
 
-    ## API Integration
+    ### API Integration
 
-    Chargify can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](../docs/ecosystem/API-Code-Samples.md) doc for an introduction to the wrappers and available code samples.
+    Chargify can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](./ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
-    ## Testing Guide
+    ### Testing Guide
 
     Chargify has compiled a [testing guide](https://help.chargify.com/testing/testing-intro.html) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
 
@@ -21,28 +21,28 @@ info:
 
     We strongly suggest reading over the testing guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
 
-    ## Engage Support
+    ### Engage Support
 
     We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Chargify via our API, we suggest sending a “heads up” to “support@chargify.com” so we can coordinate with you to ensure your import process goes smoothly.
 
     Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Chargify API.
 
-    ## Support Access
+    ### Support Access
 
     Access to our Technical Specialist team for API support is currently limited to purchasers of our larger Chargify support plans. 
 
     But don’t worry! There are quite a few options to help you get the answers you need:
 
-    - [Read our documentation for developers](../docs/getting-started/Overview.md)
+    - [Read our documentation for developers](./ZG9jOjM0NjA3MQ-overview)
     - Explore the endpoints of our API Documentation
     - [Watch our videos and tutorials](https://chargify.com/tutorials)
     - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
 
-    ## Available Consultants
+    ### Available Consultants
 
     Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
 
-    # API Overview
+    ## API Overview
 
     The Chargify API allows you to interact with our system programmatically from your own application. Using the API you interact with Resources such as:
 
@@ -57,21 +57,21 @@ info:
 
     You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of the API.
 
-    ## Available Formats: JSON and XML
+    ### Available Formats: JSON and XML
 
     JSON is the primary and recommended format for use with the Chargify API.  XML is also provided as a backwards compatible option for Merchants who require it.
 
-    ## Authentication
+    ### Authentication
 
-    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](../docs/getting-started/Authentication.md)
+    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](./ZG9jOjE1NTUxNQ-authentication)
 
-    ## URL
+    ### URL
 
     The URL for API requests includes the subdomain of the Site you are working with:
 
     `https://<subdomain>.chargify.com/<resource URI>`
 
-    ## Response Data
+    ### Response Data
 
     Response data is sent as either XML or JSON, depending on the type of data requested (`HTTP Content-Type` header) or the type specified as being accepted (HTTP `Accept` header).
 
@@ -85,29 +85,29 @@ info:
 
     + `null` can define that there's no data available for that attribute
 
-    ## Pagination
+    ### Pagination
 
     When an endpoint returns a list of items, it will be paginated.  Usually, 20 items will be returned by default, and you may request up to a maximum of 200 at a time.  Pagination is done with query string parameters, for example: `?page=5&per_page=200`
 
-    ## Response Time Zones
+    ### Response Time Zones
 
     API responses from Chargify are sent with the timezone of current Chargify site. 
 
     Alternately, webhooks sent from Chargify globally utilize EST as the timezone for all content in the body of the payload. 
 
-    ## Request Data
+    ### Request Data
 
     POST and PUT request data may be formatted as either XML (`application/xml`) or JSON (`application/json`). For best results, you should set your HTTP `Content-Type` request header accordingly, although you may also specify your format by appending `.xml` or `.json` extensions on to the resource URI.
 
     Note that Chargify does not accept PUT or POST data sent as query params or form encoded data – data must be sent as either XML or JSON. If you fail to set your `Content-Type` to either `application/xml` or `application/json`, your request may fail due to triggering of forgery protection mechanisms.
 
-    ### About Decimal Numbers
+    #### About Decimal Numbers
 
     In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
 
     We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
 
-    ### About Amount Fields
+    #### About Amount Fields
 
     Fields holding amount values are given as a string representing a decimal whole currency amount.
 
@@ -117,7 +117,7 @@ info:
 
     It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
 
-    ## Debugging
+    ### Debugging
 
     If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
 
@@ -127,7 +127,7 @@ info:
 
     If you see a "Could not resolve host" error, double check that the url is correct, including your subdomain. For example: `mysite.chargify.com`.  This error means your DNS server could not find an IP address for the domain you are trying to connect to.
 
-    ## Backwards Compatibility
+    ### Backwards Compatibility
 
     We consider the following changes to be backwards compatible and may make them without advance notice:
 
@@ -141,21 +141,21 @@ info:
 
     Chargify does not provide notifications for additions that are clearly defined as backwards compatible.
 
-    ## Examples
+    ### Examples
 
     The following examples use the curl command-line tool to execute API requests.
 
-    ### Subscription Listing
+    #### Subscription Listing
 
     **Request**
 
         curl -u <api_key>:x -H Accept:application/json -H Content-Type:application/json https://acme.chargify.com/subscriptions.json
 
 
-    # API Access Limitations
+    ## API Access Limitations
 
     There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials.
-    **Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](../docs/chargify-direct/Overview.md).
+    **Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](./ZG9jOjE0NjAzNDE5-overview).
 
     Those scenarios are as follows:
 
@@ -168,7 +168,7 @@ info:
 
     Read more about your Chargify subscription [here](https://help.chargify.com/my-account/chargify-subscription.html)
 
-    ## What happens when an API request is blocked
+    ### What happens when an API request is blocked
 
     The request will fail with a `422` http status code. The response will also include a message explaining the reason for the request being blocked. For example:
 
@@ -212,13 +212,13 @@ info:
     }
     ```
 
-    # Secure Applications
+    ## Secure Applications
 
     Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data. 
 
-    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](../docs/chargify.js/Overview.md) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
+    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](./ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
 
-    ### Troubleshooting
+    #### Troubleshooting
 
     If you attempt to make a Chargify API request directly from the customer's browser, you may see an error such as: 
 
@@ -234,23 +234,23 @@ info:
 
     This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
 
-    # Relationship Invoicing
+    ## Relationship Invoicing
 
-    ## API Compatibility for Relationship Invoicing
+    ### API Compatibility for Relationship Invoicing
 
     This section describes the API for the new, [Relationship Invoicing](https://help.chargify.com/invoices/index.html) style of invoices introduced in January 2018.
 
-    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json/get).
+    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
     These new invoices provide a single representation of all of your Chargify billing, whether you collect automatically or via remittance.
 
-    ## About Decimal Numbers
+    ### About Decimal Numbers
 
     In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
 
     We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
 
-    ## About Amount Fields
+    ### About Amount Fields
 
     Fields holding amount values are given as a string representing a decimal whole currency amount.
 
@@ -260,16 +260,16 @@ info:
 
     It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
 
-    ### Relationship Invoicing Summary
+    #### Relationship Invoicing Summary
 
     + If your site **is** using relationship invoicing, you may only use the methods described in this section for working with invoices.
 
-    + If your site is **not** using relationship invoicing, please use the legacy invoice methods under the titles of any of the following: 
+    + If your site is **not** using relationship invoicing, please use the legacy invoice methods: 
 
-      + [Invoices](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}.json/get)
-      + [Invoices: Payments](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1payments.json/get)
-      + [Invoices: Charges](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1charges.json/get)
-      + [Invoices: Credits](./Chargify-Legacy-API.yaml/paths/~1invoices~1{invoice_id}~1adjustments.json/get)
+      + [Invoices](./b3A6MTQxMTA0MTA-read-invoice)
+      + [Invoices: Payments](./b3A6MTQxMTA0MTI-create-invoice-payment)
+      + [Invoices: Charges](./b3A6MTQxMTA0MTM-create-charge)
+      + [Invoices: Credits](./b3A6MTQxMTA0MTQ-create-invoice-credit)
 tags:
   - name: Billing Portal
   - name: Coupons
@@ -454,10 +454,7 @@ paths:
                   value:
                     webhooks_enabled: true
       operationId: put-webhooks-settings.json
-      description: |-
-        ## Enable webhooks for site
-
-        This method allows you to enable webhooks via API for your site
+      description: This method allows you to enable webhooks via API for your site
       requestBody:
         content:
           application/json:
@@ -494,8 +491,6 @@ paths:
                     status: ok
       operationId: post-webhooks-replay.json
       description: |-
-        ## Replay Webhooks for Site
-
         Posting to the replay endpoint does not immediately resend the webhooks. They are added to a queue and will be sent as soon as possible, depending on available system resources.
 
         You may submit an array of up to 1000 webhook IDs to replay in the request.
@@ -563,8 +558,6 @@ paths:
                       - 'URL: invalid, only http and https supported'
       operationId: post-endpoints.json
       description: |-
-        ## Endpoint
-
         The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
 
         You can check available events here.                
@@ -619,10 +612,7 @@ paths:
                         - payment_failure
                         - refund_failure
       operationId: get-endpoints.json
-      description: |-
-        ## List of endpoints for site
-
-        This method returns created endpoints for site.
+      description: This method returns created endpoints for site.
   '/endpoints/{endpoint_id}.json':
     parameters:
       - schema:
@@ -665,8 +655,6 @@ paths:
                       - Event key is not valid - foobar
       operationId: post-endpoints-endpoint_id-.json
       description: |-
-        ## Update an Endpoint
-
         You can update an Endpoint via the API with a PUT request to the resource endpoint.
 
         You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.   
@@ -757,7 +745,6 @@ paths:
                       whopays_default_payer: eldest
       operationId: get-site.json
       description: |-
-        ## Read Site Data
         This endpoint allows you to fetch some site data.
 
         Full documentation on Sites in the Chargify UI can be located [here](http://help.chargify.com/sites/sites-intro.html).
@@ -779,8 +766,6 @@ paths:
         - Sites
       operationId: post-sites-clear_data.json
       description: |
-        ## Clear Site Data
-
         This call is asynchronous and there may be a delay before the site data is fully deleted. If you are clearing site data for an automated test, you will need to build in a delay and/or check that there are no products, etc., in the site before proceeding.
 
         **This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
@@ -825,8 +810,6 @@ paths:
                 required:
                   - note
       description: |-
-        # Create Subscription Note
-
         Use the following method to create a note for a subscription.
 
         ## How to Use Subscription Notes
@@ -860,10 +843,7 @@ paths:
           description: OK
         '422':
           description: Unprocessable Entity (WebDAV)
-      description: |-
-        ## Delete a Note
-
-        Use the following method to delete a note for a Subscription.
+      description: Use the following method to delete a note for a Subscription.
     get:
       summary: List Subscription Notes
       tags:
@@ -898,10 +878,7 @@ paths:
                         subscription_id: 100046
                         updated_at: '2015-06-15T13:26:33-04:00'
       operationId: get-subscriptions-subscription_id-notes.json
-      description: |-
-        ## List Notes for a Subscription
-
-        Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
+      description: Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
       parameters:
         - schema:
             type: integer
@@ -954,10 +931,7 @@ paths:
                       subscription_id: 100046
                       updated_at: '2015-06-15T13:28:12-04:00'
       operationId: get-subscriptions-subscription_id-notes-note_id-.json
-      description: |-
-        ## Read Specific Note
-
-        Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.
+      description: 'Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.'
     put:
       summary: Update Subscription Note
       tags:
@@ -973,10 +947,7 @@ paths:
                 properties:
                   note:
                     $ref: '#/components/schemas/Subscription-Note'
-      description: |-
-        ## Update a Note
-
-        Use the following method to update a note for a Subscription.
+      description: Use the following method to update a note for a Subscription.
       requestBody:
         content:
           application/json:
@@ -1069,8 +1040,6 @@ paths:
                       - 'Email address: cannot be blank.'
       operationId: post-customers.json
       description: |-
-        ## Create Customer Customer
-
         You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value. 
 
         If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Chargify’s unique ID for the customer, which is in the `id` attribute.
@@ -1207,8 +1176,6 @@ paths:
                         parent_id: null
       operationId: get-customers.json
       description: |-
-        ## List Customers
-
         This request will by default list all customers associated with your Site.
 
         ## Find Customer
@@ -1299,10 +1266,7 @@ paths:
                   customer:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-id-.json
-      description: |-
-        ## Read Customer Data
-
-        This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+      description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
       parameters: []
     put:
       summary: Update Customer
@@ -1360,10 +1324,7 @@ paths:
                   value:
                     errors:
                       - 'Email: must be a valid email address'
-      description: |-
-        ## Update Customer
-
-        This method allows to update the Customer.
+      description: This method allows to update the Customer.
       requestBody:
         content:
           application/json:
@@ -1387,10 +1348,7 @@ paths:
       responses:
         '204':
           description: No Content
-      description: |-
-        ## Delete Customer
-
-        This method allows to delete the Customer.
+      description: This method allows you to delete the Customer.
   /customers/lookup.json:
     get:
       summary: Read Customer by Reference
@@ -1408,8 +1366,6 @@ paths:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-lookup.json
       description: |-
-        ## Read Customer by Reference Value
-
         Use this method to return the customer object if you have the **Reference ID (Your App)** value.
 
         ### Endpoint Deprecated
@@ -1444,10 +1400,7 @@ paths:
                 items:
                   $ref: ../models/Subscription.yaml
       operationId: get-customers-customer_id-subscriptions.json
-      description: |-
-        ## List Subscriptions for a Customer
-
-        This method lists all subscriptions that belong to a customer.
+      description: This method lists all subscriptions that belong to a customer.
   '/portal/customers/{customer_id}/enable.json':
     parameters:
       - schema:
@@ -1589,8 +1542,6 @@ paths:
                       error: Too many requests for this customer's management link
       operationId: get-portal-customers-customer_id-management_link.json
       description: |-
-        ## Read the Management Link
-
         This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
 
         ## Rules for Management Link API
@@ -1655,8 +1606,6 @@ paths:
                       - 'Too many requests for this customer. You can perform 5 requests within 00:30:00.'
       operationId: post-portal-customers-customer_id-invitations-invite.json
       description: |-
-        ## Resend Billing Portal Invitation for Customer
-
         You can resend a customer's Billing Portal invitation.
 
         If you attempt to resend an invitation 5 times within 30 minutes, you will receive a `422` response with `error` message in the body.
@@ -1706,8 +1655,6 @@ paths:
           description: Unprocessable Entity (WebDAV)
       operationId: delete-portal-customers-customer_id-invitations-revoke.json
       description: |-
-        ## Revoke Billing Portal Invitation for Customer
-
         You can revoke a customer's Billing Portal invitation.
 
         If you attempt to revoke an invitation when the Billing Portal is already disabled for a Customer, you will receive a 422 error response.
@@ -1777,8 +1724,6 @@ paths:
                       revenue_this_year: '$27,935.24'
       operationId: get-stats.json
       description: |-
-        ## Stats
-
         The Stats API is a very basic view of some Site-level stats. This API call only answers with JSON responses. An XML version is not provided.
 
         ## Stats Documentation
@@ -1842,8 +1787,6 @@ paths:
           name: code
           description: The referral code you are trying to validate
       description: |-
-        ## Validate Referral Code
-
         Use this method to determine if the referral code is valid and applicable within your Site. This method is useful for validating referral codes that are entered by a customer.
 
         ## Referrals Documentation
@@ -1972,10 +1915,7 @@ paths:
                         position: 3
                         created_at: '2017-02-17T16:29:42-05:00'
                         updated_at: '2017-02-17T16:29:59-05:00'
-      description: |-
-        ## List Reason Codes for a Site
-
-        This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
+      description: This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
       parameters:
         - schema:
             type: integer
@@ -2014,10 +1954,7 @@ paths:
         '404':
           description: Not Found
       operationId: get-reason_codes-reason_code_id-.json
-      description: |-
-        ## Read Reason Code
-
-        This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
+      description: This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
     put:
       summary: Update Reason Code
       tags:
@@ -2053,10 +1990,7 @@ paths:
                     position:
                       type: integer
                       description: The order that code appears in lists
-      description: |-
-        ## Update Reason Code
-
-        This method gives a merchant the option to update an existing reason code for a given site.
+      description: This method gives a merchant the option to update an existing reason code for a given site.
     delete:
       summary: Delete Reason Code
       tags:
@@ -2078,10 +2012,7 @@ paths:
         '404':
           description: Not Found
       operationId: delete-reason_codes-reason_code_id-.json
-      description: |-
-        ## Delete Reason Code
-
-        This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
+      description: This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
   '/{resource_type}/metafields.json':
     parameters:
       - schema:
@@ -2131,7 +2062,7 @@ paths:
                       enum: null
       operationId: post-resource_type-metafields.json
       description: |-
-        ## Custom Fields: Metafields Intro
+        ## Custom Fields: Metafield Intro
 
         **Chargify refers to Custom Fields in the API documentation as metafields and metadata.** Within the Chargify UI, metadata and metafields are grouped together under the umbrella of "Custom Fields." All of our UI-based documentation that references custom fields will not cite the terminology metafields or metadata. 
 
@@ -2207,10 +2138,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Metafield'
       operationId: get-resource_type-metafields.json
-      description: |-
-        ## List Metafields
-
-        This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
+      description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
         - schema:
             type: string
@@ -2243,10 +2171,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Metafield'
       operationId: put-resource_type-metafields.json
-      description: |-
-        ## Update Metafield
-
-        Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
+      description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
         content:
           application/json:
@@ -2282,8 +2207,6 @@ paths:
         '404':
           description: Not Found
       description: |-
-        ## Delete Metafield
-
         Use the following method to delete a metafield. This will remove the metafield from the Site. 
 
         Additionally, this will remove the metafield and associated metadata with all Subscriptions on the Site.
@@ -2388,8 +2311,6 @@ paths:
                 $ref: '#/components/schemas/Paginated-Metadata'
       operationId: get-resource_type-resource_id-metadata.json
       description: |-
-        ## Read Metadata for a Specific Resource
-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
         ## Metadata Data
@@ -2428,10 +2349,7 @@ paths:
           in: query
           name: value
           description: Can be a single item or a list of metadata
-      description: |-
-        ## Update Metadata
-
-        This method allows you to update the existing metadata associated with a subscription or customer.
+      description: This method allows you to update the existing metadata associated with a subscription or customer.
       requestBody:
         content:
           application/json:
@@ -2458,8 +2376,6 @@ paths:
           description: Not Found
       operationId: delete-resource_type-resource_id-metadata.json
       description: |-
-        ## Delete Metadata
-
         This method removes the metadata from the subscriber/customer cited.
 
         ## Query String Usage
@@ -2511,8 +2427,6 @@ paths:
                 $ref: '#/components/schemas/Paginated-Metadata'
       operationId: get-resource_type-metadata.json
       description: |-
-        ## Read Metadata by Resource
-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
         ## Metadata Data
@@ -2764,8 +2678,6 @@ paths:
                             handle: null
       operationId: get-product_families-product_family_id-coupons.json
       description: |-
-        ## List Coupons for Product Family
-
         List coupons for a specific Product Family in a Site.
 
         When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
@@ -2801,8 +2713,6 @@ paths:
                     $ref: '#/components/schemas/Coupon'
       operationId: get-coupons-find.json
       description: |-
-        ## Find Coupon
-
         You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
 
         If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
@@ -2871,8 +2781,6 @@ paths:
                       coupon_restrictions: []
       operationId: get-product_families-product_family_id-coupons-coupon_id-.json
       description: |-
-        ## Read a Coupon
-
         You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
         If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
 
@@ -2993,8 +2901,6 @@ paths:
                       coupon_restrictions: []
       operationId: delete-product_families-product_family_id-coupons-coupon_id-.json
       description: |-
-        ## Archive a Coupon
-
         You can archive a Coupon via the API with the archive method.
         Archiving makes that Coupon unavailable for future use, but allows it to remain attached and functional on existing Subscriptions that are using it.
         The `archived_at` date and time will be assigned.
@@ -3014,8 +2920,6 @@ paths:
                   $ref: '#/components/schemas/Coupon'
       operationId: get-coupons.json
       description: |-
-        ## List Coupons for Default Product Family
-
         You can retrieve a list of coupons that belong to the default product family for a site via this method.
 
         The default product family is the one that was created first for the site, (with the lowest ID number) that has not been archived.
@@ -3141,10 +3045,7 @@ paths:
                       revenue: 20
                       revenue_in_cents: 2000
       operationId: get-product_families-product_family_id-coupons-coupon_id-usage.json
-      description: |-
-        ## Read Coupon Usage for a Site
-
-        This request will provide details about the coupon usage as an array of data hashes, one per product.
+      description: 'This request will provide details about the coupon usage as an array of data hashes, one per product.'
   /coupons/validate.json:
     get:
       summary: Validate Coupon
@@ -3200,8 +3101,6 @@ paths:
                     errors: Coupon code could not be found.
       operationId: get-coupons-validate.json
       description: |-
-        ## Validate Coupon
-
         You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
 
         If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
@@ -3442,10 +3341,7 @@ paths:
                       - 6KC3KB
                       - 7DF7YT
                       - 9FH1ED
-      description: |-
-        ## List Coupon Subcodes for a Site
-
-        This request allows you to request the subcodes that are attached to a coupon.
+      description: This request allows you to request the subcodes that are attached to a coupon.
       parameters:
         - schema:
             type: integer
@@ -3485,8 +3381,6 @@ paths:
                     items:
                       type: string
       description: |-
-        ## Update Coupon Subcodes
-
         You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
         Send an array of new coupon subcodes.
 
@@ -3807,8 +3701,6 @@ paths:
                         event_specific_data: null
       operationId: get-subscriptions-subscription_id-events.json
       description: |-
-        ## List Events for Subscription
-
         The following request will return a list of events for a subscription.
 
         Each event type has its own `event_specific_data` specified.
@@ -3964,10 +3856,7 @@ paths:
           in: query
           name: filter
           description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
-      description: |-
-        ## Read the Total Event Count for a Site
-
-        Get a count of all the events for a given site by using this method.
+      description: Get a count of all the events for a given site by using this method.
   /mrr.json:
     get:
       summary: Read MRR
@@ -4210,8 +4099,6 @@ paths:
       operationId: post-product_families-product_family_id-plural_kind-.json
       parameters: []
       description: |-
-        ## Create Component
-
         This request will create a component definition under the specified product family. These component definitions determine what components are named, how they are measured, and how much they cost.
 
         Components can then be added and “allocated” for each subscription to a product in the product family. These component line-items affect how much a subscription will be charged, depending on the current allocations (i.e. 4 IP Addresses, or SSL “enabled”)
@@ -4771,10 +4658,7 @@ paths:
           required: true
           name: handle
           description: The handle of the component to find
-      description: |-
-        ## Find Component by Handle
-
-        This request will return information regarding a component having the handle you provide. You can identify your components with a handle so you don't have to save or reference the IDs we generate.
+      description: This request will return information regarding a component having the handle you provide. You can identify your components with a handle so you don't have to save or reference the IDs we generate.
   '/product_families/{product_family_id}/components/{component_id}.json':
     parameters:
       - schema:
@@ -4828,8 +4712,6 @@ paths:
                       product_family_name: Chargify
       operationId: get-product_families-product_family_id-components-component_id-.json
       description: |-
-        ## Read Component
-
         This request will return information regarding a component from a specific product family.
 
         You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
@@ -4884,10 +4766,7 @@ paths:
                     errors:
                       - Component cannot be archived. Please make sure it hasn't already been archived.
       operationId: delete-product_families-product_family_id-components-component_id-.json
-      description: |-
-        # Archive Component
-
-        Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
+      description: Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
   /components.json:
     get:
       summary: List Components
@@ -5026,10 +4905,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-      description: |-
-        ## List Components for a Site
-
-        This request will return a list of components for a site.
+      description: This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
       - schema:
@@ -5155,10 +5031,7 @@ paths:
                         default_price_point_name: Original
                         product_family_name: Chargify
       operationId: get-product_families-product_family_id-components.json
-      description: |-
-        ## List Components for a Product Family
-
-        This request will return a list of components for a particular product family.
+      description: This request will return a list of components for a particular product family.
       parameters:
         - schema:
             type: boolean
@@ -5186,10 +5059,7 @@ paths:
                 $ref: '#/components/schemas/Component-Price-Point'
               examples: {}
       operationId: post-components-component_id-price_points.json
-      description: |-
-        ## Create Component Price Point
-
-        This endpoint can be used to create a new price point for an existing component.
+      description: This endpoint can be used to create a new price point for an existing component.
       requestBody:
         content:
           application/json:
@@ -5291,8 +5161,6 @@ paths:
                             unit_price: '4.0'
       operationId: get-components-component_id-price_points.json
       description: |-
-        # List Price Points
-
         Use this endpoint to read current price points that are associated with a component.
 
         You may specify the component by using either the numeric id or the `handle:gold` syntax.
@@ -5376,7 +5244,7 @@ paths:
                             ending_quantity: null
                             unit_price: '4.0'
       operationId: post-components-component_id-price_points-bulk.json
-      description: '# Bulk Create Component Price Points'
+      description: ''
       requestBody:
         content:
           application/json:
@@ -5435,8 +5303,6 @@ paths:
                     $ref: '#/components/schemas/Component-Price-Point'
       operationId: put-components-component_id-price_points-price_point_id-.json
       description: |-
-        # Update Price Point
-
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
 
         Passing in a price bracket without an `id` will attempt to create a new price. 
@@ -5520,10 +5386,7 @@ paths:
                           ending_quantity: null
                           unit_price: '4.0'
       operationId: delete-components-component_id-price_points-price_point_id-.json
-      description: |-
-        # Archive Price Point
-
-        A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
+      description: A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
   '/components/{component_id}/price_points/{price_point_id}/unarchive.json':
     parameters:
       - schema:
@@ -5577,7 +5440,7 @@ paths:
                           ending_quantity: null
                           unit_price: '4.0'
       operationId: put-components-component_id-price_points-price_point_id-unarchive.json
-      description: '# Unarchive Price Point'
+      description: ''
   '/price_points/{price_point_id}/currency_prices.json':
     parameters:
       - schema:
@@ -5601,8 +5464,6 @@ paths:
                   $ref: '#/components/schemas/Currency-Price'
       operationId: post-price_points-price_point_id-currency_prices.json
       description: |-
-        # Create Currency Prices
-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
 
         When creating currency prices, they need to mirror the structure of your primary pricing. For each price level defined on the component price point, there should be a matching price level created in the given currency.
@@ -5650,10 +5511,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Currency-Price'
       operationId: put-price_points-price_point_id-currency_prices.json
-      description: |-
-        # Update Currency Prices
-
-        This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
+      description: This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
       requestBody:
         content:
           application/json:
@@ -5804,8 +5662,6 @@ paths:
                           subscriber_name: Amy Smith
       operationId: get-mrr_movements.json
       description: |-
-        # List MRR Movements
-
         This endpoint returns your site's MRR movements.
 
         ## Understanding MRR movements
@@ -5920,8 +5776,6 @@ paths:
                     $ref: ../models/Product.yaml
       operationId: post-product_families-product_family_id-products.json
       description: |-
-        # Create Product
-
         Use this method to create a product within your Chargify site.
 
         + [Products Documentation](http://help.chargify.com/products/products-intro.html)
@@ -6053,10 +5907,7 @@ paths:
               examples:
                 Example:
                   value: A valid product_family_id is required
-      description: |-
-        # List Products
-
-        This method allows to retrieve a list of Products belonging to a Product Family.
+      description: This method allows to retrieve a list of Products belonging to a Product Family.
       parameters:
         - schema:
             type: integer
@@ -6164,10 +6015,7 @@ paths:
                       public_signup_pages: []
                       product_price_point_name: Default
       operationId: get-products-product_id-.json
-      description: |-
-        ## Read Product
-
-        This endpoint allows you to read the current details of a product that you've created in Chargify.
+      description: This endpoint allows you to read the current details of a product that you've created in Chargify.
     put:
       summary: Update Product
       tags:
@@ -6241,8 +6089,6 @@ paths:
                     errors:
                       - 'Name: cannot be blank.'
       description: |-
-        ## Update Product
-
         Use this method to change aspects of an existing product. 
 
         ### Input Attributes Update Notes
@@ -6314,8 +6160,6 @@ paths:
                       public_signup_pages: []
                       product_price_point_name: Default
       description: |-
-        ## Archive Product
-
         Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthyl. 
 
         This will restrict the option to chose the product for purchase via the Billing Portal, as well as disable Public Signup Pages for the product.
@@ -6395,10 +6239,7 @@ paths:
                           url: 'https://general-goods.chargify.com/subscribe/m6tbcq4mcgpw/no-cost-product'
                       product_price_point_name: Default
       operationId: get-products-handle-api_handle-.json
-      description: |-
-        ## Read Product via API Handle
-
-        This method allows to retrieve a Product object by its `api_handle`.
+      description: This method allows to retrieve a Product object by its `api_handle`.
   /product_families.json:
     post:
       summary: Create Product Family
@@ -6425,8 +6266,6 @@ paths:
                       accounting_code: null
       operationId: post-product_families.json
       description: |-
-        ## Create Product Family
-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
 
         Full documentation on how Product Families operate within the Chargify UI can be located [here](http://help.chargify.com/products/product-families.html).
@@ -6485,10 +6324,7 @@ paths:
                         created_at: '2014-04-16T12:41:13-06:00'
                         updated_at: '2014-04-16T12:41:13-06:00'
       operationId: get-product_families.json
-      description: |-
-        ## List Product Families
-
-        This method allows to retrieve a list of Product Families for a site.
+      description: This method allows to retrieve a list of Product Families for a site.
       parameters:
         - schema:
             type: string
@@ -6551,8 +6387,6 @@ paths:
                       accounting_code: null
       operationId: get-product_families-id-.json
       description: |-
-        ## Read Product Family
-
         This method allows to retrieve a Product Family via the `product_family_id`. The response will contain a Product Family object.
 
         The product family can be specified either with the id number, or with the `handle:my-family` format.
@@ -6601,10 +6435,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: post-products-product_id-price_points.json
-      description: |-
-        # Create Product Price Point
-
-        [Product Price Point Documentation](https://help.chargify.com/products/product-price-points.html)
+      description: '[Product Price Point Documentation](https://help.chargify.com/products/product-price-points.html)'
       requestBody:
         content:
           application/json:
@@ -6687,7 +6518,7 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching a product''s price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.'
-      description: '# List Product Price Points'
+      description: ''
   '/products/{product_id}/price_points/{price_point_id}.json':
     parameters:
       - schema:
@@ -6758,7 +6589,7 @@ paths:
                   price_point:
                     handle: educational
                     price_in_cents: 1250
-      description: '# Update Product Price Point'
+      description: ''
     get:
       summary: Read Product Price Point
       tags:
@@ -6796,7 +6627,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: get-products-product_id-price_points-price_point_id-.json
-      description: '# Read Product Price Point'
+      description: ''
       parameters:
         - schema:
             type: boolean
@@ -6840,7 +6671,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: delete-products-product_id-price_points-price_point_id-.json
-      description: '# Archive Product Price Point'
+      description: ''
   '/products/{product_id}/price_points/{price_point_id}/unarchive.json':
     parameters:
       - schema:
@@ -6892,7 +6723,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-unarchive.json
-      description: '# Unarchive Product Price Point'
+      description: ''
   '/products/{product_id}/price_points/{price_point_id}/default.json':
     parameters:
       - schema:
@@ -6944,7 +6775,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-default.json
-      description: '# Promote Product Price Point to Default'
+      description: ''
   '/products/{product_id}/price_points/bulk.json':
     parameters:
       - schema:
@@ -6992,7 +6823,7 @@ paths:
                         created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                         updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: post-products-product_id-price_points-bulk.json
-      description: '# Bulk Create Product Price Points'
+      description: ''
       requestBody:
         content:
           application/json:
@@ -7074,8 +6905,6 @@ paths:
                         - A baseline price must be defined for this product price point.
       operationId: post-product_price_points-product_price_point_id-currency_prices.json
       description: |-
-        # Create Currency Prices
-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
 
         When creating currency prices, they need to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
@@ -7139,8 +6968,6 @@ paths:
                   $ref: '#/components/schemas/Product-Price-Point-Currency-Price'
       operationId: put-product_price_points-product_price_point_id-currency_prices.json
       description: |-
-        # Update Currency Prices
-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
 
         When updating the pricing, it needs to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
@@ -7265,8 +7092,6 @@ paths:
           description: Not Found
       operationId: post-payment_profiles.json
       description: |-
-        # Create Payment Profile
-
         Use this endpoint to create a payment profile for a customer.
 
         Payment Profiles house the credit card, ACH (Authorize.Net or Stripe only,) or PayPal (Braintree only,) data for a customer. The payment information is attached to the customer within Chargify, as opposed to the Subscription itself.
@@ -7292,29 +7117,29 @@ paths:
         If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
 
         ## BraintreeBlue
-        Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided [Chargify.js](../docs/chargify.js/Overview.md) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
+        Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided [Chargify.js](./ZG9jOjE0NjAzNDI0-overview) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
 
         ## GoCardless
         + [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)
 
-        + [Using Chargify.js with GoCardless - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-direct-debit-gocardless-gateway)
+        + [Using Chargify.js with GoCardless - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
-        + [Using Chargify.js with GoCardless - full example](../docs/chargify.js/Examples.md#full-example-with-direct-debit-gocardless-gateway)
+        + [Using Chargify.js with GoCardless - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-direct-debit-gocardless-gateway)
 
         ## SEPA Direct Debit
         + [Full documentation on Stripe SEPA Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
 
-        + [Using Chargify.js with Stripe Direct Debit - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe Direct Debit - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
-        + [Using Chargify.js with Stripe Direct Debit - full example](../docs/chargify.js/Examples.md#full-example-with-sepa-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe Direct Debit - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-sepa-direct-debit-stripe-gateway)
 
         ## BECS Direct Debit
 
         + [Full documentation on Stripe BECS Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
 
-        + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
-        + [Using Chargify.js with Stripe BECS Direct Debit - full example](../docs/chargify.js/Examples.md#full-example-with-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe BECS Direct Debit - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-becs-direct-debit-stripe-gateway)
       requestBody:
         content:
           application/json:
@@ -7584,7 +7409,7 @@ paths:
                         bank_account_holder_type: personal
                         payment_type: bank_account
       operationId: get-payment_profiles.json
-      description: '# List Payment Profiles'
+      description: ''
       parameters:
         - schema:
             type: integer
@@ -7753,7 +7578,7 @@ paths:
                       bank_account_holder_type: personal
                       payment_type: bank_account
       operationId: get-payment_profiles-payment_profile_id-.json
-      description: '# Read Payment Profile'
+      description: ''
     put:
       summary: Update Payment Profile
       tags:
@@ -7820,8 +7645,6 @@ paths:
                       payment_type: exercitation eiusmod tempor eu in
       operationId: put-payment_profiles-payment_profile_id-.json
       description: |-
-        # Update Payment Profile
-
         ## Partial Card Updates
 
         In the event that you are using the Authorize.net, Stripe, Cybersource, Forte or Braintree Blue payment gateways, you can update just the billing and contact information for a payment method. Note the lack of credit-card related data contained in the JSON payload. 
@@ -7935,8 +7758,6 @@ paths:
                       - The payment profile is in use by one or more subscriptions and cannot be deleted
       operationId: delete-payment_profiles-payment_profile_id-.json
       description: |-
-        # Delete Unused Payment profile.
-
         Deletes an unused payment profile.
 
         If the payment profile is in use by one or more subscriptions or groups, a 422 and error message will be returned.
@@ -7961,8 +7782,6 @@ paths:
           description: No Content
       operationId: delete-subscriptions-subscription_id-payment_profiles-payment_profile_id-.json
       description: |-
-        ## Delete Subscription Payment Profile
-
         This will delete a payment profile belonging to the customer on the subscription.
 
         + If the customer has multiple subscriptions, the payment profile will be removed from all of them.
@@ -8076,10 +7895,7 @@ paths:
                     errors:
                       - 'You have tried to verify this bank account 10 times. To continue trying to verify the account, please reach out to us directly.'
       operationId: put-bank_accounts-bank_account_id-verification.json
-      description: |-
-        # Verify Bank Account
-
-        Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
+      description: Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
       requestBody:
         content:
           application/json:
@@ -8121,8 +7937,6 @@ paths:
               examples: {}
       operationId: post-invoices-uid-refunds.json
       description: |-
-        # Refund Invoice
-
         Refund an invoice, segment, or consolidated invoice.
 
         ## Partial Refund for Consolidated Invoice
@@ -8478,10 +8292,7 @@ paths:
                         due_amount: '0.0'
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
       operationId: get-invoices.json
-      description: |-
-        # List Invoices
-
-        By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
+      description: 'By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.'
       parameters:
         - schema:
             type: string
@@ -8694,7 +8505,7 @@ paths:
                     custom_fields: []
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
       operationId: get-invoices-uid-.json
-      description: '# Read Invoice'
+      description: ''
   /invoices/events.json:
     get:
       summary: List Invoice Events
@@ -9058,8 +8869,6 @@ paths:
                     total_pages: 102
       operationId: get-invoices-events.json
       description: |-
-        # List Invoice Events
-
         This endpoint returns a list of invoice events. Each event contains event "data" (such as an applied payment) as well as a snapshot of the `invoice` at the time of event completion.
 
         Exposed event types are:
@@ -9134,8 +8943,6 @@ paths:
                 $ref: '#/components/schemas/Invoice'
       operationId: post-invoices-uid-payments.json
       description: |-
-        ## Create Payment
-
         This API call should be used when you want to record an external payment against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
 
         ## Create a Payment from the Subscription's Prepayment Account
@@ -9458,8 +9265,6 @@ paths:
                             applied_amount: '200.5'
       operationId: get-credit_notes.json
       description: |-
-        # List Credit Notes
-
         Credit Notes are like inverse invoices. They reduce the amount a customer owes.
 
         By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`, `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field as a key in the query with a value set to `true`.
@@ -9748,7 +9553,7 @@ paths:
                         original_amount: '524.9'
                         applied_amount: '200.5'
       operationId: get-credit_notes-uid-.json
-      description: '# Read Credit Note'
+      description: ''
   '/subscriptions/{subscription_id}/payments.json':
     parameters:
       - schema:
@@ -9840,8 +9645,6 @@ paths:
                       - 'If in a group, the Subscription must be the primary'
       operationId: post-subscriptions-subscription_id-payments.json
       description: |-
-        # Create Bulk Payment
-
         Record an external payment made against a subscription that will pay partially or in full one or more invoices.
 
         Payment will be applied starting with the oldest open invoice and then next oldest, and so on until the amount of the payment is fully consumed.
@@ -9924,8 +9727,6 @@ paths:
                       - The invoice must be in canceled status to be reopened.
       operationId: post-invoices-uid-reopen.json
       description: |-
-        # Reopen Invoice
-
         This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
 
         Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
@@ -9934,6 +9735,10 @@ paths:
         - Recording a payment directly against the invoice
 
         A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
+
+        ### Reopening Consolidated Invoices
+
+        When reopening a consolidated invoice, all of its canceled segments will also be reopened.
   '/invoices/{uid}/void.json':
     parameters:
       - schema:
@@ -9976,10 +9781,7 @@ paths:
                     errors:
                       - 'Invoice status must be ''open'', ''canceled'', or ''pending'' and non-consolidated to be voided.'
       operationId: post-invoices-uid-void.json
-      description: |-
-        # Void Invoice
-
-        This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
+      description: This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
       requestBody:
         content:
           application/json:
@@ -10262,10 +10064,7 @@ paths:
                         due_amount: '0.0'
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
       operationId: get-invoices-invoice_uid-segments.json
-      description: |-
-        # List Segments for Consolidated Invoice
-
-        Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
+      description: 'Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.'
       parameters:
         - schema:
             type: integer
@@ -10334,10 +10133,7 @@ paths:
                         type: integer
                         description: 'The balance, in cents, of the subscription''s Prepayment account.'
       operationId: get-subscriptions-subscription_id-account_balances.json
-      description: |-
-        # Read Account Balances
-
-        Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+      description: 'Returns the `balance_in_cents` of the Subscription''s Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription''s open, payable invoices.'
   '/subscriptions/{subscription_id}/components/{component_id}.json':
     parameters:
       - schema:
@@ -10383,10 +10179,7 @@ paths:
         '404':
           description: Not Found
       operationId: get-subscriptions-subscription_id-components-component_id-.json
-      description: |-
-        # Read Subscription Component
-
-        This request will list information regarding a specific component owned by a subscription.
+      description: This request will list information regarding a specific component owned by a subscription.
   '/subscriptions/{subscription_id}/components.json':
     parameters:
       - schema:
@@ -10429,8 +10222,6 @@ paths:
                         name: text messages
       operationId: get-subscriptions-subscription_id-components.json
       description: |-
-        # List Subscription Components
-
         This request will list a subscription's applied components.
 
         ## Archived Components
@@ -10450,8 +10241,6 @@ paths:
         - Subscription Components
       operationId: post-subscriptions-subscription_id-price_points.json
       description: |-
-        # Bulk Update Subscriptions Components' Price Points
-
         Updates the price points on one or more of a subscription's components.
 
         The `price_point` key can take either a:
@@ -10660,8 +10449,6 @@ paths:
                         public_signup_pages: []
       operationId: post-subscriptions-subscription_id-price_points-reset.json
       description: |-
-        # Bulk Reset Subscription Components' Price Points
-
         Resets all of a subscription's components to use the current default.
 
         **Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
@@ -10716,7 +10503,7 @@ paths:
                         success: false
                         memo: aliqua
       operationId: post-subscriptions-subscription_id-components-component_id-allocations.json
-      description: "# Allocation Component\n\nThis endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/setting-component-allocations.html). It is focused on how allocations operate within the Chargify UI. It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see: API: [Setting Component Allocations.](<https://help.chargify.com/subscriptions/setting-component-allocations.html>). See the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](<https://help.chargify.com/products/product-components.html#component-proration>)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n### Order of Resolution for accrue_charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
+      description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/setting-component-allocations.html). It is focused on how allocations operate within the Chargify UI. It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see: API: [Setting Component Allocations.](<https://help.chargify.com/subscriptions/setting-component-allocations.html>). See the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](<https://help.chargify.com/products/product-components.html#component-proration>)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n### Order of Resolution for accrue_charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
       requestBody:
         content:
           application/json:
@@ -10790,8 +10577,6 @@ paths:
           description: Unprocessable Entity (WebDAV)
       operationId: get-subscriptions-subscription_id-components-component_id-allocations.json
       description: |-
-        # List Allocations
-
         This endpoint returns the 50 most recent Allocations, ordered by most recent first.
 
         ## On/Off Components
@@ -10900,8 +10685,6 @@ paths:
                       - 'Quantity: cannot be blank.'
       operationId: post-subscriptions-subscription_id-allocations.json
       description: |-
-        # Allocate Components
-
         Creates multiple allocations, setting the current allocated quantity for each of the components and recording a memo. The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of Resolutions explained below in determining the proration scheme.
 
         A `component_id` is required for each allocation.
@@ -11163,8 +10946,6 @@ paths:
                         message: Allocations can only be updated for quantity and on/off components.
       operationId: post-subscriptions-subscription_id-allocations-preview.json
       description: |-
-        # Preview Allocations
-
         Chargify offers the ability to preview a potential subscription's **quantity-based** or **on/off** component allocation in the middle of the current billing period.  This is useful if you want users to be able to see the effect of a component operation before actually doing it.
 
         ## Fine-grained Component Control: Use with multiple `upgrade_charge`s or `downgrade_credits`
@@ -11251,8 +11032,6 @@ paths:
                         message: 'Credit scheme must be one of credit, refund or none.'
       operationId: put-subscriptions-subscription_id-components-component_id-allocations-allocation_id-.json
       description: |-
-        # Update Prepaid Usage Allocation Expiration Date
-
         When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
 
         In order to change a prepaid usage allocation's expiration date, a PUT call must be made to the allocation's endpoint with a new expiration date.
@@ -11317,8 +11096,6 @@ paths:
                         message: 'Credit scheme must be one of credit, refund or none.'
       operationId: delete-subscriptions-subscription_id-components-component_id-allocations-allocation_id-.json
       description: |-
-        # Delete Prepaid Usage Allocation
-
         Prepaid Usage components are unique in that their allocations are always additive. In order to reduce a subscription's allocated quantity for a prepaid usage component each allocation must be destroyed individually via this endpoint.
 
         ## Credit Scheme
@@ -11399,8 +11176,6 @@ paths:
                       - 'Price point: could not be found.'
       operationId: post-subscriptions-subscription_id-components-component_id-usages.json
       description: |-
-        # Create Usage
-
         ## Documentation
 
         Full documentation on how to create Components in the Chargify UI can be located [here](https://help.chargify.com/products/product-components.html). Additionally, for information on how to record component usage against a subscription, please see the following resources:
@@ -11412,7 +11187,7 @@ paths:
 
         ## Create Usage for Subscription
 
-        This endpoint allows you to record an instance of metered or prepaid usage for a subscription. The `quantity` from usage for each component is accumulated to the `unit_balance` on the [Component Line Item](https://reference.chargify.com/v1/component-line-items/component-line-items) for the subscription.
+        This endpoint allows you to record an instance of metered or prepaid usage for a subscription. The `quantity` from usage for each component is accumulated to the `unit_balance` on the [Component Line Item](./b3A6MTQxMDgzNzQ-read-subscription-component) for the subscription.
 
         ## Price Point ID usage
 
@@ -11521,8 +11296,6 @@ paths:
                         subscription_id: 22824464
       operationId: get-subscriptions-subscription_id-components-component_id-usages.json
       description: |-
-        # List Usages
-
         This request will return a list of the usages associated with a subscription for a particular metered component. This will display the previously recorded components for a subscription.
 
         This endpoint is not compatible with quantity-based components.
@@ -11595,8 +11368,6 @@ paths:
           description: OK
       operationId: post-event_based_billing-subscriptions-subscription_id-components-component_id-activate.json
       description: |-
-        # Activate Event-Based Component
-
         In order to bill your subscribers on your Events data under the Events-Based Billing feature, the components must be activated for the subscriber.
 
         Learn more about the role of activation in the [Events-Based Billing docs](https://help.chargify.com/events/billing-guide.html#activating-components-for-subscribers).
@@ -11626,10 +11397,7 @@ paths:
         '200':
           description: OK
       operationId: post-event_based_billing-subscriptions-subscription_id-components-component_id-deactivate.json
-      description: |-
-        # Deactivate Event-Based Component
-
-        Use this endpoint to deactivate an event-based component for a single subscription. Deactivating the event-based component causes Chargify to ignore related events at subscription renewal.
+      description: Use this endpoint to deactivate an event-based component for a single subscription. Deactivating the event-based component causes Chargify to ignore related events at subscription renewal.
   /subscriptions.json:
     post:
       summary: Create Subscription
@@ -11784,7 +11552,7 @@ paths:
                       - 'Bank routing number: cannot be blank.'
                       - 'Bank account number: cannot be blank. '
       operationId: post-subscriptions.json
-      description: "# Create Subscription\n\nFull documentation on how subscriptions operate within Chargify can be located under the following topics:\n\n+ [Subscriptions Reference](https://help.chargify.com/subscriptions/subscription-intro.html)\n+ [Subscriptions Actions](https://help.chargify.com/subscriptions/subscription-actions.html)\n+ [Subscription Cancellation](https://help.chargify.com/subscriptions/cancellation.html)\n+ [Subscription Reactivation](https://help.chargify.com/subscriptions/reactivation.html)\n+ [Subscription Import](https://help.chargify.com/subscriptions/subscriptions-import.html)\n\nWhen creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://help.chargify.com/products/product-options.html)).\n\nThe product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.\n\nAn existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). A new customer may be created by providing `customer_attributes`.\n\nCredit card details may be required, depending on the options for the Product being subscribed. The Product can be specified by `product_id` or by `product_handle` (API Handle).\n\nIf you are creating a subscription with a payment profile, the attribute to send will be `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you read the subscription after creation, we return the profile details under `credit_card` or `bank_account`.\n\n## Taxable Subscriptions\n\nIf your intent is to charge your subscribers tax via [Avalara Taxes](https://help.chargify.com/taxes/avalara-managed-sales-tax.html) or [Custom Taxes](https://help.chargify.com/taxes/custom-taxes.html), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:\n\n+ A subscription to a [taxable product](https://help.chargify.com/products/product-editing.html#tax-settings)\n+ [Full valid billing or shipping address](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#full-address-required-for-taxable-subscriptions) to identify the tax locale\n+ The portion of the address that houses the [state information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.\nThe portion of the address that houses the [country information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.\n\n\n# Passing Payment Information\n\n## Subscription with Chargify.js token\n\nThe `chargify_token` can be obtained using [chargify.js](../docs/chargify.js/Overview.md). The token represents payment profile attributes that were provided by the customer in their browser and stored at the payment gateway.\n\nThe `payment_type` attribute may either be `credit_card` or `bank_account`, depending on the type of payment method being added. If a bank account is being passed, the payment attributes should be changed to `bank_account_attributes`.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      \"chargify_token\": \"tok_cwhvpfcnbtgkd8nfkzf9dnjn\",\n      \"payment_type\": \"credit_card\"\n    }\n  }\n}\n```\n\n## Subscription with vault token\n\nIf you already have a customer and card stored in your payment gateway, you may create a subscription with a `vault_token`.  Providing the last_four, card type and expiration date will allow the card to be displayed properly in the Chargify UI.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      first_name: \"Joe,\n      last_name: \"Smith\",\n      card_type: \"visa\",\n      expiration_month: \"05\",\n      expiration_year: \"2025\",\n      last_four: \"1234\",\n      vault_token: \"12345abc\",\n      current_vault: \"braintree_blue\"\n  }\n}\n```\n\n## Existing Customer with Existing Payment Profile\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"product-xyz\",\n    \"customer_id\": 17346006,\n    \"payment_profile_id\": 11991557\n  }\n}\n```\n\n## Subscription with Credit Card\n\n```\n\"subscription\": {\n\t\t\"product_handle\": \"basic\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"credit_card_attributes\": {\n\t\t\t\"last_name\": \"Smith\",\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"full_number\": \"4111111111111111\",\n\t\t\t\"expiration_year\": \"2021\",\n\t\t\t\"expiration_month\": \"1\",\n\t\t\t\"card_type\": \"visa\",\n\t\t\t\"billing_zip\": \"02120\",\n\t\t\t\"billing_state\": \"MA\",\n\t\t\t\"billing_country\": \"US\",\n\t\t\t\"billing_city\": \"Boston\",\n\t\t\t\"billing_address_2\": null,\n\t\t\t\"billing_address\": \"123 Mass Ave.\"\n\t\t}\n}\n```\n\n## Subscription with ACH as Payment Profile\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Best Bank\",\n\t\t\t\"bank_routing_number\": \"021000089\",\n\t\t\t\"bank_account_number\": \"111111111111\",\n\t\t\t\"bank_account_type\": \"checking\",\n\t\t\t\"bank_account_holder_type\": \"business\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription with PayPal payment profile \n\n### With the nonce from Braintree JS\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"payment_method_nonce\":\"abc123\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n\n### With the Braintree Customer ID as the vault token:\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"vault_token\":\"58271347\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n## Subscription using GoCardless Bank Number\n\nThese examples creates a customer, bank account and mandate in GoCardless.\n\nFor more information on GoCardless, please view the following two resources:\n\n+ [Payment Profiles via API for GoCardless](#endpoint:CaR3rApsyniuZtoEH)\n+ [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)\n\n+ [Using Chargify.js with GoCardless - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-direct-debit-gocardless-gateway)\n\n+ [Using Chargify.js with GoCardless - full example](../docs/chargify.js/Examples.md#full-example-with-direct-debit-gocardless-gateway)\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Royal Bank of France\",\n\t\t\t\"bank_account_number\": \"0000000\",\n\t\t\t\"bank_routing_number\": \"0003\",\n\t\t\t\"bank_branch_code\": \"00006\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using GoCardless IBAN Number\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"French Bank\",\n\t\t\t\"bank_iban\": \"FR1420041010050500013M02606\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe SEPA Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe SEPA Direct Debit](#endpoint:NasuhQCFDimxYmBh4)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe SEPA Direct Debit - full example](../docs/chargify.js/Examples.md#full-example-with-sepa-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_iban\": \"DE89370400440532013000\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe BECS Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe BECS Direct Debit](#endpoint:H4z4BsLgSCd68A45W)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](../docs/chargify.js/Examples.md#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe BECS Direct Debit - full example](../docs/chargify.js/Examples.md#full-example-with-becs-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_branch_code\": \"000000\",\n      \"bank_account_number\": \"000123456\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## 3D Secure - Stripe\n\nIt may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:\n\n```\n{\n  \"errors\": [\n    \"Your card was declined. This transaction requires 3D secure authentication.\"\n  ],\n  \"gateway_payment_id\": \"pi_1F0aGoJ2UDb3Q4av7zU3sHPh\",\n  \"description\": \"This card requires 3D secure authentication. Redirect the customer to the URL from the action_link attribute to authenticate. Attach callback_url param to this URL if you want to be notified about the result of 3D Secure authentication. Attach redirect_url param to this URL if you want to redirect a customer back to your page after 3D Secure authentication. Example: https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com will do a POST request to https://localhost:4000 after payment is authenticated and will redirect a customer to https://yourpage.com after 3DS authentication.\",\n  \"action_link\": \"http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_time_token_id=242\"\n}\n```\n\nTo let the customer go through 3D Secure Authentication, they need to be redirected to the URL specified in `action_link`.\nOptionally, you can specify `callback_url` parameter in the `action_link` URL if you’d like to be notified about the result of 3D Secure Authentication. The `callback_url` will return the following information:\n\n- whether the authentication was successful (`success`)\n- the gateway ID for the payment (`gateway_payment_id`)\n- the subscription ID (`subscription_id`)\n \nLastly, you can also specify a `redirect_url` within the `action_link` URL if you’d like to redirect a customer back to your site. \n\nThe final URL that you send a customer to to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com`\n\n### Example Redirect Flow\n\nYou may wish to redirect customers to different pages depending on whether their SCA was performed successfully. Here's an example flow to use as a reference:\n\n1. Create a subscription via API; it requires 3DS\n2. You receive a `gateway_payment_id` in the `action_link` along other params in the response.\n3. Use this `gateway_payment_id` to, for example, connect with your internal resources or generate a session_id\n4. Include 1 of those attributes inside the `callback_url` and `redirect_url` to be aware which “session” this applies to\n5. Redirect the customer to the `action_link` with `callback_url` and `redirect_url` applied\n6. After the customer finishes 3DS authentication, we let you know the result by making a request to applied `callback_url`.\n7. After that, we redirect the customer to the `redirect_url`; at this point the result of authentication is known \n8. Optionally, you can use the applied \"msg\" param in the `redirect_url` to determine whether it was successful or not\n\n## Subscriptions Import\n\nSubscriptions can be “imported” via the API to handle the following scenarios:\n\n+ You already have existing subscriptions with specific start and renewal dates that you would like to import to Chargify\n+ You already have credit cards stored in your provider’s vault and you would like to create subscriptions using those tokens\n\nBefore importing, you should have already set up your products to match your offerings. Then, you can create Subscriptions via the API just like you normally would, but using a few special attributes.\n\nFull documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/subscriptions-import.html).\n\n### Important Notices and Disclaimers regarding Imports\n\nBefore performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](http://help.chargify.com/subscriptions/subscriptions-import.html#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.\n\n### Subscription Input Attributes\n\nThe following _additional_ attributes to the subscription input attributes make imports possible: `next_billing_at`, `previous_billing_at`, and `import_mrr`.\n\n### Current Vault\n\nIf you are using a Legacy gateway such as \"eWAY Rapid (Legacy)\" or \"Stripe (Legacy)\" then please contact Support for further instructions on subscription imports.\n\n### Braintree Blue (Braintree v2) Imports\n\nBraintree Blue is Braintree’s newer (version 2) API. For this gateway, please provide the `vault_token` parameter with the value from Braintree’s “Customer ID” rather than the “Payment Profile Token”. At this time we do not use `current_vault_token` with the Braintree Blue gateway, and we only support a single payment profile per Braintree Customer.\n\nWhen importing PayPal type payment profiles, please set `payment_type` to `paypal_account`.\n\n### Stripe ACH Imports\n\nIf the bank account has already been verified, currently you will need to create the customer, create the payment profile in Chargify - setting verified=true, then create a subscription using the customer_id and payment_profile_id.\n\n### Webhooks During Import\n\nIf no `next_billing_at` is provided, webhooks will be fired as normal. If you do set a future `next_billing_at`, only a subset of the webhooks are fired when the subscription is created. Keep reading for more information as to what webhooks will be fired under which scenarios.\n\n#### Successful creation with Billing Date\n\nScenario: If `next_billing_at` provided\n\n+ `signup_success`\n+ `billing_date_change`\n\n#### Successful creation without Billing Date\n\nScenario: If no `next_billing_at` provided\n\n+ `signup_success`\n+ `payment_success`\n\n#### Unsuccessful creation\n\nScenario: If card can’t be charged, and no `next_billing_at` provided\n\n+ signup_failure\n\n#### Webhooks fired when next_billing_at is reached:\n\n+ `renewal_success or renewal_failure`\n+ `payment_success or payment_failure`\n\n### Date and Time Formats\n\nWe will attempt to parse any string you send as the value of next_billing_at in to a date or time. For best results, use a known format like described in “Date and Time Specification” of RFC 2822 or ISO 8601 .\n\nThe following are all equivalent and will work as input to `next_billing_at`:\n\n```\nAug 06 2030 11:34:00 -0400\nAug 06 2030 11:34 -0400\n2030-08-06T11:34:00-04:00\n8/6/2030 11:34:00 EDT\n8/6/2030 8:34:00 PDT\n2030-08-06T15:34:00Z\n```\nYou may also pass just a date, in which case we will assume the time to be noon\n\n```\n2010-08-06\n```\n\n## Subscription Hierarchies & WhoPays\n\nWhen subscription groups were first added to our Relationship Invoicing architecture, to group together invoices for related subscriptions and allow for complex customer hierarchies and WhoPays scenarios, they were designed to consist of a primary and a collection of group members. The primary would control many aspects of the group, such as when the consolidated invoice is generated. As of today, groups still function this way.\n\nIn the future, the concept of a \"primary\" will be removed in order to offer more flexibility into group management and reduce confusion concerning what actions must be done on a primary level, rather than a member level.\n\nWe have introduced a two scheme system as a bridge between these two group organizations. Scheme 1, which is relevant to all subscription groups today, marks the group as being \"ruled\" by a primary.\n\nWhen reading a subscription via API, they will return a top-level attribute called `group`, which will denote which scheme is being used. At this time, the `scheme` attribute will always be 1.\n\n### Subscription in a Customer Hierarchy\n\nFor sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy] features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.  \n\n+ The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.\n\nWhen the `target` parameter specifies a customer that is already part of a hierarchy, the new subscription will become a member of the customer hierarchy as well.  If the target customer is not part of a hierarchy, a new customer hierarchy will be created and both the target customer and the new subscription will become part of the hierarchy with the specified target customer set as the responsible payer for the hierarchy's subscriptions.\n\nRather than specifying a customer, the `target` parameter could instead simply have a value of `self` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer.  This will be true whether the customer is being created new, is already part of a hierarchy, or already exists outside a hierarchy.  A valid payment method must also be specified in the subscription parameters. \n\nNote that when creating subscriptions in a customer hierarchy, if the customer hierarchy does not already have a payment method, passing valid credit card attributes in the subscription parameters will also result in the payment method being established as the default payment method for the customer hierarchy irrespective of the responsible payer.\n\nThe optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the default subscription group in the customer hierarchy.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the default subscription group in the customer hierarchy also.\n\n### Subscription in a Subscription Group \n\nFor sites making use of [Relationship Billing](https://help.chargify.com/invoices/index.html) it may be desireable to create a subscription as part of a [subscription group](https://help.chargify.com/invoices/consolidation.html) in order to rely on [invoice consolidation](https://help.chargify.com/invoices/consolidation.html).  This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.   \n\nThe `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.\n\nThe optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also."
+      description: "Full documentation on how subscriptions operate within Chargify can be located under the following topics:\n\n+ [Subscriptions Reference](https://help.chargify.com/subscriptions/subscription-intro.html)\n+ [Subscriptions Actions](https://help.chargify.com/subscriptions/subscription-actions.html)\n+ [Subscription Cancellation](https://help.chargify.com/subscriptions/cancellation.html)\n+ [Subscription Reactivation](https://help.chargify.com/subscriptions/reactivation.html)\n+ [Subscription Import](https://help.chargify.com/subscriptions/subscriptions-import.html)\n\nWhen creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://help.chargify.com/products/product-editing.html)).\n\nThe product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.\n\nAn existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). A new customer may be created by providing `customer_attributes`.\n\nCredit card details may be required, depending on the options for the Product being subscribed. The Product can be specified by `product_id` or by `product_handle` (API Handle).\n\nIf you are creating a subscription with a payment profile, the attribute to send will be `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you read the subscription after creation, we return the profile details under `credit_card` or `bank_account`.\n\n## Taxable Subscriptions\n\nIf your intent is to charge your subscribers tax via [Avalara Taxes](https://help.chargify.com/taxes/avalara-managed-sales-tax.html) or [Custom Taxes](https://help.chargify.com/taxes/custom-taxes.html), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:\n\n+ A subscription to a [taxable product](https://help.chargify.com/products/product-editing.html#tax-settings)\n+ [Full valid billing or shipping address](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#full-address-required-for-taxable-subscriptions) to identify the tax locale\n+ The portion of the address that houses the [state information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.\nThe portion of the address that houses the [country information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.\n\n\n# Passing Payment Information\n\n## Subscription with Chargify.js token\n\nThe `chargify_token` can be obtained using [chargify.js](./ZG9jOjE0NjAzNDI0-overview). The token represents payment profile attributes that were provided by the customer in their browser and stored at the payment gateway.\n\nThe `payment_type` attribute may either be `credit_card` or `bank_account`, depending on the type of payment method being added. If a bank account is being passed, the payment attributes should be changed to `bank_account_attributes`.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      \"chargify_token\": \"tok_cwhvpfcnbtgkd8nfkzf9dnjn\",\n      \"payment_type\": \"credit_card\"\n    }\n  }\n}\n```\n\n## Subscription with vault token\n\nIf you already have a customer and card stored in your payment gateway, you may create a subscription with a `vault_token`.  Providing the last_four, card type and expiration date will allow the card to be displayed properly in the Chargify UI.\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"pro-plan\",\n    \"customer_attributes\": {\n      \"first_name\": \"Joe\",\n      \"last_name\": \"Smith\",\n      \"email\": \"j.smith@example.com\"\n    },\n    \"credit_card_attributes\": {\n      first_name: \"Joe,\n      last_name: \"Smith\",\n      card_type: \"visa\",\n      expiration_month: \"05\",\n      expiration_year: \"2025\",\n      last_four: \"1234\",\n      vault_token: \"12345abc\",\n      current_vault: \"braintree_blue\"\n  }\n}\n```\n\n## Existing Customer with Existing Payment Profile\n\n```\n{\n  \"subscription\": {\n    \"product_handle\": \"product-xyz\",\n    \"customer_id\": 17346006,\n    \"payment_profile_id\": 11991557\n  }\n}\n```\n\n## Subscription with Credit Card\n\n```\n\"subscription\": {\n\t\t\"product_handle\": \"basic\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"credit_card_attributes\": {\n\t\t\t\"last_name\": \"Smith\",\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"full_number\": \"4111111111111111\",\n\t\t\t\"expiration_year\": \"2021\",\n\t\t\t\"expiration_month\": \"1\",\n\t\t\t\"card_type\": \"visa\",\n\t\t\t\"billing_zip\": \"02120\",\n\t\t\t\"billing_state\": \"MA\",\n\t\t\t\"billing_country\": \"US\",\n\t\t\t\"billing_city\": \"Boston\",\n\t\t\t\"billing_address_2\": null,\n\t\t\t\"billing_address\": \"123 Mass Ave.\"\n\t\t}\n}\n```\n\n## Subscription with ACH as Payment Profile\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Joe\",\n\t\t\t\"last_name\": \"Blow\",\n\t\t\t\"email\": \"joe@example.com\",\n\t\t\t\"zip\": \"02120\",\n\t\t\t\"state\": \"MA\",\n\t\t\t\"reference\": \"XYZ\",\n\t\t\t\"phone\": \"(617) 111 - 0000\",\n\t\t\t\"organization\": \"Acme\",\n\t\t\t\"country\": \"US\",\n\t\t\t\"city\": \"Boston\",\n\t\t\t\"address_2\": null,\n\t\t\t\"address\": \"123 Mass Ave.\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Best Bank\",\n\t\t\t\"bank_routing_number\": \"021000089\",\n\t\t\t\"bank_account_number\": \"111111111111\",\n\t\t\t\"bank_account_type\": \"checking\",\n\t\t\t\"bank_account_holder_type\": \"business\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription with PayPal payment profile \n\n### With the nonce from Braintree JS\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"payment_method_nonce\":\"abc123\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n\n### With the Braintree Customer ID as the vault token:\n\n```\n{ \"subscription\": {\n    \"product_handle\":\"test-product-b\",\n    \"customer_attributes\": {\n      \"first_name\":\"Amelia\",\n      \"last_name\":\"Johnson\",\n      \"email\":\"amelia@example.com\",\n      \"organization\":\"My Awesome Company\"\n    },\n    \"payment_profile_attributes\":{\n      \"paypal_email\": \"amelia@example.com\",\n      \"current_vault\": \"braintree_blue\",\n      \"vault_token\":\"58271347\",\n      \"payment_type\":\"paypal_account\"\n    }\n  }\n```\n\n## Subscription using GoCardless Bank Number\n\nThese examples creates a customer, bank account and mandate in GoCardless.\n\nFor more information on GoCardless, please view the following two resources:\n\n+ [Payment Profiles via API for GoCardless](#endpoint:CaR3rApsyniuZtoEH)\n+ [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)\n\n+ [Using Chargify.js with GoCardless - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)\n\n+ [Using Chargify.js with GoCardless - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-direct-debit-gocardless-gateway)\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Royal Bank of France\",\n\t\t\t\"bank_account_number\": \"0000000\",\n\t\t\t\"bank_routing_number\": \"0003\",\n\t\t\t\"bank_branch_code\": \"00006\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using GoCardless IBAN Number\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"French Bank\",\n\t\t\t\"bank_iban\": \"FR1420041010050500013M02606\",\n\t\t\t\"payment_type\": \"bank_account\",\n\t\t\t\"billing_address\": \"20 Place de la Gare\",\n\t\t\t\"billing_city\": \"Colombes\",\n\t\t\t\"billing_state\": \"Île-de-France\",\n\t\t\t\"billing_zip\": \"92700\",\n\t\t\t\"billing_country\": \"FR\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe SEPA Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe SEPA Direct Debit](#endpoint:NasuhQCFDimxYmBh4)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe SEPA Direct Debit - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-sepa-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_iban\": \"DE89370400440532013000\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## Subscription using Stripe BECS Direct Debit\n\nFor more information on Stripe Direct Debit, please view the following two resources:\n\n+ [Payment Profiles via API for Stripe BECS Direct Debit](#endpoint:H4z4BsLgSCd68A45W)\n+ [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)\n\n+ [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)\n\n+ [Using Chargify.js with Stripe BECS Direct Debit - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-becs-direct-debit-stripe-gateway)\n\n\n```\n{\n\t\"subscription\": {\n\t\t\"product_handle\": \"gold-product\",\n\t\t\"customer_attributes\": {\n\t\t\t\"first_name\": \"Jane\",\n\t\t\t\"last_name\": \"Doe\",\n\t\t\t\"email\": \"jd@chargify.test\"\n\t\t},\n\t\t\"bank_account_attributes\": {\n\t\t\t\"bank_name\": \"Test Bank\",\n\t\t\t\"bank_branch_code\": \"000000\",\n      \"bank_account_number\": \"000123456\",\n\t\t\t\"payment_type\": \"bank_account\"\n\t\t}\n\t}\n}\n```\n\n## 3D Secure - Stripe\n\nIt may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:\n\n```\n{\n  \"errors\": [\n    \"Your card was declined. This transaction requires 3D secure authentication.\"\n  ],\n  \"gateway_payment_id\": \"pi_1F0aGoJ2UDb3Q4av7zU3sHPh\",\n  \"description\": \"This card requires 3D secure authentication. Redirect the customer to the URL from the action_link attribute to authenticate. Attach callback_url param to this URL if you want to be notified about the result of 3D Secure authentication. Attach redirect_url param to this URL if you want to redirect a customer back to your page after 3D Secure authentication. Example: https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com will do a POST request to https://localhost:4000 after payment is authenticated and will redirect a customer to https://yourpage.com after 3DS authentication.\",\n  \"action_link\": \"http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_time_token_id=242\"\n}\n```\n\nTo let the customer go through 3D Secure Authentication, they need to be redirected to the URL specified in `action_link`.\nOptionally, you can specify `callback_url` parameter in the `action_link` URL if you’d like to be notified about the result of 3D Secure Authentication. The `callback_url` will return the following information:\n\n- whether the authentication was successful (`success`)\n- the gateway ID for the payment (`gateway_payment_id`)\n- the subscription ID (`subscription_id`)\n \nLastly, you can also specify a `redirect_url` within the `action_link` URL if you’d like to redirect a customer back to your site. \n\nThe final URL that you send a customer to to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com`\n\n### Example Redirect Flow\n\nYou may wish to redirect customers to different pages depending on whether their SCA was performed successfully. Here's an example flow to use as a reference:\n\n1. Create a subscription via API; it requires 3DS\n2. You receive a `gateway_payment_id` in the `action_link` along other params in the response.\n3. Use this `gateway_payment_id` to, for example, connect with your internal resources or generate a session_id\n4. Include 1 of those attributes inside the `callback_url` and `redirect_url` to be aware which “session” this applies to\n5. Redirect the customer to the `action_link` with `callback_url` and `redirect_url` applied\n6. After the customer finishes 3DS authentication, we let you know the result by making a request to applied `callback_url`.\n7. After that, we redirect the customer to the `redirect_url`; at this point the result of authentication is known \n8. Optionally, you can use the applied \"msg\" param in the `redirect_url` to determine whether it was successful or not\n\n## Subscriptions Import\n\nSubscriptions can be “imported” via the API to handle the following scenarios:\n\n+ You already have existing subscriptions with specific start and renewal dates that you would like to import to Chargify\n+ You already have credit cards stored in your provider’s vault and you would like to create subscriptions using those tokens\n\nBefore importing, you should have already set up your products to match your offerings. Then, you can create Subscriptions via the API just like you normally would, but using a few special attributes.\n\nFull documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/subscriptions-import.html).\n\n### Important Notices and Disclaimers regarding Imports\n\nBefore performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](http://help.chargify.com/subscriptions/subscriptions-import.html#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.\n\n### Subscription Input Attributes\n\nThe following _additional_ attributes to the subscription input attributes make imports possible: `next_billing_at`, `previous_billing_at`, and `import_mrr`.\n\n### Current Vault\n\nIf you are using a Legacy gateway such as \"eWAY Rapid (Legacy)\" or \"Stripe (Legacy)\" then please contact Support for further instructions on subscription imports.\n\n### Braintree Blue (Braintree v2) Imports\n\nBraintree Blue is Braintree’s newer (version 2) API. For this gateway, please provide the `vault_token` parameter with the value from Braintree’s “Customer ID” rather than the “Payment Profile Token”. At this time we do not use `current_vault_token` with the Braintree Blue gateway, and we only support a single payment profile per Braintree Customer.\n\nWhen importing PayPal type payment profiles, please set `payment_type` to `paypal_account`.\n\n### Stripe ACH Imports\n\nIf the bank account has already been verified, currently you will need to create the customer, create the payment profile in Chargify - setting verified=true, then create a subscription using the customer_id and payment_profile_id.\n\n### Webhooks During Import\n\nIf no `next_billing_at` is provided, webhooks will be fired as normal. If you do set a future `next_billing_at`, only a subset of the webhooks are fired when the subscription is created. Keep reading for more information as to what webhooks will be fired under which scenarios.\n\n#### Successful creation with Billing Date\n\nScenario: If `next_billing_at` provided\n\n+ `signup_success`\n+ `billing_date_change`\n\n#### Successful creation without Billing Date\n\nScenario: If no `next_billing_at` provided\n\n+ `signup_success`\n+ `payment_success`\n\n#### Unsuccessful creation\n\nScenario: If card can’t be charged, and no `next_billing_at` provided\n\n+ signup_failure\n\n#### Webhooks fired when next_billing_at is reached:\n\n+ `renewal_success or renewal_failure`\n+ `payment_success or payment_failure`\n\n### Date and Time Formats\n\nWe will attempt to parse any string you send as the value of next_billing_at in to a date or time. For best results, use a known format like described in “Date and Time Specification” of RFC 2822 or ISO 8601 .\n\nThe following are all equivalent and will work as input to `next_billing_at`:\n\n```\nAug 06 2030 11:34:00 -0400\nAug 06 2030 11:34 -0400\n2030-08-06T11:34:00-04:00\n8/6/2030 11:34:00 EDT\n8/6/2030 8:34:00 PDT\n2030-08-06T15:34:00Z\n```\nYou may also pass just a date, in which case we will assume the time to be noon\n\n```\n2010-08-06\n```\n\n## Subscription Hierarchies & WhoPays\n\nWhen subscription groups were first added to our Relationship Invoicing architecture, to group together invoices for related subscriptions and allow for complex customer hierarchies and WhoPays scenarios, they were designed to consist of a primary and a collection of group members. The primary would control many aspects of the group, such as when the consolidated invoice is generated. As of today, groups still function this way.\n\nIn the future, the concept of a \"primary\" will be removed in order to offer more flexibility into group management and reduce confusion concerning what actions must be done on a primary level, rather than a member level.\n\nWe have introduced a two scheme system as a bridge between these two group organizations. Scheme 1, which is relevant to all subscription groups today, marks the group as being \"ruled\" by a primary.\n\nWhen reading a subscription via API, they will return a top-level attribute called `group`, which will denote which scheme is being used. At this time, the `scheme` attribute will always be 1.\n\n### Subscription in a Customer Hierarchy\n\nFor sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy] features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.  \n\n+ The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.\n\nWhen the `target` parameter specifies a customer that is already part of a hierarchy, the new subscription will become a member of the customer hierarchy as well.  If the target customer is not part of a hierarchy, a new customer hierarchy will be created and both the target customer and the new subscription will become part of the hierarchy with the specified target customer set as the responsible payer for the hierarchy's subscriptions.\n\nRather than specifying a customer, the `target` parameter could instead simply have a value of `self` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer.  This will be true whether the customer is being created new, is already part of a hierarchy, or already exists outside a hierarchy.  A valid payment method must also be specified in the subscription parameters. \n\nNote that when creating subscriptions in a customer hierarchy, if the customer hierarchy does not already have a payment method, passing valid credit card attributes in the subscription parameters will also result in the payment method being established as the default payment method for the customer hierarchy irrespective of the responsible payer.\n\nThe optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the default subscription group in the customer hierarchy.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the default subscription group in the customer hierarchy also.\n\n### Subscription in a Subscription Group \n\nFor sites making use of [Relationship Billing](https://help.chargify.com/invoices/index.html) it may be desireable to create a subscription as part of a [subscription group](https://help.chargify.com/invoices/consolidation.html) in order to rely on [invoice consolidation](https://help.chargify.com/invoices/consolidation.html).  This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.   \n\nThe `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.\n\nThe optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also."
       requestBody:
         content:
           application/json:
@@ -11986,8 +11754,6 @@ paths:
                       $ref: ../models/Subscription.yaml
       operationId: get-subscriptions.json
       description: |-
-        # List Subscriptions
-
         This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
 
         ## Search for a subscription
@@ -12127,8 +11893,6 @@ paths:
           description: Created
       operationId: post-subdomain-events-api_handle-.json
       description: |-
-        # Event Ingestion
-
         ## Documentation
 
         Events-Based Billing is an evolved form of metered billing that is based on data-rich events streamed in real-time from your system to Chargify.
@@ -12205,8 +11969,6 @@ paths:
           description: Created
       operationId: post-subdomain-events-api_handle-bulk.json
       description: |-
-        # Bulk Event Ingestion
-
         Use this endpoint to record a collection of events.
 
         *Note: this endpoint differs from the standard Chargify endpoints in that the subdomain will be `events` and your site subdomain will be included in the URL path.*
@@ -12293,8 +12055,6 @@ paths:
                         - 'starting_quantity for an On/Off component can only be ''1'' or ''0'': 24'
       operationId: post-offers.json
       description: |-
-        # Create Offer
-
         Create an offer within your Chargify site by sending a POST request.
 
         ## Documentation
@@ -12411,10 +12171,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargifypay.com/subscribe/hjpvhnw63tzy'
       operationId: get-offers.json
-      description: |-
-        # List Offers
-
-        This endpoint will list offers for a site.
+      description: This endpoint will list offers for a site.
   '/offers/{offer_id}.json':
     parameters:
       - schema:
@@ -12441,10 +12198,7 @@ paths:
         '401':
           description: Unauthorized
       operationId: get-offers-offer_id-.json
-      description: |-
-        # Read Offer
-
-        This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
+      description: 'This method allows you to list a specific offer''s attributes. This is different than list all offers for a site, as it requires an `offer_id`.'
   '/offers/{offer_id}/archive.json':
     parameters:
       - schema:
@@ -12463,10 +12217,7 @@ paths:
         '401':
           description: Unauthorized
       operationId: put-offers-offer_id-archive.json
-      description: |-
-        # Archive Offer
-
-        Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+      description: Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
   '/offers/{offer_id}/unarchive.json':
     parameters:
       - schema:
@@ -12485,10 +12236,7 @@ paths:
         '401':
           description: Unauthorized
       operationId: put-offers-offer_id-unarchive.json
-      description: |-
-        # Unarchive Offer
-
-        Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
+      description: Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
   '/sellers/{seller_id}/sales_commission_settings.json':
     parameters:
       - schema:
@@ -12551,8 +12299,6 @@ paths:
                       sales_rep_name: John Candy
       operationId: get-sellers-seller_id-sales_commission_settings.json
       description: |-
-        # List Sales Commission Settings
-
         Endpoint returns subscriptions with associated sales reps
 
         ## Modified Authentication Process
@@ -12732,8 +12478,6 @@ paths:
                       test_mode: true
       operationId: get-sellers-seller_id-sales_reps.json
       description: |-
-        # List Sales Reps
-
         Endpoint returns sales rep list with details
 
         ## Modified Authentication Process
@@ -12851,8 +12595,6 @@ paths:
                         churn_date: null
       operationId: get-sellers-seller_id-sales_reps-sales_rep_id-.json
       description: |-
-        # Read Sales Rep
-
         Endpoint returns sales rep and attached subscriptions details.
 
         ## Modified Authentication Process
@@ -13046,8 +12788,6 @@ paths:
                     errors: []
       operationId: put-subscriptions-subscription_id-retry.json
       description: |-
-        # Retry Subscription
-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
 
         ## Successful Reactivation
@@ -13197,8 +12937,6 @@ paths:
                       - '''expires_at'' cannot be set for subscriptions on calendar billing'
       operationId: put-subscriptions-subscription_id-.json
       description: |-
-        # Update Subscription
-
         The subscription endpoint allows you to instantly update one or many attributes about a subscription in a single call.
 
         ## Update Subscription Payment Method
@@ -13456,10 +13194,7 @@ paths:
                   value:
                     errors:
                       - The subscription is already canceled
-      description: |-
-        # Cancel Subscription
-
-        The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".
+      description: 'The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".'
       requestBody:
         content:
           application/json:
@@ -13617,8 +13352,6 @@ paths:
                       scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
       operationId: get-subscriptions-subscription_id-.json
       description: |-
-        # Read Subscription
-
         Use this endpoint to find subscription details.
 
         ## Self-Service Page token
@@ -13745,10 +13478,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product'
       operationId: post-subscriptions-subscription_id-resume.json
-      description: |-
-        # Resume Subscription
-
-        Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.
+      description: 'Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to ''now'' and charging the subscriber.'
       parameters:
         - schema:
             type: string
@@ -13898,8 +13628,6 @@ paths:
                       - This subscription is not eligible to be put on hold.
       operationId: post-subscriptions-subscription_id-hold.json
       description: |-
-        # Hold / Pause Subscription
-
         This will place the subscription in the on_hold state and it will not renew.
 
         ## Limitations
@@ -14055,8 +13783,6 @@ paths:
                         payment_type: credit_card
       operationId: put-subscriptions-subscription_id-hold.json
       description: |-
-        # Update Automatic Subscription Resumption
-
         Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
 
         To update a subscription's resume date, use this method to change or update the `automatically_resume_at` date.
@@ -14228,8 +13954,6 @@ paths:
                       - The credit card on file could not be charged.
       operationId: put-subscriptions-subscription_id-reactivate.json
       description: |-
-        # Reactivate Subscription
-
         Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://help.chargify.com/subscriptions/reactivation.html).
 
         **Please note: The term 
@@ -14600,8 +14324,6 @@ paths:
                       - Invalid Product
       operationId: post-subscriptions-subscription_id-migrations.json
       description: |-
-        # Migrate Subscription Product
-
         In order to create a migration, you must pass the `product_id` or `product_handle` in the object when you send a POST request. You may also pass either a `product_price_point_id` or `product_price_point_handle` to choose which price point the subscription is moved to. If no price point identifier is passed the subscription will be moved to the products default price point. The response will be the updated subscription.
 
         ## Valid Subscriptions
@@ -14769,8 +14491,6 @@ paths:
                       - Subscription must be active
       operationId: post-subscriptions-subscription_id-migrations-preview.json
       description: |-
-        # Preview Subscription Product Migration
-
         ## Previewing a future date
         It is also possible to preview the migration for a date in the future, as long as it's still within the subscription's current billing period, by passing a `proration_date` along with the request (eg: `"proration_date": "2020-12-18T18:25:43.511Z"`).
 
@@ -14842,8 +14562,6 @@ paths:
           description: Unprocessable Entity (WebDAV)
       operationId: put-subscriptions-subscription_id-override.json
       description: |-
-        # Override Subscription
-
         This API endpoint allows you to set certain subscription fields that are usually managed for you automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can only be set using this endpoint.
 
         This endpoint is provided for cases where you need to “align” Chargify data with data that happened in your system, perhaps before you started using Chargify. For example, you may choose to import your historical subscription data, and would like the activation and cancellation dates in Chargify to match your existing historical dates. Chargify does not backfill historical events (i.e. from the Events API), but some static data can be changed via this API.
@@ -14852,7 +14570,7 @@ paths:
 
         Changing these fields will not affect any other attributes. For example, adding an expiration date will not affect the next assessment date on the subscription.
 
-        If you regularly need to override the current_period_starts_at for new subscriptions, this can also be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation. See the documentation on [Importing Subscriptions](https://reference.chargify.com/v1/subscriptions-import/importing-subscriptions) for more information.
+        If you regularly need to override the current_period_starts_at for new subscriptions, this can also be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation. See the documentation on [Importing Subscriptions](./b3A6MTQxMDgzODg-create-subscription#subscriptions-import) for more information.
 
         ## Limitations
 
@@ -14910,8 +14628,6 @@ paths:
           description: OK
       operationId: post-subscriptions-subscription_id-delayed_cancel.json
       description: |-
-        # Initiate Delayed Cancellation
-
         Chargify offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
 
         Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
@@ -15048,8 +14764,6 @@ paths:
           description: Not Found
       operationId: delete-subscriptions-subscription_id-delayed_cancel.json
       description: |-
-        # Cancel Delayed Cancellation
-
         Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
 
         This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
@@ -15076,10 +14790,7 @@ paths:
                   subscription:
                     $ref: ../models/Subscription.yaml
       operationId: post-subscriptions-subscription_id-cancel_dunning.json
-      description: |-
-        # Cancel Dunning
-
-        If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.
+      description: 'If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.'
   '/subscriptions/{subscription_id}/renewals/preview.json':
     parameters:
       - schema:
@@ -15188,8 +14899,6 @@ paths:
                           component_name: Quantity Component
       operationId: post-subscriptions-subscription_id-renewals-preview.json
       description: |-
-        # Preview Renewal
-
         The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
 
         The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation  [here](http://help.chargify.com/subscriptions/subscription-summary.html#next-billing).
@@ -15380,8 +15089,6 @@ paths:
                     type: object
       operationId: post-subscriptions-subscription_id-invoices.json
       description: |-
-        # Create Invoice
-
         This endpoint will allow you to create an ad-hoc, remittance invoice.
 
         ### Basic Behavior
@@ -15703,10 +15410,7 @@ paths:
         '201':
           description: Created
       operationId: post-subscriptions-subscription_id-service_credits.json
-      description: |-
-        # Issue Service Credit
-
-        Credit will be added to the subscription in the amount specified in the request body.The credit is subsequently applied to the next generated invoice.
+      description: Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
       requestBody:
         content:
           application/json:
@@ -15791,10 +15495,7 @@ paths:
                   deduction:
                     amount: '1'
                     memo: Deduction
-      description: |-
-        # Deduct Service Credit
-
-        Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
+      description: Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
@@ -15861,10 +15562,7 @@ paths:
                   value:
                     errors: Subscription is already in group
       operationId: post-subscription_groups.json
-      description: |-
-        # Create Subscription Group
-
-        Creates a subscription group with given members.
+      description: Creates a subscription group with given members.
       requestBody:
         content:
           application/json:
@@ -15988,8 +15686,6 @@ paths:
                       total_count: 1
       operationId: get-subscription_groups.json
       description: |-
-        # List Subscription Groups
-
         Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
 
         #### Account Balance Information
@@ -16119,8 +15815,6 @@ paths:
                         balance_in_cents: 0
       operationId: get-subscription_groups-uid-.json
       description: |-
-        # Read Subscription Group
-
         Use this endpoint to find subscription group details.
 
         #### Current Billing Amount in Cents
@@ -16207,8 +15901,6 @@ paths:
                           message: Subscription could not be found
       operationId: put-subscription_groups-uid-.json
       description: |-
-        # Update Subscription Group
-
         Use this endpoint to update subscription group members.
         `"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
       requestBody:
@@ -16255,8 +15947,6 @@ paths:
           description: Not Found
       operationId: delete-subscription_groups-uid-.json
       description: |-
-        # Delete Subscription Group
-
         Use this endpoint to delete subscription group.
         Only groups without members can be deleted
   /subscription_groups/lookup.json:
@@ -16362,8 +16052,6 @@ paths:
           description: Not Found
       operationId: get-subscription_groups-lookup.json
       description: |-
-        # Find Subscription Group
-
         Use this endpoint to find subscription group associated with subscription.
 
         If the subscription is not in a group endpoint will return 404 code.
@@ -16407,8 +16095,6 @@ paths:
                       - One or more subscriptions are not on automatic billing
       operationId: post-subscription_groups-uid-cancel.json
       description: |-
-        # Cancel Grouped Subscriptions
-
         This endpoint will immediately cancel all subscriptions within the specified group. The group is identified by it's `uid` passed in the URL. To successfully cancel the group, the primary subscription must be on automatic billing. The group members as well must be on automatic billing or they must be prepaid.
 
         In order to cancel a subscription group while also charging for any unbilled usage on metered or prepaid components, the `charge_unbilled_usage=true` parameter must be included in the request.
@@ -16457,8 +16143,6 @@ paths:
                       - Subscriptions group is in a past due state
       operationId: post-subscription_groups-uid-delayed_cancel.json
       description: |-
-        # Initiate Delayed Group Cancellation
-
         This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
 
         All subscriptions in the group must be on automatic billing in order to successfully cancel them, and the group must not be in a "past_due" state.
@@ -16486,10 +16170,7 @@ paths:
                     errors:
                       - Subscriptions group does not have a pending delayed cancellation
       operationId: delete-subscription_groups-uid-delayed_cancel.json
-      description: |-
-        # Cancel Delayed Group Cancellation
-
-        Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
+      description: Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
   '/subscription_groups/{subscription_group_uid}/reactivate.json':
     parameters:
       - schema:
@@ -16562,8 +16243,6 @@ paths:
                       - Must be inside the current billing period to resume this subscription group
       operationId: post-subscription_groups-subscription_group_uid-reactivate.json
       description: |-
-        # Reactivate / Resume Subscription Group
-
         This endpoint will attempt to reactivate or resume a cancelled subscription group. Upon reactivation, any canceled invoices created after the beginning of the primary subscription's billing period will be reopened and payment will be attempted on them. If the subscription group is being reactivated (as opposed to resumed), new charges will also be assessed for the new billing period.
 
         Whether a subscription group is reactivated (a new billing period is created) or resumed (the current billing period is respected) will depend on the parameters that are sent with the request as well as the date of the request relative to the primary subscription's period.
@@ -16613,8 +16292,6 @@ paths:
           description: No Content
       operationId: delete-subscription_groups-subscription_group_uid-payment_profiles-payment_profile_id-.json
       description: |-
-        # Delete Subscription Group Payment Profile
-
         This will delete a Payment Profile belonging to a Subscription Group.
 
         **Note**: If the Payment Profile belongs to multiple Subscription Groups and/or Subscriptions, it will be removed from all of them.
@@ -16683,10 +16360,7 @@ paths:
                     errors:
                       - Amount must be greater than 0
       operationId: post-subscription_groups-uid-prepayments.json
-      description: |-
-        # Create Prepayment
-
-        A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
+      description: 'A prepayment can be added for a subscription group identified by the group''s `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group''s prepayment balance.'
       requestBody:
         content:
           application/json:
@@ -16765,10 +16439,7 @@ paths:
                     errors:
                       - Amount must be greater than 0
       operationId: post-subscription_groups-uid-service_credits.json
-      description: |-
-        # Issue Service Credit
-
-        Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
+      description: Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
       requestBody:
         content:
           application/json:
@@ -16837,10 +16508,7 @@ paths:
                     errors:
                       - Amount must be greater than 0
       operationId: post-subscription_groups-uid-service_credit_deductions.json
-      description: |-
-        # Deduct Service Credit
-
-        Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
+      description: Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
       requestBody:
         content:
           application/json:
@@ -16888,7 +16556,7 @@ paths:
             type: string
           in: query
           name: reference
-      description: '# Find Subscription'
+      description: ''
   '/subscriptions/{identifier}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
     parameters:
       - schema:
@@ -16957,8 +16625,6 @@ paths:
                       - This is already the current payment profile
       operationId: post-subscriptions-subscription_id-payment_profiles-payment_profile_id-change_payment_profile.json
       description: |-
-        # Change Default Payment Profile
-
         This will change the default payment profile on the subscription or subscription group to the existing payment profile with the id specified.
 
         You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
@@ -16983,8 +16649,6 @@ paths:
           description: Bad Request
       operationId: post-subscriptions-subscription_id-purge.json
       description: |-
-        # Purge Subscription
-
         For sites in test mode, you may purge individual subscriptions.
 
         Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string `ack` parameter. You may also delete the customer record and/or payment profiles by passing `cascade` parameters. For example, to delete just the customer record, the query params would be: `?ack={customer_id}&cascade[]=customer`
@@ -17047,7 +16711,7 @@ paths:
                       replenish_to_amount_in_cents: 50000
                       replenish_threshold_amount_in_cents: 10000
       operationId: post-subscriptions-subscription_id-prepaid_configurations.json
-      description: '# Update Prepaid Subscription Configuration'
+      description: ''
       requestBody:
         content:
           application/json:
@@ -17123,8 +16787,6 @@ paths:
                       created_at: '2018-08-30T17:14:30-04:00'
       operationId: post-subscriptions-subscription_id-group.json
       description: |-
-        # Add Subscription to Group
-
         For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to add existing subscriptions to subscription groups.
 
         Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
@@ -17180,10 +16842,7 @@ paths:
                     errors:
                       - You can not remove primary subscription when there are others in group
       operationId: delete-subscriptions-subscription_id-group.json
-      description: |-
-        # Remove Subscription from Group
-
-        For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to remove existing subscription from subscription group.
+      description: 'For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to remove existing subscription from subscription group.'
   /subscriptions/preview.json:
     post:
       summary: Subscription Preview
@@ -17299,8 +16958,6 @@ paths:
                         existing_balance_in_cents: 0
       operationId: post-subscriptions-preview.json
       description: |-
-        # Subscription Preview
-
         The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a subscription creation.
 
         The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For more information, please see our documentation  [here](http://help.chargify.com/subscriptions/subscription-summary.html#next-billing).
@@ -17420,10 +17077,7 @@ paths:
                       total_pages: 1
                       per_page: 10
       operationId: get-chargify_js_keys.json
-      description: |-
-        # List Chargify.js Public Keys
-
-        This endpoint returns public keys used for Chargify.js.
+      description: This endpoint returns public keys used for Chargify.js.
       parameters:
         - schema:
             type: integer
@@ -17470,8 +17124,6 @@ paths:
                       - Consolidated proforma invoice generation already in progress
       operationId: post-subscription_groups-subscription_group_uid-proforma_invoices.json
       description: |-
-        # Create Consolidated Proforma Invoices
-
         This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will return a 201 with no message, or a 422 with any errors. To find and view the new consolidated proforma invoice, you may poll the subscription group listing for proforma invoices; only one consolidated proforma invoice may be created per group at a time.
 
         If the information becomes outdated, simply void the old consolidated proforma invoice and generate a new one.
@@ -17495,7 +17147,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      description: '# List Subscription Group Proforma Invoices'
+      description: ''
   '/proforma_invoices/{proforma_invoice_uid}.json':
     parameters:
       - schema:
@@ -17510,8 +17162,6 @@ paths:
         - Proforma Invoices
       operationId: get-proforma_invoices-proforma_invoice_uid-.json
       description: |-
-        # Read Proforma Invoice
-
         Use this endpoint to read the details of an existing proforma invoice.
 
         ## Restrictions
@@ -17716,8 +17366,6 @@ paths:
                       - Coupon is invalid.
       operationId: post-subscriptions-subscription_id-add_coupon.json
       description: |-
-        # Add Coupons to Subscription
-
         An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://help.chargify.com/products/product-coupons.html#stackable-coupons)
 
         ## Query Parameters vs Request Body Parameters
@@ -17787,8 +17435,6 @@ paths:
                       - There's no coupon applied to this subscription
       operationId: delete-subscriptions-subscription_id-remove_coupon.json
       description: |-
-        # Remove Coupon from Subscription
-
         Use this endpoint to remove a coupon from an existing subscription.
 
         For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://help.chargify.com/subscriptions/coupons.html#removing-a-coupon)
@@ -17837,8 +17483,6 @@ paths:
                       - this subscription is not eligible to create proforma invoices
       operationId: post-subscriptions-subscription_id-proforma_invoices.json
       description: |-
-        # Create Proforma Invoice
-
         This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
 
         If you would like to preview the next billing amounts without generating a full proforma invoice, please use the renewal preview endpoint.
@@ -17860,10 +17504,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Proforma-Invoice'
       operationId: get-subscriptions-subscription_id-proforma_invoices.json
-      description: |-
-        # List Subscription Proforma Invoices
-
-        By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.
+      description: 'By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.'
       parameters:
         - schema:
             type: string
@@ -17985,8 +17626,6 @@ paths:
                       - Only draft proforma invoices may be voided.
       operationId: post-proforma_invoices-proforma_invoice_uid-void.json
       description: |-
-        # Void Proforma Invoice
-
         This endpoint will void a proforma invoice that has the status "draft".
 
         ## Restrictions
@@ -18045,8 +17684,6 @@ paths:
                       - 'cc_recipient_emails: must be a valid email address'
       operationId: post-invoices-uid-deliveries.json
       description: |-
-        # Send Invoice
-
         This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
 
         Please note that if no recipient email addresses are specified in the request, then the subscription's default email configuration will be used. For example, if `recipient_emails` is left blank, then the invoice will be delivered to the subscription's customer email address.
@@ -18225,8 +17862,6 @@ paths:
                       - Invoice must have an open status
       operationId: post-invoices-uid-customer_information-preview.json
       description: |-
-        # Preview Customer Information Changes
-
         Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
 
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
@@ -18398,8 +18033,6 @@ paths:
                       - Invoice must have an open status
       operationId: put-invoices-uid-customer_information-preview.json
       description: |-
-        # Update Customer Information
-
         This endpoint updates customer information on an open invoice and returns the updated invoice. If you would like to preview changes that will be applied, use the `/invoices/{uid}/customer_information/preview.json` endpoint before.
 
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.

@@ -22,7 +22,7 @@ The second method of interaction is using Chargify Direct. Chargify Direct has t
 
 ## Chargify Direct via Secure Parameters
 
-Secure parameters are used when using the transparent redirect (posting values directly) to Chargify using a `<form method='POST' \>`. This is done when [creating new subscriptions](./Signups.md) and [updating payment profile](../basics/Subscriptions.md#updating-payment-details) information.
+Secure parameters are used when using the transparent redirect (posting values directly) to Chargify using a `<form method='POST' \>`. This is done when [creating new subscriptions](./ZG9jOjE0NjAzNDIw-signups) and [updating payment profile](./ZG9jOjE0NjAzNDEx-subscriptions#updating-payment-details) information.
 
 Every Chargify Direct post must contain a set of cryptographically signed secure parameters. The secure parameters are necessary in order to:
 

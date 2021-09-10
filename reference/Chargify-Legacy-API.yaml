@@ -93,19 +93,19 @@ paths:
                       - 'Amount: is not a number.'
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
-        # Create Adjustment
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
+        |  |  |  |
+        |--|--|--|
         | Scenario 1 | To create an Adjustment on a Subscription to increase the balance by a certain dollar amount, include the following to your request: | `"amount":"4.00"`                                            |
-        |------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
         | Scenario 2 | To increase the Subscription balance by a certain amount of cents, use the following attribute in your request:                      | `"amount_in_cents":100`                                      |
         | Scenario 3 | To decrease the Subscription balance by a certain dollar amount, the request must contain:                                           | `"amount":"-4.00"`                                           |
         | Scenario 4 | To decrease the Subscription balance by a certain amount of cents, use:                                                              | `"amount_in_cents":"-400"`                                   |
         | Scenario 5 | To set the Subscription balance to an exact dollar amount, include the following attributes to the request:                          | `"adjustment_method":"target", "amount":"100.00"`            |
         | Scenario 6 | To set the Subscription balance to an exact positive amount of cents, the request must contain the following attributes:             | `"adjustment_method":"target",` `"amount_in_cents":"10000"`  |
         | Scenario 7 | To set the Subscription balance to an exact negative amount of cents, use the following attributes in the request:                   | `"adjustment_method":"target",` `"amount_in_cents":"-10000"` |
+
         ## Help Documentation 
         Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
       requestBody:
@@ -195,8 +195,6 @@ paths:
                       - 'Bogus Gateway: Forced failure'
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
-        # Create Charge
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -411,8 +409,6 @@ paths:
                         - 'Amount: is not a number.'
       operationId: post-subscriptions-subscription_id-payments.json
       description: |-
-        # Create Payment
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
 
@@ -579,8 +575,6 @@ paths:
                       - 'Memo: cannot be blank.'
       operationId: post-subscriptions-subscription_id-refunds.json
       description: |-
-        # Create Refund
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
 
@@ -711,8 +705,6 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: get-transactions-transaction_id-.json
       description: |-
-        # Read Transaction
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -729,6 +721,7 @@ paths:
         | refund                  | A positive amount that denotes “cash” given back to a subscriber (i.e. put back on their card) via a refund or credit at the gateway.                                                                                                                      | No effect on balance due           | Decreases revenue                     |
         | InfoTransaction / info  | An informational transaction whose description provides context for transactions nearby in time, or serves as a placeholder for another transaction that could not be attempted (i.e. when payment cannot be attempted because no card is on file)         | N/A                                | N/A                                   |
         | payment_authorization   | Deprecated. No longer appears in transactions listing                                                                                                                                                                                                      | N/A                                | N/A                                   |
+
         ## Kinds (Subtypes)
         ### Kinds for the ```charge``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                  |
@@ -744,6 +737,7 @@ paths:
         | charge                  | metered                  | Deprecated. May exist for very old transactions. Can be considered an alias for “metered_component”.                                                                                        |
         | charge                  | tax                      | A charge for the taxes computed on taxable line items for the billing event (signup or renewal).                                                                                             |
         | charge                  |                          | A generic charge that is not otherwise classified by any of the above values for `kind`.                                                                                                     |
+
         ### Kinds for the ```credit``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                         |
         |-------------------------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
@@ -751,6 +745,7 @@ paths:
         | credit                  | on_off_component         | A credit against an on/off component charge. Usually generated during a prorated downgrade for an amount previously charged.        |
         | credit                  | tax                      | A credit against tax charges. Usually generated during a prorated downgrade to offset a tax amount already assessed.                |
         | credit                  |                          | A generic credit that is not otherwise classified by any of the above values for `kind`.                                            |
+
         ### Kinds for the ```adjustment``` transaction type
         | Type / Transaction Type | Kind                     | Description                                                                                                                                                                                         |
         |-------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -764,6 +759,7 @@ paths:
         | adjustment              |                          | A generic adjustment that is not otherwise classified by any of the above values for `kind`. This is the kind of ad-hoc adjustment that can be created via the API.                                 |
         | adjustment              | voided_invoice           | (Relationship Invoicing only) An adjustment as a result of a voided invoice.                                                                                                                        |
         | adjustment              | cancelation              | (Relationship Invoicing only) An adjustment as a result of a canceled subscription.                                                                                                                 |
+
         ### Kinds for the ```payment``` transaction type
         | Type / Transaction Type | Kind                | Description                                                                                                                                                |
         |-------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -771,6 +767,7 @@ paths:
         | payment                 | component_proration | A payment received for a mid-period component proration (allocation change).                                                                               |
         | payment                 | manual              | A payment recorded “manually” via the Admin UI or API. This kind of payment was not one automatically processed by Chargify, but instead entered manually. |
         | payment                 |                     | A generic payment received in any sitation not described above. Usually an automatically captured payment for a normal signup or renewal.                  |
+
         ### Kinds for the ```refund``` transaction type
         | Type / Transaction Type | Kind   | Description                                                                                                                                                                               |
         |-------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -915,8 +912,6 @@ paths:
           name: order_by
           description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
       description: |-
-        # List Transactions
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1131,8 +1126,6 @@ paths:
           name: direction
           description: The sort order is based on the created_at timestamp then id for transactions within the same second.
       description: |-
-        # List Transactions for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1160,8 +1153,6 @@ paths:
                     count: 290
       operationId: get-transactions-count.json
       description: |-
-        # Transactions Count
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -1629,8 +1620,6 @@ paths:
                               account_transaction_id: null
       operationId: get-statements-statement_id-.json
       description: |-
-        # Read Statement
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -2758,8 +2747,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statements
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -3880,8 +3867,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statements for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -3951,8 +3936,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statement IDs
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4029,8 +4012,6 @@ paths:
           description: Specifies the direction of the sort on the given sort key
           name: direction
       description: |-
-        # List Statement IDs for Subscription
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4057,8 +4038,6 @@ paths:
                     count: 290
       operationId: get-statements-count.json
       description: |-
-        # Statements Count
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4164,8 +4143,6 @@ paths:
           description: Not Found
       operationId: get-invoices-invoice_id-.json
       description: |-
-        # Read Invoice
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4348,8 +4325,6 @@ paths:
           name: subscription_id
           description: The Chargify id for the subscription for which invoices should be returned
       description: |-
-        # List Invoices
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4412,8 +4387,6 @@ paths:
                       refunded_amount_in_cents: 0
       operationId: post-invoices-invoice_id-payments.json
       description: |-
-        # Create Invoice Payment 
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4469,8 +4442,6 @@ paths:
                     $ref: '#/components/schemas/Legacy-Charge'
       operationId: post-invoices-invoice_id-charges.json
       description: |-
-        # Create Charge
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
@@ -4570,7 +4541,8 @@ paths:
                       customer_id: 14332342
       operationId: post-invoices-invoice_id-adjustments.json
       description: |-
-        # Create Invoice Credit
+        | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
+        |-----------------------------------------------------------------------------|
 
         Use this method to add a credit to an existing invoice.
       requestBody:
@@ -5026,8 +4998,6 @@ paths:
                       scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
       operationId: put-subscriptions-subscription_id-reset_balance.json
       description: |-
-        # Reset Subscription Balance
-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
