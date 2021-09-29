@@ -262,7 +262,7 @@ paths:
                             - '0'
                             - '1'
                     taxable:
-                      description: 'If true, taxes will be assessed on the charge.'
+                      description: 'If true, taxes will be assessed for the charge.'
                       default: false
                       oneOf:
                         - type: boolean
