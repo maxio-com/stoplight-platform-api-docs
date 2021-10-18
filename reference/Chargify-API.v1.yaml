@@ -7140,6 +7140,8 @@ paths:
         + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](./ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
         + [Using Chargify.js with Stripe BECS Direct Debit - full example](./ZG9jOjE0NjAzNDIy-examples#full-example-with-becs-direct-debit-stripe-gateway)
+
+        ## Checkout
       requestBody:
         content:
           application/json:
