@@ -416,6 +416,13 @@ paths:
         Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
         Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
+
+        ### Payment Input Attributes
+
+        | amount          | The amount represented as a string of the payment. E.g. if the payment was for $14.50, you would pass `14.50`         |
+        |-----------------|-----------------------------------------------------------------------------------------------------------------------|
+        | amount_in_cents | The amount represented as a string of the payment in cents. E.g. if the payment was for $14.50, you would pass `1450` |
+        | memo            | Typically the description of why the payment occured                                                                  |
       parameters: []
       requestBody:
         content:
