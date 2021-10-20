@@ -7127,7 +7127,7 @@ paths:
 
         Create a Payment Profile for ACH usage
         If you would like to create a payment method that is a Bank Account applicable for ACH payments use the following:
-        ```
+        ```json
         {
         "payment_profile": {
           "customer_id": [Valid-Customer-ID],
@@ -7189,7 +7189,7 @@ paths:
 
         ## Create a Payment Profile with a Chargify.js token
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": 1036,
@@ -7239,7 +7239,7 @@ paths:
 
         Following examples create customer, bank account and mandate in GoCardless:
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": "Valid-Customer-ID",
@@ -7259,7 +7259,7 @@ paths:
 
         ### GoCardless with IBAN
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": "24907598",
@@ -7279,7 +7279,7 @@ paths:
 
         If the customer, bank account, and mandate already exist in GoCardless, a payment profile can be created by using the IDs. In order to create masked versions of `bank_account_number` and `bank_routing_number` that are used to display within Chargify Admin UI, you can pass the last four digits for this fields which then will be saved in this form `XXXX[four-provided-digits]`.
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": "24907598",
@@ -7322,7 +7322,7 @@ paths:
         The following example creates a customer, bank account and mandate in Stripe:
 
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": "24907598",
@@ -7362,7 +7362,7 @@ paths:
         The following example creates a customer, bank account and mandate in Stripe:
 
 
-        ```
+        ```json
         {
           "payment_profile": {
             "customer_id": "24907598",
@@ -7383,7 +7383,7 @@ paths:
 
         It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
 
-        ```
+        ```json
         {
             "jsonapi": {
                 "version": "1.0"
@@ -16024,6 +16024,32 @@ paths:
 
         If you regularly need to override the current_period_starts_at for new subscriptions, this can also be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation. See the documentation on [Importing Subscriptions](./b3A6MTQxMDgzODg-create-subscription#subscriptions-import) for more information.
 
+        ## Subscriptions Override Documentation
+
+        There is no current complimentary documentation for this endpoint. 
+
+        ## Fields That Can Be Manipulated
+
+        | activated_at         | Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)                |
+        |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | canceled_at          | Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.           |
+        | cancellation_message | Can be used to record a reason for the original cancellation.                                                                                                             |
+        | expires_at           | Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time. |
+        | current_period_starts_at | Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation.  The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.
+
+        No other fields are currently available. Attempting to set any other fields will cause a `400 Bad Request` response. You only need to send the fields you would like to change.
+
+        Note that changing these fields will not affect any other attributes. For example, adding an expiration date will not affect the next assessment date on the subscription.
+
+        Note that if you regularly need to override the current_period_starts at for new subscriptions, this can also be accomplished by setting both `previous_billing_at` and `next_billing_at` at subscription creation.  See the documentation on [Importing Subscriptions](https://reference.chargify.com/v1/subscriptions-import/importing-subscriptions) for more information.
+
+        The fields should be nested beneath a `subscription` key – see the examples below for more information.
+
+        ## Headers
+
+        + `Accept`: set to either `application/json` or `application/xml` depending on the top of response you desire
+        + `Content-Type`: set to either `application/json` or `application/xml` depending on the top of request body you send
+
         ## Limitations
 
         When passing `current_period_starts_at` some validations are made:
@@ -16031,6 +16057,7 @@ paths:
         1. The subscription needs to be unbilled (no statements or invoices).
         2. The value passed must be a valid date/time.
         3. The value passed must be before the current date/time.
+        
       requestBody:
         content:
           application/json:
