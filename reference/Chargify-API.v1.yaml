@@ -7665,7 +7665,8 @@ paths:
                         bank_account_holder_type: personal
                         payment_type: bank_account
       operationId: get-payment_profiles.json
-      description: ''
+      description: |-
+        This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
       parameters:
         - schema:
             type: integer
@@ -7834,7 +7835,41 @@ paths:
                       bank_account_holder_type: personal
                       payment_type: bank_account
       operationId: get-payment_profiles-payment_profile_id-.json
-      description: ''
+      description: |-
+        Using the GET method you can retrieve a Payment Profile identified by its unique ID.
+
+        Please note that a different JSON object will be returned if the card method on file is a bank account.
+
+        ### Response for Bank Account
+
+        Example response for Bank Account:
+
+        ```
+        {
+          "payment_profile": {
+            "id": 10089892,
+            "first_name": "Chester",
+            "last_name": "Tester",
+            "customer_id": 14543792,
+            "current_vault": "bogus",
+            "vault_token": "0011223344",
+            "billing_address": "456 Juniper Court",
+            "billing_city": "Boulder",
+            "billing_state": "CO",
+            "billing_zip": "80302",
+            "billing_country": "US",
+            "customer_vault_token": null,
+            "billing_address_2": "",
+            "bank_name": "Bank of Kansas City",
+            "masked_bank_routing_number": "XXXX6789",
+            "masked_bank_account_number": "XXXX3344",
+            "bank_account_type": "checking",
+            "bank_account_holder_type": "personal",
+            "payment_type": "bank_account"
+          }
+        }
+        ```
+
     put:
       summary: Update Payment Profile
       tags:
