@@ -20658,6 +20658,12 @@ components:
           type: integer
         price_point_handle:
           type: string
+        price_point_type:
+          type: string
+          enum:
+            - default
+            - catalog
+            - custom
         enabled:
           type: boolean
           description: (for on/off components) indicates if the component is enabled for the subscription
