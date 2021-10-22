@@ -417,12 +417,6 @@ paths:
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
         Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
 
-        ### Payment Input Attributes
-
-        | amount          | The amount represented as a string of the payment. E.g. if the payment was for $14.50, you would pass `14.50`         |
-        |-----------------|-----------------------------------------------------------------------------------------------------------------------|
-        | amount_in_cents | The amount represented as a string of the payment in cents. E.g. if the payment was for $14.50, you would pass `1450` |
-        | memo            | Typically the description of why the payment occured                                                                  |
       parameters: []
       requestBody:
         content:
@@ -615,26 +609,6 @@ paths:
         + QuickPay
         + Stripe
         + Trust Commerce
-
-        ### Refund Input Attributes
-
-        In order to create a refund, you must pass an a payment id, amount and a memo. The amount can be specified by either the amount parameter or the amount_in_cents parameter.
-
-        | payment_id      | (required) The id of the Payment that the credit will be applied to                                                                                                                                                                                                                                                                                                    |
-        |-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-        | amount          | (either ‘amount’ or ‘amount_in_cents’ is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as `10.00`.                                                                                                                                                                            |
-        | amount_in_cents | (either ‘amount’ or ‘amount_in_cents’ is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as `1000`. If you pass a value for both ‘amount’ and ‘amount_in_cents’, the value in ‘amount_in_cents’ will be used and ‘amount’ will be discarded. |
-        | memo            | (required) A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.                                                                                                                                                                                                                                          |
-        
-        ### Refund Output Attributes
-
-        When a refund is successfully created, a representation of the newly created refund will be returned to you as JSON or XML in the message body, with the following attributes:
-
-        | id              | The id of the created refund                                         |
-        |-----------------|----------------------------------------------------------------------|
-        | success         | Either `true` or `false`, depending on the success of the refund.    |
-        | amount_in_cents | The amount of the refund and captured payment, represented in cents. |
-        | memo            | The memo for the created refund. |
         
         ### Errors
 
@@ -676,7 +650,7 @@ paths:
                       description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
                     memo:
                       type: string
-                      description: A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
+                      description: (required) A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
                 external:
                   type: integer
                   enum:
