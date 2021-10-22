@@ -7429,26 +7429,30 @@ paths:
                       enum:
                         - bogus
                         - authorizenet
-                        - trust_commerce
-                        - payment_express
+                        - authorizenet_cim
                         - beanstream
+                        - bpoint
                         - braintree_blue
-                        - paypal
-                        - quickpay
+                        - cybersource
+                        - elavon
                         - eway
                         - eway_rapid_std
-                        - stripe_connect
-                        - pin
-                        - wirecard
-                        - bpoint
                         - firstdata
-                        - elavon
-                        - cybersource
-                        - paymill
-                        - moneris
-                        - litle
-                        - square
+                        - forte
+                        - fusebox
                         - gocardless
+                        - litle
+                        - moneris
+                        - moneris_us
+                        - orbital
+                        - payment_express
+                        - paymill
+                        - pin
+                        - quickpay
+                        - square
+                        - stripe_connect
+                        - trust_commerce
+                        - wirecard
                         - checkout
                     vault_token:
                       type: string
@@ -7458,6 +7462,7 @@ paths:
                       description: '(Optional, used only for Subscription Import) (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
                     customer_id:
                       type: integer
+                      description: (Required when creating a new payment profile) The Chargify customer id.
                     paypal_email:
                       type: string
                       description: DEPRECATED - used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
