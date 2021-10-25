@@ -17104,7 +17104,7 @@ paths:
         name: subscription_group_uid
         in: path
         required: true
-        description: The Chargify id of the subscription group
+        description: The Chargify uid of the subscription group
     post:
       summary: Create Consolidated Proforma Invoices
       tags:
@@ -17153,7 +17153,10 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      description: ''
+      description: |
+        Only proforma invoices with a `consolidation_level` of parent are returned.
+
+        By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to true.
   '/proforma_invoices/{proforma_invoice_uid}.json':
     parameters:
       - schema:
