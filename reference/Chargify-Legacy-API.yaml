@@ -416,7 +416,6 @@ paths:
         Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
         Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
-
       parameters: []
       requestBody:
         content:
@@ -585,7 +584,7 @@ paths:
         - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
         Note that external refunds will reduce revenue, but they do not affect the balance due for the subscription.
         For more information on creating refunds in general, please see [Refunds](https://help.chargify.com/subscriptions/refunds.html).
-        
+
         ## External Refund Use Cases
          
         The use case for this type of refund is as follows:
@@ -609,7 +608,7 @@ paths:
         + QuickPay
         + Stripe
         + Trust Commerce
-        
+
         ### Errors
 
         Errors are returned either as an array of error explanation strings and formatted as either an XML or JSON array, depending on your Accept headers. The listing of currently possible error messages is listed below:
@@ -618,7 +617,6 @@ paths:
         + Amount: is not a number.
         + Amount: must be greater than or equal to 0.
         + Gateway response if a gateway fail featuring "[Your original memo]"
-
       requestBody:
         content:
           application/json:
@@ -650,7 +648,7 @@ paths:
                       description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
                     memo:
                       type: string
-                      description: (required) A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
+                      description: A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
                 external:
                   type: integer
                   enum:

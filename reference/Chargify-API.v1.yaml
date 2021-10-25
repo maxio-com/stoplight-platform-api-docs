@@ -323,20 +323,20 @@ paths:
                           description: A string describing which event type produced the given webhook
                         id:
                           type: integer
-                          description: The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event.
+                          description: 'The unique identifier for the webhooks (unique across all of Chargify). This is not changed on a retry/replay of the same webhook, so it may be used to avoid duplicate action for the same event.'
                         created_at:
                           type: string
                           description: Timestamp indicating when the webhook was created
                         last_error:
                           type: string
-                          description: Text describing the status code and/or error from the last failed attempt to send the Webhook. When a webhook is retried and accepted, this field will be cleared.
+                          description: 'Text describing the status code and/or error from the last failed attempt to send the Webhook. When a webhook is retried and accepted, this field will be cleared.'
                         last_error_at:
                           type: string
-                          description: Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.
+                          description: 'Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.'
                         accepted_at:
                           type: string
                           nullable: true
-                          description: Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.
+                          description: 'Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.'
                         last_sent_at:
                           type: string
                           description: Timestamp indicating when the most recent attempt was made to send the webhook
@@ -345,7 +345,7 @@ paths:
                           description: The url that the endpoint was last sent to.
                         successful:
                           type: boolean
-                          description: A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, i.e. 15 seconds)
+                          description: 'A boolean flag describing whether the webhook was accepted by the webhook endpoint for the most recent attempt. (Acceptance is defined by receiving a “200 OK” HTTP response within a reasonable timeframe, i.e. 15 seconds)'
                         body:
                           type: string
                           description: The data sent within the webhook post
@@ -7328,7 +7328,7 @@ paths:
 
         - whether the authentication was successful (`success`)
         - the payment profile ID (`payment_profile_id`)
-        
+
         Lastly, you can also specify a `redirect_url` parameter within the `action_link` URL if you’d like to redirect a customer back to your site. 
 
         The final URL that you send a customer to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5uhkbodx5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:4000&redirect_url=https://yourpage.com`
@@ -7345,7 +7345,6 @@ paths:
         6. After the customer finishes 3DS authentication, we let you know the result by making a request to applied `callback_url`.
         7. After that, we redirect the customer to the `redirect_url`; at this point the result of authentication is known 
         8. Optionally, you can use the applied "msg" param in the `redirect_url` to determine whether it was successful or not
-
       requestBody:
         content:
           application/json:
@@ -7357,30 +7356,33 @@ paths:
                   properties:
                     chargify_token:
                       type: string
-                      description: (Optional) Token received after sending billing informations using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+                      description: Token received after sending billing informations using chargify.js.
+                      example: tok_9g6hw85pnpt6knmskpwp4ttt
                     id:
                       type: integer
                     payment_type:
                       type: string
-                      description: Default is `credit_card`
+                      description: ''
                       enum:
                         - credit_card
                         - bank_account
                         - paypal_account
+                      default: credit_card
                     first_name:
                       type: string
-                      description: '(Optional) First name on card or bank account. If omitted, the first_name from customer attributes will be used.'
+                      description: 'First name on card or bank account. If omitted, the first_name from customer attributes will be used.'
                     last_name:
                       type: string
-                      description: '(Optional) Last name on card or bank account. If omitted, the last_name from customer attributes will be used.'
+                      description: 'Last name on card or bank account. If omitted, the last_name from customer attributes will be used.'
                     masked_card_number:
                       type: string
                     full_number:
                       type: string
-                      description: 'The full credit card number (string representation, i.e. 5424000000000015)'
+                      description: The full credit card number
+                      example: '5424000000000015'
                     card_type:
                       type: string
-                      description: '(Optional, used only for Subscription Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI.'
+                      description: '(used only for an Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI.'
                       enum:
                         - visa
                         - master
@@ -7398,34 +7400,34 @@ paths:
                       type:
                         - integer
                         - string
-                      description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5'
+                      description: '(Optional when performing an Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5'
                     expiration_year:
                       type:
                         - integer
                         - string
-                      description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012'
+                      description: '(Optional when performing a Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012'
                     billing_address:
                       type: string
-                      description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.'
+                      description: The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.
                     billing_address_2:
                       type: string
-                      description: Optional) Second line of the customer’s billing address i.e. Apt. 100
+                      description: Second line of the customer’s billing address i.e. Apt. 100
                       nullable: true
                     billing_city:
                       type: string
-                      description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.'
+                      description: The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.
                     billing_state:
                       type: string
-                      description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
+                      description: 'The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
                     billing_country:
                       type: string
-                      description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time.'
+                      description: 'The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time.'
                     billing_zip:
                       type: string
-                      description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.'
+                      description: The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.
                     current_vault:
                       type: string
-                      description: 'The vault that stores the payment profile with the provided vault_token'
+                      description: The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing
                       enum:
                         - bogus
                         - authorizenet
@@ -7456,40 +7458,42 @@ paths:
                         - checkout
                     vault_token:
                       type: string
-                      description: '(Optional, used only for Subscription Import) The “token” provided by your vault storage for an already stored payment profile'
+                      description: The “token” provided by your vault storage for an already stored payment profile
                     customer_vault_token:
                       type: string
-                      description: '(Optional, used only for Subscription Import) (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
+                      description: (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token
                     customer_id:
                       type: integer
                       description: (Required when creating a new payment profile) The Chargify customer id.
                     paypal_email:
                       type: string
-                      description: DEPRECATED - used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
+                      description: used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
+                      deprecated: true
                     payment_method_nonce:
                       type: string
-                      description: DEPRECATED - used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
+                      description: used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
+                      deprecated: true
                     gateway_handle:
                       type: string
-                      description: '(Optional) This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://help.chargify.com/payment-gateways/gateway-configuration.html#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
+                      description: 'This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://help.chargify.com/payment-gateways/gateway-configuration.html#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
                     cvv:
                       type: string
-                      description: '(Optional, may be required by your gateway settings) The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.'
+                      description: The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.
                     bank_name:
                       type: string
-                      description: (Required when creating with ACH or GoCardless, optional with Stripe Direct Debit). The name of the bank where the customerʼs account resides
+                      description: '(Required when creating with ACH or GoCardless, optional with Stripe Direct Debit). The name of the bank where the customerʼs account resides'
                     bank_iban:
                       type: string
-                      description: (Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided
+                      description: '(Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided'
                     bank_routing_number:
                       type: string
                       description: (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
                     bank_account_number:
                       type: string
-                      description: (Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number
+                      description: '(Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number'
                     bank_branch_code:
                       type: string
-                      description: (Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided
+                      description: '(Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided'
             examples:
               ACH:
                 value:
@@ -7662,8 +7666,7 @@ paths:
                         bank_account_holder_type: personal
                         payment_type: bank_account
       operationId: get-payment_profiles.json
-      description: |-
-        This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
+      description: 'This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.'
       parameters:
         - schema:
             type: integer
@@ -7866,7 +7869,6 @@ paths:
           }
         }
         ```
-
     put:
       summary: Update Payment Profile
       tags:
@@ -12574,7 +12576,7 @@ paths:
         - whether the authentication was successful (`success`)
         - the gateway ID for the payment (`gateway_payment_id`)
         - the subscription ID (`subscription_id`)
-        
+
         Lastly, you can also specify a `redirect_url` within the `action_link` URL if you’d like to redirect a customer back to your site. 
 
         The final URL that you send a customer to to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_time_token_id=128&callback_url=https://localhost:4000&redirect_url=https://yourpage.com`
@@ -12600,7 +12602,7 @@ paths:
         - whether the authentication was successful (`success`)
         - the gateway ID for the payment (`gateway_payment_id`)
         - the subscription ID (`subscription_id`)
-        
+
         Lastly, you can also specify a `redirect_url` parameter within the `action_link` URL if you’d like to redirect a customer back to your site. 
 
         The final URL that you send a customer to complete 3D Secure may resemble the following, where the first half is the `action_link` and the second half contains a `redirect_url` and `callback_url`: `https://mysite.chargify.com/3d-secure/pay_6gjofv7dlyrkpizlolsuspvtiu?one_time_token_id=123&callback_url=https://localhost:4000&redirect_url=https://yourpage.com`
@@ -12744,7 +12746,6 @@ paths:
         The `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.
 
         The optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also.
-
       requestBody:
         content:
           application/json:
@@ -15770,7 +15771,6 @@ paths:
         1. The subscription needs to be unbilled (no statements or invoices).
         2. The value passed must be a valid date/time.
         3. The value passed must be before the current date/time.
-
       requestBody:
         content:
           application/json:
@@ -16549,7 +16549,6 @@ paths:
         When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance.  This is especially useful for manual replenishment of prepaid subscriptions.
 
         Please note that you **can't** pass `amount_in_cents`.
-
       requestBody:
         content:
           application/json:
