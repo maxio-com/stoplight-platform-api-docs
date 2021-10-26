@@ -7110,7 +7110,8 @@ paths:
 
         You must include a customer_id so that Chargify will attach it to the customer entry. If no customer_id is included the API will return a 404.
 
-        Create a Payment Profile for ACH usage
+        ## Create a Payment Profile for ACH usage
+
         If you would like to create a payment method that is a Bank Account applicable for ACH payments use the following:
         ```json
         {
