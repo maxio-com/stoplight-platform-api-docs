@@ -14,4 +14,3 @@ jobs:
           destination_branch: "main"
           source_ssh_private_key: ${{ secrets.SOURCE_SSH_PRIVATE_KEY }}
           destination_ssh_private_key: ${{ secrets.DESTINATION_SSH_PRIVATE_KEY }}
-          git_discovery_across_filesystem: 1
