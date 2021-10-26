@@ -584,6 +584,7 @@ paths:
         - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
         Note that external refunds will reduce revenue, but they do not affect the balance due for the subscription.
         For more information on creating refunds in general, please see [Refunds](https://help.chargify.com/subscriptions/refunds.html).
+
         ## External Refund Use Cases
          
         The use case for this type of refund is as follows:
@@ -607,6 +608,15 @@ paths:
         + QuickPay
         + Stripe
         + Trust Commerce
+
+        ### Errors
+
+        Errors are returned either as an array of error explanation strings and formatted as either an XML or JSON array, depending on your Accept headers. The listing of currently possible error messages is listed below:
+
+        + Memo: cannot be blank.
+        + Amount: is not a number.
+        + Amount: must be greater than or equal to 0.
+        + Gateway response if a gateway fail featuring "[Your original memo]"
       requestBody:
         content:
           application/json:
