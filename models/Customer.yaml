@@ -68,7 +68,7 @@ properties:
     type:
       - string
       - 'null'
-    description: "\tThe customer shipping address country"
+    description: The customer shipping address country
   country_name:
     type:
       - string
@@ -112,11 +112,11 @@ properties:
       - integer
       - 'null'
   locale:
-    type: 
+    type:
       - string
       - 'null'
     description: The locale for the customer to identify language-region
   default_subscription_group_uid:
-    type: 
+    type:
       - string
       - 'null'

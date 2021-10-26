@@ -20149,7 +20149,7 @@ components:
               description: The last name of the customer. Required when creating a customer via attributes.
             email:
               type: string
-              description: "\tThe email address of the customer. Required when creating a customer via attributes."
+              description: The email address of the customer. Required when creating a customer via attributes.
             cc_emails:
               type: string
               description: A list of emails that should be cc’d on all customer communications. Optional.
@@ -20175,12 +20175,12 @@ components:
             zip:
               type: string
               description: (Optional) The customer’s shipping address zip code (i.e. “12345”).
-            country:
-              type: string
-              description: '(Optional) The customer shipping address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”).'
             phone:
               type: string
               description: (Optional) The phone number of the customer.
+            country:
+              type: string
+              description: '(Optional) The customer shipping address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”).'
             verified:
               type: boolean
             tax_exempt:
@@ -20392,7 +20392,7 @@ components:
           description: '(Optional) The ACH authorization agreement terms. If enabled, an email will be sent to the customer with a copy of the terms.'
         authorizer_first_name:
           type: string
-          description: "\t(Optional) The first name of the person authorizing the ACH agreement."
+          description: (Optional) The first name of the person authorizing the ACH agreement.
         authorizer_last_name:
           type: string
           description: (Optional) The last name of the person authorizing the ACH agreement.

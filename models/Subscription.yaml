@@ -105,11 +105,11 @@ properties:
       - remittance
       - prepaid
   customer:
-    $ref: './Customer.yaml'
+    $ref: ./Customer.yaml
   product:
-    $ref: './Product.yaml'
+    $ref: ./Product.yaml
   credit_card:
-    $ref: './Payment-Profile.yaml'
+    $ref: ./Payment-Profile.yaml
   group:
     type:
       - object
@@ -248,7 +248,7 @@ properties:
     nullable: true
   net_terms:
     type: integer
-    description: "\tOn Relationship Invoicing, the number of days before a renewal invoice is due."
+    description: 'On Relationship Invoicing, the number of days before a renewal invoice is due.'
     nullable: true
   stored_credential_transaction_id:
     type: integer
