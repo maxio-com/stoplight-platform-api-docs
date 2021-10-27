@@ -19707,7 +19707,7 @@ components:
           type: string
         address:
           type: string
-        address2:
+        address_2:
           type: string
         city:
           type: string
@@ -19732,6 +19732,7 @@ components:
         - first_name
         - last_name
         - email
+      description: ''
     Create-Metafield:
       title: Create Metafield
       type: object
@@ -21889,7 +21890,7 @@ components:
           type: string
         address:
           type: string
-        address2:
+        address_2:
           type: string
         city:
           type: string
