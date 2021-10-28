@@ -7079,7 +7079,9 @@ paths:
                     type: string
                   verified:
                     type: boolean
-                  '':
+                  site_gateway_setting_id:
+                    type: integer
+                  gateway_handle:
                     type: string
               examples:
                 Example:
