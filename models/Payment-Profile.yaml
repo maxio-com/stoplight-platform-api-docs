@@ -21,6 +21,8 @@ examples:
     payment_type: string
     disabled: true
     chargify_token: string
+    site_gateway_setting_id: 1
+    gateway_handle: string
 properties:
   id:
     type: integer
