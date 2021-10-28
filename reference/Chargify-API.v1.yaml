@@ -7677,8 +7677,8 @@ paths:
                         masked_bank_account_number: XXXX6789
                         bank_account_type: checking
                         bank_account_holder_type: personal
-                        payment_type: bank_account,
-                        site_gateway_setting_id: 1,
+                        payment_type: bank_account
+                        site_gateway_setting_id: 1
                         gateway_handle: null
       operationId: get-payment_profiles.json
       description: 'This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.'
@@ -7834,7 +7834,7 @@ paths:
                       billing_country: US
                       customer_vault_token: null
                       billing_address_2: ''
-                      payment_type: credit_card,
+                      payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: null
                 Bank Account:
@@ -7968,7 +7968,7 @@ paths:
                       billing_country: US
                       customer_vault_token: null
                       billing_address_2: ''
-                      payment_type: credit_card,
+                      payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: null
       operationId: put-payment_profiles-payment_profile_id-.json
@@ -17835,28 +17835,26 @@ paths:
                 Example:
                   value:
                     payment_profile:
-                      id: 0
-                      first_name: string
-                      last_name: string
-                      masked_card_number: string
+                      id: 10211899
+                      first_name: Amelia
+                      last_name: Example
+                      masked_card_number: XXXX-XXXX-XXXX-1
                       card_type: bogus
-                      expiration_month: 0
-                      expiration_year: 0
-                      customer_id: 0
+                      expiration_month: 2
+                      expiration_year: 2018
+                      customer_id: 14399371
                       current_vault: bogus
-                      vault_token: string
-                      billing_address: string
-                      billing_city: string
-                      billing_state: string
-                      billing_zip: string
-                      billing_country: string
-                      customer_vault_token: string
-                      billing_address_2: string
-                      payment_type: string
-                      disabled: true
-                      chargify_token: string
+                      vault_token: '1'
+                      billing_address: ''
+                      billing_city: ''
+                      billing_state: ''
+                      billing_zip: ''
+                      billing_country: ''
+                      customer_vault_token: null
+                      billing_address_2: ''
+                      payment_type: credit_card
                       site_gateway_setting_id: 1
-                      gateway_handle: string
+                      gateway_handle: null
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
