@@ -7804,8 +7804,6 @@ paths:
                             type: boolean
                           site_gateway_setting_id:
                             type: string
-                          '':
-                            type: string
                     type: object
               examples:
                 Card:
