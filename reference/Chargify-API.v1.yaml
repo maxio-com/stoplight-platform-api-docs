@@ -21860,20 +21860,61 @@ components:
         unit_name:
           type: string
         price_point_id:
-          type: integer
+          type:
+            - integer
+            - 'null'
         price_point_handle:
-          type: string
+          type:
+            - string
+            - 'null'
         price_point_type:
-          type: string
+          type:
+            - string
+            - 'null'
           enum:
             - default
             - catalog
             - custom
+        price_point_name:
+          type: string
         enabled:
           type: boolean
           description: (for on/off components) indicates if the component is enabled for the subscription
         unit_balance:
           type: integer
+        id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        component_handle:
+          type:
+            - string
+            - 'null'
+        archived_at:
+          type:
+            - string
+            - 'null'
+      examples:
+        - component_id: 0
+          subscription_id: 0
+          allocated_quantity: 0
+          pricing_scheme: string
+          name: string
+          kind: string
+          unit_name: string
+          price_point_id: 0
+          price_point_handle: string
+          price_point_type: default
+          price_point_name: string
+          enabled: true
+          unit_balance: 0
+          id: 0
+          created_at: string
+          updated_at: string
+          component_handle: string
+          archived_at: string
     Update-Customer:
       title: Update Customer
       type: object
