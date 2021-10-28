@@ -7625,6 +7625,12 @@ paths:
                       type: string
                     payment_type:
                       type: string
+                    site_gateway_setting_id:
+                      type: integer
+                    gateway_handle:
+                      type: string
+                    '':
+                      type: string
               examples:
                 Example:
                   value:
@@ -7753,6 +7759,10 @@ paths:
                             type: boolean
                             default: false
                             description: denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account
+                          site_gateway_setting_id:
+                            type: integer
+                          gateway_handle:
+                            type: string
                       - properties:
                           id:
                             type: integer
@@ -7793,7 +7803,9 @@ paths:
                           disabled:
                             type: boolean
                           site_gateway_setting_id:
-                            type: integer
+                            type: string
+                          '':
+                            type: string
                     type: object
               examples:
                 Card:
@@ -8148,6 +8160,10 @@ paths:
                         type: boolean
                         default: false
                         description: denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account
+                      site_gateway_setting_id:
+                        type: integer
+                      gateway_handle:
+                        type: string
               examples:
                 Example:
                   value:

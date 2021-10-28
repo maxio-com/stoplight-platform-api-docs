@@ -105,11 +105,11 @@ properties:
       - remittance
       - prepaid
   customer:
-    $ref: './Customer.yaml'
+    $ref: ./Customer.yaml
   product:
-    $ref: './Product.yaml'
+    $ref: ./Product.yaml
   credit_card:
-    $ref: './Payment-Profile.yaml'
+    $ref: ./Payment-Profile.yaml
   group:
     type:
       - object
@@ -190,6 +190,10 @@ properties:
       chargify_token:
         type: string
         description: Token received after sending billing informations using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+      site_gateway_setting_id:
+        type: integer
+      gateway_handle:
+        type: string
   payment_type:
     type: string
     nullable: true
