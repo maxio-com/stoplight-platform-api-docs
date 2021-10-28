@@ -7804,6 +7804,8 @@ paths:
                             type: boolean
                           site_gateway_setting_id:
                             type: string
+                          gateway_handle:
+                            type: string
                     type: object
               examples:
                 Card:
@@ -7928,6 +7930,10 @@ paths:
                       billing_country:
                         type: string
                       payment_type:
+                        type: string
+                      site_gateway_setting_id:
+                        type: integer
+                      gateway_handle:
                         type: string
               examples:
                 Example:
