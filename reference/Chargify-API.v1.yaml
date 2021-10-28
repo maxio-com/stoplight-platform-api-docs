@@ -7631,8 +7631,6 @@ paths:
                       type: integer
                     gateway_handle:
                       type: string
-                    '':
-                      type: string
               examples:
                 Example:
                   value:
