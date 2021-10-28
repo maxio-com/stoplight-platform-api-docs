@@ -40,7 +40,7 @@ properties:
     type: integer
     description: The Chargify-assigned id for the customer record to which the card belongs
   current_vault:
-    type: 
+    type:
       - string
       - 'null'
     nullable: true
@@ -97,3 +97,24 @@ properties:
   chargify_token:
     type: string
     description: Token received after sending billing informations using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+examples:
+  - id: 0
+    first_name: string
+    last_name: string
+    masked_card_number: string
+    card_type: bogus
+    expiration_month: 0
+    expiration_year: 0
+    customer_id: 0
+    current_vault: bogus
+    vault_token: string
+    billing_address: string
+    billing_city: string
+    billing_state: string
+    billing_zip: string
+    billing_country: string
+    customer_vault_token: string
+    billing_address_2: string
+    payment_type: string
+    disabled: true
+    chargify_token: string

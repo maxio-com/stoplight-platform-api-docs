@@ -7079,6 +7079,8 @@ paths:
                     type: string
                   verified:
                     type: boolean
+                  '':
+                    type: string
               examples:
                 Example:
                   value:
@@ -7790,6 +7792,8 @@ paths:
                             type: string
                           disabled:
                             type: boolean
+                          site_gateway_setting_id:
+                            type: integer
                     type: object
               examples:
                 Card:
