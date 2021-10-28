@@ -1,5 +1,26 @@
 title: Payment Profile
 type: object
+examples:
+    id: 10088716
+    first_name: Test
+    last_name: Subscription
+    masked_card_number: XXXX-XXXX-XXXX-1
+    card_type: bogus
+    expiration_month: 1
+    expiration_year: 2022
+    customer_id: 14543792
+    current_vault: bogus
+    vault_token: '1'
+    billing_address: 123 Montana Way
+    billing_city: Billings
+    billing_state: MT
+    billing_zip: '59101'
+    billing_country: US
+    customer_vault_token: null
+    billing_address_2: ''
+    payment_type: credit_card
+    site_gateway_setting_id: 1
+    gateway_handle: null
 properties:
   id:
     type: integer
@@ -40,7 +61,7 @@ properties:
     type: integer
     description: The Chargify-assigned id for the customer record to which the card belongs
   current_vault:
-    type: 
+    type:
       - string
       - 'null'
     nullable: true
@@ -97,3 +118,7 @@ properties:
   chargify_token:
     type: string
     description: Token received after sending billing informations using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+  site_gateway_setting_id:
+    type: integer
+  gateway_handle:
+    type: string
