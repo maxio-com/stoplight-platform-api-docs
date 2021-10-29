@@ -11490,6 +11490,9 @@ paths:
                       created_at: '2017-11-13T10:05:32-06:00'
                       price_point_id: 149416
                       quantity: 1000
+                      component_id: 500093
+                      component_handle: handle
+                      subscription_id: 22824464
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -11537,7 +11540,7 @@ paths:
 
         Previously recorded:
 
-        ```
+        ```json
         {
           "usage": {
             "quantity": 5000,
@@ -11548,7 +11551,7 @@ paths:
 
         At this point, `unit_balance` would be `5000`. To reduce the balance to `0`, POST the following payload:
 
-        ```
+        ```json
         {
           "usage": {
             "quantity": -5000,
@@ -21901,20 +21904,61 @@ components:
         unit_name:
           type: string
         price_point_id:
-          type: integer
+          type:
+            - integer
+            - 'null'
         price_point_handle:
-          type: string
+          type:
+            - string
+            - 'null'
         price_point_type:
-          type: string
+          type:
+            - string
+            - 'null'
           enum:
             - default
             - catalog
             - custom
+        price_point_name:
+          type: string
         enabled:
           type: boolean
           description: (for on/off components) indicates if the component is enabled for the subscription
         unit_balance:
           type: integer
+        id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        component_handle:
+          type:
+            - string
+            - 'null'
+        archived_at:
+          type:
+            - string
+            - 'null'
+      examples:
+        - component_id: 0
+          subscription_id: 0
+          allocated_quantity: 0
+          pricing_scheme: string
+          name: string
+          kind: string
+          unit_name: string
+          price_point_id: 0
+          price_point_handle: string
+          price_point_type: default
+          price_point_name: string
+          enabled: true
+          unit_balance: 0
+          id: 0
+          created_at: string
+          updated_at: string
+          component_handle: string
+          archived_at: string
     Update-Customer:
       title: Update Customer
       type: object
@@ -22006,6 +22050,15 @@ components:
     Usage:
       title: Usage
       type: object
+      examples:
+        - id: 0
+          memo: string
+          created_at: string
+          price_point_id: 0
+          quantity: 0
+          component_id: 0
+          component_handle: string
+          subscription_id: 0
       properties:
         id:
           type: integer
@@ -22019,3 +22072,11 @@ components:
           type:
             - integer
             - string
+        overage_quantity:
+          type: integer
+        component_id:
+          type: integer
+        component_handle:
+          type: string
+        subscription_id:
+          type: integer
