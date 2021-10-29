@@ -5121,6 +5121,14 @@ paths:
                         - starting_quantity: 1
                           ending_quantity: 100
                           unit_price: 4
+              On Off Component:
+                value:
+                  price_point:
+                    name: Special Pricing
+                    handle: special
+                    prices:
+                      - starting_quantity: 1
+                        unit_price: 5
     get:
       summary: List Price Points
       tags:
@@ -5285,6 +5293,11 @@ paths:
                       prices:
                         - starting_quantity: 1
                           unit_price: 4
+                    - name: Special Pricing
+                      handle: special
+                      prices:
+                        - starting_quantity: 1
+                          unit_price: 5
   '/components/{component_id}/price_points/{price_point_id}.json':
     parameters:
       - schema:
@@ -12983,10 +12996,10 @@ paths:
               Prepaid Subscription:
                 value:
                   subscription:
-                    product_handle: "basic"
-                    customer_id: 12345,
+                    product_handle: basic
+                    customer_id: '12345,'
                     payment_profile_id: 6789
-                    payment_collection_method: "prepaid"
+                    payment_collection_method: prepaid
                     prepaid_subscription_configuration:
                       initial_funding_amount_in_cents: 10000
                       replenish_to_amount_in_cents: 6000
