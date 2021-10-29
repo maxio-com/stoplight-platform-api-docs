@@ -12229,6 +12229,13 @@ paths:
         }
         ```
 
+        ## Prepaid Subscription
+
+        A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_subscription_configuration`.
+
+        After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](#endpoint:b3A6MTQxMDg0MTY).
+
+
         ## Subscription with metafields
 
         In the example below, the custom field `color` exists while `comments` doesn't.
@@ -12973,6 +12980,18 @@ paths:
                       email: joe@example.com
                       parent_id: '23554144'
                     group: false
+              Prepaid Subscription:
+                value:
+                  subscription:
+                    product_handle: "basic"
+                    customer_id: 12345,
+                    payment_profile_id: 6789
+                    payment_collection_method: "prepaid"
+                    prepaid_subscription_configuration:
+                      initial_funding_amount_in_cents: 10000
+                      replenish_to_amount_in_cents: 6000
+                      auto_replenish: true
+                      replenish_threshold_amount_in_cents: 5000
     get:
       summary: List Subscriptions
       tags:
