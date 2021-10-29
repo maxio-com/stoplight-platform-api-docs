@@ -15581,7 +15581,7 @@ paths:
 
         It may happen that a payment needs 3D Secure Authentication when the subscription is migrated to a new product; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
 
-        ```
+        ```json
         {
           "errors": [
             "Your card was declined. This transaction requires 3D secure authentication."
