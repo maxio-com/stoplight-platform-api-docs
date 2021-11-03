@@ -6172,7 +6172,7 @@ paths:
                       public_signup_pages: []
                       product_price_point_name: Default
       description: |-
-        Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthyl. 
+        Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly. 
 
         This will restrict the option to chose the product for purchase via the Billing Portal, as well as disable Public Signup Pages for the product.
   '/products/handle/{api_handle}.json':
