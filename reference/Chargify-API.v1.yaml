@@ -3479,8 +3479,74 @@ paths:
             application/json:
               schema:
                 type: array
+                description: ''
+                minItems: 1
+                uniqueItems: true
                 items:
-                  $ref: '#/components/schemas/Event'
+                  type: object
+                  required:
+                    - event
+                  properties:
+                    event:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                          minLength: 1
+                        message:
+                          type: string
+                          minLength: 1
+                        subscription_id:
+                          type: number
+                        created_at:
+                          type: string
+                          minLength: 1
+                        event_specific_data:
+                          type: object
+                          properties:
+                            previous_subscription_state:
+                              type: string
+                              minLength: 1
+                            new_subscription_state:
+                              type: string
+                              minLength: 1
+                          required:
+                            - previous_subscription_state
+                            - new_subscription_state
+                      required:
+                        - id
+                        - key
+                        - message
+                        - subscription_id
+                        - created_at
+                        - event_specific_data
+                x-examples:
+                  example-1:
+                    - event:
+                        id: 343087780
+                        key: subscription_state_change
+                        message: State changed on Test subscription to Monthly Product from active to past_due
+                        subscription_id: 14950962
+                        created_at: '2016-10-27T16:42:22-04:00'
+                        event_specific_data:
+                          previous_subscription_state: active
+                          new_subscription_state: past_due
+                    - event:
+                        id: 343087742
+                        key: billing_date_change
+                        message: Billing date changed on Test's subscription to Monthly Product from 11/27/2016 to 10/27/2016
+                        subscription_id: 14950962
+                        created_at: '2016-10-27T16:42:19-04:00'
+                        event_specific_data: null
+                    - event:
+                        id: 343085267
+                        key: statement_closed
+                        message: Statement 79401838 closed (but not settled) for Test's subscription to ANNUAL product
+                        subscription_id: 14950975
+                        created_at: '2016-10-27T16:40:40-04:00'
+                        event_specific_data: null
               examples:
                 Example:
                   value:
@@ -3507,6 +3573,13 @@ paths:
                         subscription_id: 14950975
                         created_at: '2016-10-27T16:40:40-04:00'
                         event_specific_data: null
+            application/xml:
+              schema:
+                type: object
+            multipart/form-data:
+              schema:
+                type: array
+                items: {}
       operationId: get-events.json
       description: |-
         ## Events Intro
@@ -12983,10 +13056,10 @@ paths:
               Prepaid Subscription:
                 value:
                   subscription:
-                    product_handle: "basic"
-                    customer_id: 12345,
+                    product_handle: basic
+                    customer_id: '12345,'
                     payment_profile_id: 6789
-                    payment_collection_method: "prepaid"
+                    payment_collection_method: prepaid
                     prepaid_subscription_configuration:
                       initial_funding_amount_in_cents: 10000
                       replenish_to_amount_in_cents: 6000
@@ -16792,7 +16865,7 @@ paths:
                       subscription_ids:
                         type: array
                         items:
-                          type: integer
+                          type: Event
                       created_at:
                         type: string
               examples:
