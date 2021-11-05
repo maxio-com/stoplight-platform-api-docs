@@ -4521,10 +4521,7 @@ paths:
                 type: object
                 properties:
                   adjustment:
-                    type: object
-                    properties:
-                      adjustment:
-                        $ref: '#/components/schemas/Legacy-Adjustment'
+                    $ref: '#/components/schemas/Legacy-Adjustment'
               examples:
                 Example:
                   value:
