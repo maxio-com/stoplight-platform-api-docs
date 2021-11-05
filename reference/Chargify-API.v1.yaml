@@ -7038,6 +7038,7 @@ paths:
                     - currency: EUR
                       price: 100
                       role: initial
+        description: ''
     put:
       summary: Update Currency Prices
       tags:
@@ -7051,6 +7052,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product-Price-Point-Currency-Price'
+              examples:
+                example-1:
+                  value:
+                    - id: 0
+                      currency: string
+                      price: 0
+                      formatted_price: string
+                      product_price_point_id: 0
+                      role: baseline
       operationId: put-product_price_points-product_price_point_id-currency_prices.json
       description: |-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
@@ -21688,6 +21698,21 @@ components:
             - baseline
             - trial
             - initial
+      examples:
+        - id: 0
+          currency: string
+          price: 0
+          formatted_price: string
+          product_price_point_id: 0
+          role: baseline
+        - id: 0
+          currency: string
+          price: 0
+          formatted_price: string
+          product_price_point_id: 0
+          role: baseline
+      description: |
+        object Product Price Point Currency Price:
     Product-Price-Point:
       title: Product Price Point
       type: object
