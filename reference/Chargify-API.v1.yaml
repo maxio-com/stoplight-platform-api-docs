@@ -3515,6 +3515,7 @@ paths:
                           required:
                             - previous_subscription_state
                             - new_subscription_state
+                          nullable: true
                       required:
                         - id
                         - key
@@ -5329,7 +5330,7 @@ paths:
                             ending_quantity: null
                             unit_price: '4.0'
       operationId: post-components-component_id-price_points-bulk.json
-      description: ''
+      description: Use this endpoint to create multiple component price points in one request.
       requestBody:
         content:
           application/json:
@@ -5525,7 +5526,7 @@ paths:
                           ending_quantity: null
                           unit_price: '4.0'
       operationId: put-components-component_id-price_points-price_point_id-unarchive.json
-      description: ''
+      description: Use this endpoint to unarchive a component price point.
   '/price_points/{price_point_id}/currency_prices.json':
     parameters:
       - schema:
@@ -6603,7 +6604,7 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching a product''s price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.'
-      description: ''
+      description: Use this endpoint to retrieve a list of product price points.
   '/products/{product_id}/price_points/{price_point_id}.json':
     parameters:
       - schema:
@@ -6674,7 +6675,7 @@ paths:
                   price_point:
                     handle: educational
                     price_in_cents: 1250
-      description: ''
+      description: Use this endpoint to update a product price point.
     get:
       summary: Read Product Price Point
       tags:
@@ -6712,7 +6713,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: get-products-product_id-price_points-price_point_id-.json
-      description: ''
+      description: Use this endpoint to retrieve details for a specific product price point.
       parameters:
         - schema:
             type: boolean
@@ -6756,7 +6757,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: delete-products-product_id-price_points-price_point_id-.json
-      description: ''
+      description: Use this endpoint to archive a product price point.
   '/products/{product_id}/price_points/{price_point_id}/unarchive.json':
     parameters:
       - schema:
@@ -6808,7 +6809,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-unarchive.json
-      description: ''
+      description: Use this endpoint to unarchive an archived product price point.
   '/products/{product_id}/price_points/{price_point_id}/default.json':
     parameters:
       - schema:
@@ -6860,7 +6861,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-default.json
-      description: ''
+      description: Use this endpoint to make a product price point the default for the product.
   '/products/{product_id}/price_points/bulk.json':
     parameters:
       - schema:
@@ -6908,7 +6909,7 @@ paths:
                         created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                         updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: post-products-product_id-price_points-bulk.json
-      description: ''
+      description: Use this endpoint to create multiple product price points in one request.
       requestBody:
         content:
           application/json:
@@ -7852,6 +7853,7 @@ paths:
                             type: integer
                           gateway_handle:
                             type: string
+                            nullable: true
                       - properties:
                           id:
                             type: integer
@@ -7895,6 +7897,7 @@ paths:
                             type: string
                           gateway_handle:
                             type: string
+                            nullable: true
                     type: object
               examples:
                 Card:
@@ -8030,6 +8033,7 @@ paths:
                         type: integer
                       gateway_handle:
                         type: string
+                        nullable: true
               examples:
                 Example:
                   value:
@@ -8920,7 +8924,7 @@ paths:
                     custom_fields: []
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
       operationId: get-invoices-uid-.json
-      description: ''
+      description: Use this endpoint to retrieve the details for an invoice.
   /invoices/events.json:
     get:
       summary: List Invoice Events
@@ -9968,7 +9972,7 @@ paths:
                         original_amount: '524.9'
                         applied_amount: '200.5'
       operationId: get-credit_notes-uid-.json
-      description: ''
+      description: Use this endpoint to retrieve the details for a credit note.
   '/subscriptions/{subscription_id}/payments.json':
     parameters:
       - schema:
@@ -13072,7 +13076,7 @@ paths:
                 value:
                   subscription:
                     product_handle: basic
-                    customer_id: '12345,'
+                    customer_id: 12345
                     payment_profile_id: 6789
                     payment_collection_method: prepaid
                     prepaid_subscription_configuration:
@@ -17912,7 +17916,7 @@ paths:
             type: string
           in: query
           name: reference
-      description: ''
+      description: Use this endpoint to find a subscription by its reference.
   '/subscriptions/{identifier}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
     parameters:
       - schema:
@@ -18069,7 +18073,7 @@ paths:
                       replenish_to_amount_in_cents: 50000
                       replenish_threshold_amount_in_cents: 10000
       operationId: post-subscriptions-subscription_id-prepaid_configurations.json
-      description: ''
+      description: Use this endpoint to update a subscription's prepaid configuration.
       requestBody:
         content:
           application/json:
