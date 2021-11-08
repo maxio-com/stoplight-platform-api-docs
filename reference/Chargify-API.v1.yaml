@@ -12302,6 +12302,9 @@ paths:
 
         ## Subscription for existing customer on invoice collection method
 
+        `invoice` collection method works only on legacy Statement Architecture.
+        On current Relationship Invoicing Architecture use `remittance` collection method.
+
         ```json
         {
           "subscription": {
@@ -12317,6 +12320,8 @@ paths:
         A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_subscription_configuration`.
 
         After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](#endpoint:b3A6MTQxMDg0MTY).
+
+        Prepaid subscriptions do not work on legacy Statement Architecture.
 
 
         ## Subscription with metafields
@@ -18575,7 +18580,7 @@ paths:
                       cancellation_message: null
                       next_product_id: null
                       cancel_at_end_of_period: false
-                      payment_collection_method: invoice
+                      payment_collection_method: remittance
                       snap_day: null
                       cancellation_method: null
                       current_period_started_at: '2018-05-11T11:33:03-05:00'
@@ -20261,7 +20266,6 @@ components:
           description: (Optional) The type of payment collection to be used in the subscription.
           enum:
             - automatic
-            - invoice
             - remittance
             - prepaid
         receives_invoice_emails:
