@@ -17657,6 +17657,7 @@ paths:
                   properties:
                     amount:
                       type: integer
+                      minimum: 1
                     details:
                       type: string
                     memo:
