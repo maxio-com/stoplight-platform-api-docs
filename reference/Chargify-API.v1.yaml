@@ -6294,6 +6294,8 @@ paths:
                       type: string
                     description:
                       type: string
+                  required:
+                    - name
             examples:
               Example:
                 value:
