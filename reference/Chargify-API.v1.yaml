@@ -16794,6 +16794,7 @@ paths:
                       type:
                         - number
                         - string
+                      minimum: 0
                     memo:
                       type: string
               required:
