@@ -163,7 +163,7 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '200':
+        '201':
           description: OK
           content:
             application/json:
