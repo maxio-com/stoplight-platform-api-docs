@@ -4562,6 +4562,7 @@ paths:
                   type: object
                   required:
                     - amount_in_cents
+                    - amount
                   properties:
                     amount_in_cents:
                       oneOf:
