@@ -19244,6 +19244,14 @@ paths:
         Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
 
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
+  '/invoices/{uid}/customer_information.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: The uid of the invoice
     put:
       summary: Update Customer Information
       tags:
