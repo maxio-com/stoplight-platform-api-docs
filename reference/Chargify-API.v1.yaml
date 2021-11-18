@@ -12577,49 +12577,7 @@ paths:
                       billing_city: Boston
                       billing_address_2: null
                       billing_address: 123 Mass Ave.
-              With Components (Quantity-Based):
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Alysa
-                      last_name: Test
-                      email: alysa@example.com
-                    credit_card_attributes:
-                      full_number: '1'
-                      expiration_month: '10'
-                      expiration_year: '2020'
-                    components:
-                      - component_id: 1
-                        allocated_quantity: 18
-                        price_point_id: 3
-              With Component (On/Off):
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    components:
-                      - component_id: 2500
-                        enabled: true
-              With Components (Metered):
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe1049am@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    components:
-                      - component_id: 195268
-                        unit_balance: 20
-              With Calendar Billing:
+              Calendar Billing:
                 value:
                   subscription:
                     product_handle: gold
@@ -12641,62 +12599,72 @@ paths:
                       calendar_billing_first_charge: immediate
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-              With Offer:
+              Components (Metered):
                 value:
                   subscription:
-                    offer_id: 'handle:godfather'
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe1049am@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 195268
+                        unit_balance: 20
+              Components (On/Off):
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 2500
+                        enabled: true
+              Components (Quantity-Based):
+                value:
+                  subscription:
+                    product_handle: basic
                     customer_attributes:
                       first_name: Alysa
                       last_name: Test
                       email: alysa@example.com
                     credit_card_attributes:
-                      full_number: '1'
-                      expiration_month: '10'
-                      expiration_year: '2020'
-              Authorize.Net ACH Import:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 1
+                        allocated_quantity: 18
+                        price_point_id: 3
+              Components By Handle (Quantity-Based):
                 value:
                   subscription:
-                    product_handle: product
-                    next_billing_at: '2020-08-29'
-                    customer_attributes:
-                      first_name: John
-                      last_name: Doe
-                      email: john.doe@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: authorizenet
-                      vault_token: '1234'
-                      customer_vault_token: '5678'
-              Stripe ACH Import:
-                value:
-                  subscription:
-                    product_handle: product
-                    next_billing_at: '2020-08-29'
-                    customer_attributes:
-                      first_name: John
-                      last_name: Doe
-                      email: john.doe@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: stripe_connect
-                      vault_token: cus_abc123
-              Canceled Subscription Import:
-                value:
-                  subscription:
-                    product_handle: product
-                    canceled_at: '2021-02-25T12:00:00-04:00'
-                    cancellation_message: Too expensive
-                    reason_code: expensive
-                    activated_at: '2021-01-17T12:00:00-04:00'
+                    product_handle: basic
                     customer_attributes:
                       first_name: Joe
-                      last_name: Test
-                      email: joetest@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: stripe
-                      vault_token: '1234'
-              With Group:
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 'handle:my-handle'
+                        price_point_id: 'handle:special-offer'
+                        allocated_quantity: 14
+              With Coupon:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    coupon_code: SUB111
+              Grouped:
                 value:
                   subscription:
                     product_handle: product-xyz
@@ -12720,30 +12688,23 @@ paths:
                       email: joe@example.com
                       parent_id: '23554144'
                     group: false
-              Prepaid Subscription:
+              Import as Canceled:
                 value:
                   subscription:
-                    product_handle: basic
-                    customer_id: 12345
-                    payment_profile_id: 6789
-                    payment_collection_method: prepaid
-                    prepaid_subscription_configuration:
-                      initial_funding_amount_in_cents: 10000
-                      replenish_to_amount_in_cents: 6000
-                      auto_replenish: true
-                      replenish_threshold_amount_in_cents: 5000
-              With Coupon:
-                value:
-                  subscription:
-                    product_handle: basic
+                    product_handle: product
+                    canceled_at: '2021-02-25T12:00:00-04:00'
+                    cancellation_message: Too expensive
+                    reason_code: expensive
+                    activated_at: '2021-01-17T12:00:00-04:00'
                     customer_attributes:
                       first_name: Joe
-                      last_name: Blow
-                      email: joe@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    coupon_code: SUB111
-              With Future Billing Date:
+                      last_name: Test
+                      email: joetest@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: stripe
+                      vault_token: '1234'
+              Import With Future Billing Date:
                 value:
                   subscription:
                     product_handle: basic
@@ -12754,31 +12715,33 @@ paths:
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
                     next_billing_at: '2020-06-01'
-              With Component By Handle (Quantity-Based):
+              Import Authorize.Net ACH:
                 value:
                   subscription:
-                    product_handle: basic
+                    product_handle: product
+                    next_billing_at: '2020-08-29'
                     customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    components:
-                      - component_id: 'handle:my-handle'
-                        price_point_id: 'handle:special-offer'
-                        allocated_quantity: 14
-              With Referral Code:
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: authorizenet
+                      vault_token: '1234'
+                      customer_vault_token: '5678'
+              Import Stripe ACH:
                 value:
                   subscription:
-                    product_handle: product-handle
-                    ref: 1q2w3e
+                    product_handle: product
+                    next_billing_at: '2020-08-29'
                     customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: stripe_connect
+                      vault_token: cus_abc123
               Metadata (Subscription-Level):
                 value:
                   subscription:
@@ -12803,6 +12766,41 @@ paths:
                       metafields:
                         nickname: Boris
                         language: Spanish
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+              With Offer:
+                value:
+                  subscription:
+                    offer_id: 'handle:godfather'
+                    customer_attributes:
+                      first_name: Alysa
+                      last_name: Test
+                      email: alysa@example.com
+                    credit_card_attributes:
+                      full_number: '1'
+                      expiration_month: '10'
+                      expiration_year: '2020'
+              Prepaid Subscription:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_id: 12345
+                    payment_profile_id: 6789
+                    payment_collection_method: prepaid
+                    prepaid_subscription_configuration:
+                      initial_funding_amount_in_cents: 10000
+                      replenish_to_amount_in_cents: 6000
+                      auto_replenish: true
+                      replenish_threshold_amount_in_cents: 5000              
+              With Referral Code:
+                value:
+                  subscription:
+                    product_handle: product-handle
+                    ref: 1q2w3e
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
     get:
