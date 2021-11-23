@@ -17808,14 +17808,6 @@ paths:
                     ending_balance_in_cents: 2000
                     entry_type: Credit
                     memo: Credit to group account
-                example-1:
-                  value:
-                    service_credit:
-                      id: 0
-                      amount_in_cents: 0
-                      ending_balance_in_cents: 0
-                      entry_type: Credit
-                      memo: string
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
