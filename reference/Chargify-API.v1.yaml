@@ -16776,6 +16776,18 @@ paths:
       responses:
         '201':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service-Credit'
+              examples:
+                Example:
+                  value:
+                    id: 101
+                    amount_in_cents: 1000
+                    ending_balance_in_cents: 2000
+                    entry_type: Credit
+                    memo: Credit to group account
       operationId: post-subscriptions-subscription_id-service_credits.json
       description: Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
       requestBody:
