@@ -5628,6 +5628,11 @@ paths:
                       price:
                         type: integer
                         description: New price for the given currency
+                    required:
+                      - id
+                      - price
+              required:
+                - currency_prices
             examples:
               Example:
                 value:
