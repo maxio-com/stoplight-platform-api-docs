@@ -98,7 +98,7 @@ properties:
   payment_collection_method:
     type: string
     nullable: true
-    description: The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.
+    description: 'The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
     enum:
       - automatic
       - invoice
@@ -252,7 +252,7 @@ properties:
     nullable: true
   net_terms:
     type: integer
-    description: "\tOn Relationship Invoicing, the number of days before a renewal invoice is due."
+    description: 'On Relationship Invoicing, the number of days before a renewal invoice is due.'
     nullable: true
   stored_credential_transaction_id:
     type: integer

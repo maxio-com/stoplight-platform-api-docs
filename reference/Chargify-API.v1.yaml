@@ -12005,9 +12005,9 @@ paths:
 
         The product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.
 
-        An existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). A new customer may be created by providing `customer_attributes`.
+        An existing customer may be specified by a `customer_id` (ID within Chargify) or a `customer_reference` (unique value within your app that you have shared with Chargify via the reference attribute on a customer). You may also pass in an existing payment profile for that customer with `payment_profile_id`. A new customer may be created by providing `customer_attributes`.
 
-        Credit card details may be required, depending on the options for the Product being subscribed. The Product can be specified by `product_id` or by `product_handle` (API Handle).
+        Credit card details may be required, depending on the options for the product being subscribed. The product can be specified by `product_id` or by `product_handle` (API Handle).
 
         If you are creating a subscription with a payment profile, the attribute to send will be `credit_card_attributes` or `bank_account_attributes` for ACH and Direct Debit. That said, when you read the subscription after creation, we return the profile details under `credit_card` or `bank_account`.
 
@@ -12030,312 +12030,27 @@ paths:
 
         # Subscription Customization
 
-        ## Existing Customers
+        ## With Components
 
-        An existing Customer can be specified by `customer_id` (its ID within Chargify) or `customer_reference` (a unique value within your application that you have shared with Chargify). 
-
-        Use the following JSON example to form an object that will create a subscription for an already existing customer.
-
-        ```json
-            {
-              "subscription": {
-                "product_handle": "basic",
-                "customer_id": 2000,
-                "credit_card_attributes": {
-                  "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-                }
-              }
-            }
-        ```
-
-
-        ## New Customer
-
-        A new Customer can be created by providing `customer_attributes` along with any information. The base requirements are a first name, last name, and email address.
-
-        ## Create Subscription with Coupon
-
-        Use the following JSON example to create a subscription with a coupon. This JSON is applicable when a payment method is not required for a product.
-
-        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](#endpoint:YFHw4XRYxaqLwGNvk)
-
-        ```json
-              {
-                "subscription": {
-                  "product_handle": "basic",
-                  "customer_attributes": {
-                    "first_name": "Joe",
-                    "last_name": "Blow",
-                    "email": "joe@example.com",
-                    "zip": "02120",
-                    "state": "MA",
-                    "reference": "XYZ",
-                    "phone": "(617) 111 - 0000",
-                    "organization": "Acme",
-                    "country": "US",
-                    "city": "Boston",
-                    "address_2": null,
-                    "address": "123 Mass Ave."
-                  },
-                  "coupon_code": "SUB111"
-                }
-              }
-        ```      
-
-        ## Create Subscription with Coupon and Payment Profile
-
-        Use the following JSON example to create a subscription with a coupon. This JSON is applicable when a payment method is required for a product.
-
-        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](#endpoint:YFHw4XRYxaqLwGNvk)
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave."
-            },
-            "credit_card_attributes": {
-                    "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            },
-            "coupon_code": "SUB111"
-          }
-        }
-        ```
-
-
-        ## Subscription with Future Billing Date
-
-        ```json
-              {
-                "subscription": {
-                  "product_handle": "basic",
-                  "customer_attributes": {
-                    "first_name": "Joe",
-                    "last_name": "Blow",
-                    "email": "joe@example.com"
-                  },
-                  "credit_card_attributes": {
-                        "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-                  },
-                  "next_billing_at": "2020-06-01"
-                }
-              }
-        ```
-
-        ## Subscription with On-Off Component
-
-        ```json
-            {
-                "subscription": {
-                  "product_handle": "basic",
-                  "customer_attributes": {
-                    "first_name": "Joe",
-                    "last_name": "Blow",
-                    "email": "joe@example.com"
-                  },
-                  "credit_card_attributes": {
-                    "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-                  },
-                  "components": [{
-                    "component_id": 2500,
-                    "enabled": true
-                  }]
-                }
-              }
-        ```
-
-        ## Subscription with Metered Components
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe1049am@example.com"
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            },
-            "components": [{
-              "component_id": 195268,
-              "unit_balance": 20
-            }]
-          }
-        }
-        ```
-
-        ## Subscription with Quantity-Based Component
-
-        ```json
-            {
-              "subscription": {
-                "product_handle": "basic",
-                "customer_attributes": {
-                  "first_name": "Joe",
-                  "last_name": "Blow",
-                  "email": "joe@example.com"
-                },
-                "credit_card_attributes": {
-                  "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-                },
-                "components": [{
-                  "component_id": 2500,
-                  "allocated_quantity": 14
-                }]
-              }
-            }
-        ```
-
-        ## Subscription with a Non-Default Component Price Point
+        Different components require slightly different data. For example, quantity-based and on/off components accept `allocated_quantity`, while metered components accept `unit_balance`.
 
         When creating a subscription with a component, a `price_point_id` can be passed in along with the `component_id` to specify which price point to use. If not passed in, the default price point will be used.
 
         Note: if an invalid `price_point_id` is used, the subscription will still proceed but will use the component's default price point.
 
-        ```json
-            {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave."
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            },
-            "components": [{
-              "component_id": 2500,
-              "price_point_id": 499,
-              "allocated_quantity": 14
-            }]
-          }
-        }
-        ```
+        Components may be added by ID or by handle.
 
-        ## Subscription with Component Handles
+        ## With Coupon(s)
 
-        The component passed here is a quantity-based component, but the format to pass component and price point handles will be the same for each component type.
+        To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`.
 
-        ```json
-        {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com"
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            },
-            "components": [{
-              "component_id": "handle:my-handle",
-              "price_point_id": "handle:special-offer",
-              "allocated_quantity": 14
-            }]
-          }
-        }
-        ```
+        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](#endpoint:YFHw4XRYxaqLwGNvk)
 
-        ## Subscription with Calendar Billing
+        ## With Manual Invoice Collection
 
-        ```json
-          {
-          "subscription": {
-            "product_handle": "gold",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave."
-            },
-            "calendar_billing": {
-              "snap_day": 1,
-              "calendar_billing_first_charge": "immediate"
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            }
-          }
-        }
-        ```
+        The `invoice` collection method works only on legacy Statement Architecture.
 
-        ## Subscription with Referral Code
-
-        Use the following JSON to create a subscription using a referral code. Note that the `ref` key/value pair must be part of the subscription object. 
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "product-handle",
-            "ref": "1q2w3e",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave."
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            }
-          }
-        }
-        ```
-
-        ## Subscription for existing customer on invoice collection method
-
-        `invoice` collection method works only on legacy Statement Architecture.
-        On current Relationship Invoicing Architecture use `remittance` collection method.
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "test",
-            "customer_id": "12345",
-            "payment_collection_method": "invoice"
-          }
-        }
-        ```
+        On Relationship Invoicing Architecture use the `remittance` collection method.
 
         ## Prepaid Subscription
 
@@ -12345,79 +12060,11 @@ paths:
 
         Prepaid subscriptions do not work on legacy Statement Architecture.
 
+        ## With Metafields
 
-        ## Subscription with metafields
+        Metafields can either attach to subscriptions or customers. Metafields are popuplated with the supplied metadata to the resource specified.
 
-        In the example below, the custom field `color` exists while `comments` doesn't.
-
-        When the request below is sent, the metafields are populated with the supplied metadata. In addition a new metafield called `comments` will have been created. 
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave."
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            },
-            "metafields": {
-              "color": "blue",
-              "comments": "Thanks!"
-            }
-          }
-        }
-        ```
-
-
-        ## Subscription with customer level metafields
-
-        Since both subscriptions and customers can have metafields/metadata associated with them you can also create a customer with metafields/metadata.
-
-        In the example below, the custom field `nickname` exists while `language` doesn't.
-
-        When the request below is sent, the metafields are populated with the supplied metadata on the Customer level. In addition a new metafield called `language` will have been created. 
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "basic",
-            "customer_attributes": {
-              "first_name": "Joe",
-              "last_name": "Blow",
-              "email": "joe@example.com",
-              "zip": "02120",
-              "state": "MA",
-              "reference": "XYZ",
-              "phone": "(617) 111 - 0000",
-              "organization": "Acme",
-              "country": "US",
-              "city": "Boston",
-              "address_2": null,
-              "address": "123 Mass Ave.",
-              "metafields": {
-                "nickname": "Boris",
-                "language": "Spanish"
-              }
-            },
-            "credit_card_attributes": {
-              "chargify_token": "tok_cwhvpfcnbtgkd8nfkzf9dnjn"
-            }
-          }
-        }
-        ```
+        If the metafield doesn't exist yet, it will be created on-the-fly.
 
         # Passing Payment Information
 
@@ -12466,18 +12113,6 @@ paths:
               last_four: "1234",
               vault_token: "12345abc",
               current_vault: "braintree_blue"
-          }
-        }
-        ```
-
-        ## Existing Customer with Existing Payment Profile
-
-        ```json
-        {
-          "subscription": {
-            "product_handle": "product-xyz",
-            "customer_id": 17346006,
-            "payment_profile_id": 11991557
           }
         }
         ```
@@ -12947,49 +12582,7 @@ paths:
                       billing_city: Boston
                       billing_address_2: null
                       billing_address: 123 Mass Ave.
-              With Quantity-based component:
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Alysa
-                      last_name: Test
-                      email: alysa@example.com
-                    credit_card_attributes:
-                      full_number: '1'
-                      expiration_month: '10'
-                      expiration_year: '2020'
-                    components:
-                      - component_id: 1
-                        allocated_quantity: 18
-                        price_point_id: 3
-              With On/Off Component:
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    components:
-                      - component_id: 2500
-                        enabled: true
-              With Metered Component:
-                value:
-                  subscription:
-                    product_handle: basic
-                    customer_attributes:
-                      first_name: Joe
-                      last_name: Blow
-                      email: joe1049am@example.com
-                    credit_card_attributes:
-                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    components:
-                      - component_id: 195268
-                        unit_balance: 20
-              With Calendar Billing:
+              Calendar Billing:
                 value:
                   subscription:
                     product_handle: gold
@@ -13011,62 +12604,72 @@ paths:
                       calendar_billing_first_charge: immediate
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-              With Offer:
+              Components (Metered):
                 value:
                   subscription:
-                    offer_id: 'handle:godfather'
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe1049am@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 195268
+                        unit_balance: 20
+              Components (On/Off):
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 2500
+                        enabled: true
+              Components (Quantity-Based):
+                value:
+                  subscription:
+                    product_handle: basic
                     customer_attributes:
                       first_name: Alysa
                       last_name: Test
                       email: alysa@example.com
                     credit_card_attributes:
-                      full_number: '1'
-                      expiration_month: '10'
-                      expiration_year: '2020'
-              Authorize.Net ACH Import:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 1
+                        allocated_quantity: 18
+                        price_point_id: 3
+              Components By Handle (Quantity-Based):
                 value:
                   subscription:
-                    product_handle: product
-                    next_billing_at: '2020-08-29'
-                    customer_attributes:
-                      first_name: John
-                      last_name: Doe
-                      email: john.doe@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: authorizenet
-                      vault_token: '1234'
-                      customer_vault_token: '5678'
-              Stripe ACH Import:
-                value:
-                  subscription:
-                    product_handle: product
-                    next_billing_at: '2020-08-29'
-                    customer_attributes:
-                      first_name: John
-                      last_name: Doe
-                      email: john.doe@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: stripe_connect
-                      vault_token: cus_abc123
-              Canceled Subscription Import:
-                value:
-                  subscription:
-                    product_handle: product
-                    canceled_at: '2021-02-25T12:00:00-04:00'
-                    cancellation_message: Too expensive
-                    reason_code: expensive
-                    activated_at: '2021-01-17T12:00:00-04:00'
+                    product_handle: basic
                     customer_attributes:
                       first_name: Joe
-                      last_name: Test
-                      email: joetest@example.com
-                    bank_account_attributes:
-                      bank_name: My Bank
-                      current_vault: stripe
-                      vault_token: '1234'
-              With Group:
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    components:
+                      - component_id: 'handle:my-handle'
+                        price_point_id: 'handle:special-offer'
+                        allocated_quantity: 14
+              With Coupon:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    coupon_code: SUB111
+              Grouped:
                 value:
                   subscription:
                     product_handle: product-xyz
@@ -13090,6 +12693,98 @@ paths:
                       email: joe@example.com
                       parent_id: '23554144'
                     group: false
+              Import as Canceled:
+                value:
+                  subscription:
+                    product_handle: product
+                    canceled_at: '2021-02-25T12:00:00-04:00'
+                    cancellation_message: Too expensive
+                    reason_code: expensive
+                    activated_at: '2021-01-17T12:00:00-04:00'
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Test
+                      email: joetest@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: stripe
+                      vault_token: '1234'
+              Import With Future Billing Date:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    next_billing_at: '2020-06-01'
+              Import Authorize.Net ACH:
+                value:
+                  subscription:
+                    product_handle: product
+                    next_billing_at: '2020-08-29'
+                    customer_attributes:
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: authorizenet
+                      vault_token: '1234'
+                      customer_vault_token: '5678'
+              Import Stripe ACH:
+                value:
+                  subscription:
+                    product_handle: product
+                    next_billing_at: '2020-08-29'
+                    customer_attributes:
+                      first_name: John
+                      last_name: Doe
+                      email: john.doe@example.com
+                    bank_account_attributes:
+                      bank_name: My Bank
+                      current_vault: stripe_connect
+                      vault_token: cus_abc123
+              Metadata (Subscription-Level):
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    metafields:
+                      color: blue
+                      comments: Thanks!
+              Metadata (Customer-Level):
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                      metafields:
+                        nickname: Boris
+                        language: Spanish
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+              With Offer:
+                value:
+                  subscription:
+                    offer_id: 'handle:godfather'
+                    customer_attributes:
+                      first_name: Alysa
+                      last_name: Test
+                      email: alysa@example.com
+                    credit_card_attributes:
+                      full_number: '1'
+                      expiration_month: '10'
+                      expiration_year: '2020'
               Prepaid Subscription:
                 value:
                   subscription:
@@ -13101,7 +12796,18 @@ paths:
                       initial_funding_amount_in_cents: 10000
                       replenish_to_amount_in_cents: 6000
                       auto_replenish: true
-                      replenish_threshold_amount_in_cents: 5000
+                      replenish_threshold_amount_in_cents: 5000              
+              With Referral Code:
+                value:
+                  subscription:
+                    product_handle: product-handle
+                    ref: 1q2w3e
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
     get:
       summary: List Subscriptions
       tags:
@@ -20345,7 +20051,7 @@ components:
               description: The last name of the customer. Required when creating a customer via attributes.
             email:
               type: string
-              description: "\tThe email address of the customer. Required when creating a customer via attributes."
+              description: The email address of the customer. Required when creating a customer via attributes.
             cc_emails:
               type: string
               description: A list of emails that should be cc’d on all customer communications. Optional.
@@ -20588,7 +20294,7 @@ components:
           description: '(Optional) The ACH authorization agreement terms. If enabled, an email will be sent to the customer with a copy of the terms.'
         authorizer_first_name:
           type: string
-          description: "\t(Optional) The first name of the person authorizing the ACH agreement."
+          description: (Optional) The first name of the person authorizing the ACH agreement.
         authorizer_last_name:
           type: string
           description: (Optional) The last name of the person authorizing the ACH agreement.
