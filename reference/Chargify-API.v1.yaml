@@ -5018,6 +5018,8 @@ paths:
         Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
         See [Price Points Documentation](https://help.chargify.com/products/product-components.html#price-points) for more information on price points and moving subscriptions between price points.
+
+        Note: Custom price points are not able to be set as the default for a component.
   '/product_families/{product_family_id}/components.json':
     parameters:
       - schema:
@@ -5280,6 +5282,15 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - in: query
+          name: filter
+          style: deepObject
+          schema:
+            type: object
+            example: '?filter[type]=catalog'
+          description: |-
+            #### Default type filter: `?filter[type]=catalog,default`
+            #### Type filter options: `catalog`, `default`, `custom`
   '/components/{component_id}/price_points/bulk.json':
     parameters:
       - schema:
@@ -5407,6 +5418,8 @@ paths:
         Passing in a price bracket without an `id` will attempt to create a new price. 
 
         Including an `id` will update the corresponding price, and including the `_destroy` flag set to true along with the `id` will remove that price.
+
+        Note: Custom price points cannot be updated directly. They must be edited through the Subscription.
       requestBody:
         content:
           application/json:
@@ -5566,6 +5579,8 @@ paths:
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
 
         When creating currency prices, they need to mirror the structure of your primary pricing. For each price level defined on the component price point, there should be a matching price level created in the given currency.
+
+        Note: Currency Prices are not able to be created for custom price points.
       requestBody:
         content:
           application/json:
@@ -5610,7 +5625,10 @@ paths:
                 items:
                   $ref: '#/components/schemas/Currency-Price'
       operationId: put-price_points-price_point_id-currency_prices.json
-      description: This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
+      description: |-
+        This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
+
+        Note: Currency Prices are not able to be updated for custom price points.
       requestBody:
         content:
           application/json:
@@ -12796,7 +12814,7 @@ paths:
                       initial_funding_amount_in_cents: 10000
                       replenish_to_amount_in_cents: 6000
                       auto_replenish: true
-                      replenish_threshold_amount_in_cents: 5000              
+                      replenish_threshold_amount_in_cents: 5000
               With Referral Code:
                 value:
                   subscription:
@@ -12808,6 +12826,31 @@ paths:
                       email: joe@example.com
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+              With Custom Pricing:
+                value:
+                  subscription:
+                    product_id: string
+                    custom_price:
+                      price_in_cents: 9900
+                      interval: 1
+                      interval_unit: month
+                    components:
+                      - component_id: 20
+                        allocated_quantity: 10
+                        custom_price:
+                          pricing_scheme: stairstep
+                          prices:
+                            - unit_price: '5'
+                              starting_quantity: '1'
+                              ending_quantity: '15'
+                            - unit_price: '2'
+                              starting_quantity: '16'
+                      - component_id: 10
+                        enabled: true
+                        custom_price:
+                          prices:
+                            - unit_price: '1'
+                              starting_quantity: '1'
     get:
       summary: List Subscriptions
       tags:
@@ -14049,7 +14092,7 @@ paths:
 
         For a subscription using Calendar Billing, setting the next billing date is a bit different. Send the `snap_day` attribute to change the calendar billing date for **a subscription using a product eligible for calendar billing**.
 
-        Note: If you change the product associated with a subscription that contains a `snap_date` and immediately `READ/GET` the subscription data, it will still contain evidence of the existing `snap_date`. This is due to the fact that a product change is instantanous and only affects the product associated with a subscription. After the `next_billing` date arrives, the `snap_day` associated with the subscription will return to `null.` Another way of looking at this is that you willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null.
+        Note: If you change the product associated with a subscription that contains a `snap_date` and immediately `READ/GET` the subscription data, it will still contain evidence of the existing `snap_date`. This is due to the fact that a product change is instantanous and only affects the product associated with a subscription. After the `next_billing` date arrives, the `snap_day` associated with the subscription will return to `null.` Another way of looking at this is that you willl have to wait for the next billing cycle to arrive before the `snap_date` will reset to `null`.
       requestBody:
         content:
           application/json:
@@ -14104,6 +14147,39 @@ paths:
                         - integer
                     stored_credential_transaction_id:
                       type: integer
+                    components:
+                      type: array
+                      description: (Optional) An array of component ids and custom prices to be added to the subscription.
+                      items:
+                        type: object
+                        properties:
+                          component_id:
+                            type: integer
+                          custom_price:
+                            type: object
+                            description: Create or update custom pricing unique to the subscription
+                            properties:
+                              pricing_scheme:
+                                type: string
+                                enum:
+                                  - stairstep
+                                  - volume
+                                  - per_unit
+                                  - tiered
+                                description: Omit for On/Off components
+                              prices:
+                                type: array
+                                description: On/off components only need one price bracket starting at 1
+                                items:
+                                  type: object
+                                  properties:
+                                    unit_price:
+                                      type: string
+                                    starting_quantity:
+                                      type: string
+                                    ending_quantity:
+                                      type: string
+                                      nullable: true
             examples:
               Example:
                 value:
@@ -14113,6 +14189,31 @@ paths:
                       expiration_month: '10'
                       expiration_year: '2030'
                     next_billing_at: '2010-08-06T15:34:00Z'
+              With Custom Pricing:
+                value:
+                  subscription:
+                    product_id: string
+                    custom_price:
+                      price_in_cents: 9900
+                      interval: 1
+                      interval_unit: month
+                    components:
+                      - component_id: 20
+                        allocated_quantity: 10
+                        custom_price:
+                          pricing_scheme: stairstep
+                          prices:
+                            - unit_price: '5'
+                              starting_quantity: '1'
+                              ending_quantity: '15'
+                            - unit_price: '2'
+                              starting_quantity: '16'
+                      - component_id: 10
+                        enabled: true
+                        custom_price:
+                          prices:
+                            - unit_price: '1'
+                              starting_quantity: '1'
     delete:
       summary: Cancel Subscription
       tags:
@@ -18128,6 +18229,31 @@ paths:
                       billing_state: MA
                       billing_zip: '02118'
                       billing_country: US
+              With Custom Pricing:
+                value:
+                  subscription:
+                    product_id: string
+                    custom_price:
+                      price_in_cents: 9900
+                      interval: 1
+                      interval_unit: month
+                    components:
+                      - component_id: 20
+                        allocated_quantity: 10
+                        custom_price:
+                          pricing_scheme: stairstep
+                          prices:
+                            - unit_price: '5'
+                              starting_quantity: '1'
+                              ending_quantity: '15'
+                            - unit_price: '2'
+                              starting_quantity: '16'
+                      - component_id: 10
+                        enabled: true
+                        custom_price:
+                          prices:
+                            - unit_price: '1'
+                              starting_quantity: '1'
   /chargify_js_keys.json:
     get:
       summary: List Chargify.js Public Keys
@@ -19254,8 +19380,16 @@ components:
           properties:
             id:
               type: integer
+            type:
+              type: string
+              enum:
+                - catalog
+                - default
+                - custom
             default:
               type: boolean
+              deprecated: true
+              description: 'Note: Refer to type attribute instead'
             name:
               type: string
             pricing_scheme:
@@ -19291,6 +19425,9 @@ components:
               type: boolean
               description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
               default: true
+            subscription_id:
+              type: integer
+              description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.
     Component:
       title: Component
       type: object
@@ -20249,6 +20386,31 @@ components:
                 description: Used for quantity based compo
               price_point_id:
                 type: integer
+              custom_price:
+                type: object
+                description: Used in place of `price_point_id` to define a custom price point unique to the subscription
+                properties:
+                  pricing_scheme:
+                    type: string
+                    enum:
+                      - stairstep
+                      - volume
+                      - per_unit
+                      - tiered
+                    description: Omit for On/Off components
+                  prices:
+                    type: array
+                    description: On/off components only need one price bracket starting at 1
+                    items:
+                      type: object
+                      properties:
+                        unit_price:
+                          type: string
+                        starting_quantity:
+                          type: string
+                        ending_quantity:
+                          type: string
+                          nullable: true
         calendar_billing:
           type: object
           description: (Optional). Cannot be used when also specifying next_billing_at
@@ -21757,6 +21919,25 @@ components:
     Subscriptions-Component:
       title: Subscriptions Component
       type: object
+      examples:
+        - component_id: 0
+          subscription_id: 0
+          allocated_quantity: 0
+          pricing_scheme: string
+          name: string
+          kind: string
+          unit_name: string
+          price_point_id: 0
+          price_point_handle: string
+          price_point_type: default
+          price_point_name: string
+          enabled: true
+          unit_balance: 0
+          id: 0
+          created_at: string
+          updated_at: string
+          component_handle: string
+          archived_at: string
       properties:
         component_id:
           type: integer
@@ -21810,25 +21991,6 @@ components:
           type:
             - string
             - 'null'
-      examples:
-        - component_id: 0
-          subscription_id: 0
-          allocated_quantity: 0
-          pricing_scheme: string
-          name: string
-          kind: string
-          unit_name: string
-          price_point_id: 0
-          price_point_handle: string
-          price_point_type: default
-          price_point_name: string
-          enabled: true
-          unit_balance: 0
-          id: 0
-          created_at: string
-          updated_at: string
-          component_handle: string
-          archived_at: string
     Update-Customer:
       title: Update Customer
       type: object
