@@ -24,7 +24,7 @@ info:
     ### Engage Support
 
     We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Chargify via our API, we suggest sending a “heads up” to “support@chargify.com” so we can coordinate with you to ensure your import process goes smoothly.
-
+    re
     Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Chargify API.
 
     ### Support Access
@@ -17441,18 +17441,18 @@ paths:
 
         ## Reactivating within the current period
 
-        If a subscription group is cancelled and reactivated within the primary subscription's current period, we can choose to either start a new billing period or maintain the existing one. If we want to maintain the existing billing period the resume=true option must be passed in request parameters.
+        If a subscription group is cancelled and reactivated within the primary subscription's current period, we can choose to either start a new billing period or maintain the existing one. If we want to maintain the existing billing period the `resume=true` option must be passed in request parameters.
 
-        An exception to the above are subscriptions that are on calendar billing. These subscriptions cannot be reactivatied within the current period. If the resume=true option is not passed the request will return an error.
+        An exception to the above are subscriptions that are on calendar billing. These subscriptions cannot be reactivated within the current period. If the `resume=true` option is not passed the request will return an error.
 
-        The resume_members option is ignored in this case. All eligible group members will be automatically resumed.
+        The `resume_members` option is ignored in this case. All eligible group members will be automatically resumed.
 
 
         ## Reactivating beyond the current period
 
-        In this case, a subscription group can only be reactivated with a new billing period. If the resume=true option is passed it will be ignored.
+        In this case, a subscription group can only be reactivated with a new billing period. If the `resume=true` option is passed it will be ignored.
 
-        Member subscriptions can have billing periods that are longer than the primary (e.g. a monthly primary with annual group members). If the primary subscription in a group cannot be reactivated within the current period, but other group members can be, passing resume_members=true will resume the existing billing period for eligible group members. The primary subscription will begin a new billing period.
+        Member subscriptions can have billing periods that are longer than the primary (e.g. a monthly primary with annual group members). If the primary subscription in a group cannot be reactivated within the current period, but other group members can be, passing `resume_members=true` will resume the existing billing period for eligible group members. The primary subscription will begin a new billing period.
 
         For calendar billing subscriptions, the new billing period created will be a partial one, spanning from the date of reactivation to the next corresponding calendar renewal date.
       requestBody:
