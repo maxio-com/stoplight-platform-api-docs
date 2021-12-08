@@ -15750,6 +15750,8 @@ paths:
         1. The subscription needs to be unbilled (no statements or invoices).
         2. The value passed must be a valid date/time.
         3. The value passed must be before the current date/time.
+
+        If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the reason for the problem.
       requestBody:
         content:
           application/json:
@@ -15782,6 +15784,7 @@ paths:
                     canceled_at: '2000-12-31'
                     cancellation_message: Original cancellation in 2000
                     expires_at: '2001-07-15'
+        description: Only these fields are available to be set.
   '/subscriptions/{subscription_id}/delayed_cancel.json':
     parameters:
       - schema:
