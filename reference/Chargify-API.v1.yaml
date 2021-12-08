@@ -17971,6 +17971,8 @@ paths:
                             type: string
                           masked_card_number:
                             type: string
+                      payment_collection_method:
+                        type: string
                       subscription_ids:
                         type: array
                         items:
