@@ -14380,8 +14380,6 @@ paths:
                     cancellation_message:
                       type: string
                       description: Can be used when canceling a subscription to make a note about the reason for cancellation.
-                    cancellation_method:
-                      type: string
                     reason_code:
                       type: string
                       description: Can be used when canceling a subscription to indicate why a subscription was canceled. (See reason codes associated with your site)
@@ -15799,6 +15797,15 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
       operationId: post-subscriptions-subscription_id-delayed_cancel.json
       description: |-
         Chargify offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
