@@ -19776,6 +19776,8 @@ components:
       title: Create Metafield
       type: object
       properties:
+        id:
+          type: number
         name:
           type: string
         scope:
@@ -21430,14 +21432,14 @@ components:
       title: Metadata
       type: object
       properties:
+        id:
+          type: integer
         value:
           type: string
         resource_id:
           type: integer
         name:
           type: string
-        id:
-          type: integer
         deleted_at:
           type:
             - string
@@ -21446,6 +21448,8 @@ components:
       title: Metafield
       type: object
       properties:
+        id:
+          type: number
         name:
           type: string
         scope:
