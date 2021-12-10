@@ -19385,6 +19385,12 @@ paths:
                 required:
                   - segment
               examples: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -19473,6 +19479,10 @@ paths:
                   required:
                     - event_based_billing_metric_id
                     - pricing_scheme
+      description: |-
+        This endpoint create new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for it.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     parameters:
       - schema:
           type: string
@@ -19617,6 +19627,12 @@ paths:
                             - segment_id
                 required:
                   - segment
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -19666,6 +19682,10 @@ paths:
                           - unit_price
                   required:
                     - pricing_scheme
+      description: |-
+        This endpoint update single Segment for a Component with segmented Metric. It allows you to update the pricing for the segment.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
 servers:
   - url: 'https://subdomain.chargify.com'
 components:
