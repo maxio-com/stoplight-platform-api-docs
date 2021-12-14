@@ -19445,6 +19445,20 @@ paths:
                           - unit_price
                   required:
                     - pricing_scheme
+            examples:
+              Create a Single Segment (related Metric has 2 segmented properties):
+                value:
+                  segment:
+                    segment_property_1_value: France
+                    segment_property_2_value: Spain
+                    pricing_scheme: volume
+                    prices:
+                      - starting_quantity: 1
+                        ending_quantity: 10000
+                        unit_price: '0.19'
+                      - starting_quantity: 10001
+                        ending_quantity: null
+                        unit_price: '0.09'
       description: |-
         This endpoint create new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for it. You can only pass as many "property_values" as related Metric has segmenting properties defined.
 
@@ -19585,7 +19599,7 @@ paths:
             default: 30
           in: query
           name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200.
+          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
   '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
     parameters:
       - schema:
