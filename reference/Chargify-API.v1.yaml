@@ -19288,19 +19288,6 @@ paths:
                 properties:
                   segment:
                     type: object
-                    required:
-                      - id
-                      - component_id
-                      - price_point_id
-                      - event_based_billing_metric_id
-                      - pricing_scheme
-                      - segment_property_1_value
-                      - segment_property_2_value
-                      - segment_property_3_value
-                      - segment_property_4_value
-                      - created_at
-                      - updated_at
-                      - prices
                     properties:
                       id:
                         type: integer
@@ -19312,44 +19299,37 @@ paths:
                         type: integer
                       pricing_scheme:
                         type: string
-                        minLength: 1
                       segment_property_1_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_2_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_3_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_4_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       created_at:
                         type: string
-                        minLength: 1
                       updated_at:
                         type: string
-                        minLength: 1
                       prices:
                         type: array
-                        uniqueItems: true
+                        uniqueItems: false
                         minItems: 1
                         items:
                           type: object
@@ -19366,24 +19346,12 @@ paths:
                                 - 'null'
                             unit_price:
                               type: string
-                              minLength: 1
                             price_point_id:
                               type: integer
                             formatted_unit_price:
                               type: string
-                              minLength: 1
                             segment_id:
                               type: integer
-                          required:
-                            - id
-                            - component_id
-                            - starting_quantity
-                            - unit_price
-                            - price_point_id
-                            - formatted_unit_price
-                            - segment_id
-                required:
-                  - segment
               examples: {}
         '401':
           description: Unauthorized
@@ -19427,8 +19395,6 @@ paths:
                 segment:
                   type: object
                   properties:
-                    event_based_billing_metric_id:
-                      type: integer
                     segment_property_1_value:
                       type:
                         - string
@@ -19477,10 +19443,9 @@ paths:
                         required:
                           - unit_price
                   required:
-                    - event_based_billing_metric_id
                     - pricing_scheme
       description: |-
-        This endpoint create new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for it.
+        This endpoint create new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for it. You can only pass as many "property_values" as related Metric has segmenting properties defined.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     parameters:
@@ -19531,19 +19496,6 @@ paths:
                 properties:
                   segment:
                     type: object
-                    required:
-                      - id
-                      - component_id
-                      - price_point_id
-                      - event_based_billing_metric_id
-                      - pricing_scheme
-                      - segment_property_1_value
-                      - segment_property_2_value
-                      - segment_property_3_value
-                      - segment_property_4_value
-                      - created_at
-                      - updated_at
-                      - prices
                     properties:
                       id:
                         type: integer
@@ -19555,44 +19507,37 @@ paths:
                         type: integer
                       pricing_scheme:
                         type: string
-                        minLength: 1
                       segment_property_1_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_2_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_3_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       segment_property_4_value:
                         type:
                           - string
                           - number
                           - integer
                           - boolean
-                        minLength: 1
                       created_at:
                         type: string
-                        minLength: 1
                       updated_at:
                         type: string
-                        minLength: 1
                       prices:
                         type: array
-                        uniqueItems: true
+                        uniqueItems: false
                         minItems: 1
                         items:
                           type: object
@@ -19609,24 +19554,12 @@ paths:
                                 - 'null'
                             unit_price:
                               type: string
-                              minLength: 1
                             price_point_id:
                               type: integer
                             formatted_unit_price:
                               type: string
-                              minLength: 1
                             segment_id:
                               type: integer
-                          required:
-                            - id
-                            - component_id
-                            - starting_quantity
-                            - unit_price
-                            - price_point_id
-                            - formatted_unit_price
-                            - segment_id
-                required:
-                  - segment
         '401':
           description: Unauthorized
         '403':
