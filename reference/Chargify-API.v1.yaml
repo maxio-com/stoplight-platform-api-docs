@@ -277,6 +277,7 @@ tags:
   - name: Customers
   - name: Custom Fields
   - name: Events
+  - name: 'Events-Based Billing: Segments'
   - name: Insights
   - name: Invoices
   - name: Offers
@@ -19461,6 +19462,130 @@ paths:
         in: path
         required: true
         description: ID or Handle for the Price Point belonging to the Component
+    get:
+      summary: List Segments for a Price Point
+      operationId: get-components-component_id-price_points-price_point_id-segments.json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+              examples: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      per_page:
+                        type: array
+                        items:
+                          type: string
+                      price_point:
+                        type: array
+                        items:
+                          type: string
+      description: |-
+        This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
+
+        You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            minimum: 1
+            default: 30
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200.
   '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
     parameters:
       - schema:
