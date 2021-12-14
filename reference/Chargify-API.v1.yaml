@@ -21938,6 +21938,8 @@ components:
           updated_at: string
           component_handle: string
           archived_at: string
+          product_family_id: 0
+          product_family_handle: string
       properties:
         component_id:
           type: integer
@@ -21991,6 +21993,10 @@ components:
           type:
             - string
             - 'null'
+        product_family_id:
+          type: integer
+        product_familiy_handle:
+          type: string
     Update-Customer:
       title: Update Customer
       type: object
