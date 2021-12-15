@@ -19460,7 +19460,7 @@ paths:
                         ending_quantity: null
                         unit_price: '0.09'
       description: |-
-        This endpoint create new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for it. You can only pass as many "property_values" as related Metric has segmenting properties defined.
+        This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     parameters:
@@ -19585,6 +19585,8 @@ paths:
         This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
 
         You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
       parameters:
         - schema:
             type: integer
@@ -19755,7 +19757,7 @@ paths:
                   required:
                     - pricing_scheme
       description: |-
-        This endpoint update single Segment for a Component with segmented Metric. It allows you to update the pricing for the segment.
+        This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     delete:
@@ -19772,7 +19774,10 @@ paths:
           description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
-      description: This endpoint allows you to delete a Segment with specified ID.
+      description: |-
+        This endpoint allows you to delete a Segment with specified ID.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
   '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
     parameters:
       - schema:
@@ -19989,6 +19994,8 @@ paths:
         This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
 
         If any of the records contain error the whole request would fail and none of the requested segments get created. The error response contain the message for the one segment that failed validation only, with the corresponding index in the array.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     put:
       summary: Bulk Update Segments
       tags:
@@ -20162,6 +20169,8 @@ paths:
         This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `2000` records.
 
         If any of the records contain error the whole request would fail and none of the requested segments get updated. The error response contain the message for the one segment that failed validation only, with the corresponding index in the array.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
 servers:
   - url: 'https://subdomain.chargify.com'
 components:
