@@ -19758,6 +19758,21 @@ paths:
         This endpoint update single Segment for a Component with segmented Metric. It allows you to update the pricing for the segment.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+    delete:
+      summary: ''
+      operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: This endpoint allows you to delete a Segment with specified ID.
   '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
     parameters:
       - schema:
