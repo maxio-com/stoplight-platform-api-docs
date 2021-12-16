@@ -14380,8 +14380,6 @@ paths:
                     cancellation_message:
                       type: string
                       description: Can be used when canceling a subscription to make a note about the reason for cancellation.
-                    cancellation_method:
-                      type: string
                     reason_code:
                       type: string
                       description: Can be used when canceling a subscription to indicate why a subscription was canceled. (See reason codes associated with your site)
@@ -15752,6 +15750,8 @@ paths:
         1. The subscription needs to be unbilled (no statements or invoices).
         2. The value passed must be a valid date/time.
         3. The value passed must be before the current date/time.
+
+        If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the reason for the problem.
       requestBody:
         content:
           application/json:
@@ -15784,6 +15784,7 @@ paths:
                     canceled_at: '2000-12-31'
                     cancellation_message: Original cancellation in 2000
                     expires_at: '2001-07-15'
+        description: Only these fields are available to be set.
   '/subscriptions/{subscription_id}/delayed_cancel.json':
     parameters:
       - schema:
@@ -15799,6 +15800,15 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
       operationId: post-subscriptions-subscription_id-delayed_cancel.json
       description: |-
         Chargify offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
@@ -17441,18 +17451,18 @@ paths:
 
         ## Reactivating within the current period
 
-        If a subscription group is cancelled and reactivated within the primary subscription's current period, we can choose to either start a new billing period or maintain the existing one. If we want to maintain the existing billing period the resume=true option must be passed in request parameters.
+        If a subscription group is cancelled and reactivated within the primary subscription's current period, we can choose to either start a new billing period or maintain the existing one. If we want to maintain the existing billing period the `resume=true` option must be passed in request parameters.
 
-        An exception to the above are subscriptions that are on calendar billing. These subscriptions cannot be reactivatied within the current period. If the resume=true option is not passed the request will return an error.
+        An exception to the above are subscriptions that are on calendar billing. These subscriptions cannot be reactivated within the current period. If the `resume=true` option is not passed the request will return an error.
 
-        The resume_members option is ignored in this case. All eligible group members will be automatically resumed.
+        The `resume_members` option is ignored in this case. All eligible group members will be automatically resumed.
 
 
         ## Reactivating beyond the current period
 
-        In this case, a subscription group can only be reactivated with a new billing period. If the resume=true option is passed it will be ignored.
+        In this case, a subscription group can only be reactivated with a new billing period. If the `resume=true` option is passed it will be ignored.
 
-        Member subscriptions can have billing periods that are longer than the primary (e.g. a monthly primary with annual group members). If the primary subscription in a group cannot be reactivated within the current period, but other group members can be, passing resume_members=true will resume the existing billing period for eligible group members. The primary subscription will begin a new billing period.
+        Member subscriptions can have billing periods that are longer than the primary (e.g. a monthly primary with annual group members). If the primary subscription in a group cannot be reactivated within the current period, but other group members can be, passing `resume_members=true` will resume the existing billing period for eligible group members. The primary subscription will begin a new billing period.
 
         For calendar billing subscriptions, the new billing period created will be a partial one, spanning from the date of reactivation to the next corresponding calendar renewal date.
       requestBody:
@@ -17964,6 +17974,8 @@ paths:
                             type: string
                           masked_card_number:
                             type: string
+                      payment_collection_method:
+                        type: string
                       subscription_ids:
                         type: array
                         items:
