@@ -19993,7 +19993,7 @@ paths:
       description: |-
         This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
 
-        If any of the records contain error the whole request would fail and none of the requested segments get created. The error response contain the message for the one segment that failed validation only, with the corresponding index in the array.
+        If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
     put:
@@ -20168,7 +20168,7 @@ paths:
       description: |-
         This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `2000` records.
 
-        If any of the records contain error the whole request would fail and none of the requested segments get updated. The error response contain the message for the one segment that failed validation only, with the corresponding index in the array.
+        If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
         For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
 servers:
