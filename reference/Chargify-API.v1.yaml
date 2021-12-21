@@ -19286,6 +19286,8 @@ paths:
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
 servers:
   - url: 'https://subdomain.chargify.com'
+security:
+  - BasicAuth: []
 components:
   schemas:
     Allocation:
@@ -22128,3 +22130,8 @@ components:
           type: string
         subscription_id:
           type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: The `username` is a Chargify API key. The `password` is `x`.

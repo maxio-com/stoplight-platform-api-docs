@@ -5016,6 +5016,8 @@ paths:
 servers:
   - url: 'https://subdomain.chargify.com'
     description: ''
+security:
+  - BasicAuth: []
 components:
   schemas:
     Create-Legacy-Payment:
@@ -6042,3 +6044,8 @@ components:
           nullable: true
         refunded_amount_in_cents:
           type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: The `username` is a Chargify API key. The `password` is `x`.
