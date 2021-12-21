@@ -5014,8 +5014,12 @@ paths:
         ## Past Due & Unpaid Subscriptions
         If you have a subscription that is in the `past_due` or `unpaid` state, when you reset the balance, the subscription will transition to `active`.
 servers:
-  - url: 'https://subdomain.chargify.com'
-    description: ''
+  - url: 'https://{subdomain}.chargify.com'
+    description: Production server
+    variables:
+      subdomain:
+        default: subdomain
+        description: The subdomain for your Chargify site
 components:
   schemas:
     Create-Legacy-Payment:
