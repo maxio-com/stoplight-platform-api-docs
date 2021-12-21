@@ -19289,13 +19289,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
+              examples:
+                example-1:
+                  value:
+                    subscriptions_components:
+                      - id: 20
+                        name: Metered Usage Component
+                        kind: metered_component
+                        unit_name: Metered Usage Component
+                        unit_balance: 0
+                        currency: USD
+                        pricing_scheme: null
+                        component_id: 1
+                        component_handle: null
+                        subscription_id: 22
+                        recurring: false
+                        archived_at: null
+                        price_point_id: null
+                        price_point_handle: null
+                        price_point_type: null
+                        price_point_name: null
+                        product_family_id: 333
+                        product_family_handle: acme-inc-billing-plans
+                        created_at: '2021-12-21T06:00:31-05:00'
+                        updated_at: '2021-12-21T06:00:31-05:00'
       operationId: get-subscriptions_components.json
       description: |-
         This request will list components applited to each subscription.
 
         ## Archived Components
 
-        When requesting to list components for a given subscription, if the subscription contains archived components they will be listed in the server response.
+        Archived components will be listed in the server response.
       parameters:
         - schema:
             type: integer
