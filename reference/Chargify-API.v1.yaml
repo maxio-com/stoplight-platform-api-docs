@@ -2341,6 +2341,9 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+          in: query
     put:
       summary: Update Metadata
       tags:
@@ -2419,8 +2422,13 @@ paths:
             type: array
           in: query
           name: 'names[]'
-  //metadata.json:
-    parameters: []
+  '/{resource_type}/metadata.json':
+    parameters:
+      - schema:
+          type: string
+        name: resource_type
+        in: path
+        required: true
     get:
       summary: List Metadata for Resource Type
       tags:
