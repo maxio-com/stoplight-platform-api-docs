@@ -19285,7 +19285,12 @@ paths:
 
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
 servers:
-  - url: 'https://subdomain.chargify.com'
+  - url: 'https://{subdomain}.chargify.com'
+    description: Production server
+    variables:
+      subdomain:
+        default: subdomain
+        description: The subdomain for your Chargify site
 components:
   schemas:
     Allocation:
