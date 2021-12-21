@@ -2419,13 +2419,8 @@ paths:
             type: array
           in: query
           name: 'names[]'
-  '/{resource_type}/metadata.json':
-    parameters:
-      - schema:
-          type: string
-        name: resource_type
-        in: path
-        required: true
+  //metadata.json:
+    parameters: []
     get:
       summary: List Metadata for Resource Type
       tags:
@@ -19272,6 +19267,99 @@ paths:
         This endpoint updates customer information on an open invoice and returns the updated invoice. If you would like to preview changes that will be applied, use the `/invoices/{uid}/customer_information/preview.json` endpoint before.
 
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
+  /subscriptions_components.json:
+    get:
+      summary: List Subscription Components for Site
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions_components:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscriptions-Component'
+      operationId: get-subscriptions_components.json
+      description: |-
+        This request will list components applited to each subscription.
+
+        ## Archived Components
+
+        When requesting to list components for a given subscription, if the subscription contains archived components they will be listed in the server response.
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            default: 20
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            enum:
+              - updated_at
+              - id
+          in: query
+          name: sort
+          description: The attribute by which to sort
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
+        - schema:
+            type: string
+            enum:
+              - updated_at
+          in: query
+          name: date_field
+          description: 'The type of filter you''d like to apply to your search. Allowed Values: updated_at'
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          name: start_datetime
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+        - schema:
+            type: string
+            example: 'subscription_ids=1,2,3'
+          in: query
+          name: subscription_ids
+          description: 'Allows fetching components allocation for subscriptions based on provided ids. '
+        - schema:
+            type: string
+            enum:
+              - not_null
+          in: query
+          name: price_point_ids
+          description: Allows fetching components allocation only if price point id is present.
 servers:
   - url: 'https://subdomain.chargify.com'
 components:
@@ -21920,26 +22008,27 @@ components:
       title: Subscriptions Component
       type: object
       examples:
-        - component_id: 0
-          subscription_id: 0
-          allocated_quantity: 0
-          pricing_scheme: string
-          name: string
-          kind: string
-          unit_name: string
-          price_point_id: 0
-          price_point_handle: string
-          price_point_type: default
-          price_point_name: string
-          enabled: true
+        - id: 20
+          name: Metered Usage Component
+          kind: metered_component
+          unit_name: Metered Usage Component
           unit_balance: 0
-          id: 0
-          created_at: string
-          updated_at: string
-          component_handle: string
-          archived_at: string
-          product_family_id: 0
-          product_family_handle: string
+          currency: USD
+          pricing_scheme: null
+          component_id: 1
+          component_handle: null
+          subscription_id: 22
+          recurring: false
+          archived_at: null
+          price_point_id: null
+          price_point_handle: null
+          price_point_type: null
+          price_point_name: null
+          product_family_id: 333
+          product_family_handle: acme-inc-billing-plans
+          created_at: '2021-12-21T06:00:31-05:00'
+          updated_at: '2021-12-21T06:00:31-05:00'
+      description: ''
       properties:
         component_id:
           type: integer
@@ -21964,6 +22053,8 @@ components:
           type:
             - string
             - 'null'
+        price_point_name:
+          type: string
         price_point_type:
           type:
             - string
@@ -21972,14 +22063,12 @@ components:
             - default
             - catalog
             - custom
-        price_point_name:
-          type: string
+        id:
+          type: integer
         enabled:
           type: boolean
           description: (for on/off components) indicates if the component is enabled for the subscription
         unit_balance:
-          type: integer
-        id:
           type: integer
         created_at:
           type: string
@@ -21996,6 +22085,8 @@ components:
         product_family_id:
           type: integer
         product_familiy_handle:
+          type: string
+        currency:
           type: string
     Update-Customer:
       title: Update Customer
