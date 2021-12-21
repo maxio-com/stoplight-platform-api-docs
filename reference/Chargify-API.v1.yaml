@@ -19291,6 +19291,8 @@ servers:
       subdomain:
         default: subdomain
         description: The subdomain for your Chargify site
+security:
+  - BasicAuth: []
 components:
   schemas:
     Allocation:
@@ -22133,3 +22135,8 @@ components:
           type: string
         subscription_id:
           type: integer
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: The `username` is a Chargify API key. The `password` is `x`.
