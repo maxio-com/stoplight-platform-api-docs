@@ -13063,6 +13063,9 @@ paths:
                     timestamp: '2020-02-27T17:45:50-05:00'
                   messages: 150
                   country: US
+    servers:
+      - url: 'https://events.chargify.com'
+        description: Production server
   '/{subdomain}/events/{api_handle}/bulk.json':
     parameters:
       - schema:
@@ -13102,6 +13105,9 @@ paths:
               type: array
               items:
                 type: object
+    servers:
+      - url: 'https://events.chargify.com'
+        description: Production server
   /offers.json:
     post:
       summary: Create Offer
