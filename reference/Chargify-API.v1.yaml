@@ -19398,6 +19398,22 @@ paths:
                         minLength: 1
                 required:
                   - payment_profile
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: string
+                    minLength: 1
+                required:
+                  - errors
+                x-examples:
+                  example-1:
+                    errors: Chargify token not found
       operationId: get-one_time_tokens.json
       x-internal: false
       description: |-
