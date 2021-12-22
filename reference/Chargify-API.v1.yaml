@@ -19452,7 +19452,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
       operationId: get-subscriptions_components
-      description: This request will list components applited to each subscription.
+      description: This request will list components applied to each subscription.
       parameters:
         - schema:
             type: integer
