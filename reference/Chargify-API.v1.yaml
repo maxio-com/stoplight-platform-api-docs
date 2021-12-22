@@ -19434,6 +19434,102 @@ paths:
         name: chargify_token
         in: path
         required: true
+  /subscriptions_components:
+    get:
+      summary: List Subscription Components for Site
+      tags:
+        - Subscription Components
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions_components:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscriptions-Component'
+      operationId: get-subscriptions_components
+      description: This request will list components applied to each subscription.
+      parameters:
+        - schema:
+            type: integer
+            example: page=2
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            example: per_page=50
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            enum:
+              - id
+              - updated_at
+            example: sort=updated_at
+          in: query
+          name: sort
+          description: The attribute by which to sort.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            example: direction=asc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
+        - schema:
+            type: string
+            enum:
+              - updated_at
+            example: date_field=updated_at
+          in: query
+          name: date_field
+          description: The type of filter you'd like to apply to your search.
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified,'
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+        - schema:
+            type: array
+            example: 'subscription_ids=1,2,3'
+            maxLength: 200
+            minLength: 1
+            minItems: 1
+            maxItems: 200
+          in: query
+          name: subscription_ids
+          description: Allows fetching components allocation with matching subscription id based on provided ids.
+        - schema:
+            type: string
+            enum:
+              - not_null
+            example: price_point_ids=not_null
+          in: query
+          name: price_point_ids
+          description: Allows fetching components allocation only if price point id is present.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -22112,21 +22208,42 @@ components:
           component_handle: string
           archived_at: string
       properties:
-        component_id:
+        id:
           type: integer
-        subscription_id:
-          type: integer
-        allocated_quantity:
-          type: integer
-          description: 'For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off.'
-        pricing_scheme:
-          type: string
         name:
           type: string
         kind:
           type: string
         unit_name:
           type: string
+        enabled:
+          type: boolean
+          description: (for on/off components) indicates if the component is enabled for the subscription
+        unit_balance:
+          type: integer
+        currency:
+          type: string
+        allocated_quantity:
+          type: integer
+          description: 'For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off.'
+        pricing_scheme:
+          type:
+            - string
+            - 'null'
+        component_id:
+          type: integer
+        component_handle:
+          type:
+            - string
+            - 'null'
+        subscription_id:
+          type: integer
+        recurring:
+          type: boolean
+        archived_at:
+          type:
+            - 'null'
+            - string
         price_point_id:
           type:
             - integer
@@ -22144,26 +22261,17 @@ components:
             - catalog
             - custom
         price_point_name:
+          type:
+            - string
+            - 'null'
+        product_family_id:
+          type: integer
+        product_family_handle:
           type: string
-        enabled:
-          type: boolean
-          description: (for on/off components) indicates if the component is enabled for the subscription
-        unit_balance:
-          type: integer
-        id:
-          type: integer
         created_at:
           type: string
         updated_at:
           type: string
-        component_handle:
-          type:
-            - string
-            - 'null'
-        archived_at:
-          type:
-            - string
-            - 'null'
     Update-Customer:
       title: Update Customer
       type: object
