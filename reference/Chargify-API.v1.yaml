@@ -13,7 +13,7 @@ info:
 
     ### Testing Guide
 
-    Chargify has compiled a [testing guide](https://help.chargify.com/testing/testing-intro.html) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
+    Chargify has compiled a [testing guide](https://chargify.zendesk.com/hc/en-us/articles/4407904658587) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
 
     + Test credit card basics
     + Test site limits
@@ -161,12 +161,12 @@ info:
 
     - Your Chargify subscription is canceled.
     - Your Chargify trial has reached an end.
-    - The site you're making a request for is in the process of ["clearing site data"](https://help.chargify.com/sites/clearing-site-data.html)
+    - The site you're making a request for is in the process of ["clearing site data"](https://chargify.zendesk.com/hc/en-us/articles/4407864367387)
       - _Note: any API request for another site that is in a good state will NOT be blocked_
     - The site you're making a request for has been deleted.
       - _Note: any API request for another site that is in a good state will NOT be blocked_
 
-    Read more about your Chargify subscription [here](https://help.chargify.com/my-account/chargify-subscription.html)
+    Read more about your Chargify subscription [here](https://chargify.zendesk.com/hc/en-us/articles/4407747017115)
 
     ### What happens when an API request is blocked
 
@@ -192,7 +192,7 @@ info:
     }
     ```
 
-    - If the site you're making a request for is in the process of ["clearing site data"](https://help.chargify.com/sites/clearing-site-data.html):
+    - If the site you're making a request for is in the process of ["clearing site data"](https://chargify.zendesk.com/hc/en-us/articles/4407864367387):
 
     ```json
     {
@@ -238,7 +238,7 @@ info:
 
     ### API Compatibility for Relationship Invoicing
 
-    This section describes the API for the new, [Relationship Invoicing](https://help.chargify.com/invoices/index.html) style of invoices introduced in January 2018.
+    This section describes the API for the new, [Relationship Invoicing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) style of invoices introduced in January 2018.
 
     If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
@@ -392,10 +392,10 @@ paths:
 
         We recommend that you review Chargify's webhook documentation located in our help site. The following resources will help guide you on how to use webhooks in Chargify, in addition to these webhook endpoints:
 
-        + [Adding/editing new webhooks](https://help.chargify.com/settings/webhooks.html)
-        + [Webhooks introduction and delivery information](https://help.chargify.com/webhooks/introduction.html)
-        + [Main webhook overview](https://help.chargify.com/webhooks/webhooks-reference.html)
-        + [Available webhooks and payloads](https://help.chargify.com/webhooks/webhooks-reference.html#example-payloads)
+        + [Adding/editing new webhooks](https://chargify.zendesk.com/hc/en-us/articles/4407864180763)
+        + [Webhooks introduction and delivery information](https://chargify.zendesk.com/hc/en-us/articles/4407912597403)
+        + [Main webhook overview](https://chargify.zendesk.com/hc/en-us/articles/4407905415963)
+        + [Available webhooks and payloads](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
 
         ## List Webhooks for a Site
 
@@ -573,7 +573,7 @@ paths:
         The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
 
         You can check available events here.                
-        [Event keys](https://help.chargify.com/webhooks/webhooks-reference.html#example-payloads)
+        [Event keys](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
       requestBody:
         content:
           application/json:
@@ -670,7 +670,7 @@ paths:
         You can update an Endpoint via the API with a PUT request to the resource endpoint.
 
         You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.   
-        Check available [Event keys](https://help.chargify.com/webhooks/webhooks-reference.html).
+        Check available [Event keys](https://chargify.zendesk.com/hc/en-us/articles/4407905415963).
 
         Always send a complete list of events which you want subscribe/watch.
         Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end with unsubscribe from all events.
@@ -759,9 +759,9 @@ paths:
       description: |-
         This endpoint allows you to fetch some site data.
 
-        Full documentation on Sites in the Chargify UI can be located [here](http://help.chargify.com/sites/sites-intro.html).
+        Full documentation on Sites in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407870738587).
 
-        Specifically, the [Clearing Site Data](http://help.chargify.com/sites/clearing-site-data.html) section is extremely relevant to this endpoint documentation.
+        Specifically, the [Clearing Site Data](https://chargify.zendesk.com/hc/en-us/articles/4407864367387) section is extremely relevant to this endpoint documentation.
 
         #### Relationship invoicing enabled
         If site has RI enabled then you will see more settings like: 
@@ -770,7 +770,7 @@ paths:
             "whopays_enabled": true,
             "whopays_default_payer": "self"
         You can read more about these settings here:
-         [Who Pays & Customer Hierarchy](https://help.chargify.com/invoices/customer-hierarchies-whopays.html)
+         [Who Pays & Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291)
   /sites/clear_data.json:
     post:
       summary: Clear Site Data
@@ -830,7 +830,7 @@ paths:
 
         If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-        Full documentation on how to use Notes in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/subscription-summary.html#notes).
+        Full documentation on how to use Notes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#notes).
       requestBody:
         content:
           application/json:
@@ -1056,7 +1056,7 @@ paths:
 
         If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Chargify’s unique ID for the customer, which is in the `id` attribute.
 
-        Full documentation on how to locate, create and edit Customers in the Chargify UI can be located [here](https://help.chargify.com/customers/customers-intro.html).
+        Full documentation on how to locate, create and edit Customers in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659914267).
 
         ## Required Country Format
 
@@ -1075,7 +1075,7 @@ paths:
         ## Locale
 
         Chargify allows you to attribute a language/region to your customer to deliver invoices in any required language.
-        For more: [Customer Locale](https://help.chargify.com/settings/multi-lingual-invoices.html#customer-locale)
+        For more: [Customer Locale](https://chargify.zendesk.com/hc/en-us/articles/4407870384283#customer-locale)
       requestBody:
         content:
           application/json:
@@ -1455,7 +1455,7 @@ paths:
       description: |-
         ## Billing Portal Documentation
 
-        Full documentation on how the Billing Portal operates within the Chargify UI can be located [here](https://help.chargify.com/billing-portal/introduction.html).
+        Full documentation on how the Billing Portal operates within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407648972443).
 
         This documentation is focused on how the to configure the Billing Portal Settings, as well as Subscriber Interaction and Merchant Management of the Billing Portal. 
 
@@ -1803,7 +1803,7 @@ paths:
 
         ## Referrals Documentation
 
-        Full documentation on how to use the referrals feature in the Chargify UI can be located [here](http://help.chargify.com/referrals/introduction.html).
+        Full documentation on how to use the referrals feature in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407802831643).
 
         ## Server Response
 
@@ -1853,7 +1853,7 @@ paths:
 
         Full documentation on how Reason Codes operate within Chargify can be located under the following links.
 
-        [Churn Reason Codes](http://help.chargify.com/subscriptions/cancellation.html#churn-reason-codes)
+        [Churn Reason Codes](https://chargify.zendesk.com/hc/en-us/articles/4407896775579#churn-reason-codes)
 
         ## Create Reason Code
 
@@ -2081,7 +2081,7 @@ paths:
         + **Metafield is the custom field**
         + **Metadata is the data populating the custom field.**
 
-        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://help.chargify.com/custom-fields/custom-fields-intro.html). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#custom-fields)
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659856411). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#customer-details)
 
         Metafield are the place where you will set up your resource to accept additional data. It is scoped to the site instead of a specific customer or subscription. Think of it as the key, and Metadata as the value on every record.
 
@@ -2257,7 +2257,7 @@ paths:
         + **Metafield is the custom field**
         + **Metadata is the data populating the custom field.**
 
-        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://help.chargify.com/custom-fields/custom-fields-intro.html). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#custom-fields)
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659856411). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#custom-fields)
 
         Metadata is associated to a customer or subscription, and corresponds to a Metafield. When creating a new metadata object for a given record, **if the metafield is not present it will be created**.
 
@@ -2546,9 +2546,9 @@ paths:
       description: |-
         ## Coupons Documentation
 
-        Coupons can be administered in the Chargify application or created via API. Please view our section on [creating coupons](https://help.chargify.com/products/product-coupons.html) for more information. 
+        Coupons can be administered in the Chargify application or created via API. Please view our section on [creating coupons](https://chargify.zendesk.com/hc/en-us/articles/4407755909531) for more information. 
 
-        Additionally, for documentation on how to apply a coupon to a subscription within the Chargify UI, please see our documentation [here](https://help.chargify.com/subscriptions/subscription-summary.html#coupon).
+        Additionally, for documentation on how to apply a coupon to a subscription within the Chargify UI, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#coupon).
 
         ## Create Coupon
 
@@ -3277,9 +3277,9 @@ paths:
 
         ## Coupon Subcodes Documentation
 
-        Full documentation on how to create coupon subcodes in the Chargify UI can be located [here](https://help.chargify.com/products/product-coupons.html#coupon-codes).
+        Full documentation on how to create coupon subcodes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#coupon-codes).
 
-        Additionally, for documentation on how to apply a coupon to a Subscription within the Chargify UI, please see our documentation [here](https://help.chargify.com/subscriptions/subscription-summary.html#coupon).
+        Additionally, for documentation on how to apply a coupon to a Subscription within the Chargify UI, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#coupon).
 
         ## Create Coupon Subcode
 
@@ -3587,7 +3587,7 @@ paths:
 
         Chargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
 
-        Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://help.chargify.com/sites/site-activity.html).
+        Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).
 
         ## List Events for a Site
 
@@ -3601,8 +3601,8 @@ paths:
         + `payment_success_recreated`
         + `renewal_failure_recreated`
         + `renewal_success_recreated`
-        + `zferral_revenue_post_failure` - [Specific to the Zferral integration](https://help.chargify.com/integrations/zferral.html)
-        + `zferral_revenue_post_success` - [Specific to the Zferral integration](https://help.chargify.com/integrations/zferral.html)
+        + `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)
+        + `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)
 
         ## Event Specific Data
 
@@ -4055,7 +4055,7 @@ paths:
                         description: 'The name of the Component, suitable for display on statements. i.e. Text Messages.'
                       pricing_scheme:
                         type: string
-                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes.'
                       unit_name:
                         type: string
                         description: The name of the unit that the component’s usage is measured in. i.e. message
@@ -4195,12 +4195,12 @@ paths:
 
         ### Component Documentation
 
-        For more information on components, please see our documentation [here](https://help.chargify.com/products/product-components.html).
+        For more information on components, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407755865883).
 
         For information on how to record component usage against a subscription, please see the following resources:
 
-        + [Proration and Component Allocations](https://help.chargify.com/subscriptions/setting-component-allocations.html)
-        + [Recording component usage against a subscription](https://help.chargify.com/subscriptions/subscription-summary.html#components-line-items)
+        + [Proration and Component Allocations](https://chargify.zendesk.com/hc/en-us/articles/4407899119771)
+        + [Recording component usage against a subscription](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#change-product---cancelation)
       requestBody:
         content:
           application/json:
@@ -4233,7 +4233,7 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes.'
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
@@ -4241,7 +4241,7 @@ paths:
                             - stairstep
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -4311,7 +4311,7 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes.'
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
@@ -4319,7 +4319,7 @@ paths:
                             - stairstep
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -4397,7 +4397,7 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes.'
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
@@ -4405,7 +4405,7 @@ paths:
                             - stairstep
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -4475,7 +4475,7 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes.'
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
@@ -4483,7 +4483,7 @@ paths:
                             - stairstep
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -5017,7 +5017,7 @@ paths:
       description: |-
         Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
-        See [Price Points Documentation](https://help.chargify.com/products/product-components.html#price-points) for more information on price points and moving subscriptions between price points.
+        See [Price Points Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-points) for more information on price points and moving subscriptions between price points.
 
         Note: Custom price points are not able to be set as the default for a component.
   '/product_families/{product_family_id}/components.json':
@@ -5788,7 +5788,7 @@ paths:
 
         ## Understanding MRR movements
 
-        This endpoint will aid in accessing your site's [MRR Report](https://help.chargify.com/reports/mrr-analytics.html) data.
+        This endpoint will aid in accessing your site's [MRR Report](https://chargify.zendesk.com/hc/en-us/articles/4407838249627) data.
 
         Whenever a subscription event occurs that causes your site's MRR to change (such as a signup or upgrade), we record an MRR movement. These records are accessible via the MRR Movements endpoint.
 
@@ -5796,7 +5796,7 @@ paths:
 
         ### Plan & Usage Breakouts
 
-        In the MRR Report UI, we support a setting to [include or exclude](https://help.chargify.com/reports/mrr-analytics.html#displaying-component-based-metered-usage-in-mrr) usage revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
+        In the MRR Report UI, we support a setting to [include or exclude](https://chargify.zendesk.com/hc/en-us/articles/4407838249627#displaying-component-based-metered-usage-in-mrr) usage revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
 
         Plan includes revenue from:
         * Products
@@ -5900,8 +5900,8 @@ paths:
       description: |-
         Use this method to create a product within your Chargify site.
 
-        + [Products Documentation](http://help.chargify.com/products/products-intro.html)
-        + [Changing a Subscription's Product](http://help.chargify.com/subscriptions/subscription-summary.html#product)
+        + [Products Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407762375067)
+        + [Changing a Subscription's Product](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#product)
       requestBody:
         content:
           application/json:
@@ -6390,7 +6390,7 @@ paths:
       description: |-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
 
-        Full documentation on how Product Families operate within the Chargify UI can be located [here](http://help.chargify.com/products/product-families.html).
+        Full documentation on how Product Families operate within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407762380443).
       requestBody:
         content:
           application/json:
@@ -6557,7 +6557,7 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: post-products-product_id-price_points.json
-      description: '[Product Price Point Documentation](https://help.chargify.com/products/product-price-points.html)'
+      description: '[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)'
       requestBody:
         content:
           application/json:
@@ -7261,9 +7261,9 @@ paths:
 
         Full documentation on how Payment Profiles operate within Chargify can be located under the following links:
 
-        + [Subscriber Payment Details](http://help.chargify.com/subscriptions/subscription-summary.html#payment-details)
-        + [Self Service Pages](http://help.chargify.com/public-pages/self-service-pages.html) (Allows credit card updates by Subscriber)
-        + [Public Signup Pages payment settings](http://help.chargify.com/public-pages/public-signup-page-settings.html#credit-card-settings)
+        + [Subscriber Payment Details](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#payment-details)
+        + [Self Service Pages](https://chargify.zendesk.com/hc/en-us/articles/4407797760539) (Allows credit card updates by Subscriber)
+        + [Public Signup Pages payment settings](https://chargify.zendesk.com/hc/en-us/articles/4407762566171#credit-card-settings)
 
         ## Create a Payment Profile with a Chargify.js token
 
@@ -7296,7 +7296,7 @@ paths:
 
         For more information on GoCardless, please view the following resources:
 
-        + [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)
+        + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
@@ -7370,7 +7370,7 @@ paths:
 
         For more information on Stripe SEPA Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe SEPA Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+        + [Full documentation on Stripe SEPA Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7401,7 +7401,7 @@ paths:
 
         For more information on Stripe BECS Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe BECS Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+        + [Full documentation on Stripe BECS Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7431,7 +7431,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -7604,7 +7604,7 @@ paths:
                       deprecated: true
                     gateway_handle:
                       type: string
-                      description: 'This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://help.chargify.com/payment-gateways/gateway-configuration.html#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
+                      description: 'This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://chargify.zendesk.com/hc/en-us/articles/4407761759643#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
                     cvv:
                       type: string
                       description: The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.
@@ -10960,7 +10960,7 @@ paths:
                         success: false
                         memo: aliqua
       operationId: post-subscriptions-subscription_id-components-component_id-allocations.json
-      description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/setting-component-allocations.html). It is focused on how allocations operate within the Chargify UI. It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see: API: [Setting Component Allocations.](<https://help.chargify.com/subscriptions/setting-component-allocations.html>). See the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](<https://help.chargify.com/products/product-components.html#component-proration>)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n### Order of Resolution for accrue_charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](<https://help.chargify.com/subscriptions/setting-component-allocations.html#proration-schemes>)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
+      description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407899119771). It is focused on how allocations operate within the Chargify UI. It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see: API: [Setting Component Allocations.](https://chargify.zendesk.com/hc/en-us/articles/4407899119771). See the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#moving-subscriptions-between-price-points)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#proration-schemes)\n\n### Order of Resolution for accrue charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#proration-schemes)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
       requestBody:
         content:
           application/json:
@@ -11638,10 +11638,10 @@ paths:
       description: |-
         ## Documentation
 
-        Full documentation on how to create Components in the Chargify UI can be located [here](https://help.chargify.com/products/product-components.html). Additionally, for information on how to record component usage against a subscription, please see the following resources:
+        Full documentation on how to create Components in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407755865883). Additionally, for information on how to record component usage against a subscription, please see the following resources:
 
-        + [Recording Metered Component Usage](https://help.chargify.com/subscriptions/setting-component-allocations.html#reporting-metered-component-usage)
-        + [Reporting Prepaid Component Status](https://help.chargify.com/subscriptions/setting-component-allocations.html#reporting-prepaid-component-status)
+        + [Recording Metered Component Usage](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#reporting-metered-component-usage)
+        + [Reporting Prepaid Component Status](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#reporting-prepaid-component-status)
 
         You may choose to report metered or prepaid usage to Chargify as often as you wish. You may report usage as it happens. You may also report usage periodically, such as each night or once per billing period. If usage events occur in your system very frequently (on the order of thousands of times an hour), it is best to accumulate usage into batches on your side, and then report those batches less frequently, such as daily. This will ensure you remain below any API throttling limits. If your use case requires higher rates of usage reporting, we recommend utilizing Events Based Components.
 
@@ -11830,7 +11830,7 @@ paths:
       description: |-
         In order to bill your subscribers on your Events data under the Events-Based Billing feature, the components must be activated for the subscriber.
 
-        Learn more about the role of activation in the [Events-Based Billing docs](https://help.chargify.com/events/billing-guide.html#activating-components-for-subscribers).
+        Learn more about the role of activation in the [Events-Based Billing docs](https://chargify.zendesk.com/hc/en-us/articles/4407720810907#activating-components-for-subscribers).
 
         Use this endpoint to activate an event-based component for a single subscription. Activating an event-based component causes Chargify to bill for events when the subscription is renewed.
 
@@ -12015,13 +12015,13 @@ paths:
       description: |-
         Full documentation on how subscriptions operate within Chargify can be located under the following topics:
 
-        + [Subscriptions Reference](https://help.chargify.com/subscriptions/subscription-intro.html)
-        + [Subscriptions Actions](https://help.chargify.com/subscriptions/subscription-actions.html)
-        + [Subscription Cancellation](https://help.chargify.com/subscriptions/cancellation.html)
-        + [Subscription Reactivation](https://help.chargify.com/subscriptions/reactivation.html)
-        + [Subscription Import](https://help.chargify.com/subscriptions/subscriptions-import.html)
+        + [Subscriptions Reference](https://chargify.zendesk.com/hc/en-us/articles/4407881092763)
+        + [Subscriptions Actions](https://chargify.zendesk.com/hc/en-us/articles/4407895937819)
+        + [Subscription Cancellation](https://chargify.zendesk.com/hc/en-us/articles/4407896775579)
+        + [Subscription Reactivation](https://chargify.zendesk.com/hc/en-us/articles/4407898737691)
+        + [Subscription Import](https://chargify.zendesk.com/hc/en-us/articles/4407896986779)
 
-        When creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://help.chargify.com/products/product-editing.html)).
+        When creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://chargify.zendesk.com/hc/en-us/articles/4407762386203)).
 
         The product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.
 
@@ -12033,12 +12033,12 @@ paths:
 
         ## Taxable Subscriptions
 
-        If your intent is to charge your subscribers tax via [Avalara Taxes](https://help.chargify.com/taxes/avalara-managed-sales-tax.html) or [Custom Taxes](https://help.chargify.com/taxes/custom-taxes.html), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
+        If your intent is to charge your subscribers tax via [Avalara Taxes](https://chargify.zendesk.com/hc/en-us/articles/4407904217755) or [Custom Taxes](https://chargify.zendesk.com/hc/en-us/articles/4407911887771), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
 
-        + A subscription to a [taxable product](https://help.chargify.com/products/product-editing.html#tax-settings)
-        + [Full valid billing or shipping address](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#full-address-required-for-taxable-subscriptions) to identify the tax locale
-        + The portion of the address that houses the [state information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.
-        The portion of the address that houses the [country information](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.
+        + A subscription to a [taxable product](https://chargify.zendesk.com/hc/en-us/articles/4407762386203#tax-settings)
+        + [Full valid billing or shipping address](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#full-address-required-for-taxable-subscriptions) to identify the tax locale
+        + The portion of the address that houses the [state information](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.
+        The portion of the address that houses the [country information](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.
 
         ## Subscription Request Examples
 
@@ -12255,7 +12255,7 @@ paths:
         For more information on GoCardless, please view the following two resources:
 
         + [Payment Profiles via API for GoCardless](#endpoint:CaR3rApsyniuZtoEH)
-        + [Full documentation on GoCardless](https://help.chargify.com/payment-gateways/gocardless.html)
+        + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
@@ -12316,7 +12316,7 @@ paths:
         For more information on Stripe Direct Debit, please view the following two resources:
 
         + [Payment Profiles via API for Stripe SEPA Direct Debit](#endpoint:NasuhQCFDimxYmBh4)
-        + [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+        + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -12346,7 +12346,7 @@ paths:
         For more information on Stripe Direct Debit, please view the following two resources:
 
         + [Payment Profiles via API for Stripe BECS Direct Debit](#endpoint:H4z4BsLgSCd68A45W)
-        + [Full documentation on Stripe Direct Debit](https://help.chargify.com/payment-gateways/stripe-direct-debit.html)
+        + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -12374,7 +12374,7 @@ paths:
 
         ## 3D Secure - Stripe
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -12402,7 +12402,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -12463,11 +12463,11 @@ paths:
 
         Before importing, you should have already set up your products to match your offerings. Then, you can create Subscriptions via the API just like you normally would, but using a few special attributes.
 
-        Full documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/subscriptions-import.html).
+        Full documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407896986779).
 
         ### Important Notices and Disclaimers regarding Imports
 
-        Before performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](http://help.chargify.com/subscriptions/subscriptions-import.html#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.
+        Before performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](https://chargify.zendesk.com/hc/en-us/articles/4407896986779#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.
 
         ### Subscription Input Attributes
 
@@ -12548,7 +12548,7 @@ paths:
 
         ### Subscription in a Customer Hierarchy
 
-        For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy] features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.  
+        For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy] features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.  
 
         + The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.
 
@@ -12562,7 +12562,7 @@ paths:
 
         ### Subscription in a Subscription Group 
 
-        For sites making use of [Relationship Billing](https://help.chargify.com/invoices/index.html) it may be desireable to create a subscription as part of a [subscription group](https://help.chargify.com/invoices/consolidation.html) in order to rely on [invoice consolidation](https://help.chargify.com/invoices/consolidation.html).  This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.   
+        For sites making use of [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) it may be desireable to create a subscription as part of a [subscription group](https://chargify.zendesk.com/hc/en-us/articles/4407746391835) in order to rely on [invoice consolidation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).  This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.   
 
         The `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.
 
@@ -13022,7 +13022,7 @@ paths:
 
         This API allows you to stream events into the Chargify data ingestion engine.
 
-        Learn more about the feature in general in the [Events-Based Billing help docs](https://help.chargify.com/events/).
+        Learn more about the feature in general in the [Events-Based Billing help docs](https://chargify.zendesk.com/hc/en-us/articles/4407720613403).
 
         ## Record Event
 
@@ -13190,7 +13190,7 @@ paths:
 
         Once an offer is defined it can be used as an alternative to the product when creating subscriptions.
 
-        Full documentation on how to use offers in the Chargify UI can be located [here](https://help.chargify.com/offers/offers-introduction.html).
+        Full documentation on how to use offers in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407753852059).
 
         ## Using a Product Price Point
 
@@ -13430,7 +13430,7 @@ paths:
 
         ## Modified Authentication Process
 
-        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://help.chargify.com/announcements/new-api-authentication-method.html).
+        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
         Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
 
@@ -13609,7 +13609,7 @@ paths:
 
         ## Modified Authentication Process
 
-        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://help.chargify.com/announcements/new-api-authentication-method.html).
+        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
         Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
 
@@ -13726,7 +13726,7 @@ paths:
 
         ## Modified Authentication Process
 
-        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://help.chargify.com/announcements/new-api-authentication-method.html).
+        The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
         Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
 
@@ -15137,7 +15137,7 @@ paths:
                       - The credit card on file could not be charged.
       operationId: put-subscriptions-subscription_id-reactivate.json
       description: |-
-        Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://help.chargify.com/subscriptions/reactivation.html).
+        Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://chargify.zendesk.com/hc/en-us/articles/4407898737691).
 
         **Please note: The term 
         "resume" is used also during another process in Chargify. This occurs when an on-hold subscription is "resumed". This returns the subscription to an active state.**
@@ -15517,7 +15517,7 @@ paths:
 
         ## Migrations Documentation
 
-        Full documentation on how to record Migrations in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/upgrades-downgrades.html).
+        Full documentation on how to record Migrations in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407898373531).
 
         ## Failed Migrations
 
@@ -15525,7 +15525,7 @@ paths:
 
         ## Migration 3D Secure - Stripe
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is migrated to a new product; this is referred to in our help docs as a [post-authentication flow](https://help.chargify.com/payment-gateways/testing-3dsecure.html). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is migrated to a new product; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -16098,7 +16098,7 @@ paths:
       description: |-
         The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
 
-        The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation  [here](http://help.chargify.com/subscriptions/subscription-summary.html#next-billing).
+        The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#next-billing).
 
         ## Optional Component Fields
 
@@ -18013,7 +18013,7 @@ paths:
                       created_at: '2018-08-30T17:14:30-04:00'
       operationId: post-subscriptions-subscription_id-group.json
       description: |-
-        For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to add existing subscriptions to subscription groups.
+        For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
 
         Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
 
@@ -18068,7 +18068,7 @@ paths:
                     errors:
                       - You can not remove primary subscription when there are others in group
       operationId: delete-subscriptions-subscription_id-group.json
-      description: 'For sites making use of the [Relationship Billing](https://help.chargify.com/invoices/index.html) and [Customer Hierarchy](https://help.chargify.com/relationship-invoicing/customer-hierarchies-whopays.html) features, it is possible to remove existing subscription from subscription group.'
+      description: 'For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group.'
   /subscriptions/preview.json:
     post:
       summary: Subscription Preview
@@ -18186,7 +18186,7 @@ paths:
       description: |-
         The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a subscription creation.
 
-        The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For more information, please see our documentation  [here](http://help.chargify.com/subscriptions/subscription-summary.html#next-billing).
+        The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For more information, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#next-billing).
 
         ## Side effects
 
@@ -18200,7 +18200,7 @@ paths:
         + The preview must be for the purchase of a taxable product or component, or combination of the two.
         + The subscription payload must contain a full billing or shipping address in order to calculate tax
 
-        For more information about creating taxable previews, please see our documentation guide on how to create [taxable subscriptions.](https://help.chargify.com/taxes/avalara-managed-sales-tax.html#creating-taxable-subscriptions)
+        For more information about creating taxable previews, please see our documentation guide on how to create [taxable subscriptions.](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#creating-taxable-subscriptions)
 
         You do **not** need to include a card number to generate tax information when you are previewing a subscription. However, please note that when you actually want to create the subscription, you must include the credit card information if you want the billing address to be stored in Chargify. The billing address and the credit card information are stored together within the payment profile object. Also, you may not send a billing address to Chargify without payment profile information, as the address is stored on the card.
 
@@ -18620,7 +18620,7 @@ paths:
                       - Coupon is invalid.
       operationId: post-subscriptions-subscription_id-add_coupon.json
       description: |-
-        An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://help.chargify.com/products/product-coupons.html#stackable-coupons)
+        An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
 
         ## Query Parameters vs Request Body Parameters
 
@@ -18691,7 +18691,7 @@ paths:
       description: |-
         Use this endpoint to remove a coupon from an existing subscription.
 
-        For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://help.chargify.com/subscriptions/coupons.html#removing-a-coupon)
+        For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-coupon)
       parameters:
         - schema:
             type: string
@@ -19716,7 +19716,7 @@ components:
               description: 'The name of the Component, suitable for display on statements. i.e. Text Messages.'
             pricing_scheme:
               type: string
-              description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+              description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes.'
               nullable: true
             unit_name:
               type: string
@@ -20440,7 +20440,7 @@ components:
           description: 'The ID of an existing customer within Chargify. Required, unless a `customer_reference` or a set of `customer_attributes` is given.'
         next_billing_at:
           type: string
-          description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://help.chargify.com/subscriptions/subscriptions-import.html). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
+          description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://chargify.zendesk.com/hc/en-us/articles/4407896986779). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
         stored_credential_transaction_id:
           type: integer
           description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
@@ -20609,7 +20609,7 @@ components:
               description: (Required for Square unless importing with vault_token and customer_vault_token) The nonce generated by the Square Javascript library (SqPaymentForm)
             gateway_handle:
               type: string
-              description: '(Optional) This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://help.chargify.com/payment-gateways/gateway-configuration.html#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
+              description: '(Optional) This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://chargify.zendesk.com/hc/en-us/articles/4407761759643#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
             cvv:
               type: string
               description: '(Optional, may be required by your gateway settings) The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.'
@@ -20644,7 +20644,7 @@ components:
               type: string
         components:
           type: array
-          description: '(Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://help.chargify.com/products/product-components.html)  for more information.'
+          description: '(Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for more information.'
           items:
             type: object
             properties:
@@ -20710,7 +20710,7 @@ components:
           $ref: '#/components/schemas/Group-Attributes'
         ref:
           type: string
-          description: 'A valid referral code. (optional, see [Referrals](https://help.chargify.com/referrals/introduction.html) for more details). If supplied, must be valid, or else subscription creation will fail.'
+          description: 'A valid referral code. (optional, see [Referrals](https://chargify.zendesk.com/hc/en-us/articles/4407802831643) for more details). If supplied, must be valid, or else subscription creation will fail.'
         cancellation_message:
           type: string
           description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation.
@@ -21077,7 +21077,7 @@ components:
                 type: string
         origin_invoices:
           type: array
-          description: 'An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://help.chargify.com/invoices/credit-notes.html#origin-invoices)'
+          description: 'An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://chargify.zendesk.com/hc/en-us/articles/4407753036699#origin-invoices)'
           items:
             type: object
             properties:
@@ -21246,7 +21246,7 @@ components:
             * "voided"
             * "canceled"
 
-            See [Invoice Statuses](https://help.chargify.com/invoices/index.html#invoice-statuses) for more.
+            See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more.
         collection_method:
           type: string
           description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'
@@ -21267,7 +21267,7 @@ components:
 
             "Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.
 
-            See also the [invoice consolidation documentation](https://help.chargify.com/invoices/consolidation.html).
+            See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
         parent_invoice_uid:
           type:
             - 'null'
