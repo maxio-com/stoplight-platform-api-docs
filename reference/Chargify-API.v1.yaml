@@ -11042,7 +11042,7 @@ paths:
 
         ## Querying data via Chargify gem
 
-        You can also query the current quantity via the [official Chargify Gem.]( http://github.com/chargify/chargify_api_ares)
+        You can also query the current quantity via the [official Chargify Gem.](http://github.com/chargify/chargify_api_ares)
 
         ```# First way
         component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
@@ -12064,7 +12064,7 @@ paths:
 
         To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`.
 
-        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](#endpoint:YFHw4XRYxaqLwGNvk)
+        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](./b3A6MTQxMDgzODg-create-subscription#with-coupons)
 
         ## With Manual Invoice Collection
 
@@ -12076,7 +12076,7 @@ paths:
 
         A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_subscription_configuration`.
 
-        After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](#endpoint:b3A6MTQxMDg0MTY).
+        After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](./b3A6MTQxMDg0MTY-create-prepayment).
 
         Prepaid subscriptions do not work on legacy Statement Architecture.
 
@@ -12254,7 +12254,7 @@ paths:
 
         For more information on GoCardless, please view the following two resources:
 
-        + [Payment Profiles via API for GoCardless](#endpoint:CaR3rApsyniuZtoEH)
+        + [Payment Profiles via API for GoCardless](./b3A6MTQxMDgzNTU-create-payment-profile#gocardless)
         + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
@@ -12315,7 +12315,7 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe SEPA Direct Debit](#endpoint:NasuhQCFDimxYmBh4)
+        + [Payment Profiles via API for Stripe SEPA Direct Debit](./b3A6MTQxMDgzNTU-create-payment-profile#sepa-direct-debit)
         + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
@@ -12345,7 +12345,7 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe BECS Direct Debit](#endpoint:H4z4BsLgSCd68A45W)
+        + [Payment Profiles via API for Stripe BECS Direct Debit](./b3A6MTQxMDgzNTU-create-payment-profile#stripe-becs-direct-debit)
         + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
