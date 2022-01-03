@@ -6074,7 +6074,7 @@ paths:
         - schema:
             type: boolean
           in: query
-          name: include_archibed
+          name: include_archived
           description: Include archived products
   '/products/{product_id}.json':
     parameters:
