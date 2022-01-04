@@ -21717,6 +21717,8 @@ components:
           type:
             - string
             - 'null'
+        metafield_id:
+          type: number
     Metafield:
       title: Metafield
       type: object
