@@ -107,7 +107,7 @@ paths:
         | Scenario 7 | To set the Subscription balance to an exact negative amount of cents, use the following attributes in the request:                   | `"adjustment_method":"target",` `"amount_in_cents":"-10000"` |
 
         ## Help Documentation 
-        Full documentation on how to record Adjustments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/adjustments.html). It goes into greater detail on how the user interface will react when applying adjustments.
+        Full documentation on how to record Adjustments in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407896003227). It goes into greater detail on how the user interface will react when applying adjustments.
       requestBody:
         content:
           application/json:
@@ -208,7 +208,7 @@ paths:
         + `accrue_on_failure` = true
         ## Help Documentation
         This method of recording a charge against a subscription is referred to as a **"One-time Charge"** in the Chargify Help Documentation.
-        Full documentation on how to record a One-time Charge in the Chargify UI can be located [here](https://help.chargify.com/subscriptions/one-time-charges.html).
+        Full documentation on how to record a One-time Charge in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407897565723).
       requestBody:
         content:
           application/json:
@@ -415,7 +415,7 @@ paths:
         ## External Payments
         Chargify allows you to record payments that occur **outside** of the normal flow of payment processing.
         These payments are considered **external payments**. A common case to apply such a payment is when a customer pays by check or some other means for their subscription.
-        Full documentation on how to record external payments in the Chargify UI can be located [here](http://help.chargify.com/subscriptions/subscription-actions.html#record-external-payment).
+        Full documentation on how to record external payments in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407895937819#process-refund).
       parameters: []
       requestBody:
         content:
@@ -583,7 +583,7 @@ paths:
         - **Internal** - a refund which interacts with the Gateway to return the amount back to the customer
         - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
         Note that external refunds will reduce revenue, but they do not affect the balance due for the subscription.
-        For more information on creating refunds in general, please see [Refunds](https://help.chargify.com/subscriptions/refunds.html).
+        For more information on creating refunds in general, please see [Refunds](https://chargify.zendesk.com/hc/en-us/articles/4407898813851).
 
         ## External Refund Use Cases
          
@@ -719,8 +719,8 @@ paths:
         |-----------------------------------------------------------------------------|
 
         Documentation in relation to transactions is broken up into two major sections within Chargify:
-        + [Recorded Transactions](http://help.chargify.com/subscriptions/subscription-summary.html#transactions)
-        + [Transactions Export](http://help.chargify.com/reports/exporting-data.html#transactions-line-item-export)
+        + [Recorded Transactions](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#transactions)
+        + [Transactions Export](https://chargify.zendesk.com/hc/en-us/articles/4407840381851#transactions-line-item-export)
         ## Types
         | Type / Transaction Type | Description                                                                                                                                                                                                                                                | Effect on Subscriber Balance Due   | Effect on “Revenue” (money collected) |
         |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|---------------------------------------|
@@ -1636,9 +1636,9 @@ paths:
         ## Statements Intro
         Chargify Statements give you and your customers a breakdown of Subscription charges, payments, credits, and activity on a period-by-period basis. A Statement is similar to an “Invoice” because it is marked as currently paid or unpaid. Statements display all account activity for a specific usage period.
         Documentation for Statements in the Chargify UI can be accessed via the following links / topics:
-        + [Statements Reference](http://help.chargify.com/statements/statements-intro.html)
-        + [Viewing Statements](http://help.chargify.com/subscriptions/subscription-summary.html#statements)
-        + [Statement Settings](http://help.chargify.com/settings/statements.html)
+        + [Statements Reference](https://chargify.zendesk.com/hc/en-us/articles/4407895493787)
+        + [Viewing Statements](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#statements)
+        + [Statement Settings](https://chargify.zendesk.com/hc/en-us/articles/4407870517019)
         ## Statement Presentation
         The Statements API offers three ways to easily render a statement on your site. You can include a text representation of the statement or one of two HTML views that can be styled to your liking.
 
@@ -4342,8 +4342,8 @@ paths:
 
         ## Legacy Invoice Documentation
 
-        Full documentation on how invoices function within the Chargify UI can be located [here](https://help.chargify.com/invoices/invoice-intro.html).
-        For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://help.chargify.com/subscriptions/subscription-summary.html#invoices)
+        Full documentation on how invoices function within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407745025947).
+        For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#invoices)
   '/invoices/{invoice_id}/payments.json':
     parameters:
       - schema:
@@ -4416,8 +4416,8 @@ paths:
         ## Invoice Payment Documentation
 
         For more information that on adding a payment to an invoice, please see our payment documentation below:
-        + [Pay via Card](https://help.chargify.com/invoices/invoice-reference.html#pay-with-card)
-        + [Offline Payments](https://help.chargify.com/invoices/invoice-reference.html#enter-payment)
+        + [Pay via Card](https://chargify.zendesk.com/hc/en-us/articles/4407737130907#pay-with-card)
+        + [Offline Payments](https://chargify.zendesk.com/hc/en-us/articles/4407737130907#enter-payment)
       requestBody:
         content:
           application/json:
@@ -4456,7 +4456,7 @@ paths:
         |-----------------------------------------------------------------------------|
 
         ## Legacy Invoice Charges Documentation
-        For more information on adding a charge to an invoice, please see our documentation [here](https://help.chargify.com/invoices/invoice-reference.html#add-charge).
+        For more information on adding a charge to an invoice, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407737130907#add-charge).
       requestBody:
         content:
           application/json:
