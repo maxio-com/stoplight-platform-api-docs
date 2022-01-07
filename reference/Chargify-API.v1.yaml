@@ -15762,7 +15762,7 @@ paths:
         When passing `current_period_starts_at` some validations are made:
 
         1. The subscription needs to be unbilled (no statements or invoices).
-        2. The value passed must be a valid date/time. We recommend using iso 8601 format.
+        2. The value passed must be a valid date/time. We recommend using the iso 8601 format.
         3. The value passed must be before the current date/time.
 
         If unpermitted parameters are sent, a 400 HTTP response is sent along with a string giving the reason for the problem.
