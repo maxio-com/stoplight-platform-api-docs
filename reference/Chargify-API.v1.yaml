@@ -19538,6 +19538,12 @@ paths:
           in: query
           name: price_point_ids
           description: Allows fetching components allocation only if price point id is present.
+        - schema:
+            type: array
+            example: 'product_family_ids=1,2,3'
+          in: query
+          name: product_family_ids
+          description: Allows fetching components allocation with matching product family id based on provided ids.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
