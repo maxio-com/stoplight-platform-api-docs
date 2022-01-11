@@ -277,6 +277,7 @@ tags:
   - name: Customers
   - name: Custom Fields
   - name: Events
+  - name: 'Events-Based Billing: Segments'
   - name: Insights
   - name: Invoices
   - name: Offers
@@ -19679,6 +19680,909 @@ paths:
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
+  '/components/{component_id}/price_points/{price_point_id}/segments.json/':
+    post:
+      summary: Create Single Segment
+      tags:
+        - 'Events-Based Billing: Segment'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  segment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                                - integer
+                                - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+              examples: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                      pricing_scheme:
+                        type: array
+                        items:
+                          type: string
+                      prices:
+                        type: array
+                        items:
+                          type: string
+                      property_values_fingerprint:
+                        type: array
+                        items:
+                          type: string
+      operationId: 'post-components-:component_id-price_points-:price_point_id-segments.json'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segment:
+                  type: object
+                  properties:
+                    segment_property_1_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_2_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_3_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_4_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                              - string
+                              - number
+                            description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                          - unit_price
+                  required:
+                    - pricing_scheme
+            examples:
+              Create a Single Segment (related Metric has 2 segmented properties):
+                value:
+                  segment:
+                    segment_property_1_value: France
+                    segment_property_2_value: Spain
+                    pricing_scheme: volume
+                    prices:
+                      - starting_quantity: 1
+                        ending_quantity: 10000
+                        unit_price: '0.19'
+                      - starting_quantity: 10001
+                        ending_quantity: null
+                        unit_price: '0.09'
+      description: |-
+        This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+        description: ID or Handle for the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle for the Price Point belonging to the Component
+    get:
+      summary: List Segments for a Price Point
+      operationId: get-components-component_id-price_points-price_point_id-segments.json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+              examples: {}
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      per_page:
+                        type: array
+                        items:
+                          type: string
+                      price_point:
+                        type: array
+                        items:
+                          type: string
+      description: |-
+        This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
+
+        You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            minimum: 1
+            default: 30
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
+        - schema:
+            example: '?filter[segment_property_1_value]=EU'
+          in: query
+          name: filter
+          description: 'This parameter allows to pass values for Segments filtering. Using "example value" (below) would return only the Segments that have "EU" as a first property value. You can specify up to 4 property values in the filter (i.e. `segment_property_1_value`, `segment_property_2_value`, ...), depending on how many you defined on the Segments. The empty values passed to `filter` properties would be rejected.'
+  '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+        description: ID or Handle of the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle of the Price Point belonging to the Component
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: The ID of the Segment
+    put:
+      summary: Update Single Segment
+      tags:
+        - 'Events-Based Billing: Segments'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  segment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                                - integer
+                                - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      pricing_scheme:
+                        type: array
+                        items:
+                          type: string
+                      prices:
+                        type: array
+                        items:
+                          type: string
+      operationId: put-components-component_id-price_points-price_point_id-segments-id-.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segment:
+                  type: object
+                  properties:
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                              - string
+                              - number
+                            description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                          - unit_price
+                  required:
+                    - pricing_scheme
+      description: |-
+        This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+    delete:
+      summary: ''
+      operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: |-
+        This endpoint allows you to delete a Segment with specified ID.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+  '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+        description: ID or Handle for the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle for the Price Point belonging to the Component
+    post:
+      summary: Bulk Create Segments
+      tags:
+        - 'Events-Based Billing: Segments'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    required:
+                      - segments
+                    properties:
+                      segments:
+                        type: object
+                        properties:
+                          '''x''':
+                            type: object
+                            description: |-
+                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
+
+                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                            properties:
+                              base:
+                                type: array
+                                items:
+                                  type: string
+                              pricing_scheme:
+                                type: array
+                                items:
+                                  type: string
+                              prices:
+                                type: array
+                                items:
+                                  type: string
+                              property_values_fingerprint:
+                                type: array
+                                items:
+                                  type: string
+                required:
+                  - errors
+              examples:
+                Error response when Pricing Scheme is missing:
+                  value:
+                    errors:
+                      segments:
+                        '1':
+                          pricing_scheme:
+                            - 'Pricing scheme: cannot be blank'
+      operationId: post-components-component_id-price_points-price_point_id-segments-bulk.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segments:
+                  type: array
+                  maxItems: 2000
+                  items:
+                    type: object
+                    properties:
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      pricing_scheme:
+                        type: string
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                      prices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type: integer
+                            unit_price:
+                              type:
+                                - string
+                                - number
+                              description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                          required:
+                            - unit_price
+                    required:
+                      - pricing_scheme
+                      - prices
+            examples: {}
+      description: |-
+        This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
+
+        If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+    put:
+      summary: Bulk Update Segments
+      tags:
+        - 'Events-Based Billing: Segments'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    required:
+                      - segments
+                    properties:
+                      segments:
+                        type: object
+                        properties:
+                          '''x''':
+                            type: object
+                            description: |-
+                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
+
+                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                            properties:
+                              base:
+                                type: array
+                                items:
+                                  type: string
+                              pricing_scheme:
+                                type: array
+                                items:
+                                  type: string
+                              prices:
+                                type: array
+                                items:
+                                  type: string
+                required:
+                  - errors
+              examples:
+                Error response when Pricing Scheme is missing:
+                  value:
+                    errors:
+                      segments:
+                        '1':
+                          pricing_scheme:
+                            - 'Pricing scheme: cannot be blank'
+      operationId: put-components-component_id-price_points-price_point_id-segments-bulk.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segments:
+                  type: array
+                  maxItems: 2000
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The ID of the segment you want to update.
+                      pricing_scheme:
+                        type: string
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                      prices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type: integer
+                            unit_price:
+                              type:
+                                - string
+                                - number
+                              description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                          required:
+                            - unit_price
+                    required:
+                      - id
+                      - pricing_scheme
+                      - prices
+      description: |-
+        This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `2000` records.
+
+        If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
