@@ -20011,6 +20011,11 @@ paths:
           description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
         - schema:
             example: '?filter[segment_property_1_value]=EU'
+            enum:
+              - segment_property_1_value
+              - segment_property_2_value
+              - segment_property_3_value
+              - segment_property_4_value
           in: query
           name: filter
           description: 'This parameter allows to pass values for Segments filtering. Using "example value" (below) would return only the Segments that have "EU" as a first property value. You can specify up to 4 property values in the filter (i.e. `segment_property_1_value`, `segment_property_2_value`, ...), depending on how many you defined on the Segments. The empty values passed to `filter` properties would be rejected.'
