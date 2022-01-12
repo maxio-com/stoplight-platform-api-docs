@@ -2706,7 +2706,7 @@ paths:
             default: 30
             maximum: 200
             minimum: 1
-            example: per_page=
+            example: per_page=50
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
@@ -2715,7 +2715,7 @@ paths:
             enum:
               - created_at
               - updated_at
-            example: 'filter[date_field]=updated_a'
+            example: 'filter[date_field]=updated_at'
           in: query
           name: 'filter[date_field]'
           description: The type of filter you would like to apply to your search.
