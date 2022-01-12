@@ -20145,6 +20145,7 @@ components:
     Create-Customer:
       title: Create Customer
       type: object
+      description: ''
       properties:
         first_name:
           type: string
@@ -20177,7 +20178,7 @@ components:
           description: Set a specific language on a customer record.
         vat_number:
           type: string
-        tax_exampt:
+        tax_exempt:
           type: boolean
         tax_exempt_reason:
           type: string
@@ -20185,7 +20186,6 @@ components:
         - first_name
         - last_name
         - email
-      description: ''
     Create-Metafield:
       title: Create Metafield
       type: object
