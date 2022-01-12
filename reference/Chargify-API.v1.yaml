@@ -19679,6 +19679,444 @@ paths:
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
+  '/subscriptions/{subscription_id}/proforma_invoices/preview.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Preview the next proforma invoice
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    minLength: 1
+                  site_id:
+                    type: number
+                  customer_id:
+                    type: number
+                  subscription_id:
+                    type: number
+                  number: {}
+                  sequence_number: {}
+                  created_at:
+                    type: string
+                    minLength: 1
+                  delivery_date:
+                    type: string
+                    minLength: 1
+                  status:
+                    type: string
+                    minLength: 1
+                  collection_method:
+                    type: string
+                    minLength: 1
+                  payment_instructions:
+                    type: string
+                  currency:
+                    type: string
+                    minLength: 1
+                  consolidation_level:
+                    type: string
+                    minLength: 1
+                  product_name:
+                    type: string
+                    minLength: 1
+                  product_family_name:
+                    type: string
+                    minLength: 1
+                  role:
+                    type: string
+                    minLength: 1
+                  seller:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                      address:
+                        type: object
+                        properties:
+                          street:
+                            type: string
+                          line2:
+                            type: string
+                          city:
+                            type: string
+                          state:
+                            type: string
+                          zip:
+                            type: string
+                          country:
+                            type: string
+                            minLength: 1
+                        required:
+                          - street
+                          - line2
+                          - city
+                          - state
+                          - zip
+                          - country
+                      phone:
+                        type: string
+                        minLength: 1
+                    required:
+                      - name
+                      - address
+                      - phone
+                  customer:
+                    type: object
+                    properties:
+                      chargify_id:
+                        type: number
+                      first_name:
+                        type: string
+                        minLength: 1
+                      last_name:
+                        type: string
+                        minLength: 1
+                      organization:
+                        type: string
+                        minLength: 1
+                      email:
+                        type: string
+                        minLength: 1
+                      vat_number: {}
+                      reference: {}
+                    required:
+                      - chargify_id
+                      - first_name
+                      - last_name
+                      - organization
+                      - email
+                  memo:
+                    type: string
+                  billing_address:
+                    type: object
+                    properties:
+                      street:
+                        type: string
+                        minLength: 1
+                      line2:
+                        type: string
+                        minLength: 1
+                      city:
+                        type: string
+                        minLength: 1
+                      state:
+                        type: string
+                        minLength: 1
+                      zip:
+                        type: string
+                        minLength: 1
+                      country:
+                        type: string
+                        minLength: 1
+                    required:
+                      - street
+                      - line2
+                      - city
+                      - state
+                      - zip
+                      - country
+                  shipping_address:
+                    type: object
+                    properties:
+                      street:
+                        type: string
+                        minLength: 1
+                      line2:
+                        type: string
+                        minLength: 1
+                      city:
+                        type: string
+                        minLength: 1
+                      state:
+                        type: string
+                        minLength: 1
+                      zip:
+                        type: string
+                        minLength: 1
+                      country:
+                        type: string
+                        minLength: 1
+                    required:
+                      - street
+                      - line2
+                      - city
+                      - state
+                      - zip
+                      - country
+                  subtotal_amount:
+                    type: string
+                    minLength: 1
+                  discount_amount:
+                    type: string
+                    minLength: 1
+                  tax_amount:
+                    type: string
+                    minLength: 1
+                  total_amount:
+                    type: string
+                    minLength: 1
+                  credit_amount:
+                    type: string
+                    minLength: 1
+                  paid_amount:
+                    type: string
+                    minLength: 1
+                  refund_amount:
+                    type: string
+                    minLength: 1
+                  due_amount:
+                    type: string
+                    minLength: 1
+                  line_items:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - uid
+                        - title
+                        - description
+                        - quantity
+                        - unit_price
+                        - subtotal_amount
+                        - discount_amount
+                        - tax_amount
+                        - total_amount
+                        - tiered_unit_price
+                        - period_range_start
+                        - period_range_end
+                        - product_id
+                        - product_version
+                        - product_price_point_id
+                      properties:
+                        uid:
+                          type: string
+                          minLength: 1
+                        title:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        quantity:
+                          type: string
+                          minLength: 1
+                        unit_price:
+                          type: string
+                          minLength: 1
+                        subtotal_amount:
+                          type: string
+                          minLength: 1
+                        discount_amount:
+                          type: string
+                          minLength: 1
+                        tax_amount:
+                          type: string
+                          minLength: 1
+                        total_amount:
+                          type: string
+                          minLength: 1
+                        tiered_unit_price:
+                          type: boolean
+                        period_range_start:
+                          type: string
+                          minLength: 1
+                        period_range_end:
+                          type: string
+                          minLength: 1
+                        product_id:
+                          type: number
+                        product_version:
+                          type: number
+                        product_price_point_id:
+                          type: number
+                        component_id: {}
+                        price_point_id: {}
+                  discounts:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  taxes:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  credits:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  payments:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  custom_fields:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  public_url: {}
+                required:
+                  - uid
+                  - site_id
+                  - customer_id
+                  - subscription_id
+                  - created_at
+                  - delivery_date
+                  - status
+                  - collection_method
+                  - payment_instructions
+                  - currency
+                  - consolidation_level
+                  - product_name
+                  - product_family_name
+                  - role
+                  - seller
+                  - customer
+                  - memo
+                  - billing_address
+                  - shipping_address
+                  - subtotal_amount
+                  - discount_amount
+                  - tax_amount
+                  - total_amount
+                  - credit_amount
+                  - paid_amount
+                  - refund_amount
+                  - due_amount
+                  - line_items
+                  - discounts
+                  - taxes
+                  - credits
+                  - payments
+                  - custom_fields
+                x-examples:
+                  example-1:
+                    uid: pro_567wxy
+                    site_id: 1234
+                    customer_id: 49586710
+                    subscription_id: 48630091
+                    number: null
+                    sequence_number: null
+                    created_at: '2022-01-12T10:48:53-06:00'
+                    delivery_date: '2022-02-09'
+                    status: draft
+                    collection_method: automatic
+                    payment_instructions: ''
+                    currency: USD
+                    consolidation_level: none
+                    product_name: Standard
+                    product_family_name: Fam
+                    role: proforma_adhoc
+                    seller:
+                      name: My Company
+                      address:
+                        street: ''
+                        line2: ''
+                        city: ''
+                        state: ''
+                        zip: ''
+                        country: AU
+                      phone: 123-456-7892
+                    customer:
+                      chargify_id: 49586710
+                      first_name: Lucious
+                      last_name: Ondricka
+                      organization: 'Bednar, Thiel and Kunze'
+                      email: Kaleigh4@example.net
+                      vat_number: null
+                      reference: null
+                    memo: ''
+                    billing_address:
+                      street: 689 Miller Meadows
+                      line2: Apt. 928
+                      city: East Alycia
+                      state: FL
+                      zip: '41060'
+                      country: US
+                    shipping_address:
+                      street: 403 Larissa Walk
+                      line2: Suite 799
+                      city: North Rita
+                      state: TN
+                      zip: '38070'
+                      country: US
+                    subtotal_amount: '99.0'
+                    discount_amount: '0.0'
+                    tax_amount: '0.0'
+                    total_amount: '99.0'
+                    credit_amount: '0.0'
+                    paid_amount: '0.0'
+                    refund_amount: '0.0'
+                    due_amount: '99.0'
+                    line_items:
+                      - uid: li_567wxy
+                        title: Standard
+                        description: 9 Feb 2022 - 9 Mar 2022
+                        quantity: '1.0'
+                        unit_price: '99.0'
+                        subtotal_amount: '99.0'
+                        discount_amount: '0.0'
+                        tax_amount: '0.0'
+                        total_amount: '99.0'
+                        tiered_unit_price: false
+                        period_range_start: '2022-02-09'
+                        period_range_end: '2022-03-09'
+                        product_id: 5834911
+                        product_version: 1
+                        product_price_point_id: 1632841
+                        component_id: null
+                        price_point_id: null
+                    discounts: []
+                    taxes: []
+                    credits: []
+                    payments: []
+                    custom_fields: []
+                    public_url: null
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                required:
+                  - errors
+                x-examples:
+                  example-1:
+                    errors:
+                      - this subscription is not eligible to create proforma invoices
+      operationId: post-subscriptions-subscription_id-proforma_invoices-preview.json
+      description: |-
+        Return a preview of the data that will be included on a given subscription's proforma invoice if one were to be generated. It will have similar line items and totals as a renewal preview, but the response will be presented in the format of a proforma invoice. Consequently it will include additional information such as the name and addresses that will appear on the proforma invoice.
+
+        The preview endpoint is subject to all the same conditions as the proforma invoice endpoint. For example, previews are only available on the Relationship Invoicing architecture, and previews cannot be made for end-of-life subscriptions.
+
+        If all the data returned in the preview is as expected, you may then create a static proforma invoice and send it to your customer. The data within a preview will not be saved and will not be accessible after the call is made.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
