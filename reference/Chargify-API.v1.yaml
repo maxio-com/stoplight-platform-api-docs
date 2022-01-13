@@ -19869,7 +19869,7 @@ paths:
       description: |-
         This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     parameters:
       - schema:
           type: string
@@ -19993,7 +19993,7 @@ paths:
 
         You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
       parameters:
         - schema:
             type: integer
@@ -20010,15 +20010,26 @@ paths:
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
         - schema:
+            type: string
             example: '?filter[segment_property_1_value]=EU'
-            enum:
-              - segment_property_1_value
-              - segment_property_2_value
-              - segment_property_3_value
-              - segment_property_4_value
           in: query
-          name: filter
-          description: 'This parameter allows to pass values for Segments filtering. Using "example value" (below) would return only the Segments that have "EU" as a first property value. You can specify up to 4 property values in the filter (i.e. `segment_property_1_value`, `segment_property_2_value`, ...), depending on how many you defined on the Segments. The empty values passed to `filter` properties would be rejected.'
+          name: 'filter[segment_property_1_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_2_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_2` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_3_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_3` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_4_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_4` on attached Metric. If empty string is passed, this filter would be rejected.'
   '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
     parameters:
       - schema:
@@ -20176,7 +20187,7 @@ paths:
       description: |-
         This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     delete:
       summary: ''
       operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
@@ -20194,7 +20205,7 @@ paths:
       description: |-
         This endpoint allows you to delete a Segment with specified ID.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
   '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
     parameters:
       - schema:
@@ -20412,7 +20423,7 @@ paths:
 
         If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     put:
       summary: Bulk Update Segments
       tags:
@@ -20552,7 +20563,7 @@ paths:
               properties:
                 segments:
                   type: array
-                  maxItems: 2000
+                  maxItems: 1000
                   items:
                     type: object
                     properties:
@@ -20583,11 +20594,11 @@ paths:
                       - pricing_scheme
                       - prices
       description: |-
-        This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `2000` records.
+        This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `1000` records.
 
         If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
-        For the `component_id` and `price_point_id` it is allowed to pass `handle` instead of the `id` for those resources in order to ease setting up the integration.
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
