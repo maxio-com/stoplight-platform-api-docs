@@ -11381,7 +11381,10 @@ paths:
                   type: string
                 payment_collection_method:
                   type: string
-                  description: 'May be `automatic` or `invoice` (for non-Relationship Invoicing sites). If not passed, the allocation(s) will use the payment collection method on the subscription'
+                  description: '(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription'
+                  enum:
+                    - automatic
+                    - invoice
             examples:
               Example:
                 value:
