@@ -10854,21 +10854,6 @@ paths:
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
           name: end_datetime
         - schema:
-            type: integer
-            example: page=2
-            minimum: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            maximum: 200
-            minimum: 1
-            example: per_page=50
-          in: query
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-          name: per_page
-        - schema:
             type: string
             enum:
               - not_null
