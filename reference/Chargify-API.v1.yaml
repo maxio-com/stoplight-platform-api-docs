@@ -10797,21 +10797,27 @@ paths:
                     component:
                       $ref: '#/components/schemas/Subscriptions-Component'
               examples:
-                Example:
+                example-1:
                   value:
                     - component:
-                        unit_name: Text messages
-                        name: text_messages
-                        kind: metered_component
-                        component_id: 98322708341
-                        subscription_id: 38855254509
-                        allocated_quantity: 1500
-                        unit_balance: 5000
-                    - component:
+                        component_id: 0
+                        subscription_id: 0
+                        allocated_quantity: 0
+                        pricing_scheme: string
+                        name: string
+                        kind: string
+                        unit_name: string
+                        price_point_id: 0
+                        price_point_handle: string
+                        price_point_type: default
+                        price_point_name: string
                         enabled: true
-                        subscription_id: 30336331837
-                        unit_balance: 5000
-                        name: text messages
+                        unit_balance: 0
+                        id: 0
+                        created_at: string
+                        updated_at: string
+                        component_handle: string
+                        archived_at: string
       operationId: get-subscriptions-subscription_id-components.json
       description: |-
         This request will list a subscription's applied components.
@@ -10819,6 +10825,67 @@ paths:
         ## Archived Components
 
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
+      parameters:
+        - schema:
+            type: string
+            example: date_field=updated_at
+            enum:
+              - updated_at
+          in: query
+          name: date_field
+          description: The type of filter you'd like to apply to your search.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            example: direction=asc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+        - schema:
+            type: string
+            enum:
+              - not_null
+            example: price_point_ids=not_null
+          in: query
+          name: price_point_ids
+          description: Allows fetching components allocation only if price point id is present.
+        - schema:
+            type: array
+            example: 'product_family_ids=1,2,3'
+          in: query
+          description: Allows fetching components allocation with matching product family id based on provided ids.
+          name: product_family_ids
+        - schema:
+            type: string
+            enum:
+              - id
+              - updated_at
+            example: sort=updated_at
+          in: query
+          name: sort
+          description: The attribute by which to sort.
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
