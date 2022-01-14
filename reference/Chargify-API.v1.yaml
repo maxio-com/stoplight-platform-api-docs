@@ -21556,11 +21556,12 @@ components:
           description: '(Optional) The coupon code of the coupon to apply '
         payment_collection_method:
           type: string
-          description: (Optional) The type of payment collection to be used in the subscription.
+          description: '(Optional) The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
           enum:
             - automatic
             - remittance
             - prepaid
+            - invoice
         receives_invoice_emails:
           type: string
           description: '(Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription.'
