@@ -10886,14 +10886,6 @@ paths:
           in: query
           name: start_datetime
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
-        - schema:
-            type: array
-            minItems: 1
-            maxItems: 200
-            example: 'subscription_ids=1,2,3'
-          in: query
-          name: subscription_ids
-          description: Allows fetching components allocation with matching subscription id based on provided ids.
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
