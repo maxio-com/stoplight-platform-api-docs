@@ -19751,7 +19751,7 @@ paths:
     post:
       summary: Create Single Segment
       tags:
-        - 'Events-Based Billing: Segment'
+        - 'Events-Based Billing: Segments'
       responses:
         '201':
           description: Created
@@ -20097,6 +20097,8 @@ paths:
           in: query
           name: 'filter[segment_property_4_value]'
           description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_4` on attached Metric. If empty string is passed, this filter would be rejected.'
+      tags:
+        - 'Events-Based Billing: Segments'
   '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
     parameters:
       - schema:
@@ -20256,7 +20258,7 @@ paths:
 
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     delete:
-      summary: ''
+      summary: Delete Single Segment
       operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
       responses:
         '204':
@@ -20273,6 +20275,8 @@ paths:
         This endpoint allows you to delete a Segment with specified ID.
 
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+      tags:
+        - 'Events-Based Billing: Segments'
   '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
     parameters:
       - schema:
