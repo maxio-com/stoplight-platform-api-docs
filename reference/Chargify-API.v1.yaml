@@ -20028,6 +20028,8 @@ components:
             - percent
         exclude_mid_period_allocations:
           type: boolean
+        'apply_on_cancel_at_end_of_period ':
+          type: boolean
         coupon_restrictions:
           type: array
           items:
@@ -20333,6 +20335,8 @@ components:
           type: string
         exclude_mid_period_allocations:
           type: boolean
+        apply_on_cancel_at_end_of_period:
+          type: boolean
       required:
         - name
         - code
@@ -20366,6 +20370,8 @@ components:
         compounding_strategy:
           type: string
         exclude_mid_period_allocations:
+          type: boolean
+        apply_on_cancel_at_end_of_period:
           type: boolean
       required:
         - name
