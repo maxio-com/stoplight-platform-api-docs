@@ -6776,6 +6776,15 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching a product''s price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.'
+        - in: query
+          name: filter
+          style: deepObject
+          schema:
+            type: object
+            example: '?filter[type]=catalog'
+          description: |-
+            #### Default type filter: `?filter[type]=catalog,default`
+            #### Type filter options: `catalog`, `default`, `custom`
       description: Use this endpoint to retrieve a list of product price points.
   '/products/{product_id}/price_points/{price_point_id}.json':
     parameters:
@@ -6847,7 +6856,10 @@ paths:
                   price_point:
                     handle: educational
                     price_in_cents: 1250
-      description: Use this endpoint to update a product price point.
+      description: |-
+        Use this endpoint to update a product price point.
+
+        Note: Custom product price points are not able to be updated.
     get:
       summary: Read Product Price Point
       tags:
@@ -7033,7 +7045,10 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-default.json
-      description: Use this endpoint to make a product price point the default for the product.
+      description: |-
+        Use this endpoint to make a product price point the default for the product.
+
+        Note: Custom product price points are not able to be set as the default for a product.
   '/products/{product_id}/price_points/bulk.json':
     parameters:
       - schema:
@@ -7166,6 +7181,8 @@ paths:
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
 
         When creating currency prices, they need to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+        Note: Currency Prices are not able to be created for custom product price points.
       requestBody:
         content:
           application/json:
@@ -7239,6 +7256,8 @@ paths:
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
 
         When updating the pricing, it needs to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+        Note: Currency Prices are not able to be updated for custom product price points.
       requestBody:
         content:
           application/json:
@@ -13046,6 +13065,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
+                      handle: "custom-price"
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
