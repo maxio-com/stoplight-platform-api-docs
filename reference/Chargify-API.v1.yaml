@@ -3010,28 +3010,33 @@ paths:
               - created_at
               - updated_at
           in: query
-          description: The type of filter you would like to apply to your search.
+          description: 'The field was deprecated: at 20.01.2022. The type of filter you would like to apply to your search.'
           name: date_field
+          deprecated: true
         - schema:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The field was deprecated: at 20.01.2022. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          deprecated: true
         - schema:
             type: string
           in: query
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The field was deprecated: at 20.01.2022. The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
           name: end_date
+          deprecated: true
         - schema:
             type: string
           in: query
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The field was deprecated: at 20.01.2022. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
           name: start_datetime
+          deprecated: true
         - schema:
             type: string
           in: query
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The field was deprecated: at 20.01.2022. The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
           name: end_datetime
+          deprecated: true
         - schema:
             type: array
             example: 'filter[ids]=1,2,3'
@@ -3052,6 +3057,26 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_date]'
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_datetime]'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[start_date]'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[start_datetime]'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
       - schema:
