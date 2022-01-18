@@ -13065,7 +13065,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: "custom-price"
+                      handle: custom-price
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -20696,6 +20696,40 @@ paths:
         If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+  /products.json:
+    get:
+      summary: List Products
+      tags:
+        - Products
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product:
+                      $ref: ../models/Product.yaml
+      operationId: get-products.json
+      description: ''
+      parameters:
+        - schema:
+            type: string
+            example: 'filter[product_type]=prepaid'
+            enum:
+              - prepaid
+          in: query
+          name: 'filter[product_type]'
+          description: Allows to fetch products that matches provided type.
+        - schema:
+            type: string
+          in: query
+          name: include=prepaid_price_point
+          description: Allows to include details about first valid prepaid price point.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server

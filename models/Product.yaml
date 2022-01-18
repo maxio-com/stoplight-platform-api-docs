@@ -97,7 +97,7 @@ properties:
     nullable: true
     description: 'The parameters will append to the url after a successful account update. See [help documentation](https://help.chargify.com/products/product-editing.html#return-parameters-after-account-update)'
   product_family:
-    $ref: './Product-Family.yaml'
+    $ref: ./Product-Family.yaml
   public_signup_pages:
     type: array
     items:
@@ -134,3 +134,12 @@ properties:
     description: A string representing the tax code related to the product type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
   default_product_price_point_id:
     type: integer
+  prepaid_price_point:
+    type: object
+    properties:
+      price_point_id:
+        type: integer
+      price_point_name:
+        type: string
+      price_point_handle:
+        type: string
