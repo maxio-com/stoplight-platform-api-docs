@@ -9150,6 +9150,7 @@ paths:
                             - void_remainder
                             - backport_invoice
                             - change_invoice_status
+                            - change_invoice_collection_method
                         event_data:
                           description: 'The event data is the data that, when combined with the command, results in the output invoice found in the invoice field.'
                           anyOf:
@@ -9493,6 +9494,7 @@ paths:
         + void_remainder
         + backport_invoice
         + change_invoice_status
+        + change_invoice_collection_method
 
         Invoice events are returned in ascending order.
 
