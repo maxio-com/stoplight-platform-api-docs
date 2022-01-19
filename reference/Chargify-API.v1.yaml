@@ -19769,8 +19769,14 @@ paths:
         content:
           application/json:
             schema:
+              description: ''
               type: object
-              properties: {}
+              x-examples:
+                example-1:
+                  force: true
+              properties:
+                force:
+                  type: boolean
             examples:
               Force generation:
                 value:
