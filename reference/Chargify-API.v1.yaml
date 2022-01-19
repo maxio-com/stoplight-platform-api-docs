@@ -277,6 +277,7 @@ tags:
   - name: Customers
   - name: Custom Fields
   - name: Events
+  - name: 'Events-Based Billing: Segments'
   - name: Insights
   - name: Invoices
   - name: Offers
@@ -6775,6 +6776,15 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching a product''s price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.'
+        - in: query
+          name: filter
+          style: deepObject
+          schema:
+            type: object
+            example: '?filter[type]=catalog'
+          description: |-
+            #### Default type filter: `?filter[type]=catalog,default`
+            #### Type filter options: `catalog`, `default`, `custom`
       description: Use this endpoint to retrieve a list of product price points.
   '/products/{product_id}/price_points/{price_point_id}.json':
     parameters:
@@ -6846,7 +6856,10 @@ paths:
                   price_point:
                     handle: educational
                     price_in_cents: 1250
-      description: Use this endpoint to update a product price point.
+      description: |-
+        Use this endpoint to update a product price point.
+
+        Note: Custom product price points are not able to be updated.
     get:
       summary: Read Product Price Point
       tags:
@@ -7032,7 +7045,10 @@ paths:
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: patch-products-product_id-price_points-price_point_id-default.json
-      description: Use this endpoint to make a product price point the default for the product.
+      description: |-
+        Use this endpoint to make a product price point the default for the product.
+
+        Note: Custom product price points are not able to be set as the default for a product.
   '/products/{product_id}/price_points/bulk.json':
     parameters:
       - schema:
@@ -7165,6 +7181,8 @@ paths:
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
 
         When creating currency prices, they need to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+        Note: Currency Prices are not able to be created for custom product price points.
       requestBody:
         content:
           application/json:
@@ -7238,6 +7256,8 @@ paths:
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
 
         When updating the pricing, it needs to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+        Note: Currency Prices are not able to be updated for custom product price points.
       requestBody:
         content:
           application/json:
@@ -9130,6 +9150,7 @@ paths:
                             - void_remainder
                             - backport_invoice
                             - change_invoice_status
+                            - change_invoice_collection_method
                         event_data:
                           description: 'The event data is the data that, when combined with the command, results in the output invoice found in the invoice field.'
                           anyOf:
@@ -9473,6 +9494,7 @@ paths:
         + void_remainder
         + backport_invoice
         + change_invoice_status
+        + change_invoice_collection_method
 
         Invoice events are returned in ascending order.
 
@@ -9621,6 +9643,181 @@ paths:
                   payment:
                     amount: 10
         description: ''
+  '/subscriptions/{subscription_id}/advance_invoice/issue.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Issue advance invoice
+      tags:
+        - Advance Invoice
+                $ref: '#/components/schemas/Invoice'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      - Cannot generate an invoice in advance for subscription in the group
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - errors
+              examples:
+                Nothing due:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance when nothing is due
+                Already exists:
+                  value:
+                    errors:
+                      - Advance invoice already exists
+                Grouped:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for subscription in the group
+                End of life:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for inactive subscription
+                Calendar billing:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a calendar billing subscription
+                Prepaid subscription:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a prepaid subscription
+                Close to renewal:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance within an hour of renewal
+                Custom exchange:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a subscription using the site level exchange rate
+                Prepaid components:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance when a subscription uses prepaid components
+      operationId: post-subscriptions-subscription_id-advance_invoice-issue.json
+      description: |
+        Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
+
+        A subscription may only have one advance invoice per billing period. Attempting to issue an advance invoice when one already exists will return an error.
+
+        That said, regeneration of the invoice may be forced with the params `force: true`, which will void an advance invoice if one exists and generate a new one. If no advance invoice exists, a new one will be generated.
+
+        We recommend using either the create or preview endpoints for proforma invoices to preview this advance invoice before using this endpoint to generate it.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  force: true
+              properties:
+                force:
+                  type: boolean
+            examples:
+              Force generation:
+                value:
+                  force: true
+  '/subscriptions/{subscription_id}/advance_invoice.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    get:
+      summary: Read advance invoice
+      tags:
+        - Advance Invoice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples: {}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: get-subscriptions-subscription_id-advance_invoice.json
+      description: 'Once an advance invoice has been generated for a subscription''s upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.'
+  '/subscriptions/{subscription_id}/advance_invoice/void.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Void advance invoice
+      tags:
+        - Advance Invoice
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: post-subscriptions-subscription_id-advance_invoice-void.json
+      description: |-
+        Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
+
+        A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  void:
+                    reason: because
+              properties:
+                void:
+                  type: object
+                  required:
+                    - reason
+                  properties:
+                    reason:
+                      type: string
+                      minLength: 1
+              required:
+                - void
   /credit_notes.json:
     get:
       summary: List Credit Notes
@@ -10797,21 +10994,27 @@ paths:
                     component:
                       $ref: '#/components/schemas/Subscriptions-Component'
               examples:
-                Example:
+                example-1:
                   value:
                     - component:
-                        unit_name: Text messages
-                        name: text_messages
-                        kind: metered_component
-                        component_id: 98322708341
-                        subscription_id: 38855254509
-                        allocated_quantity: 1500
-                        unit_balance: 5000
-                    - component:
+                        component_id: 0
+                        subscription_id: 0
+                        allocated_quantity: 0
+                        pricing_scheme: string
+                        name: string
+                        kind: string
+                        unit_name: string
+                        price_point_id: 0
+                        price_point_handle: string
+                        price_point_type: default
+                        price_point_name: string
                         enabled: true
-                        subscription_id: 30336331837
-                        unit_balance: 5000
-                        name: text messages
+                        unit_balance: 0
+                        id: 0
+                        created_at: string
+                        updated_at: string
+                        component_handle: string
+                        archived_at: string
       operationId: get-subscriptions-subscription_id-components.json
       description: |-
         This request will list a subscription's applied components.
@@ -10819,6 +11022,67 @@ paths:
         ## Archived Components
 
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
+      parameters:
+        - schema:
+            type: string
+            example: date_field=updated_at
+            enum:
+              - updated_at
+          in: query
+          name: date_field
+          description: The type of filter you'd like to apply to your search.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            example: direction=asc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+        - schema:
+            type: string
+            enum:
+              - not_null
+            example: price_point_ids=not_null
+          in: query
+          name: price_point_ids
+          description: Allows fetching components allocation only if price point id is present.
+        - schema:
+            type: array
+            example: 'product_family_ids=1,2,3'
+          in: query
+          description: Allows fetching components allocation with matching product family id based on provided ids.
+          name: product_family_ids
+        - schema:
+            type: string
+            enum:
+              - id
+              - updated_at
+            example: sort=updated_at
+          in: query
+          name: sort
+          description: The attribute by which to sort.
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
@@ -11311,6 +11575,12 @@ paths:
                   type: string
                 downgrade_credit:
                   type: string
+                payment_collection_method:
+                  type: string
+                  description: '(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription'
+                  enum:
+                    - automatic
+                    - invoice
             examples:
               Example:
                 value:
@@ -12972,6 +13242,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
+                      handle: "custom-price"
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -19679,24 +19950,231 @@ paths:
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
-  '/subscriptions/{subscription_id}/advance_invoice/issue.json':
-    parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+  '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
-      summary: Issue advance invoice
+      summary: Create Single Segment
       tags:
-        - Advance Invoice
+        - 'Events-Based Billing: Segments'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+servers:
+  - url: 'https://{subdomain}.chargify.com'
+    description: Production server
+    variables:
+      subdomain:
+        default: subdomain
+        description: The subdomain for your Chargify site
+security:
+  - BasicAuth: []
+components:
+  schemas:
+    Allocation:
+      title: Allocation
+      type: object
+      properties:
+        component_id:
+          type: integer
+          description: The integer component ID for the allocation. This references a component that you have created in your Product setup
+        subscription_id:
+          type: integer
+          description: The integer subscription ID for the allocation. This references a unique subscription in your Site
+        quantity:
+          type: integer
+          description: The allocated quantity set in to effect by the allocation
+        previous_quantity:
+          type: integer
+          description: The allocated quantity that was in effect before this allocation was created
+        memo:
+          type: string
+          description: The memo passed when the allocation was created
+          nullable: true
+        timestamp:
+          type: string
+          description: 'The time that the allocation was recorded, in  format and UTC timezone, i.e. 2012-11-20T22:00:37Z'
+        proration_upgrade_scheme:
+          type: string
+          description: The scheme used if the proration was an upgrade. This is only present when the allocation was created mid-period.
+        proration_downgrade_scheme:
+          type: string
+          description: The scheme used if the proration was a downgrade. This is only present when the allocation was created mid-period.
+        price_point_id:
+          type: integer
+        previous_price_point_id:
+          type: integer
+        accrue_charge:
+          type: boolean
+          description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately.'
+        upgrade_charge:
+          type: string
+          description: The type of charge to be created if the change in cost is an upgrade.
+        downgrade_credit:
+          type: string
+          description: The type of credit to be created if the change in cost is a downgrade.
+        payment:
+          type:
+            - object
+            - 'null'
+          description: 'Information for captured payment, if applicable'
+          properties:
+            id:
+              type: number
+            amout_in_cents:
+              type: string
+            success:
+              type: boolean
+            memo:
+              type: string
+    Billing-Manifest:
+      title: Billing Manifest
+      type: object
+      properties:
+        line_items:
+          type: array
+          items:
+            type: object
+            properties:
+              transaction_type:
+                type: string
+              kind:
+                type: string
+              amount_in_cents:
+                type: integer
+              memo:
+                type: string
+              discount_amount_in_cents:
+                type: integer
+              taxable_amount_in_cents:
+                type: integer
+              component_id:
+                type: integer
+        total_in_cents:
+          type: integer
+        total_discount_in_cents:
+          type: integer
+        total_tax_in_cents:
+          type: integer
+        subtotal_in_cents:
+          type: integer
+        start_date:
+          type: string
+        end_date:
+          type: string
+        period_type:
+          type: string
+        existing_balance_in_cents:
+          type: integer
+    Component-Price-Point:
+      title: Component Price Point
+      type: object
+      properties:
+        price_point:
+          type: object
+          properties:
+            id:
+              type: integer
+            type:
+              type: string
+              enum:
+                - catalog
+                - default
+                - custom
+            default:
+              type: boolean
+              deprecated: true
+              description: 'Note: Refer to type attribute instead'
+            name:
+              type: string
+            pricing_scheme:
+              type: string
+            component_id:
+              type: integer
+            handle:
+              type: string
+            archived_at:
+              type: 'null'
+            created_at:
+              type: string
+            updated_at:
+              type: string
+            prices:
+              type: array
+              items:
+                description: ''
+                type: object
+                properties:
+                  segment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                                - integer
+                                - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+              examples: {}
+        '401':
+          description: Unauthorized
         '403':
           description: Forbidden
         '404':
@@ -19706,154 +20184,837 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - Cannot generate an invoice in advance for subscription in the group
                 properties:
                   errors:
-                    type: array
-                    items:
-                      type: string
-                required:
-                  - errors
-              examples:
-                Nothing due:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance when nothing is due
-                Already exists:
-                  value:
-                    errors:
-                      - Advance invoice already exists
-                Grouped:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance for subscription in the group
-                End of life:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance for inactive subscription
-                Calendar billing:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance for a calendar billing subscription
-                Prepaid subscription:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance for a prepaid subscription
-                Close to renewal:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance within an hour of renewal
-                Custom exchange:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance for a subscription using the site level exchange rate
-                Prepaid components:
-                  value:
-                    errors:
-                      - Cannot generate an invoice in advance when a subscription uses prepaid components
-      operationId: post-subscriptions-subscription_id-advance_invoice-issue.json
-      description: |
-        Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
-
-        A subscription may only have one advance invoice per billing period. Attempting to issue an advance invoice when one already exists will return an error.
-
-        That said, regeneration of the invoice may be forced with the params `force: true`, which will void an advance invoice if one exists and generate a new one. If no advance invoice exists, a new one will be generated.
-
-        We recommend using either the create or preview endpoints for proforma invoices to preview this advance invoice before using this endpoint to generate it.
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                      pricing_scheme:
+                        type: array
+                        items:
+                          type: string
+                      prices:
+                        type: array
+                        items:
+                          type: string
+                      property_values_fingerprint:
+                        type: array
+                        items:
+                          type: string
+      operationId: 'post-components-:component_id-price_points-:price_point_id-segments.json'
       requestBody:
         content:
           application/json:
             schema:
-              description: ''
               type: object
-              x-examples:
-                example-1:
-                  force: true
               properties:
-                force:
-                  type: boolean
+                segment:
+                  type: object
+                  properties:
+                    segment_property_1_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_2_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_3_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    segment_property_4_value:
+                      type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                              - string
+                              - number
+                            description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                          - unit_price
+                  required:
+                    - pricing_scheme
             examples:
-              Force generation:
+              Create a Single Segment (related Metric has 2 segmented properties):
                 value:
-                  force: true
-  '/subscriptions/{subscription_id}/advance_invoice.json':
+                  segment:
+                    segment_property_1_value: France
+                    segment_property_2_value: Spain
+                    pricing_scheme: volume
+                    prices:
+                      - starting_quantity: 1
+                        ending_quantity: 10000
+                        unit_price: '0.19'
+                      - starting_quantity: 10001
+                        ending_quantity: null
+                        unit_price: '0.09'
+      description: |-
+        This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     parameters:
       - schema:
           type: string
-        name: subscription_id
+        name: component_id
         in: path
         required: true
+        description: ID or Handle for the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle for the Price Point belonging to the Component
     get:
-      summary: Read advance invoice
-      tags:
-        - Advance Invoice
+      summary: List Segments for a Price Point
+      operationId: get-components-component_id-price_points-price_point_id-segments.json
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                description: ''
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
               examples: {}
+        '401':
+          description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-      operationId: get-subscriptions-subscription_id-advance_invoice.json
-      description: 'Once an advance invoice has been generated for a subscription''s upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.'
-  '/subscriptions/{subscription_id}/advance_invoice/void.json':
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      per_page:
+                        type: array
+                        items:
+                          type: string
+                      price_point:
+                        type: array
+                        items:
+                          type: string
+      description: |-
+        This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
+
+        You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+            maximum: 200
+            minimum: 1
+            default: 30
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
+        - schema:
+            type: string
+            example: '?filter[segment_property_1_value]=EU'
+          in: query
+          name: 'filter[segment_property_1_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_2_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_2` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_3_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_3` on attached Metric. If empty string is passed, this filter would be rejected.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[segment_property_4_value]'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_4` on attached Metric. If empty string is passed, this filter would be rejected.'
+      tags:
+        - 'Events-Based Billing: Segments'
+  '/components/{component_id}/price_points/{price_point_id}/segments/{id}.json':
     parameters:
       - schema:
           type: string
-        name: subscription_id
+        name: component_id
         in: path
         required: true
-    post:
-      summary: Void advance invoice
+        description: ID or Handle of the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle of the Price Point belonging to the Component
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: The ID of the Segment
+    put:
+      summary: Update Single Segment
       tags:
-        - Advance Invoice
+        - 'Events-Based Billing: Segments'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  segment:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                                - integer
+                                - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      pricing_scheme:
+                        type: array
+                        items:
+                          type: string
+                      prices:
+                        type: array
+                        items:
+                          type: string
+      operationId: put-components-component_id-price_points-price_point_id-segments-id-.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segment:
+                  type: object
+                  properties:
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                              - string
+                              - number
+                            description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                          - unit_price
+                  required:
+                    - pricing_scheme
+      description: |-
+        This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+    delete:
+      summary: Delete Single Segment
+      operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+      description: |-
+        This endpoint allows you to delete a Segment with specified ID.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+      tags:
+        - 'Events-Based Billing: Segments'
+  '/components/{component_id}/price_points/{price_point_id}/segments/bulk.json':
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+        description: ID or Handle for the Component
+      - schema:
+          type: string
+        name: price_point_id
+        in: path
+        required: true
+        description: ID or Handle for the Price Point belonging to the Component
+    post:
+      summary: Bulk Create Segments
+      tags:
+        - 'Events-Based Billing: Segments'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+        '401':
+          description: Unauthorized
         '403':
           description: Forbidden
         '404':
           description: Not Found
-      operationId: post-subscriptions-subscription_id-advance_invoice-void.json
-      description: |-
-        Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    required:
+                      - segments
+                    properties:
+                      segments:
+                        type: object
+                        properties:
+                          '''x''':
+                            type: object
+                            description: |-
+                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
 
-        A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice).
+                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                            properties:
+                              base:
+                                type: array
+                                items:
+                                  type: string
+                              pricing_scheme:
+                                type: array
+                                items:
+                                  type: string
+                              prices:
+                                type: array
+                                items:
+                                  type: string
+                              property_values_fingerprint:
+                                type: array
+                                items:
+                                  type: string
+                required:
+                  - errors
+              examples:
+                Error response when Pricing Scheme is missing:
+                  value:
+                    errors:
+                      segments:
+                        '1':
+                          pricing_scheme:
+                            - 'Pricing scheme: cannot be blank'
+      operationId: post-components-component_id-price_points-price_point_id-segments-bulk.json
       requestBody:
         content:
           application/json:
             schema:
-              description: ''
               type: object
-              x-examples:
-                example-1:
-                  void:
-                    reason: because
               properties:
-                void:
-                  type: object
-                  required:
-                    - reason
-                  properties:
-                    reason:
-                      type: string
-                      minLength: 1
-              required:
-                - void
+                segments:
+                  type: array
+                  maxItems: 2000
+                  items:
+                    type: object
+                    properties:
+                      segment_property_1_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_2_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_3_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      segment_property_4_value:
+                        type:
+                          - string
+                          - number
+                          - integer
+                          - boolean
+                        description: A value that will occur in your events that you want to bill upon. The type of the value depends on the property type in the related event based billing metric.
+                      pricing_scheme:
+                        type: string
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                      prices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type: integer
+                            unit_price:
+                              type:
+                                - string
+                                - number
+                              description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                          required:
+                            - unit_price
+                    required:
+                      - pricing_scheme
+                      - prices
+            examples: {}
+      description: |-
+        This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
+
+        If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+    put:
+      summary: Bulk Update Segments
+      tags:
+        - 'Events-Based Billing: Segments'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        component_id:
+                          type: integer
+                        price_point_id:
+                          type: integer
+                        event_based_billing_metric_id:
+                          type: integer
+                        pricing_scheme:
+                          type: string
+                        segment_property_1_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_2_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_3_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        segment_property_4_value:
+                          type:
+                            - string
+                            - number
+                            - integer
+                            - boolean
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        prices:
+                          type: array
+                          uniqueItems: false
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                              component_id:
+                                type: integer
+                              starting_quantity:
+                                type: integer
+                              ending_quantity:
+                                type:
+                                  - integer
+                                  - 'null'
+                              unit_price:
+                                type: string
+                              price_point_id:
+                                type: integer
+                              formatted_unit_price:
+                                type: string
+                              segment_id:
+                                type: integer
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    required:
+                      - segments
+                    properties:
+                      segments:
+                        type: object
+                        properties:
+                          '''x''':
+                            type: object
+                            description: |-
+                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
+
+                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                            properties:
+                              base:
+                                type: array
+                                items:
+                                  type: string
+                              pricing_scheme:
+                                type: array
+                                items:
+                                  type: string
+                              prices:
+                                type: array
+                                items:
+                                  type: string
+                required:
+                  - errors
+              examples:
+                Error response when Pricing Scheme is missing:
+                  value:
+                    errors:
+                      segments:
+                        '1':
+                          pricing_scheme:
+                            - 'Pricing scheme: cannot be blank'
+      operationId: put-components-component_id-price_points-price_point_id-segments-bulk.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segments:
+                  type: array
+                  maxItems: 1000
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: The ID of the segment you want to update.
+                      pricing_scheme:
+                        type: string
+                        description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes.'
+                      prices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type: integer
+                            unit_price:
+                              type:
+                                - string
+                                - number
+                              description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+                          required:
+                            - unit_price
+                    required:
+                      - id
+                      - pricing_scheme
+                      - prices
+      description: |-
+        This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `1000` records.
+
+        If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+        You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -20246,10 +21407,6 @@ components:
           type: string
           description: The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided.
           deprecated: true
-        proration_collection_method:
-          type: string
-          default: automatic
-          description: ''
         accrue_charge:
           type: boolean
           description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided.'
@@ -20267,9 +21424,6 @@ components:
             - full
             - prorated
             - none
-        payment_collection_method:
-          type: string
-          description: '(deprecated, ignored) The payment_collection_method set on the subscription will be used. For subscriptions on invoice billing, when accrue_charge is false, a mid-period invoice will be created from any charges that are a result of the allocation change.'
         price_point_id:
           type:
             - string
@@ -20740,11 +21894,12 @@ components:
           description: '(Optional) The coupon code of the coupon to apply '
         payment_collection_method:
           type: string
-          description: (Optional) The type of payment collection to be used in the subscription.
+          description: '(Optional) The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
           enum:
             - automatic
             - remittance
             - prepaid
+            - invoice
         receives_invoice_emails:
           type: string
           description: '(Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription.'
