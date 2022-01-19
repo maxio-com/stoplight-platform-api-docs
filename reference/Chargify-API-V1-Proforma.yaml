@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: Chargify-API-V1-Proforma
+  version: '1.0'
+  description: Contains endpoints for Proforma
+servers:
+  - url: 'https://{subdomain}.chargify.com'
+    description: Production
+paths:
+  /proforma.json:
+    get:
+      summary: List
+      tags:
+        - Proforma
+      responses: {}
+      operationId: get-proforma
+      description: List all Proforma Invoices
+    post:
+      summary: Create
+      tags:
+        - Proforma
+      responses: {}
+      operationId: post-proforma
+      description: Create a Proforma Invoice
+    parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: The username is a Chargify API key. The password is x.
+security:
+  - BasicAuth: []
