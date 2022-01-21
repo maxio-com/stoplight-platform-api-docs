@@ -4095,7 +4095,7 @@ paths:
                         type: integer
                       price_point_count:
                         type: integer
-                        description: Count for the number of of amount of price points associated with the the component
+                        description: Count for the number of price points associated with the component
                       price_points_url:
                         type: string
                         description: URL that points to the location to read the existing price points via GET request
@@ -12294,9 +12294,7 @@ paths:
 
         ## With Coupon(s)
 
-        To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`.
-
-        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](./b3A6MTQxMDgzODg-create-subscription#with-coupons)
+        Pass an array of `coupon_codes`. See the example request body "With Coupon".
 
         ## With Manual Invoice Collection
 
@@ -20961,7 +20959,7 @@ components:
               type: integer
             price_point_count:
               type: integer
-              description: Count for the number of of amount of price points associated with the the component
+              description: The number of price points associated with the component
             price_points_url:
               type: string
               description: URL that points to the location to read the existing price points via GET request
