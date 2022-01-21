@@ -12294,9 +12294,7 @@ paths:
 
         ## With Coupon(s)
 
-        To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`.
-
-        For more information on creating subscriptions with a coupon code, please see the section on creating a subscription with coupon [here.](./b3A6MTQxMDgzODg-create-subscription#with-coupons)
+        To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`. See the example request body "With Coupon".
 
         ## With Manual Invoice Collection
 
