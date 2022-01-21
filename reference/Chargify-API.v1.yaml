@@ -12294,7 +12294,7 @@ paths:
 
         ## With Coupon(s)
 
-        To pass a single coupon, use `coupon_code`. To pass multiple coupons, use an array of `coupon_codes`. See the example request body "With Coupon".
+        Pass an array of `coupon_codes`. See the example request body "With Coupon".
 
         ## With Manual Invoice Collection
 
