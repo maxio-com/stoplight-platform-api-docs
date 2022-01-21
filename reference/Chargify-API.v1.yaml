@@ -20959,7 +20959,7 @@ components:
               type: integer
             price_point_count:
               type: integer
-              description: Count for the number of amount of price points associated with the component
+              description: The number of price points associated with the component
             price_points_url:
               type: string
               description: URL that points to the location to read the existing price points via GET request
