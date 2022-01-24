@@ -19709,6 +19709,91 @@ paths:
                               type: number
                             usage_amount_in_cents:
                               type: number
+        '400':
+          description: |-
+            When provided invalid values for the following params:
+
+            - `direction`,
+            - `page`,
+            - `per_page`,
+            - `[filter]end_datetime`,
+            - `[filter]subscription_ids`.
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      direction:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      page:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      per_page:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                      filter:
+                        type: object
+                        properties:
+                          end_datetime:
+                            type: array
+                            items:
+                              required: []
+                              properties: {}
+                          subscription_ids:
+                            type: array
+                            items:
+                              required: []
+                              properties: {}
+                        required:
+                          - end_datetime
+                          - subscription_ids
+                    required:
+                      - direction
+                      - page
+                      - per_page
+                      - filter
+                required:
+                  - errors
+                x-examples:
+                  example-1:
+                    errors:
+                      direction:
+                        - 'must be one of: asc, desc'
+                      page:
+                        - must be greater than or equal to 1
+                      per_page:
+                        - must be less than or equal to 200
+                      filter:
+                        end_datetime:
+                          - 'supplied value is invalid, expected ISO 8601 format'
+                        subscription_ids:
+                          - 'must be a String with comma-separated values, for example: ids=1,2,3'
+              examples:
+                invalid-query-params:
+                  value:
+                    errors:
+                      direction:
+                        - 'must be one of: asc, desc'
+                      page:
+                        - must be greater than or equal to 1
+                      per_page:
+                        - must be less than or equal to 200
+                      filter:
+                        end_datetime:
+                          - 'supplied value is invalid, expected ISO 8601 format'
+                        subscription_ids:
+                          - 'must be a String with comma-separated values, for example: ids=1,2,3'
       operationId: get-subscriptions_mrr
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts split per subscription.'
       parameters:
@@ -19749,7 +19834,7 @@ paths:
             example: 'filter[direction]=des'
           in: query
           name: 'filter[direction]'
-          description: Controls the order in which results are returned.
+          description: Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default.
     parameters: []
 servers:
   - url: 'https://{subdomain}.chargify.com'
