@@ -13164,7 +13164,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: custom-price
+                      handle: "custom-price"
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
