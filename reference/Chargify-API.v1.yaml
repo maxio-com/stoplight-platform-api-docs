@@ -13164,7 +13164,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: "custom-price"
+                      handle: custom-price
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -14689,6 +14689,45 @@ paths:
                         customer_vault_token: '67890'
                         billing_address_2: null
                         payment_type: credit_card
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      subscription:
+                        type: array
+                        items:
+                          required: []
+                          properties: {}
+                    required:
+                      - subscription
+                required:
+                  - errors
+                x-examples:
+                  example-1:
+                    errors:
+                      subscription:
+                        - must be a hash
+              examples:
+                example-1:
+                  value:
+                    errors:
+                      subscription:
+                        - ''
+                example-2:
+                  value:
+                    errors:
+                      subscription:
+                        cancellation_message:
+                          - ''
+        '401':
+          description: Unauthorized
         '404':
           description: Not Found
         '422':
