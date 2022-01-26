@@ -13164,7 +13164,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: "custom-price"
+                      handle: custom-price
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -19241,7 +19241,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Preview the next proforma invoice
+      summary: Preview Proforma Invoice
       tags:
         - Proforma Invoices
       responses:
@@ -19281,6 +19281,8 @@ paths:
         The preview endpoint is subject to all the same conditions as the proforma invoice endpoint. For example, previews are only available on the Relationship Invoicing architecture, and previews cannot be made for end-of-life subscriptions.
 
         If all the data returned in the preview is as expected, you may then create a static proforma invoice and send it to your customer. The data within a preview will not be saved and will not be accessible after the call is made.
+
+        Alternatively, if you have some proforma invoices already, you may make a preview call to determine whether any billing information for the subscription's upcoming renewal has changed.
   '/invoices/{uid}/deliveries.json':
     parameters:
       - schema:
