@@ -2693,12 +2693,12 @@ paths:
       description: |-
         List coupons for a specific Product Family in a Site.
 
-        When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
-
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
         - schema:
             type: integer
+            minimum: 1
+            example: page=2
           in: query
           name: page
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
@@ -2706,9 +2706,65 @@ paths:
             type: integer
             default: 30
             maximum: 200
+            minimum: 1
+            example: per_page=50
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+            example: 'filter[date_field]=updated_at'
+          in: query
+          name: 'filter[date_field]'
+          description: The type of filter you would like to apply to your search.
+        - schema:
+            type: string
+            example: 'filter[end_date]=2011-12-15'
+          in: query
+          name: 'filter[end_date]'
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+            example: 'filter[end_datetime]=2011-12-1T10:15:30+01:00'
+          in: query
+          name: 'filter[end_datetime]'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+        - schema:
+            type: string
+            example: 'filter[start_date]=2011-12-17'
+          in: query
+          name: 'filter[start_date]'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+            example: 'filter[start_datetime]=2011-12-19T10:15:30+01:00'
+          in: query
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          name: 'filter[start_datetime]'
+        - schema:
+            type: array
+            example: 'filter[ids]=1,2,3'
+            minItems: 1
+          in: query
+          name: 'filter[ids]'
+          description: Allows fetching coupons with matching id based on provided values.
+        - schema:
+            type: array
+            example: 'filter[codes]=free,free_trial'
+          in: query
+          name: 'filter[codes]'
+          description: Allows fetching coupons with matching codes based on provided values.
+        - schema:
+            type: boolean
+            enum:
+              - 'true'
+            example: currency_prices=true
+          in: query
+          name: currency_prices
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
   /coupons/find.json:
     get:
       summary: Find Coupon
@@ -2919,7 +2975,7 @@ paths:
         The `archived_at` date and time will be assigned.
   /coupons.json:
     get:
-      summary: List Coupons for Default Product Family
+      summary: List Coupons
       tags:
         - Coupons
       responses:
@@ -2933,11 +2989,7 @@ paths:
                   $ref: '#/components/schemas/Coupon'
       operationId: get-coupons.json
       description: |-
-        You can retrieve a list of coupons that belong to the default product family for a site via this method.
-
-        The default product family is the one that was created first for the site, (with the lowest ID number) that has not been archived.
-
-        When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+        You can retrieve a list of coupons.
 
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
@@ -2959,28 +3011,73 @@ paths:
               - created_at
               - updated_at
           in: query
-          description: The type of filter you would like to apply to your search.
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search.'
           name: date_field
+          deprecated: true
         - schema:
             type: string
           in: query
           name: start_date
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          deprecated: true
+        - schema:
+            type: string
+          in: query
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          name: end_date
+          deprecated: true
+        - schema:
+            type: string
+          in: query
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[start_datetime] instead to achieve the same result. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          name: start_datetime
+          deprecated: true
+        - schema:
+            type: string
+          in: query
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[end_datetime] instead to achieve the same result. The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          name: end_datetime
+          deprecated: true
+        - schema:
+            type: array
+            example: 'filter[ids]=1,2,3'
+            minItems: 1
+          in: query
+          name: 'filter[ids]'
+          description: Allows fetching coupons with matching id based on provided values.
+        - schema:
+            type: array
+            minItems: 1
+            example: 'filter[codes]=free,free_trial'
+          in: query
+          name: 'filter[codes]'
+          description: Allows fetching coupons with matching code based on provided values.
+        - schema:
+            type: boolean
+            example: currency_prices=true
+          in: query
+          name: currency_prices
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_date]'
+          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_datetime]'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[start_date]'
           description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
         - schema:
             type: string
           in: query
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
-          name: end_date
-        - schema:
-            type: string
-          in: query
+          name: 'filter[start_datetime]'
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
-          name: start_datetime
-        - schema:
-            type: string
-          in: query
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
-          name: end_datetime
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
       - schema:
@@ -9645,6 +9742,181 @@ paths:
                   payment:
                     amount: 10
         description: ''
+  '/subscriptions/{subscription_id}/advance_invoice/issue.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Issue advance invoice
+      tags:
+        - Advance Invoice
+                $ref: '#/components/schemas/Invoice'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      - Cannot generate an invoice in advance for subscription in the group
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - errors
+              examples:
+                Nothing due:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance when nothing is due
+                Already exists:
+                  value:
+                    errors:
+                      - Advance invoice already exists
+                Grouped:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for subscription in the group
+                End of life:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for inactive subscription
+                Calendar billing:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a calendar billing subscription
+                Prepaid subscription:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a prepaid subscription
+                Close to renewal:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance within an hour of renewal
+                Custom exchange:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance for a subscription using the site level exchange rate
+                Prepaid components:
+                  value:
+                    errors:
+                      - Cannot generate an invoice in advance when a subscription uses prepaid components
+      operationId: post-subscriptions-subscription_id-advance_invoice-issue.json
+      description: |
+        Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
+
+        A subscription may only have one advance invoice per billing period. Attempting to issue an advance invoice when one already exists will return an error.
+
+        That said, regeneration of the invoice may be forced with the params `force: true`, which will void an advance invoice if one exists and generate a new one. If no advance invoice exists, a new one will be generated.
+
+        We recommend using either the create or preview endpoints for proforma invoices to preview this advance invoice before using this endpoint to generate it.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  force: true
+              properties:
+                force:
+                  type: boolean
+            examples:
+              Force generation:
+                value:
+                  force: true
+  '/subscriptions/{subscription_id}/advance_invoice.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    get:
+      summary: Read advance invoice
+      tags:
+        - Advance Invoice
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples: {}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: get-subscriptions-subscription_id-advance_invoice.json
+      description: 'Once an advance invoice has been generated for a subscription''s upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.'
+  '/subscriptions/{subscription_id}/advance_invoice/void.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Void advance invoice
+      tags:
+        - Advance Invoice
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: post-subscriptions-subscription_id-advance_invoice-void.json
+      description: |-
+        Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
+
+        A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  void:
+                    reason: because
+              properties:
+                void:
+                  type: object
+                  required:
+                    - reason
+                  properties:
+                    reason:
+                      type: string
+                      minLength: 1
+              required:
+                - void
   /credit_notes.json:
     get:
       summary: List Credit Notes
@@ -12096,8 +12368,8 @@ paths:
       tags:
         - Subscriptions
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -13067,7 +13339,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: "custom-price"
+                      handle: custom-price
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -19144,7 +19416,7 @@ paths:
         in: path
         required: true
     post:
-      summary: Preview the next proforma invoice
+      summary: Preview Proforma Invoice
       tags:
         - Proforma Invoices
       responses:
@@ -19184,6 +19456,8 @@ paths:
         The preview endpoint is subject to all the same conditions as the proforma invoice endpoint. For example, previews are only available on the Relationship Invoicing architecture, and previews cannot be made for end-of-life subscriptions.
 
         If all the data returned in the preview is as expected, you may then create a static proforma invoice and send it to your customer. The data within a preview will not be saved and will not be accessible after the call is made.
+
+        Alternatively, if you have some proforma invoices already, you may make a preview call to determine whether any billing information for the subscription's upcoming renewal has changed.
   '/invoices/{uid}/deliveries.json':
     parameters:
       - schema:
