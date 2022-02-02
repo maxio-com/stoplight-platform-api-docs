@@ -24004,7 +24004,7 @@ components:
           description: Set a specific language on a customer record.
         vat_number:
           type: string
-        tax_exampt:
+        tax_exempt:
           type: boolean
         tax_exempt_reason:
           type: string
