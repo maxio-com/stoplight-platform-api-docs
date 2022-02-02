@@ -14703,10 +14703,19 @@ paths:
                     items:
                       type: string
               examples:
-                Example:
+                Example-1:
                   value:
                     errors:
                       - The subscription is already canceled
+                Example-2:
+                  value:
+                    errors:
+                      - reason_code size cannot be greater than 255
+                      - cancellation_message size cannot be greater than 65535
+                Example-3:
+                  value:
+                    errors:
+                      - subscription must be an Object
       description: 'The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".'
       requestBody:
         content:
