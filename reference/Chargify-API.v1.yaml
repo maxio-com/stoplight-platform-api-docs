@@ -16927,6 +16927,8 @@ paths:
                     method: check
     get:
       summary: 'List Prepayments'
+      tags:
+        - Subscription Invoice Account
       operationId: get-subscriptions-subscription_id-prepayments.json
       responses:
         '200':
@@ -16971,7 +16973,7 @@ paths:
           description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
         - schema:
             type: integer
-            default: 30
+            default: 20
             maximum: 200
             minimum: 1
             example: per_page=50
@@ -16983,7 +16985,7 @@ paths:
             enum:
               - created_at
               - application_at
-            example: 'filter[date_field]=updated_at'
+            example: 'filter[date_field]=created_at'
           in: query
           name: 'filter[date_field]'
           description: The type of filter you would like to apply to your search.
