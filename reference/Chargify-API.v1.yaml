@@ -13164,7 +13164,7 @@ paths:
                   subscription:
                     product_id: string
                     custom_price:
-                      handle: "custom-price"
+                      handle: custom-price
                       price_in_cents: 9900
                       interval: 1
                       interval_unit: month
@@ -20973,9 +20973,9 @@ paths:
           description: Submit ids in order to limit results. You can provide up to 200 ids.
         - schema:
             type: string
-            example: 'filter[end_datetime]=2022-01-10T10:00:00-05:00'
+            example: 'at_ti=2022-01-10T10:00:00-05:00'
           in: query
-          name: 'filter[end_datetime] '
+          name: at_time
           description: Submit a timestamp in ISO8601 format to request MRR for a historic time.
         - schema:
             type: number
