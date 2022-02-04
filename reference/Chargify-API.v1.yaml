@@ -21744,6 +21744,9 @@ components:
               type: integer
             interval_unit:
               type: string
+              enum:
+                - day
+                - month
             trial_price_in_cents:
               type: integer
               description: '(Optional)'
