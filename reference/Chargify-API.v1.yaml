@@ -21728,6 +21728,52 @@ components:
         product_price_point_id:
           type: string
           description: The ID of the particular price point on the product.
+        custom_price:
+          type: object
+          description: Used in place of `product_price_point_id` to define a custom price point unique to the subscription
+          properties:
+            name:
+              type: string
+              description: '(Optional)'
+            handle:
+              type: string
+              description: '(Optional)'
+            price_in_cents:
+              type: integer
+            interval:
+              type: integer
+            interval_unit:
+              type: string
+              enum:
+                - day
+                - month
+            trial_price_in_cents:
+              type: integer
+              description: '(Optional)'
+            trial_interval:
+              type: integer
+              description: '(Optional)'
+            trial_interval_unit:
+              type: string
+              description: '(Optional)'
+              enum:
+                - day
+                - month
+            initial_charge_in_cents:
+              type: integer
+              description: '(Optional)'
+            initial_charge_after_trial:
+              type: boolean
+              description: '(Optional)'
+            expiration_interval:
+              type: integer
+              description: '(Optional)'
+            expiration_interval_unit:
+              type: string
+              description: '(Optional)'
+              enum:
+                - day
+                - month
         coupon_code:
           type: string
           description: '(Optional) The coupon code of the coupon to apply '
