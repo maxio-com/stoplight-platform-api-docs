@@ -11007,6 +11007,14 @@ paths:
           in: query
           name: start_datetime
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: string
+            enum:
+              - subscription
+            example: include=subscription
+          in: query
+          description: Allows including additional data in the response.
+          name: include
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
@@ -19829,7 +19837,7 @@ paths:
         name: chargify_token
         in: path
         required: true
-  /subscriptions_components:
+  /subscriptions_components.json:
     get:
       summary: List Subscription Components for Site
       tags:
@@ -19846,6 +19854,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
+        '':
+          description: ''
       operationId: get-subscriptions_components
       description: This request will list components applied to each subscription.
       parameters:
@@ -19931,6 +19941,15 @@ paths:
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
+        - schema:
+            type: string
+            example: include=subscription
+            enum:
+              - subscription
+          in: query
+          name: include
+          description: Allows including additional data in the response.
+    parameters: []
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
       summary: Create Single Segment
@@ -24077,6 +24096,14 @@ components:
           type: string
         updated_at:
           type: string
+        subscription:
+          type: object
+          description: 'An optional object, will be returned if provided `include=subscription` query param.'
+          properties:
+            state:
+              type: string
+            updated_at:
+              type: string
     Update-Customer:
       title: Update Customer
       type: object
