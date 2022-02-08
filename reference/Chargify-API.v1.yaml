@@ -11069,6 +11069,15 @@ paths:
           in: query
           description: Allows including additional data in the response.
           name: include
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+            enum:
+              - 'true'
+              - 'false'
+          in: query
+          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+          name: 'filter[use_site_exchange_rate]'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
@@ -20003,6 +20012,15 @@ paths:
           in: query
           name: include
           description: Allows including additional data in the response.
+        - schema:
+            type: boolean
+            enum:
+              - 'true'
+              - 'false'
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
     parameters: []
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
@@ -24113,24 +24131,27 @@ components:
       title: Subscriptions Component
       type: object
       examples:
-        - component_id: 0
-          subscription_id: 0
-          allocated_quantity: 0
-          pricing_scheme: string
+        - id: 0
           name: string
           kind: string
           unit_name: string
+          enabled: true
+          currency: string
+          allocated_quantity: 0
+          component_id: 0
+          component_handle: null
+          subscription_id: 0
+          recurring: true
+          archived_at: null
           price_point_id: 0
           price_point_handle: string
-          price_point_type: default
+          price_point_type: string
           price_point_name: string
-          enabled: true
-          unit_balance: 0
-          id: 0
+          use_site_exchange_rate: true
+          product_family_id: 0
+          product_family_handle: string
           created_at: string
           updated_at: string
-          component_handle: string
-          archived_at: string
       properties:
         id:
           type: integer
@@ -24196,6 +24217,10 @@ components:
           type: string
         updated_at:
           type: string
+        use_site_exchange_rate:
+          type:
+            - boolean
+            - 'null'
         subscription:
           type: object
           description: 'An optional object, will be returned if provided `include=subscription` query param.'
