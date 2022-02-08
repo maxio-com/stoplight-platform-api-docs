@@ -21825,10 +21825,10 @@ components:
           properties:
             name:
               type: string
-              description: (Optional)
+              description: '(Optional)'
             handle:
               type: string
-              description: (Optional)
+              description: '(Optional)'
             price_in_cents:
               type: integer
             interval:
@@ -21840,28 +21840,28 @@ components:
                 - month
             trial_price_in_cents:
               type: integer
-              description: (Optional)
+              description: '(Optional)'
             trial_interval:
               type: integer
-              description: (Optional)
+              description: '(Optional)'
             trial_interval_unit:
               type: string
-              description: (Optional)
+              description: '(Optional)'
               enum:
                 - day
                 - month
             initial_charge_in_cents:
               type: integer
-              description: (Optional)
+              description: '(Optional)'
             initial_charge_after_trial:
               type: boolean
-              description: (Optional)
+              description: '(Optional)'
             expiration_interval:
               type: integer
-              description: (Optional)
+              description: '(Optional)'
             expiration_interval_unit:
               type: string
-              description: (Optional)
+              description: '(Optional)'
               enum:
                 - day
                 - month
