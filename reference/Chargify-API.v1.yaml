@@ -24229,7 +24229,6 @@ components:
               type: string
             updated_at:
               type: string
-      description: ''
     Update-Customer:
       title: Update Customer
       type: object
