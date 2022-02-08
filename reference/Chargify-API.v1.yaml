@@ -24135,9 +24135,9 @@ components:
           name: string
           kind: string
           unit_name: string
+          enabled: true
           currency: string
           allocated_quantity: 0
-          pricing_scheme: string
           component_id: 0
           component_handle: null
           subscription_id: 0
@@ -24229,6 +24229,7 @@ components:
               type: string
             updated_at:
               type: string
+      description: ''
     Update-Customer:
       title: Update Customer
       type: object
