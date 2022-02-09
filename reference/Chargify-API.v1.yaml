@@ -9008,6 +9008,7 @@ paths:
               - issue_date
               - updated_at
             default: due_date
+            example: date_field=issue_date
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
