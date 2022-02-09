@@ -16988,7 +16988,7 @@ paths:
             example: 'filter[date_field]=created_at'
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice
         - schema:
             type: string
             example: 'filter[start_date]=2011-12-15'
