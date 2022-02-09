@@ -11078,6 +11078,12 @@ paths:
           in: query
           description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
           name: 'filter[use_site_exchange_rate]'
+        - schema:
+            type: string
+            example: 'filter[currencies]=USD,EU'
+          in: query
+          description: Allows fetching components allocation with matching currency based on provided values.
+          name: 'filter[currencies]'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
@@ -17006,7 +17012,7 @@ paths:
                     memo: Signup for $100
                     method: check
     get:
-      summary: 'List Prepayments'
+      summary: List Prepayments
       tags:
         - Subscription Invoice Account
       operationId: get-subscriptions-subscription_id-prepayments.json
@@ -17031,11 +17037,11 @@ paths:
                         subscription_id: 3558750
                         amount_in_cents: 2000
                         remaining_amount_in_cents: 1100
-                        external: True
-                        memo: 'test'
-                        details: 'test details'
-                        payment_type: 'cash'
-                        created_at: "2022-01-18T22:45:41+11:00"
+                        external: true
+                        memo: test
+                        details: test details
+                        payment_type: cash
+                        created_at: '2022-01-18T22:45:41+11:00'
         '401':
           description: Unauthorized
         '403':
@@ -20097,6 +20103,12 @@ paths:
           in: query
           name: 'filter[use_site_exchange_rate]'
           description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+        - schema:
+            type: string
+            example: 'filter[currencies]=USD,EUR'
+          in: query
+          name: 'filter[currencies]'
+          description: Allows fetching components allocation with matching currency based on provided values.
     parameters: []
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
@@ -21901,10 +21913,10 @@ components:
           properties:
             name:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             handle:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             price_in_cents:
               type: integer
             interval:
@@ -21916,28 +21928,28 @@ components:
                 - month
             trial_price_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
             initial_charge_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             initial_charge_after_trial:
               type: boolean
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
