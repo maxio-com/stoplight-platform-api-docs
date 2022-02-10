@@ -17028,7 +17028,7 @@ paths:
                     memo: Signup for $100
                     method: check
     get:
-      summary: 'List Prepayments'
+      summary: List Prepayments
       tags:
         - Subscription Invoice Account
       operationId: get-subscriptions-subscription_id-prepayments.json
@@ -17053,11 +17053,11 @@ paths:
                         subscription_id: 3558750
                         amount_in_cents: 2000
                         remaining_amount_in_cents: 1100
-                        external: True
-                        memo: 'test'
-                        details: 'test details'
-                        payment_type: 'cash'
-                        created_at: "2022-01-18T22:45:41+11:00"
+                        external: true
+                        memo: test
+                        details: test details
+                        payment_type: cash
+                        created_at: '2022-01-18T22:45:41+11:00'
         '401':
           description: Unauthorized
         '403':
@@ -21059,7 +21059,7 @@ paths:
           description: Created
           content:
             application/json:
-              schema:
+              schema: null
         '403':
           description: Forbidden
         '404':
@@ -21121,7 +21121,8 @@ paths:
                       - Cannot generate an invoice in advance when a subscription uses prepaid components
       operationId: post-subscriptions-subscription_id-advance_invoice-issue.json
       description: |
-        Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
+        Generate an invoice in advance for a subscription's next renewal date. [Please see our help docs](https://chargify.zendesk.com/hc/en-us/articles/4413055824283) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
+
         A subscription may only have one advance invoice per billing period. Attempting to issue an advance invoice when one already exists will return an error.
         That said, regeneration of the invoice may be forced with the params `force: true`, which will void an advance invoice if one exists and generate a new one. If no advance invoice exists, a new one will be generated.
         We recommend using either the create or preview endpoints for proforma invoices to preview this advance invoice before using this endpoint to generate it.
@@ -22099,10 +22100,10 @@ components:
           properties:
             name:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             handle:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             price_in_cents:
               type: integer
             interval:
@@ -22114,28 +22115,28 @@ components:
                 - month
             trial_price_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
             initial_charge_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             initial_charge_after_trial:
               type: boolean
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
