@@ -1234,13 +1234,13 @@ paths:
         - schema:
             type: string
           in: query
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
           name: start_date
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -2478,12 +2478,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns metadata with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -2725,7 +2725,7 @@ paths:
             example: 'filter[end_date]=2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
             example: 'filter[end_datetime]=2011-12-1T10:15:30+01:00'
@@ -3018,12 +3018,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
           deprecated: true
         - schema:
             type: string
           in: query
-          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
           name: end_date
           deprecated: true
         - schema:
@@ -3062,7 +3062,7 @@ paths:
             type: string
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -3072,7 +3072,7 @@ paths:
             type: string
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -3820,12 +3820,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -5191,12 +5191,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -5397,7 +5397,7 @@ paths:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -6342,12 +6342,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -6747,12 +6747,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: ' The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: ' The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -9061,12 +9061,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The beginning date range for the invoice''s Due Date, in the YYYY-MM-DD format.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The ending date range for the invoice''s Due Date, in the YYYY-MM-DD format.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
             enum:
@@ -9151,6 +9151,28 @@ paths:
           in: query
           name: refunds
           description: Include refunds data
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - due_date
+              - issue_date
+              - updated_at
+            default: due_date
+            example: date_field=issue_date
+          in: query
+          name: date_field
+          description: The type of filter you would like to apply to your search.
+        - schema:
+            type: string
+          in: query
+          name: start_datetime
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns invoices with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Allowed to be used only along with date_field set to created_at or updated_at.'
+        - schema:
+            type: string
+          in: query
+          name: end_datetime
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns invoices with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Allowed to be used only along with date_field set to created_at or updated_at.'
   '/invoices/{uid}.json':
     parameters:
       - schema:
@@ -11022,7 +11044,7 @@ paths:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -13348,12 +13370,12 @@ paths:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
@@ -17074,13 +17096,13 @@ paths:
             example: 'filter[start_date]=2011-12-15'
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
         - schema:
             type: string
             example: 'filter[end_date]=2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
   '/subscriptions/{subscription_id}/service_credits.json':
     parameters:
       - schema:
@@ -20050,7 +20072,7 @@ paths:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
         - schema:
             type: string
           in: query
