@@ -21224,9 +21224,18 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Subscription-MRR'
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    subscriptions_mrr: []
+                properties:
+                  subscriptions_mrr:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription-MRR'
+                required:
+                  - subscriptions_mrr
               examples:
                 example-1:
                   value:
