@@ -17028,7 +17028,7 @@ paths:
                     memo: Signup for $100
                     method: check
     get:
-      summary: List Prepayments
+      summary: 'List Prepayments'
       tags:
         - Subscription Invoice Account
       operationId: get-subscriptions-subscription_id-prepayments.json
@@ -17053,11 +17053,11 @@ paths:
                         subscription_id: 3558750
                         amount_in_cents: 2000
                         remaining_amount_in_cents: 1100
-                        external: true
-                        memo: test
-                        details: test details
-                        payment_type: cash
-                        created_at: '2022-01-18T22:45:41+11:00'
+                        external: True
+                        memo: 'test'
+                        details: 'test details'
+                        payment_type: 'cash'
+                        created_at: "2022-01-18T22:45:41+11:00"
         '401':
           description: Unauthorized
         '403':
@@ -21059,7 +21059,7 @@ paths:
           description: Created
           content:
             application/json:
-              schema: null
+              schema:
         '403':
           description: Forbidden
         '404':
