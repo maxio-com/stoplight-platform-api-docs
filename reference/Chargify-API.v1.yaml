@@ -11080,7 +11080,7 @@ paths:
           name: 'filter[use_site_exchange_rate]'
         - schema:
             type: string
-            example: 'filter[currencies]=USD,EU'
+            example: 'filter[currencies]=USD,EUR'
           in: query
           description: Allows fetching components allocation with matching currency based on provided values.
           name: 'filter[currencies]'
