@@ -11100,6 +11100,12 @@ paths:
           in: query
           description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
           name: 'filter[use_site_exchange_rate]'
+        - schema:
+            type: string
+            example: 'filter[currencies]=USD,EUR'
+          in: query
+          description: Allows fetching components allocation with matching currency based on provided values.
+          name: 'filter[currencies]'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
       - schema:
@@ -20119,6 +20125,12 @@ paths:
           in: query
           name: 'filter[use_site_exchange_rate]'
           description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+        - schema:
+            type: string
+            example: 'filter[currencies]=USD,EUR'
+          in: query
+          name: 'filter[currencies]'
+          description: Allows fetching components allocation with matching currency based on provided values.
     parameters: []
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
