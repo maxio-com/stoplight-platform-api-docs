@@ -18291,14 +18291,14 @@ paths:
           in: query
           name: reference
       description: Use this endpoint to find a subscription by its reference.
-  '/subscriptions/{identifier}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
+  '/subscriptions/{id}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
     parameters:
       - schema:
           type: integer
-        name: identifier
+        name: id
         in: path
         required: true
-        description: The Chargify id of the subscription or the uid of the subscription's group
+        description: The Chargify id of the subscription
       - schema:
           type: integer
         name: payment_profile_id
@@ -18306,7 +18306,7 @@ paths:
         required: true
         description: The Chargify id of the payment profile
     post:
-      summary: Change Default Payment Profile
+      summary: Change Subscription Default Payment Profile
       tags:
         - Payment Profiles
       responses:
@@ -18361,11 +18361,84 @@ paths:
                       - This is already the current payment profile
       operationId: post-subscriptions-subscription_id-payment_profiles-payment_profile_id-change_payment_profile.json
       description: |-
-        This will change the default payment profile on the subscription or subscription group to the existing payment profile with the id specified.
+        This will change the default payment profile on the subscription to the existing payment profile with the id specified.
+
+        You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
+  '/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json':
+    parameters:
+      - schema:
+          type: integer
+        name: uid
+        in: path
+        required: true
+        description: The Chargify uid of the subscription's group
+      - schema:
+          type: integer
+        name: payment_profile_id
+        in: path
+        required: true
+        description: The Chargify id of the payment profile
+    post:
+      summary: Change Subscription Group Default Payment Profile
+      tags:
+        - Payment Profiles
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment_profile:
+                    $ref: ../models/Payment-Profile.yaml
+              examples:
+                Example:
+                  value:
+                    payment_profile:
+                      id: 10211899
+                      first_name: Amelia
+                      last_name: Example
+                      masked_card_number: XXXX-XXXX-XXXX-1
+                      card_type: bogus
+                      expiration_month: 2
+                      expiration_year: 2018
+                      customer_id: 14399371
+                      current_vault: bogus
+                      vault_token: '1'
+                      billing_address: ''
+                      billing_city: ''
+                      billing_state: ''
+                      billing_zip: ''
+                      billing_country: ''
+                      customer_vault_token: null
+                      billing_address_2: ''
+                      payment_type: credit_card
+                      site_gateway_setting_id: 1
+                      gateway_handle: null
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - This is already the current payment profile
+      operationId: post-subscription_groups-subscription_group_uid-payment_profiles-payment_profile_id-change_payment_profile.json
+      description: |-
+        This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
 
         You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
-        When changing for a subscription group, the new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
+        The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
   '/subscriptions/{subscription_id}/purge.json':
     parameters:
       - schema:
