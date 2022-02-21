@@ -205,10 +205,10 @@ paths:
         ## 3d secure requirement
 
         If for given subscription there is a pending 3ds payment, which was not
-        yet confirmed, you will not be able to apply the charge for this
+        yet confirmed, you will not be able to apply any charge for this
         subscription until 3ds transaction will not be confirmed.
 
-        The only case which allows it, is when you use accrue charge until next
+        The only case which allows it, is when you accrue charge until next
         renewal (`delay_capture` = true) option and the subscription is in an active state.
         ## Limitations of attribute combinations
         When you add a charge to an existing subscription, you may not use the following combination of attribute values:
