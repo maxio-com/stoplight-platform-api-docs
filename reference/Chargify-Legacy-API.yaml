@@ -202,6 +202,14 @@ paths:
         When a charge is created, a payment in the amount of the assessed charge is automatically captured from the credit card on file for the subscription. For this purpose, the subscription must have a payment method in order to support adding a charge. Payment collection will not be attempted if:
         + the subscription is on legacy invoice billing
         + the charge is accrued to the next renewal (`delay_capture` = true)
+        ## 3d secure requirement
+
+        If for given subscription there is a pending 3ds payment, which was not
+        yet confirmed, you will not be able to apply the charge for this
+        subscription until 3ds transaction will not be confirmed.
+
+        The only case which allows it, is when you use accrue charge until next
+        renewal (`delay_capture` = true) option and the subscription is in an active state.
         ## Limitations of attribute combinations
         When you add a charge to an existing subscription, you may not use the following combination of attribute values:
         + `delay_capture` = true
