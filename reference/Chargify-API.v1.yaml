@@ -20204,6 +20204,12 @@ paths:
           in: query
           name: 'filter[currencies]'
           description: Allows fetching components allocation with matching currency based on provided values.
+        - schema:
+            type: string
+            example: 'filter[subscription][states]=active,canceled&include=subscription'
+          in: query
+          name: 'filter[subscription][states]'
+          description: Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
     parameters: []
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
