@@ -21671,6 +21671,8 @@ components:
             hide_date_range_on_invoice:
               type: boolean
               description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
+            allow_fractional_quantities:
+              type: boolean
     Coupon:
       title: Coupon
       type: object
