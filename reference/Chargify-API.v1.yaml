@@ -22211,7 +22211,7 @@ components:
               description: '(Optional)'
             trial_interval_unit:
               type: string
-              description: ''(Optional)'
+              description: '(Optional)'
               enum:
                 - day
                 - month
