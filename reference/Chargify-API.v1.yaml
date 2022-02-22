@@ -12488,7 +12488,7 @@ paths:
 
         Components and their price points may be added by ID or by handle. See the example request body labeled "Components By Handle (Quantity-Based)"; the format will be the same for other component types.
 
-        ## With Coupon(s) Se
+        ## With Coupon(s)
 
         Pass an array of `coupon_codes`. See the example request body "With Coupon".
 
