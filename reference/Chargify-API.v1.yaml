@@ -12486,7 +12486,7 @@ paths:
 
         Note: if an invalid `price_point_id` is used, the subscription will still proceed but will use the component's default price point.
 
-        Components may be added by ID or by handle.
+        Components and their price points may be added by ID or by handle. See the example request body labeled "Components By Handle (Quantity-Based)"; the format will be the same for other component types.
 
         ## With Coupon(s)
 
@@ -14586,6 +14586,8 @@ paths:
                         - integer
                     stored_credential_transaction_id:
                       type: integer
+                    reference:
+                      type: string
                     components:
                       type: array
                       description: (Optional) An array of component ids and custom prices to be added to the subscription.
@@ -17034,7 +17036,7 @@ paths:
                     memo: Signup for $100
                     method: check
     get:
-      summary: 'List Prepayments'
+      summary: List Prepayments
       tags:
         - Subscription Invoice Account
       operationId: get-subscriptions-subscription_id-prepayments.json
@@ -17059,11 +17061,11 @@ paths:
                         subscription_id: 3558750
                         amount_in_cents: 2000
                         remaining_amount_in_cents: 1100
-                        external: True
-                        memo: 'test'
-                        details: 'test details'
-                        payment_type: 'cash'
-                        created_at: "2022-01-18T22:45:41+11:00"
+                        external: true
+                        memo: test
+                        details: test details
+                        payment_type: cash
+                        created_at: '2022-01-18T22:45:41+11:00'
         '401':
           description: Unauthorized
         '403':
@@ -21150,7 +21152,7 @@ paths:
           description: Created
           content:
             application/json:
-              schema:
+              schema: null
         '403':
           description: Forbidden
         '404':
@@ -21669,6 +21671,8 @@ components:
             hide_date_range_on_invoice:
               type: boolean
               description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
+            allow_fractional_quantities:
+              type: boolean
     Coupon:
       title: Coupon
       type: object
@@ -22293,10 +22297,10 @@ components:
           properties:
             name:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             handle:
               type: string
-              description: '(Optional)'
+              description: (Optional)
             price_in_cents:
               type: integer
             interval:
@@ -22308,28 +22312,28 @@ components:
                 - month
             trial_price_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             trial_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
             initial_charge_in_cents:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             initial_charge_after_trial:
               type: boolean
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval:
               type: integer
-              description: '(Optional)'
+              description: (Optional)
             expiration_interval_unit:
               type: string
-              description: '(Optional)'
+              description: (Optional)
               enum:
                 - day
                 - month
