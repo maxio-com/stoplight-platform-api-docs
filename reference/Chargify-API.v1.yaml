@@ -12486,9 +12486,9 @@ paths:
 
         Note: if an invalid `price_point_id` is used, the subscription will still proceed but will use the component's default price point.
 
-        Components may be added by ID or by handle.
+        Components and their price points may be added by ID or by handle. See the example request body labeled "Components By Handle (Quantity-Based)"; the format will be the same for other component types.
 
-        ## With Coupon(s)
+        ## With Coupon(s) Se
 
         Pass an array of `coupon_codes`. See the example request body "With Coupon".
 
