@@ -21496,12 +21496,12 @@ paths:
                             items:
                               type: string
               examples:
-                example-1:
+                Example Error:
                   value:
-                    refund:
-                      errors:
+                    errors:
+                      refund:
                         amount_in_cents:
-                          - null
+                          - Refund amount exceeds prepayment amount
       operationId: post-subscriptions-subscription_id-prepayments-prepayment_id-refunds.json
       description: |-
         This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
