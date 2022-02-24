@@ -20223,7 +20223,7 @@ paths:
           description: Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
         - schema:
             type: string
-            example: 'filter[subscription[date_field]=updated_at'
+            example: 'filter[subscription][date_field]=updated_at&include=subscription'
             enum:
               - updated_at
           in: query
