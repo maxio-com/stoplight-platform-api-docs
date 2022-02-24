@@ -205,11 +205,6 @@ paths:
         ## 3d secure requirement
 
         If for a given subscription there is a pending 3DS payment, which has not
-        yet been confirmed, you will not be able to apply any charge for this
-        subscription until the 3DS transaction is confirmed.
-        
-        The only case which allows it, is when you choose to accrue the charge until next
-        renewal (`delay_capture` = true) and the subscription is in an active state.
         yet confirmed, you will not be able to apply any charge for this
         subscription until 3ds transaction will not be confirmed.
 
