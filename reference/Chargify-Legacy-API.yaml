@@ -210,6 +210,7 @@ paths:
 
         The only case which allows it, is when you accrue charge until next
         renewal (`delay_capture` = true) option and the subscription is in an active state.
+
         ## Limitations of attribute combinations
         When you add a charge to an existing subscription, you may not use the following combination of attribute values:
         + `delay_capture` = true
