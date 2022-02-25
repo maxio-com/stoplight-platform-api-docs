@@ -2986,7 +2986,47 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Coupon'
+                  type: object
+                  properties:
+                    coupon:
+                      $ref: '#/components/schemas/Coupon'
+              examples:
+                example-1:
+                  value:
+                    - id: 0
+                      name: string
+                      code: string
+                      description: string
+                      amount: 0
+                      amount_in_cents: 0
+                      product_family_id: 0
+                      product_family_name: string
+                      start_date: string
+                      end_date: string
+                      percentage: 0
+                      recurring: true
+                      recurring_scheme: do_not_recur
+                      duration_period_count: 0
+                      duration_interval: 0
+                      duration_interval_unit: string
+                      duration_interval_span: string
+                      allow_negative_balance: true
+                      archived_at: string
+                      conversion_limit: string
+                      stackable: true
+                      compounding_strategy: compound
+                      use_site_exchange_rate: true
+                      created_at: string
+                      updated_at: string
+                      discount_type: amount
+                      exclude_mid_period_allocations: true
+                      'apply_on_cancel_at_end_of_period ': true
+                      coupon_restrictions:
+                        - id: string
+                          item_type: Component
+                          item_id: 0
+                          name: string
+                          handle: string
       operationId: get-coupons.json
       description: |-
         You can retrieve a list of coupons.
