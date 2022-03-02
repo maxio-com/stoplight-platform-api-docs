@@ -24681,6 +24681,7 @@ components:
           unit_name: string
           enabled: true
           currency: string
+          description: string
           allocated_quantity: 0
           component_id: 0
           component_handle: null
@@ -24764,6 +24765,10 @@ components:
         use_site_exchange_rate:
           type:
             - boolean
+            - 'null'
+        description:
+          type:
+            - string
             - 'null'
         subscription:
           type: object
