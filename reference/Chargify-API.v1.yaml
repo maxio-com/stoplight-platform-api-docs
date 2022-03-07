@@ -21487,6 +21487,140 @@ paths:
           in: query
           name: direction
           description: Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default.
+  '/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: prepayment_id
+        in: path
+        required: true
+    post:
+      summary: Refund Prepayment
+      tags:
+        - Subscription Invoice Account
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prepayment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                      refund:
+                        base:
+                          - must be an object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      refund:
+                        type: object
+                        properties:
+                          base:
+                            type: array
+                            items:
+                              type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    refund:
+                      errors:
+                        amount_in_cents:
+                          - Refund amount exceeds prepayment amount
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      refund:
+                        type: object
+                        properties:
+                          amount_in_cents:
+                            type: array
+                            items:
+                              type: string
+                          base:
+                            type: array
+                            items:
+                              type: string
+                          external:
+                            type: array
+                            items:
+                              type: string
+              examples:
+                Example Error:
+                  value:
+                    errors:
+                      refund:
+                        amount_in_cents:
+                          - Refund amount exceeds prepayment amount
+      operationId: post-subscriptions-subscription_id-prepayments-prepayment_id-refunds.json
+      description: |-
+        This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
+
+        The amount may be passed either as a decimal, with `amount`, or an integer in cents, with `amount_in_cents`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  refund:
+                    amount_in_cents: 100
+                    memo: my memo
+                    external: true
+              properties:
+                refund:
+                  type: object
+                  required:
+                    - amount_in_cents
+                    - amount
+                    - memo
+                  properties:
+                    amount_in_cents:
+                      type: number
+                      description: '`amount` is not required if you pass `amount_in_cents`.'
+                    amount:
+                      type:
+                        - string
+                        - number
+                      description: '`amount_in_cents` is not required if you pass `amount`.'
+                    memo:
+                      type: string
+                      minLength: 1
+                    external:
+                      type: boolean
+                      description: 'Specify the type of refund you wish to initiate. When the prepayment is external, the `external` flag is optional. But if the prepayment was made through a payment profile, the `external` flag is required.'
+              required:
+                - refund
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -23874,27 +24008,52 @@ components:
           items:
             $ref: '#/components/schemas/Metadata'
     Prepayment:
-      title: Prepayment
+      description: ''
       type: object
       properties:
-        id:
-          type: integer
-        subscription_id:
-          type: integer
-        amount_in_cents:
-          type: integer
-        remaining_amount_in_cents:
-          type: integer
-        external:
-          type: boolean
-        memo:
-          type: string
-        details:
-          type: string
-        payment_type:
-          type: string
-        created_at:
-          type: string
+        prepayment:
+          type: object
+          properties:
+            id:
+              type: number
+            subscription_id:
+              type: number
+            amount_in_cents:
+              type: number
+            remaining_amount_in_cents:
+              type: number
+            details: {}
+            external:
+              type: boolean
+            memo:
+              type: string
+              minLength: 1
+            payment_type: {}
+            created_at:
+              type: string
+              minLength: 1
+          required:
+            - id
+            - subscription_id
+            - amount_in_cents
+            - remaining_amount_in_cents
+            - external
+            - memo
+            - created_at
+      required:
+        - prepayment
+      x-examples:
+        example-1:
+          prepayment:
+            id: 353
+            subscription_id: 24
+            amount_in_cents: 1500
+            remaining_amount_in_cents: 1050
+            details: null
+            external: false
+            memo: sdf - Prepayment
+            payment_type: null
+            created_at: '2022-02-22T14:07:00-05:00'
     Product-Price-Point-Currency-Price:
       title: Product Price Point Currency Price
       type: object
