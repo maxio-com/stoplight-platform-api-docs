@@ -16818,6 +16818,7 @@ paths:
         #### Period Date Range
 
         A custom period date range can be defined for each line item with the `period_range_start` and `period_range_end` parameters. Dates must be sent in the `YYYY-MM-DD` format.
+        `period_range_end` must be greater or equal `period_range_start`.
 
         #### Taxes
 
