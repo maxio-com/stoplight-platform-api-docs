@@ -741,6 +741,41 @@ paths:
                           - eldest
                       default_payment_collection_method:
                         type: string
+                      organization_address:
+                        type: object
+                        properties:
+                          street:
+                            type:
+                              - string
+                              - 'null'
+                          line2:
+                            type:
+                              - string
+                              - 'null'
+                          city:
+                            type:
+                              - string
+                              - 'null'
+                          state:
+                            type:
+                              - string
+                              - 'null'
+                          zip:
+                            type:
+                              - string
+                              - 'null'
+                          country:
+                            type:
+                              - string
+                              - 'null'
+                          name:
+                            type:
+                              - string
+                              - 'null'
+                          phone:
+                            type:
+                              - string
+                              - 'null'
               examples:
                 Example:
                   value:
@@ -756,6 +791,15 @@ paths:
                       customer_hierarchy_enabled: true
                       whopays_enabled: true
                       whopays_default_payer: eldest
+                      organization_address:
+                        street: 123 General Goods Way
+                        line2: Apt. 10
+                        city: Boston
+                        state: MA
+                        zip: '02120'
+                        country: US
+                        name: General Goods
+                        phone: 555-555-1212
       operationId: get-site.json
       description: |-
         This endpoint allows you to fetch some site data.
