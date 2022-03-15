@@ -22333,6 +22333,17 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
+      examples:
+        - id: 0
+          name: string
+          scope:
+            csv: '0'
+            invoices: '0'
+            statements: '0'
+            portal: '0'
+          input_type: text
+          enum:
+            - string
       properties:
         id:
           type: number
@@ -22345,26 +22356,26 @@ components:
             csv:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from the csv export
             invoices:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from invoices
             statements:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from statements
             portal:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from the portal
         input_type:
           type: string
@@ -22376,7 +22387,7 @@ components:
           default: text
         enum:
           type: array
-          description: Only applicable when input_type is radio or dropdown
+          description: Only applicable when input_type is radio or dropdown. Empty Strings are going to be omitted.
           items:
             type: string
     Create-or-Update-Coupon:
