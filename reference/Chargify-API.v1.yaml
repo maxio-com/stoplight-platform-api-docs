@@ -22333,7 +22333,6 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
-      examples: []
       properties:
         id:
           type: number
@@ -22346,26 +22345,26 @@ components:
             csv:
               type: string
               enum:
-                - 0
-                - 1
+                - '0'
+                - '1'
               description: include (1) or exclude (0) metafields from the csv export
             invoices:
               type: string
               enum:
-                - 0
-                - 1
+                - '0'
+                - '1'
               description: include (1) or exclude (0) metafields from invoices
             statements:
               type: string
               enum:
-                - 0
-                - 1
+                - '0'
+                - '1'
               description: include (1) or exclude (0) metafields from statements
             portal:
               type: string
               enum:
-                - 0
-                - 1
+                - '0'
+                - '1'
               description: include (1) or exclude (0) metafields from the portal
         input_type:
           type: string
