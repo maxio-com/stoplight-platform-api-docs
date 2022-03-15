@@ -22333,17 +22333,7 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
-      examples:
-        - id: 0
-          name: string
-          scope:
-            csv: '0'
-            invoices: '0'
-            statements: '0'
-            portal: '0'
-          input_type: text
-          enum:
-            - string
+      examples: []
       properties:
         id:
           type: number
