@@ -22204,26 +22204,6 @@ components:
             subscription_id:
               type: integer
               description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.
-      examples:
-        - price_point:
-            id: 0
-            type: catalog
-            default: true
-            name: string
-            pricing_scheme: string
-            component_id: 0
-            handle: string
-            archived_at: null
-            created_at: string
-            updated_at: string
-            prices:
-              - id: 0
-                component_id: 0
-                starting_quantity: 0
-                ending_quantity: 0
-                unit_price: string
-            use_site_exchange_rate: true
-            subscription_id: 0
     Component:
       title: Component
       type: object
