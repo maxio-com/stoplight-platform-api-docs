@@ -3404,6 +3404,52 @@ paths:
                       price: 10
                     - currency: GBP
                       price: 9
+  '/coupons/{coupon_id}/codes/{subcode}.json':
+    parameters:
+      - schema:
+          type: integer
+        name: coupon_id
+        in: path
+        required: true
+        description: The Chargify id of the coupon to which the subcode belongs
+      - schema:
+          type: string
+        name: subcode
+        in: path
+        required: true
+    delete:
+      summary: Delete Coupon Subcode
+      tags:
+        - Coupons
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-coupons-coupon_id-codes-subcode-.json
+      description: |-
+        ## Example
+
+        Given a coupon with an ID of 567, and a coupon subcode of 20OFF, the URL to `DELETE` this coupon subcode would be:
+
+        ```
+        http://subdomain.chargify.com/coupons/567/codes/20OFF.<format>
+        ```
+
+        Note: If you are using any of the allowed special characters (“%”, “@”, “+”, “-”, “_”, and “.”), you must encode them for use in the URL.
+
+        | Special character | Encoding |
+        |-------------------|----------|
+        | %                 | %25      |
+        | @                 | %40      |
+        | +                 | %2B      |
+        | –                 | %2D      |
+        | _                 | %5F      |
+        | .                 | %2E      |
+
+        ## Percent Encoding Example
+
+        Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
   '/coupons/{coupon_id}/codes.json':
     parameters:
       - schema:
@@ -3613,52 +3659,6 @@ paths:
                     - AAAA
                     - BBBB
                     - CCCC
-  '/coupons/{coupon_id}/codes/{subcode}.json':
-    parameters:
-      - schema:
-          type: integer
-        name: coupon_id
-        in: path
-        required: true
-        description: The Chargify id of the coupon to which the subcode belongs
-      - schema:
-          type: string
-        name: subcode
-        in: path
-        required: true
-    delete:
-      summary: Delete Coupon Subcode
-      tags:
-        - Coupons
-      responses:
-        '200':
-          description: OK
-        '404':
-          description: Not Found
-      operationId: delete-coupons-coupon_id-codes-subcode-.json
-      description: |-
-        ## Example
-
-        Given a coupon with an ID of 567, and a coupon subcode of 20OFF, the URL to `DELETE` this coupon subcode would be:
-
-        ```
-        http://subdomain.chargify.com/coupons/567/codes/20OFF.<format>
-        ```
-
-        Note: If you are using any of the allowed special characters (“%”, “@”, “+”, “-”, “_”, and “.”), you must encode them for use in the URL.
-
-        | Special character | Encoding |
-        |-------------------|----------|
-        | %                 | %25      |
-        | @                 | %40      |
-        | +                 | %2B      |
-        | –                 | %2D      |
-        | _                 | %5F      |
-        | .                 | %2E      |
-
-        ## Percent Encoding Example
-
-        Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
   /events.json:
     get:
       summary: List Events
@@ -3766,6 +3766,21 @@ paths:
                         subscription_id: 14950975
                         created_at: '2016-10-27T16:40:40-04:00'
                         event_specific_data: null
+                    - event:
+                        id: 4481
+                        key: custom_field_value_change
+                        message: Custom field (Extra support included) changed for Subscription 117 from 'Yes' to 'No'.
+                        subscription_id: 117
+                        customer_id: null
+                        created_at: '2022-03-24T07:55:06-04:00'
+                        event_specific_data:
+                          event_type: updated
+                          metafield_name: Extra support included
+                          metafield_id: 2
+                          old_value: 'Yes'
+                          new_value: 'No'
+                          resource_type: Subscription
+                          resource_id: 117
             application/xml:
               schema:
                 type: object
@@ -3774,7 +3789,69 @@ paths:
                 type: array
                 items: {}
       operationId: get-events.json
-      description: "## Events Intro\n\nChargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.\n\nWithin the Chargify UI, \"Events\" are referred to as \"Site Activity\".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).\n\n## List Events for a Site\n\nThis method will retrieve a list of events for a site. Use query string filters to narrow down results. You may use the `key` filter as part of your query string to narrow down results.\n\n### Legacy Filters\n\nThe following keys are no longer supported.\n\n+ `payment_failure_recreated`\n+ `payment_success_recreated`\n+ `renewal_failure_recreated`\n+ `renewal_success_recreated`\n+ `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)\n+ `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)\n\n## Event Specific Data\n\nEvent Specific Data\n\nEach event type has its own `event_specific_data` specified.\n\nHere’s an example event for the `subscription_product_change` event:\n\n```json\n{\n    \"event\": {\n        \"id\": 351,\n        \"key\": \"subscription_product_change\",\n        \"message\": \"Product changed on Marky Mark's subscription from 'Basic' to 'Pro'\",\n        \"subscription_id\": 205,\n        \"event_specific_data\": {\n            \"new_product_id\": 3,\n            \"previous_product_id\": 2\n        },\n        \"created_at\": \"2012-01-30T10:43:31-05:00\"\n    }\n}\n```\n\nHere’s an example event for the `subscription_state_change` event:\n\n```json\n {\n     \"event\": {\n         \"id\": 353,\n         \"key\": \"subscription_state_change\",\n         \"message\": \"State changed on Marky Mark's subscription to Pro from trialing to active\",\n         \"subscription_id\": 205,\n         \"event_specific_data\": {\n             \"new_subscription_state\": \"active\",\n             \"previous_subscription_state\": \"trialing\"\n         },\n         \"created_at\": \"2012-01-30T10:43:33-05:00\"\n     }\n }\n```\n\nHere's an example event for the `custom_field_value_change` event:\n\n```json\n\t{\n\t\t\"event\": {\n\t\t\t\"id\": 4481,\n\t\t\t\"key\": \"custom_field_value_change\",\n\t\t\t\"message\": \"Custom field (Extra support?) changed for Subscription 117 from 'Yes' to 'No'.\",\n\t\t\t\"subscription_id\": 117,\n\t\t\t\"customer_id\": null,\n\t\t\t\"created_at\": \"2022-03-24T07:55:06-04:00\",\n\t\t\t\"event_specific_data\": {\n\t\t\t\t\"event_type\": \"updated\",\n\t\t\t\t\"metafield_name\": \"Extra support?\",\n\t\t\t\t\"metafield_id\": 2,\n\t\t\t\t\"old_value\": \"Yes\",\n\t\t\t\t\"new_value\": \"No\",\n\t\t\t\t\"resource_type\": \"Subscription\",\n\t\t\t\t\"resource_id\": 117\n\t\t\t}\n\t\t}\n```"
+      description: |-
+        ## Events Intro
+
+        Chargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
+
+        Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).
+
+        ## List Events for a Site
+
+        This method will retrieve a list of events for a site. Use query string filters to narrow down results. You may use the `key` filter as part of your query string to narrow down results.
+
+        ### Legacy Filters
+
+        The following keys are no longer supported.
+
+        + `payment_failure_recreated`
+        + `payment_success_recreated`
+        + `renewal_failure_recreated`
+        + `renewal_success_recreated`
+        + `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)
+        + `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)
+
+        ## Event Specific Data
+
+        Event Specific Data
+
+        Each event type has its own `event_specific_data` specified.
+
+        Here’s an example event for the `subscription_product_change` event:
+
+        ```
+        {
+            "event": {
+                "id": 351,
+                "key": "subscription_product_change",
+                "message": "Product changed on Marky Mark's subscription from 'Basic' to 'Pro'",
+                "subscription_id": 205,
+                "event_specific_data": {
+                    "new_product_id": 3,
+                    "previous_product_id": 2
+                },
+                "created_at": "2012-01-30T10:43:31-05:00"
+            }
+        }
+        ```
+
+        Here’s an example event for the `subscription_state_change` event:
+
+        ```
+         {
+             "event": {
+                 "id": 353,
+                 "key": "subscription_state_change",
+                 "message": "State changed on Marky Mark's subscription to Pro from trialing to active",
+                 "subscription_id": 205,
+                 "event_specific_data": {
+                     "new_subscription_state": "active",
+                     "previous_subscription_state": "trialing"
+                 },
+                 "created_at": "2012-01-30T10:43:33-05:00"
+             }
+         }
+        ```
       parameters:
         - schema:
             type: integer
