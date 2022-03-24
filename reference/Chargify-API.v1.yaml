@@ -3774,69 +3774,7 @@ paths:
                 type: array
                 items: {}
       operationId: get-events.json
-      description: |-
-        ## Events Intro
-
-        Chargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
-
-        Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).
-
-        ## List Events for a Site
-
-        This method will retrieve a list of events for a site. Use query string filters to narrow down results. You may use the `key` filter as part of your query string to narrow down results.
-
-        ### Legacy Filters
-
-        The following keys are no longer supported.
-
-        + `payment_failure_recreated`
-        + `payment_success_recreated`
-        + `renewal_failure_recreated`
-        + `renewal_success_recreated`
-        + `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)
-        + `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)
-
-        ## Event Specific Data
-
-        Event Specific Data
-
-        Each event type has its own `event_specific_data` specified.
-
-        Here’s an example event for the `subscription_product_change` event:
-
-        ```
-        {
-            "event": {
-                "id": 351,
-                "key": "subscription_product_change",
-                "message": "Product changed on Marky Mark's subscription from 'Basic' to 'Pro'",
-                "subscription_id": 205,
-                "event_specific_data": {
-                    "new_product_id": 3,
-                    "previous_product_id": 2
-                },
-                "created_at": "2012-01-30T10:43:31-05:00"
-            }
-        }
-        ```
-
-        Here’s an example event for the `subscription_state_change` event:
-
-        ```
-         {
-             "event": {
-                 "id": 353,
-                 "key": "subscription_state_change",
-                 "message": "State changed on Marky Mark's subscription to Pro from trialing to active",
-                 "subscription_id": 205,
-                 "event_specific_data": {
-                     "new_subscription_state": "active",
-                     "previous_subscription_state": "trialing"
-                 },
-                 "created_at": "2012-01-30T10:43:33-05:00"
-             }
-         }
-        ```
+      description: "## Events Intro\n\nChargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.\n\nWithin the Chargify UI, \"Events\" are referred to as \"Site Activity\".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).\n\n## List Events for a Site\n\nThis method will retrieve a list of events for a site. Use query string filters to narrow down results. You may use the `key` filter as part of your query string to narrow down results.\n\n### Legacy Filters\n\nThe following keys are no longer supported.\n\n+ `payment_failure_recreated`\n+ `payment_success_recreated`\n+ `renewal_failure_recreated`\n+ `renewal_success_recreated`\n+ `zferral_revenue_post_failure` - (Specific to the deprecated Zferral integration)\n+ `zferral_revenue_post_success` - (Specific to the deprecated Zferral integration)\n\n## Event Specific Data\n\nEvent Specific Data\n\nEach event type has its own `event_specific_data` specified.\n\nHere’s an example event for the `subscription_product_change` event:\n\n```json\n{\n    \"event\": {\n        \"id\": 351,\n        \"key\": \"subscription_product_change\",\n        \"message\": \"Product changed on Marky Mark's subscription from 'Basic' to 'Pro'\",\n        \"subscription_id\": 205,\n        \"event_specific_data\": {\n            \"new_product_id\": 3,\n            \"previous_product_id\": 2\n        },\n        \"created_at\": \"2012-01-30T10:43:31-05:00\"\n    }\n}\n```\n\nHere’s an example event for the `subscription_state_change` event:\n\n```json\n {\n     \"event\": {\n         \"id\": 353,\n         \"key\": \"subscription_state_change\",\n         \"message\": \"State changed on Marky Mark's subscription to Pro from trialing to active\",\n         \"subscription_id\": 205,\n         \"event_specific_data\": {\n             \"new_subscription_state\": \"active\",\n             \"previous_subscription_state\": \"trialing\"\n         },\n         \"created_at\": \"2012-01-30T10:43:33-05:00\"\n     }\n }\n```\n\nHere's an example event for the `custom_field_value_change` event:\n\n```json\n\t{\n\t\t\"event\": {\n\t\t\t\"id\": 4481,\n\t\t\t\"key\": \"custom_field_value_change\",\n\t\t\t\"message\": \"Custom field (Extra support?) changed for Subscription 117 from 'Yes' to 'No'.\",\n\t\t\t\"subscription_id\": 117,\n\t\t\t\"customer_id\": null,\n\t\t\t\"created_at\": \"2022-03-24T07:55:06-04:00\",\n\t\t\t\"event_specific_data\": {\n\t\t\t\t\"event_type\": \"updated\",\n\t\t\t\t\"metafield_name\": \"Extra support?\",\n\t\t\t\t\"metafield_id\": 2,\n\t\t\t\t\"old_value\": \"Yes\",\n\t\t\t\t\"new_value\": \"No\",\n\t\t\t\t\"resource_type\": \"Subscription\",\n\t\t\t\t\"resource_id\": 117\n\t\t\t}\n\t\t}\n```"
       parameters:
         - schema:
             type: integer
@@ -3900,6 +3838,8 @@ paths:
               - upgrade_downgrade_success
               - upgrade_downgrade_failure
               - upcoming_renewal_notice
+              - custom_field_value_change
+            example: filter=custom_field_value_change
           in: query
           name: filter
           description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
