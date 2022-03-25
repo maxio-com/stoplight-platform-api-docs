@@ -3766,6 +3766,21 @@ paths:
                         subscription_id: 14950975
                         created_at: '2016-10-27T16:40:40-04:00'
                         event_specific_data: null
+                    - event:
+                        id: 4481
+                        key: custom_field_value_change
+                        message: Custom field (Extra support included) changed for Subscription 117 from 'Yes' to 'No'.
+                        subscription_id: 117
+                        customer_id: null
+                        created_at: '2022-03-24T07:55:06-04:00'
+                        event_specific_data:
+                          event_type: updated
+                          metafield_name: Extra support included
+                          metafield_id: 2
+                          old_value: 'Yes'
+                          new_value: 'No'
+                          resource_type: Subscription
+                          resource_id: 117
             application/xml:
               schema:
                 type: object
@@ -3900,6 +3915,8 @@ paths:
               - upgrade_downgrade_success
               - upgrade_downgrade_failure
               - upcoming_renewal_notice
+              - custom_field_value_change
+            example: filter=custom_field_value_change
           in: query
           name: filter
           description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
