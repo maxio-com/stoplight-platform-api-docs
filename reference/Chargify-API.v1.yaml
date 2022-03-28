@@ -16919,9 +16919,17 @@ paths:
                           title:
                             type: string
                           quantity:
-                            type: integer
+                            type:
+                              - integer
+                              - number
+                            description:
+                              the maximum of decimal places is 2  
+                            format: float
+                            example: 0
                           unit_price:
                             type: string
+                            description:
+                              the maximum of decimal places is 8  
                           taxable:
                             type: boolean
                             description: |-
