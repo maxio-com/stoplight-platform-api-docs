@@ -16921,10 +16921,9 @@ paths:
                           quantity:
                             type:
                               - integer
-                              - number
+                              - string
                             description:
                               the maximum of decimal places is 2  
-                            format: float
                             example: 0
                           unit_price:
                             type: string
