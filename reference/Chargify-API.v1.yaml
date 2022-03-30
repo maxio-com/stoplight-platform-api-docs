@@ -25309,6 +25309,7 @@ components:
           allocated_quantity: 0
           component_id: 0
           component_handle: null
+          allow_fractional_quantities: false
           subscription_id: 0
           recurring: true
           archived_at: null
@@ -25394,6 +25395,8 @@ components:
           type:
             - string
             - 'null'
+        allow_fractional_quantities:
+          type: boolean
         subscription:
           type: object
           description: 'An optional object, will be returned if provided `include=subscription` query param.'
