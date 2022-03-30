@@ -16841,6 +16841,8 @@ paths:
                       refunds: []
                       custom_fields: []
                       public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
+        '401':
+          description: Unauthorized
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -16852,13 +16854,13 @@ paths:
                     type: object
       operationId: post-subscriptions-subscription_id-invoices.json
       description: |-
-        This endpoint will allow you to create an ad-hoc, remittance invoice.
+        This endpoint will allow you to create an ad hoc, remittance invoice.
 
         ### Basic Behavior
 
         You can create a basic invoice by sending an array of line items to this endpoint. Each line item, at a minimum, must include a title, a quantity and a unit price. Example:
 
-        ```
+        ```json
         {
           "invoice": {
             "line_items": [
@@ -16872,7 +16874,77 @@ paths:
         }
         ```
 
+        ### Catalog items
+        Instead of creating custom products like in above example, You can pass existing items like products, components.
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 2,
+              }
+            ]
+          }
+        }
+        ```
+         
+
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
+
+        ### Catalog items options
+        When defining line item, You can choose one of 3 ways at once:
+        #### Custom item
+        Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
+        #### Product id
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. If product handle is used, following fields cannot be used: `title`, `component_id`.
+        #### Component id
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If product handle is used, following fields cannot be used: `title`, `product_id`.
+
+        ### Coupons
+        When creating ad hoc invoice discounts can be applied in following ways:
+        * using custom coupon 
+        (NOTE: this is future preview only, we will go with sencond option for first milestone)
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 1
+              }
+            ],
+            "discounts": [ {
+                "title": "Custom coupon",
+                "discount_type": "percentage",
+                "percentage": "50.0"
+            }]
+          }
+        }
+        ```
+
+        * using existing coupon from subscription site scope.
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 1,
+
+              }
+            ],
+            "discounts": [
+              {
+               "code": "FREECOUPON"
+               }
+            ]
+          }
+        }
+        ```
+
 
         ### Line Item Options
 
@@ -16884,6 +16956,9 @@ paths:
         #### Taxes
 
         The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent.
+
+        #### Price Point
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used.
 
         ### Invoice Options
 
@@ -16936,6 +17011,21 @@ paths:
                           period_range_end:
                             type: string
                             description: YYYY-MM-DD
+                          product_id:
+                            type: string
+                            description: Product handle or product id.
+                          component_id:
+                            type: string
+                            description: Component handle or component id.
+                          price_point_id:
+                            type: string
+                            description: Price point handle or price point id.
+                          memo:
+                            type: string
+                            description: |
+                              A custom memo about item.
+                        required:
+                          - quantity
                     issue_date:
                       type: string
                     net_terms:
@@ -17012,6 +17102,13 @@ paths:
                           type: string
                         country:
                           type: string
+                    discounts:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
@@ -17064,6 +17161,58 @@ paths:
                       state: string
                       zip: string
                       country: string
+              Catalog Product Example:
+                value:
+                  invoice:
+                    line_items:
+                      - title: string
+                        quantity: 0
+                        unit_price: string
+                        taxable: true
+                        tax_code: string
+                        period_range_start: string
+                        period_range_end: string
+                        product_handle: string
+                        component_handle: string
+                        price_point_handle: string
+                        memo: string
+                        custom_item: true
+                    issue_date: string
+                    net_terms: 0
+                    payment_instructions: string
+                    memo: string
+                    seller_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    billing_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    shipping_address:
+                      first_name: string
+                      last_name: string
+                      phone: string
+                      address: string
+                      address_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    discounts:
+                      - code: string
         description: ''
   '/subscriptions/{subscription_id}/prepayments.json':
     parameters:
@@ -24091,6 +24240,11 @@ components:
                   - 'null'
                   - integer
                 description: The price point ID of the line item's product
+              memo:
+                type: string
+                description: The memo printed by line item for item description. This message is in control of the merchant.
+              custom_item:
+                type: boolean
         discounts:
           type: array
           items:
