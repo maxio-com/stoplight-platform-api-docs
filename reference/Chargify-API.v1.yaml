@@ -22927,7 +22927,6 @@ components:
     Create-Subscription:
       title: Create Subscription
       type: object
-      description: ''
       properties:
         product_handle:
           type: string
@@ -23335,7 +23334,6 @@ components:
           type: string
         activated_at:
           type: string
-      examples: []
     Credit-Note:
       title: Credit Note
       type: object
