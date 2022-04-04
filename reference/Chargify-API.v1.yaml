@@ -3916,6 +3916,8 @@ paths:
               - upgrade_downgrade_failure
               - upcoming_renewal_notice
               - custom_field_value_change
+              - subscription_prepayment_account_balance_changed
+              - subscription_service_credit_account_balance_changed
             example: filter=custom_field_value_change
           in: query
           name: filter
@@ -4062,6 +4064,8 @@ paths:
               - upgrade_downgrade_success
               - upgrade_downgrade_failure
               - upcoming_renewal_notice
+              - subscription_prepayment_account_balance_changed
+              - subscription_service_credit_account_balance_changed
           in: query
           name: filter
           description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
@@ -4148,6 +4152,8 @@ paths:
               - upgrade_downgrade_success
               - upgrade_downgrade_failure
               - upcoming_renewal_notice
+              - subscription_prepayment_account_balance_changed
+              - subscription_service_credit_account_balance_changed
           in: query
           name: filter
           description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
@@ -22681,6 +22687,8 @@ components:
               - upgrade_downgrade_failure
               - upgrade_downgrade_success
               - pending_cancellation_change
+              - subscription_prepayment_account_balance_changed
+              - subscription_service_credit_account_balance_changed
     Create-or-Update-Flat-Amount-Coupon:
       title: Create or Update Flat Amount Coupon
       type: object
