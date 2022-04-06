@@ -16751,6 +16751,8 @@ paths:
                 properties:
                   invoice:
                     $ref: '#/components/schemas/Invoice'
+                  '':
+                    type: string
               examples:
                 Example:
                   value:
@@ -16898,14 +16900,13 @@ paths:
         #### Custom item
         Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
         #### Product id
-        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. If product handle is used, following fields cannot be used: `title`, `component_id`.
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
         #### Component id
-        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If product handle is used, following fields cannot be used: `title`, `product_id`.
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`.
 
         ### Coupons
         When creating ad hoc invoice discounts can be applied in following ways:
         * using custom coupon 
-        (NOTE: this is future preview only, we will go with sencond option for first milestone)
 
         ```json
         {
@@ -16917,9 +16918,8 @@ paths:
               }
             ],
             "discounts": [ {
-                "title": "Custom coupon",
-                "discount_type": "percentage",
-                "percentage": "50.0"
+                "code": "CUSTOMCOUPON",
+                "percentage": 50.0
             }]
           }
         }
@@ -16938,13 +16938,26 @@ paths:
             ],
             "discounts": [
               {
-               "code": "FREECOUPON"
+               "coupon_id": "FREECOUPON"
                }
             ]
           }
         }
         ```
+        ### Coupon options
+        * custom coupon
+        #### Code
+        Coupon `CODE` will be displayed on invoice discount section
+        #### Percentage 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount_in_cents`. 
+        #### Amount in cents
+        Coupon `amount_in_cents` takes integer value. It cannot be used with `percentage`. 
+        #### Description
+        Optional `descriptipn` will be displayed with coupon `CODE`
 
+        * existing coupons from catalog
+        #### Coupon id
+        Coupon handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `coupon_id`. If `coupon_id` is used, following fields cannot be used: `code`, `description`, `discount_type`, `percentage`.
 
         ### Line Item Options
 
@@ -17107,7 +17120,19 @@ paths:
                       items:
                         type: object
                         properties:
+                          coupon_id:
+                            type: string
                           code:
+                            type: string
+                          percentage:
+                            type: number
+                            minimum: 0
+                            maximum: 100
+                            example: 50
+                            format: float
+                          amount_in_cents:
+                            type: integer
+                          description:
                             type: string
             examples:
               Minimal Invoice (Relies on site defaults):
