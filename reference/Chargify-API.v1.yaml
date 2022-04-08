@@ -24736,6 +24736,10 @@ components:
           type: string
         tax_included:
           type: boolean
+        subscription_id:
+          type:
+            - 'null'
+            - integer
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
