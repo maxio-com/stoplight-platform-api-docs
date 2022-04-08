@@ -22074,7 +22074,9 @@ paths:
                 type: object
                 properties:
                   price_points:
-                    $ref: '#/components/schemas/Product-Price-Point'
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product-Price-Point'
               examples:
                 example:
                   value:
