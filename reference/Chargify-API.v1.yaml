@@ -24732,6 +24732,10 @@ components:
         use_site_exchange_rate:
           type: boolean
           description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
+        type:
+          type: string
+        tax_included:
+          type: boolean
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
