@@ -22119,7 +22119,7 @@ paths:
                       - 'date_field must be one of: created_at, updated_at'
                       - 'start_date supplied value is invalid, expected ISO 8601 format'
       operationId: get-products_price_points.json
-      description: This method allows to retrieve a list of Products Price Points belonging to a Site.
+      description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
         - schema:
             type: string
