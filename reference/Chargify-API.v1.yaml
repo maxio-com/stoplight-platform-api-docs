@@ -21995,7 +21995,7 @@ paths:
             type: string
           in: query
           name: 'filter[end_datetime]'
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
         - schema:
             type: string
             example: include=currency_prices
@@ -22012,7 +22012,7 @@ paths:
         - schema:
             type: number
             minimum: 1
-            maximum: 20
+            maximum: 200
             example: per_page=5
           in: query
           name: per_page
@@ -22026,7 +22026,7 @@ paths:
             type: string
           in: query
           name: 'filter[start_datetime]'
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
         - schema:
             type: string
             enum:
@@ -22044,7 +22044,7 @@ paths:
               - asc
               - desc
             example: direction=desc
-            default: direction=a
+            default: direction=asc
           in: query
           name: direction
           description: Controls the order in which results are returned.
@@ -22064,6 +22064,157 @@ paths:
           in: query
           name: 'filter[archived_at]'
           description: Allows fetching price points only if archived_at is present or not.
+  /products_price_points.json:
+    get:
+      summary: List Products Price Points
+      tags:
+        - 'Product: Price Points'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  price_points:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product-Price-Point'
+              examples:
+                example:
+                  value:
+                    price_points:
+                      id: 0
+                      name: string
+                      handle: string
+                      price_in_cents: 0
+                      interval: 0
+                      interval_unit: string
+                      trial_price_in_cents: 0
+                      trial_interval: 0
+                      trial_interval_unit: string
+                      trial_type: string
+                      introductory_offer: true
+                      initial_charge_in_cents: 0
+                      initial_charge_after_trial: true
+                      expiration_interval: 0
+                      expiration_interval_unit: string
+                      product_id: 0
+                      archived_at: string
+                      created_at: string
+                      updated_at: string
+                      use_site_exchange_rate: true
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                example:
+                  value:
+                    errors:
+                      - 'date_field must be one of: created_at, updated_at'
+                      - 'start_date supplied value is invalid, expected ISO 8601 format'
+      operationId: get-products_price_points.json
+      description: This method allows retrieval of a list of Products Price Points belonging to a Site.
+      parameters:
+        - schema:
+            type: string
+            default: direction=asc
+            example: direction=desc
+            enum:
+              - asc
+              - desc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
+        - schema:
+            type: string
+            enum:
+              - 'null'
+              - not_null
+            default: 'filter[archived_at]=null'
+            example: 'filter[archived_at]=not_null'
+          in: query
+          name: 'filter[archived_at]'
+          description: Allows fetching price points only if archived_at is present or not.
+        - schema:
+            type: string
+            enum:
+              - created_at
+              - updated_at
+            example: 'filter[date_field]=created_at'
+          in: query
+          description: The type of filter you would like to apply to your search.
+          name: 'filter[date_field]'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_date]'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[end_datetime]'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+        - schema:
+            type: string
+            example: 'filter[ids]=1,2,3'
+          in: query
+          name: 'filter[ids]'
+          description: Allows fetching price points with matching id based on provided values.
+        - schema:
+            type: string
+          in: query
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          name: 'filter[start_date]'
+        - schema:
+            type: string
+          in: query
+          name: 'filter[start_datetime]'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: string
+            enum:
+              - catalog
+              - custom
+              - default
+            default: 'filter[type]=catalog,default'
+            example: 'filter[type]=custom,catalog'
+          in: query
+          name: 'filter[type]'
+          description: Allows fetching price points with matching type.
+        - schema:
+            type: string
+            enum:
+              - currency_prices
+            example: include=currency_prices
+          in: query
+          name: include
+          description: Allows including additional data in the response.
+        - schema:
+            type: number
+            minLength: 1
+            example: page=2
+            minimum: 1
+          in: query
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          name: page
+        - schema:
+            type: number
+            minimum: 1
+            maximum: 200
+            example: per_page=5
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -24585,6 +24736,19 @@ components:
         use_site_exchange_rate:
           type: boolean
           description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
+        type:
+          type: string
+          description: |-
+            We expose the following types:
+            1. **default**: a price point that is marked as a default price for a certain product. 
+            2. **custom**: a custom price point.
+            3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one.
+        tax_included:
+          type: boolean
+        subscription_id:
+          type:
+            - 'null'
+            - integer
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
