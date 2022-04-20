@@ -16925,9 +16925,13 @@ paths:
                           title:
                             type: string
                           quantity:
-                            type: integer
+                            type:
+                              - integer
+                              - string
+                            description: decimal number up to 2 decimal places
                           unit_price:
                             type: string
+                            description: decimal number up to 8 decimal places
                           taxable:
                             type: boolean
                             description: |-
