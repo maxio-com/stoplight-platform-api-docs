@@ -16925,9 +16925,13 @@ paths:
                           title:
                             type: string
                           quantity:
-                            type: integer
+                            type:
+                              - integer
+                              - string
+                            description: The quantity can contain up to 2 decimal places. i.e. 1.00 or 1.12
                           unit_price:
                             type: string
+                            description: The unit_price can contain up to 8 decimal places. i.e. "1.00" or "0.0012" or "0.00000065"
                           taxable:
                             type: boolean
                             description: |-
