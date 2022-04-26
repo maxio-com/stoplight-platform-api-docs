@@ -25627,6 +25627,10 @@ components:
           type: boolean
         tax_exempt_reason:
           type: string
+        parent_id:
+          type:
+            - 'null'
+            - integer
     Update-Metafield:
       title: Update Metafield
       type: object
