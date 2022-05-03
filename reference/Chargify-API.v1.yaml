@@ -9952,6 +9952,113 @@ paths:
                   payment:
                     amount: 10
         description: ''
+  '/invoices/payments.json':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+        description: ' The unique identifier for the invoice, this does not refer to the public facing invoice number'
+    post:
+      summary: Create Payment for Multiple Invoices
+      tags:
+        - Invoices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+      operationId: post-invoices-uid-payments.json
+      description: |-
+        This API call should be used when you want to record an external payment against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+
+        ## Create a Payment from the Subscription's Prepayment Account
+
+        In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
+
+        ```
+        {
+          "type": "prepayment",
+          "payment": {
+            "amount": 10.00
+          }
+        }
+        ```
+
+        Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
+
+        ## Create a Payment from the Subscription's Service Credit Account
+
+        In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
+
+
+        ```
+        {
+          "type": "service_credit",
+          "payment": {
+            "amount": 10.00
+          }
+        }
+        ```
+
+        Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment:
+                  type: object
+                  properties:
+                    amount:
+                      type:
+                        - string
+                        - number
+                      description: A string of the dollar amount to be refunded (eg. "10.50" => $10.50)
+                    memo:
+                      type: string
+                      description: A description to be attached to the payment.
+                    method:
+                      type: string
+                      description: The type of payment method used.
+                      enum:
+                        - credit_card
+                        - check
+                        - cash
+                        - money_order
+                        - ach
+                        - other
+                      default: other
+                    details:
+                      type: string
+                      description: |
+                        Additional information related to the payment method (eg. Check #)
+                type:
+                  type: string
+                  description: The type of payment to be applied to an Invoice.
+                  default: external
+                  enum:
+                    - external
+                    - prepayment
+                    - service_credit
+            examples:
+              Example 1:
+                value:
+                  payment:
+                    amount: 124.33
+                    memo: for John Smith
+                    payment_method_name: check
+                    payment_method_details: '#0102'
+              Example 2:
+                value:
+                  type: prepayment
+                  payment:
+                    amount: 10
+        description: ''
   /credit_notes.json:
     get:
       summary: List Credit Notes
