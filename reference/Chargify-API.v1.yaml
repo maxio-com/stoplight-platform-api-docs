@@ -9952,14 +9952,7 @@ paths:
                   payment:
                     amount: 10
         description: ''
-  '/invoices/payments.json':
-    parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: ' The unique identifier for the invoice, this does not refer to the public facing invoice number'
+  /invoices/payments.json:
     post:
       summary: Create Payment for Multiple Invoices
       tags:
@@ -9970,41 +9963,108 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
-      operationId: post-invoices-uid-payments.json
+                type: object
+                properties:
+                  payment:
+                    type: object
+                    properties:
+                      transaction_id:
+                        type: number
+                        description: The numeric ID of the transaction.
+                      total_amount:
+                        type: string
+                        description: Dollar amount of the sum of the paid invoices.
+                      currency_code:
+                        type: string
+                        description: The ISO 4217 currency code (3 character string) representing the currency of invoice transaction.
+                      applications:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            invoice_uid:
+                              type: string
+                              description: |
+                                Unique identifier for the paid invoice. It has the prefix "inv_" followed by alphanumeric characters.
+                            application_uid:
+                              type: string
+                              description: |
+                                Unique identifier for the payment. It has the prefix "pmt_" followed by alphanumeric characters.
+                            applied_amount:
+                              type: string
+                              description: Dollar amount of the paid invoice.
+              examples:
+                Example:
+                  value:
+                    payment:
+                      transaction_id: 1
+                      total_amount: '100.00'
+                      currency_code: USD
+                      applications:
+                        - invoice_uid: inv_1
+                          application_uid: pmt_1
+                          applied_amount: '50.00'
+                        - invoice_uid: inv_2
+                          application_uid: pmt_2
+                          applied_amount: '50.00'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - 'Total amount must be greater than 0'
+                      - 'Total amount must be higher or equal to invoices payment amount sum'
+                      - 'Invoice does not exist'
+                      - 'Payment method must valid'
+                      - 'Invoices must be in the same currency'
+                      - 'A required parameter is missing'
+                      - 'Invoices belong to different subscriptions. Only invoices from same subscriptions are allowed when total amount exceeds invoices due amount.'
+                      - 'Individual invoices may not be overpaid. To create a prepayment, add overage to the total amount.'
+                      - 'Paying consolidated invoices is forbidden'
+                      - 'Invoice payment amounts must be greater than 0'
+                      - 'Invoice must have an open balance'
+                      - 'Effective date is missing'
+                      - 'Effective date is invalid or malformed'
+                      - 'Effective date must occur in the past'
+                      - 'Multiple applications associated to a single invoice, please aggregate and send as a single application per invoice.'
+      operationId: post-invoices-payments.json
       description: |-
-        This API call should be used when you want to record an external payment against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+        This API call should be used when you want to record an external payment against multiple invoices.
 
-        ## Create a Payment from the Subscription's Prepayment Account
-
-        In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
+         In order apply a payment to multiple invoices, at minimum, specify the `amount` and `applications` (i.e., `invoice_uid` and `amount`) details.
 
         ```
         {
-          "type": "prepayment",
           "payment": {
-            "amount": 10.00
+            "memo": "to pay the bills",
+            "details": "check number 8675309",
+            "method": "check",
+            "amount": "250.00",
+            "applications": [
+              {
+                "invoice_uid": "uid_1",
+                "amount": "100.00"
+              },
+              {
+                "invoice_uid": "uid_2",
+                "amount": "150.00"
+              }
+            ]
           }
         }
         ```
 
-        Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
-
-        ## Create a Payment from the Subscription's Service Credit Account
-
-        In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
-
-
-        ```
-        {
-          "type": "service_credit",
-          "payment": {
-            "amount": 10.00
-          }
-        }
-        ```
-
-        Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+        Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
       requestBody:
         content:
           application/json:
@@ -10013,15 +10073,17 @@ paths:
               properties:
                 payment:
                   type: object
+                  required:
+                    - amount
+                    - applications
                   properties:
-                    amount:
-                      type:
-                        - string
-                        - number
-                      description: A string of the dollar amount to be refunded (eg. "10.50" => $10.50)
                     memo:
                       type: string
                       description: A description to be attached to the payment.
+                    details:
+                      type: string
+                      description: |
+                        Additional information related to the payment method (eg. Check #).
                     method:
                       type: string
                       description: The type of payment method used.
@@ -10033,32 +10095,44 @@ paths:
                         - ach
                         - other
                       default: other
-                    details:
+                    amount:
+                      type:
+                        - string
+                        - number
+                      description: Dollar amount of the sum of the invoices payment (eg. "10.50" => $10.50).
+                    received_on:
                       type: string
-                      description: |
-                        Additional information related to the payment method (eg. Check #)
-                type:
-                  type: string
-                  description: The type of payment to be applied to an Invoice.
-                  default: external
-                  enum:
-                    - external
-                    - prepayment
-                    - service_credit
+                      description: Date reflecting when the payment was received from a customer. Must be in the past.
+                    applications:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                          - invoice_uid
+                          - amount
+                        properties:
+                          invoice_uid:
+                            type: string
+                            description: |
+                              Unique identifier for the invoice. It has the prefix "inv_" followed by alphanumeric characters.
+                          amount:
+                            type: string
+                            description: Dollar amount of the invoice payment (eg. "10.50" => $10.50).
             examples:
-              Example 1:
+              Example:
                 value:
                   payment:
-                    amount: 124.33
-                    memo: for John Smith
-                    payment_method_name: check
-                    payment_method_details: '#0102'
-              Example 2:
-                value:
-                  type: prepayment
-                  payment:
-                    amount: 10
-        description: ''
+                    memo: to pay the bills
+                    details: check number 8675309
+                    method: check
+                    amount: '100.00'
+                    applications:
+                      - invoice_uid: inv_1
+                        amount: '50.00'
+                      - invoice_uid: inv_2
+                        amount: '50.00'
+      parameters: []
+    parameters: []
   /credit_notes.json:
     get:
       summary: List Credit Notes
