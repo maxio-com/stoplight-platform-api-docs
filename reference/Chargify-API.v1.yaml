@@ -16751,8 +16751,6 @@ paths:
                 properties:
                   invoice:
                     $ref: '#/components/schemas/Invoice'
-                  '':
-                    type: string
               examples:
                 Example:
                   value:
@@ -17159,54 +17157,12 @@ paths:
                 value:
                   invoice:
                     line_items:
-                      - title: string
-                        quantity: 0
-                        unit_price: string
-                        taxable: true
-                        tax_code: string
-                        period_range_start: string
-                        period_range_end: string
-                        product_handle: string
-                        component_handle: string
-                        price_point_handle: string
-                        memo: string
-                        custom_item: true
-                    issue_date: string
-                    net_terms: 0
-                    payment_instructions: string
-                    memo: string
-                    seller_address:
-                      first_name: string
-                      last_name: string
-                      phone: string
-                      address: string
-                      address_2: string
-                      city: string
-                      state: string
-                      zip: string
-                      country: string
-                    billing_address:
-                      first_name: string
-                      last_name: string
-                      phone: string
-                      address: string
-                      address_2: string
-                      city: string
-                      state: string
-                      zip: string
-                      country: string
-                    shipping_address:
-                      first_name: string
-                      last_name: string
-                      phone: string
-                      address: string
-                      address_2: string
-                      city: string
-                      state: string
-                      zip: string
-                      country: string
+                      - product_id: 'handle:golden-product'
+                        quantity: 2
+                        unit_price: 110
                     discounts:
-                      - code: string
+                      - code: COUPON
+                        percentage: '50'
         description: ''
   '/subscriptions/{subscription_id}/prepayments.json':
     parameters:
@@ -24234,9 +24190,6 @@ components:
                   - 'null'
                   - integer
                 description: The price point ID of the line item's product
-              memo:
-                type: string
-                description: The memo printed by line item for item description. This message is in control of the merchant.
               custom_item:
                 type: boolean
         discounts:
