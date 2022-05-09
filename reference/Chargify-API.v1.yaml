@@ -16895,18 +16895,17 @@ paths:
 
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
-        ### Catalog items options
-        When defining line item, You can choose one of 3 ways at once:
+        ### Line items types
+        When defining line item, You can choose one of 3 types for one line item:
         #### Custom item
         Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
         #### Product id
-        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
         #### Component id
-        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`.
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. At this moment we support only quantity based, on/off and metered components.
 
         ### Coupons
-        When creating ad hoc invoice discounts can be applied in following ways:
-        * using custom coupon 
+        When creating ad hoc invoice discounts can be applied in following way:
 
         ```json
         {
@@ -16925,27 +16924,7 @@ paths:
         }
         ```
 
-        * using existing coupon from subscription site scope.
-        ```json
-        {
-          "invoice": {
-            "line_items": [
-              {
-                "product_id": "handle:gold-product",
-                "quantity": 1,
-
-              }
-            ],
-            "discounts": [
-              {
-               "coupon_id": "FREECOUPON"
-               }
-            ]
-          }
-        }
-        ```
         ### Coupon options
-        * custom coupon
         #### Code
         Coupon `CODE` will be displayed on invoice discount section
         #### Percentage 
@@ -16954,10 +16933,6 @@ paths:
         Coupon `amount_in_cents` takes integer value. It cannot be used with `percentage`. 
         #### Description
         Optional `descriptipn` will be displayed with coupon `CODE`
-
-        * existing coupons from catalog
-        #### Coupon id
-        Coupon handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `coupon_id`. If `coupon_id` is used, following fields cannot be used: `code`, `description`, `discount_type`, `percentage`.
 
         ### Line Item Options
 
@@ -16968,10 +16943,10 @@ paths:
 
         #### Taxes
 
-        The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent.
+        The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent. For existing catalog items: products/components taxes cannot be overwritten.
 
         #### Price Point
-        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used.
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products.
 
         ### Invoice Options
 
@@ -17033,12 +17008,6 @@ paths:
                           price_point_id:
                             type: string
                             description: Price point handle or price point id.
-                          memo:
-                            type: string
-                            description: |
-                              A custom memo about item.
-                        required:
-                          - quantity
                     issue_date:
                       type: string
                     net_terms:
