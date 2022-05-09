@@ -1,7 +1,7 @@
 title: Payment Profile
 type: object
 examples:
-    id: 10088716
+  - id: 10088716
     first_name: Test
     last_name: Subscription
     masked_card_number: XXXX-XXXX-XXXX-1
@@ -122,3 +122,4 @@ properties:
     type: integer
   gateway_handle:
     type: string
+    nullable: true

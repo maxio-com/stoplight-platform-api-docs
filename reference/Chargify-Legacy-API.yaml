@@ -5954,9 +5954,8 @@ components:
             - cancelation
             - component_proration
             - manual
-            - null
-          nullable: true
           description: The specific “subtype” for the transaction_type
+          nullable: true
         transaction_type:
           type: string
           enum:
