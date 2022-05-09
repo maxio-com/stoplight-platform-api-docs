@@ -10001,10 +10001,10 @@ paths:
                       total_amount: '100.00'
                       currency_code: USD
                       applications:
-                        - invoice_uid: inv_1
-                          application_uid: pmt_1
+                        - invoice_uid: inv_8gk5bwkct3gqt
+                          application_uid: pmt_1tr0hgsct3ybx
                           applied_amount: '50.00'
-                        - invoice_uid: inv_2
+                        - invoice_uid: inv_7bc6bwkct3lyt
                           application_uid: pmt_2
                           applied_amount: '50.00'
         '422':
@@ -10052,11 +10052,11 @@ paths:
             "amount": "250.00",
             "applications": [
               {
-                "invoice_uid": "uid_1",
+                "invoice_uid": "inv_8gk5bwkct3gqt",
                 "amount": "100.00"
               },
               {
-                "invoice_uid": "uid_2",
+                "invoice_uid": "inv_7bc6bwkct3lyt",
                 "amount": "150.00"
               }
             ]
@@ -10127,9 +10127,9 @@ paths:
                     method: check
                     amount: '100.00'
                     applications:
-                      - invoice_uid: inv_1
+                      - invoice_uid: inv_8gk5bwkct3gqt
                         amount: '50.00'
-                      - invoice_uid: inv_2
+                      - invoice_uid: inv_7bc6bwkct3lyt
                         amount: '50.00'
       parameters: []
     parameters: []
