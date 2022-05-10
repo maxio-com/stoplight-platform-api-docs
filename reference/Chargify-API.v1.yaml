@@ -16841,6 +16841,8 @@ paths:
                       refunds: []
                       custom_fields: []
                       public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
+        '201':
+          description: Created
         '401':
           description: Unauthorized
         '422':
@@ -16900,7 +16902,7 @@ paths:
         #### Product id
         Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
         #### Component id
-        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. At this moment we support only quantity based, on/off and metered components.
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment we support only quantity based, on/off and metered components.
 
         ### Coupons
         When creating ad hoc invoice discounts can be applied in following way:
@@ -16944,7 +16946,7 @@ paths:
         The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent. For existing catalog items: products/components taxes cannot be overwritten.
 
         #### Price Point
-        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products.
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
 
         ### Invoice Options
 
