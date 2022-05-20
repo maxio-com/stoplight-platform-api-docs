@@ -16929,10 +16929,10 @@ paths:
         Coupon `CODE` will be displayed on invoice discount section
         #### Percentage 
         Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount_in_cents`. 
-        #### Amount in cents
-        Coupon `amount_in_cents` takes integer value. It cannot be used with `percentage`. 
+        #### Amount
+        Coupon `amount` takes number value. It cannot be used with `percentage`. 
         #### Description
-        Optional `descriptipn` will be displayed with coupon `CODE`
+        Optional `description` will be displayed with coupon `CODE`
 
         ### Line Item Options
 
@@ -16946,8 +16946,8 @@ paths:
         The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent. For existing catalog items: products/components taxes cannot be overwritten.
 
         #### Price Point
-        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id`. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
-
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
+         
         ### Invoice Options
 
         #### Issue Date
@@ -16982,9 +16982,14 @@ paths:
                           title:
                             type: string
                           quantity:
-                            type: integer
+                            type:
+                              - integer
+                              - string
+                            minimum: 0
                           unit_price:
-                            type: string
+                            type:
+                              - number
+                              - string
                           taxable:
                             type: boolean
                             description: |-
@@ -17000,14 +17005,23 @@ paths:
                             type: string
                             description: YYYY-MM-DD
                           product_id:
-                            type: string
+                            type:
+                              - string
+                              - integer
                             description: Product handle or product id.
                           component_id:
-                            type: string
+                            type:
+                              - string
+                              - integer
                             description: Component handle or component id.
                           price_point_id:
-                            type: string
-                            description: Price point handle or price point id.
+                            type:
+                              - string
+                              - integer
+                          product_price_point_id:
+                            type:
+                              - string
+                              - integer
                     issue_date:
                       type: string
                     net_terms:
@@ -17089,18 +17103,21 @@ paths:
                       items:
                         type: object
                         properties:
-                          coupon_id:
-                            type: string
                           code:
                             type: string
                           percentage:
-                            type: number
-                            minimum: 0
-                            maximum: 100
+                            type:
+                              - number
+                              - string
                             example: 50
                             format: float
-                          amount_in_cents:
-                            type: integer
+                            exclusiveMinimum: 0
+                            maximum: 100
+                          amount:
+                            type:
+                              - number
+                              - string
+                            minimum: 0
                           description:
                             type: string
             examples:
