@@ -16900,9 +16900,9 @@ paths:
         #### Custom item
         Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
         #### Product id
-        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `product_price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
         #### Component id
-        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment we support only quantity based, on/off and metered components.
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
 
         ### Coupons
         When creating ad hoc invoice discounts can be applied in following way:
@@ -16916,7 +16916,7 @@ paths:
                 "quantity": 1
               }
             ],
-            "discounts": [ {
+            "couponm": [ {
                 "code": "CUSTOMCOUPON",
                 "percentage": 50.0
             }]
@@ -16928,7 +16928,7 @@ paths:
         #### Code
         Coupon `CODE` will be displayed on invoice discount section
         #### Percentage 
-        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount_in_cents`. 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. 
         #### Amount
         Coupon `amount` takes number value. It cannot be used with `percentage`. 
         #### Description
@@ -17098,7 +17098,7 @@ paths:
                           type: string
                         country:
                           type: string
-                    discounts:
+                    coupons:
                       type: array
                       items:
                         type: object
@@ -17120,6 +17120,7 @@ paths:
                             minimum: 0
                           description:
                             type: string
+                            maxLength: 255
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
