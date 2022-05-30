@@ -16916,7 +16916,7 @@ paths:
                 "quantity": 1
               }
             ],
-            "couponm": [ {
+            "coupons": [ {
                 "code": "CUSTOMCOUPON",
                 "percentage": 50.0
             }]
