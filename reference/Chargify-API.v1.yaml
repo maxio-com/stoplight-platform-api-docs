@@ -1434,7 +1434,6 @@ paths:
           in: query
           name: reference
           required: true
-      deprecated: true
   '/customers/{customer_id}/subscriptions.json':
     parameters:
       - schema:
@@ -10022,20 +10021,20 @@ paths:
                 Example:
                   value:
                     errors:
-                      - 'Total amount must be greater than 0'
-                      - 'Total amount must be higher or equal to invoices payment amount sum'
-                      - 'Invoice does not exist'
-                      - 'Payment method must valid'
-                      - 'Invoices must be in the same currency'
-                      - 'A required parameter is missing'
-                      - 'Invoices belong to different subscriptions. Only invoices from same subscriptions are allowed when total amount exceeds invoices due amount.'
+                      - Total amount must be greater than 0
+                      - Total amount must be higher or equal to invoices payment amount sum
+                      - Invoice does not exist
+                      - Payment method must valid
+                      - Invoices must be in the same currency
+                      - A required parameter is missing
+                      - Invoices belong to different subscriptions. Only invoices from same subscriptions are allowed when total amount exceeds invoices due amount.
                       - 'Individual invoices may not be overpaid. To create a prepayment, add overage to the total amount.'
-                      - 'Paying consolidated invoices is forbidden'
-                      - 'Invoice payment amounts must be greater than 0'
-                      - 'Invoice must have an open balance'
-                      - 'Effective date is missing'
-                      - 'Effective date is invalid or malformed'
-                      - 'Effective date must occur in the past'
+                      - Paying consolidated invoices is forbidden
+                      - Invoice payment amounts must be greater than 0
+                      - Invoice must have an open balance
+                      - Effective date is missing
+                      - Effective date is invalid or malformed
+                      - Effective date must occur in the past
                       - 'Multiple applications associated to a single invoice, please aggregate and send as a single application per invoice.'
       operationId: post-invoices-payments.json
       description: |-
