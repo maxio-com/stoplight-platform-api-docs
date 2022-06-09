@@ -1422,12 +1422,7 @@ paths:
                   customer:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-lookup.json
-      description: |-
-        Use this method to return the customer object if you have the **Reference ID (Your App)** value.
-
-        ### Endpoint Deprecated
-
-        Use the Find Customer endpoint instead.
+      description: Use this method to return the customer object if you have the **Reference ID (Your App)** value.
       parameters:
         - schema:
             type: string
