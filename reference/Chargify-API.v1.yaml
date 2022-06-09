@@ -1434,6 +1434,7 @@ paths:
           in: query
           name: reference
           required: true
+      x-internal: false
   '/customers/{customer_id}/subscriptions.json':
     parameters:
       - schema:
