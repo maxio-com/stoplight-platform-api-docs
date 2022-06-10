@@ -1237,14 +1237,17 @@ paths:
 
         ## Find Customer
 
-        Use the search feature to retrieve a single or group of customers.
+        Use the search feature with the `q` query parameter to retrieve an array of customers that matches the search query.
 
         Common use cases are:
 
-        + Search by email
-        + Search by Chargify ID
-        + Search by Reference (Your App)
-        + Search by Organization
+        + Search by an email
+        + Search by a Chargify ID
+        + Search by an organization
+        + Search by a reference value from your application
+        + Search by a first or last name
+
+        To retrieve a single, exact match by reference, please use the [lookup endpoint](Chargify-API.v1.yaml/paths/~1customers~1lookup.json).
       parameters:
         - schema:
             type: string
@@ -1422,7 +1425,7 @@ paths:
                   customer:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-lookup.json
-      description: Use this method to return the customer object if you have the **Reference ID (Your App)** value.
+      description: Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
       parameters:
         - schema:
             type: string
