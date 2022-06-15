@@ -16926,7 +16926,9 @@ paths:
 
         ### Coupon options
         #### Code
-        Coupon `CODE` will be displayed on invoice discount section
+        Coupon `CODE` will be displayed on invoice discount section.
+        Coupon code can only contain uppercase letters, numbers, and allowed special characters.
+        Lowercase letters will be converted to uppercase.
         #### Percentage 
         Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. 
         #### Amount
