@@ -16985,9 +16985,8 @@ paths:
                             type: string
                           quantity:
                             type:
-                              - integer
+                              - number
                               - string
-                            minimum: 0
                           unit_price:
                             type:
                               - number
