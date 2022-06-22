@@ -1237,14 +1237,17 @@ paths:
 
         ## Find Customer
 
-        Use the search feature to retrieve a single or group of customers.
+        Use the search feature with the `q` query parameter to retrieve an array of customers that matches the search query.
 
         Common use cases are:
 
-        + Search by email
-        + Search by Chargify ID
-        + Search by Reference (Your App)
-        + Search by Organization
+        + Search by an email
+        + Search by a Chargify ID
+        + Search by an organization
+        + Search by a reference value from your application
+        + Search by a first or last name
+
+        To retrieve a single, exact match by reference, please use the [lookup endpoint](Chargify-API.v1.yaml/paths/~1customers~1lookup.json).
       parameters:
         - schema:
             type: string
@@ -1422,19 +1425,14 @@ paths:
                   customer:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-lookup.json
-      description: |-
-        Use this method to return the customer object if you have the **Reference ID (Your App)** value.
-
-        ### Endpoint Deprecated
-
-        Use the Find Customer endpoint instead.
+      description: Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
       parameters:
         - schema:
             type: string
           in: query
           name: reference
           required: true
-      deprecated: true
+      x-internal: false
   '/customers/{customer_id}/subscriptions.json':
     parameters:
       - schema:
@@ -10022,20 +10020,20 @@ paths:
                 Example:
                   value:
                     errors:
-                      - 'Total amount must be greater than 0'
-                      - 'Total amount must be higher or equal to invoices payment amount sum'
-                      - 'Invoice does not exist'
-                      - 'Payment method must valid'
-                      - 'Invoices must be in the same currency'
-                      - 'A required parameter is missing'
-                      - 'Invoices belong to different subscriptions. Only invoices from same subscriptions are allowed when total amount exceeds invoices due amount.'
+                      - Total amount must be greater than 0
+                      - Total amount must be higher or equal to invoices payment amount sum
+                      - Invoice does not exist
+                      - Payment method must valid
+                      - Invoices must be in the same currency
+                      - A required parameter is missing
+                      - Invoices belong to different subscriptions. Only invoices from same subscriptions are allowed when total amount exceeds invoices due amount.
                       - 'Individual invoices may not be overpaid. To create a prepayment, add overage to the total amount.'
-                      - 'Paying consolidated invoices is forbidden'
-                      - 'Invoice payment amounts must be greater than 0'
-                      - 'Invoice must have an open balance'
-                      - 'Effective date is missing'
-                      - 'Effective date is invalid or malformed'
-                      - 'Effective date must occur in the past'
+                      - Paying consolidated invoices is forbidden
+                      - Invoice payment amounts must be greater than 0
+                      - Invoice must have an open balance
+                      - Effective date is missing
+                      - Effective date is invalid or malformed
+                      - Effective date must occur in the past
                       - 'Multiple applications associated to a single invoice, please aggregate and send as a single application per invoice.'
       operationId: post-invoices-payments.json
       description: |-
