@@ -25785,35 +25785,6 @@ components:
       title: Subscription-MRR
     Site:
       type: object
-      x-examples:
-        example-1:
-          site:
-            id: 24
-            name: smg-dev
-            subdomain: smg-dev
-            currency: USD
-            seller_id: 2
-            non_primary_currencies:
-              - CAD
-              - PLN
-            relationship_invoicing_enabled: true
-            customer_hierarchy_enabled: true
-            whopays_enabled: true
-            whopays_default_payer: self-ungrouped
-            default_payment_collection_method: automatic
-            organization_address:
-              street: null
-              line2: null
-              city: null
-              state: null
-              zip: null
-              country: null
-              name: 'Acme, Inc.'
-              phone: 555-555-1234 x137
-            tax_configuration:
-              kind: custom
-              fully_configured: false
-              destination_address: shipping_then_billing
       examples:
         - site:
             id: 0
