@@ -710,96 +710,36 @@ paths:
                 type: object
                 properties:
                   site:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      subdomain:
-                        type: string
-                      currency:
-                        type: string
-                      seller_id:
-                        type: integer
-                      non_primary_currencies:
-                        type: array
-                        items:
-                          type: string
-                      relationship_invoicing_enabled:
-                        type: boolean
-                      customer_hierarchy_enabled:
-                        type: boolean
-                      whopays_enabled:
-                        type: boolean
-                      whopays_default_payer:
-                        type: string
-                        enum:
-                          - self-ungrouped
-                          - self
-                          - parent
-                          - eldest
-                      default_payment_collection_method:
-                        type: string
-                      organization_address:
-                        type: object
-                        properties:
-                          street:
-                            type:
-                              - string
-                              - 'null'
-                          line2:
-                            type:
-                              - string
-                              - 'null'
-                          city:
-                            type:
-                              - string
-                              - 'null'
-                          state:
-                            type:
-                              - string
-                              - 'null'
-                          zip:
-                            type:
-                              - string
-                              - 'null'
-                          country:
-                            type:
-                              - string
-                              - 'null'
-                          name:
-                            type:
-                              - string
-                              - 'null'
-                          phone:
-                            type:
-                              - string
-                              - 'null'
+                    $ref: '#/components/schemas/Site'
               examples:
                 Example:
                   value:
                     site:
-                      id: 68
-                      name: Invoice Centric Billing
-                      subdomain: invoices
-                      currency: USD
-                      seller_id: 2
+                      id: 0
+                      name: string
+                      subdomain: string
+                      currency: string
+                      seller_id: 0
                       non_primary_currencies:
-                        - GBP
+                        - string
                       relationship_invoicing_enabled: true
                       customer_hierarchy_enabled: true
                       whopays_enabled: true
-                      whopays_default_payer: eldest
+                      whopays_default_payer: string
+                      default_payment_collection_method: string
                       organization_address:
-                        street: 123 General Goods Way
-                        line2: Apt. 10
-                        city: Boston
-                        state: MA
-                        zip: '02120'
-                        country: US
-                        name: General Goods
-                        phone: 555-555-1212
+                        street: null
+                        line2: null
+                        city: null
+                        state: null
+                        zip: null
+                        country: null
+                        name: string
+                        phone: string
+                      tax_configuration:
+                        kind: string
+                        fully_configured: true
+                        destination_address: string
       operationId: get-site.json
       description: |-
         This endpoint allows you to fetch some site data.
@@ -25843,6 +25783,150 @@ components:
                 plan_amount_in_cents: 0
                 usage_amount_in_cents: 0
       title: Subscription-MRR
+    Site:
+      type: object
+      x-examples:
+        example-1:
+          site:
+            id: 24
+            name: smg-dev
+            subdomain: smg-dev
+            currency: USD
+            seller_id: 2
+            non_primary_currencies:
+              - CAD
+              - PLN
+            relationship_invoicing_enabled: true
+            customer_hierarchy_enabled: true
+            whopays_enabled: true
+            whopays_default_payer: self-ungrouped
+            default_payment_collection_method: automatic
+            organization_address:
+              street: null
+              line2: null
+              city: null
+              state: null
+              zip: null
+              country: null
+              name: 'Acme, Inc.'
+              phone: 555-555-1234 x137
+            tax_configuration:
+              kind: custom
+              fully_configured: false
+              destination_address: shipping_then_billing
+      examples:
+        - site:
+            id: 0
+            name: string
+            subdomain: string
+            currency: string
+            seller_id: 0
+            non_primary_currencies:
+              - string
+            relationship_invoicing_enabled: true
+            customer_hierarchy_enabled: true
+            whopays_enabled: true
+            whopays_default_payer: string
+            default_payment_collection_method: string
+            organization_address:
+              street: null
+              line2: null
+              city: null
+              state: null
+              zip: null
+              country: null
+              name: string
+              phone: string
+            tax_configuration:
+              kind: string
+              fully_configured: true
+              destination_address: string
+      properties:
+        site:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            subdomain:
+              type: string
+            currency:
+              type: string
+            seller_id:
+              type: integer
+            non_primary_currencies:
+              type: array
+              items:
+                type: string
+            relationship_invoicing_enabled:
+              type: boolean
+            customer_hierarchy_enabled:
+              type: boolean
+            whopays_enabled:
+              type: boolean
+            whopays_default_payer:
+              type: string
+            default_payment_collection_method:
+              type: string
+            organization_address:
+              type: object
+              properties:
+                street:
+                  type:
+                    - string
+                    - 'null'
+                line2:
+                  type:
+                    - string
+                    - 'null'
+                city:
+                  type:
+                    - string
+                    - 'null'
+                state:
+                  type:
+                    - string
+                    - 'null'
+                zip:
+                  type:
+                    - string
+                    - 'null'
+                country:
+                  type:
+                    - string
+                    - 'null'
+                name:
+                  type:
+                    - string
+                    - 'null'
+                phone:
+                  type:
+                    - string
+                    - 'null'
+            tax_configuration:
+              type: object
+              properties:
+                kind:
+                  type: string
+                  default: custom
+                  enum:
+                    - custom
+                    - managed avalara
+                    - linked avalara
+                    - digital river
+                fully_configured:
+                  type: boolean
+                  default: false
+                  description: 'Returns `true` when all requirements for calculating taxes are met. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction'
+                destination_address:
+                  type: string
+                  enum:
+                    - shipping_then_billing
+                    - billing_then_shipping
+                    - shipping_only
+                    - billing_only
+      title: Site
   securitySchemes:
     BasicAuth:
       type: http
