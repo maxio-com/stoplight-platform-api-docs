@@ -25841,6 +25841,8 @@ components:
               kind: string
               fully_configured: true
               destination_address: string
+      title: Site
+      description: ''
       properties:
         site:
           type: object
@@ -25918,7 +25920,7 @@ components:
                 fully_configured:
                   type: boolean
                   default: false
-                  description: 'Returns `true` when all requirements for calculating taxes are met. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction'
+                  description: 'Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction'
                 destination_address:
                   type: string
                   enum:
@@ -25926,7 +25928,6 @@ components:
                     - billing_then_shipping
                     - shipping_only
                     - billing_only
-      title: Site
   securitySchemes:
     BasicAuth:
       type: http
