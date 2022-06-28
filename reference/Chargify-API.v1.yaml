@@ -12829,7 +12829,7 @@ paths:
 
         Custom pricing is pricing specific to the subscription in question.
         Create a subscription with custom pricing by passing pricing information instead of a price point.
-        For a custom priced product, pass the custom_price object in place of product_price_point_id. For a custom priced component, pass the custom_price object within the component object.
+        For a custom priced product, pass the custom_price object in place of `product_price_point_id`. For a custom priced component, pass the `custom_price` object within the component object.
         Custom prices and price points can exist in harmony on a subscription.
 
         # Passing Payment Information
