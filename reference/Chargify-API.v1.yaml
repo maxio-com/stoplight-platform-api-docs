@@ -12825,6 +12825,13 @@ paths:
 
         If the metafield doesn't exist yet, it will be created on-the-fly.
 
+        ## With Custom Pricing
+
+        Custom pricing is pricing specific to the subscription in question.
+        Create a subscription with custom pricing by passing pricing information instead of a price point.
+        For a custom priced product, pass the custom_price object in place of product_price_point_id. For a custom priced component, pass the custom_price object within the component object.
+        Custom prices and price points can exist in harmony on a subscription.
+
         # Passing Payment Information
 
         ## Subscription with Chargify.js token
@@ -14901,6 +14908,55 @@ paths:
                       type: integer
                     reference:
                       type: string
+                    custom_price:
+                      type: object
+                      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
+                      properties:
+                        name:
+                          type: string
+                          description: '(Optional)'
+                        handle:
+                          type: string
+                          description: '(Optional)'
+                        price_in_cents:
+                          type: integer
+                        interval:
+                          type: integer
+                        interval_unit:
+                          type: string
+                          enum:
+                            - day
+                            - month
+                        trial_price_in_cents:
+                          type: integer
+                          description: '(Optional)'
+                        trial_interval:
+                          type: integer
+                          description: '(Optional)'
+                        trial_interval_unit:
+                          type: string
+                          description: '(Optional)'
+                          enum:
+                            - day
+                            - month
+                        initial_charge_in_cents:
+                          type: integer
+                          description: '(Optional)'
+                        initial_charge_after_trial:
+                          type: boolean
+                          description: '(Optional)'
+                        expiration_interval:
+                          type: integer
+                          description: '(Optional)'
+                        expiration_interval_unit:
+                          type: string
+                          description: '(Optional)'
+                          enum:
+                            - day
+                            - month
+                        tax_included:
+                          type: boolean
+                          description: '(Optional)'
                     components:
                       type: array
                       description: (Optional) An array of component ids and custom prices to be added to the subscription.
