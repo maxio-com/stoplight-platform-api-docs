@@ -22821,26 +22821,26 @@ components:
             csv:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from the csv export
             invoices:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from invoices
             statements:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from statements
             portal:
               type: string
               enum:
-                - '0'
-                - '1'
+                - 0
+                - 1
               description: include (1) or exclude (0) metafields from the portal
         input_type:
           type: string
@@ -22852,7 +22852,7 @@ components:
           default: text
         enum:
           type: array
-          description: Only applicable when input_type is radio or dropdown
+          description: Only applicable when input_type is radio or dropdown. Empty strings will not be submitted.
           items:
             type: string
     Create-or-Update-Coupon:
