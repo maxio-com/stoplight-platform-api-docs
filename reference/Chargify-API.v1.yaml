@@ -20159,7 +20159,7 @@ paths:
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
   '/one_time_tokens/{chargify_token}.json':
     get:
-      summary: Get one time token datails
+      summary: Get one time token details
       tags:
         - Payment Profiles
       responses:
