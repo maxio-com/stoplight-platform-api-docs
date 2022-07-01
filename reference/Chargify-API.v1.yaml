@@ -25978,6 +25978,7 @@ components:
               default: false
             custom_net_terms_enabled:
               type: boolean
+              default: false
   securitySchemes:
     BasicAuth:
       type: http
