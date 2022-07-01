@@ -25870,6 +25870,10 @@ components:
               destination_address: string
             net_terms:
               default_net_terms: 0
+              automatic_net_terms: 0
+              remittance_net_terms: 0
+              net_terms_on_remittance_signups_enabled: true
+              custom_net_terms_enabled: true
       title: Site
       description: ''
       properties:
