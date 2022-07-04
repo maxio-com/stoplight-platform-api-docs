@@ -2622,6 +2622,7 @@ paths:
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
+                        use_site_exchange_rate: true
                     - coupon:
                         id: 123456
                         name: 100% coupon
@@ -2644,6 +2645,7 @@ paths:
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
+                        use_site_exchange_rate: true
                     - coupon:
                         id: 888888
                         name: 25% coupon
@@ -2671,6 +2673,7 @@ paths:
                             item_id: 519
                             name: test
                             handle: null
+                        use_site_exchange_rate: true
       operationId: get-product_families-product_family_id-coupons.json
       description: |-
         List coupons for a specific Product Family in a Site.
@@ -2747,6 +2750,12 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          description: Allows fetching coupons allocation with matching use_site_exchange_rate based on provided value.
+          name: 'filter[use_site_exchange_rate]'
   /coupons/find.json:
     get:
       summary: Find Coupon
