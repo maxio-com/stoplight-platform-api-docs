@@ -3110,6 +3110,12 @@ paths:
           in: query
           name: 'filter[date_field]'
           description: The type of filter you would like to apply to your search.
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          description: Allows fetching coupons allocation with matching use_site_exchange_rate based on provided value.
+          name: 'filter[use_site_exchange_rate]'
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
       - schema:
