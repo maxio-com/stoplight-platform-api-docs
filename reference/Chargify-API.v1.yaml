@@ -6322,6 +6322,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargify.com/subscribe/smcc4j3d2w6h/zero-dollar-product'
                         product_price_point_name: Default
+                        use_site_exchange_rate: true
                     - product:
                         id: 3858146
                         name: Calendar Billing Product
@@ -6360,6 +6361,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargify.com/subscribe/gxdbfxzxhcjq/calendar-billing-product'
                         product_price_point_name: Default
+                        use_site_exchange_rate: true
         '404':
           description: Not Found
           content:
@@ -6433,6 +6435,12 @@ paths:
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
           description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching products allocation with matching use_site_exchange_rate based on provided value (refers to default price point).
       tags:
         - Product Families
   '/products/{product_id}.json':
