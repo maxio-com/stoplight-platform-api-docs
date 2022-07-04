@@ -5188,6 +5188,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 399853
                         name: Annual Support Services
@@ -5210,6 +5211,7 @@ paths:
                         created_at: '2019-08-01T09:35:37-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 386937
                         name: Cancellation fee
@@ -5232,6 +5234,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
       operationId: get-components.json
       parameters:
         - schema:
@@ -5285,6 +5288,12 @@ paths:
           in: query
           name: 'filter[ids]'
           description: Allows fetching components with matching id based on provided value.
+        - schema:
+            type: boolean
+            example: ' filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value (refers to default price point).
       description: This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
@@ -22581,6 +22590,10 @@ components:
               description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
             allow_fractional_quantities:
               type: boolean
+            use_site_exchange_rate:
+              type:
+                - boolean
+                - 'null'
     Coupon:
       title: Coupon
       type: object
