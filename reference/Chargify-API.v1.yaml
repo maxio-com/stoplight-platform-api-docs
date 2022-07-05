@@ -740,6 +740,12 @@ paths:
                         kind: string
                         fully_configured: true
                         destination_address: string
+                      net_terms:
+                        default_net_terms: 0
+                        automatic_net_terms: 0
+                        remittance_net_terms: 0
+                        net_terms_on_remittance_signups_enabled: false
+                        custom_net_terms_enabled: false
       operationId: get-site.json
       description: |-
         This endpoint allows you to fetch some site data.
@@ -25841,39 +25847,7 @@ components:
       title: Subscription-MRR
     Site:
       type: object
-      examples:
-        - site:
-            id: 0
-            name: string
-            subdomain: string
-            currency: string
-            seller_id: 0
-            non_primary_currencies:
-              - string
-            relationship_invoicing_enabled: true
-            customer_hierarchy_enabled: true
-            whopays_enabled: true
-            whopays_default_payer: string
-            default_payment_collection_method: string
-            organization_address:
-              street: null
-              line2: null
-              city: null
-              state: null
-              zip: null
-              country: null
-              name: string
-              phone: string
-            tax_configuration:
-              kind: string
-              fully_configured: true
-              destination_address: string
-            net_terms:
-              default_net_terms: 0
-              automatic_net_terms: 0
-              remittance_net_terms: 0
-              net_terms_on_remittance_signups_enabled: false
-              custom_net_terms_enabled: false
+      examples: []
       title: Site
       description: ''
       properties:
@@ -25961,24 +25935,24 @@ components:
                     - billing_then_shipping
                     - shipping_only
                     - billing_only
-        net_terms:
-          type: object
-          properties:
-            default_net_terms:
-              type: number
-              default: 0
-            automatic_net_terms:
-              type: number
-              default: 0
-            remittance_net_terms:
-              type: number
-              default: 0
-            net_terms_on_remittance_signups_enabled:
-              type: boolean
-              default: false
-            custom_net_terms_enabled:
-              type: boolean
-              default: false
+            net_terms:
+              type: object
+              properties:
+                default_net_terms:
+                  type: number
+                  default: 0
+                automatic_net_terms:
+                  type: number
+                  default: 0
+                remittance_net_terms:
+                  type: number
+                  default: 0
+                net_terms_on_remittance_signups_enabled:
+                  type: boolean
+                  default: false
+                custom_net_terms_enabled:
+                  type: boolean
+                  default: false
   securitySchemes:
     BasicAuth:
       type: http
