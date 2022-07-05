@@ -14854,10 +14854,10 @@ paths:
                       properties:
                         name:
                           type: string
-                          description: '(Optional)'
+                          description: (Optional)
                         handle:
                           type: string
-                          description: '(Optional)'
+                          description: (Optional)
                         price_in_cents:
                           type: integer
                         interval:
@@ -14869,34 +14869,34 @@ paths:
                             - month
                         trial_price_in_cents:
                           type: integer
-                          description: '(Optional)'
+                          description: (Optional)
                         trial_interval:
                           type: integer
-                          description: '(Optional)'
+                          description: (Optional)
                         trial_interval_unit:
                           type: string
-                          description: '(Optional)'
+                          description: (Optional)
                           enum:
                             - day
                             - month
                         initial_charge_in_cents:
                           type: integer
-                          description: '(Optional)'
+                          description: (Optional)
                         initial_charge_after_trial:
                           type: boolean
-                          description: '(Optional)'
+                          description: (Optional)
                         expiration_interval:
                           type: integer
-                          description: '(Optional)'
+                          description: (Optional)
                         expiration_interval_unit:
                           type: string
-                          description: '(Optional)'
+                          description: (Optional)
                           enum:
                             - day
                             - month
                         tax_included:
                           type: boolean
-                          description: '(Optional)'
+                          description: (Optional)
                     components:
                       type: array
                       description: (Optional) An array of component ids and custom prices to be added to the subscription.
@@ -25868,6 +25868,12 @@ components:
               kind: string
               fully_configured: true
               destination_address: string
+            net_terms:
+              default_net_terms: 0
+              automatic_net_terms: 0
+              remittance_net_terms: 0
+              net_terms_on_remittance_signups_enabled: false
+              custom_net_terms_enabled: false
       title: Site
       description: ''
       properties:
@@ -25955,6 +25961,24 @@ components:
                     - billing_then_shipping
                     - shipping_only
                     - billing_only
+        net_terms:
+          type: object
+          properties:
+            default_net_terms:
+              type: number
+              default: 0
+            automatic_net_terms:
+              type: number
+              default: 0
+            remittance_net_terms:
+              type: number
+              default: 0
+            net_terms_on_remittance_signups_enabled:
+              type: boolean
+              default: false
+            custom_net_terms_enabled:
+              type: boolean
+              default: false
   securitySchemes:
     BasicAuth:
       type: http
