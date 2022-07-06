@@ -2625,6 +2625,7 @@ paths:
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
+                        use_site_exchange_rate: true
                     - coupon:
                         id: 123456
                         name: 100% coupon
@@ -2647,6 +2648,7 @@ paths:
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
+                        use_site_exchange_rate: true
                     - coupon:
                         id: 888888
                         name: 25% coupon
@@ -2674,6 +2676,7 @@ paths:
                             item_id: 519
                             name: test
                             handle: null
+                        use_site_exchange_rate: true
       operationId: get-product_families-product_family_id-coupons.json
       description: |-
         List coupons for a specific Product Family in a Site.
@@ -2750,6 +2753,12 @@ paths:
           in: query
           name: currency_prices
           description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          name: 'filter[use_site_exchange_rate]'
   /coupons/find.json:
     get:
       summary: Find Coupon
@@ -3113,6 +3122,12 @@ paths:
           in: query
           name: 'filter[date_field]'
           description: The type of filter you would like to apply to your search.
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          name: 'filter[use_site_exchange_rate]'
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
       - schema:
@@ -5191,6 +5206,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 399853
                         name: Annual Support Services
@@ -5213,6 +5229,7 @@ paths:
                         created_at: '2019-08-01T09:35:37-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 386937
                         name: Cancellation fee
@@ -5235,6 +5252,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
       operationId: get-components.json
       parameters:
         - schema:
@@ -5288,6 +5306,12 @@ paths:
           in: query
           name: 'filter[ids]'
           description: Allows fetching components with matching id based on provided value.
+        - schema:
+            type: boolean
+            example: ' filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
       description: This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
@@ -5371,6 +5395,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 399853
                         name: Annual Support Services
@@ -5393,6 +5418,7 @@ paths:
                         created_at: '2019-08-01T09:35:37-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
                     - component:
                         id: 386937
                         name: Cancellation fee
@@ -5415,6 +5441,7 @@ paths:
                         created_at: '2019-08-01T09:35:38-04:00'
                         default_price_point_name: Original
                         product_family_name: Chargify
+                        use_site_exchange_rate: true
       operationId: get-product_families-product_family_id-components.json
       description: This request will return a list of components for a particular product family.
       parameters:
@@ -5471,6 +5498,12 @@ paths:
           in: query
           name: start_datetime
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
+          name: 'filter[use_site_exchange_rate]'
   '/components/{component_id}/price_points.json':
     parameters:
       - schema:
@@ -6325,6 +6358,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargify.com/subscribe/smcc4j3d2w6h/zero-dollar-product'
                         product_price_point_name: Default
+                        use_site_exchange_rate: true
                     - product:
                         id: 3858146
                         name: Calendar Billing Product
@@ -6363,6 +6397,7 @@ paths:
                             return_params: ''
                             url: 'https://general-goods.chargify.com/subscribe/gxdbfxzxhcjq/calendar-billing-product'
                         product_price_point_name: Default
+                        use_site_exchange_rate: true
         '404':
           description: Not Found
           content:
@@ -6436,6 +6471,12 @@ paths:
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
           description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
       tags:
         - Product Families
   '/products/{product_id}.json':
@@ -21859,6 +21900,7 @@ paths:
                         request_billing_address: true
                         require_billing_address: true
                         require_shipping_address: true
+                        use_site_exchange_rate: true
                         tax_code: string
                         default_product_price_point_id: 0
       operationId: get-products.json
@@ -21935,6 +21977,12 @@ paths:
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
           description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+        - schema:
+            type: boolean
+            example: 'filter[use_site_exchange_rate]=true'
+          in: query
+          name: 'filter[use_site_exchange_rate]'
+          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
   '/invoices/{uid}/issue.json':
     parameters:
       - schema:
@@ -22569,6 +22617,10 @@ components:
               description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
             allow_fractional_quantities:
               type: boolean
+            use_site_exchange_rate:
+              type:
+                - boolean
+                - 'null'
     Coupon:
       title: Coupon
       type: object
