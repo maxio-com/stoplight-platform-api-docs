@@ -22349,6 +22349,105 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+  '/subscriptions/{subscription_id}/activate.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    put:
+      summary: Activate Subscription
+      tags:
+        - Subscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscription:
+                    $ref: ../models/Subscription.yaml
+              examples: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+              examples:
+                example-1:
+                  value:
+                    errors:
+                      base:
+                        - Purchase Declined. The subscription is now in the 'awaiting_signup' state.
+      operationId: put-subscriptions-subscription_id-activate.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                revert_on_failure:
+                  type: boolean
+                  description: 'You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)'
+        description: ''
+      description: |
+        Chargify offers the ability to activate awaiting signup and trialing subscriptions. This feature is only available on the Relationship Invoicing architecture. Subscriptions in a group may not be activated immediately.
+
+        For details on how the activation works, and how to activate subscriptions through the application, see [activation](#).
+
+        The `revert_on_failure` parameter controls the behavior upon activation failure. 
+        - If set to `true` and something goes wrong i.e. payment fails, then Chargify will not change the subscription's state. The subscription’s billing period will also remain the same. 
+        - If set to `false` and something goes wrong i.e. payment fails, then Chargify will continue through with the activation and enter an end of life state. For trialing subscriptions, that will either be trial ended (if the trial is no obligation), past due (if the trial has an obligation), or canceled (if the site has no dunning strategy, or has a strategy that says to cancel immediately). For awaiting signup subscriptions, that will always be canceled.
+
+        The default activation failure behavior can be configured per activation attempt, or you may set a default value under Config > Settings > Subscription Activation Settings. 
+
+        ## Activation Scenarios
+
+        ### Activate Awaiting Signup subscription
+
+        - Given you have a product without trial
+        - Given you have a site without dunning strategy
+
+        ```mermaid
+          flowchart LR
+            AS[Awaiting Signup] --> A{Activate}
+            A -->|Success| Active
+            A -->|Failure| ROF{revert_on_failure}
+            ROF -->|true| AS
+            ROF -->|false| Canceled
+        ```
+
+        - Given you have a product with trial
+        - Given you have a site with dunning strategy
+
+        ```mermaid
+          flowchart LR
+            AS[Awaiting Signup] --> A{Activate}
+            A -->|Success| Trialing
+            A -->|Failure| ROF{revert_on_failure}
+            ROF -->|true| AS
+            ROF -->|false| PD[Past Due]
+        ```
+
+        ### Activate Trialing subscription
+
+        You can read more about the behavior of trialing subscriptions [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404494617357#trialing-subscriptions-0-0).
+        When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as Trialing, we will void the invoice from activation and return any prepayments and credits applied to the invoice back to the subscription.
+
+
+
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
