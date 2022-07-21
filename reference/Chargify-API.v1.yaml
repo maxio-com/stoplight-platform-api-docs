@@ -9274,6 +9274,7 @@ paths:
               - due_date
               - issue_date
               - updated_at
+              - paid_date
             default: due_date
             example: date_field=issue_date
           in: query
@@ -9289,6 +9290,24 @@ paths:
           in: query
           name: end_datetime
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns invoices with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Allowed to be used only along with date_field set to created_at or updated_at.'
+        - schema:
+            type: string
+            example: 'customer_ids=1,2,3'
+          in: query
+          name: customer_ids
+          description: Allows fetching invoices with matching customer id based on provided values.
+        - schema:
+            type: string
+            example: 'number=1234,1235'
+          in: query
+          name: number
+          description: Allows fetching invoices with matching invoice number based on provided values.
+        - schema:
+            type: string
+            example: 'product_ids=23,34'
+          in: query
+          name: product_ids
+          description: Allows fetching invoices with matching line items product ids based on provided values.
   '/invoices/{uid}.json':
     parameters:
       - schema:
@@ -22445,9 +22464,6 @@ paths:
 
         You can read more about the behavior of trialing subscriptions [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404494617357#trialing-subscriptions-0-0).
         When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as Trialing, we will void the invoice from activation and return any prepayments and credits applied to the invoice back to the subscription.
-
-
-
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
