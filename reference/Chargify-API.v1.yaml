@@ -22464,6 +22464,106 @@ paths:
 
         You can read more about the behavior of trialing subscriptions [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404494617357#trialing-subscriptions-0-0).
         When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as Trialing, we will void the invoice from activation and return any prepayments and credits applied to the invoice back to the subscription.
+  /subscriptions/proforma_invoices.json:
+    post:
+      summary: Create signup proforma invoice
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proforma-Invoice'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      subscription:
+                        type: object
+                        properties:
+                          base:
+                            type: array
+                            items:
+                              type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      subscription:
+                        base:
+                          - must be an object
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      base:
+                        - Couldn't find Product by 1
+              examples:
+                Product invalid:
+                  value:
+                    errors:
+                      base:
+                        - Couldn't find Product by 1
+                Missing customer:
+                  value:
+                    errors:
+                      customer:
+                        - Missing required customer attributes
+                Invalid type:
+                  value:
+                    errors:
+                      base:
+                        - currency must be a string
+      operationId: post-subscriptions-proforma_invoices
+      description: |-
+        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoices.
+
+        Create a proforma invoice to preview costs before a subscription's signup. Like other proforma invoices, it can be emailed to the customer, voided, and publicly viewed on the chargifypay domain.
+
+        Pass a payload that resembles a subscription create or signup preview request. For example, you can specify components, coupons/a referral, offers, custom pricing, and an existing customer or payment profile to populate a shipping or billing address.
+
+        A product and customer first name, last name, and email are the minimum requirements. We recommend associating the proforma invoice with a customer_id to easily find their proforma invoices, since the subscription_id will always be blank.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create-Subscription'
+            examples:
+              Minimum payload:
+                value:
+                  subscription:
+                    product_handle: gold-product
+                    customer_attributes:
+                      first_name: Myra
+                      last_name: Maisel
+                      email: mmaisel@example.com
+              Minimum payload with referenced customer:
+                value:
+                  subscription:
+                    product_handle: gold-product
+                    customer_id: 12345
+    parameters: []
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
