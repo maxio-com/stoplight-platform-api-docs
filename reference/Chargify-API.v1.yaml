@@ -22537,7 +22537,7 @@ paths:
                         - currency must be a string
       operationId: post-subscriptions-proforma_invoices
       description: |-
-        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoices.
+        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoices or preview prepaid subscriptions.
 
         Create a proforma invoice to preview costs before a subscription's signup. Like other proforma invoices, it can be emailed to the customer, voided, and publicly viewed on the chargifypay domain.
 
@@ -22650,7 +22650,7 @@ paths:
                         - organization must be a string
       operationId: post-subscriptions-proforma_invoices-preview.json
       description: |-
-        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoice previews.
+        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoice previews or preview prepaid subscriptions.
 
         Create a signup preview in the format of a proforma invoice to preview costs before a subscription's signup. You have the option of optionally previewing the first renewal's costs as well. The proforma invoice preview will not be persisted.
 
