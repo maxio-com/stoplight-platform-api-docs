@@ -9296,6 +9296,18 @@ paths:
           in: query
           name: customer_ids
           description: Allows fetching invoices with matching customer id based on provided values.
+        - schema:
+            type: string
+            example: 'number=1234,1235'
+          in: query
+          name: number
+          description: Allows fetching invoices with matching invoice number based on provided values.
+        - schema:
+            type: string
+            example: 'product_ids= 23,34'
+          in: query
+          name: product_ids
+          description: Allows fetching invoices with matching line items product ids based on provided values.
   '/invoices/{uid}.json':
     parameters:
       - schema:
