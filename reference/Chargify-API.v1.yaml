@@ -9304,7 +9304,7 @@ paths:
           description: Allows fetching invoices with matching invoice number based on provided values.
         - schema:
             type: string
-            example: 'product_ids= 23,34'
+            example: 'product_ids=23,34'
           in: query
           name: product_ids
           description: Allows fetching invoices with matching line items product ids based on provided values.
