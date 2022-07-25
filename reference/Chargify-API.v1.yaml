@@ -16991,6 +16991,11 @@ paths:
                       refunds: []
                       custom_fields: []
                       public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
+          headers: {}
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -17002,13 +17007,13 @@ paths:
                     type: object
       operationId: post-subscriptions-subscription_id-invoices.json
       description: |-
-        This endpoint will allow you to create an ad-hoc, remittance invoice.
+        This endpoint will allow you to create an ad hoc invoice.
 
         ### Basic Behavior
 
         You can create a basic invoice by sending an array of line items to this endpoint. Each line item, at a minimum, must include a title, a quantity and a unit price. Example:
 
-        ```
+        ```json
         {
           "invoice": {
             "line_items": [
@@ -17022,7 +17027,67 @@ paths:
         }
         ```
 
+        ### Catalog items
+        Instead of creating custom products like in above example, You can pass existing items like products, components.
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 2,
+              }
+            ]
+          }
+        }
+        ```
+         
+
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
+
+        ### Line items types
+        When defining line item, You can choose one of 3 types for one line item:
+        #### Custom item
+        Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
+        #### Product id
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `product_price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
+        #### Component id
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
+
+        ### Coupons
+        When creating ad hoc invoice discounts can be applied in following way:
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 1
+              }
+            ],
+            "coupons": [ 
+              {
+                "code": "COUPONCODE",
+                "percentage": 50.0
+              }
+            ]
+          }
+        }
+        ```
+
+        ### Coupon options
+        #### Code
+        Coupon `CODE` will be displayed on invoice discount section.
+        Coupon code can only contain uppercase letters, numbers, and allowed special characters.
+        Lowercase letters will be converted to uppercase.
+        #### Percentage 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. 
+        #### Amount
+        Coupon `amount` takes number value. It cannot be used with `percentage`. 
+        #### Description
+        Optional `description` will be displayed with coupon `CODE`
 
         ### Line Item Options
 
@@ -17033,8 +17098,11 @@ paths:
 
         #### Taxes
 
-        The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent.
+        The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent. For existing catalog items: products/components taxes cannot be overwritten.
 
+        #### Price Point
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
+         
         ### Invoice Options
 
         #### Issue Date
@@ -17052,6 +17120,11 @@ paths:
         #### Memo and Payment Instructions
 
         A custom memo can be sent with the `memo` parameter to override the site's default. Likewise, custom payment instructions can be sent with the `payment_instrucions` parameter.
+        
+        #### Status
+
+        By default, invoices will be created with open status. Possible alternative is `draft`.
+
       requestBody:
         content:
           application/json:
@@ -17073,6 +17146,7 @@ paths:
                               - number
                               - string
                             description: 'The quantity can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
+                            minimum: 0
                           unit_price:
                             description: 'The unit_price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
                             type:
@@ -17092,6 +17166,25 @@ paths:
                           period_range_end:
                             type: string
                             description: YYYY-MM-DD
+                          product_id:
+                            type:
+                              - string
+                              - integer
+                            description: Product handle or product id.
+                          component_id:
+                            type:
+                              - string
+                              - integer
+                            description: Component handle or component id.
+                          price_point_id:
+                            type:
+                              - string
+                              - integer
+                            description: Price point handle or id. For component.
+                          product_price_point_id:
+                            type:
+                              - string
+                              - integer
                     issue_date:
                       type: string
                     net_terms:
@@ -17168,6 +17261,31 @@ paths:
                           type: string
                         country:
                           type: string
+                    coupons:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          percentage:
+                            type:
+                              - string
+                              - number
+                            maximum: 100
+                            example: 50
+                          amount:
+                            type:
+                              - string
+                              - number
+                            minimum: 0
+                          description:
+                            type: string
+                            maxLength: 255
+                    status:
+                      type: string
+                      example: draft
+                      default: open
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
@@ -24515,6 +24633,8 @@ components:
                   - 'null'
                   - integer
                 description: The price point ID of the line item's product
+              custom_item:
+                type: boolean
         discounts:
           type: array
           items:
