@@ -16841,6 +16841,7 @@ paths:
                       refunds: []
                       custom_fields: []
                       public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
+          headers: {}
         '201':
           description: Created
         '401':
@@ -16856,7 +16857,7 @@ paths:
                     type: object
       operationId: post-subscriptions-subscription_id-invoices.json
       description: |-
-        This endpoint will allow you to create an ad hoc, remittance invoice.
+        This endpoint will allow you to create an ad hoc invoice.
 
         ### Basic Behavior
 
@@ -16916,10 +16917,12 @@ paths:
                 "quantity": 1
               }
             ],
-            "coupons": [ {
-                "code": "CUSTOMCOUPON",
+            "coupons": [ 
+              {
+                "code": "COUPON",
                 "percentage": 50.0
-            }]
+              }
+            ]
           }
         }
         ```
