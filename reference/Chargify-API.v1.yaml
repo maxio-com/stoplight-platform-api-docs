@@ -17046,6 +17046,49 @@ paths:
 
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
+        ### Line items types
+        When defining line item, You can choose one of 3 types for one line item:
+        #### Custom item
+        Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
+        #### Product id
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `product_price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
+        #### Component id
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
+
+        ### Coupons
+        When creating ad hoc invoice discounts can be applied in following way:
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 1
+              }
+            ],
+            "coupons": [ 
+              {
+                "code": "COUPONCODE",
+                "percentage": 50.0
+              }
+            ]
+          }
+        }
+        ```
+
+        ### Coupon options
+        #### Code
+        Coupon `CODE` will be displayed on invoice discount section.
+        Coupon code can only contain uppercase letters, numbers, and allowed special characters.
+        Lowercase letters will be converted to uppercase.
+        #### Percentage 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. 
+        #### Amount
+        Coupon `amount` takes number value. It cannot be used with `percentage`. 
+        #### Description
+        Optional `description` will be displayed with coupon `CODE`
+
         ### Line Item Options
 
         #### Period Date Range
@@ -17098,6 +17141,7 @@ paths:
                               - number
                               - string
                             description: 'The quantity can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
+                            minimum: 0
                           unit_price:
                             description: 'The unit_price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
                             type:
@@ -17117,6 +17161,25 @@ paths:
                           period_range_end:
                             type: string
                             description: YYYY-MM-DD
+                          product_id:
+                            type:
+                              - string
+                              - integer
+                            description: Product handle or product id.
+                          component_id:
+                            type:
+                              - string
+                              - integer
+                            description: Component handle or component id.
+                          price_point_id:
+                            type:
+                              - string
+                              - integer
+                            description: Price point handle or id. For component.
+                          product_price_point_id:
+                            type:
+                              - string
+                              - integer
                     issue_date:
                       type: string
                     net_terms:
@@ -17193,6 +17256,27 @@ paths:
                           type: string
                         country:
                           type: string
+                    coupons:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          percentage:
+                            type:
+                              - string
+                              - number
+                            maximum: 100
+                            example: 50
+                          amount:
+                            type:
+                              - string
+                              - number
+                            minimum: 0
+                          description:
+                            type: string
+                            maxLength: 255
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
