@@ -17120,6 +17120,11 @@ paths:
         #### Memo and Payment Instructions
 
         A custom memo can be sent with the `memo` parameter to override the site's default. Likewise, custom payment instructions can be sent with the `payment_instrucions` parameter.
+        
+        #### Status
+
+        By default, invoices will be created with open status. Possible alternative is `draft`.
+
       requestBody:
         content:
           application/json:
@@ -17277,6 +17282,10 @@ paths:
                           description:
                             type: string
                             maxLength: 255
+                    status:
+                      type: string
+                      example: draft
+                      default: open
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
