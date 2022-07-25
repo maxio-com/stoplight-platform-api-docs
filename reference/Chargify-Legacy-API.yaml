@@ -792,6 +792,12 @@ paths:
         |-------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
         | refund                  | manual | A refund recorded “manually” via the Admin UI or API to reflect a refund already given outside of Chargify. Chargify does not actually submit this kind of refund to the payment gateway. |
         | refund                  |        | A generic refund resulting from any sitation not described above. This kind of refund is submitted by Chargify to the payment gateway to return money to the subscriber.                  |
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: gateway_response
+          description: 'for a Payment, include the response from the gateway'
   /transactions.json:
     get:
       summary: List Transactions
