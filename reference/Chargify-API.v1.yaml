@@ -17120,11 +17120,10 @@ paths:
         #### Memo and Payment Instructions
 
         A custom memo can be sent with the `memo` parameter to override the site's default. Likewise, custom payment instructions can be sent with the `payment_instrucions` parameter.
-        
+
         #### Status
 
         By default, invoices will be created with open status. Possible alternative is `draft`.
-
       requestBody:
         content:
           application/json:
@@ -22585,7 +22584,8 @@ paths:
   /subscriptions/proforma_invoices.json:
     post:
       summary: Create signup proforma invoice
-      tags: []
+      tags:
+        - Proforma Invoices
       responses:
         '201':
           description: Created
@@ -22685,7 +22685,8 @@ paths:
   /subscriptions/proforma_invoices/preview.json:
     post:
       summary: Create signup proforma preview
-      tags: []
+      tags:
+        - Proforma Invoices
       responses:
         '201':
           description: Created
