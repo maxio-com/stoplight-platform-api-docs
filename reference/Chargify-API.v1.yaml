@@ -22784,15 +22784,17 @@ paths:
             examples:
               Minimum example:
                 value:
-                  product_handle: gold-plan
-                  customer_attributes:
-                    first_name: first
-                    last_name: last
-                    email: flast@example.com
+                  subscription:
+                    product_handle: gold-plan
+                    customer_attributes:
+                      first_name: first
+                      last_name: last
+                      email: flast@example.com
               Minimum example with existing customer:
                 value:
-                  product_handle: silver-plan
-                  customer_id: 1234
+                  subscription:
+                    product_handle: silver-plan
+                    customer_id: 1234
         description: ''
       parameters:
         - schema:
