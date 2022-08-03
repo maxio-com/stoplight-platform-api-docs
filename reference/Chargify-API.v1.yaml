@@ -2105,6 +2105,9 @@ paths:
                     enum:
                       - option 1
                       - option 2
+                    scope:
+                      public_edit: '1'
+                      public_show: '1'
               Multiple Metafields:
                 value:
                   metafields:
@@ -23347,6 +23350,8 @@ components:
             invoices: '0'
             statements: '0'
             portal: '0'
+            public_show: '0'
+            public_edit: '0'
           input_type: text
           enum:
             - string
@@ -23383,6 +23388,18 @@ components:
                 - '0'
                 - '1'
               description: include (1) or exclude (0) metafields from the portal
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: include (1) or exclude (0) metafields from the reusable components
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: include (1) or exclude (0) metafields from the reusable components
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
@@ -25107,6 +25124,10 @@ components:
               type: string
             portal:
               type: string
+            public_show:
+              type: string
+            public_edit:
+              type: string
         data_count:
           type: integer
           description: the amount of subscriptions this metafield has been applied to in Chargify
@@ -26294,6 +26315,18 @@ components:
                 - '0'
                 - '1'
               description: include (1) or exclude (0) metafields from the portal
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: include (1) or exclude (0) metafields from the reusable components
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: include (1) or exclude (0) metafields from the reusable components
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
