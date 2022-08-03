@@ -23369,37 +23369,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
             public_show:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from being viewable by your ecosystem
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
             public_edit:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from being edited by your ecosystem
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
@@ -26296,41 +26296,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
             public_show:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: |-
-                :14
-                include (1) or exclude (0) metafields from being viewable by your ecosystem
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
             public_edit:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: |-
-                :14
-                include (1) or exclude (0) metafields from being edited by your ecosystem
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
