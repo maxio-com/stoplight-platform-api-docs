@@ -2135,6 +2135,28 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Metafield'
+              examples:
+                example-1:
+                  value:
+                    total_count: 0
+                    current_page: 0
+                    total_pages: 0
+                    per_page: 0
+                    metafields:
+                      - id: 0
+                        name: string
+                        scope:
+                          hosted:
+                            - {}
+                          csv: string
+                          statements: string
+                          invoices: string
+                          portal: string
+                          public_show: string
+                          public_edit: string
+                        data_count: 0
+                        input_type: string
+                        enum: null
       operationId: get-resource_type-metafields.json
       description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
@@ -23317,6 +23339,17 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
+      examples:
+        - id: 0
+          name: string
+          scope:
+            csv: '0'
+            invoices: '0'
+            statements: '0'
+            portal: '0'
+          input_type: text
+          enum:
+            - string
       properties:
         id:
           type: number
