@@ -2105,6 +2105,9 @@ paths:
                     enum:
                       - option 1
                       - option 2
+                    scope:
+                      public_edit: '1'
+                      public_show: '1'
               Multiple Metafields:
                 value:
                   metafields:
@@ -2135,6 +2138,28 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Metafield'
+              examples:
+                example-1:
+                  value:
+                    total_count: 0
+                    current_page: 0
+                    total_pages: 0
+                    per_page: 0
+                    metafields:
+                      - id: 0
+                        name: string
+                        scope:
+                          hosted:
+                            - {}
+                          csv: string
+                          statements: string
+                          invoices: string
+                          portal: string
+                          public_show: string
+                          public_edit: string
+                        data_count: 0
+                        input_type: string
+                        enum: null
       operationId: get-resource_type-metafields.json
       description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
@@ -23317,6 +23342,19 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
+      examples:
+        - id: 0
+          name: string
+          scope:
+            csv: '0'
+            invoices: '0'
+            statements: '0'
+            portal: '0'
+            public_show: '0'
+            public_edit: '0'
+          input_type: text
+          enum:
+            - string
       properties:
         id:
           type: number
@@ -23331,25 +23369,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
@@ -25074,6 +25124,10 @@ components:
               type: string
             portal:
               type: string
+            public_show:
+              type: string
+            public_edit:
+              type: string
         data_count:
           type: integer
           description: the amount of subscriptions this metafield has been applied to in Chargify
@@ -26242,25 +26296,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
