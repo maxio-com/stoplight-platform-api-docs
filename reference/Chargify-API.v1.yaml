@@ -9333,6 +9333,22 @@ paths:
           in: query
           name: product_ids
           description: Allows fetching invoices with matching line items product ids based on provided values.
+        - schema:
+            type: string
+            enum:
+              - status
+              - total_amount
+              - due_amount
+              - created_at
+              - updated_at
+              - issue_date
+              - due_date
+              - number
+            example: sort=total_amount
+            default: number
+          in: query
+          name: sort
+          description: The attribute by which to sort.
   '/invoices/{uid}.json':
     parameters:
       - schema:
