@@ -9348,7 +9348,7 @@ paths:
             default: number
           in: query
           name: sort
-          description: The attribute by which to sort.
+          description: Allows specification of the order of the returned list.
   '/invoices/{uid}.json':
     parameters:
       - schema:
