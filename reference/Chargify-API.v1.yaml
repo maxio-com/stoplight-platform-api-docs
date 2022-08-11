@@ -23814,9 +23814,6 @@ components:
         coupon_code:
           type: string
           description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
-        coupon_code - copy:
-          type: string
-          description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
         coupon_codes:
           type: array
           description: An array for all the coupons attached to the subscription.
