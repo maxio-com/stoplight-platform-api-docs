@@ -23010,6 +23010,8 @@ components:
             subscription_id:
               type: integer
               description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.
+            tax_included:
+              type: boolean
     Component:
       title: Component
       type: object
@@ -23806,6 +23808,9 @@ components:
               enum:
                 - day
                 - month
+            tax_included:
+              type: boolean
+              description: (Optional)
         coupon_code:
           type: string
           description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
