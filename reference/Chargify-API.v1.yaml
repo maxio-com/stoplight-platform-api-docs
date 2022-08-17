@@ -25067,6 +25067,12 @@ components:
                 type: integer
               prepayment:
                 type: boolean
+              gateway_handle:
+                type:
+                  - string
+                  - 'null'
+              gateway_used:
+                type: string
               gateway_transaction_id:
                 type:
                   - string
