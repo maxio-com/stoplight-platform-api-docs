@@ -25071,13 +25071,13 @@ components:
                 type:
                   - string
                   - 'null'
-                description: Thegateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified.
               gateway_used:
                 type: string
               gateway_transaction_id:
                 type:
                   - string
                   - 'null'
+                description: The transaction ID for the payment as returned from the payment gateway
         custom_fields:
           type: array
           items:
