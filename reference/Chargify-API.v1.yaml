@@ -743,6 +743,7 @@ paths:
                         remittance_net_terms: 0
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
+                      test: true
       operationId: get-site.json
       description: |-
         This endpoint allows you to fetch some site data.
@@ -26553,6 +26554,8 @@ components:
                 custom_net_terms_enabled:
                   type: boolean
                   default: false
+            test:
+              type: boolean
   securitySchemes:
     BasicAuth:
       type: http
