@@ -17145,6 +17145,9 @@ paths:
         #### Price Point
         Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
          
+        #### Description
+        Optional `description` parameter, it will overwrite default generated description for line item.
+
         ### Invoice Options
 
         #### Issue Date
@@ -17166,11 +17169,6 @@ paths:
         #### Status
 
         By default, invoices will be created with open status. Possible alternative is `draft`.
-
-
-        ###Description
-
-        Max size of the description is 255.
       requestBody:
         content:
           application/json:
@@ -17231,6 +17229,9 @@ paths:
                             type:
                               - string
                               - integer
+                          description:
+                            type: string
+                            maxLength: 255
                     issue_date:
                       type: string
                     net_terms:
