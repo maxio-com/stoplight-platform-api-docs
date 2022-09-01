@@ -17166,6 +17166,11 @@ paths:
         #### Status
 
         By default, invoices will be created with open status. Possible alternative is `draft`.
+
+
+        ###Description
+
+        Max size of the description is 255.
       requestBody:
         content:
           application/json:
