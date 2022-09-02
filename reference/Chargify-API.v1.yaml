@@ -18100,8 +18100,10 @@ paths:
               Example:
                 value:
                   subscription_group:
-                    members_ids:
+                    member_ids:
                       - 1
+                      - 2
+                      - 3
     delete:
       summary: Delete Subscription Group
       tags:
