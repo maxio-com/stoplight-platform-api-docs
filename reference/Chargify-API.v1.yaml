@@ -13359,7 +13359,7 @@ paths:
 
         The optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also.
 
-        ### Providing Agreement Acceptance Params
+        ## Providing Agreement Acceptance Params
 
         It is possible to provide a proof of customer's acceptance of terms and policies.
         We will be storing this proof in case it might be required (i.e. chargeback).
