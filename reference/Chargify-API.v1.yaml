@@ -13696,7 +13696,6 @@ paths:
                       return_refund_policy_url: 'https://return_refund_policy.url'
                       delivery_policy_url: 'https://delivery_policy_.url'
                       secure_checkout_policy_url: 'https://secure_checkout_policy.url'
-        description: ''
     get:
       summary: List Subscriptions
       tags:
