@@ -12780,6 +12780,8 @@ paths:
                       coupon_uses_allowed: 1
                       next_product_handle: null
                       stored_credential_transaction_id: 125566112256688
+        '400':
+          description: Bad Request
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -13358,6 +13360,36 @@ paths:
         The `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.
 
         The optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also.
+
+        ### Providing Agreement Acceptance Params
+
+        It is possible to provide a proof of customer's acceptance of terms and policies.
+        We will be storing this proof in case of any situation that it might be required to provide (i.e. chargeback).
+        Currently, we alredy persist it for subscriptions created via Public Signup Pages.
+        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `ageeement acceptance` with `ip_address` and at least one one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
+        `secure_checkout_policy_url`.
+
+        ```json
+          "subscription": {
+            "product_handle": "gold-product",
+            "customer_attributes": {
+              "first_name": "Jane",
+              "last_name": "Doe",
+              "email": "jd@chargify.test"
+            },
+            "agreement_acceptance": {
+              "ip_address": "1.2.3.4",
+              "terms_url": "https://terms.url",
+              "privacy_policy_url": "https://privacy_policy.url",
+              "return_refund_policy_url": "https://return_refund_policy.url",
+              "delivery_policy_url": "https://delivery_policy.url",
+              "secure_checkout_policy_url": "https://secure_checkout_policy.url"
+            }
+          }
+        }
+        ```
+
+        **For Maxio Payments subscriptions, the agreement acceptance params are required, with at least terms_url provided.**
       requestBody:
         content:
           application/json:
@@ -13649,6 +13681,24 @@ paths:
                           prices:
                             - unit_price: '1'
                               starting_quantity: '1'
+              With Agreement Acceptance:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    agreement_acceptance:
+                      ip_address: '1.2.3.4'
+                      terms_url: 'https://terms.url'
+                      privacy_policy_url: 'https://privacy_policy.url'
+                      return_refund_policy_url: 'https://return_refund_policy.url'
+                      delivery_policy_url: 'https://delivery_policy_.url'
+                      secure_checkout_policy_url: 'https://secure_checkout_policy.url'
+        description: ''
     get:
       summary: List Subscriptions
       tags:
@@ -24171,6 +24221,24 @@ components:
           type: string
         activated_at:
           type: string
+        agreement_acceptance:
+          type: object
+          description: Required when creating a subscription with Maxio Payments.
+          properties:
+            ip_address:
+              type: string
+              description: Required when providing agreement acceptance params.
+            terms_url:
+              type: string
+              description: Required when creating a subscription with Maxio Payments. Either terms_url or provacy_policy_url required when providing agreement_acceptance params.
+            privacy_policy_url:
+              type: string
+            return_refund_policy_url:
+              type: string
+            delivery_policy_url:
+              type: string
+            secure_checkout_policy_url:
+              type: string
     Credit-Note:
       title: Credit Note
       type: object
