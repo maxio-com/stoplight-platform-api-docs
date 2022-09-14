@@ -13363,8 +13363,8 @@ paths:
 
         It is possible to provide a proof of customer's acceptance of terms and policies.
         We will be storing this proof in case it might be required (i.e. chargeback).
-        Currently, we alredy keep it for subscriptions created via Public Signup Pages.
-        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `ageeement acceptance` with `ip_address` and at least one one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
+        Currently, we already keep it for subscriptions created via Public Signup Pages.
+        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `ageeement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
         `secure_checkout_policy_url`.
 
         ```json
