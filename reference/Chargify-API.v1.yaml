@@ -12780,8 +12780,6 @@ paths:
                       coupon_uses_allowed: 1
                       next_product_handle: null
                       stored_credential_transaction_id: 125566112256688
-        '400':
-          description: Bad Request
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
