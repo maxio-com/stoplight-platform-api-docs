@@ -22923,6 +22923,22 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/Proforma-Invoice'
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: per_page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - schema:
+            type: integer
+          in: query
+          name: page
+          description: This parameter indicates how many records to fetch in each request.
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
   '/api_exports/invoices/{batch_id}/rows.json':
     parameters:
       - schema:
@@ -22947,6 +22963,11 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
   '/api_exports/subscriptions/{batch_id}/rows.json':
     parameters:
       - schema:
@@ -22971,6 +22992,11 @@ paths:
               type: array
               items:
                 $ref: ../models/Subscription.yaml
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
   /api_exports/proforma_invoices.json:
     post:
       summary: Create Proforma Invoices Export
@@ -23048,6 +23074,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Batch-Job'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
   '/api_exports/invoices/{batch_id}.json':
     parameters:
       - schema:
@@ -23067,6 +23098,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Batch-Job'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
   '/api_exports/subscriptions/{batch_id}.json':
     parameters:
       - schema:
@@ -23086,6 +23122,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Batch-Job'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
