@@ -13690,7 +13690,7 @@ paths:
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
                     agreement_acceptance:
-                      ip_address: '1.2.3.4'
+                      ip_address: 1.2.3.4
                       terms_url: 'https://terms.url'
                       privacy_policy_url: 'https://privacy_policy.url'
                       return_refund_policy_url: 'https://return_refund_policy.url'
@@ -22899,6 +22899,193 @@ paths:
           in: query
           name: include=next_proforma_invoice
           description: Choose to include a proforma invoice preview for the first renewal
+  '/api_exports/proforma_invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Proforma Invoices
+      tags:
+        - API Exports
+        - Proforma Invoices
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported proforma invoices for a provided id. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET /api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Proforma-Invoice'
+  '/api_exports/invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Invoices
+      tags:
+        - API Exports
+        - Invoices
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported invoices for a provided id. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET /api_exports/invoices/123/rows?per_page=10000&page=1`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Invoice'
+  '/api_exports/subscriptions/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Subscriptions
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported subscriptions for a provided id. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET /api_exports/subscriptions/123/rows?per_page=10000&page=1`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: ../models/Subscription.yaml
+  /api_exports/proforma_invoices.json:
+    post:
+      summary: Create Proforma Invoices Export
+      tags:
+        - Proforma Invoices
+        - API Exports
+      operationId: post-api_exports-proforma_invoices.json
+      description: |-
+        This API creates a proforma invoices export and returns a batchjob object.
+
+        It works only for sites with invoices. 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
+      responses:
+        '200':
+          description: OK
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+  /api_exports/invoices.json:
+    post:
+      summary: Create Invoices Export
+      tags:
+        - API Exports
+        - Invoices
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates an invoices export and returns a batchjob object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
+    parameters: []
+  /api_exports/subscriptions.json:
+    post:
+      summary: Create Subscriptions Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates a subscriptions export and returns a batchjob object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
+    parameters: []
+  '/api_exports/proforma_invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Proforma Invoices Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for proforma invoices export.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
+  '/api_exports/invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Invoices Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for invoices export.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
+  '/api_exports/subscriptions/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Subscriptions Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for subscriptions export.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Batch-Job'
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -26629,6 +26816,31 @@ components:
                   default: false
             test:
               type: boolean
+    Batch-Job:
+      title: Batch-Job
+      x-stoplight:
+        id: igb6nbuojdj23
+      type: object
+      properties:
+        batchjob:
+          type: object
+          properties:
+            id:
+              type: integer
+            finished_at:
+              type:
+                - string
+                - 'null'
+            row_count:
+              type:
+                - integer
+                - 'null'
+            created_at:
+              type:
+                - string
+                - 'null'
+            completed:
+              type: string
   securitySchemes:
     BasicAuth:
       type: http
