@@ -23007,7 +23007,7 @@ paths:
       description: |-
         This API creates a proforma invoices export and returns a batchjob object.
 
-        It works only for sites with invoices. 
+        It is only available for Relationship Invoicing architecture.
       requestBody:
         content:
           application/json:
