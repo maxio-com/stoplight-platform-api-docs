@@ -13690,7 +13690,7 @@ paths:
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
                     agreement_acceptance:
-                      ip_address: '1.2.3.4'
+                      ip_address: 1.2.3.4
                       terms_url: 'https://terms.url'
                       privacy_policy_url: 'https://privacy_policy.url'
                       return_refund_policy_url: 'https://return_refund_policy.url'
@@ -17816,9 +17816,10 @@ paths:
                 value:
                   subscription_group:
                     subscription_id: 1
-                    members_ids:
+                    member_ids:
                       - 2
                       - 3
+                      - 4
     get:
       summary: List Subscription Groups
       tags:
