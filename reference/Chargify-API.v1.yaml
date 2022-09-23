@@ -22900,6 +22900,287 @@ paths:
           in: query
           name: include=next_proforma_invoice
           description: Choose to include a proforma invoice preview for the first renewal
+  '/api_exports/proforma_invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Proforma Invoices
+      tags:
+        - API Exports
+        - Proforma Invoices
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported proforma invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proforma-Invoice'
+        '404':
+          description: Not Found
+  '/api_exports/invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Invoices
+      tags:
+        - API Exports
+        - Invoices
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Not Found
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+  '/api_exports/subscriptions/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Subscriptions
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/rows?per_page=200&page=1`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Subscription.yaml
+        '404':
+          description: Not Found
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+  /api_exports/proforma_invoices.json:
+    post:
+      summary: Create Proforma Invoices Export
+      tags:
+        - Proforma Invoices
+        - API Exports
+      operationId: post-api_exports-proforma_invoices.json
+      description: |-
+        This API creates a proforma invoices export and returns a batchjob object.
+
+        It is only available for Relationship Invoicing architecture.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+  /api_exports/invoices.json:
+    post:
+      summary: Create Invoices Export
+      tags:
+        - API Exports
+        - Invoices
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates an invoices export and returns a batchjob object.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    parameters: []
+  /api_exports/subscriptions.json:
+    post:
+      summary: Create Subscriptions Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates a subscriptions export and returns a batchjob object.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    parameters: []
+  '/api_exports/proforma_invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Proforma Invoices Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for proforma invoices export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+  '/api_exports/invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Invoices Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for invoices export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+  '/api_exports/subscriptions/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Subscriptions Export
+      tags:
+        - API Exports
+        - Subscriptions
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for subscriptions export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -26630,6 +26911,31 @@ components:
                   default: false
             test:
               type: boolean
+    Batch-Job:
+      title: Batch-Job
+      x-stoplight:
+        id: igb6nbuojdj23
+      type: object
+      properties:
+        batchjob:
+          type: object
+          properties:
+            id:
+              type: integer
+            finished_at:
+              type:
+                - string
+                - 'null'
+            row_count:
+              type:
+                - integer
+                - 'null'
+            created_at:
+              type:
+                - string
+                - 'null'
+            completed:
+              type: string
   securitySchemes:
     BasicAuth:
       type: http
