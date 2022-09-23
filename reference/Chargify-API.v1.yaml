@@ -22913,9 +22913,9 @@ paths:
         - Proforma Invoices
       operationId: get-api_exports-proforma_invoices-id-rows.json
       description: |-
-        This API returns an array of exported proforma invoices for a provided id. Pay close attention to pagination in order to control responses from the server.
+        This API returns an array of exported proforma invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
-        Example: `GET /api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
+        Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
       parameters:
         - schema:
             type: integer
@@ -22955,9 +22955,9 @@ paths:
         - Invoices
       operationId: get-api_exports-proforma_invoices-id-rows.json
       description: |-
-        This API returns an array of exported invoices for a provided id. Pay close attention to pagination in order to control responses from the server.
+        This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
-        Example: `GET /api_exports/invoices/123/rows?per_page=10000&page=1`.
+        Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
       responses:
         '200':
           description: OK
@@ -22997,9 +22997,9 @@ paths:
         - Subscriptions
       operationId: get-api_exports-proforma_invoices-id-rows.json
       description: |-
-        This API returns an array of exported subscriptions for a provided id. Pay close attention to pagination in order to control responses from the server.
+        This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
-        Example: `GET /api_exports/subscriptions/123/rows?per_page=200&page=1`.
+        Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/rows?per_page=200&page=1`.
       responses:
         '200':
           description: OK
@@ -23015,7 +23015,7 @@ paths:
         - schema:
             type: integer
             minimum: 1
-            maximum: 1000
+            maximum: 10000
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
@@ -23043,6 +23043,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
         '409':
           description: Conflict
           content:
@@ -23072,6 +23074,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
         '409':
           description: Conflict
           content:
