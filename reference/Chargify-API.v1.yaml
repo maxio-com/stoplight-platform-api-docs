@@ -17141,7 +17141,7 @@ paths:
         Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
 
         ### Coupons
-        When creating ad hoc invoice discounts can be applied in following way:
+        When creating ad hoc invoice new discounts can be applied in following way:
 
         ```json
         {
@@ -17161,18 +17161,32 @@ paths:
           }
         }
         ```
+        If You want to use existing coupon for discount creation, only `code` and optional `product_family_id` is needed
+
+        ```
+        ...
+         "coupons": [ 
+              {
+                "code": "FREESETUP",
+                "product_family_id": 1
+              }
+          ]
+        ...
+        ```
 
         ### Coupon options
         #### Code
-        Coupon `CODE` will be displayed on invoice discount section.
+        Coupon `code` will be displayed on invoice discount section.
         Coupon code can only contain uppercase letters, numbers, and allowed special characters.
-        Lowercase letters will be converted to uppercase.
+        Lowercase letters will be converted to uppercase. It can be used to match existing coupon, or to create new one when passed with `percentage` or `amount`.
         #### Percentage 
-        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Used only when not using existing coupons. 
         #### Amount
-        Coupon `amount` takes number value. It cannot be used with `percentage`. 
+        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not using existing coupons. 
         #### Description
-        Optional `description` will be displayed with coupon `CODE`
+        Optional `description` will be displayed with coupon `code`. Used only when not using existing coupons. 
+        #### Product Family id
+        Optional `product_family_id` is used to match existing coupon when codes are not unique.
 
         ### Line Item Options
 
@@ -17661,6 +17675,65 @@ paths:
                     amount: '1'
                     memo: Courtesy credit
   '/subscriptions/{subscription_id}/service_credit_deductions.json':
+    parameters:
+      - schema:
+          type: integer
+        name: subscription_id
+        in: path
+        required: true
+        description: The Chargify id of the subscription
+    post:
+      summary: Deduct Service Credit
+      tags:
+        - Subscription Invoice Account
+      responses:
+        '200':
+          description: OK
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Amount cannot exceed current service credit account balance.
+      operationId: post-subscriptions-subscription_id-service_credit_deductions.json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deduction:
+                  type: object
+                  required:
+                    - amount
+                    - memo
+                  properties:
+                    amount:
+                      type:
+                        - string
+                        - number
+                    memo:
+                      type: string
+              required:
+                - deduction
+            examples:
+              Example:
+                value:
+                  deduction:
+                    amount: '1'
+                    memo: Deduction
+      description: Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
+  '/subscriptions/{subscription_id}/service_credit_deductions.json - copy':
     parameters:
       - schema:
           type: integer
