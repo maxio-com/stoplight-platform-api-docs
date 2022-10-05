@@ -17141,7 +17141,7 @@ paths:
         Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
 
         ### Coupons
-        When creating ad hoc invoice new discounts can be applied in following way:
+        When creating ad hoc invoice, new discounts can be applied in following way:
 
         ```json
         {
@@ -17163,7 +17163,7 @@ paths:
         ```
         If You want to use existing coupon for discount creation, only `code` and optional `product_family_id` is needed
 
-        ```
+        ```json
         ...
          "coupons": [ 
               {
@@ -17180,13 +17180,13 @@ paths:
         Coupon code can only contain uppercase letters, numbers, and allowed special characters.
         Lowercase letters will be converted to uppercase. It can be used to match existing coupon, or to create new one when passed with `percentage` or `amount`.
         #### Percentage 
-        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Used only when not using existing coupons. 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Used only when not matching existing coupon by `code`. 
         #### Amount
-        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not using existing coupons. 
+        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`. 
         #### Description
-        Optional `description` will be displayed with coupon `code`. Used only when not using existing coupons. 
+        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`. 
         #### Product Family id
-        Optional `product_family_id` is used to match existing coupon when codes are not unique.
+        Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
 
         ### Line Item Options
 
@@ -17386,6 +17386,10 @@ paths:
                           description:
                             type: string
                             maxLength: 255
+                          product_family_id:
+                            type:
+                              - string
+                              - integer
                     status:
                       type: string
                       example: draft
