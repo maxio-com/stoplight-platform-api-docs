@@ -6948,7 +6948,7 @@ paths:
         name: product_id
         in: path
         required: true
-        description: The Chargify id of the product to which the price point belongs
+        description: 'The id or handle of the product. When using the handle, it must be prefixed with `handle:`'
     post:
       summary: Create Product Price Point
       tags:
@@ -7086,13 +7086,13 @@ paths:
         name: product_id
         in: path
         required: true
-        description: The Chargify id of the product to which the price point belongs
+        description: 'The id or handle of the product. When using the handle, it must be prefixed with `handle:`'
       - schema:
           type: integer
         name: price_point_id
         in: path
         required: true
-        description: The Chargify id of the product price point
+        description: 'The id or handle of the price point. When using the handle, it must be prefixed with `handle:`'
     put:
       summary: Update Product Price Point
       tags:
