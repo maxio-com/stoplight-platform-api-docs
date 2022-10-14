@@ -17178,9 +17178,9 @@ paths:
         #### Code
         Coupon `code` will be displayed on invoice discount section.
         Coupon code can only contain uppercase letters, numbers, and allowed special characters.
-        Lowercase letters will be converted to uppercase. It can be used to match existing coupon, or to create new one when passed with `percentage` or `amount`.
+        Lowercase letters will be converted to uppercase. It can be used to select an existing coupon from the catalog, or as an ad hoc coupon when passed with `percentage` or `amount`.
         #### Percentage 
-        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Used only when not matching existing coupon by `code`. 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Only for ad hoc coupons, will be ignored if `code` is used to select an existing coupon from the catalog.
         #### Amount
         Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`. 
         #### Description
