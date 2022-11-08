@@ -13384,6 +13384,39 @@ paths:
         ```
 
         **For Maxio Payments subscriptions, the agreement acceptance params are required, with at least terms_url provided.**
+
+        ## Providing ACH Agreement params
+
+        It is also possible to provide a proof that a customer authorized ACH agreement terms.
+        The proof will be stored and the email will be sent to the customer with a copy of the terms (if enabled).
+        In order to create a subscription with the proof of authorized ACH agreement terms, you must provide the additional parameter `ach_agreement` with the following nested parameters: `agreement_terms`, `authorizer_first_name`, `authorizer_last_name` and `ip_address`.
+        Each of them is required.
+
+        ```json
+          "subscription": {
+            "product_handle": "gold-product",
+            "customer_attributes": {
+              "first_name": "Jane",
+              "last_name": "Doe",
+              "email": "jd@chargify.test"
+            },
+            "bank_account_attributes": {
+              "bank_name": "Test Bank",
+              "bank_routing_number": "021000089",
+              "bank_account_number": "111111111111",
+              "bank_account_type": "checking",
+              "bank_account_holder_type": "business",
+              "payment_type": "bank_account"
+            },
+            "ach_agreement": {
+              "agreement_terms": "ACH agreement terms",
+              "authorizer_first_name": "Jane",
+              "authorizer_last_name": "Doe",
+              "ip_address": "1.2.3.4"
+            }
+          }
+        ```
+
       requestBody:
         content:
           application/json:
@@ -13692,6 +13725,26 @@ paths:
                       return_refund_policy_url: 'https://return_refund_policy.url'
                       delivery_policy_url: 'https://delivery_policy_.url'
                       secure_checkout_policy_url: 'https://secure_checkout_policy.url'
+              With ACH Agreement:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    bank_account_attributes:
+                      bank_name: Test Bank
+                      bank_routing_number: 021000089
+                      bank_account_number: 111111111111
+                      bank_account_type: checking
+                      bank_account_holder_type: business
+                      payment_type: bank_account
+                    ach_agreement:
+                      agreement_terms: ACH agreement terms
+                      authorizer_first_name: Jane
+                      authorizer_last_name: Doe
+                      ip_address: 1.2.3.4
     get:
       summary: List Subscriptions
       tags:
@@ -24522,6 +24575,22 @@ components:
               type: string
             secure_checkout_policy_url:
               type: string
+        ach_agreement:
+          type: object
+          description: (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.
+          properties:
+            agreement_terms:
+              type: string
+              description: (Required when providing ACH agreement params) The ACH authorization agreement terms.
+            authorizer_first_name:
+              type: string
+              description: (Required when providing ACH agreement params) The first name of the person authorizing the ACH agreement.
+            authorizer_last_name:
+              type: string
+              description: (Required when providing ACH agreement params) The last name of the person authorizing the ACH agreement.
+            ip_address:
+              type: string
+              description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
     Credit-Note:
       title: Credit Note
       type: object
