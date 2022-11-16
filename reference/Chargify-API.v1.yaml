@@ -13416,7 +13416,6 @@ paths:
             }
           }
         ```
-
       requestBody:
         content:
           application/json:
@@ -13735,8 +13734,8 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
-                      bank_account_number: 111111111111
+                      bank_routing_number: "021000089"
+                      bank_account_number: "111111111111"
                       bank_account_type: checking
                       bank_account_holder_type: business
                       payment_type: bank_account
@@ -17790,6 +17789,292 @@ paths:
                     amount: '1'
                     memo: Deduction
       description: Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
+  /subscription_groups_with_subs.json:
+    post:
+      operationId: post-subscription_groups_with_subs.j.json
+      summary: Create Subscription Group with Multiple Subscriptions
+      description: Create subscription group with multiple subscriptions at once.
+      tags:
+        - Subscription Groups
+      responses:
+        '200':
+          description: OK
+          headers: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_group:
+                  type: object
+                  required:
+                    - subscriptions
+                  properties:
+                    payment_profile_id:
+                      type: integer
+                    payer_id:
+                      type: integer
+                    payer_reference:
+                      type: string
+                    payment_collection_method:
+                      type: string
+                      enum:
+                        - automatic
+                        - remittance
+                    payer_attributes:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        email:
+                          type: string
+                        cc_emails:
+                          type: string
+                        organization:
+                          type: string
+                        reference:
+                          type: string
+                        address:
+                          type: string
+                        address_2:
+                          type: string
+                        city:
+                          type: string
+                        state:
+                          type: string
+                        zip:
+                          type: string
+                        country:
+                          type: string
+                        phone:
+                          type: string
+                        locale:
+                          type: string
+                        vat_number:
+                          type: string
+                        tax_exempt:
+                          type: string
+                        tax_exempt_reason:
+                          type: string
+                        metafields:
+                          type: object
+                    credit_card_attributes:
+                      type: object
+                      properties:
+                        full_number:
+                          type:
+                            - string
+                            - integer
+                        expiration_month:
+                          type:
+                            - string
+                            - integer
+                        expiration_year:
+                          type:
+                            - string
+                            - integer
+                        chargify_token:
+                          type: string
+                        vault_token:
+                          type: string
+                        current_vault:
+                          type: string
+                        gateway_handle:
+                          type: string
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        billing_address:
+                          type: string
+                        billing_address_2:
+                          type: string
+                        billing_city:
+                          type: string
+                        billing_state:
+                          type: string
+                        billing_zip:
+                          type: string
+                        billing_country:
+                          type: string
+                        last_four:
+                          type: string
+                        card_type:
+                          type: string
+                        customer_vault_token:
+                          type: string
+                        cvv:
+                          type: string
+                        payment_type:
+                          type: string
+                    bank_account_attributes:
+                      type: object
+                      properties:
+                        bank_name:
+                          type: string
+                        bank_account_number:
+                          type: string
+                        bank_routing_number:
+                          type: string
+                        bank_iban:
+                          type: string
+                        bank_branch_code:
+                          type: string
+                        bank_account_type:
+                          type: string
+                        bank_account_holder_type:
+                          type: string
+                        payment_type:
+                          type: string
+                        billing_address:
+                          type: string
+                        billing_city:
+                          type: string
+                        billing_state:
+                          type: string
+                        billing_zip:
+                          type: string
+                        billing_country:
+                          type: string
+                        chargify_token:
+                          type: string
+                        current_vault:
+                          type: string
+                        gateway_handle:
+                          type: string
+                    subscriptions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          product_handle:
+                            type: integer
+                          product_id:
+                            type: string
+                          product_price_point_id:
+                            type: integer
+                          product_price_point_handle:
+                            type: string
+                          offer_id:
+                            type: integer
+                          reference:
+                            type: string
+                          primary:
+                            type: boolean
+                          currency:
+                            type: string
+                          coupon_codes:
+                            type: array
+                            items:
+                              type: string
+                          components:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                component_id:
+                                  type: string
+                                allocated_quantity:
+                                  type: string
+                                unit_balance:
+                                  type: string
+                                price_point_id:
+                                  type: string
+                                custom_price:
+                                  type: object
+                                  properties:
+                                    pricing_scheme:
+                                      type: string
+                                    prices:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          unit_price:
+                                            type: string
+                                          starting_quantity:
+                                            type: string
+                                          ending_quantity:
+                                            type: string
+                                    overage_pricing:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          pricing_scheme:
+                                            type: string
+                                          prices:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                unit_price:
+                                                  type: string
+                                                starting_quantity:
+                                                  type: string
+                                                ending_quantity:
+                                                  type: string
+                          custom_price:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              handle:
+                                type: string
+                              price_in_cents:
+                                type:
+                                  - string
+                                  - integer
+                              interval:
+                                type:
+                                  - string
+                                  - integer
+                              interval_unit:
+                                type: string
+                              trial_price_in_cents:
+                                type:
+                                  - string
+                                  - integer
+                              trial_interval:
+                                type:
+                                  - string
+                                  - integer
+                              trial_interval_unit:
+                                type: string
+                              initial_charge_in_cents:
+                                type:
+                                  - string
+                                  - integer
+                              initial_charge_after_trial:
+                                type: boolean
+                              expiration_interval:
+                                type:
+                                  - string
+                                  - integer
+                              expiration_interval_unit:
+                                type: string
+                              tax_included:
+                                type: boolean
+                          calendar_billing:
+                            type: object
+                            properties:
+                              snap_day:
+                                type: string
+                              calendar_billing_first_charge:
+                                type: string
+                                enum:
+                                  - prorated
+                                  - immediate
+                                  - delayed
+                          metafields:
+                            type: array
+                            items:
+                              type: object
+              required:
+                - subscription_group
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
