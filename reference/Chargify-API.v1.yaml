@@ -13734,8 +13734,8 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: "021000089"
-                      bank_account_number: "111111111111"
+                      bank_routing_number: '021000089'
+                      bank_account_number: '111111111111'
                       bank_account_type: checking
                       bank_account_holder_type: business
                       payment_type: bank_account
@@ -17793,7 +17793,16 @@ paths:
     post:
       operationId: post-subscription_groups_with_subs.j.json
       summary: Create Subscription Group with Multiple Subscriptions
-      description: Create subscription group with multiple subscriptions at once.
+      description: |-
+        Create multiple subscriptions at once under the same customer and consolidate them into a subscription group.
+
+        You must provide one and only one of the `payer_id`/`payer_reference`/`payer_attributes` for the customer attached to the group.
+
+        You must provide one and only one of the `payment_profile_id`/`credit_card_attributes`/`bank_account_attributes` for the payment profile attached to the group.
+
+        Only one of the `subscriptions` can have `"primary": true` attribute set.
+
+        When passing product to a subscription you can use either `product_id` or `product_handle`. You can also use `offer_id` instead.
       tags:
         - Subscription Groups
       responses:
@@ -17951,9 +17960,9 @@ paths:
                         type: object
                         properties:
                           product_handle:
-                            type: integer
-                          product_id:
                             type: string
+                          product_id:
+                            type: integer
                           product_price_point_id:
                             type: integer
                           product_price_point_handle:
@@ -18034,6 +18043,9 @@ paths:
                                   - integer
                               interval_unit:
                                 type: string
+                                enum:
+                                  - day
+                                  - month
                               trial_price_in_cents:
                                 type:
                                   - string
@@ -18044,6 +18056,9 @@ paths:
                                   - integer
                               trial_interval_unit:
                                 type: string
+                                enum:
+                                  - day
+                                  - month
                               initial_charge_in_cents:
                                 type:
                                   - string
@@ -18056,6 +18071,9 @@ paths:
                                   - integer
                               expiration_interval_unit:
                                 type: string
+                                enum:
+                                  - day
+                                  - month
                               tax_included:
                                 type: boolean
                           calendar_billing:
@@ -18075,6 +18093,121 @@ paths:
                               type: object
               required:
                 - subscription_group
+            examples:
+              Basic request:
+                value:
+                  subscription_group:
+                    payment_profile_id: 123
+                    payer_id: 123
+                    subscriptions:
+                      - product_id: 11
+                        primary: true
+                      - product_id: 12
+                      - product_id: 13
+              Create customer and payment profile in-place:
+                value:
+                  subscription_group:
+                    payer_attributes:
+                      first_name: John
+                      last_name: Doe
+                      email: john@example.com
+                      organization: 'Acme, Inc'
+                    credit_card_attributes:
+                      full_number: '4111111111111111'
+                      expiration_month: '12'
+                      expiration_year: '2031'
+                    subscriptions:
+                      - product_id: 123
+                        primary: true
+                      - product_handle: silver-plan
+                      - product_id: 124
+              Create credit card using Chargify.js token:
+                value:
+                  subscription_group:
+                    payer_id: 123
+                    credit_card_attributes:
+                      chargify_token: tok_19gnjsa9433u9b22
+                      last_four: '1111'
+                      card_type: visa
+                    subscriptions:
+                      - product_id: 11
+                        primary: true
+                      - product_id: 12
+                      - product_id: 13
+              Create bank account using Chargify.js token:
+                value:
+                  subscription_group:
+                    payer_id: 234
+                    bank_account_attributes:
+                      chargify_token: tok_19gnjsa9433u9b22
+                    subscriptions:
+                      - product_id: 11
+                        primary: true
+                      - product_id: 12
+                      - product_id: 13
+              Create group with subscription and customer metafields:
+                value:
+                  subscription_group:
+                    payer_attributes:
+                      first_name: John
+                      last_name: Doe
+                      email: john@example.com
+                      organization: 'Acme, Inc'
+                      metafields:
+                        win-over: ABCompany
+                    credit_card_attributes:
+                      full_number: '4111111111111111'
+                      expiration_month: '12'
+                      expiration_year: '2031'
+                    subscriptions:
+                      - product_id: 123
+                        primary: true
+                        metfields:
+                          mrr: $99
+                          discounted: false
+                      - product_handle: silver-plan
+                        metafields:
+                          mrr: $49
+                      - product_id: 124
+              Create subscription with components:
+                value:
+                  subscription_group:
+                    payment_profile_id: 123
+                    payer_id: 123
+                    subscriptions:
+                      - product_id: 11
+                        primary: true
+                        components:
+                          - component_id: 99
+                            allocated_quantity: 10
+                      - product_id: 12
+                      - product_id: 13
+              Create subscription with Custom Pricing:
+                value:
+                  subscription_group:
+                    payment_profile_id: 123
+                    payer_id: 123
+                    subscriptions:
+                      - product_id: 19
+                        custom_pricing:
+                          handle: custom-price
+                          price_in_cents: 9900
+                          interval: 1
+                          interval_unit: month
+                        primary: true
+                      - product_id: 12
+                        components:
+                          - component_id: 29
+                            allocated_quantity: 5
+                            custom_pricing:
+                              pricing_scheme: volume
+                              prices:
+                                - unit_price: '5'
+                                  starting_quantity: '1'
+                                  ending_quantity: '15'
+                                - unit_price: '2'
+                                  starting_quantity: '16'
+                      - product_id: 13
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
@@ -24862,7 +24995,7 @@ components:
               type: string
         ach_agreement:
           type: object
-          description: (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.
+          description: '(Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.'
           properties:
             agreement_terms:
               type: string
