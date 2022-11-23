@@ -17802,13 +17802,92 @@ paths:
 
         Only one of the `subscriptions` can have `"primary": true` attribute set.
 
-        When passing product to a subscription you can use either `product_id` or `product_handle`. You can also use `offer_id` instead.
+        When passing product to a subscription you can use either `product_id` or `product_handle` or `offer_id`. You can also use `custom_price` instead.
       tags:
         - Subscription Groups
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                  scheme:
+                    type: integer
+                  customer_id:
+                    type: integer
+                  payment_profile_id:
+                    type: integer
+                  subscription_ids:
+                    type: array
+                    items:
+                      type: integer
+                  primary_subscription_id:
+                    type: integer
+                  next_assessment_at:
+                    type: string
+                  state:
+                    type: string
+                  cancel_at_end_of_period:
+                    type: boolean
+                  subscriptions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        reference:
+                          type:
+                            - string
+                            - 'null'
+                        product_id:
+                          type: integer
+                        product_handle:
+                          type:
+                            - 'null'
+                            - string
+                        product_price_point_id:
+                          type: integer
+                        product_price_point_handle:
+                          type: string
+                        currency:
+                          type: string
+                        coupon_code:
+                          type:
+                            - string
+                            - 'null'
+                        total_revenue_in_cents:
+                          type: integer
+                        balance_in_cents:
+                          type: integer
+                  payment_collection_method:
+                    type: string
+                    enum:
+                      - remittance
+                      - automatic
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      customer:
+                        type: object
+                      payment_profile:
+                        type: object
+                      subscriptions:
+                        type: object
+                required:
+                  - errors
       requestBody:
         content:
           application/json:
@@ -17831,6 +17910,7 @@ paths:
                       enum:
                         - automatic
                         - remittance
+                      default: automatic
                     payer_attributes:
                       type: object
                       properties:
@@ -17877,6 +17957,7 @@ paths:
                           type:
                             - string
                             - integer
+                          example: 4111111111111111
                         expiration_month:
                           type:
                             - string
@@ -17887,6 +17968,7 @@ paths:
                             - integer
                         chargify_token:
                           type: string
+                          example: tok_592nf92ng0sjd4300p
                         vault_token:
                           type: string
                         current_vault:
@@ -17913,6 +17995,7 @@ paths:
                           type: string
                         card_type:
                           type: string
+                          example: visa
                         customer_vault_token:
                           type: string
                         cvv:
@@ -17924,18 +18007,31 @@ paths:
                       properties:
                         bank_name:
                           type: string
+                          description: (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides
                         bank_account_number:
                           type: string
+                          description: (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
                         bank_routing_number:
                           type: string
+                          description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
                         bank_iban:
                           type: string
+                          description: '(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided'
                         bank_branch_code:
                           type: string
+                          description: '(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided'
                         bank_account_type:
                           type: string
+                          enum:
+                            - checking
+                            - savings
+                          default: checking
                         bank_account_holder_type:
                           type: string
+                          enum:
+                            - personal
+                            - business
+                          default: personal
                         payment_type:
                           type: string
                         billing_address:
@@ -17961,22 +18057,31 @@ paths:
                         properties:
                           product_handle:
                             type: string
+                            description: 'The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.'
                           product_id:
                             type: integer
+                            description: The Product ID of the product for which you are creating a subscription. You can pass either `product_id` or `product_handle`.
                           product_price_point_id:
                             type: integer
+                            description: The ID of the particular price point on the product.
                           product_price_point_handle:
                             type: string
+                            description: The user-friendly API handle of a product's particular price point.
                           offer_id:
                             type: integer
+                            description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`'
                           reference:
                             type: string
+                            description: The reference value (provided by your app) for the subscription itelf.
                           primary:
                             type: boolean
+                            description: One of the subscriptions must be marked as primary in the group.
                           currency:
                             type: string
+                            description: '(Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.'
                           coupon_codes:
                             type: array
+                            description: An array for all the coupons attached to the subscription.
                             items:
                               type: string
                           components:
@@ -17986,6 +18091,7 @@ paths:
                               properties:
                                 component_id:
                                   type: string
+                                  description: Required if passing any component to `components` attribute.
                                 allocated_quantity:
                                   type: string
                                 unit_balance:
@@ -17994,9 +18100,15 @@ paths:
                                   type: string
                                 custom_price:
                                   type: object
+                                  description: Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`.
                                   properties:
                                     pricing_scheme:
                                       type: string
+                                      enum:
+                                        - per_unit
+                                        - stairstep
+                                        - volume
+                                        - tiered
                                     prices:
                                       type: array
                                       items:
@@ -18015,6 +18127,11 @@ paths:
                                         properties:
                                           pricing_scheme:
                                             type: string
+                                            enum:
+                                              - per_unit
+                                              - stairstep
+                                              - volume
+                                              - tiered
                                           prices:
                                             type: array
                                             items:
@@ -18028,6 +18145,7 @@ paths:
                                                   type: string
                           custom_price:
                             type: object
+                            description: Used in place of `product_price_point_id` to define a custom price point unique to the subscription. You still need to pass `product_id` or `product_handle`.
                             properties:
                               name:
                                 type: string
@@ -18037,15 +18155,18 @@ paths:
                                 type:
                                   - string
                                   - integer
+                                description: Required if using `custom_price` attribute.
                               interval:
                                 type:
                                   - string
                                   - integer
+                                description: Required if using `custom_price` attribute.
                               interval_unit:
                                 type: string
                                 enum:
                                   - day
                                   - month
+                                description: Required if using `custom_price` attribute.
                               trial_price_in_cents:
                                 type:
                                   - string
@@ -18081,6 +18202,7 @@ paths:
                             properties:
                               snap_day:
                                 type: string
+                                description: A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'.
                               calendar_billing_first_charge:
                                 type: string
                                 enum:
