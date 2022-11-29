@@ -17789,10 +17789,10 @@ paths:
                     amount: '1'
                     memo: Deduction
       description: Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
-  /subscription_groups_with_subs.json:
+  /subscription_groups/signup.json:
     post:
       operationId: post-subscription_groups_with_subs.j.json
-      summary: Create Subscription Group with Multiple Subscriptions
+      summary: Subscription Group Signup
       description: |-
         Create multiple subscriptions at once under the same customer and consolidate them into a subscription group.
 
@@ -18090,14 +18090,22 @@ paths:
                               type: object
                               properties:
                                 component_id:
-                                  type: string
+                                  type:
+                                    - string
+                                    - integer
                                   description: Required if passing any component to `components` attribute.
                                 allocated_quantity:
-                                  type: string
+                                  type:
+                                    - string
+                                    - integer
                                 unit_balance:
-                                  type: string
+                                  type:
+                                    - string
+                                    - integer
                                 price_point_id:
-                                  type: string
+                                  type:
+                                    - string
+                                    - integer
                                 custom_price:
                                   type: object
                                   description: Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`.
@@ -18210,9 +18218,7 @@ paths:
                                   - immediate
                                   - delayed
                           metafields:
-                            type: array
-                            items:
-                              type: object
+                            type: object
               required:
                 - subscription_group
             examples:
@@ -18330,6 +18336,7 @@ paths:
                                 - unit_price: '2'
                                   starting_quantity: '16'
                       - product_id: 13
+    parameters: []
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
