@@ -13416,7 +13416,6 @@ paths:
             }
           }
         ```
-
       requestBody:
         content:
           application/json:
@@ -13735,7 +13734,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
+                      bank_routing_number: 21000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
@@ -23239,6 +23238,49 @@ paths:
                 $ref: '#/components/schemas/Batch-Job'
         '404':
           description: Not Found
+  '/subscriptions/{subscription_id}/request_payment_profiles_update.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Send request payment update email
+      tags:
+        - Payment Profiles
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  Example 1:
+                    errors:
+                      - 'Too many requests. You can perform 5 requests within 00:30:00'
+              examples:
+                Too many requests:
+                  value:
+                    errors:
+                      - 'Too many requests. You can perform 5 requests within 00:30:00'
+      operationId: post-subscriptions-subscription_id-request_payment_profiles_update.json
+      description: |-
+        You can send a `request payment update` email to the customer associated with the subscription.
+
+        If you attempt to send a `request payment update` email 5 times within 30 minutes, you will receive a 422 response with an error message in the body.
+
+        If you attempt to send a request payment update email when the Subscription does not exist, you will receive a 404 error response.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -24577,7 +24619,7 @@ components:
               type: string
         ach_agreement:
           type: object
-          description: (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.
+          description: '(Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.'
           properties:
             agreement_terms:
               type: string
