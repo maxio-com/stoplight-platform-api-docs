@@ -17791,7 +17791,7 @@ paths:
       description: Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
   /subscription_groups/signup.json:
     post:
-      operationId: post-subscription_groups_with_subs.j.json
+      operationId: post-subscription_groups_signup.json
       summary: Subscription Group Signup
       description: |-
         Create multiple subscriptions at once under the same customer and consolidate them into a subscription group.
