@@ -13416,7 +13416,6 @@ paths:
             }
           }
         ```
-
       requestBody:
         content:
           application/json:
@@ -23239,6 +23238,51 @@ paths:
                 $ref: '#/components/schemas/Batch-Job'
         '404':
           description: Not Found
+  '/subscriptions/{subscription_id}/request_payment_profiles_update.json':
+    parameters:
+      - schema:
+          type: string
+        name: subscription_id
+        in: path
+        required: true
+    post:
+      summary: Send request payment update email
+      tags:
+        - Payment Profiles
+      responses:
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                x-examples:
+                  Example 1:
+                    errors:
+                      - 'Too many requests. You can perform 5 requests within 00:30:00'
+              examples:
+                Too many requests:
+                  value:
+                    errors:
+                      - 'Too many requests. You can perform 5 requests within 00:30:00'
+      operationId: post-subscriptions-subscription_id-request_payment_profiles_update.json
+      description: |-
+        You can send a "request payment update" email to the customer associated with the subscription.
+
+        If you attempt to send a "request payment update" email more than five times within a 30-minute period, you will receive a `422` response with an error message in the body. This error message will indicate that the request has been rejected due to excessive attempts, and will provide instructions on how to resubmit the request.
+
+        Additionally, if you attempt to send a "request payment update" email for a subscription that does not exist, you will receive a `404` error response. This error message will indicate that the subscription could not be found, and will provide instructions on how to correct the error and resubmit the request.
+
+        These error responses are designed to prevent excessive or invalid requests, and to provide clear and helpful information to users who encounter errors during the request process.
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -24577,7 +24621,7 @@ components:
               type: string
         ach_agreement:
           type: object
-          description: (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.
+          description: '(Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.'
           properties:
             agreement_terms:
               type: string
