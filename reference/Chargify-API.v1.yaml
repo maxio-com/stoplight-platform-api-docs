@@ -18016,10 +18016,10 @@ paths:
                           description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
                         bank_iban:
                           type: string
-                          description: '(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided'
+                          description: (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided
                         bank_branch_code:
                           type: string
-                          description: '(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided'
+                          description: (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided
                         bank_account_type:
                           type: string
                           enum:
@@ -18057,7 +18057,7 @@ paths:
                         properties:
                           product_handle:
                             type: string
-                            description: 'The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.'
+                            description: The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.
                           product_id:
                             type: integer
                             description: The Product ID of the product for which you are creating a subscription. You can pass either `product_id` or `product_handle`.
@@ -18069,7 +18069,7 @@ paths:
                             description: The user-friendly API handle of a product's particular price point.
                           offer_id:
                             type: integer
-                            description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`'
+                            description: Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`
                           reference:
                             type: string
                             description: The reference value (provided by your app) for the subscription itelf.
@@ -18078,7 +18078,7 @@ paths:
                             description: One of the subscriptions must be marked as primary in the group.
                           currency:
                             type: string
-                            description: '(Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.'
+                            description: (Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.
                           coupon_codes:
                             type: array
                             description: An array for all the coupons attached to the subscription.
