@@ -743,6 +743,7 @@ paths:
                         remittance_net_terms: 0
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
+                      test: true
       operationId: get-site.json
       description: |-
         This endpoint allows you to fetch some site data.
@@ -2105,6 +2106,9 @@ paths:
                     enum:
                       - option 1
                       - option 2
+                    scope:
+                      public_edit: '1'
+                      public_show: '1'
               Multiple Metafields:
                 value:
                   metafields:
@@ -2135,6 +2139,28 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Metafield'
+              examples:
+                example-1:
+                  value:
+                    total_count: 0
+                    current_page: 0
+                    total_pages: 0
+                    per_page: 0
+                    metafields:
+                      - id: 0
+                        name: string
+                        scope:
+                          hosted:
+                            - {}
+                          csv: string
+                          statements: string
+                          invoices: string
+                          portal: string
+                          public_show: string
+                          public_edit: string
+                        data_count: 0
+                        input_type: string
+                        enum: null
       operationId: get-resource_type-metafields.json
       description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
@@ -6924,7 +6950,7 @@ paths:
         name: product_id
         in: path
         required: true
-        description: The Chargify id of the product to which the price point belongs
+        description: 'The id or handle of the product. When using the handle, it must be prefixed with `handle:`'
     post:
       summary: Create Product Price Point
       tags:
@@ -7061,13 +7087,13 @@ paths:
         name: product_id
         in: path
         required: true
-        description: The Chargify id of the product to which the price point belongs
+        description: 'The id or handle of the product. When using the handle, it must be prefixed with `handle:`'
       - schema:
           type: integer
         name: price_point_id
         in: path
         required: true
-        description: The Chargify id of the product price point
+        description: 'The id or handle of the price point. When using the handle, it must be prefixed with `handle:`'
     put:
       summary: Update Product Price Point
       tags:
@@ -7985,7 +8011,6 @@ paths:
                         - authorizenet
                         - authorizenet_cim
                         - beanstream
-                        - bpoint
                         - braintree_blue
                         - cybersource
                         - elavon
@@ -7993,16 +8018,13 @@ paths:
                         - eway_rapid_std
                         - firstdata
                         - forte
-                        - fusebox
                         - gocardless
                         - litle
                         - moneris
-                        - moneris_us
                         - orbital
                         - payment_express
                         - paymill
                         - pin
-                        - quickpay
                         - square
                         - stripe_connect
                         - trust_commerce
@@ -9309,6 +9331,22 @@ paths:
           in: query
           name: product_ids
           description: Allows fetching invoices with matching line items product ids based on provided values.
+        - schema:
+            type: string
+            enum:
+              - status
+              - total_amount
+              - due_amount
+              - created_at
+              - updated_at
+              - issue_date
+              - due_date
+              - number
+            example: sort=total_amount
+            default: number
+          in: query
+          name: sort
+          description: Allows specification of the order of the returned list.
   '/invoices/{uid}.json':
     parameters:
       - schema:
@@ -13317,6 +13355,69 @@ paths:
         The `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.
 
         The optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the target subscription.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the target subscription also.
+
+        ## Providing Agreement Acceptance Params
+
+        It is possible to provide a proof of customer's acceptance of terms and policies.
+        We will be storing this proof in case it might be required (i.e. chargeback).
+        Currently, we already keep it for subscriptions created via Public Signup Pages.
+        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `agreement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
+        `secure_checkout_policy_url`.
+
+        ```json
+          "subscription": {
+            "product_handle": "gold-product",
+            "customer_attributes": {
+              "first_name": "Jane",
+              "last_name": "Doe",
+              "email": "jd@chargify.test"
+            },
+            "agreement_acceptance": {
+              "ip_address": "1.2.3.4",
+              "terms_url": "https://terms.url",
+              "privacy_policy_url": "https://privacy_policy.url",
+              "return_refund_policy_url": "https://return_refund_policy.url",
+              "delivery_policy_url": "https://delivery_policy.url",
+              "secure_checkout_policy_url": "https://secure_checkout_policy.url"
+            }
+          }
+        }
+        ```
+
+        **For Maxio Payments subscriptions, the agreement acceptance params are required, with at least terms_url provided.**
+
+        ## Providing ACH Agreement params
+
+        It is also possible to provide a proof that a customer authorized ACH agreement terms.
+        The proof will be stored and the email will be sent to the customer with a copy of the terms (if enabled).
+        In order to create a subscription with the proof of authorized ACH agreement terms, you must provide the additional parameter `ach_agreement` with the following nested parameters: `agreement_terms`, `authorizer_first_name`, `authorizer_last_name` and `ip_address`.
+        Each of them is required.
+
+        ```json
+          "subscription": {
+            "product_handle": "gold-product",
+            "customer_attributes": {
+              "first_name": "Jane",
+              "last_name": "Doe",
+              "email": "jd@chargify.test"
+            },
+            "bank_account_attributes": {
+              "bank_name": "Test Bank",
+              "bank_routing_number": "021000089",
+              "bank_account_number": "111111111111",
+              "bank_account_type": "checking",
+              "bank_account_holder_type": "business",
+              "payment_type": "bank_account"
+            },
+            "ach_agreement": {
+              "agreement_terms": "ACH agreement terms",
+              "authorizer_first_name": "Jane",
+              "authorizer_last_name": "Doe",
+              "ip_address": "1.2.3.4"
+            }
+          }
+        ```
+
       requestBody:
         content:
           application/json:
@@ -13608,6 +13709,43 @@ paths:
                           prices:
                             - unit_price: '1'
                               starting_quantity: '1'
+              With Agreement Acceptance:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    credit_card_attributes:
+                      chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
+                    agreement_acceptance:
+                      ip_address: 1.2.3.4
+                      terms_url: 'https://terms.url'
+                      privacy_policy_url: 'https://privacy_policy.url'
+                      return_refund_policy_url: 'https://return_refund_policy.url'
+                      delivery_policy_url: 'https://delivery_policy_.url'
+                      secure_checkout_policy_url: 'https://secure_checkout_policy.url'
+              With ACH Agreement:
+                value:
+                  subscription:
+                    product_handle: basic
+                    customer_attributes:
+                      first_name: Joe
+                      last_name: Blow
+                      email: joe@example.com
+                    bank_account_attributes:
+                      bank_name: Test Bank
+                      bank_routing_number: 021000089
+                      bank_account_number: 111111111111
+                      bank_account_type: checking
+                      bank_account_holder_type: business
+                      payment_type: bank_account
+                    ach_agreement:
+                      agreement_terms: ACH agreement terms
+                      authorizer_first_name: Jane
+                      authorizer_last_name: Doe
+                      ip_address: 1.2.3.4
     get:
       summary: List Subscriptions
       tags:
@@ -17047,6 +17185,63 @@ paths:
 
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
+        ### Line items types
+        When defining line item, You can choose one of 3 types for one line item:
+        #### Custom item
+        Like in basic behavior example above, You can pass `title` and `unit_price` for custom item.
+        #### Product id
+        Product handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `product_price_point_id`. If `product_id` is used, following fields cannot be used: `title`, `component_id`.
+        #### Component id
+        Component handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `component_id`. If `component_id` is used, following fields cannot be used: `title`, `product_id`. By default `unit_price` is taken from product's default price point, but can be overwritten by passing `unit_price` or `price_point_id`. At this moment price points are supportted only for quantity based, on/off and metered components. For prepaid and event based billing components `unit_price` is required.
+
+        ### Coupons
+        When creating ad hoc invoice, new discounts can be applied in following way:
+
+        ```json
+        {
+          "invoice": {
+            "line_items": [
+              {
+                "product_id": "handle:gold-product",
+                "quantity": 1
+              }
+            ],
+            "coupons": [ 
+              {
+                "code": "COUPONCODE",
+                "percentage": 50.0
+              }
+            ]
+          }
+        }
+        ```
+        If You want to use existing coupon for discount creation, only `code` and optional `product_family_id` is needed
+
+        ```json
+        ...
+         "coupons": [ 
+              {
+                "code": "FREESETUP",
+                "product_family_id": 1
+              }
+          ]
+        ...
+        ```
+
+        ### Coupon options
+        #### Code
+        Coupon `code` will be displayed on invoice discount section.
+        Coupon code can only contain uppercase letters, numbers, and allowed special characters.
+        Lowercase letters will be converted to uppercase. It can be used to select an existing coupon from the catalog, or as an ad hoc coupon when passed with `percentage` or `amount`.
+        #### Percentage 
+        Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Only for ad hoc coupons, will be ignored if `code` is used to select an existing coupon from the catalog.
+        #### Amount
+        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`. 
+        #### Description
+        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`. 
+        #### Product Family id
+        Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
+
         ### Line Item Options
 
         #### Period Date Range
@@ -17057,6 +17252,13 @@ paths:
         #### Taxes
 
         The `taxable` parameter can be sent as `true` if taxes should be calculated for a specific line item. For this to work, the site should be configured to use and calculate taxes. Further, if the site uses Avalara for tax calculations, a `tax_code` parameter should also be sent. For existing catalog items: products/components taxes cannot be overwritten.
+
+        #### Price Point
+        Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
+         
+        #### Description
+        Optional `description` parameter, it will overwrite default generated description for line item.
+
 
         #### Price Point
         Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
@@ -17078,6 +17280,10 @@ paths:
         #### Memo and Payment Instructions
 
         A custom memo can be sent with the `memo` parameter to override the site's default. Likewise, custom payment instructions can be sent with the `payment_instrucions` parameter.
+
+        #### Status
+
+        By default, invoices will be created with open status. Possible alternative is `draft`.
       requestBody:
         content:
           application/json:
@@ -17099,6 +17305,7 @@ paths:
                               - number
                               - string
                             description: 'The quantity can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
+                            minimum: 0
                           unit_price:
                             description: 'The unit_price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place.'
                             type:
@@ -17118,6 +17325,28 @@ paths:
                           period_range_end:
                             type: string
                             description: YYYY-MM-DD
+                          product_id:
+                            type:
+                              - string
+                              - integer
+                            description: Product handle or product id.
+                          component_id:
+                            type:
+                              - string
+                              - integer
+                            description: Component handle or component id.
+                          price_point_id:
+                            type:
+                              - string
+                              - integer
+                            description: Price point handle or id. For component.
+                          product_price_point_id:
+                            type:
+                              - string
+                              - integer
+                          description:
+                            type: string
+                            maxLength: 255
                     issue_date:
                       type: string
                     net_terms:
@@ -17194,6 +17423,35 @@ paths:
                           type: string
                         country:
                           type: string
+                    coupons:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          code:
+                            type: string
+                          percentage:
+                            type:
+                              - string
+                              - number
+                            maximum: 100
+                            example: 50
+                          amount:
+                            type:
+                              - string
+                              - number
+                            minimum: 0
+                          description:
+                            type: string
+                            maxLength: 255
+                          product_family_id:
+                            type:
+                              - string
+                              - integer
+                    status:
+                      type: string
+                      example: draft
+                      default: open
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
@@ -17629,9 +17887,10 @@ paths:
                 value:
                   subscription_group:
                     subscription_id: 1
-                    members_ids:
+                    member_ids:
                       - 2
                       - 3
+                      - 4
     get:
       summary: List Subscription Groups
       tags:
@@ -17960,8 +18219,10 @@ paths:
               Example:
                 value:
                   subscription_group:
-                    members_ids:
+                    member_ids:
                       - 1
+                      - 2
+                      - 3
     delete:
       summary: Delete Subscription Group
       tags:
@@ -22477,6 +22738,499 @@ paths:
 
         You can read more about the behavior of trialing subscriptions [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404494617357#trialing-subscriptions-0-0).
         When the `revert_on_failure` parameter is set to `true`, the subscription's state will remain as Trialing, we will void the invoice from activation and return any prepayments and credits applied to the invoice back to the subscription.
+  /subscriptions/proforma_invoices.json:
+    post:
+      summary: Create signup proforma invoice
+      tags:
+        - Proforma Invoices
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Proforma-Invoice'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      subscription:
+                        type: object
+                        properties:
+                          base:
+                            type: array
+                            items:
+                              type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      subscription:
+                        base:
+                          - must be an object
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      base:
+                        - Couldn't find Product by 1
+              examples:
+                Product invalid:
+                  value:
+                    errors:
+                      base:
+                        - Couldn't find Product by 1
+                Missing customer:
+                  value:
+                    errors:
+                      customer:
+                        - Missing required customer attributes
+                Invalid type:
+                  value:
+                    errors:
+                      base:
+                        - currency must be a string
+      operationId: post-subscriptions-proforma_invoices
+      description: |-
+        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoices or preview prepaid subscriptions.
+
+        Create a proforma invoice to preview costs before a subscription's signup. Like other proforma invoices, it can be emailed to the customer, voided, and publicly viewed on the chargifypay domain.
+
+        Pass a payload that resembles a subscription create or signup preview request. For example, you can specify components, coupons/a referral, offers, custom pricing, and an existing customer or payment profile to populate a shipping or billing address.
+
+        A product and customer first name, last name, and email are the minimum requirements. We recommend associating the proforma invoice with a customer_id to easily find their proforma invoices, since the subscription_id will always be blank.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create-Subscription'
+            examples:
+              Minimum payload:
+                value:
+                  subscription:
+                    product_handle: gold-product
+                    customer_attributes:
+                      first_name: Myra
+                      last_name: Maisel
+                      email: mmaisel@example.com
+              Minimum payload with referenced customer:
+                value:
+                  subscription:
+                    product_handle: gold-product
+                    customer_id: 12345
+    parameters: []
+  /subscriptions/proforma_invoices/preview.json:
+    post:
+      summary: Create signup proforma preview
+      tags:
+        - Proforma Invoices
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    proforma_invoice_preview:
+                      current_proforma_invoice: {}
+                      next_proforma_invoice: {}
+                properties:
+                  proforma_invoice_preview:
+                    type: object
+                    properties:
+                      current_proforma_invoice:
+                        type: object
+                      next_proforma_invoice:
+                        type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      subscription:
+                        type: object
+                        properties:
+                          base:
+                            type: array
+                            items:
+                              type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      subscription:
+                        base:
+                          - must be an object
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      base:
+                        type: array
+                        items:
+                          type: string
+                x-examples:
+                  example-1:
+                    errors:
+                      base:
+                        - Couldn't find Product by 6067
+              examples:
+                Missing product:
+                  value:
+                    errors:
+                      base:
+                        - Couldn't find Product by 6067
+                Missing customer:
+                  value:
+                    errors:
+                      customer:
+                        - Missing required customer attributes
+                Invalid type:
+                  value:
+                    errors:
+                      base:
+                        - organization must be a string
+      operationId: post-subscriptions-proforma_invoices-preview.json
+      description: |-
+        This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoice previews or preview prepaid subscriptions.
+
+        Create a signup preview in the format of a proforma invoice to preview costs before a subscription's signup. You have the option of optionally previewing the first renewal's costs as well. The proforma invoice preview will not be persisted.
+
+        Pass a payload that resembles a subscription create or signup preview request. For example, you can specify components, coupons/a referral, offers, custom pricing, and an existing customer or payment profile to populate a shipping or billing address.
+
+        A product and customer first name, last name, and email are the minimum requirements.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Create-Subscription'
+            examples:
+              Minimum example:
+                value:
+                  subscription:
+                    product_handle: gold-plan
+                    customer_attributes:
+                      first_name: first
+                      last_name: last
+                      email: flast@example.com
+              Minimum example with existing customer:
+                value:
+                  subscription:
+                    product_handle: silver-plan
+                    customer_id: 1234
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: include=next_proforma_invoice
+          description: Choose to include a proforma invoice preview for the first renewal
+  '/api_exports/proforma_invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Proforma Invoices
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported proforma invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Proforma-Invoice'
+        '404':
+          description: Not Found
+  '/api_exports/invoices/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Invoices
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&page=1`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Not Found
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+  '/api_exports/subscriptions/{batch_id}/rows.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: List Exported Subscriptions
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: |-
+        This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
+
+        Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/rows?per_page=200&page=1`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Subscription.yaml
+        '404':
+          description: Not Found
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+          in: query
+          name: per_page
+          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - schema:
+            type: integer
+            minimum: 1
+          in: query
+          name: page
+          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+  /api_exports/proforma_invoices.json:
+    post:
+      summary: Create Proforma Invoices Export
+      tags:
+        - API Exports
+      operationId: post-api_exports-proforma_invoices.json
+      description: |-
+        This API creates a proforma invoices export and returns a batchjob object.
+
+        It is only available for Relationship Invoicing architecture.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+  /api_exports/invoices.json:
+    post:
+      summary: Create Invoices Export
+      tags:
+        - API Exports
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates an invoices export and returns a batchjob object.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    parameters: []
+  /api_exports/subscriptions.json:
+    post:
+      summary: Create Subscriptions Export
+      tags:
+        - API Exports
+      operationId: post-api_exports-proforma_invoices.json
+      description: This API creates a subscriptions export and returns a batchjob object.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+    parameters: []
+  '/api_exports/proforma_invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Proforma Invoices Export
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for proforma invoices export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+  '/api_exports/invoices/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Invoices Export
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for invoices export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
+  '/api_exports/subscriptions/{batch_id}.json':
+    parameters:
+      - schema:
+          type: string
+        name: batch_id
+        in: path
+        required: true
+    get:
+      summary: Read Subscriptions Export
+      tags:
+        - API Exports
+      operationId: get-api_exports-proforma_invoices-id-rows.json
+      description: This API returns a batchjob object for subscriptions export.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch-Job'
+        '404':
+          description: Not Found
 servers:
   - url: 'https://{subdomain}.chargify.com'
     description: Production server
@@ -22644,6 +23398,8 @@ components:
             subscription_id:
               type: integer
               description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.
+            tax_included:
+              type: boolean
     Component:
       title: Component
       type: object
@@ -22992,6 +23748,19 @@ components:
     Create-Metafield:
       title: Create Metafield
       type: object
+      examples:
+        - id: 0
+          name: string
+          scope:
+            csv: '0'
+            invoices: '0'
+            statements: '0'
+            portal: '0'
+            public_show: '0'
+            public_edit: '0'
+          input_type: text
+          enum:
+            - string
       properties:
         id:
           type: number
@@ -23006,25 +23775,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
@@ -23415,6 +24196,9 @@ components:
               enum:
                 - day
                 - month
+            tax_included:
+              type: boolean
+              description: (Optional)
         coupon_code:
           type: string
           description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
@@ -23585,7 +24369,6 @@ components:
                 - beanstream
                 - braintree_blue
                 - paypal
-                - quickpay
                 - eway
                 - eway_rapid_std
                 - stripe_connect
@@ -23770,6 +24553,40 @@ components:
           type: string
         activated_at:
           type: string
+        agreement_acceptance:
+          type: object
+          description: Required when creating a subscription with Maxio Payments.
+          properties:
+            ip_address:
+              type: string
+              description: Required when providing agreement acceptance params.
+            terms_url:
+              type: string
+              description: Required when creating a subscription with Maxio Payments. Either terms_url or provacy_policy_url required when providing agreement_acceptance params.
+            privacy_policy_url:
+              type: string
+            return_refund_policy_url:
+              type: string
+            delivery_policy_url:
+              type: string
+            secure_checkout_policy_url:
+              type: string
+        ach_agreement:
+          type: object
+          description: (Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.
+          properties:
+            agreement_terms:
+              type: string
+              description: (Required when providing ACH agreement params) The ACH authorization agreement terms.
+            authorizer_first_name:
+              type: string
+              description: (Required when providing ACH agreement params) The first name of the person authorizing the ACH agreement.
+            authorizer_last_name:
+              type: string
+              description: (Required when providing ACH agreement params) The last name of the person authorizing the ACH agreement.
+            ip_address:
+              type: string
+              description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
     Credit-Note:
       title: Credit Note
       type: object
@@ -24675,6 +25492,12 @@ components:
                 type: integer
               prepayment:
                 type: boolean
+              gateway_handle:
+                type:
+                  - string
+                  - 'null'
+              gateway_used:
+                type: string
               gateway_transaction_id:
                 type:
                   - string
@@ -24752,6 +25575,10 @@ components:
             invoices:
               type: string
             portal:
+              type: string
+            public_show:
+              type: string
+            public_edit:
               type: string
         data_count:
           type: integer
@@ -25921,25 +26748,37 @@ components:
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the csv export
+              description: Include (1) or exclude (0) metafields from the csv export.
             invoices:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from invoices
+              description: Include (1) or exclude (0) metafields from invoices.
             statements:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from statements
+              description: Include (1) or exclude (0) metafields from statements.
             portal:
               type: string
               enum:
                 - '0'
                 - '1'
-              description: include (1) or exclude (0) metafields from the portal
+              description: Include (1) or exclude (0) metafields from the portal.
+            public_show:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
+            public_edit:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
         input_type:
           type: string
           description: 'The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page.'
@@ -26139,6 +26978,33 @@ components:
                 custom_net_terms_enabled:
                   type: boolean
                   default: false
+            test:
+              type: boolean
+    Batch-Job:
+      title: Batch-Job
+      x-stoplight:
+        id: igb6nbuojdj23
+      type: object
+      properties:
+        batchjob:
+          type: object
+          properties:
+            id:
+              type: integer
+            finished_at:
+              type:
+                - string
+                - 'null'
+            row_count:
+              type:
+                - integer
+                - 'null'
+            created_at:
+              type:
+                - string
+                - 'null'
+            completed:
+              type: string
   securitySchemes:
     BasicAuth:
       type: http
