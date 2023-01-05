@@ -5188,6 +5188,8 @@ paths:
   /components.json:
     get:
       summary: List Components
+      tags:
+        - Components
       responses:
         '200':
           description: OK
@@ -5337,8 +5339,6 @@ paths:
           name: 'filter[use_site_exchange_rate]'
           description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
       description: This request will return a list of components for a site.
-      tags:
-        - Components
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
       - schema:
@@ -13734,7 +13734,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 21000089
+                      bank_routing_number: 021000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
