@@ -4340,6 +4340,9 @@ paths:
                       event_based_billing_metric_id:
                         type: integer
                         description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
+                      item_category:
+                        type: string
+                        description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
               examples:
                 Example:
                   value:
@@ -13734,7 +13737,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
+                      bank_routing_number: 21000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
