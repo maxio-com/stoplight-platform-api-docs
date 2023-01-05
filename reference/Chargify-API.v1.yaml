@@ -4343,6 +4343,9 @@ paths:
                       item_category:
                         type: string
                         description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
+                      accounting_code:
+                        type: string
+                        description: 'E.g. Internal ID or SKU Number'
               examples:
                 Example:
                   value:
@@ -23565,6 +23568,11 @@ components:
                 - string
                 - 'null'
               description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
+            accounting_code:
+              type:
+                - string
+                - 'null'
+              description: 'E.g. Internal ID or SKU Number'
     Coupon:
       title: Coupon
       type: object
