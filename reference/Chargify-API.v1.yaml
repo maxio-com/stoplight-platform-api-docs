@@ -23558,7 +23558,9 @@ components:
                 - boolean
                 - 'null'
             item_category:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
     Coupon:
       title: Coupon
