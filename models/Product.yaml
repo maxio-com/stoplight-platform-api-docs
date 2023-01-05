@@ -16,6 +16,7 @@ properties:
   accounting_code:
     type: string
     nullable: true
+    description: 'E.g. Internal ID or SKU Number'
   request_credit_card:
     type: boolean
     description: 'Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page.'
