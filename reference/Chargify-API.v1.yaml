@@ -17240,6 +17240,17 @@ paths:
         #### Product Family id
         Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
 
+        ### Compounding Strategy
+        Optional `compounding_strategy`, can take values `compound` or `full-price`.
+
+        For amount coupons discounts will be always calculated against the original item price, before other discounts are applied.
+
+        `compound` strategy:
+        Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated.
+
+        `full-price` strategy:
+        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied.
+
         ### Line Item Options
 
         #### Period Date Range
@@ -17442,6 +17453,9 @@ paths:
                             type:
                               - string
                               - integer
+                          compounding_strategy:
+                            type:
+                              - string
                     status:
                       type: string
                       example: draft
