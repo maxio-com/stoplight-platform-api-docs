@@ -17179,7 +17179,6 @@ paths:
           }
         }
         ```
-
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
         ### Line items types
