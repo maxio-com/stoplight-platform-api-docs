@@ -2516,6 +2516,15 @@ paths:
           in: query
           name: 'resource_ids[]'
           description: Allow to fetch metadata for multiple records based on provided ids.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
   '/product_families/{product_family_id}/coupons.json':
     parameters:
       - schema:
@@ -13734,7 +13743,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
+                      bank_routing_number: 21000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
