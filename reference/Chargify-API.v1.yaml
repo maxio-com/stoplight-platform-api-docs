@@ -17246,10 +17246,10 @@ paths:
         For amount coupons, discounts will be always calculated against the original item price, before other discounts are applied.
 
         `compound` strategy:
-        Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated.
+        Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated. It is set by default.
 
         `full-price` strategy:
-        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. It is set by default.
+        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. 
 
         ### Line Item Options
 
