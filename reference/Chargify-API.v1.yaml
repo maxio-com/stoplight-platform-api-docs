@@ -17241,15 +17241,15 @@ paths:
         Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
 
         ### Compounding Strategy
-        Optional `compounding_strategy`, can take values `compound` or `full-price`.
+        Optional `compounding_strategy` for percentage coupons, can take values `compound` or `full-price`.
 
-        For amount coupons discounts will be always calculated against the original item price, before other discounts are applied.
+        For amount coupons, discounts will be always calculated against the original item price, before other discounts are applied.
 
         `compound` strategy:
         Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated.
 
         `full-price` strategy:
-        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied.
+        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. It is set by default.
 
         ### Line Item Options
 
