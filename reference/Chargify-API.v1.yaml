@@ -2516,6 +2516,15 @@ paths:
           in: query
           name: 'resource_ids[]'
           description: Allow to fetch metadata for multiple records based on provided ids.
+        - schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
   '/product_families/{product_family_id}/coupons.json':
     parameters:
       - schema:
