@@ -17239,8 +17239,7 @@ paths:
         Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`. 
         #### Product Family id
         Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
-
-        ### Compounding Strategy
+        #### Compounding Strategy
         Optional `compounding_strategy` for percentage coupons, can take values `compound` or `full-price`.
 
         For amount coupons, discounts will be always calculated against the original item price, before other discounts are applied.
