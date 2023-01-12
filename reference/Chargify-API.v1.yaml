@@ -4349,6 +4349,12 @@ paths:
                       event_based_billing_metric_id:
                         type: integer
                         description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
+                      item_category:
+                        type: string
+                        description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
+                      accounting_code:
+                        type: string
+                        description: 'E.g. Internal ID or SKU Number'
               examples:
                 Example:
                   value:
@@ -23579,6 +23585,16 @@ components:
               type:
                 - boolean
                 - 'null'
+            item_category:
+              type:
+                - string
+                - 'null'
+              description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
+            accounting_code:
+              type:
+                - string
+                - 'null'
+              description: 'E.g. Internal ID or SKU Number'
     Coupon:
       title: Coupon
       type: object
