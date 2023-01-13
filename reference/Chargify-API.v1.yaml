@@ -2181,6 +2181,15 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+          in: query
+          name: direction
+          description: Controls the order in which results are returned.
     put:
       summary: Update Metafield
       tags:
@@ -4354,7 +4363,7 @@ paths:
                         description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
                       accounting_code:
                         type: string
-                        description: 'E.g. Internal ID or SKU Number'
+                        description: E.g. Internal ID or SKU Number
               examples:
                 Example:
                   value:
@@ -13749,7 +13758,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
+                      bank_routing_number: 21000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
@@ -23594,7 +23603,7 @@ components:
               type:
                 - string
                 - 'null'
-              description: 'E.g. Internal ID or SKU Number'
+              description: E.g. Internal ID or SKU Number
     Coupon:
       title: Coupon
       type: object
