@@ -7725,15 +7725,15 @@ paths:
 
         ## Taxable Subscriptions
 
-        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
+        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-signups#taxes)
 
         ## Payment Profile Documentation
 
         Full documentation on how Payment Profiles operate within Chargify can be located under the following links:
 
-        + [Subscriber Payment Details](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#payment-details)
-        + [Self Service Pages](https://chargify.zendesk.com/hc/en-us/articles/4407797760539) (Allows credit card updates by Subscriber)
-        + [Public Signup Pages payment settings](https://chargify.zendesk.com/hc/en-us/articles/4407762566171#credit-card-settings)
+        + [Subscriber Payment Details](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405212558349-Customers-Reference#customers-reference-0-0)
+        + [Self Service Pages](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021) (Allows credit card updates by Subscriber)
+        + [Public Signup Pages payment settings](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405267754381-Individual-Page-Settings#credit-card-settings)
 
         ## Create a Payment Profile with a Chargify.js token
 
@@ -7757,7 +7757,7 @@ paths:
 
         ### Taxable Subscriptions
 
-        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
+        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-signups#taxes)
 
         ## BraintreeBlue
         Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
@@ -7766,7 +7766,7 @@ paths:
 
         For more information on GoCardless, please view the following resources:
 
-        + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
+        + [Full documentation on GoCardless](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
@@ -7840,7 +7840,7 @@ paths:
 
         For more information on Stripe SEPA Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe SEPA Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Full documentation on Stripe SEPA Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7871,7 +7871,7 @@ paths:
 
         For more information on Stripe BECS Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe BECS Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Full documentation on Stripe BECS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7901,7 +7901,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077). The server returns `422 Unprocesse Entity` in this case with the following response:
 
         ```json
         {
