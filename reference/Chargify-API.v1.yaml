@@ -393,10 +393,10 @@ paths:
 
         We recommend that you review Chargify's webhook documentation located in our help site. The following resources will help guide you on how to use webhooks in Chargify, in addition to these webhook endpoints:
 
-        + [Adding/editing new webhooks](https://chargify.zendesk.com/hc/en-us/articles/4407864180763)
-        + [Webhooks introduction and delivery information](https://chargify.zendesk.com/hc/en-us/articles/4407912597403)
-        + [Main webhook overview](https://chargify.zendesk.com/hc/en-us/articles/4407905415963)
-        + [Available webhooks and payloads](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
+        + [Adding/editing new webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404448450317#configure-webhook-url)
+        + [Webhooks introduction and delivery information](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365#webhooks-introduction-0-0)
+        + [Main webhook overview](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#webhooks-reference-0-0)
+        + [Available webhooks and payloads](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#events)
 
         ## List Webhooks for a Site
 
@@ -574,7 +574,7 @@ paths:
         The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
 
         You can check available events here.
-        [Event keys](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
+        [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#example-payloads)
       requestBody:
         content:
           application/json:
@@ -819,7 +819,7 @@ paths:
 
         If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-        Full documentation on how to use Notes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#notes).
+        Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
       requestBody:
         content:
           application/json:
@@ -1191,7 +1191,7 @@ paths:
         + Search by a reference value from your application
         + Search by a first or last name
 
-        To retrieve a single, exact match by reference, please use the [lookup endpoint](Chargify-API.v1.yaml/paths/~1customers~1lookup.json).
+        To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
       parameters:
         - schema:
             type: string
@@ -2068,7 +2068,7 @@ paths:
         + **Metafield is the custom field**
         + **Metadata is the data populating the custom field.**
 
-        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659856411). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#customer-details)
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405332553613-Custom-Fields-Reference). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#custom-fields)
 
         Metafield are the place where you will set up your resource to accept additional data. It is scoped to the site instead of a specific customer or subscription. Think of it as the key, and Metadata as the value on every record.
 
@@ -4363,7 +4363,7 @@ paths:
                         description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
                       accounting_code:
                         type: string
-                        description: 'E.g. Internal ID or SKU Number'
+                        description: E.g. Internal ID or SKU Number
               examples:
                 Example:
                   value:
@@ -13758,7 +13758,7 @@ paths:
                       email: joe@example.com
                     bank_account_attributes:
                       bank_name: Test Bank
-                      bank_routing_number: 021000089
+                      bank_routing_number: 21000089
                       bank_account_number: 111111111111
                       bank_account_type: checking
                       bank_account_holder_type: business
@@ -23603,7 +23603,7 @@ components:
               type:
                 - string
                 - 'null'
-              description: 'E.g. Internal ID or SKU Number'
+              description: E.g. Internal ID or SKU Number
     Coupon:
       title: Coupon
       type: object
