@@ -6326,8 +6326,8 @@ paths:
       description: |-
         Use this method to create a product within your Chargify site.
 
-        + [Products Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407762375067)
-        + [Changing a Subscription's Product](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#product)
+        + [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
+        + [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
       requestBody:
         content:
           application/json:
