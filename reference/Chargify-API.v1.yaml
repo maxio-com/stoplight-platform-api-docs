@@ -4421,12 +4421,12 @@ paths:
 
         ### Component Documentation
 
-        For more information on components, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407755865883).
+        For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
 
         For information on how to record component usage against a subscription, please see the following resources:
 
-        + [Proration and Component Allocations](https://chargify.zendesk.com/hc/en-us/articles/4407899119771)
-        + [Recording component usage against a subscription](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#change-product---cancelation)
+        + [Proration and Component Allocations](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#applying-proration-and-recording-components)
+        + [Recording component usage against a subscription](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404606587917#recording-component-usage)
       requestBody:
         content:
           application/json:
@@ -4458,15 +4458,15 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
                             - tiered
                             - stairstep
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#pricing-schemes-explained) for an overview of pricing schemes.'
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -4611,7 +4611,6 @@ paths:
                 - properties:
                     on_off_component:
                       type: object
-                      description: ''
                       required:
                         - name
                         - pricing_scheme
@@ -4793,7 +4792,6 @@ paths:
                           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
                         expiration_interval_unit:
                           type: string
-                          description: ''
                           enum:
                             - day
                             - month
