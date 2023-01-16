@@ -819,7 +819,7 @@ paths:
 
         If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-        Full documentation on how to use Notes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#notes).
+        Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
       requestBody:
         content:
           application/json:
@@ -1191,7 +1191,7 @@ paths:
         + Search by a reference value from your application
         + Search by a first or last name
 
-        To retrieve a single, exact match by reference, please use the [lookup endpoint](Chargify-API.v1.yaml/paths/~1customers~1lookup.json).
+        To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
       parameters:
         - schema:
             type: string
@@ -2068,7 +2068,7 @@ paths:
         + **Metafield is the custom field**
         + **Metadata is the data populating the custom field.**
 
-        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659856411). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#customer-details)
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405332553613-Custom-Fields-Reference). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#custom-fields)
 
         Metafield are the place where you will set up your resource to accept additional data. It is scoped to the site instead of a specific customer or subscription. Think of it as the key, and Metadata as the value on every record.
 
