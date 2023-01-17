@@ -393,10 +393,10 @@ paths:
 
         We recommend that you review Chargify's webhook documentation located in our help site. The following resources will help guide you on how to use webhooks in Chargify, in addition to these webhook endpoints:
 
-        + [Adding/editing new webhooks](https://chargify.zendesk.com/hc/en-us/articles/4407864180763)
-        + [Webhooks introduction and delivery information](https://chargify.zendesk.com/hc/en-us/articles/4407912597403)
-        + [Main webhook overview](https://chargify.zendesk.com/hc/en-us/articles/4407905415963)
-        + [Available webhooks and payloads](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
+        + [Adding/editing new webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404448450317#configure-webhook-url)
+        + [Webhooks introduction and delivery information](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365#webhooks-introduction-0-0)
+        + [Main webhook overview](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#webhooks-reference-0-0)
+        + [Available webhooks and payloads](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#events)
 
         ## List Webhooks for a Site
 
@@ -574,7 +574,7 @@ paths:
         The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
 
         You can check available events here.
-        [Event keys](https://chargify.zendesk.com/hc/en-us/articles/4407905415963#example-payloads)
+        [Event keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#example-payloads)
       requestBody:
         content:
           application/json:
@@ -819,7 +819,7 @@ paths:
 
         If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-        Full documentation on how to use Notes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#notes).
+        Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
       requestBody:
         content:
           application/json:
@@ -1191,7 +1191,7 @@ paths:
         + Search by a reference value from your application
         + Search by a first or last name
 
-        To retrieve a single, exact match by reference, please use the [lookup endpoint](Chargify-API.v1.yaml/paths/~1customers~1lookup.json).
+        To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
       parameters:
         - schema:
             type: string
@@ -2068,7 +2068,7 @@ paths:
         + **Metafield is the custom field**
         + **Metadata is the data populating the custom field.**
 
-        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659856411). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#customer-details)
+        Chargify Metafields are used to add meaningful attributes to subscription and customer resources. Full documentation on how to create Custom Fields in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405332553613-Custom-Fields-Reference). For additional documentation on how to record data within custom fields, please see our subscription-based documentation [here.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#custom-fields)
 
         Metafield are the place where you will set up your resource to accept additional data. It is scoped to the site instead of a specific customer or subscription. Think of it as the key, and Metadata as the value on every record.
 
@@ -2576,9 +2576,9 @@ paths:
       description: |-
         ## Coupons Documentation
 
-        Coupons can be administered in the Chargify application or created via API. Please view our section on [creating coupons](https://chargify.zendesk.com/hc/en-us/articles/4407755909531) for more information.
+        Coupons can be administered in the Chargify application or created via API. Please view our section on [creating coupons](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404742830733) for more information.
 
-        Additionally, for documentation on how to apply a coupon to a subscription within the Chargify UI, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#coupon).
+        Additionally, for documentation on how to apply a coupon to a subscription within the Chargify UI, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404761012877).
 
         ## Create Coupon
 
@@ -4363,7 +4363,7 @@ paths:
                         description: 'One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other'
                       accounting_code:
                         type: string
-                        description: 'E.g. Internal ID or SKU Number'
+                        description: E.g. Internal ID or SKU Number
               examples:
                 Example:
                   value:
@@ -4421,12 +4421,12 @@ paths:
 
         ### Component Documentation
 
-        For more information on components, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407755865883).
+        For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
 
         For information on how to record component usage against a subscription, please see the following resources:
 
-        + [Proration and Component Allocations](https://chargify.zendesk.com/hc/en-us/articles/4407899119771)
-        + [Recording component usage against a subscription](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#change-product---cancelation)
+        + [Proration and Component Allocations](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#applying-proration-and-recording-components)
+        + [Recording component usage against a subscription](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404606587917#recording-component-usage)
       requestBody:
         content:
           application/json:
@@ -4458,15 +4458,15 @@ paths:
                           description: Boolean flag describing whether a component is taxable or not.
                         pricing_scheme:
                           type: string
-                          description: 'The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes.'
                           enum:
                             - per_unit
                             - volume
                             - tiered
                             - stairstep
+                          description: 'The identifier for the pricing scheme. See [Product Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#pricing-schemes-explained) for an overview of pricing schemes.'
                         prices:
                           type: array
-                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
+                          description: '(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes.'
                           items:
                             type: object
                             properties:
@@ -4611,7 +4611,6 @@ paths:
                 - properties:
                     on_off_component:
                       type: object
-                      description: ''
                       required:
                         - name
                         - pricing_scheme
@@ -4793,7 +4792,6 @@ paths:
                           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
                         expiration_interval_unit:
                           type: string
-                          description: ''
                           enum:
                             - day
                             - month
@@ -6328,8 +6326,8 @@ paths:
       description: |-
         Use this method to create a product within your Chargify site.
 
-        + [Products Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407762375067)
-        + [Changing a Subscription's Product](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#product)
+        + [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
+        + [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
       requestBody:
         content:
           application/json:
@@ -6843,7 +6841,7 @@ paths:
       description: |-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
 
-        Full documentation on how Product Families operate within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407762380443).
+        Full documentation on how Product Families operate within the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
       requestBody:
         content:
           application/json:
@@ -7727,15 +7725,15 @@ paths:
 
         ## Taxable Subscriptions
 
-        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
+        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-signups#taxes)
 
         ## Payment Profile Documentation
 
         Full documentation on how Payment Profiles operate within Chargify can be located under the following links:
 
-        + [Subscriber Payment Details](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#payment-details)
-        + [Self Service Pages](https://chargify.zendesk.com/hc/en-us/articles/4407797760539) (Allows credit card updates by Subscriber)
-        + [Public Signup Pages payment settings](https://chargify.zendesk.com/hc/en-us/articles/4407762566171#credit-card-settings)
+        + [Subscriber Payment Details](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405212558349-Customers-Reference#customers-reference-0-0)
+        + [Self Service Pages](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021) (Allows credit card updates by Subscriber)
+        + [Public Signup Pages payment settings](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405267754381-Individual-Page-Settings#credit-card-settings)
 
         ## Create a Payment Profile with a Chargify.js token
 
@@ -7759,7 +7757,7 @@ paths:
 
         ### Taxable Subscriptions
 
-        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developer.chargify.com/content/basics/signups.html#taxes)
+        If your subscriber pays taxes on their purchased product, and you are attempting to create or update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-signups#taxes)
 
         ## BraintreeBlue
         Some merchants use Braintree JavaScript libraries directly and then pass `payment_method_nonce` and/or `paypal_email` to create a payment profile. This implementation is deprecated and does not handle 3D Secure.  Instead, we have provided [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) which is continuously improved and supports Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
@@ -7768,7 +7766,7 @@ paths:
 
         For more information on GoCardless, please view the following resources:
 
-        + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
+        + [Full documentation on GoCardless](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
@@ -7842,7 +7840,7 @@ paths:
 
         For more information on Stripe SEPA Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe SEPA Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Full documentation on Stripe SEPA Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7873,7 +7871,7 @@ paths:
 
         For more information on Stripe BECS Direct Debit, please view the following resources:
 
-        + [Full documentation on Stripe BECS Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Full documentation on Stripe BECS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -7903,7 +7901,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -11760,7 +11758,7 @@ paths:
                         success: false
                         memo: aliqua
       operationId: post-subscriptions-subscription_id-components-component_id-allocations.json
-      description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407899119771). It is focused on how allocations operate within the Chargify UI. It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see: API: [Setting Component Allocations.](https://chargify.zendesk.com/hc/en-us/articles/4407899119771). See the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#moving-subscriptions-between-price-points)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#proration-schemes)\n\n### Order of Resolution for accrue charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#proration-schemes)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
+      description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997). It is focused on how allocations operate within the Chargify UI.It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-upgrades-vs-downgrades).\nSee the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997-Component-Allocations#component-allocations-0-0)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n### Order of Resolution for accrue charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
       requestBody:
         content:
           application/json:
@@ -12821,13 +12819,13 @@ paths:
       description: |-
         Full documentation on how subscriptions operate within Chargify can be located under the following topics:
 
-        + [Subscriptions Reference](https://chargify.zendesk.com/hc/en-us/articles/4407881092763)
-        + [Subscriptions Actions](https://chargify.zendesk.com/hc/en-us/articles/4407895937819)
-        + [Subscription Cancellation](https://chargify.zendesk.com/hc/en-us/articles/4407896775579)
-        + [Subscription Reactivation](https://chargify.zendesk.com/hc/en-us/articles/4407898737691)
-        + [Subscription Import](https://chargify.zendesk.com/hc/en-us/articles/4407896986779)
+        + [Subscriptions Reference](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577172749-Subscription-Introduction)
+        + [Subscriptions Actions](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405510556557-Actions)
+        + [Subscription Cancellation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405510556557-Actions#initiate-cancellation)
+        + [Subscription Reactivation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404559291021-Reactivating-and-Resuming)
+        + [Subscription Import](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821-Imports)
 
-        When creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://chargify.zendesk.com/hc/en-us/articles/4407762386203)).
+        When creating a subscription, you must specify a product and a customer. Credit card details may be required, depending on the options for the Product being subscribed ([see Product Options](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405246782221#payment-method-settings)).
 
         The product may be specified by `product_id` or by `product_handle` (API Handle). In similar fashion, to pass a particular product price point, you may either use `product_price_point_handle` or `product_price_point_id`.
 
@@ -12839,12 +12837,13 @@ paths:
 
         ## Taxable Subscriptions
 
-        If your intent is to charge your subscribers tax via [Avalara Taxes](https://chargify.zendesk.com/hc/en-us/articles/4407904217755) or [Custom Taxes](https://chargify.zendesk.com/hc/en-us/articles/4407911887771), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
+        If your intent is to charge your subscribers tax via [Avalara Taxes](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405275711885-Avalara-VAT-Tax) or [Custom Taxes](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405069041549-Custom-Taxes), there are a few considerations to be made regarding collecting subscription data.
+        For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
 
-        + A subscription to a [taxable product](https://chargify.zendesk.com/hc/en-us/articles/4407762386203#tax-settings)
-        + [Full valid billing or shipping address](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#full-address-required-for-taxable-subscriptions) to identify the tax locale
-        + The portion of the address that houses the [state information](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.
-        The portion of the address that houses the [country information](https://chargify.zendesk.com/hc/en-us/articles/4407904217755#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.
+        + A subscription to a [taxable product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405246782221-Product-Editing#tax-settings)
+        + [Full valid billing or shipping address](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#full-address-required-for-taxable-subscriptions) to identify the tax locale
+        + The portion of the address that houses the [state information](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#required-state-format-for-taxable-subscriptions) of either adddress must adhere to the ISO standard of a 2-3 character limit/format.
+        + The portion of the address that houses the [country information](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#required-country-format-for-taxable-subscriptions) must adhere to the ISO standard of a 2 character limit/format.
 
         ## Subscription Request Examples
 
@@ -12880,7 +12879,7 @@ paths:
 
         A prepaid subscription can be created with the usual subscription creation parameters, specifying `prepaid` as the `payment_collection_method` and including a nested `prepaid_subscription_configuration`.
 
-        After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](./b3A6MTQxMDg0MTY-create-prepayment).
+        After a prepaid subscription has been created, additional funds can be manually added to the prepayment account through the [Create Prepayment Endpoint](https://developers.chargify.com/docs/api-docs/7ec482de77ba7-create-prepayment).
 
         Prepaid subscriptions do not work on legacy Statement Architecture.
 
@@ -13065,8 +13064,8 @@ paths:
 
         For more information on GoCardless, please view the following two resources:
 
-        + [Payment Profiles via API for GoCardless](./b3A6MTQxMDgzNTU-create-payment-profile#gocardless)
-        + [Full documentation on GoCardless](https://chargify.zendesk.com/hc/en-us/articles/4407761924123)
+        + [Payment Profiles via API for GoCardless](https://developers.chargify.com/docs/api-docs/1f10a4f170405-create-payment-profile#gocardless)
+        + [Full documentation on GoCardless](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677)
 
         + [Using Chargify.js with GoCardless - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-direct-debit-gocardless-gateway)
 
@@ -13126,8 +13125,8 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe SEPA Direct Debit](./b3A6MTQxMDgzNTU-create-payment-profile#sepa-direct-debit)
-        + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Payment Profiles via API for Stripe SEPA Direct Debit](https://developers.chargify.com/docs/api-docs/1f10a4f170405-create-payment-profile#sepa-direct-debit)
+        + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -13156,8 +13155,8 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe BECS Direct Debit](./b3A6MTQxMDgzNTU-create-payment-profile#stripe-becs-direct-debit)
-        + [Full documentation on Stripe Direct Debit](https://chargify.zendesk.com/hc/en-us/articles/4407761733275)
+        + [Payment Profiles via API for Stripe BECS Direct Debit](https://developers.chargify.com/docs/api-docs/1f10a4f170405-create-payment-profile#stripe-becs-direct-debit)
+        + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
         + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
@@ -13185,7 +13184,7 @@ paths:
 
         ## 3D Secure - Stripe
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077#psd2-flows-pre-authentication-and-post-authentication). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -13213,7 +13212,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077#psd2-flows-pre-authentication-and-post-authentication). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -13274,11 +13273,11 @@ paths:
 
         Before importing, you should have already set up your products to match your offerings. Then, you can create Subscriptions via the API just like you normally would, but using a few special attributes.
 
-        Full documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407896986779).
+        Full documentation on how import Subscriptions using the **import tool** in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#imports-0-0).
 
         ### Important Notices and Disclaimers regarding Imports
 
-        Before performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](https://chargify.zendesk.com/hc/en-us/articles/4407896986779#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.
+        Before performing a bulk import of subscriptions via the API, we suggest reading the [Subscriptions Import](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#important-notices-and-disclaimers) instructions to understand the repurcussions of a large import.
 
         ### Subscription Input Attributes
 
@@ -13359,7 +13358,7 @@ paths:
 
         ### Subscription in a Customer Hierarchy
 
-        For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy] features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.
+        For sites making use of the [Relationship Billing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices) and [Customer Hierarchy](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404900384141) features, it is possible to create subscriptions within a customer hierarchy.  This can be achieved through the API by passing group parameters in the **Create Subscription** request.
 
         + The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.
 
@@ -13373,7 +13372,7 @@ paths:
 
         ### Subscription in a Subscription Group
 
-        For sites making use of [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) it may be desireable to create a subscription as part of a [subscription group](https://chargify.zendesk.com/hc/en-us/articles/4407746391835) in order to rely on [invoice consolidation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).  This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.
+        For sites making use of [Relationship Billing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices) it may be desireable to create a subscription as part of a [subscription group](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577356173) in order to rely on [invoice consolidation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404980119949). This can be achieved through the API by passing group parameters in the Create Subscription request.  The `group` parameters are optional and consist of the required `target` and optional `billing` parameters.
 
         The `target` parameters specify an existing subscription with which the newly created subscription should be grouped.  If the target subscription is already part of a group, the new subscription will become a member of the group as well.  If the target subscription is not part of a group, a new group will be created and both the target and the new subscription will become part of the group with the target as the group's primary subscription.
 
@@ -18053,10 +18052,10 @@ paths:
                           description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
                         bank_iban:
                           type: string
-                          description: (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided
+                          description: '(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided'
                         bank_branch_code:
                           type: string
-                          description: (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided
+                          description: '(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided'
                         bank_account_type:
                           type: string
                           enum:
@@ -18094,7 +18093,7 @@ paths:
                         properties:
                           product_handle:
                             type: string
-                            description: The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.
+                            description: 'The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.'
                           product_id:
                             type: integer
                             description: The Product ID of the product for which you are creating a subscription. You can pass either `product_id` or `product_handle`.
@@ -18106,7 +18105,7 @@ paths:
                             description: The user-friendly API handle of a product's particular price point.
                           offer_id:
                             type: integer
-                            description: Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`
+                            description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`'
                           reference:
                             type: string
                             description: The reference value (provided by your app) for the subscription itelf.
@@ -18115,7 +18114,7 @@ paths:
                             description: One of the subscriptions must be marked as primary in the group.
                           currency:
                             type: string
-                            description: (Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.
+                            description: '(Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.'
                           coupon_codes:
                             type: array
                             description: An array for all the coupons attached to the subscription.
@@ -24151,7 +24150,7 @@ components:
               type:
                 - string
                 - 'null'
-              description: 'E.g. Internal ID or SKU Number'
+              description: E.g. Internal ID or SKU Number
     Coupon:
       title: Coupon
       type: object
@@ -24873,10 +24872,10 @@ components:
           description: 'The ID of an existing customer within Chargify. Required, unless a `customer_reference` or a set of `customer_attributes` is given.'
         next_billing_at:
           type: string
-          description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://chargify.zendesk.com/hc/en-us/articles/4407896986779). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
+          description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#date-format). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
         initial_billing_at:
           type: string
-          description: '(Optional) Set this attribute to a future date/time to create a subscription in the "Awaiting Signup" state, rather than "Active" or "Trialing". See the notes on “Date/Time Format” in our [subscription import documentation](https://chargify.zendesk.com/hc/en-us/articles/4407896986779). In the "Awaiting Signup" state, a subscription behaves like any other. It can be canceled, allocated to, had its billing date changed. etc. When the initial_billing_at date hits, the subscription will transition to the expected state. If the product has a trial, the subscription will enter a trial, otherwise it will go active. Setup fees will be respected either before or after the trial, as configured on the price point. If the payment is due at the initial_billing_at and it fails the subscription will be immediately canceled. See further notes in the section on Delayed Signups.'
+          description: '(Optional) Set this attribute to a future date/time to create a subscription in the "Awaiting Signup" state, rather than "Active" or "Trialing". See the notes on “Date/Time Format” in our [subscription import documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#date-format). In the "Awaiting Signup" state, a subscription behaves like any other. It can be canceled, allocated to, had its billing date changed. etc. When the initial_billing_at date hits, the subscription will transition to the expected state. If the product has a trial, the subscription will enter a trial, otherwise it will go active. Setup fees will be respected either before or after the trial, as configured on the price point. If the payment is due at the initial_billing_at and it fails the subscription will be immediately canceled. See further notes in the section on Delayed Signups.'
         stored_credential_transaction_id:
           type: integer
           description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
@@ -25079,7 +25078,7 @@ components:
               type: string
         components:
           type: array
-          description: '(Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for more information.'
+          description: '(Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) for more information.'
           items:
             type: object
             properties:
@@ -25145,7 +25144,7 @@ components:
           $ref: '#/components/schemas/Group-Attributes'
         ref:
           type: string
-          description: 'A valid referral code. (optional, see [Referrals](https://chargify.zendesk.com/hc/en-us/articles/4407802831643) for more details). If supplied, must be valid, or else subscription creation will fail.'
+          description: 'A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail.'
         cancellation_message:
           type: string
           description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation.
