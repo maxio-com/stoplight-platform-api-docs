@@ -280,6 +280,7 @@ properties:
       properties:
         '':
           type: object
+          additionalProperties: false
           properties:
             code:
               type: string
@@ -306,3 +307,4 @@ properties:
               type:
                 - string
                 - 'null'
+              example: '"15"'
