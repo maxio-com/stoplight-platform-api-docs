@@ -15510,6 +15510,16 @@ paths:
         ## Self-Service Page token
 
         Self-Service Page token for the subscription is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
+      parameters:
+        - schema:
+            type: array
+            enum:
+              - coupons
+              - self_service_page_token
+            example: 'include[]=coupons, include[]=self_service_page_toke'
+          in: query
+          name: 'include[]'
+          description: Allows including additional data in the response.
   '/subscriptions/{subscription_id}/resume.json':
     parameters:
       - schema:
