@@ -270,3 +270,42 @@ properties:
     type: boolean
     description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
     nullable: true
+  coupons:
+    type: array
+    description: |-
+      Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.
+      Only in Read Subscription Endpoint.
+    items:
+      type: object
+      additionalProperties: false
+      properties:
+        '':
+          type: object
+          additionalProperties: false
+          properties:
+            code:
+              type: string
+              example: '"ABCD_10"'
+            use_count:
+              type: integer
+              example: 2
+            uses_allowed:
+              type: integer
+              example: 10
+            expires_at:
+              type:
+                - string
+                - 'null'
+              example: '"2023-07-13T05:18:58-04:00"'
+            recurring:
+              type: boolean
+            amount_in_cents:
+              type:
+                - string
+                - 'null'
+              example: '"1000"'
+            percentage:
+              type:
+                - string
+                - 'null'
+              example: '"15.0"'
