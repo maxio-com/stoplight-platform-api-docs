@@ -5998,13 +5998,13 @@ components:
           type: integer
           description: 'A gateway-specific identifier for the transaction, separate from the gateway_transaction_id'
           nullable: true
-        product_id:
-          type: integer
-          description: The Chargify id for the product associated with the subscription
-          nullable: true
         payment_id:
           type: integer
           description: 'The unique identifier for the payment being explicitly refunded (in whole or in part) by this transaction. Will be null for all transaction types except for “Refund”. May be null even for Refunds. For partial refunds, more than one Refund transaction may reference the same payment_id.'
+          nullable: true
+        product_id:
+          type: integer
+          description: The Chargify id for the product associated with the subscription
           nullable: true
         tax_id:
           type: integer
