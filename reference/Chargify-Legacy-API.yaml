@@ -5991,6 +5991,9 @@ components:
           type: string
           description: 'The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists'
           nullable: true
+        gateway_response_code:
+          type: string
+          description: 'The response code from the remote Gateway (only supported by: Vantiv (Litle), Maxio Payments)'
         gateway_order_id:
           type: integer
           description: 'A gateway-specific identifier for the transaction, separate from the gateway_transaction_id'
@@ -6008,6 +6011,7 @@ components:
           nullable: true
         taxations:
           type: array
+          items: {}
         component_id:
           type: integer
           description: 'The Chargify id of the component, only available for a charge'
