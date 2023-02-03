@@ -15058,7 +15058,6 @@ paths:
                       description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
                     next_billing_at:
                       type: string
-                      description: ''
                     payment_collection_method:
                       type: string
                     receives_invoice_emails:
@@ -15153,6 +15152,18 @@ paths:
                                     ending_quantity:
                                       type: string
                                       nullable: true
+                    dunning_communication_delay_enabled:
+                      type:
+                        - boolean
+                        - 'null'
+                      default: false
+                      description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
+                    dunning_communication_delay_time_zone:
+                      type:
+                        - string
+                        - 'null'
+                      example: '"Eastern Time (US & Canada)"'
+                      description: Time zone for the Dunning Communication Delay feature.
             examples:
               Example:
                 value:
@@ -25239,6 +25250,18 @@ components:
             ip_address:
               type: string
               description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
+        dunning_communication_delay_enabled:
+          type:
+            - boolean
+            - 'null'
+          default: false
+          description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
+        dunning_communication_delay_time_zone:
+          type:
+            - string
+            - 'null'
+          example: '"Eastern Time (US & Canada)"'
+          description: Time zone for the Dunning Communication Delay feature.
     Credit-Note:
       title: Credit Note
       type: object
