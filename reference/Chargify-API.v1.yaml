@@ -9931,7 +9931,7 @@ paths:
 
         ## Create a Payment from the existing payment profile
 
-        In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. Id of a payment profile might be retrieved via the Payment Profiles API endpoint.
+        In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
 
         ```
         {
