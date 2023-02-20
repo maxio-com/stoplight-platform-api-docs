@@ -9927,7 +9927,21 @@ paths:
                 $ref: '#/components/schemas/Invoice'
       operationId: post-invoices-uid-payments.json
       description: |-
-        This API call should be used when you want to record an external payment against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+        This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+
+        ## Create a Payment from the existing payment profile
+
+        In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
+
+        ```
+        {
+          "type": "payment",
+          "payment": {
+            "amount": 10.00,
+            "payment_profile_id": 123
+          }
+        }
+        ```
 
         ## Create a Payment from the Subscription's Prepayment Account
 
@@ -9999,6 +10013,7 @@ paths:
                     - external
                     - prepayment
                     - service_credit
+                    - payment
             examples:
               Example 1:
                 value:
