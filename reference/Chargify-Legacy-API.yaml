@@ -217,7 +217,7 @@ paths:
         + `accrue_on_failure` = true
         ## Help Documentation
         This method of recording a charge against a subscription is referred to as a **"One-time Charge"** in the Chargify Help Documentation.
-        Full documentation on how to record a One-time Charge in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407897565723).
+        Full documentation on how to record a One-time Charge in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404619484685).
       requestBody:
         content:
           application/json:
@@ -592,7 +592,7 @@ paths:
         - **Internal** - a refund which interacts with the Gateway to return the amount back to the customer
         - **External** - a refund which _records_ a return which occurred outside of Chargify. No funds are returned to the customer 
         Note that external refunds will reduce revenue, but they do not affect the balance due for the subscription.
-        For more information on creating refunds in general, please see [Refunds](https://chargify.zendesk.com/hc/en-us/articles/4407898813851).
+        For more information on creating refunds in general, please see [Refunds](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405315609613#refunds-statements--0-0).
 
         ## External Refund Use Cases
          

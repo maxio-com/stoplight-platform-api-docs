@@ -161,7 +161,7 @@ info:
 
     - Your Chargify subscription is canceled.
     - Your Chargify trial has reached an end.
-    - The site you're making a request for is in the process of ["clearing site data"](https://chargify.zendesk.com/hc/en-us/articles/4407864367387)
+    - The site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309)
       - _Note: any API request for another site that is in a good state will NOT be blocked_
     - The site you're making a request for has been deleted.
       - _Note: any API request for another site that is in a good state will NOT be blocked_
@@ -192,7 +192,7 @@ info:
     }
     ```
 
-    - If the site you're making a request for is in the process of ["clearing site data"](https://chargify.zendesk.com/hc/en-us/articles/4407864367387):
+    - If the site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309):
 
     ```json
     {
@@ -750,7 +750,7 @@ paths:
 
         Full documentation on Sites in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407870738587).
 
-        Specifically, the [Clearing Site Data](https://chargify.zendesk.com/hc/en-us/articles/4407864367387) section is extremely relevant to this endpoint documentation.
+        Specifically, the [Clearing Site Data](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309) section is extremely relevant to this endpoint documentation.
 
         #### Relationship invoicing enabled
         If site has RI enabled then you will see more settings like:
@@ -12457,10 +12457,10 @@ paths:
       description: |-
         ## Documentation
 
-        Full documentation on how to create Components in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407755865883). Additionally, for information on how to record component usage against a subscription, please see the following resources:
+        Full documentation on how to create Components in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#creating-components). Additionally, for information on how to record component usage against a subscription, please see the following resources:
 
-        + [Recording Metered Component Usage](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#reporting-metered-component-usage)
-        + [Reporting Prepaid Component Status](https://chargify.zendesk.com/hc/en-us/articles/4407899119771#reporting-prepaid-component-status)
+        + [Recording Metered Component Usage](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#reporting-metered-component-usage)
+        + [Reporting Prepaid Component Status](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#reporting-prepaid-component-status)
 
         You may choose to report metered or prepaid usage to Chargify as often as you wish. You may report usage as it happens. You may also report usage periodically, such as each night or once per billing period. If usage events occur in your system very frequently (on the order of thousands of times an hour), it is best to accumulate usage into batches on your side, and then report those batches less frequently, such as daily. This will ensure you remain below any API throttling limits. If your use case requires higher rates of usage reporting, we recommend utilizing Events Based Components.
 
