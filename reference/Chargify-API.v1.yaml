@@ -6285,7 +6285,6 @@ paths:
                       handle: gold
                       description: This is our gold plan.
                       accounting_code: '123'
-                      request_credit_card: true
                       expiration_interval: null
                       expiration_interval_unit: null
                       created_at: '2016-11-04T16:31:15-04:00'
@@ -6374,7 +6373,6 @@ paths:
                         handle: zero-dollar-product
                         description: ''
                         accounting_code: ''
-                        request_credit_card: true
                         expiration_interval: null
                         expiration_interval_unit: never
                         created_at: '2016-04-21T16:08:39-04:00'
@@ -24669,7 +24667,7 @@ components:
           type: string
         accounting_code:
           type: string
-        request_credit_card:
+        require_credit_card:
           type: boolean
         price_in_cents:
           type: integer
