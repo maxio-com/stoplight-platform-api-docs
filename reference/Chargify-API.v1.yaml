@@ -19979,6 +19979,8 @@ paths:
 
         You do **not** need to include a card number to generate tax information when you are previewing a subscription. However, please note that when you actually want to create the subscription, you must include the credit card information if you want the billing address to be stored in Chargify. The billing address and the credit card information are stored together within the payment profile object. Also, you may not send a billing address to Chargify without payment profile information, as the address is stored on the card.
 
+        You can pass shipping and billing addresses and still decide not to calculate taxes. To do that, pass `skip_billing_manifest_taxes: true` attribute.
+
         ## Non-taxable Subscriptions
 
         If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the billing information.
@@ -25279,6 +25281,10 @@ components:
             - 'null'
           example: '"Eastern Time (US & Canada)"'
           description: Time zone for the Dunning Communication Delay feature.
+        skip_billing_manifest_taxes:
+          type: boolean
+          description: Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests.
+          default: false
     Credit-Note:
       title: Credit Note
       type: object
