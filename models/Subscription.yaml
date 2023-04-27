@@ -246,6 +246,9 @@ properties:
   product_price_point_id:
     type: integer
     description: The product price point currently subscribed to.
+  product_price_point_type:
+    type: string
+    description: 'One of the following: custom, default, catalog.'
   next_product_price_point_id:
     type: integer
     description: 'If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal.'
