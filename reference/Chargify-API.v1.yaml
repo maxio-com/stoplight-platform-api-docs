@@ -6344,7 +6344,7 @@ paths:
                     handle: gold
                     description: This is our gold plan.
                     accounting_code: '123'
-                    request_credit_card: true
+                    require_credit_card: true
                     price_in_cents: 1000
                     interval: 1
                     interval_unit: month
@@ -24669,7 +24669,7 @@ components:
           type: string
         accounting_code:
           type: string
-        request_credit_card:
+        require_credit_card:
           type: boolean
         price_in_cents:
           type: integer
