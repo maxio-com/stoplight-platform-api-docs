@@ -12812,9 +12812,9 @@ paths:
                       coupon_use_count: 1
                       coupon_uses_allowed: 1
                       next_product_handle: null
-                      stored_credential_transaction_id: '125566112256688,'
-                      dunning_communication_delay_enabled: 'true,'
-                      dunning_communication_delay_time_zone: Eastern Time (US & Canada)
+                      stored_credential_transaction_id: 125566112256688,
+                      dunning_communication_delay_enabled: true,
+                      dunning_communication_delay_time_zone: 'Eastern Time (US & Canada)'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -19797,7 +19797,7 @@ paths:
         Rather than specifying a customer, the `target` parameter could instead simply have a value of
         * `"self"` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer,
         * `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
-        * `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy
+        * `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
 
         To create a new subscription into a subscription group, please reference the following: 
         [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
