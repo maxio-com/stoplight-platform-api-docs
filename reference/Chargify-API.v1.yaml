@@ -19816,10 +19816,6 @@ paths:
                     target:
                       type: subscription
                       id: 32987
-                    billing:
-                      accrue: true
-                      align_date: true
-                      prorate: true
     delete:
       summary: Remove Subscription from Group
       tags:
