@@ -19787,17 +19787,20 @@ paths:
                         - 32986
                       created_at: '2018-08-30T17:14:30-04:00'
       operationId: post-subscriptions-subscription_id-group.json
-      description: |-
+      description: |
         For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
 
         Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
+
+        **Please Note:** In order to add an existing subscription to a subscription group, it must belong to either the same customer record as the target, or be within the same customer hierarchy.
 
         Rather than specifying a customer, the `target` parameter could instead simply have a value of
         * `"self"` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer,
         * `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
         * `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
 
-        The optional `billing` parameters specify how some aspects of the billing for the new subscription should be handled.  Rather than capturing payment immediately, the `accrue` parameter can be included so that the new subscription charges accrue until the next assessment date.  Regarding the date, the `align_date` parameter can be included so that the billing date of the new subscription matches up with the default subscription group in the customer hierarchy.  When choosing to align the dates, the `prorate` parameter can also be specified so that the new subscription charges are prorated based on the billing period of the default subscription group in the customer hierarchy also.
+        To create a new subscription into a subscription group, please reference the following: 
+        [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
       requestBody:
         content:
           application/json:
@@ -25663,7 +25666,6 @@ components:
             new_subscription_state:
               type: string
     Group-Attributes:
-      title: Group Attributes
       anyOf:
         - type: object
           properties:
@@ -25687,7 +25689,7 @@ components:
                   description: 'The id of the target customer or subscription to group the existing subscription with. Ignored and should not be included if type is "self" , "parent", or "eldest"'
             billing:
               type: object
-              description: Optional attributes related to billing date and accrual.
+              description: 'Optional attributes related to billing date and accrual. Note: Only applicable for new subscriptions.'
               properties:
                 accrue:
                   type: boolean
@@ -25704,7 +25706,6 @@ components:
           required:
             - target
         - type: boolean
-          properties: {}
     Invoice:
       title: Invoice
       type: object
