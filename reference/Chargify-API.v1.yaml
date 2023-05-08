@@ -335,8 +335,9 @@ paths:
                           type: string
                           description: 'Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.'
                         accepted_at:
-                          type: string
-                          nullable: true
+                          type: 
+                            - string
+                            - 'null'
                           description: 'Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.'
                         last_sent_at:
                           type: string
@@ -1029,11 +1030,11 @@ paths:
                           type: string
                 type: object
               examples:
-                Example 1:
+                Example-1:
                   value:
                     errors:
                       customer: can't be blank
-                Example 2:
+                Example-2:
                   value:
                     errors:
                       - 'First name: cannot be blank.'
@@ -1084,7 +1085,7 @@ paths:
                     organization: 'ABC, Inc.'
                     reference: '1234567890'
                     address: 123 Main Street
-                    address2: Unit 10
+                    address_2: Unit 10
                     city: Anytown
                     state: MA
                     zip: '02120'
@@ -2098,7 +2099,7 @@ paths:
                       items:
                         $ref: '#/components/schemas/Create-Metafield'
             examples:
-              Single Metafield:
+              Single-Metafield:
                 value:
                   metafields:
                     name: Dropdown field
@@ -2109,7 +2110,7 @@ paths:
                     scope:
                       public_edit: '1'
                       public_show: '1'
-              Multiple Metafields:
+              Multiple-Metafields:
                 value:
                   metafields:
                     - name: Color
@@ -4193,13 +4194,9 @@ paths:
                             type: integer
                           usage_amount_formatted:
                             type: string
-                          '':
-                            type: string
                       at_time:
                         type: string
                         description: ISO8601 timestamp
-                      '':
-                        type: string
               examples:
                 Example:
                   value:
@@ -20988,7 +20985,6 @@ paths:
                     seller:
                       name: co
                       phone: ullamco in officia
-                      '': nostrud
                     customer:
                       chargify_id: -55826334
                       first_name: deserunt
@@ -21287,8 +21283,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
-        '':
-          description: ''
       operationId: get-subscriptions_components
       description: This request will list components applied to each subscription.
       parameters:
@@ -22371,7 +22365,8 @@ paths:
           description: Created
           content:
             application/json:
-              schema: null
+              schema:
+                $ref: '#/components/schemas/Invoice'
         '403':
           description: Forbidden
         '404':
@@ -23643,7 +23638,7 @@ paths:
       summary: List Exported Invoices
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: get-api_exports-invoices-id-rows.json
       description: |-
         This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
@@ -23684,7 +23679,7 @@ paths:
       summary: List Exported Subscriptions
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: get-api_exports-subscriptions-id-rows.json
       description: |-
         This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
@@ -23752,7 +23747,7 @@ paths:
       summary: Create Invoices Export
       tags:
         - API Exports
-      operationId: post-api_exports-proforma_invoices.json
+      operationId: post-api_exports-invoices.json
       description: This API creates an invoices export and returns a batchjob object.
       responses:
         '201':
@@ -23778,7 +23773,7 @@ paths:
       summary: Create Subscriptions Export
       tags:
         - API Exports
-      operationId: post-api_exports-proforma_invoices.json
+      operationId: post-api_exports-subscriptions.json
       description: This API creates a subscriptions export and returns a batchjob object.
       responses:
         '201':
@@ -23808,7 +23803,7 @@ paths:
       summary: Read Proforma Invoices Export
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: get-api_exports-proforma_invoices-id.json
       description: This API returns a batchjob object for proforma invoices export.
       responses:
         '200':
@@ -23830,7 +23825,7 @@ paths:
       summary: Read Invoices Export
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: get-api_exports_invoices-id.json
       description: This API returns a batchjob object for invoices export.
       responses:
         '200':
@@ -23852,7 +23847,7 @@ paths:
       summary: Read Subscriptions Export
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: get-api_exports-subscriptions-id.json
       description: This API returns a batchjob object for subscriptions export.
       responses:
         '200':
@@ -24132,9 +24127,10 @@ components:
               type: string
               description: URL that points to the location to read the existing price points via GET request
             tax_code:
-              type: string
+              type: 
+                - string
+                - 'null'
               description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-              nullable: true
             recurring:
               type: boolean
             upgrade_charge:
@@ -24372,7 +24368,7 @@ components:
                 type:
                   - integer
                   - string
-                nullable: true
+                  - 'null'
               unit_price:
                 type:
                   - integer
@@ -24724,7 +24720,7 @@ components:
                 type:
                   - integer
                   - string
-                nullable: true
+                  - 'null'
               unit_price:
                 type:
                   - integer
@@ -24750,7 +24746,7 @@ components:
                     type:
                       - integer
                       - string
-                    nullable: true
+                      - 'null'
                   unit_price:
                     type:
                       - integer
@@ -25842,8 +25838,6 @@ components:
                     - 'null'
                     - string
             phone:
-              type: string
-            '':
               type: string
         customer:
           type: object

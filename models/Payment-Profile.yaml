@@ -1,7 +1,7 @@
 title: Payment Profile
 type: object
 examples:
-    id: 10088716
+  - id: 10088716
     first_name: Test
     last_name: Subscription
     masked_card_number: XXXX-XXXX-XXXX-1
@@ -64,7 +64,6 @@ properties:
     type:
       - string
       - 'null'
-    nullable: true
     description: The vault that stores the payment profile with the provided vault_token.
     enum:
       - bogus
@@ -80,36 +79,44 @@ properties:
       - wirecard
       - null
   vault_token:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The “token” provided by your vault storage for an already stored payment profile
   billing_address:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The current billing street address for the card
   billing_city:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The current billing address city for the card
   billing_state:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The current billing address state for the card
   billing_zip:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The current billing address zip code for the card
   billing_country:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The current billing address country for the card
   customer_vault_token:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: '(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
   billing_address_2:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: 'The current billing street address, second line, for the card'
   payment_type:
     type: string
