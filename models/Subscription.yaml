@@ -26,19 +26,22 @@ properties:
     type: string
     description: 'Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases)'
   trial_started_at:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: Timestamp for when the trial period (if any) began
   trial_ended_at:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: Timestamp for when the trial period (if any) ended
   activated_at:
     type: string
     description: 'Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial)'
   expires_at:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: Timestamp giving the expiration date of this subscription (if any)
   created_at:
     type: string
@@ -47,14 +50,14 @@ properties:
     type: string
     description: The date of last update for this subscription
   cancellation_message:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: 'Seller-provided reason for, or note about, the cancellation.'
   cancellation_method:
     type:
       - string
       - 'null'
-    nullable: true
     description: 'The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription''s state is not canceled.'
     enum:
       - merchant_ui
@@ -63,12 +66,14 @@ properties:
       - billing_portal
       - null
   cancel_at_end_of_period:
-    type: boolean
-    nullable: true
+    type: 
+      - boolean
+      - 'null'
     description: Whether or not the subscription will (or has) canceled at the end of the period.
   canceled_at:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The timestamp of the most recent cancellation
   current_period_started_at:
     type: string
@@ -83,21 +88,25 @@ properties:
     type: string
     description: 'The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00)'
   delayed_cancel_at:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: Timestamp for when the subscription is currently set to cancel.
   coupon_code:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
     deprecated: true
   snap_day:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: 'The day of the month that the subscription will charge according to calendar billing rules, if used.'
   payment_collection_method:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: 'The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
     enum:
       - automatic
@@ -195,48 +204,57 @@ properties:
       gateway_handle:
         type: string
   payment_type:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The payment profile type for the active profile on file.
   referral_code:
-    type: string
-    nullable: true
+    type:
+      - string
+      - 'null'
     description: The subscription's unique code that can be given to referrals.
   next_product_id:
-    type: integer
-    nullable: true
+    type: 
+      - integer
+      - 'null'
     description: 'If a delayed product change is scheduled, the ID of the product that the subscription will be changed to at the next renewal.'
   next_product_handle:
-    type: string
+    type: 
+      - string
+      - 'null'
     description: 'If a delayed product change is scheduled, the handle of the product that the subscription will be changed to at the next renewal.'
-    nullable: true
   coupon_use_count:
-    type: integer
-    nullable: true
+    type: 
+      - integer
+      - 'null'
     description: (deprecated) How many times the subscription's single coupon has been used. This field has no replacement for multiple coupons.
     deprecated: true
   coupon_uses_allowed:
-    type: integer
-    nullable: true
+    type: 
+      - integer
+      - 'null'
     description: (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons.
     deprecated: true
   reason_code:
-    type: string
+    type:
+      - string
+      - 'null'
     description: 'If the subscription is canceled, this is their churn code.'
-    nullable: true
   automatically_resume_at:
-    type: string
+    type:
+      - string
+      - 'null'
     description: The date the subscription is scheduled to automatically resume from the on_hold state.
-    nullable: true
   coupon_codes:
     type: array
     description: An array for all the coupons attached to the subscription.
     items:
       type: string
   offer_id:
-    type: string
+    type:
+      - integer
+      - 'null'
     description: The ID of the offer associated with the subscription.
-    nullable: true
   payer_id:
     type: integer
     description: 'On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the ''Customer Hierarchies & WhoPays'' feature is enabled.'
@@ -250,29 +268,34 @@ properties:
     type: string
     description: 'One of the following: custom, default, catalog.'
   next_product_price_point_id:
-    type: integer
+    type: 
+      - integer
+      - 'null'
     description: 'If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal.'
-    nullable: true
   net_terms:
-    type: integer
+    type: 
+      - integer
+      - 'null'
     description: 'On Relationship Invoicing, the number of days before a renewal invoice is due.'
-    nullable: true
   stored_credential_transaction_id:
-    type: integer
+    type: 
+      - integer
+      - 'null'
     description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
-    nullable: true
   reference:
-    type: string
+    type:
+      - string
+      - 'null'
     description: The reference value (provided by your app) for the subscription itelf.
-    nullable: true
   on_hold_at:
-    type: string
+    type:
+      - string
+      - 'null'
     description: The timestamp of the most recent on hold action.
-    nullable: true
   prepaid_dunning:
-    type: boolean
+    type: 
+      - boolean
     description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
-    nullable: true
   coupons:
     type: array
     description: |-
@@ -282,36 +305,33 @@ properties:
       type: object
       additionalProperties: false
       properties:
-        '':
-          type: object
-          additionalProperties: false
-          properties:
-            code:
-              type: string
-              example: '"ABCD_10"'
-            use_count:
-              type: integer
-              example: 2
-            uses_allowed:
-              type: integer
-              example: 10
-            expires_at:
-              type:
-                - string
-                - 'null'
-              example: '"2023-07-13T05:18:58-04:00"'
-            recurring:
-              type: boolean
-            amount_in_cents:
-              type:
-                - string
-                - 'null'
-              example: '"1000"'
-            percentage:
-              type:
-                - string
-                - 'null'
-              example: '"15.0"'
+        code:
+          type: string
+          example: '"ABCD_10"'
+        use_count:
+          type: integer
+          example: 2
+        uses_allowed:
+          type: integer
+          example: 10
+        expires_at:
+          type:
+            - string
+            - 'null'
+          example: '"2023-07-13T05:18:58-04:00"'
+        recurring:
+          type: boolean
+        amount_in_cents:
+          type:
+            - integer
+            - 'null'
+          example: 1000
+        percentage:
+          type:
+            - string
+            - 'null'
+          example: '"15.0"'
+
   dunning_communication_delay_enabled:
     type: boolean
     description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
