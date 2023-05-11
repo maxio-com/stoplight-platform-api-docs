@@ -252,7 +252,7 @@ properties:
       type: string
   offer_id:
     type:
-      - string
+      - integer
       - 'null'
     description: The ID of the offer associated with the subscription.
   payer_id:
@@ -295,7 +295,6 @@ properties:
   prepaid_dunning:
     type: 
       - boolean
-      - 'null'
     description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
   coupons:
     type: array
@@ -324,9 +323,9 @@ properties:
           type: boolean
         amount_in_cents:
           type:
-            - string
+            - integer
             - 'null'
-          example: '"1000"'
+          example: 1000
         percentage:
           type:
             - string
