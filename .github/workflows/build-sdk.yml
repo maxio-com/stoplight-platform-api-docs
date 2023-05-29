@@ -34,9 +34,4 @@ jobs:
       - name: Build SDKs
         shell: bash
         run: ./gradlew clean generateAll -PoverrideApiDocsRelativePath=..
-      - shell: bash
-        run: ls -al
-        working-directory: ..
-      - shell: bash
-        run: ls -al
 
