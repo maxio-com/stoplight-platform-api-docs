@@ -5,3 +5,33 @@ The Chargify API is documented in this repository using the [OpenAPI Specificati
 ### Development
 
 If you are a Chargify developer and need to make changes to the API documentation, please refer to our internal documentation on Stoplight Studio.
+
+## SDK generation
+This repository is used for SDK generation. It's important to keep specification compatible with our generators.
+You cannot merge your PR if SDK generation fails. 
+Check output of `Validate specification and build SDKs` pipeline in GitHub Actions if your build fails.
+Look at `Build SDKs` step, here is a sample error message:
+
+```text
+> Task :validateSpec
+Validating spec ../reference/Chargify-API.v1.yaml
+
+Spec has issues or recommendations.
+
+...
+...
+
+Spec is invalid.
+Issues:
+
+	attribute paths.'/webhooks/replay.json'(post).responses.200.content.'examples'.Example is unexpected
+```
+
+It's useful to look at the pipeline output even if it's green as it might contain some warnings which can influence generated code.
+
+### How it works
+We are using [OpenAPI Generator](https://openapi-generator.tech/) to generate our SDKs.
+Configuration of generators are stored in repository [sdk-generator](https://github.com/maxio-com/sdk-generator).
+When PR is opened in `stoplight-platform-api-docs` with target branch `main`/`staging` then `build-sdk` pipeline is run to validate specification.
+
+`publish-sdk` workflow is run manually - it generates code for specified languages, pushes generated code to respective SDK repositories and opens PR in GitHub.
