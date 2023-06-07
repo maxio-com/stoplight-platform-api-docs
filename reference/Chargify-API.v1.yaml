@@ -467,7 +467,7 @@ paths:
                 Example:
                   value:
                     webhooks_enabled: true
-      operationId: put-webhooks-settings.json
+      operationId: enableWebhooks
       description: This method allows you to enable webhooks via API for your site
       requestBody:
         content:
@@ -938,7 +938,7 @@ paths:
       summary: Update Subscription Note
       tags:
         - Subscription Notes
-      operationId: put-subscriptions-subscription_id-notes-note_id-.json
+      operationId: updateSubscriptionNote
       responses:
         '200':
           description: OK
@@ -1277,7 +1277,7 @@ paths:
       summary: Update Customer
       tags:
         - Customers
-      operationId: put-customers-id-.json
+      operationId: updateCustomer
       responses:
         '200':
           description: OK
@@ -1971,7 +1971,7 @@ paths:
                     $ref: '#/components/schemas/Reason-Code'
         '404':
           description: Not Found
-      operationId: put-reason_codes-reason_code_id-.json
+      operationId: updateReasonCode
       requestBody:
         content:
           application/json:
@@ -2204,7 +2204,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Metafield'
-      operationId: put-resource_type-metafields.json
+      operationId: updateResourceMetafield
       description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
         content:
@@ -2376,7 +2376,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Metadata'
-      operationId: put-resource_type-resource_id-metadata.json
+      operationId: updateResourceMetadata
       parameters:
         - schema:
             type: string
@@ -2935,7 +2935,7 @@ paths:
                       stackable: true
                       compounding_strategy: compound
                       coupon_restrictions: []
-      operationId: put-product_families-product_family_id-coupons-coupon_id-.json
+      operationId: updateCoupon
       description: |-
         ## Update Coupon
 
@@ -3369,7 +3369,7 @@ paths:
                       type: integer
                     coupon_id:
                       type: integer
-      operationId: put-coupon-coupon_id-currency_prices.json
+      operationId: updateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
 
@@ -3564,7 +3564,7 @@ paths:
       summary: Update Coupon Subcodes
       tags:
         - Coupons
-      operationId: put-coupons-coupon_id-codes.json
+      operationId: updateCouponSubcodes
       responses:
         '200':
           description: OK
@@ -5379,7 +5379,7 @@ paths:
       responses:
         '201':
           description: Created
-      operationId: put-components-component_id-price_points-price_point_id-default.json
+      operationId: updateDefaultPricePointForComponent
       description: |-
         Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
@@ -5834,7 +5834,7 @@ paths:
                 properties:
                   price_point:
                     $ref: '#/components/schemas/Component-Price-Point'
-      operationId: put-components-component_id-price_points-price_point_id-.json
+      operationId: updateComponentPricePoint
       description: |-
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
 
@@ -5974,7 +5974,7 @@ paths:
                           starting_quantity: 101
                           ending_quantity: null
                           unit_price: '4.0'
-      operationId: put-components-component_id-price_points-price_point_id-unarchive.json
+      operationId: unarchiveComponentPricePoint
       description: Use this endpoint to unarchive a component price point.
   '/price_points/{price_point_id}/currency_prices.json':
     parameters:
@@ -6047,7 +6047,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Currency-Price'
-      operationId: put-price_points-price_point_id-currency_prices.json
+      operationId: updateComponentCurrencyPrices
       description: |-
         This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
 
@@ -6590,7 +6590,7 @@ paths:
       summary: Update Product
       tags:
         - Products
-      operationId: put-products-product_id-.json
+      operationId: updateProduct
       responses:
         '200':
           description: OK
@@ -7148,7 +7148,7 @@ paths:
                       archived_at: 'Tue, 30 Oct 2018 18:49:47 EDT -04:00'
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
-      operationId: put-products-product_id-price_points-price_point_id-.json
+      operationId: updateProductPricePoint
       requestBody:
         content:
           application/json:
@@ -7563,7 +7563,7 @@ paths:
                       formatted_price: string
                       product_price_point_id: 0
                       role: baseline
-      operationId: put-product_price_points-product_price_point_id-currency_prices.json
+      operationId: updateCurrencyForProductPrices
       description: |-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
 
@@ -8559,7 +8559,7 @@ paths:
                       payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: null
-      operationId: put-payment_profiles-payment_profile_id-.json
+      operationId: updatePaymentProfile
       description: |-
         ## Partial Card Updates
 
@@ -8814,7 +8814,7 @@ paths:
                   value:
                     errors:
                       - 'You have tried to verify this bank account 10 times. To continue trying to verify the account, please reach out to us directly.'
-      operationId: put-bank_accounts-bank_account_id-verification.json
+      operationId: updateBankAccountVerification
       description: Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
       requestBody:
         content:
@@ -12303,7 +12303,7 @@ paths:
                     errors:
                       - kind: base
                         message: 'Credit scheme must be one of credit, refund or none.'
-      operationId: put-subscriptions-subscription_id-components-component_id-allocations-allocation_id-.json
+      operationId: updateSubscriptionComponentAllocation
       description: |-
         When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
 
@@ -14267,7 +14267,7 @@ paths:
           description: OK
         '401':
           description: Unauthorized
-      operationId: put-offers-offer_id-archive.json
+      operationId: archiveOffer
       description: Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
   '/offers/{offer_id}/unarchive.json':
     parameters:
@@ -14286,7 +14286,7 @@ paths:
           description: OK
         '401':
           description: Unauthorized
-      operationId: put-offers-offer_id-unarchive.json
+      operationId: unarchiveOffer
       description: Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
   '/sellers/{seller_id}/sales_commission_settings.json':
     parameters:
@@ -14837,7 +14837,7 @@ paths:
                 Example:
                   value:
                     errors: []
-      operationId: put-subscriptions-subscription_id-retry.json
+      operationId: retrySubscriptionPayment
       description: |-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
 
@@ -14986,7 +14986,7 @@ paths:
                     errors:
                       - Payment collection method cannot be set to 'invoice' when the subscription is past due
                       - '''expires_at'' cannot be set for subscriptions on calendar billing'
-      operationId: put-subscriptions-subscription_id-.json
+      operationId: updateSubscription
       description: |-
         The subscription endpoint allows you to instantly update one or many attributes about a subscription in a single call.
 
@@ -15969,7 +15969,7 @@ paths:
                         customer_vault_token: null
                         billing_address_2: ''
                         payment_type: credit_card
-      operationId: put-subscriptions-subscription_id-hold.json
+      operationId: pauseSubscription
       description: |-
         Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
 
@@ -16140,7 +16140,7 @@ paths:
                       - 'Cannot reactivate a subscription that is not marked "Canceled", "Unpaid", or "Trial Ended".'
                       - 'Request was ''resume only'', but this subscription cannot be resumed.'
                       - The credit card on file could not be charged.
-      operationId: put-subscriptions-subscription_id-reactivate.json
+      operationId: reactivateSubscription
       description: |-
         Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://chargify.zendesk.com/hc/en-us/articles/4407898737691).
 
@@ -16750,7 +16750,7 @@ paths:
           description: Bad Request
         '422':
           description: Unprocessable Entity (WebDAV)
-      operationId: put-subscriptions-subscription_id-override.json
+      operationId: OverrideSubscription
       description: |-
         This API endpoint allows you to set certain subscription fields that are usually managed for you automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can only be set using this endpoint.
 
@@ -18812,7 +18812,7 @@ paths:
                         - id: 10101
                           type: not_found
                           message: Subscription could not be found
-      operationId: put-subscription_groups-uid-.json
+      operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
         `"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
@@ -21119,7 +21119,7 @@ paths:
                   value:
                     errors:
                       - Invoice must have an open status
-      operationId: put-invoices-uid-customer_information-preview.json
+      operationId: updateCustomerInformationForOpenInvoice
       description: |-
         This endpoint updates customer information on an open invoice and returns the updated invoice. If you would like to preview changes that will be applied, use the `/invoices/{uid}/customer_information/preview.json` endpoint before.
 
@@ -21903,7 +21903,7 @@ paths:
                         type: array
                         items:
                           type: string
-      operationId: put-components-component_id-price_points-price_point_id-segments-id-.json
+      operationId: updateComponentPricePointSegment
       requestBody:
         content:
           application/json:
@@ -22306,7 +22306,7 @@ paths:
                         '1':
                           pricing_scheme:
                             - 'Pricing scheme: cannot be blank'
-      operationId: put-components-component_id-price_points-price_point_id-segments-bulk.json
+      operationId: updateComponentPricePointSegments
       requestBody:
         content:
           application/json:
@@ -23313,7 +23313,7 @@ paths:
                     errors:
                       base:
                         - Purchase Declined. The subscription is now in the 'awaiting_signup' state.
-      operationId: put-subscriptions-subscription_id-activate.json
+      operationId: activateSubscription
       requestBody:
         content:
           application/json:
