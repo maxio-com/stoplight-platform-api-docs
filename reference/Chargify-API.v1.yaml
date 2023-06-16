@@ -386,7 +386,7 @@ paths:
                         body: 'id=141765008&event=payment_success&payload[site][id]=31615&payload[site][subdomain]=general-goods&payload[subscription][id]=15100141&payload[subscription][state]=active&payload[subscription][trial_started_at]=&payload[subscription][trial_ended_at]=&payload[subscription][activated_at]=2016-11-04%2017%3A06%3A43%20-0400&payload[subscription][created_at]=2016-11-04%2017%3A06%3A42%20-0400&payload[subscription][updated_at]=2016-11-08%2016%3A22%3A22%20-0500&payload[subscription][expires_at]=&payload[subscription][balance_in_cents]=0&payload[subscription][current_period_ends_at]=2016-11-09%2016%3A06%3A42%20-0500&payload[subscription][next_assessment_at]=2016-11-09%2016%3A06%3A42%20-0500&payload[subscription][canceled_at]=&payload[subscription][cancellation_message]=&payload[subscription][next_product_id]=&payload[subscription][cancel_at_end_of_period]=false&payload[subscription][payment_collection_method]=automatic&payload[subscription][snap_day]=&payload[subscription][cancellation_method]=&payload[subscription][current_period_started_at]=2016-11-08%2016%3A06%3A42%20-0500&payload[subscription][previous_state]=active&payload[subscription][signup_payment_id]=161034048&payload[subscription][signup_revenue]=64.00&payload[subscription][delayed_cancel_at]=&payload[subscription][coupon_code]=&payload[subscription][total_revenue_in_cents]=32000&payload[subscription][product_price_in_cents]=1000&payload[subscription][product_version_number]=7&payload[subscription][payment_type]=credit_card&payload[subscription][referral_code]=pggn84&payload[subscription][coupon_use_count]=&payload[subscription][coupon_uses_allowed]=&payload[subscription][customer][id]=14585695&payload[subscription][customer][first_name]=Test&payload[subscription][customer][last_name]=Test&payload[subscription][customer][organization]=&payload[subscription][customer][email]=pookie999%40example.com&payload[subscription][customer][created_at]=2016-11-04%2017%3A06%3A42%20-0400&payload[subscription][customer][updated_at]=2016-11-04%2017%3A06%3A45%20-0400&payload[subscription][customer][reference]=&payload[subscription][customer][address]=&payload[subscription][customer][address_2]=&payload[subscription][customer][city]=&payload[subscription][customer][state]=&payload[subscription][customer][zip]=&payload[subscription][customer][country]=&payload[subscription][customer][phone]=&payload[subscription][customer][portal_invite_last_sent_at]=2016-11-04%2017%3A06%3A45%20-0400&payload[subscription][customer][portal_invite_last_accepted_at]=&payload[subscription][customer][verified]=false&payload[subscription][customer][portal_customer_created_at]=2016-11-04%2017%3A06%3A45%20-0400&payload[subscription][customer][cc_emails]=&payload[subscription][product][id]=3792003&payload[subscription][product][name]=%2410%20Basic%20Plan&payload[subscription][product][handle]=basic&payload[subscription][product][description]=lorem%20ipsum&payload[subscription][product][accounting_code]=basic&payload[subscription][product][request_credit_card]=false&payload[subscription][product][expiration_interval]=&payload[subscription][product][expiration_interval_unit]=never&payload[subscription][product][created_at]=2016-03-24%2013%3A38%3A39%20-0400&payload[subscription][product][updated_at]=2016-11-03%2013%3A03%3A05%20-0400&payload[subscription][product][price_in_cents]=1000&payload[subscription][product][interval]=1&payload[subscription][product][interval_unit]=day&payload[subscription][product][initial_charge_in_cents]=&payload[subscription][product][trial_price_in_cents]=&payload[subscription][product][trial_interval]=&payload[subscription][product][trial_interval_unit]=month&payload[subscription][product][archived_at]=&payload[subscription][product][require_credit_card]=false&payload[subscription][product][return_params]=&payload[subscription][product][taxable]=false&payload[subscription][product][update_return_url]=&payload[subscription][product][initial_charge_after_trial]=false&payload[subscription][product][version_number]=7&payload[subscription][product][update_return_params]=&payload[subscription][product][product_family][id]=527890&payload[subscription][product][product_family][name]=Acme%20Projects&payload[subscription][product][product_family][description]=&payload[subscription][product][product_family][handle]=billing-plans&payload[subscription][product][product_family][accounting_code]=&payload[subscription][product][public_signup_pages][id]=281054&payload[subscription][product][public_signup_pages][return_url]=http%3A%2F%2Fwww.example.com%3Fsuccessfulsignup&payload[subscription][product][public_signup_pages][return_params]=&payload[subscription][product][public_signup_pages][url]=https%3A%2F%2Fgeneral-goods.chargify.com%2Fsubscribe%2Fkqvmfrbgd89q%2Fbasic&payload[subscription][product][public_signup_pages][id]=281240&payload[subscription][product][public_signup_pages][return_url]=&payload[subscription][product][public_signup_pages][return_params]=&payload[subscription][product][public_signup_pages][url]=https%3A%2F%2Fgeneral-goods.chargify.com%2Fsubscribe%2Fdkffht5dxfd8%2Fbasic&payload[subscription][product][public_signup_pages][id]=282694&payload[subscription][product][public_signup_pages][return_url]=&payload[subscription][product][public_signup_pages][return_params]=&payload[subscription][product][public_signup_pages][url]=https%3A%2F%2Fgeneral-goods.chargify.com%2Fsubscribe%2Fjwffwgdd95s8%2Fbasic&payload[subscription][credit_card][id]=10102821&payload[subscription][credit_card][first_name]=Pookie&payload[subscription][credit_card][last_name]=Test&payload[subscription][credit_card][masked_card_number]=XXXX-XXXX-XXXX-1&payload[subscription][credit_card][card_type]=bogus&payload[subscription][credit_card][expiration_month]=10&payload[subscription][credit_card][expiration_year]=2020&payload[subscription][credit_card][customer_id]=14585695&payload[subscription][credit_card][current_vault]=bogus&payload[subscription][credit_card][vault_token]=1&payload[subscription][credit_card][billing_address]=&payload[subscription][credit_card][billing_city]=&payload[subscription][credit_card][billing_state]=&payload[subscription][credit_card][billing_zip]=&payload[subscription][credit_card][billing_country]=&payload[subscription][credit_card][customer_vault_token]=&payload[subscription][credit_card][billing_address_2]=&payload[subscription][credit_card][payment_type]=credit_card&payload[subscription][credit_card][site_gateway_setting_id]=&payload[subscription][credit_card][gateway_handle]=&payload[transaction][id]=161537369&payload[transaction][subscription_id]=15100141&payload[transaction][type]=Payment&payload[transaction][kind]=&payload[transaction][transaction_type]=payment&payload[transaction][success]=true&payload[transaction][amount_in_cents]=6400&payload[transaction][memo]=Pookie%20Test%20-%20%2410%20Basic%20Plan%3A%20Renewal%20payment&payload[transaction][created_at]=2016-11-08%2016%3A22%3A20%20-0500&payload[transaction][starting_balance_in_cents]=6400&payload[transaction][ending_balance_in_cents]=0&payload[transaction][gateway_used]=bogus&payload[transaction][gateway_transaction_id]=53433&payload[transaction][gateway_response_code]=&payload[transaction][gateway_order_id]=&payload[transaction][payment_id]=&payload[transaction][product_id]=3792003&payload[transaction][tax_id]=&payload[transaction][component_id]=&payload[transaction][statement_id]=80168049&payload[transaction][customer_id]=14585695&payload[transaction][card_number]=XXXX-XXXX-XXXX-1&payload[transaction][card_expiration]=10%2F2020&payload[transaction][card_type]=bogus&payload[transaction][refunded_amount_in_cents]=0&payload[transaction][invoice_id]=&payload[event_id]=347299364'
                         signature: fbcf2f6be579f9658cff90c4373e0ca2
                         signature_hmac_sha_256: db96654f5456c5460062feb944ac8bb1418f9d181ae04a8ed982fe9ffdca8de1
-      operationId: get-webhooks.json
+      operationId: readWebhooks
       description: |-
         ## Webhooks Intro
 
@@ -625,7 +625,7 @@ paths:
                         - payment_success
                         - payment_failure
                         - refund_failure
-      operationId: get-endpoints.json
+      operationId: readWebhookEndpoints
       description: This method returns created endpoints for site.
   '/endpoints/{endpoint_id}.json':
     parameters:
@@ -745,7 +745,7 @@ paths:
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
                       test: true
-      operationId: get-site.json
+      operationId: readSite
       description: |-
         This endpoint allows you to fetch some site data.
 
@@ -879,7 +879,7 @@ paths:
                         sticky: false
                         subscription_id: 100046
                         updated_at: '2015-06-15T13:26:33-04:00'
-      operationId: get-subscriptions-subscription_id-notes.json
+      operationId: readSubscriptionNotes
       description: Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
       parameters:
         - schema:
@@ -932,7 +932,7 @@ paths:
                       sticky: false
                       subscription_id: 100046
                       updated_at: '2015-06-15T13:28:12-04:00'
-      operationId: get-subscriptions-subscription_id-notes-note_id-.json
+      operationId: readSubscriptionNote
       description: 'Once you have obtained the ID of the note you wish to read, use this method to show a particular note attached to a subscription.'
     put:
       summary: Update Subscription Note
@@ -1176,7 +1176,7 @@ paths:
                         portal_invite_last_accepted_at: null
                         tax_exempt: false
                         parent_id: null
-      operationId: get-customers.json
+      operationId: readCustomers
       description: |-
         This request will by default list all customers associated with your Site.
 
@@ -1270,7 +1270,7 @@ paths:
                 properties:
                   customer:
                     $ref: ../models/Customer.yaml
-      operationId: get-customers-id-.json
+      operationId: readCustomer
       description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
       parameters: []
     put:
@@ -1369,7 +1369,7 @@ paths:
                 properties:
                   customer:
                     $ref: ../models/Customer.yaml
-      operationId: get-customers-lookup.json
+      operationId: readCustomerByReference
       description: Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
       parameters:
         - schema:
@@ -1399,7 +1399,7 @@ paths:
                 type: array
                 items:
                   $ref: ../models/Subscription.yaml
-      operationId: get-customers-customer_id-subscriptions.json
+      operationId: readSubscriptionsByCustomer
       description: This method lists all subscriptions that belong to a customer.
   '/portal/customers/{customer_id}/enable.json':
     parameters:
@@ -1540,7 +1540,7 @@ paths:
                   value:
                     errors:
                       error: Too many requests for this customer's management link
-      operationId: get-portal-customers-customer_id-management_link.json
+      operationId: readCustomerPortalLink
       description: |-
         This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
 
@@ -1722,7 +1722,7 @@ paths:
                       revenue_today: '$1,405.12'
                       revenue_this_month: '$10,000.00'
                       revenue_this_year: '$27,935.24'
-      operationId: get-stats.json
+      operationId: readSiteStats
       description: |-
         The Stats API is a very basic view of some Site-level stats. This API call only answers with JSON responses. An XML version is not provided.
 
@@ -1778,7 +1778,7 @@ paths:
                 Example:
                   value:
                     errors: Referral code is invalid.
-      operationId: get-referral_codes-validate.json
+      operationId: validateReferralCode
       parameters:
         - schema:
             type: string
@@ -1878,7 +1878,7 @@ paths:
       summary: List Reason Codes
       tags:
         - Reason Codes
-      operationId: get-reason_codes.json
+      operationId: readReasonCodes
       responses:
         '200':
           description: OK
@@ -1953,7 +1953,7 @@ paths:
                     $ref: '#/components/schemas/Reason-Code'
         '404':
           description: Not Found
-      operationId: get-reason_codes-reason_code_id-.json
+      operationId: readReasonCode
       description: This method gives a merchant the option to retrieve a list of a particular code for a given Site by providing the unique numerical ID of the code.
     put:
       summary: Update Reason Code
@@ -2162,7 +2162,7 @@ paths:
                         data_count: 0
                         input_type: string
                         enum: null
-      operationId: get-resource_type-metafields.json
+      operationId: readSiteMetafields
       description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
       parameters:
         - schema:
@@ -2343,7 +2343,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Paginated-Metadata'
-      operationId: get-resource_type-resource_id-metadata.json
+      operationId: readMetadata
       description: |-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
@@ -2459,7 +2459,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Paginated-Metadata'
-      operationId: get-resource_type-metadata.json
+      operationId: readResourceMetadataFields
       description: |-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
@@ -2722,7 +2722,7 @@ paths:
                             name: test
                             handle: null
                         use_site_exchange_rate: true
-      operationId: get-product_families-product_family_id-coupons.json
+      operationId: readProductFamilyCoupons
       description: |-
         List coupons for a specific Product Family in a Site.
 
@@ -2819,7 +2819,7 @@ paths:
                 properties:
                   coupon:
                     $ref: '#/components/schemas/Coupon'
-      operationId: get-coupons-find.json
+      operationId: readCouponByCode
       description: |-
         You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
 
@@ -2887,7 +2887,7 @@ paths:
                       stackable: true
                       compounding_strategy: compound
                       coupon_restrictions: []
-      operationId: get-product_families-product_family_id-coupons-coupon_id-.json
+      operationId: readCoupon
       description: |-
         You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
         If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
@@ -3067,7 +3067,7 @@ paths:
                             item_id: 0
                             name: string
                             handle: string
-      operationId: get-coupons.json
+      operationId: readCoupons
       description: |-
         You can retrieve a list of coupons.
 
@@ -3249,7 +3249,7 @@ paths:
                       savings_in_cents: 3000
                       revenue: 20
                       revenue_in_cents: 2000
-      operationId: get-product_families-product_family_id-coupons-coupon_id-usage.json
+      operationId: readCouponUsage
       description: 'This request will provide details about the coupon usage as an array of data hashes, one per product.'
   /coupons/validate.json:
     get:
@@ -3304,7 +3304,7 @@ paths:
                 Example:
                   value:
                     errors: Coupon code could not be found.
-      operationId: get-coupons-validate.json
+      operationId: validateCouponCode
       description: |-
         You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
 
@@ -3509,7 +3509,7 @@ paths:
       summary: List Coupon Subcodes
       tags:
         - Coupons
-      operationId: get-coupons-coupon_id-codes.json
+      operationId: readCouponSubcodes
       responses:
         '200':
           description: OK
@@ -3789,7 +3789,7 @@ paths:
               schema:
                 type: array
                 items: {}
-      operationId: get-events.json
+      operationId: readSiteEventActivity
       description: |-
         ## Events Intro
 
@@ -3997,7 +3997,7 @@ paths:
                         subscription_id: 14900541
                         created_at: '2016-11-01T12:41:25-04:00'
                         event_specific_data: null
-      operationId: get-subscriptions-subscription_id-events.json
+      operationId: readSubscriptionEventActivity
       description: |-
         The following request will return a list of events for a subscription.
 
@@ -4089,7 +4089,7 @@ paths:
                 Example:
                   value:
                     count: 144
-      operationId: get-events-count.json
+      operationId: readTotalEventCount
       parameters:
         - schema:
             type: integer
@@ -4211,7 +4211,7 @@ paths:
                         plan_amount_formatted: '$99,135.93'
                         usage_amount_in_cents: 2000
                         usage_amount_formatted: $20.00
-      operationId: get-mrr.json
+      operationId: readLegacyMrr
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts.'
       parameters:
         - schema:
@@ -5087,7 +5087,7 @@ paths:
                       created_at: '2019-08-02T05:54:53-04:00'
                       default_price_point_name: Original
                       product_family_name: Chargify
-      operationId: get-components-lookup.json
+      operationId: readComponentByHandle
       parameters:
         - schema:
             type: string
@@ -5147,7 +5147,7 @@ paths:
                       created_at: '2019-08-02T05:54:53-04:00'
                       default_price_point_name: Original
                       product_family_name: Chargify
-      operationId: get-product_families-product_family_id-components-component_id-.json
+      operationId: readComponentById
       description: |-
         This request will return information regarding a component from a specific product family.
 
@@ -5298,7 +5298,7 @@ paths:
                         default_price_point_name: Original
                         product_family_name: Chargify
                         use_site_exchange_rate: true
-      operationId: get-components.json
+      operationId: readComponents
       parameters:
         - schema:
             type: string
@@ -5487,7 +5487,7 @@ paths:
                         default_price_point_name: Original
                         product_family_name: Chargify
                         use_site_exchange_rate: true
-      operationId: get-product_families-product_family_id-components.json
+      operationId: readComponentsByProductFamily
       description: This request will return a list of components for a particular product family.
       parameters:
         - schema:
@@ -5678,7 +5678,7 @@ paths:
                             starting_quantity: 1
                             ending_quantity: null
                             unit_price: '4.0'
-      operationId: get-components-component_id-price_points.json
+      operationId: readComponentPrices
       description: |-
         Use this endpoint to read current price points that are associated with a component.
 
@@ -6205,7 +6205,7 @@ paths:
                               recurring: true
                           subscription_id: 12355
                           subscriber_name: Amy Smith
-      operationId: get-mrr_movements.json
+      operationId: readLegacyMrrMovements
       description: |-
         This endpoint returns your site's MRR movements.
 
@@ -6349,7 +6349,7 @@ paths:
                     tax_code: D0000000
     get:
       summary: List Products for Product Family
-      operationId: get-product_families-product_family_id-products.json
+      operationId: readProductsByFamily
       responses:
         '200':
           description: OK
@@ -6584,7 +6584,7 @@ paths:
                         accounting_code: null
                       public_signup_pages: []
                       product_price_point_name: Default
-      operationId: get-products-product_id-.json
+      operationId: readProduct
       description: This endpoint allows you to read the current details of a product that you've created in Chargify.
     put:
       summary: Update Product
@@ -6808,7 +6808,7 @@ paths:
                           return_params: engine=md7a
                           url: 'https://general-goods.chargify.com/subscribe/m6tbcq4mcgpw/no-cost-product'
                       product_price_point_name: Default
-      operationId: get-products-handle-api_handle-.json
+      operationId: readProductByHandle
       description: This method allows to retrieve a Product object by its `api_handle`.
   /product_families.json:
     post:
@@ -6893,7 +6893,7 @@ paths:
                         accounting_code: null
                         created_at: '2014-04-16T12:41:13-06:00'
                         updated_at: '2014-04-16T12:41:13-06:00'
-      operationId: get-product_families.json
+      operationId: readProductFamilies
       description: This method allows to retrieve a list of Product Families for a site.
       parameters:
         - schema:
@@ -6955,7 +6955,7 @@ paths:
                       description: ''
                       handle: billing-plans
                       accounting_code: null
-      operationId: get-product_families-id-.json
+      operationId: readProductFamily
       description: |-
         This method allows to retrieve a Product Family via the `product_family_id`. The response will contain a Product Family object.
 
@@ -7069,7 +7069,7 @@ paths:
                         archived_at: 'Tue, 30 Oct 2018 18:49:47 EDT -04:00'
                         created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                         updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
-      operationId: get-products-product_id-price_points.json
+      operationId: readProductPricePoints
       parameters:
         - schema:
             type: integer
@@ -7208,7 +7208,7 @@ paths:
                       archived_at: 'Tue, 30 Oct 2018 18:49:47 EDT -04:00'
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
-      operationId: get-products-product_id-price_points-price_point_id-.json
+      operationId: readProductPricePoint
       description: Use this endpoint to retrieve details for a specific product price point.
       parameters:
         - schema:
@@ -8265,7 +8265,7 @@ paths:
                         payment_type: bank_account
                         site_gateway_setting_id: 1
                         gateway_handle: null
-      operationId: get-payment_profiles.json
+      operationId: readPaymentProfiles
       description: 'This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.'
       parameters:
         - schema:
@@ -8448,7 +8448,7 @@ paths:
                       payment_type: bank_account
                       site_gateway_setting_id: 1
                       gateway_handle: null
-      operationId: get-payment_profiles-payment_profile_id-.json
+      operationId: readPaymentProfile
       description: |-
         Using the GET method you can retrieve a Payment Profile identified by its unique ID.
 
@@ -9211,7 +9211,7 @@ paths:
                         refund_amount: '0.0'
                         due_amount: '0.0'
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
-      operationId: get-invoices.json
+      operationId: readInvoices
       description: 'By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.'
       parameters:
         - schema:
@@ -9481,7 +9481,7 @@ paths:
                     refunds: []
                     custom_fields: []
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
-      operationId: get-invoices-uid-.json
+      operationId: readInvoice
       description: Use this endpoint to retrieve the details for an invoice.
   /invoices/events.json:
     get:
@@ -9846,7 +9846,7 @@ paths:
                     page: 48
                     per_page: 1
                     total_pages: 102
-      operationId: get-invoices-events.json
+      operationId: readInvoiceEvents
       description: |-
         This endpoint returns a list of invoice events. Each event contains event "data" (such as an applied payment) as well as a snapshot of the `invoice` at the time of event completion.
 
@@ -10440,7 +10440,7 @@ paths:
                             memo: Refund for overpayment
                             original_amount: '524.9'
                             applied_amount: '200.5'
-      operationId: get-credit_notes.json
+      operationId: readCreditNotes
       description: |-
         Credit Notes are like inverse invoices. They reduce the amount a customer owes.
 
@@ -10729,7 +10729,7 @@ paths:
                         memo: Refund for overpayment
                         original_amount: '524.9'
                         applied_amount: '200.5'
-      operationId: get-credit_notes-uid-.json
+      operationId: readCreditNote
       description: Use this endpoint to retrieve the details for a credit note.
   '/subscriptions/{subscription_id}/payments.json':
     parameters:
@@ -11240,7 +11240,7 @@ paths:
                         refund_amount: '0.0'
                         due_amount: '0.0'
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
-      operationId: get-invoices-invoice_uid-segments.json
+      operationId: readConsolidatedInvoiceSegments
       description: 'Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.'
       parameters:
         - schema:
@@ -11309,7 +11309,7 @@ paths:
                       balance_in_cents:
                         type: integer
                         description: 'The balance, in cents, of the subscription''s Prepayment account.'
-      operationId: get-subscriptions-subscription_id-account_balances.json
+      operationId: readSubscriptionAccountBalances
       description: 'Returns the `balance_in_cents` of the Subscription''s Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription''s open, payable invoices.'
   '/subscriptions/{subscription_id}/components/{component_id}.json':
     parameters:
@@ -11355,7 +11355,7 @@ paths:
                       enabled: true
         '404':
           description: Not Found
-      operationId: get-subscriptions-subscription_id-components-component_id-.json
+      operationId: readSubscriptionComponents
       description: This request will list information regarding a specific component owned by a subscription.
   '/subscriptions/{subscription_id}/components.json':
     parameters:
@@ -11403,7 +11403,7 @@ paths:
                         updated_at: string
                         component_handle: string
                         archived_at: string
-      operationId: get-subscriptions-subscription_id-components.json
+      operationId: readSubscriptionAppliedComponents
       description: |-
         This request will list a subscription's applied components.
 
@@ -11842,7 +11842,7 @@ paths:
           description: Not Found
         '422':
           description: Unprocessable Entity (WebDAV)
-      operationId: get-subscriptions-subscription_id-components-component_id-allocations.json
+      operationId: readSubscriptionComponentsAllocations
       description: |-
         This endpoint returns the 50 most recent Allocations, ordered by most recent first.
 
@@ -12570,7 +12570,7 @@ paths:
                         component_id: 500093
                         component_handle: handle
                         subscription_id: 22824464
-      operationId: get-subscriptions-subscription_id-components-component_id-usages.json
+      operationId: readSubscriptionComponentsUsages
       description: |-
         This request will return a list of the usages associated with a subscription for a particular metered component. This will display the previously recorded components for a subscription.
 
@@ -13797,7 +13797,7 @@ paths:
                   properties:
                     subscription:
                       $ref: ../models/Subscription.yaml
-      operationId: get-subscriptions.json
+      operationId: readSiteSubscriptions
       description: |-
         This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
 
@@ -14221,7 +14221,7 @@ paths:
                             return_url: ''
                             return_params: ''
                             url: 'https://general-goods.chargifypay.com/subscribe/hjpvhnw63tzy'
-      operationId: get-offers.json
+      operationId: readSiteOffers
       description: This endpoint will list offers for a site.
   '/offers/{offer_id}.json':
     parameters:
@@ -14248,7 +14248,7 @@ paths:
               examples: {}
         '401':
           description: Unauthorized
-      operationId: get-offers-offer_id-.json
+      operationId: readOffers
       description: 'This method allows you to list a specific offer''s attributes. This is different than list all offers for a site, as it requires an `offer_id`.'
   '/offers/{offer_id}/archive.json':
     parameters:
@@ -14348,7 +14348,7 @@ paths:
                       subscription_mrr: $200.00
                       sales_rep_id: 48
                       sales_rep_name: John Candy
-      operationId: get-sellers-seller_id-sales_commission_settings.json
+      operationId: readSubscriptionsSalesCommission
       description: |-
         Endpoint returns subscriptions with associated sales reps
 
@@ -14527,7 +14527,7 @@ paths:
                           usage: $0.00
                           recurring: $200.00
                       test_mode: true
-      operationId: get-sellers-seller_id-sales_reps.json
+      operationId: readSalesRepDetails
       description: |-
         Endpoint returns sales rep list with details
 
@@ -14644,7 +14644,7 @@ paths:
                         recurring: $200.00
                         last_payment: '2020-04-17T08:41:03-04:00'
                         churn_date: null
-      operationId: get-sellers-seller_id-sales_reps-sales_rep_id-.json
+      operationId: readSalesRepSubscriptions
       description: |-
         Endpoint returns sales rep and attached subscriptions details.
 
@@ -15528,7 +15528,7 @@ paths:
                       stored_credential_transaction_id: 166411599220288
                       on_hold_at: null
                       scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
-      operationId: get-subscriptions-subscription_id-.json
+      operationId: readSubscription
       description: |-
         Use this endpoint to find subscription details.
 
@@ -17673,7 +17673,7 @@ paths:
       summary: List Prepayments
       tags:
         - Subscription Invoice Account
-      operationId: get-subscriptions-subscription_id-prepayments.json
+      operationId: readSubscriptionPrepayments
       responses:
         '200':
           description: OK
@@ -18597,7 +18597,7 @@ paths:
                     meta:
                       current_page: 1
                       total_count: 1
-      operationId: get-subscription_groups.json
+      operationId: readSiteSubscriptionGroups
       description: |-
         Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
 
@@ -18726,7 +18726,7 @@ paths:
                         balance_in_cents: 4400
                       pending_discounts:
                         balance_in_cents: 0
-      operationId: get-subscription_groups-uid-.json
+      operationId: readSubscriptionGroup
       description: |-
         Use this endpoint to find subscription group details.
 
@@ -18965,7 +18965,7 @@ paths:
                         balance_in_cents: 0
         '404':
           description: Not Found
-      operationId: get-subscription_groups-lookup.json
+      operationId: readSubscriptionGroupBySubscription
       description: |-
         Use this endpoint to find subscription group associated with subscription.
 
@@ -19471,7 +19471,7 @@ paths:
                 properties:
                   subscription:
                     $ref: ../models/Subscription.yaml
-      operationId: get-subscriptions-lookup.json
+      operationId: readSubscriptionByReference
       parameters:
         - schema:
             type: string
@@ -20104,7 +20104,7 @@ paths:
                       current_page: 1
                       total_pages: 1
                       per_page: 10
-      operationId: get-chargify_js_keys.json
+      operationId: readChargifyJsKey
       description: This endpoint returns public keys used for Chargify.js.
       parameters:
         - schema:
@@ -20163,7 +20163,7 @@ paths:
       summary: List Subscription Group Proforma Invoices
       tags:
         - Proforma Invoices
-      operationId: get-subscription_groups-subscription_group_uid-proforma_invoices.json
+      operationId: readSubscriptionGroupProformaInvoices
       responses:
         '200':
           description: OK
@@ -20191,7 +20191,7 @@ paths:
       summary: Read Proforma Invoice
       tags:
         - Proforma Invoices
-      operationId: get-proforma_invoices-proforma_invoice_uid-.json
+      operationId: readProformaInvoice
       description: |-
         Use this endpoint to read the details of an existing proforma invoice.
 
@@ -20534,7 +20534,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Proforma-Invoice'
-      operationId: get-subscriptions-subscription_id-proforma_invoices.json
+      operationId: readSubscriptionProformaInvoices
       description: 'By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`.'
       parameters:
         - schema:
@@ -21254,7 +21254,7 @@ paths:
                 x-examples:
                   example-1:
                     errors: Chargify token not found
-      operationId: get-one_time_tokens.json
+      operationId: readOneTimeToken
       x-internal: false
       description: |-
         One Time Tokens aka Chargify Tokens house the credit card or ACH (Authorize.Net or Stripe only) data for a customer.
@@ -21285,7 +21285,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
-      operationId: get-subscriptions_components
+      operationId: readSiteSubscriptionComponents
       description: This request will list components applied to each subscription.
       parameters:
         - schema:
@@ -21633,7 +21633,7 @@ paths:
         description: ID or Handle for the Price Point belonging to the Component
     get:
       summary: List Segments for a Price Point
-      operationId: get-components-component_id-price_points-price_point_id-segments.json
+      operationId: readComponentPricePointSegments
       responses:
         '200':
           description: OK
@@ -22473,7 +22473,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      operationId: get-subscriptions-subscription_id-advance_invoice.json
+      operationId: readSubscriptionUpcomingRenewalAdvanceInvoice
       description: 'Once an advance invoice has been generated for a subscription''s upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.'
   '/subscriptions/{subscription_id}/advance_invoice/void.json':
     parameters:
@@ -22585,7 +22585,7 @@ paths:
                     errors:
                       at_time:
                         - 'supplied value is invalid, expected ISO 8601 format'
-      operationId: get-subscriptions_mrr.json
+      operationId: readSubscriptionLegacyMrr
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts split per subscription.'
       parameters:
         - schema:
@@ -22825,7 +22825,7 @@ paths:
                         use_site_exchange_rate: true
                         tax_code: string
                         default_product_price_point_id: 0
-      operationId: get-products.json
+      operationId: readSiteProducts
       description: This method allows to retrieve a list of Products belonging to a Site.
       parameters:
         - schema:
@@ -23030,7 +23030,7 @@ paths:
                   value:
                     errors:
                       - 'start_date supplied value is invalid, expected ISO 8601 format'
-      operationId: get-components_price_points.json
+      operationId: readSiteComponentPricePoints
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
       parameters:
         - schema:
@@ -23178,7 +23178,7 @@ paths:
                     errors:
                       - 'date_field must be one of: created_at, updated_at'
                       - 'start_date supplied value is invalid, expected ISO 8601 format'
-      operationId: get-products_price_points.json
+      operationId: readSiteProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
         - schema:
@@ -23599,7 +23599,7 @@ paths:
       summary: List Exported Proforma Invoices
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id-rows.json
+      operationId: readProformaInvoicesRowsExport
       description: |-
         This API returns an array of exported proforma invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
@@ -23640,7 +23640,7 @@ paths:
       summary: List Exported Invoices
       tags:
         - API Exports
-      operationId: get-api_exports-invoices-id-rows.json
+      operationId: readInvoicesRowsExport
       description: |-
         This API returns an array of exported invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
@@ -23681,7 +23681,7 @@ paths:
       summary: List Exported Subscriptions
       tags:
         - API Exports
-      operationId: get-api_exports-subscriptions-id-rows.json
+      operationId: readSubscriptionExport
       description: |-
         This API returns an array of exported subscriptions for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
@@ -23805,7 +23805,7 @@ paths:
       summary: Read Proforma Invoices Export
       tags:
         - API Exports
-      operationId: get-api_exports-proforma_invoices-id.json
+      operationId: readProformaInvoicesExport
       description: This API returns a batchjob object for proforma invoices export.
       responses:
         '200':
@@ -23827,7 +23827,7 @@ paths:
       summary: Read Invoices Export
       tags:
         - API Exports
-      operationId: get-api_exports_invoices-id.json
+      operationId: readInvoicesExport
       description: This API returns a batchjob object for invoices export.
       responses:
         '200':
@@ -23849,7 +23849,7 @@ paths:
       summary: Read Subscriptions Export
       tags:
         - API Exports
-      operationId: get-api_exports-subscriptions-id.json
+      operationId: readSubscriptionsExport
       description: This API returns a batchjob object for subscriptions export.
       responses:
         '200':
