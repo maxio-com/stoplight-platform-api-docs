@@ -837,7 +837,7 @@ paths:
                     sticky: true
     delete:
       summary: Delete Subscription Note
-      operationId: delete-subscriptions-subscription_id-notes.json
+      operationId: deleteSubscriptionNote
       tags:
         - Subscription Notes
       responses:
@@ -1349,7 +1349,7 @@ paths:
       summary: Delete Customer
       tags:
         - Customers
-      operationId: delete-customers-id-.json
+      operationId: deleteCustomer
       responses:
         '204':
           description: No Content
@@ -1653,7 +1653,7 @@ paths:
                     uninvited_count: 8
         '422':
           description: Unprocessable Entity (WebDAV)
-      operationId: delete-portal-customers-customer_id-invitations-revoke.json
+      operationId: revokeCustomerPortalAccess
       description: |-
         You can revoke a customer's Billing Portal invitation.
 
@@ -2011,7 +2011,7 @@ paths:
                     ok: ok
         '404':
           description: Not Found
-      operationId: delete-reason_codes-reason_code_id-.json
+      operationId: deleteReasonCode
       description: This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
   '/{resource_type}/metafields.json':
     parameters:
@@ -2234,7 +2234,7 @@ paths:
       tags:
         - Custom Fields
       summary: Delete Metafield
-      operationId: delete-resource_type-metafields.json
+      operationId: deleteMetafield
       responses:
         '200':
           description: OK
@@ -2408,7 +2408,7 @@ paths:
           description: OK
         '404':
           description: Not Found
-      operationId: delete-resource_type-resource_id-metadata.json
+      operationId: deleteResourceMetadata
       description: |-
         This method removes the metadata from the subscriber/customer cited.
 
@@ -3007,7 +3007,7 @@ paths:
                       stackable: true
                       compounding_strategy: compound
                       coupon_restrictions: []
-      operationId: delete-product_families-product_family_id-coupons-coupon_id-.json
+      operationId: deleteProductFamilyCoupon
       description: |-
         You can archive a Coupon via the API with the archive method.
         Archiving makes that Coupon unavailable for future use, but allows it to remain attached and functional on existing Subscriptions that are using it.
@@ -3636,7 +3636,7 @@ paths:
           description: OK
         '404':
           description: Not Found
-      operationId: delete-coupons-coupon_id-codes-subcode-.json
+      operationId: deleteCouponSubcode
       description: |-
         ## Example
 
@@ -5202,7 +5202,7 @@ paths:
                   value:
                     errors:
                       - Component cannot be archived. Please make sure it hasn't already been archived.
-      operationId: delete-product_families-product_family_id-components-component_id-.json
+      operationId: archiveComponent
       description: Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
   /components.json:
     get:
@@ -5920,7 +5920,7 @@ paths:
                           starting_quantity: 101
                           ending_quantity: null
                           unit_price: '4.0'
-      operationId: delete-components-component_id-price_points-price_point_id-.json
+      operationId: archiveComponentPricePoint
       description: A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
   '/components/{component_id}/price_points/{price_point_id}/unarchive.json':
     parameters:
@@ -6680,7 +6680,7 @@ paths:
       summary: Archive Product
       tags:
         - Products
-      operationId: delete-products-product_id-.json
+      operationId: archiveProduct
       responses:
         '200':
           description: OK
@@ -7252,7 +7252,7 @@ paths:
                       archived_at: 'Tue, 30 Oct 2018 18:49:47 EDT -04:00'
                       created_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
                       updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
-      operationId: delete-products-product_id-price_points-price_point_id-.json
+      operationId: archiveProductPricePoint
       description: Use this endpoint to archive a product price point.
   '/products/{product_id}/price_points/{price_point_id}/unarchive.json':
     parameters:
@@ -8672,7 +8672,7 @@ paths:
                   value:
                     errors:
                       - The payment profile is in use by one or more subscriptions and cannot be deleted
-      operationId: delete-payment_profiles-payment_profile_id-.json
+      operationId: deleteUnusedPaymentProfile
       description: |-
         Deletes an unused payment profile.
 
@@ -8696,7 +8696,7 @@ paths:
       responses:
         '204':
           description: No Content
-      operationId: delete-subscriptions-subscription_id-payment_profiles-payment_profile_id-.json
+      operationId: deleteSubscriptionsPaymentProfile
       description: |-
         This will delete a payment profile belonging to the customer on the subscription.
 
@@ -12367,7 +12367,7 @@ paths:
                     errors:
                       - kind: base
                         message: 'Credit scheme must be one of credit, refund or none.'
-      operationId: delete-subscriptions-subscription_id-components-component_id-allocations-allocation_id-.json
+      operationId: deletePrepaidUsageAllocation
       description: |-
         Prepaid Usage components are unique in that their allocations are always additive. In order to reduce a subscription's allocated quantity for a prepaid usage component each allocation must be destroyed individually via this endpoint.
 
@@ -15216,7 +15216,7 @@ paths:
       summary: Cancel Subscription
       tags:
         - Subscription Status
-      operationId: delete-subscriptions-subscription_id-.json
+      operationId: cancelSubscription
       responses:
         '200':
           description: OK
@@ -16870,7 +16870,7 @@ paths:
                     message: This subscription will no longer be canceled
         '404':
           description: Not Found
-      operationId: delete-subscriptions-subscription_id-delayed_cancel.json
+      operationId: deleteSubscriptionDelayedCancellation
       description: |-
         Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
 
@@ -18860,7 +18860,7 @@ paths:
                     deleted: true
         '404':
           description: Not Found
-      operationId: delete-subscription_groups-uid-.json
+      operationId: deleteSubscriptionGroup
       description: |-
         Use this endpoint to delete subscription group.
         Only groups without members can be deleted
@@ -19084,7 +19084,7 @@ paths:
                   value:
                     errors:
                       - Subscriptions group does not have a pending delayed cancellation
-      operationId: delete-subscription_groups-uid-delayed_cancel.json
+      operationId: deleteSubscriptionGroupDelayedCancellation
       description: Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
   '/subscription_groups/{subscription_group_uid}/reactivate.json':
     parameters:
@@ -19211,7 +19211,7 @@ paths:
       responses:
         '204':
           description: No Content
-      operationId: delete-subscription_groups-subscription_group_uid-payment_profiles-payment_profile_id-.json
+      operationId: deleteSubscriptionGroupPaymentProfile
       description: |-
         This will delete a Payment Profile belonging to a Subscription Group.
 
@@ -19842,7 +19842,7 @@ paths:
                   value:
                     errors:
                       - You can not remove primary subscription when there are others in group
-      operationId: delete-subscriptions-subscription_id-group.json
+      operationId: deleteSubscriptionFromGroup
       description: 'For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group.'
   /subscriptions/preview.json:
     post:
@@ -20464,7 +20464,7 @@ paths:
                   value:
                     subscription:
                       - There's no coupon applied to this subscription
-      operationId: delete-subscriptions-subscription_id-remove_coupon.json
+      operationId: deleteCouponFromSubscription
       description: |-
         Use this endpoint to remove a coupon from an existing subscription.
 
@@ -21940,7 +21940,7 @@ paths:
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
     delete:
       summary: Delete Single Segment
-      operationId: delete-components-component_id-price_points-price_point_id-segments-id-.json
+      operationId: deleteComponentSegment
       responses:
         '204':
           description: No Content
