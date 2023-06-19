@@ -15969,7 +15969,7 @@ paths:
                         customer_vault_token: null
                         billing_address_2: ''
                         payment_type: credit_card
-      operationId: pauseSubscription
+      operationId: automaticallyResumeSubscription
       description: |-
         Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
 
@@ -20150,7 +20150,7 @@ paths:
                   value:
                     errors:
                       - Consolidated proforma invoice generation already in progress
-      operationId: createSubscriptionProformaInvoice
+      operationId: createConsolidatedSubscriptionProformaInvoice
       description: |-
         This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will return a 201 with no message, or a 422 with any errors. To find and view the new consolidated proforma invoice, you may poll the subscription group listing for proforma invoices; only one consolidated proforma invoice may be created per group at a time.
 
