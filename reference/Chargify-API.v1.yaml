@@ -19225,11 +19225,6 @@ paths:
         name: uid
         in: path
         required: true
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
         description: The uid of the subscription group
     post:
       summary: Create Prepayment
