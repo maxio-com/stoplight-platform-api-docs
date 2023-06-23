@@ -12809,8 +12809,8 @@ paths:
                       coupon_use_count: 1
                       coupon_uses_allowed: 1
                       next_product_handle: null
-                      stored_credential_transaction_id: '125566112256688,'
-                      dunning_communication_delay_enabled: 'true,'
+                      stored_credential_transaction_id: 125566112256688
+                      dunning_communication_delay_enabled: true
                       dunning_communication_delay_time_zone: Eastern Time (US & Canada)
         '422':
           description: Unprocessable Entity (WebDAV)
