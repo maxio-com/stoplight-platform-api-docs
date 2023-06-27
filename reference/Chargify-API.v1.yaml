@@ -23033,7 +23033,7 @@ paths:
                   value:
                     errors:
                       - 'start_date supplied value is invalid, expected ISO 8601 format'
-      operationId: listComponentPricePoints
+      operationId: listAllComponentPricePoints
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
       parameters:
         - schema:
@@ -23181,7 +23181,7 @@ paths:
                     errors:
                       - 'date_field must be one of: created_at, updated_at'
                       - 'start_date supplied value is invalid, expected ISO 8601 format'
-      operationId: listProductPricePoints
+      operationId: listAllProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
         - schema:
