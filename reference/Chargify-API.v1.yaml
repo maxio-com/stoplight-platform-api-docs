@@ -335,7 +335,7 @@ paths:
                           type: string
                           description: 'Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.'
                         accepted_at:
-                          type: 
+                          type:
                             - string
                             - 'null'
                           description: 'Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.'
@@ -1272,7 +1272,7 @@ paths:
                     $ref: ../models/Customer.yaml
       operationId: get-customers-id-.json
       description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
-      parameters: []
+      parameters: [ ]
     put:
       summary: Update Customer
       tags:
@@ -1398,7 +1398,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Subscription.yaml
+                  $ref: '#/components/schemas/Subscription-Response'
       operationId: get-customers-customer_id-subscriptions.json
       description: This method lists all subscriptions that belong to a customer.
   '/portal/customers/{customer_id}/enable.json':
@@ -2042,7 +2042,7 @@ paths:
                   value:
                     - name: Color
                       scope:
-                        hosted: []
+                        hosted: [ ]
                         csv: '0'
                         statements: '0'
                         invoices: '0'
@@ -2052,7 +2052,7 @@ paths:
                       enum: null
                     - name: Brand
                       scope:
-                        hosted: []
+                        hosted: [ ]
                         csv: '0'
                         statements: '0'
                         invoices: '0'
@@ -2115,7 +2115,7 @@ paths:
                   metafields:
                     - name: Color
                     - name: Brand
-      parameters: []
+      parameters: [ ]
     get:
       summary: List Metafields
       tags:
@@ -2152,7 +2152,7 @@ paths:
                         name: string
                         scope:
                           hosted:
-                            - {}
+                            - { }
                           csv: string
                           statements: string
                           invoices: string
@@ -2669,7 +2669,7 @@ paths:
                         conversion_limit: 100
                         stackable: false
                         compounding_strategy: compound
-                        coupon_restrictions: []
+                        coupon_restrictions: [ ]
                         use_site_exchange_rate: true
                     - coupon:
                         id: 123456
@@ -2692,7 +2692,7 @@ paths:
                         conversion_limit: 100
                         stackable: false
                         compounding_strategy: compound
-                        coupon_restrictions: []
+                        coupon_restrictions: [ ]
                         use_site_exchange_rate: true
                     - coupon:
                         id: 888888
@@ -2886,7 +2886,7 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
+                      coupon_restrictions: [ ]
       operationId: get-product_families-product_family_id-coupons-coupon_id-.json
       description: |-
         You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
@@ -2895,7 +2895,7 @@ paths:
         When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
 
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
-      parameters: []
+      parameters: [ ]
     put:
       summary: Update Coupon
       tags:
@@ -2934,7 +2934,7 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
+                      coupon_restrictions: [ ]
       operationId: put-product_families-product_family_id-coupons-coupon_id-.json
       description: |-
         ## Update Coupon
@@ -3006,7 +3006,7 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
+                      coupon_restrictions: [ ]
       operationId: delete-product_families-product_family_id-coupons-coupon_id-.json
       description: |-
         You can archive a Coupon via the API with the archive method.
@@ -3290,7 +3290,7 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: full-price
-                      coupon_restrictions: []
+                      coupon_restrictions: [ ]
         '404':
           description: Not Found
           content:
@@ -3444,8 +3444,8 @@ paths:
                       - BALTIMOREFALL
                       - ORLANDOFALL
                       - DETROITFALL
-                    duplicate_codes: []
-                    invalid_codes: []
+                    duplicate_codes: [ ]
+                    invalid_codes: [ ]
       operationId: post-coupons-coupon_id-codes.json
       description: |-
         ## Coupon Subcodes Intro
@@ -3788,7 +3788,7 @@ paths:
             multipart/form-data:
               schema:
                 type: array
-                items: {}
+                items: { }
       operationId: get-events.json
       description: |-
         ## Events Intro
@@ -4406,7 +4406,7 @@ paths:
                       - 'Pricing scheme: cannot be blank.'
                       - At least 1 price bracket must be defined
       operationId: post-product_families-product_family_id-plural_kind-.json
-      parameters: []
+      parameters: [ ]
       description: |-
         This request will create a component definition under the specified product family. These component definitions determine what components are named, how they are measured, and how much they cost.
 
@@ -5568,7 +5568,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Component-Price-Point'
-              examples: {}
+              examples: { }
       operationId: post-components-component_id-price_points.json
       description: This endpoint can be used to create a new price point for an existing component.
       requestBody:
@@ -6582,7 +6582,7 @@ paths:
                         description: ''
                         handle: acme-products
                         accounting_code: null
-                      public_signup_pages: []
+                      public_signup_pages: [ ]
                       product_price_point_name: Default
       operationId: get-products-product_id-.json
       description: This endpoint allows you to read the current details of a product that you've created in Chargify.
@@ -6727,7 +6727,7 @@ paths:
                         description: ''
                         handle: acme-products
                         accounting_code: null
-                      public_signup_pages: []
+                      public_signup_pages: [ ]
                       product_price_point_name: Default
       description: |-
         Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly.
@@ -8854,7 +8854,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Invoice'
-              examples: {}
+              examples: { }
       operationId: post-invoices-uid-refunds.json
       description: |-
         Refund an invoice, segment, or consolidated invoice.
@@ -9462,9 +9462,9 @@ paths:
                         product_version: 1
                         component_id: null
                         price_point_id: null
-                    discounts: []
-                    taxes: []
-                    credits: []
+                    discounts: [ ]
+                    taxes: [ ]
+                    credits: [ ]
                     payments:
                       - transaction_time: '2018-07-26T15:22:02Z'
                         memo: 'Joe Example - Monthly Product: Renewal payment'
@@ -9478,8 +9478,8 @@ paths:
                           type: credit_card
                         transaction_id: 253028955
                         prepayment: false
-                    refunds: []
-                    custom_fields: []
+                    refunds: [ ]
+                    custom_fields: [ ]
                     public_url: 'https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y'
       operationId: get-invoices-uid-.json
       description: Use this endpoint to retrieve the details for an invoice.
@@ -9620,7 +9620,7 @@ paths:
                             last_name: Canceled On Purpose
                             organization: null
                             email: evan4@example.com
-                          recipient_emails: []
+                          recipient_emails: [ ]
                           terms: due_on_receipt
                           memo: 'Thanks for your business! If you have any questions, please contact your account manager.'
                           billing_address:
@@ -9824,8 +9824,8 @@ paths:
                           total_amount: '168.61'
                           paid_amount: '168.61'
                           due_amount: '0.0'
-                          credits: []
-                          refunds: []
+                          credits: [ ]
+                          refunds: [ ]
                           payments:
                             - memo: 'Non-Resumable Canceled On Purpose - Standard Plan: Renewal payment'
                               original_amount: '168.61'
@@ -9839,7 +9839,7 @@ paths:
                                 type: credit_card
                               transaction_id: 126
                               prepayment: false
-                          custom_fields: []
+                          custom_fields: [ ]
                           display_settings:
                             hide_zero_subtotal_lines: false
                             include_discounts_on_lines: false
@@ -10204,8 +10204,8 @@ paths:
                         amount: '50.00'
                       - invoice_uid: inv_7bc6bwkct3lyt
                         amount: '50.00'
-      parameters: []
-    parameters: []
+      parameters: [ ]
+    parameters: [ ]
   /credit_notes.json:
     get:
       summary: List Credit Notes
@@ -11620,7 +11620,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -11713,7 +11713,7 @@ paths:
                           description: Duis
                           handle: ea dolore dolore sunt
                           accounting_code: null
-                        public_signup_pages: []
+                        public_signup_pages: [ ]
       operationId: post-subscriptions-subscription_id-price_points-reset.json
       description: |-
         Resets all of a subscription's components to use the current default.
@@ -12685,10 +12685,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -13457,10 +13454,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Basic:
                 value:
@@ -13793,10 +13787,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    subscription:
-                      $ref: ../models/Subscription.yaml
+                  $ref: '#/components/schemas/Subscription-Response'
       operationId: get-subscriptions.json
       description: |-
         This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
@@ -13809,33 +13800,10 @@ paths:
 
         Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
       parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        - schema:
-            type: string
-            enum:
-              - active
-              - canceled
-              - expired
-              - expired_cards
-              - on_hold
-              - past_due
-              - pending_cancellation
-              - pending_renewal
-              - suspended
-              - trial_ended
-              - trialing
-              - unpaid
+            $ref: '#/components/schemas/Subscription-State'
           in: query
           name: state
           description: The current state of the subscription
@@ -13855,17 +13823,7 @@ paths:
           name: coupon
           description: The numeric id of the coupon currently applied to the subscription. (This can be found in the URL when editing a coupon. Note that the coupon code cannot be used.)
         - schema:
-            type: string
-            enum:
-              - current_period_ends_at
-              - current_period_starts_at
-              - created_at
-              - activated_at
-              - canceled_at
-              - expires_at
-              - trial_started_at
-              - trial_ended_at
-              - updated_at
+            $ref: '#/components/schemas/List-Subscriptions-Date-Field'
           in: query
           name: date_field
           description: 'The type of filter you''d like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at'
@@ -13894,24 +13852,9 @@ paths:
           in: query
           name: 'metadata[fieldName]'
           description: The value of the metadata field specified in the parameter
+        - $ref: '#/components/parameters/sort-direction'
         - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: 'Controls the order in which results are returned. '
-        - schema:
-            type: string
-            default: signup_date
-            enum:
-              - signup_date
-              - period_start
-              - period_end
-              - next_assessment
-              - updated_at
-              - created_at
+            $ref: '#/components/schemas/List-Subscriptions-Sort'
           in: query
           name: sort
           description: The attribute by which to sort
@@ -14209,7 +14152,7 @@ paths:
                             price_point_name: Auto-created
                             starting_quantity: '0.0'
                             editable: false
-                            currency_prices: []
+                            currency_prices: [ ]
                         offer_discounts:
                           - coupon_id: 234
                             coupon_code: GR8_CUSTOMER
@@ -14245,7 +14188,7 @@ paths:
                 properties:
                   offer:
                     $ref: '#/components/schemas/Offer'
-              examples: {}
+              examples: { }
         '401':
           description: Unauthorized
       operationId: get-offers-offer_id-.json
@@ -14692,10 +14635,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -14741,7 +14681,7 @@ paths:
                       coupon_uses_allowed: null
                       reason_code: null
                       automatically_resume_at: null
-                      coupon_codes: []
+                      coupon_codes: [ ]
                       offer_id: null
                       credit_balance_in_cents: 0
                       prepayment_balance_in_cents: 0
@@ -14836,7 +14776,7 @@ paths:
               examples:
                 Example:
                   value:
-                    errors: []
+                    errors: [ ]
       operationId: put-subscriptions-subscription_id-retry.json
       description: |-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
@@ -14850,12 +14790,7 @@ paths:
         The response will be `422 "Unprocessable Entity`.
   '/subscriptions/{subscription_id}.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Update Subscription
       tags:
@@ -14866,10 +14801,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15033,151 +14965,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    credit_card_attributes:
-                      type: object
-                      properties:
-                        full_number:
-                          type: string
-                        expiration_month:
-                          type: string
-                        expiration_year:
-                          type: string
-                    product_handle:
-                      type: string
-                      description: Set to the handle of a different product to change the subscription's product
-                    product_id:
-                      type: integer
-                      description: Set to the id of a different product to change the subscription's product
-                    product_change_delayed:
-                      type: boolean
-                      default: false
-                    next_product_id:
-                      type: string
-                      description: Set to an empty string to cancel a delayed product change.
-                    next_product_price_point_id:
-                      type: string
-                    snap_day:
-                      type:
-                        - string
-                        - integer
-                      minimum: 1
-                      maximum: 28
-                      enum:
-                        - end
-                      description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
-                    next_billing_at:
-                      type: string
-                    payment_collection_method:
-                      type: string
-                    receives_invoice_emails:
-                      type: boolean
-                    net_terms:
-                      type:
-                        - string
-                        - integer
-                    stored_credential_transaction_id:
-                      type: integer
-                    reference:
-                      type: string
-                    custom_price:
-                      type: object
-                      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
-                      properties:
-                        name:
-                          type: string
-                          description: (Optional)
-                        handle:
-                          type: string
-                          description: (Optional)
-                        price_in_cents:
-                          type: integer
-                        interval:
-                          type: integer
-                        interval_unit:
-                          type: string
-                          enum:
-                            - day
-                            - month
-                        trial_price_in_cents:
-                          type: integer
-                          description: (Optional)
-                        trial_interval:
-                          type: integer
-                          description: (Optional)
-                        trial_interval_unit:
-                          type: string
-                          description: (Optional)
-                          enum:
-                            - day
-                            - month
-                        initial_charge_in_cents:
-                          type: integer
-                          description: (Optional)
-                        initial_charge_after_trial:
-                          type: boolean
-                          description: (Optional)
-                        expiration_interval:
-                          type: integer
-                          description: (Optional)
-                        expiration_interval_unit:
-                          type: string
-                          description: (Optional)
-                          enum:
-                            - day
-                            - month
-                        tax_included:
-                          type: boolean
-                          description: (Optional)
-                    components:
-                      type: array
-                      description: (Optional) An array of component ids and custom prices to be added to the subscription.
-                      items:
-                        type: object
-                        properties:
-                          component_id:
-                            type: integer
-                          custom_price:
-                            type: object
-                            description: Create or update custom pricing unique to the subscription
-                            properties:
-                              pricing_scheme:
-                                type: string
-                                enum:
-                                  - stairstep
-                                  - volume
-                                  - per_unit
-                                  - tiered
-                                description: Omit for On/Off components
-                              prices:
-                                type: array
-                                description: On/off components only need one price bracket starting at 1
-                                items:
-                                  type: object
-                                  properties:
-                                    unit_price:
-                                      type: string
-                                    starting_quantity:
-                                      type: string
-                                    ending_quantity:
-                                      type: string
-                                      nullable: true
-                    dunning_communication_delay_enabled:
-                      type:
-                        - boolean
-                        - 'null'
-                      default: false
-                      description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
-                    dunning_communication_delay_time_zone:
-                      type:
-                        - string
-                        - 'null'
-                      example: '"Eastern Time (US & Canada)"'
-                      description: Time zone for the Dunning Communication Delay feature.
+              $ref: '#/components/schemas/Update-Subscription-Request'
             examples:
               Example:
                 value:
@@ -15223,10 +15011,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15390,7 +15175,7 @@ paths:
                     reason_code:
                       type: string
                       description: Can be used when canceling a subscription to indicate why a subscription was canceled. (See reason codes associated with your site)
-            examples: {}
+            examples: { }
     get:
       summary: Read Subscription
       tags:
@@ -15401,10 +15186,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15541,7 +15323,7 @@ paths:
             enum:
               - coupons
               - self_service_page_token
-            example: 'include[]=coupons, include[]=self_service_page_toke'
+            example: 'include[]=coupons, include[]=self_service_page_token'
           in: query
           name: 'include[]'
           description: Allows including additional data in the response.
@@ -15563,10 +15345,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15696,10 +15475,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15852,10 +15628,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15893,7 +15666,7 @@ paths:
                       coupon_uses_allowed: null
                       reason_code: null
                       automatically_resume_at: '2019-01-20T00:00:00-06:00'
-                      coupon_codes: []
+                      coupon_codes: [ ]
                       customer:
                         id: 19948683
                         first_name: Vanessa
@@ -15949,7 +15722,7 @@ paths:
                           description: ''
                           handle: acme-products
                           accounting_code: null
-                        public_signup_pages: []
+                        public_signup_pages: [ ]
                       credit_card:
                         id: 13826563
                         first_name: Bomb 3
@@ -16019,10 +15792,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -16305,7 +16075,7 @@ paths:
         + The subscription will transition to active
         + The next billing date should not have changed
         + Any product-related charges should have been collected
-      parameters: []
+      parameters: [ ]
       requestBody:
         content:
           application/json:
@@ -16376,10 +16146,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -16733,12 +16500,7 @@ paths:
                       description: The date that the proration is calculated from for the preview
   '/subscriptions/{subscription_id}/override.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Override Subscription
       tags:
@@ -16775,26 +16537,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    activated_at:
-                      type: string
-                      description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
-                    canceled_at:
-                      type: string
-                      description: 'Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.'
-                    cancellation_message:
-                      type: string
-                      description: Can be used to record a reason for the original cancellation.
-                    expires_at:
-                      type: string
-                      description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
-                    current_period_starts_at:
-                      type: string
-                      description: 'Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.'
+              $ref: '#/components/schemas/Override-Subscription-Request'
             examples:
               Example:
                 value:
@@ -16893,10 +16636,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
       operationId: post-subscriptions-subscription_id-cancel_dunning.json
       description: 'If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.'
   '/subscriptions/{subscription_id}/renewals/preview.json':
@@ -17179,14 +16919,14 @@ paths:
                           product_price_point_id: null
                           component_id: null
                           price_point_id: null
-                      discounts: []
-                      taxes: []
-                      credits: []
-                      payments: []
-                      refunds: []
-                      custom_fields: []
+                      discounts: [ ]
+                      taxes: [ ]
+                      credits: [ ]
+                      payments: [ ]
+                      refunds: [ ]
+                      custom_fields: [ ]
                       public_url: 'https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x'
-          headers: {}
+          headers: { }
         '201':
           description: Created
         '401':
@@ -17237,8 +16977,8 @@ paths:
           }
         }
         ```
-         
-
+        
+        
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
         ### Line items types
@@ -17321,7 +17061,7 @@ paths:
 
         #### Price Point
         Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
-         
+        
         #### Description
         Optional `description` parameter, it will overwrite default generated description for line item.
 
@@ -17879,7 +17619,7 @@ paths:
       responses:
         '201':
           description: Created
-          headers: {}
+          headers: { }
           content:
             application/json:
               schema:
@@ -18407,7 +18147,7 @@ paths:
                                 - unit_price: '2'
                                   starting_quantity: '16'
                       - product_id: 13
-    parameters: []
+    parameters: [ ]
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
@@ -19467,10 +19207,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
       operationId: get-subscriptions-lookup.json
       parameters:
         - schema:
@@ -19628,12 +19365,7 @@ paths:
         The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
   '/subscriptions/{subscription_id}/purge.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Purge Subscription
       tags:
@@ -19666,12 +19398,7 @@ paths:
           description: Options are "customer" or "payment_profile"
   '/subscriptions/{subscription_id}/prepaid_configurations.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Update Prepaid Subscription Configuration
       tags:
@@ -19682,21 +19409,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepaid_configuration:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      initial_funding_amount_in_cents:
-                        type: integer
-                      replenish_to_amount_in_cents:
-                        type: integer
-                      auto_replenish:
-                        type: boolean
-                      replenish_threshold_amount_in_cents:
-                        type: integer
+                $ref: '#/components/schemas/Prepaid-Configuration'
               examples:
                 Example:
                   value:
@@ -19712,10 +19425,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                prepaid_configuration:
-                  $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
+              $ref: '#/components/schemas/Upsert-Prepaid-Configuration-Request'
             examples:
               Example:
                 value:
@@ -19855,15 +19565,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_preview:
-                    type: object
-                    properties:
-                      current_billing_manifest:
-                        $ref: '#/components/schemas/Billing-Manifest'
-                      next_billing_manifest:
-                        $ref: '#/components/schemas/Billing-Manifest'
+                $ref: '#/components/schemas/Subscription-Preview-Response'
               examples:
                 Example:
                   value:
@@ -19988,10 +19690,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Product Only:
                 value:
@@ -20211,12 +19910,7 @@ paths:
           description: Not Found
   '/subscriptions/{subscription_id}/add_coupon.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Add Coupons to Subscription
       tags:
@@ -20227,10 +19921,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -20414,12 +20105,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: '#/components/schemas/Add-Coupons-Request'
             examples:
               Example:
                 value:
@@ -20428,12 +20114,7 @@ paths:
                     - COUPON_2
   '/subscriptions/{subscription_id}/remove_coupon.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargidy id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     delete:
       summary: Remove Coupon from Subscription
       tags:
@@ -20715,8 +20396,8 @@ paths:
                   errors:
                     type: array
                     items:
-                      required: []
-                      properties: {}
+                      required: [ ]
+                      properties: { }
                 required:
                   - errors
                 x-examples:
@@ -21427,7 +21108,7 @@ paths:
           in: query
           name: 'filter[subscription][end_datetime]'
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`.'
-    parameters: []
+    parameters: [ ]
   '/components/{component_id}/price_points/{price_point_id}/segments.json/':
     post:
       summary: Create Single Segment
@@ -21508,7 +21189,7 @@ paths:
                               type: string
                             segment_id:
                               type: integer
-              examples: {}
+              examples: { }
         '401':
           description: Unauthorized
         '403':
@@ -21711,7 +21392,7 @@ paths:
                                 type: string
                               segment_id:
                                 type: integer
-              examples: {}
+              examples: { }
         '401':
           description: Unauthorized
         '403':
@@ -22169,7 +21850,7 @@ paths:
                     required:
                       - pricing_scheme
                       - prices
-            examples: {}
+            examples: { }
       description: |-
         This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
 
@@ -22468,7 +22149,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Invoice'
-              examples: {}
+              examples: { }
         '403':
           description: Forbidden
         '404':
@@ -22537,7 +22218,7 @@ paths:
                 type: object
                 x-examples:
                   example-1:
-                    subscriptions_mrr: []
+                    subscriptions_mrr: [ ]
                 properties:
                   subscriptions_mrr:
                     type: array
@@ -22568,8 +22249,8 @@ paths:
                       attribute:
                         type: array
                         items:
-                          required: []
-                          properties: {}
+                          required: [ ]
+                          properties: { }
                     required:
                       - attribute
                 required:
@@ -22678,7 +22359,7 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: {}
+                properties: { }
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -23273,11 +22954,7 @@ paths:
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
   '/subscriptions/{subscription_id}/activate.json':
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Activate Subscription
       tags:
@@ -23288,11 +22965,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
-              examples: {}
+                $ref: '#/components/schemas/Subscription-Response'
+              examples: { }
         '400':
           description: Bad Request
           content:
@@ -23318,11 +22992,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                revert_on_failure:
-                  type: boolean
-                  description: 'You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)'
+              $ref: '#/components/schemas/Activate-Subscription-Request'
         description: ''
       description: |
         Chargify offers the ability to activate awaiting signup and trialing subscriptions. This feature is only available on the Relationship Invoicing architecture. Subscriptions in a group may not be activated immediately.
@@ -23452,7 +23122,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Minimum payload:
                 value:
@@ -23467,7 +23137,7 @@ paths:
                   subscription:
                     product_handle: gold-product
                     customer_id: 12345
-    parameters: []
+    parameters: [ ]
   /subscriptions/proforma_invoices/preview.json:
     post:
       summary: Create signup proforma preview
@@ -23483,8 +23153,8 @@ paths:
                 x-examples:
                   example-1:
                     proforma_invoice_preview:
-                      current_proforma_invoice: {}
-                      next_proforma_invoice: {}
+                      current_proforma_invoice: { }
+                      next_proforma_invoice: { }
                 properties:
                   proforma_invoice_preview:
                     type: object
@@ -23566,7 +23236,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Minimum example:
                 value:
@@ -23739,11 +23409,11 @@ paths:
                 properties:
                   error:
                     type: string
-              examples: {}
+              examples: { }
             application/xml:
               schema:
                 type: object
-                properties: {}
+                properties: { }
   /api_exports/invoices.json:
     post:
       summary: Create Invoices Export
@@ -23769,7 +23439,7 @@ paths:
                 properties:
                   error:
                     type: string
-    parameters: []
+    parameters: [ ]
   /api_exports/subscriptions.json:
     post:
       summary: Create Subscriptions Export
@@ -23793,7 +23463,7 @@ paths:
                 properties:
                   error:
                     type: string
-    parameters: []
+    parameters: [ ]
   '/api_exports/proforma_invoices/{batch_id}.json':
     parameters:
       - schema:
@@ -23913,9 +23583,54 @@ servers:
         default: subdomain
         description: The subdomain for your Chargify site
 security:
-  - BasicAuth: []
+  - BasicAuth: [ ]
 components:
+  parameters:
+    page:
+      name: page
+      in: query
+      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      schema:
+        type: integer
+    per-page:
+      name: per_page
+      in: query
+      description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      schema:
+        type: integer
+        default: 20
+        maximum: 200
+    sort-direction:
+      name: direction
+      in: query
+      description: Controls the order in which results are returned.
+      schema:
+        $ref: '#/components/schemas/Sort-Direction'
+    subscription-id-required-path:
+      name: subscription_id
+      in: path
+      description: The Chargify id of the subscription
+      schema:
+          type: integer
+      required: true
   schemas:
+    Activate-Subscription-Request:
+      title: Activate Subscription Request
+      type: object
+      properties:
+        revert_on_failure:
+          type:
+            - boolean
+            - 'null'
+          description: 'You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)'
+    Add-Coupons-Request:
+      title: Add Coupons Request
+      type: object
+      properties:
+        codes:
+          type: array
+          items:
+            type: string
     Allocation:
       title: Allocation
       type: object
@@ -24129,7 +23844,7 @@ components:
               type: string
               description: URL that points to the location to read the existing price points via GET request
             tax_code:
-              type: 
+              type:
                 - string
                 - 'null'
               description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
@@ -24646,8 +24361,22 @@ components:
         - name
         - code
         - percentage
-    Create-or-Update-Prepaid-Configuration:
-      title: Create or Update Prepaid Configuration
+    Prepaid-Configuration:
+      title: Prepaid Configuration
+      type: object
+      properties:
+        id:
+          type: integer
+        initial_funding_amount_in_cents:
+          type: integer
+        replenish_to_amount_in_cents:
+          type: integer
+        auto_replenish:
+          type: boolean
+        replenish_threshold_amount_in_cents:
+          type: integer
+    Upsert-Prepaid-Configuration:
+      title: Upsert Prepaid Configuration
       type: object
       properties:
         initial_funding_amount_in_cents:
@@ -24658,6 +24387,13 @@ components:
           type: boolean
         replenish_threshold_amount_in_cents:
           type: integer
+    Upsert-Prepaid-Configuration-Request:
+      title: Upsert Prepaid Configuration Request
+      type: object
+      properties:
+        prepaid_configuration:
+          schema:
+            $ref: '#/components/schemas/Upsert-Prepaid-Configuration'
     Create-or-Update-Product:
       title: Create or Update Product
       type: object
@@ -25223,7 +24959,7 @@ components:
             - integer
           description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er'
         prepaid_subscription_configuration:
-          $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
+          $ref: '#/components/schemas/Upsert-Prepaid-Configuration'
         previous_billing_at:
           type: string
           description: Providing a previous_billing_at that is in the past will set the current_period_starts_at when the subscription is created. It will also set activated_at if not explicitly passed during the subscription import. Can only be used if next_billing_at is also passed. Using this option will allow you to set the period start for the subscription so mid period component allocations have the correct prorated amount.
@@ -25284,6 +25020,12 @@ components:
           type: boolean
           description: Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests.
           default: false
+    Create-Subscription-Request:
+      title: Create Subscription Request
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Create-Subscription'
     Credit-Note:
       title: Credit Note
       type: object
@@ -26333,7 +26075,7 @@ components:
                 type: string
               currency_prices:
                 type: array
-                items: {}
+                items: { }
         offer_discounts:
           type: array
           items:
@@ -26418,13 +26160,13 @@ components:
               type: number
             remaining_amount_in_cents:
               type: number
-            details: {}
+            details: { }
             external:
               type: boolean
             memo:
               type: string
               minLength: 1
-            payment_type: {}
+            payment_type: { }
             created_at:
               type: string
               minLength: 1
@@ -26897,8 +26639,8 @@ components:
           type: number
         subscription_id:
           type: number
-        number: {}
-        sequence_number: {}
+        number: { }
+        sequence_number: { }
         created_at:
           type: string
           minLength: 1
@@ -26938,12 +26680,12 @@ components:
             address:
               type: object
               properties:
-                street: {}
-                line2: {}
-                city: {}
-                state: {}
-                zip: {}
-                country: {}
+                street: { }
+                line2: { }
+                city: { }
+                state: { }
+                zip: { }
+                country: { }
             phone:
               type: string
               minLength: 1
@@ -26958,12 +26700,12 @@ components:
             last_name:
               type: string
               minLength: 1
-            organization: {}
+            organization: { }
             email:
               type: string
               minLength: 1
-            vat_number: {}
-            reference: {}
+            vat_number: { }
+            reference: { }
         memo:
           type: string
           minLength: 1
@@ -27077,11 +26819,11 @@ components:
                 minLength: 1
               product_id:
                 type: number
-              product_version: {}
+              product_version: { }
               product_price_point_id:
                 type: number
-              component_id: {}
-              price_point_id: {}
+              component_id: { }
+              price_point_id: { }
         discounts:
           type: array
           uniqueItems: true
@@ -27212,7 +26954,7 @@ components:
                 minLength: 1
               metadatum_id:
                 type: number
-        public_url: {}
+        public_url: { }
     Reason-Code:
       title: Reason Code
       type: object
@@ -27255,6 +26997,26 @@ components:
           type: string
           description: |
             The memo attached to the entry
+    Subscription-Response:
+      title: Subscription Response
+      type: object
+      properties:
+        subscription:
+          $ref: ../models/Subscription.yaml
+    Subscription-Preview:
+      title: Subscription Preview
+      type: object
+      properties:
+        current_billing_manifest:
+          $ref: '#/components/schemas/Billing-Manifest'
+        next_billing_manifest:
+          $ref: '#/components/schemas/Billing-Manifest'
+    Subscription-Preview-Response:
+      title: Subscription Preview Response
+      type: object
+      properties:
+        subscription_preview:
+          $ref: '#/components/schemas/Subscription-Preview'
     Subscription-Note:
       title: Subscription Note
       type: object
@@ -27381,6 +27143,52 @@ components:
               type: string
             updated_at:
               type: string
+    List-Subscriptions-Date-Field:
+      title: List Subscriptions Date Field
+      type: string
+      enum:
+        - current_period_ends_at
+        - current_period_starts_at
+        - created_at
+        - activated_at
+        - canceled_at
+        - expires_at
+        - trial_started_at
+        - trial_ended_at
+        - updated_at
+    List-Subscriptions-Sort:
+      title: List Subscription Sort
+      type: string
+      enum:
+        - signup_date
+        - period_start
+        - period_end
+        - next_assessment
+        - updated_at
+        - created_at
+      default: signup_date
+    Subscription-State:
+      title: Subscription State
+      type: string
+      enum:
+        - active
+        - canceled
+        - expired
+        - expired_cards
+        - on_hold
+        - past_due
+        - pending_cancellation
+        - pending_renewal
+        - suspended
+        - trial_ended
+        - trialing
+        - unpaid
+    Sort-Direction:
+      title: Sorting direction
+      type: string
+      enum:
+        - asc
+        - desc
     Update-Customer:
       title: Update Customer
       type: object
@@ -27485,6 +27293,181 @@ components:
           description: Only applicable when input_type is radio or dropdown
           items:
             type: string
+    Update-Subscription:
+      title: Update Subscription
+      type: object
+      properties:
+        credit_card_attributes:
+          type: object
+          properties:
+            full_number:
+              type: string
+            expiration_month:
+              type: string
+            expiration_year:
+              type: string
+        product_handle:
+          type: string
+          description: Set to the handle of a different product to change the subscription's product
+        product_id:
+          type: integer
+          description: Set to the id of a different product to change the subscription's product
+        product_change_delayed:
+          type: boolean
+          default: false
+        next_product_id:
+          type: string
+          description: Set to an empty string to cancel a delayed product change.
+        next_product_price_point_id:
+          type: string
+        snap_day:
+          type:
+            - string
+            - integer
+          minimum: 1
+          maximum: 28
+          enum:
+            - end
+          description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
+        next_billing_at:
+          type: string
+        payment_collection_method:
+          type: string
+        receives_invoice_emails:
+          type: boolean
+        net_terms:
+          type:
+            - string
+            - integer
+        stored_credential_transaction_id:
+          type: integer
+        reference:
+          type: string
+        custom_price:
+          type: object
+          description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
+          properties:
+            name:
+              type: string
+              description: (Optional)
+            handle:
+              type: string
+              description: (Optional)
+            price_in_cents:
+              type: integer
+            interval:
+              type: integer
+            interval_unit:
+              type: string
+              enum:
+                - day
+                - month
+            trial_price_in_cents:
+              type: integer
+              description: (Optional)
+            trial_interval:
+              type: integer
+              description: (Optional)
+            trial_interval_unit:
+              type: string
+              description: (Optional)
+              enum:
+                - day
+                - month
+            initial_charge_in_cents:
+              type: integer
+              description: (Optional)
+            initial_charge_after_trial:
+              type: boolean
+              description: (Optional)
+            expiration_interval:
+              type: integer
+              description: (Optional)
+            expiration_interval_unit:
+              type: string
+              description: (Optional)
+              enum:
+                - day
+                - month
+            tax_included:
+              type: boolean
+              description: (Optional)
+        components:
+          type: array
+          description: (Optional) An array of component ids and custom prices to be added to the subscription.
+          items:
+            type: object
+            properties:
+              component_id:
+                type: integer
+              custom_price:
+                type: object
+                description: Create or update custom pricing unique to the subscription
+                properties:
+                  pricing_scheme:
+                    type: string
+                    enum:
+                      - stairstep
+                      - volume
+                      - per_unit
+                      - tiered
+                    description: Omit for On/Off components
+                  prices:
+                    type: array
+                    description: On/off components only need one price bracket starting at 1
+                    items:
+                      type: object
+                      properties:
+                        unit_price:
+                          type: string
+                        starting_quantity:
+                          type: string
+                        ending_quantity:
+                          type: string
+                          nullable: true
+        dunning_communication_delay_enabled:
+          type:
+            - boolean
+            - 'null'
+          default: false
+          description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
+        dunning_communication_delay_time_zone:
+          type:
+            - string
+            - 'null'
+          example: '"Eastern Time (US & Canada)"'
+          description: Time zone for the Dunning Communication Delay feature.
+    Update-Subscription-Request:
+      title: Update Subscription Request
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Update-Subscription'
+    Override-Subscription:
+      title: Override Subscription
+      type: object
+      properties:
+        activated_at:
+          type: string
+          description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
+        canceled_at:
+          type: string
+          description: 'Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.'
+        cancellation_message:
+          type: string
+          description: Can be used to record a reason for the original cancellation.
+        expires_at:
+          type: string
+          description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
+        current_period_starts_at:
+          type: string
+          description: 'Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.'
+    Override-Subscription-Request:
+      title: Override Subscription Request
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Override-Subscription'
     Usage:
       title: Usage
       type: object
@@ -27565,7 +27548,7 @@ components:
       title: Subscription-MRR
     Site:
       type: object
-      examples: []
+      examples: [ ]
       title: Site
       description: ''
       properties:
