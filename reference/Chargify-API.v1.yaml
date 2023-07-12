@@ -335,7 +335,7 @@ paths:
                           type: string
                           description: 'Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.'
                         accepted_at:
-                          type: 
+                          type:
                             - string
                             - 'null'
                           description: 'Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.'
@@ -27334,6 +27334,14 @@ components:
           type: integer
         recurring:
           type: boolean
+        upgrade_charge: 
+           type:
+            - string
+            - 'null'
+        downgrade_credit: 
+           type:
+            - string
+            - 'null'    
         archived_at:
           type:
             - 'null'
@@ -27597,6 +27605,20 @@ components:
               type: boolean
             whopays_default_payer:
               type: string
+            allocation_settings:
+              type: object
+              properties:
+                upgrade_charge:
+                  type:
+                    - string
+                    - 'null'
+                downgrade_credit:
+                  type:
+                    - string
+                    - 'null'
+                accrue_charge:
+                  type:
+                    - boolean   
             default_payment_collection_method:
               type: string
             organization_address:
