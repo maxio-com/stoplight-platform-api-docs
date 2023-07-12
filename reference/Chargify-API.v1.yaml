@@ -335,7 +335,7 @@ paths:
                           type: string
                           description: 'Timestamp indicating when the last non-acceptance occurred. If a webhook is later resent and accepted, this field will be cleared.'
                         accepted_at:
-                          type: 
+                          type:
                             - string
                             - 'null'
                           description: 'Timestamp indicating when the webhook was accepted by the merchant endpoint. When a webhook is explicitly replayed by the merchant, this value will be cleared until it is accepted again.'
@@ -704,7 +704,7 @@ paths:
         - Sites
       responses:
         '200':
-          description: OK
+          description: OKa
           content:
             application/json:
               schema:
@@ -744,7 +744,7 @@ paths:
                         remittance_net_terms: 0
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
-                      test: true
+                      test: false
       operationId: readSite
       description: |-
         This endpoint allows you to fetch some site data.
@@ -12811,9 +12811,9 @@ paths:
                       coupon_use_count: 1
                       coupon_uses_allowed: 1
                       next_product_handle: null
-                      stored_credential_transaction_id: 125566112256688,
-                      dunning_communication_delay_enabled: true,
-                      dunning_communication_delay_time_zone: 'Eastern Time (US & Canada)'
+                      stored_credential_transaction_id: '125566112256688,'
+                      dunning_communication_delay_enabled: 'true,'
+                      dunning_communication_delay_time_zone: Eastern Time (US & Canada)
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -21287,6 +21287,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
+            application/xml:
+              schema:
+                type: object
+                properties: {}
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
       parameters:
@@ -24132,7 +24136,7 @@ components:
               type: string
               description: URL that points to the location to read the existing price points via GET request
             tax_code:
-              type: 
+              type:
                 - string
                 - 'null'
               description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
@@ -27334,6 +27338,14 @@ components:
           type: integer
         recurring:
           type: boolean
+        upgrade_charge: 
+           type:
+            - string
+            - 'null'
+        downgrade_credit: 
+           type:
+            - string
+            - 'null'    
         archived_at:
           type:
             - 'null'
@@ -27384,6 +27396,7 @@ components:
               type: string
             updated_at:
               type: string
+      x-internal: false
     Update-Customer:
       title: Update Customer
       type: object
@@ -27597,6 +27610,20 @@ components:
               type: boolean
             whopays_default_payer:
               type: string
+            allocation_settings:
+              type: object
+              properties:
+                upgrade_charge:
+                  type:
+                    - string
+                    - 'null'
+                downgrade_credit:
+                  type:
+                    - string
+                    - 'null'
+                accrue_charge:
+                  type:
+                    - boolean   
             default_payment_collection_method:
               type: string
             organization_address:
