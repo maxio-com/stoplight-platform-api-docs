@@ -704,7 +704,7 @@ paths:
         - Sites
       responses:
         '200':
-          description: OKa
+          description: OK
           content:
             application/json:
               schema:
@@ -744,7 +744,7 @@ paths:
                         remittance_net_terms: 0
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
-                      test: false
+                      test: true
       operationId: readSite
       description: |-
         This endpoint allows you to fetch some site data.
@@ -12811,9 +12811,9 @@ paths:
                       coupon_use_count: 1
                       coupon_uses_allowed: 1
                       next_product_handle: null
-                      stored_credential_transaction_id: '125566112256688,'
-                      dunning_communication_delay_enabled: 'true,'
-                      dunning_communication_delay_time_zone: Eastern Time (US & Canada)
+                      stored_credential_transaction_id: 125566112256688,
+                      dunning_communication_delay_enabled: true,
+                      dunning_communication_delay_time_zone: 'Eastern Time (US & Canada)'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -21287,10 +21287,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Subscriptions-Component'
-            application/xml:
-              schema:
-                type: object
-                properties: {}
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
       parameters:
@@ -27396,7 +27392,6 @@ components:
               type: string
             updated_at:
               type: string
-      x-internal: false
     Update-Customer:
       title: Update Customer
       type: object
