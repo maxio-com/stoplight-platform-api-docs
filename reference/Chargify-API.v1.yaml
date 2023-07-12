@@ -24132,7 +24132,7 @@ components:
               type: string
               description: URL that points to the location to read the existing price points via GET request
             tax_code:
-              type:
+              type: 
                 - string
                 - 'null'
               description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
