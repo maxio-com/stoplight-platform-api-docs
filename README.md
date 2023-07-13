@@ -6,9 +6,14 @@ The Chargify API is documented in this repository using the [OpenAPI Specificati
 
 If you are a Chargify developer and need to make changes to the API documentation, please refer to our internal documentation on Stoplight Studio.
 
+Please setup pre-commit hook to resolve refs from `Chargify-API.v1.dev.yaml`, it will generate `Chargify-API.v1.yaml`. Here's how you can do this:
+```
+ln -s -f git_hooks/* .git/hooks/
+```
+
 ## SDK generation
 This repository is used for SDK generation. It's important to keep specification compatible with our generators.
-You cannot merge your PR if SDK generation fails. 
+You cannot merge your PR if SDK generation fails.
 Check output of `Validate specification and build SDKs` pipeline in GitHub Actions if your build fails.
 Look at `Build SDKs` step, here is a sample error message:
 
