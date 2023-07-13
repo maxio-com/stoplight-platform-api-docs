@@ -1,8 +1,0 @@
----
-title: Subscription Preview
-type: object
-properties:
-  current_billing_manifest:
-    "$ref": "#/components/schemas/Billing-Manifest"
-  next_billing_manifest:
-    "$ref": "#/components/schemas/Billing-Manifest"

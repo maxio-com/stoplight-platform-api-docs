@@ -1,6 +1,0 @@
----
-title: Override Subscription Request
-type: object
-properties:
-  subscription:
-    "$ref": "#/components/schemas/Override-Subscription"

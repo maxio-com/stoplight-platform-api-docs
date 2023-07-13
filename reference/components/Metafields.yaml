@@ -1,6 +1,0 @@
----
-title: Metafields
-description: A set of key/value pairs representing custom fields and their values.
-type:
-- object
-additionalProperties: true

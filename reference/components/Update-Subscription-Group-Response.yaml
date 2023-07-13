@@ -1,5 +1,0 @@
----
-type: object
-properties:
-  subscription_group:
-    "$ref": "../models/Subscription-Group.yaml"
