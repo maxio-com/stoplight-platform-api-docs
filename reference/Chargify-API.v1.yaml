@@ -29091,29 +29091,7 @@ components:
       type: object
       properties:
         subscription_group:
-          type: object
-          properties:
-            customer_id:
-              type: integer
-            payment_profile:
-              type: object
-              properties:
-                id:
-                  type: integer
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-                masked_card_number:
-                  type: string
-            payment_collection_method:
-              type: string
-            subscription_ids:
-              type: array
-              items:
-                type: integer
-            created_at:
-              type: string
+          "$ref": "../models/Subscription-Group.yaml"
   securitySchemes:
     BasicAuth:
       type: http
