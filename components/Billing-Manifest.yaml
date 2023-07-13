@@ -1,0 +1,39 @@
+---
+title: Billing Manifest
+type: object
+properties:
+  line_items:
+    type: array
+    items:
+      type: object
+      properties:
+        transaction_type:
+          type: string
+        kind:
+          type: string
+        amount_in_cents:
+          type: integer
+        memo:
+          type: string
+        discount_amount_in_cents:
+          type: integer
+        taxable_amount_in_cents:
+          type: integer
+        component_id:
+          type: integer
+  total_in_cents:
+    type: integer
+  total_discount_in_cents:
+    type: integer
+  total_tax_in_cents:
+    type: integer
+  subtotal_in_cents:
+    type: integer
+  start_date:
+    type: string
+  end_date:
+    type: string
+  period_type:
+    type: string
+  existing_balance_in_cents:
+    type: integer

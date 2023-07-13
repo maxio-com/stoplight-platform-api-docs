@@ -1,0 +1,142 @@
+---
+"/reason_codes.json":
+  post:
+    summary: Create Reason Code
+    tags:
+    - Reason Codes
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason_code:
+                  "$ref": "#/components/schemas/Reason-Code"
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  errors:
+                  - 'Code: cannot be blank.'
+                  - 'Code: This code is already in use.'
+                  - 'Description: cannot be blank.'
+    operationId: createResonCode
+    description: |-
+      # Reason Codes Intro
+
+      ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription to your product or service.
+
+      Add a set of churn reason codes to be displayed in-app and/or the Chargify Billing Portal. As your subscribers decide to cancel their subscription, learn why they decided to cancel.
+
+      ## Reason Code Documentation
+
+      Full documentation on how Reason Codes operate within Chargify can be located under the following links.
+
+      [Churn Reason Codes](https://chargify.zendesk.com/hc/en-us/articles/4407896775579#churn-reason-codes)
+
+      ## Create Reason Code
+
+      This method gives a merchant the option to create a reason codes for a given Site.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              reason_code:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: The unique identifier for the ReasonCode
+                  description:
+                    type: string
+                    description: The friendly summary of what the code signifies
+                  position:
+                    type: integer
+                    description: The order that code appears in lists
+                required:
+                - code
+                - description
+          examples:
+            Example:
+              value:
+                reason_code:
+                  code: NOTHANKYOU
+                  description: No thank you!
+                  position: 5
+  get:
+    summary: List Reason Codes
+    tags:
+    - Reason Codes
+    operationId: listReasonCodes
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Reason-Code"
+            examples:
+              Example:
+                value:
+                - reason_code:
+                    id: 2
+                    site_id: 2
+                    code: LARGE
+                    description: This is too complicated
+                    position: 1
+                    created_at: '2017-02-16T16:49:07-05:00'
+                    updated_at: '2017-02-17T16:29:51-05:00'
+                - reason_code:
+                    id: 1
+                    site_id: 2
+                    code: CH1
+                    description: This doesnt meet my needs
+                    position: 2
+                    created_at: '2017-02-16T16:48:45-05:00'
+                    updated_at: '2017-02-17T16:29:59-05:00'
+                - reason_code:
+                    id: 5
+                    site_id: 2
+                    code: HAN99
+                    description: Hard to setup
+                    position: 3
+                    created_at: '2017-02-17T16:29:42-05:00'
+                    updated_at: '2017-02-17T16:29:59-05:00'
+    description: This method gives a merchant the option to retrieve a list of all
+      of the current churn codes for a given site.
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: page
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+    - schema:
+        type: integer
+        default: 20
+        maximum: 200
+      in: query
+      name: per_page
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 20. The maximum allowed values is 200; any per_page value
+        over 200 will be changed to 200.

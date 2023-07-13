@@ -1,0 +1,71 @@
+---
+"/endpoints/{endpoint_id}.json":
+  parameters:
+  - schema:
+      type: integer
+    name: endpoint_id
+    in: path
+    required: true
+    description: The Chargify id for the endpoint that should be updated
+  put:
+    summary: Update Endpoint
+    tags:
+    - Webhooks
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                endpoint:
+                  "$ref": "#/components/schemas/Endpoint"
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  errors:
+                  - Event key is not valid - foobar
+    operationId: updateEndpoint
+    description: |-
+      You can update an Endpoint via the API with a PUT request to the resource endpoint.
+
+      You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
+      Check available [Event keys](https://chargify.zendesk.com/hc/en-us/articles/4407905415963).
+
+      Always send a complete list of events which you want subscribe/watch.
+      Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end with unsubscribe from all events.
+
+      If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the specific event key.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              endpoint:
+                "$ref": "#/components/schemas/Create-or-Update-Endpoint"
+            required:
+            - endpoint
+          examples:
+            Example:
+              value:
+                endpoint:
+                  url: https://yout.site/webhooks/1/json.
+                  webhook_subscriptions:
+                  - payment_failure
+                  - payment_success
+                  - refund_failure

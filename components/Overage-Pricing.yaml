@@ -1,0 +1,14 @@
+---
+title: Overage Pricing
+type:
+- object
+properties:
+  pricing_scheme:
+    schema:
+      "$ref": "#/components/schemas/Pricing-Scheme"
+  prices:
+    type:
+    - array
+    items:
+      items:
+        "$ref": "#/components/schemas/Price"

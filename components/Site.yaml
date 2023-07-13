@@ -1,0 +1,112 @@
+---
+type: object
+examples: []
+title: Site
+description: ''
+properties:
+  site:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      subdomain:
+        type: string
+      currency:
+        type: string
+      seller_id:
+        type: integer
+      non_primary_currencies:
+        type: array
+        items:
+          type: string
+      relationship_invoicing_enabled:
+        type: boolean
+      customer_hierarchy_enabled:
+        type: boolean
+      whopays_enabled:
+        type: boolean
+      whopays_default_payer:
+        type: string
+      default_payment_collection_method:
+        type: string
+      organization_address:
+        type: object
+        properties:
+          street:
+            type:
+            - string
+            - 'null'
+          line2:
+            type:
+            - string
+            - 'null'
+          city:
+            type:
+            - string
+            - 'null'
+          state:
+            type:
+            - string
+            - 'null'
+          zip:
+            type:
+            - string
+            - 'null'
+          country:
+            type:
+            - string
+            - 'null'
+          name:
+            type:
+            - string
+            - 'null'
+          phone:
+            type:
+            - string
+            - 'null'
+      tax_configuration:
+        type: object
+        properties:
+          kind:
+            type: string
+            default: custom
+            enum:
+            - custom
+            - managed avalara
+            - linked avalara
+            - digital river
+          fully_configured:
+            type: boolean
+            default: false
+            description: 'Returns `true` when Chargify has been properly configured
+              to charge tax using the specified tax system. More details about taxes:
+              https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction'
+          destination_address:
+            type: string
+            enum:
+            - shipping_then_billing
+            - billing_then_shipping
+            - shipping_only
+            - billing_only
+      net_terms:
+        type: object
+        properties:
+          default_net_terms:
+            type: number
+            default: 0
+          automatic_net_terms:
+            type: number
+            default: 0
+          remittance_net_terms:
+            type: number
+            default: 0
+          net_terms_on_remittance_signups_enabled:
+            type: boolean
+            default: false
+          custom_net_terms_enabled:
+            type: boolean
+            default: false
+      test:
+        type: boolean

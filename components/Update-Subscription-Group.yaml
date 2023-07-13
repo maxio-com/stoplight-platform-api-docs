@@ -1,0 +1,7 @@
+---
+type: object
+properties:
+  member_ids:
+    type: array
+    items:
+      type: integer

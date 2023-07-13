@@ -1,0 +1,9 @@
+---
+title: Pricing Scheme
+type:
+- string
+enum:
+- stairstep
+- volume
+- per_unit
+- tiered

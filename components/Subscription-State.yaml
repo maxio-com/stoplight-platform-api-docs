@@ -1,0 +1,17 @@
+---
+title: Subscription State
+type:
+- string
+enum:
+- active
+- canceled
+- expired
+- expired_cards
+- on_hold
+- past_due
+- pending_cancellation
+- pending_renewal
+- suspended
+- trial_ended
+- trialing
+- unpaid

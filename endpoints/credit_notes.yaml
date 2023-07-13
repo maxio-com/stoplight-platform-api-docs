@@ -1,0 +1,238 @@
+---
+"/credit_notes/{uid}.json":
+  parameters:
+  - schema:
+      type: string
+    name: uid
+    in: path
+    required: true
+    description: The unique identifier of the credit note
+  get:
+    summary: Read Credit Note
+    tags:
+    - Invoices
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Credit-Note"
+            examples:
+              Example:
+                value:
+                  uid: cn_8m9vbd5kkv7kr
+                  site_id: 20
+                  customer_id: 3
+                  subscription_id: 2
+                  number: '77'
+                  sequence_number: 78
+                  issue_date: '2018-12-31'
+                  applied_date: '2018-12-31'
+                  status: applied
+                  currency: USD
+                  memo: Refund for overpayment
+                  seller:
+                    name: Acme, Inc.
+                    address:
+                      street: 122 E Houston St
+                      line2: Suite 105
+                      city: San Antonio
+                      state: TX
+                      zip: '78205'
+                      country: US
+                    phone: 555-555-1234 x137
+                  customer:
+                    chargify_id: 3
+                    first_name: Marty
+                    last_name: McFly
+                    organization: Time Travellers, Inc.
+                    email: timetraveller1985@example.com
+                    reference:
+                  billing_address:
+                    street: 200 Billing Rd.
+                    line2: Suite 100
+                    city: Needham
+                    state: MA
+                    zip: '02494'
+                    country: US
+                  shipping_address:
+                    street: 100 Shipping St.
+                    line2: Apt 200
+                    city: Pleasantville
+                    state: NC
+                    zip: '12345'
+                    country: US
+                  subtotal_amount: '208.69341779'
+                  discount_amount: '20.87125167'
+                  tax_amount: '12.67783387'
+                  total_amount: '200.5'
+                  applied_amount: '200.5'
+                  remaining_amount: '0.0'
+                  line_items:
+                  - uid: cnli_8k5jvdzct4h9x
+                    title: 'IP Addresses: 5 to 10 addresses'
+                    description: 38.2% credit
+                    quantity: '0.9855'
+                    unit_price: '2.0'
+                    subtotal_amount: '1.971004'
+                    discount_amount: '0.19862831'
+                    tax_amount: '0.11963536'
+                    total_amount: '1.89201105'
+                    tiered_unit_price: false
+                    period_range_start: '2018-11-30'
+                    period_range_end: '2018-11-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id: 81
+                    price_point_id: 165
+                  - uid: cnli_8kjttvjcjx8b4
+                    title: Professional Plan
+                    description: 38.2% credit
+                    quantity: '0.382'
+                    unit_price: '299.0'
+                    subtotal_amount: '114.21127834'
+                    discount_amount: '11.42112783'
+                    tax_amount: '6.93833516'
+                    total_amount: '109.72848567'
+                    tiered_unit_price: false
+                    period_range_start: '2018-12-30'
+                    period_range_end: '2018-12-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id:
+                    price_point_id:
+                  - uid: cnli_8kjttvjknzhx7
+                    title: Small Instance (Hourly)
+                    description: 38.2% credit
+                    quantity: '74.8676'
+                    unit_price: '0.12244898'
+                    subtotal_amount: '9.16746047'
+                    discount_amount: '0.91674605'
+                    tax_amount: '0.55692322'
+                    total_amount: '8.80763764'
+                    tiered_unit_price: true
+                    period_range_start: '2018-11-30'
+                    period_range_end: '2018-11-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id: 78
+                    price_point_id:
+                  - uid: cnli_8kjttvjnmh25w
+                    title: Large Instance (Hourly)
+                    description: 38.2% credit
+                    quantity: '183.3492'
+                    unit_price: '0.39583333'
+                    subtotal_amount: '72.57572871'
+                    discount_amount: '7.25757287'
+                    tax_amount: '4.40897552'
+                    total_amount: '69.72713136'
+                    tiered_unit_price: true
+                    period_range_start: '2018-11-30'
+                    period_range_end: '2018-11-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id: 79
+                    price_point_id:
+                  - uid: cnli_8kjttvjqn86kc
+                    title: Email Messages
+                    description: 38.2% credit
+                    quantity: '10076.9489'
+                    unit_price: '0.00031045'
+                    subtotal_amount: '3.12839588'
+                    discount_amount: '0.31322157'
+                    tax_amount: '0.19002427'
+                    total_amount: '3.00519858'
+                    tiered_unit_price: true
+                    period_range_start: '2018-11-30'
+                    period_range_end: '2018-11-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id: 80
+                    price_point_id:
+                  - uid: cnli_8kjttvjtxxbdd
+                    title: IP Addresses
+                    description: 38.2% credit
+                    quantity: '3.8198'
+                    unit_price: '2.0'
+                    subtotal_amount: '7.63955039'
+                    discount_amount: '0.76395504'
+                    tax_amount: '0.46410269'
+                    total_amount: '7.33969804'
+                    tiered_unit_price: false
+                    period_range_start: '2018-12-30'
+                    period_range_end: '2018-12-30'
+                    product_id: 85
+                    product_version: 1
+                    component_id: 81
+                    price_point_id: 165
+                  discounts:
+                  - uid: cndli_8k5jvdzct4h9y
+                    title: Multi-service discount (10%)
+                    code: MULTI3
+                    source_type: Coupon
+                    source_id: 40
+                    discount_type: percentage
+                    percentage: '10.0'
+                    eligible_amount: '208.69341779'
+                    discount_amount: '20.87125167'
+                    line_item_breakouts:
+                    - uid: cnli_8k5jvdzct4h9x
+                      eligible_amount: '1.971004'
+                      discount_amount: '0.19862831'
+                    - uid: cnli_8kjttvjcjx8b4
+                      eligible_amount: '114.21127834'
+                      discount_amount: '11.42112783'
+                    - uid: cnli_8kjttvjknzhx7
+                      eligible_amount: '9.16746047'
+                      discount_amount: '0.91674605'
+                    - uid: cnli_8kjttvjnmh25w
+                      eligible_amount: '72.57572871'
+                      discount_amount: '7.25757287'
+                    - uid: cnli_8kjttvjqn86kc
+                      eligible_amount: '3.12839588'
+                      discount_amount: '0.31322157'
+                    - uid: cnli_8kjttvjtxxbdd
+                      eligible_amount: '7.63955039'
+                      discount_amount: '0.76395504'
+                  taxes:
+                  - uid: cntli_8k5jvdzct4h9z
+                    title: NC Sales Tax
+                    source_type: Tax
+                    source_id: 1
+                    percentage: '6.75'
+                    taxable_amount: '187.82216613'
+                    tax_amount: '12.67783387'
+                    line_item_breakouts:
+                    - uid: cnli_8k5jvdzct4h9x
+                      taxable_amount: '1.77237569'
+                      tax_amount: '0.11963536'
+                    - uid: cnli_8kjttvjcjx8b4
+                      taxable_amount: '102.7901505'
+                      tax_amount: '6.93833516'
+                    - uid: cnli_8kjttvjknzhx7
+                      taxable_amount: '8.25071442'
+                      tax_amount: '0.55692322'
+                    - uid: cnli_8kjttvjnmh25w
+                      taxable_amount: '65.31815584'
+                      tax_amount: '4.40897552'
+                    - uid: cnli_8kjttvjqn86kc
+                      taxable_amount: '2.81517432'
+                      tax_amount: '0.19002427'
+                    - uid: cnli_8kjttvjtxxbdd
+                      taxable_amount: '6.87559535'
+                      tax_amount: '0.46410269'
+                  applications:
+                  - uid: cdt_8m9vbdbdwd28n
+                    transaction_time: '2018-12-31T21:19:28Z'
+                    invoice_uid: inv_8k5jvdzct4hb2
+                    memo: Refund for overpayment
+                    applied_amount: '200.5'
+                  refunds:
+                  - transaction_id: 329
+                    payment_id: 39
+                    memo: Refund for overpayment
+                    original_amount: '524.9'
+                    applied_amount: '200.5'
+    operationId: readCreditNote
+    description: Use this endpoint to retrieve the details for a credit note.
