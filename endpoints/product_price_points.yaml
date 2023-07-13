@@ -1,0 +1,158 @@
+---
+"/product_price_points/{product_price_point_id}/currency_prices.json":
+  parameters:
+  - schema:
+      type: integer
+    name: product_price_point_id
+    in: path
+    required: true
+    description: The Chargify id of the product price point
+  post:
+    summary: Create Currency Prices
+    tags:
+    - 'Product: Price Points'
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Product-Price-Point-Currency-Price"
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  properties:
+                    base:
+                      type: array
+                      items:
+                        type: string
+            examples:
+              Example:
+                value:
+                  errors:
+                    base:
+                    - A baseline price must be defined for this product price point.
+    operationId: createProductCurrencyPrices
+    description: |-
+      This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
+
+      When creating currency prices, they need to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+      Note: Currency Prices are not able to be created for custom product price points.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              currency_prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    currency:
+                      type: string
+                      description: 'ISO code for one of the site level currencies.
+
+                        '
+                    price:
+                      type: integer
+                      description: 'Price for the given role.
+
+                        '
+                    role:
+                      type: string
+                      description: Role for the price.
+                      enum:
+                      - baseline
+                      - trial
+                      - initial
+                  required:
+                  - currency
+                  - price
+                  - role
+            required:
+            - currency_prices
+          examples:
+            Example:
+              value:
+                currency_prices:
+                - currency: EUR
+                  price: 60
+                  role: baseline
+                - currency: EUR
+                  price: 30
+                  role: trial
+                - currency: EUR
+                  price: 100
+                  role: initial
+      description: ''
+  put:
+    summary: Update Currency Prices
+    tags:
+    - 'Product: Price Points'
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Product-Price-Point-Currency-Price"
+            examples:
+              example-1:
+                value:
+                - id: 0
+                  currency: string
+                  price: 0
+                  formatted_price: string
+                  product_price_point_id: 0
+                  role: baseline
+    operationId: updateProductCurrencyPrices
+    description: |-
+      This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
+
+      When updating the pricing, it needs to mirror the structure of your primary pricing. If the product price point defines a trial and/or setup fee, each currency must also define a trial and/or setup fee.
+
+      Note: Currency Prices are not able to be updated for custom product price points.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              currency_prices:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: 'ID of the currency price record being updated.
+
+                        '
+                    price:
+                      type: integer
+                      description: 'New price for the currency price.
+
+                        '
+                  required:
+                  - id
+                  - price
+            required:
+            - currency_prices
+          examples:
+            Example:
+              value:
+                currency_prices:
+                - id: 200
+                  price: 15
+                - id: 201
+                  price: 5

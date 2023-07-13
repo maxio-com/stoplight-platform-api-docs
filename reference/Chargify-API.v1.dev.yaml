@@ -1,0 +1,853 @@
+---
+openapi: 3.1.0
+info:
+  title: Chargify API
+  version: '1.0'
+  contact:
+    email: support@chargify.com
+  description: |-
+    ## Introduction
+
+    ### API Integration
+
+    Chargify can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
+
+    ### Testing Guide
+
+    Chargify has compiled a [testing guide](https://chargify.zendesk.com/hc/en-us/articles/4407904658587) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
+
+    + Test credit card basics
+    + Test site limits
+    + Live mode versus test mode
+
+    We strongly suggest reading over the testing guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
+
+    ### Engage Support
+
+    We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Chargify via our API, we suggest sending a “heads up” to “support@chargify.com” so we can coordinate with you to ensure your import process goes smoothly.
+
+    Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Chargify API.
+
+    ### Support Access
+
+    Access to our Technical Specialist team for API support is currently limited to purchasers of our larger Chargify support plans.
+
+    But don’t worry! There are quite a few options to help you get the answers you need:
+
+    - [Read our documentation for developers](https://developers.chargify.com/docs/developer-docs/ZG9jOjM0NjA3MQ-overview)
+    - Explore the endpoints of our API Documentation
+    - [Watch our videos and tutorials](https://chargify.com/tutorials)
+    - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
+
+    ### Available Consultants
+
+    Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
+
+    ## API Overview
+
+    The Chargify API allows you to interact with our system programmatically from your own application. Using the API you interact with Resources such as:
+
+    - Products
+    - Subscriptions
+    - Customers
+    - etc.
+
+    The API attempts to conform to the [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) design principles.
+    You interact with the resources exposed via the API by accessing resource collection and element URIs using the HTTP verbs (GET, POST, PUT, and DELETE).
+    Chargify accepts and returns both JSON and XML data via the API.
+
+    You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of the API.
+
+    ### Available Formats: JSON and XML
+
+    JSON is the primary and recommended format for use with the Chargify API.  XML is also provided as a backwards compatible option for Merchants who require it.
+
+    ### Authentication
+
+    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](https://developers.chargify.com/docs/developer-docs/ZG9jOjE1NTUxNQ-authentication)
+
+    ### URL
+
+    The URL for API requests includes the subdomain of the Site you are working with:
+
+    `https://<subdomain>.chargify.com/<resource URI>`
+
+    ### Response Data
+
+    Response data is sent as either XML or JSON, depending on the type of data requested (`HTTP Content-Type` header) or the type specified as being accepted (HTTP `Accept` header).
+
+    GETs for individual statements & invoices may also be requested as PDF using `application/pdf` or appending `.pdf` to the resource URI.
+
+    Response codes are sent via the normal HTTP Response Code, and are documented separately for each resource.
+
+    For boolean fields, please note that a value of `null` may be considered as false. However, this is not true across all cases. Please excercise good judgement here, or contact support with any questions.
+
+    For example:
+
+    + `null` can define that there's no data available for that attribute
+
+    ### Pagination
+
+    When an endpoint returns a list of items, it will be paginated.  Usually, 20 items will be returned by default, and you may request up to a maximum of 200 at a time.  Pagination is done with query string parameters, for example: `?page=5&per_page=200`
+
+    ### Response Time Zones
+
+    API responses from Chargify are sent with the timezone of current Chargify site.
+
+    Alternately, webhooks sent from Chargify globally utilize EST as the timezone for all content in the body of the payload.
+
+    ### Request Data
+
+    POST and PUT request data may be formatted as either XML (`application/xml`) or JSON (`application/json`). For best results, you should set your HTTP `Content-Type` request header accordingly, although you may also specify your format by appending `.xml` or `.json` extensions on to the resource URI.
+
+    Note that Chargify does not accept PUT or POST data sent as query params or form encoded data – data must be sent as either XML or JSON. If you fail to set your `Content-Type` to either `application/xml` or `application/json`, your request may fail due to triggering of forgery protection mechanisms.
+
+    #### About Decimal Numbers
+
+    In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
+
+    We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
+
+    #### About Amount Fields
+
+    Fields holding amount values are given as a string representing a decimal whole currency amount.
+
+    For example, `"1.23"` in currency `"USD"` would equate to `$1.23`.
+
+    Not all fields will be rounded to the smallest currency denomination.  Intermediate results, such as those that derive from line-level tax calculations, may hold precision up to 8 decimal places.  However, the top-level totals we provide (e.g. `total_amount`) will be rounded to the smallest currency denomination.
+
+    It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
+
+    ### Debugging
+
+    If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
+
+    Another handy tool is [Beeceptor](https://beeceptor.com/). You can use this to intercept your request to see exactly what is being sent.
+
+    If you are unable to connect at all, check that you are using TLS 1.2 or better.
+
+    If you see a "Could not resolve host" error, double check that the url is correct, including your subdomain. For example: `mysite.chargify.com`.  This error means your DNS server could not find an IP address for the domain you are trying to connect to.
+
+    ### Backwards Compatibility
+
+    We consider the following changes to be backwards compatible and may make them without advance notice:
+
+    + Adding new API endpoints, or adding new attributes in the responses of existing endpoints
+    + Adding new optional parameters to be sent to existing API endpoints
+    + Adding new fields to exported data
+    + Changing the type or length of any of the ID attributes
+      + For example, most IDs are currently integers, but you should not assume that this will always be the case.
+
+    In addition, you should not depend on the order of attributes within the API response as this may change.
+
+    Chargify does not provide notifications for additions that are clearly defined as backwards compatible.
+
+    ### Examples
+
+    The following examples use the curl command-line tool to execute API requests.
+
+    #### Subscription Listing
+
+    **Request**
+
+        curl -u <api_key>:x -H Accept:application/json -H Content-Type:application/json https://acme.chargify.com/subscriptions.json
+
+
+    ## API Access Limitations
+
+    There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials.
+    **Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDE3-introduction).
+
+    Those scenarios are as follows:
+
+    - Your Chargify subscription is canceled.
+    - Your Chargify trial has reached an end.
+    - The site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309)
+      - _Note: any API request for another site that is in a good state will NOT be blocked_
+    - The site you're making a request for has been deleted.
+      - _Note: any API request for another site that is in a good state will NOT be blocked_
+
+    Read more about your Chargify subscription [here](https://chargify.zendesk.com/hc/en-us/articles/4407747017115)
+
+    ### What happens when an API request is blocked
+
+    The request will fail with a `422` http status code. The response will also include a message explaining the reason for the request being blocked. For example:
+
+    - If your Chargify subscription is canceled:
+
+    ```json
+    {
+      "errors" => [
+        [0] "Your Chargify account has been canceled. Please contact support@chargify.com to reactivate."
+      ]
+    }
+    ```
+
+    - If your Chargify trial has reached and end and you attempted to make an API request, the response body will look like:
+
+    ```json
+    {
+      "errors" => [
+        [0] "Your trial has ended, please contact sales."
+      ]
+    }
+    ```
+
+    - If the site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309):
+
+    ```json
+    {
+      "errors" => [
+        [0] "Site data clearing is in progress. Please try later."
+      ]
+    }
+    ```
+
+    - If the site you're making a request for has been deleted:
+
+    ```json
+    {
+      "errors" => [
+        [0] "This site has been deleted."
+      ]
+    }
+    ```
+
+    ## Secure Applications
+
+    Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
+
+    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
+
+    #### Troubleshooting
+
+    If you attempt to make a Chargify API request directly from the customer's browser, you may see an error such as:
+
+    ```
+    Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+    ```
+
+    or
+
+    ```
+    Origin 'https://example.com' is therefore not allowed access.` `The response had HTTP status code 404.
+    ```
+
+    This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
+
+    ## Relationship Invoicing
+
+    ### API Compatibility for Relationship Invoicing
+
+    This section describes the API for the new, [Relationship Invoicing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) style of invoices introduced in January 2018.
+
+    If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
+
+    These new invoices provide a single representation of all of your Chargify billing, whether you collect automatically or via remittance.
+
+    ### About Decimal Numbers
+
+    In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
+
+    We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
+
+    ### About Amount Fields
+
+    Fields holding amount values are given as a string representing a decimal whole currency amount.
+
+    For example, `"1.23"` in currency `"USD"` would equate to `$1.23`.
+
+    Not all fields will be rounded to the smallest currency denomination. Intermediate results, such as those that derive from line-level tax calculations, may hold precision up to 8 decimal places.  However, the top-level totals we provide (e.g. `total_amount`) will be rounded to the smallest currency denomination.
+
+    It is up to API consumers to parse the string into a decimal number representation and do any rounding necessary for your application.
+
+    #### Relationship Invoicing Summary
+
+    + If your site **is** using relationship invoicing, you may only use the methods described in this section for working with invoices.
+
+    + If your site is **not** using relationship invoicing, please use the legacy invoice methods:
+
+      + [Invoices](./b3A6MTQxMTA0MTA-read-invoice)
+      + [Invoices: Payments](./b3A6MTQxMTA0MTI-create-invoice-payment)
+      + [Invoices: Charges](./b3A6MTQxMTA0MTM-create-charge)
+      + [Invoices: Credits](./b3A6MTQxMTA0MTQ-create-invoice-credit)
+tags:
+- name: Billing Portal
+- name: Coupons
+- name: Components
+- name: Customers
+- name: Custom Fields
+- name: Events
+- name: 'Events-Based Billing: Segments'
+- name: Insights
+- name: Invoices
+- name: Offers
+- name: Payment Profiles
+- name: Product Families
+- name: Products
+- name: 'Product: Price Points'
+- name: Proforma Invoices
+- name: Reason Codes
+- name: Referral Codes
+- name: Sales Commissions
+- name: Sites
+- name: Subscriptions
+- name: Subscription Components
+- name: Subscription Groups
+- name: Subscription Group Invoice Account
+- name: Subscription Group Status
+- name: Subscription Invoice Account
+- name: Subscription Notes
+- name: Subscription Products
+- name: Subscription Status
+- name: Webhooks
+paths:
+  "/webhooks.json":
+    "$ref": "./endpoints/webhooks.json.yaml"
+  "/webhooks/settings.json":
+    "$ref": "./endpoints/webhooks.yaml"
+  "/webhooks/replay.json":
+    "$ref": "./endpoints/webhooks.yaml"
+  "/endpoints.json":
+    "$ref": "./endpoints/endpoints.json.yaml"
+  "/endpoints/{endpoint_id}.json":
+    "$ref": "./endpoints/endpoints.yaml"
+  "/site.json":
+    "$ref": "./endpoints/site.json.yaml"
+  "/sites/clear_data.json":
+    "$ref": "./endpoints/sites.yaml"
+  "/subscriptions/{subscription_id}/notes.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/notes/{note_id}.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/customers.json":
+    "$ref": "./endpoints/customers.json.yaml"
+  "/customers/{id}.json":
+    "$ref": "./endpoints/customers.yaml"
+  "/customers/lookup.json":
+    "$ref": "./endpoints/customers.yaml"
+  "/customers/{customer_id}/subscriptions.json":
+    "$ref": "./endpoints/customers.yaml"
+  "/portal/customers/{customer_id}/enable.json":
+    "$ref": "./endpoints/portal.yaml"
+  "/portal/customers/{customer_id}/management_link.json":
+    "$ref": "./endpoints/portal.yaml"
+  "/portal/customers/{customer_id}/invitations/invite.json":
+    "$ref": "./endpoints/portal.yaml"
+  "/portal/customers/{customer_id}/invitations/revoke.json":
+    "$ref": "./endpoints/portal.yaml"
+  "/stats.json":
+    "$ref": "./endpoints/stats.json.yaml"
+  "/referral_codes/validate.json":
+    "$ref": "./endpoints/referral_codes.yaml"
+  "/reason_codes.json":
+    "$ref": "./endpoints/reason_codes.json.yaml"
+  "/reason_codes/{reason_code_id}.json":
+    "$ref": "./endpoints/reason_codes.yaml"
+  "/{resource_type}/metafields.json":
+    "$ref": "./endpoints/{resource_type}.yaml"
+  "/{resource_type}/{resource_id}/metadata.json":
+    "$ref": "./endpoints/{resource_type}.yaml"
+  "/{resource_type}/metadata.json":
+    "$ref": "./endpoints/{resource_type}.yaml"
+  "/product_families/{product_family_id}/coupons.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/coupons/find.json":
+    "$ref": "./endpoints/coupons.yaml"
+  "/product_families/{product_family_id}/coupons/{coupon_id}.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/coupons.json":
+    "$ref": "./endpoints/coupons.json.yaml"
+  "/product_families/{product_family_id}/coupons/{coupon_id}/usage.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/coupons/validate.json":
+    "$ref": "./endpoints/coupons.yaml"
+  "/coupon/{coupon_id}/currency_prices.json":
+    "$ref": "./endpoints/coupon.yaml"
+  "/coupons/{coupon_id}/codes.json":
+    "$ref": "./endpoints/coupons.yaml"
+  "/coupons/{coupon_id}/codes/{subcode}.json":
+    "$ref": "./endpoints/coupons.yaml"
+  "/events.json":
+    "$ref": "./endpoints/events.json.yaml"
+  "/subscriptions/{subscription_id}/events.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/events/count.json":
+    "$ref": "./endpoints/events.yaml"
+  "/mrr.json":
+    "$ref": "./endpoints/mrr.json.yaml"
+  "/product_families/{product_family_id}/{plural_kind}.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/components/lookup.json":
+    "$ref": "./endpoints/components.yaml"
+  "/product_families/{product_family_id}/components/{component_id}.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/components.json":
+    "$ref": "./endpoints/components.json.yaml"
+  "/components/{component_id}/price_points/{price_point_id}/default.json":
+    "$ref": "./endpoints/components.yaml"
+  "/product_families/{product_family_id}/components.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/components/{component_id}/price_points.json":
+    "$ref": "./endpoints/components.yaml"
+  "/components/{component_id}/price_points/bulk.json":
+    "$ref": "./endpoints/components.yaml"
+  "/components/{component_id}/price_points/{price_point_id}.json":
+    "$ref": "./endpoints/components.yaml"
+  "/components/{component_id}/price_points/{price_point_id}/unarchive.json":
+    "$ref": "./endpoints/components.yaml"
+  "/price_points/{price_point_id}/currency_prices.json":
+    "$ref": "./endpoints/price_points.yaml"
+  "/mrr_movements.json":
+    "$ref": "./endpoints/mrr_movements.json.yaml"
+  "/product_families/{product_family_id}/products.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/products/{product_id}.json":
+    "$ref": "./endpoints/products.yaml"
+  "/products/handle/{api_handle}.json":
+    "$ref": "./endpoints/products.yaml"
+  "/product_families.json":
+    "$ref": "./endpoints/product_families.json.yaml"
+  "/product_families/{id}.json":
+    "$ref": "./endpoints/product_families.yaml"
+  "/products/{product_id}/price_points.json":
+    "$ref": "./endpoints/products.yaml"
+  "/products/{product_id}/price_points/{price_point_id}.json":
+    "$ref": "./endpoints/products.yaml"
+  "/products/{product_id}/price_points/{price_point_id}/unarchive.json":
+    "$ref": "./endpoints/products.yaml"
+  "/products/{product_id}/price_points/{price_point_id}/default.json":
+    "$ref": "./endpoints/products.yaml"
+  "/products/{product_id}/price_points/bulk.json":
+    "$ref": "./endpoints/products.yaml"
+  "/product_price_points/{product_price_point_id}/currency_prices.json":
+    "$ref": "./endpoints/product_price_points.yaml"
+  "/payment_profiles.json":
+    "$ref": "./endpoints/payment_profiles.json.yaml"
+  "/payment_profiles/{payment_profile_id}.json":
+    "$ref": "./endpoints/payment_profiles.yaml"
+  "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/bank_accounts/{bank_account_id}/verification.json":
+    "$ref": "./endpoints/bank_accounts.yaml"
+  "/invoices/{uid}/refunds.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices.json":
+    "$ref": "./endpoints/invoices.json.yaml"
+  "/invoices/{uid}.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/events.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/{uid}/payments.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/payments.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/credit_notes.json":
+    "$ref": "./endpoints/credit_notes.json.yaml"
+  "/credit_notes/{uid}.json":
+    "$ref": "./endpoints/credit_notes.yaml"
+  "/subscriptions/{subscription_id}/payments.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/invoices/{uid}/reopen.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/{uid}/void.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/{invoice_uid}/segments.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/subscriptions/{subscription_id}/account_balances.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/components/{component_id}.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/components.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/price_points.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/price_points/reset.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/components/{component_id}/allocations.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/allocations.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/allocations/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/components/{component_id}/usages.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/activate.json":
+    "$ref": "./endpoints/event_based_billing.yaml"
+  "/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/deactivate.json":
+    "$ref": "./endpoints/event_based_billing.yaml"
+  "/subscriptions.json":
+    "$ref": "./endpoints/subscriptions.json.yaml"
+  "/{subdomain}/events/{api_handle}.json":
+    "$ref": "./endpoints/{subdomain}.yaml"
+  "/{subdomain}/events/{api_handle}/bulk.json":
+    "$ref": "./endpoints/{subdomain}.yaml"
+  "/offers.json":
+    "$ref": "./endpoints/offers.json.yaml"
+  "/offers/{offer_id}.json":
+    "$ref": "./endpoints/offers.yaml"
+  "/offers/{offer_id}/archive.json":
+    "$ref": "./endpoints/offers.yaml"
+  "/offers/{offer_id}/unarchive.json":
+    "$ref": "./endpoints/offers.yaml"
+  "/sellers/{seller_id}/sales_commission_settings.json":
+    "$ref": "./endpoints/sellers.yaml"
+  "/sellers/{seller_id}/sales_reps.json":
+    "$ref": "./endpoints/sellers.yaml"
+  "/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
+    "$ref": "./endpoints/sellers.yaml"
+  "/subscriptions/{subscription_id}/retry.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/resume.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/hold.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/reactivate.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/migrations.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/migrations/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/override.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/delayed_cancel.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/cancel_dunning.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/renewals/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/invoices.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/prepayments.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/service_credits.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/service_credit_deductions.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscription_groups/signup.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups.json":
+    "$ref": "./endpoints/subscription_groups.json.yaml"
+  "/subscription_groups/{uid}.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/lookup.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{uid}/cancel.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{uid}/delayed_cancel.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{subscription_group_uid}/reactivate.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{subscription_group_uid}/payment_profiles/{payment_profile_id}.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{uid}/prepayments.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{uid}/service_credits.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscription_groups/{uid}/service_credit_deductions.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscriptions/lookup.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/subscriptions/{subscription_id}/purge.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/prepaid_configurations.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/group.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/chargify_js_keys.json":
+    "$ref": "./endpoints/chargify_js_keys.json.yaml"
+  "/subscription_groups/{subscription_group_uid}/proforma_invoices.json":
+    "$ref": "./endpoints/subscription_groups.yaml"
+  "/proforma_invoices/{proforma_invoice_uid}.json":
+    "$ref": "./endpoints/proforma_invoices.yaml"
+  "/subscriptions/{subscription_id}/add_coupon.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/remove_coupon.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/proforma_invoices.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/proforma_invoices/{proforma_invoice_uid}/void.json":
+    "$ref": "./endpoints/proforma_invoices.yaml"
+  "/subscriptions/{subscription_id}/proforma_invoices/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/invoices/{uid}/deliveries.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/{uid}/customer_information/preview.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/invoices/{uid}/customer_information.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/one_time_tokens/{chargify_token}.json":
+    "$ref": "./endpoints/one_time_tokens.yaml"
+  "/subscriptions_components.json":
+    "$ref": "./endpoints/subscriptions_components.json.yaml"
+  "/components/{component_id}/price_points/{price_point_id}/segments.json/":
+    "$ref": "./endpoints/components.yaml"
+  "/components/{component_id}/price_points/{price_point_id}/segments/{id}.json":
+    "$ref": "./endpoints/components.yaml"
+  "/components/{component_id}/price_points/{price_point_id}/segments/bulk.json":
+    "$ref": "./endpoints/components.yaml"
+  "/subscriptions/{subscription_id}/advance_invoice/issue.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/advance_invoice.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/{subscription_id}/advance_invoice/void.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions_mrr.json":
+    "$ref": "./endpoints/subscriptions_mrr.json.yaml"
+  "/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/products.json":
+    "$ref": "./endpoints/products.json.yaml"
+  "/invoices/{uid}/issue.json":
+    "$ref": "./endpoints/invoices.yaml"
+  "/components_price_points.json":
+    "$ref": "./endpoints/components_price_points.json.yaml"
+  "/products_price_points.json":
+    "$ref": "./endpoints/products_price_points.json.yaml"
+  "/subscriptions/{subscription_id}/activate.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/proforma_invoices.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/subscriptions/proforma_invoices/preview.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+  "/api_exports/proforma_invoices/{batch_id}/rows.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/invoices/{batch_id}/rows.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/subscriptions/{batch_id}/rows.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/proforma_invoices.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/invoices.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/subscriptions.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/proforma_invoices/{batch_id}.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/invoices/{batch_id}.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/api_exports/subscriptions/{batch_id}.json":
+    "$ref": "./endpoints/api_exports.yaml"
+  "/subscriptions/{subscription_id}/request_payment_profiles_update.json":
+    "$ref": "./endpoints/subscriptions.yaml"
+servers:
+- url: https://{subdomain}.chargify.com
+  description: Production server
+  variables:
+    subdomain:
+      default: subdomain
+      description: The subdomain for your Chargify site
+security:
+- BasicAuth: []
+components:
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+      schema:
+        type: integer
+    per-page:
+      name: per_page
+      in: query
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 20. The maximum allowed values is 200; any per_page value
+        over 200 will be changed to 200.
+      schema:
+        type: integer
+        default: 20
+        maximum: 200
+    sort-direction:
+      name: direction
+      in: query
+      description: Controls the order in which results are returned.
+      schema:
+        "$ref": "#/components/schemas/Sort-Direction"
+    subscription-id-required-path:
+      name: subscription_id
+      in: path
+      description: The Chargify id of the subscription
+      schema:
+        type: integer
+      required: true
+  schemas:
+    Activate-Subscription-Request:
+      "$ref": "./components/Activate-Subscription-Request.yaml"
+    Add-Coupons-Request:
+      "$ref": "./components/Add-Coupons-Request.yaml"
+    Allocation:
+      "$ref": "./components/Allocation.yaml"
+    Billing-Manifest:
+      "$ref": "./components/Billing-Manifest.yaml"
+    Component-Price-Point:
+      "$ref": "./components/Component-Price-Point.yaml"
+    Component:
+      "$ref": "./components/Component.yaml"
+    Coupon:
+      "$ref": "./components/Coupon.yaml"
+    Create-Allocation:
+      "$ref": "./components/Create-Allocation.yaml"
+    Create-Component-Price-Point:
+      "$ref": "./components/Create-Component-Price-Point.yaml"
+    Create-Customer:
+      "$ref": "./components/Create-Customer.yaml"
+    Create-Metafield:
+      "$ref": "./components/Create-Metafield.yaml"
+    Create-or-Update-Coupon:
+      "$ref": "./components/Create-or-Update-Coupon.yaml"
+    Create-or-Update-Endpoint:
+      "$ref": "./components/Create-or-Update-Endpoint.yaml"
+    Create-or-Update-Flat-Amount-Coupon:
+      "$ref": "./components/Create-or-Update-Flat-Amount-Coupon.yaml"
+    Create-or-Update-Percentage-Coupon:
+      "$ref": "./components/Create-or-Update-Percentage-Coupon.yaml"
+    Prepaid-Configuration:
+      "$ref": "./components/Prepaid-Configuration.yaml"
+    Upsert-Prepaid-Configuration:
+      "$ref": "./components/Upsert-Prepaid-Configuration.yaml"
+    Upsert-Prepaid-Configuration-Request:
+      "$ref": "./components/Upsert-Prepaid-Configuration-Request.yaml"
+    Create-or-Update-Product:
+      "$ref": "./components/Create-or-Update-Product.yaml"
+    Create-or-Update-Subscription-Note:
+      "$ref": "./components/Create-or-Update-Subscription-Note.yaml"
+    Create-Prepaid-Usage-Component-Price-Point:
+      "$ref": "./components/Create-Prepaid-Usage-Component-Price-Point.yaml"
+    Create-Product-Price-Point:
+      "$ref": "./components/Create-Product-Price-Point.yaml"
+    Create-Subscription:
+      "$ref": "./components/Create-Subscription.yaml"
+    Create-Subscription-Request:
+      "$ref": "./components/Create-Subscription-Request.yaml"
+    Subscription-Custom-Price:
+      "$ref": "./components/Subscription-Custom-Price.yaml"
+    Subscription-Payment-Collection-Method:
+      "$ref": "./components/Subscription-Payment-Collection-Method.yaml"
+    Customer-Attributes:
+      "$ref": "./components/Customer-Attributes.yaml"
+    Card-Type:
+      "$ref": "./components/Card-Type.yaml"
+    Current-Vault:
+      "$ref": "./components/Current-Vault.yaml"
+    Payment-Profile-Attributes:
+      "$ref": "./components/Payment-Profile-Attributes.yaml"
+    Bank-Account-Attributes:
+      "$ref": "./components/Bank-Account-Attributes.yaml"
+    Metafields:
+      "$ref": "./components/Metafields.yaml"
+    Calendar-Billing:
+      "$ref": "./components/Calendar-Billing.yaml"
+    Agreement-Acceptance:
+      "$ref": "./components/Agreement-Acceptance.yaml"
+    ACH-Agreement:
+      "$ref": "./components/ACH-Agreement.yaml"
+    Component-Custom-Price:
+      "$ref": "./components/Component-Custom-Price.yaml"
+    Create-Subscription-Component:
+      "$ref": "./components/Create-Subscription-Component.yaml"
+    Credit-Note:
+      "$ref": "./components/Credit-Note.yaml"
+    Currency-Price:
+      "$ref": "./components/Currency-Price.yaml"
+    Endpoint:
+      "$ref": "./components/Endpoint.yaml"
+    Event:
+      "$ref": "./components/Event.yaml"
+    Group-Attributes:
+      "$ref": "./components/Group-Attributes.yaml"
+    Invoice:
+      "$ref": "./components/Invoice.yaml"
+    Interval-Unit:
+      "$ref": "./components/Interval-Unit.yaml"
+    Metadata:
+      "$ref": "./components/Metadata.yaml"
+    Metafield:
+      "$ref": "./components/Metafield.yaml"
+    Offer:
+      "$ref": "./components/Offer.yaml"
+    Overage-Pricing:
+      "$ref": "./components/Overage-Pricing.yaml"
+    Price:
+      "$ref": "./components/Price.yaml"
+    Pricing-Scheme:
+      "$ref": "./components/Pricing-Scheme.yaml"
+    Paginated-Metadata:
+      "$ref": "./components/Paginated-Metadata.yaml"
+    Prepayment:
+      "$ref": "./components/Prepayment.yaml"
+    Product-Price-Point-Currency-Price:
+      "$ref": "./components/Product-Price-Point-Currency-Price.yaml"
+    Product-Price-Point:
+      "$ref": "./components/Product-Price-Point.yaml"
+    Proforma-Invoice:
+      "$ref": "./components/Proforma-Invoice.yaml"
+    Proforma-Invoice-Preview:
+      "$ref": "./components/Proforma-Invoice-Preview.yaml"
+    Reason-Code:
+      "$ref": "./components/Reason-Code.yaml"
+    Service-Credit:
+      "$ref": "./components/Service-Credit.yaml"
+    Subscription-Response:
+      "$ref": "./components/Subscription-Response.yaml"
+    Subscription-Preview:
+      "$ref": "./components/Subscription-Preview.yaml"
+    Subscription-Preview-Response:
+      "$ref": "./components/Subscription-Preview-Response.yaml"
+    Subscription-Note:
+      "$ref": "./components/Subscription-Note.yaml"
+    Subscriptions-Component:
+      "$ref": "./components/Subscriptions-Component.yaml"
+    List-Subscriptions-Date-Field:
+      "$ref": "./components/List-Subscriptions-Date-Field.yaml"
+    List-Subscriptions-Sort:
+      "$ref": "./components/List-Subscriptions-Sort.yaml"
+    Subscription-State:
+      "$ref": "./components/Subscription-State.yaml"
+    Sort-Direction:
+      "$ref": "./components/Sort-Direction.yaml"
+    Update-Customer:
+      "$ref": "./components/Update-Customer.yaml"
+    Update-Metafield:
+      "$ref": "./components/Update-Metafield.yaml"
+    Update-Subscription:
+      "$ref": "./components/Update-Subscription.yaml"
+    Update-Subscription-Request:
+      "$ref": "./components/Update-Subscription-Request.yaml"
+    Override-Subscription:
+      "$ref": "./components/Override-Subscription.yaml"
+    Override-Subscription-Request:
+      "$ref": "./components/Override-Subscription-Request.yaml"
+    Usage:
+      "$ref": "./components/Usage.yaml"
+    Subscription-MRR:
+      "$ref": "./components/Subscription-MRR.yaml"
+    Site:
+      "$ref": "./components/Site.yaml"
+    Batch-Job:
+      "$ref": "./components/Batch-Job.yaml"
+    Update-Subscription-Group:
+      "$ref": "./components/Update-Subscription-Group.yaml"
+    Update-Subscription-Group-Request:
+      "$ref": "./components/Update-Subscription-Group-Request.yaml"
+    Update-Subscription-Group-Response:
+      "$ref": "./components/Update-Subscription-Group-Response.yaml"
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: The `username` is a Chargify API key. The `password` is `x`.

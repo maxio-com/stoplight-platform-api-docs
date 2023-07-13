@@ -1,0 +1,388 @@
+---
+"/sellers/{seller_id}/sales_commission_settings.json":
+  parameters:
+  - schema:
+      type: string
+    name: seller_id
+    in: path
+    required: true
+    description: The Chargify id of your seller account
+  get:
+    summary: List Sales Commission Settings
+    tags:
+    - Sales Commissions
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  customer_name:
+                    type: string
+                  subscription_id:
+                    type: integer
+                  site_link:
+                    type: string
+                  site_name:
+                    type: string
+                  subscription_mrr:
+                    type: string
+                  sales_rep_id:
+                    type: integer
+                  sales_rep_name:
+                    type: string
+            examples:
+              Example:
+                value:
+                - customer_name: Ziomek Ziomeczek
+                  subscription_id: 81746
+                  site_link: https://chargify9.staging-chargify.com/dashboard
+                  site_name: Chargify
+                  subscription_mrr: "$200.00"
+                  sales_rep_id: 48
+                  sales_rep_name: John Candy
+                - customer_name: Ziom Kom
+                  subscription_id: 83758
+                  site_link: https://chargify9.staging-chargify.com/dashboard
+                  site_name: Chargify
+                  subscription_mrr: "$200.00"
+                  sales_rep_id: 49
+                  sales_rep_name: Josh Acme
+                - customer_name: George Bush
+                  subscription_id: 83790
+                  site_link: https://chargify9.staging-chargify.com/dashboard
+                  site_name: Chargify
+                  subscription_mrr: "$200.00"
+                  sales_rep_id: 48
+                  sales_rep_name: John Candy
+    operationId: listSalesCommissionSettings
+    description: |-
+      Endpoint returns subscriptions with associated sales reps
+
+      ## Modified Authentication Process
+
+      The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
+
+      Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+
+      > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+    parameters:
+    - schema:
+        type: string
+        default: Bearer <<apiKey>>
+      in: header
+      name: Authorization
+    - schema:
+        type: boolean
+      in: query
+      name: live_mode
+    - schema:
+        type: integer
+        default: 1
+      in: query
+      name: page
+    - schema:
+        type: integer
+        default: 100
+      in: query
+      name: per_page
+"/sellers/{seller_id}/sales_reps.json":
+  parameters:
+  - schema:
+      type: string
+    name: seller_id
+    in: path
+    required: true
+    description: The Chargify id of your seller account
+  get:
+    summary: List Sales Reps
+    tags:
+    - Sales Commissions
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  full_name:
+                    type: string
+                  subscriptions_count:
+                    type: integer
+                  mrr_data:
+                    type: object
+                    properties:
+                      november_2019:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                      december_2019:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                      january_2020:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                      february_2020:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                      march_2020:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                      april_2020:
+                        type: object
+                        properties:
+                          mrr:
+                            type: string
+                          usage:
+                            type: string
+                          recurring:
+                            type: string
+                  test_mode:
+                    type: boolean
+            examples:
+              Example:
+                value:
+                - id: 48
+                  full_name: John Candy
+                  subscriptions_count: 2
+                  mrr_data:
+                    november_2019:
+                      mrr: "$0.00"
+                      usage: "$0.00"
+                      recurring: "$0.00"
+                    december_2019:
+                      mrr: "$0.00"
+                      usage: "$0.00"
+                      recurring: "$0.00"
+                    january_2020:
+                      mrr: "$400.00"
+                      usage: "$0.00"
+                      recurring: "$400.00"
+                    february_2020:
+                      mrr: "$400.00"
+                      usage: "$0.00"
+                      recurring: "$400.00"
+                    march_2020:
+                      mrr: "$400.00"
+                      usage: "$0.00"
+                      recurring: "$400.00"
+                    april_2020:
+                      mrr: "$400.00"
+                      usage: "$0.00"
+                      recurring: "$400.00"
+                  test_mode: true
+                - id: 49
+                  full_name: Josh Acme
+                  subscriptions_count: 1
+                  mrr_data:
+                    november_2019:
+                      mrr: "$0.00"
+                      usage: "$0.00"
+                      recurring: "$0.00"
+                    december_2019:
+                      mrr: "$0.00"
+                      usage: "$0.00"
+                      recurring: "$0.00"
+                    january_2020:
+                      mrr: "$200.00"
+                      usage: "$0.00"
+                      recurring: "$200.00"
+                    february_2020:
+                      mrr: "$200.00"
+                      usage: "$0.00"
+                      recurring: "$200.00"
+                    march_2020:
+                      mrr: "$200.00"
+                      usage: "$0.00"
+                      recurring: "$200.00"
+                    april_2020:
+                      mrr: "$200.00"
+                      usage: "$0.00"
+                      recurring: "$200.00"
+                  test_mode: true
+    operationId: listSalesReps
+    description: |-
+      Endpoint returns sales rep list with details
+
+      ## Modified Authentication Process
+
+      The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
+
+      Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+
+      > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+    parameters:
+    - schema:
+        type: string
+        default: Bearer <<apiKey>>
+      in: header
+      name: Authorization
+    - schema:
+        type: boolean
+      in: query
+      name: live_mode
+    - schema:
+        type: integer
+        default: 1
+      in: query
+      name: page
+    - schema:
+        type: integer
+        default: 100
+      in: query
+      name: per_page
+"/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
+  parameters:
+  - schema:
+      type: string
+    name: seller_id
+    in: path
+    required: true
+  - schema:
+      type: string
+    name: sales_rep_id
+    in: path
+    required: true
+  get:
+    summary: Read Sales Rep
+    tags:
+    - Sales Commissions
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                full_name:
+                  type: string
+                subscriptions_count:
+                  type: integer
+                test_mode:
+                  type: boolean
+                subscriptions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      site_name:
+                        type: string
+                      subscription_url:
+                        type: string
+                      customer_name:
+                        type: string
+                      created_at:
+                        type: string
+                      mrr:
+                        type: string
+                      usage:
+                        type: string
+                      recurring:
+                        type: string
+                      last_payment:
+                        type: string
+                      churn_date:
+                        type: string
+                        nullable: true
+            examples:
+              Example:
+                value:
+                  id: 48
+                  full_name: John Candy
+                  subscriptions_count: 2
+                  test_mode: true
+                  subscriptions:
+                  - id: 81746
+                    site_name: Chargify
+                    subscription_url: https://chargify9.staging-chargify.com/subscriptions/81746
+                    customer_name: Ziomek Ziomeczek
+                    created_at: '2020-01-03T02:36:27-05:00'
+                    mrr: "$200.00"
+                    usage: "$0.00"
+                    recurring: "$200.00"
+                    last_payment: '2020-04-03T03:40:27-04:00'
+                    churn_date:
+                  - id: 83790
+                    site_name: Chargify
+                    subscription_url: https://chargify9.staging-chargify.com/subscriptions/83790
+                    customer_name: George Bush
+                    created_at: '2020-01-17T07:34:32-05:00'
+                    mrr: "$200.00"
+                    usage: "$0.00"
+                    recurring: "$200.00"
+                    last_payment: '2020-04-17T08:41:03-04:00'
+                    churn_date:
+    operationId: readSalesRep
+    description: |-
+      Endpoint returns sales rep and attached subscriptions details.
+
+      ## Modified Authentication Process
+
+      The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
+
+      Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+
+      > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
+    parameters:
+    - schema:
+        type: string
+        default: Bearer <<apiKey>>
+      in: header
+      name: Authorization
+    - schema:
+        type: boolean
+      in: query
+      name: live_mode
+    - schema:
+        type: integer
+        default: 1
+      in: query
+      name: page
+    - schema:
+        type: integer
+        default: 100
+      in: query
+      name: per_page

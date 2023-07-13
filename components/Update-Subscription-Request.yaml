@@ -1,0 +1,6 @@
+---
+title: Update Subscription Request
+type: object
+properties:
+  subscription:
+    "$ref": "#/components/schemas/Update-Subscription"

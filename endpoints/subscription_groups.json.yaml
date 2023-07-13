@@ -1,0 +1,210 @@
+---
+"/subscription_groups.json":
+  post:
+    summary: Create Subscription Group
+    tags:
+    - Subscription Groups
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_group:
+                  type: object
+                  properties:
+                    customer_id:
+                      type: integer
+                    payment_profile:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        masked_card_number:
+                          type: string
+                    payment_collection_method:
+                      type: string
+                    subscription_ids:
+                      type: array
+                      items:
+                        type: Event
+                    created_at:
+                      type: string
+            examples:
+              Example:
+                value:
+                  subscription_group:
+                    customer_id: 1
+                    payment_profile:
+                      id: 1
+                      first_name: t
+                      last_name: t
+                      masked_card_number: XXXX-XXXX-XXXX-1
+                    payment_collection_method: automatic
+                    subscription_ids:
+                    - 1
+                    - 2
+                    created_at: '2021-01-21T05:47:38-05:00'
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: string
+            examples:
+              Example:
+                value:
+                  errors: Subscription is already in group
+    operationId: createSubscriptionGroup
+    description: Creates a subscription group with given members.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              subscription_group:
+                type: object
+                required:
+                - subscription_id
+                properties:
+                  subscription_id:
+                    type:
+                    - string
+                    - integer
+                  member_ids:
+                    type: array
+                    items:
+                      type: integer
+            required:
+            - subscription_group
+          examples:
+            Example:
+              value:
+                subscription_group:
+                  subscription_id: 1
+                  member_ids:
+                  - 2
+                  - 3
+                  - 4
+  get:
+    summary: List Subscription Groups
+    tags:
+    - Subscription Groups
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscription_groups:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      uid:
+                        type: string
+                      scheme:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      payment_profile_id:
+                        type: integer
+                      subscription_ids:
+                        type: array
+                        items:
+                          type: integer
+                      primary_subscription_id:
+                        type: integer
+                      next_assessment_at:
+                        type: string
+                      state:
+                        type: string
+                      cancel_at_end_of_period:
+                        type: boolean
+                      account_balances:
+                        type: object
+                        properties:
+                          prepayments:
+                            type: object
+                            properties:
+                              balance_in_cents:
+                                type: integer
+                          service_credits:
+                            type: object
+                            properties:
+                              balance_in_cents:
+                                type: integer
+                          open_invoices:
+                            type: object
+                            properties:
+                              balance_in_cents:
+                                type: integer
+                          pending_discounts:
+                            type: object
+                            properties:
+                              balance_in_cents:
+                                type: integer
+                meta:
+                  type: object
+                  properties:
+                    current_page:
+                      type: integer
+                    total_count:
+                      type: integer
+            examples:
+              Example:
+                value:
+                  subscription_groups:
+                  - uid: grp_952mvqcnk53wq
+                    scheme: 1
+                    customer_id: 88498000
+                    payment_profile_id: 93063018
+                    subscription_ids:
+                    - 42768907
+                    - 82370782
+                    primary_subscription_id: 69844395
+                    next_assessment_at: Sun, 09 Aug 2020 15:59:06 EDT -04:00
+                    state: active
+                    cancel_at_end_of_period: false
+                    account_balances:
+                      prepayments:
+                        balance_in_cents: 0
+                      service_credits:
+                        balance_in_cents: 0
+                      pending_discounts:
+                        balance_in_cents: 0
+                  meta:
+                    current_page: 1
+                    total_count: 1
+    operationId: listSubscriptionGroups
+    description: |-
+      Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
+
+      #### Account Balance Information
+
+      Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: per_page
+    - schema:
+        type: integer
+      in: query
+      name: page
+    - schema:
+        type: string
+      in: query
+      name: include

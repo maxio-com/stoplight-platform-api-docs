@@ -1,0 +1,186 @@
+---
+"/mrr_movements.json":
+  get:
+    summary: List MRR Movements
+    tags:
+    - Insights
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mrr:
+                  type: object
+                  properties:
+                    page:
+                      type: integer
+                    per_page:
+                      type: integer
+                    total_pages:
+                      type: integer
+                    total_entries:
+                      type: integer
+                    currency:
+                      type: string
+                    currency_symbol:
+                      type: string
+                    movements:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          timestamp:
+                            type: string
+                          amount_in_cents:
+                            type: integer
+                          amount_formatted:
+                            type: string
+                          description:
+                            type: string
+                          category:
+                            type: string
+                          breakouts:
+                            type: object
+                            properties:
+                              plan_amount_in_cents:
+                                type: integer
+                              plan_amount_formatted:
+                                type: string
+                              usage_amount_in_cents:
+                                type: integer
+                              usage_amount_formatted:
+                                type: string
+                          line_items:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                product_id:
+                                  type: integer
+                                component_id:
+                                  type: integer
+                                  description: For Product (or "baseline") line items,
+                                    this field will have a value of `0`.
+                                name:
+                                  type: string
+                                mrr:
+                                  type: integer
+                                mrr_movements:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      amount:
+                                        type: integer
+                                      category:
+                                        type: string
+                                quantity:
+                                  type: integer
+                                prev_quantity:
+                                  type: integer
+                                recurring:
+                                  type: boolean
+                                  description: When `true`, the line item's MRR value
+                                    will contribute to the `plan` breakout. When `false`,
+                                    the line item contributes to the `usage` breakout.
+                          subscription_id:
+                            type: integer
+                          subscriber_name:
+                            type: string
+            examples:
+              Example:
+                value:
+                  mrr:
+                    page: 0
+                    per_page: 10
+                    total_pages: 80
+                    total_entries: 791
+                    currency: USD
+                    currency_symbol: "$"
+                    movements:
+                    - timestamp: '2014-12-03T13:59:46-05:00'
+                      amount_in_cents: 2173
+                      amount_formatted: "$21.73"
+                      description: Awesome Company signed up for Super Product ($21.73/mo)
+                      category: new_business
+                      breakouts:
+                        plan_amount_in_cents: 2173
+                        plan_amount_formatted: "$21.73"
+                        usage_amount_in_cents: 0
+                        usage_amount_formatted: "$0.00"
+                      line_items:
+                      - product_id: 306386
+                        component_id: 0
+                        price_point_id: 3856987
+                        name: string
+                        mrr: 2173
+                        mrr_movements:
+                        - amount: 2173
+                          category: new_business
+                        quantity: 1
+                        prev_quantity: 0
+                        recurring: true
+                      subscription_id: 12355
+                      subscriber_name: Amy Smith
+    operationId: readMrrMovements
+    deprecated: true
+    description: |-
+      This endpoint returns your site's MRR movements.
+
+      ## Understanding MRR movements
+
+      This endpoint will aid in accessing your site's [MRR Report](https://chargify.zendesk.com/hc/en-us/articles/4407838249627) data.
+
+      Whenever a subscription event occurs that causes your site's MRR to change (such as a signup or upgrade), we record an MRR movement. These records are accessible via the MRR Movements endpoint.
+
+      Each MRR Movement belongs to a subscription and contains a timestamp, category, and an amount. `line_items` represent the subscription's product configuration at the time of the movement.
+
+      ### Plan & Usage Breakouts
+
+      In the MRR Report UI, we support a setting to [include or exclude](https://chargify.zendesk.com/hc/en-us/articles/4407838249627#displaying-component-based-metered-usage-in-mrr) usage revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
+
+      Plan includes revenue from:
+      * Products
+      * Quantity-Based Components
+      * On/Off Components
+
+      Usage includes revenue from:
+      * Metered Components
+      * Prepaid Usage Components
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: subscription_id
+      description: optionally filter results by subscription
+    - schema:
+        type: integer
+        default: 1
+      in: query
+      name: page
+      description: 'Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned. '
+    - schema:
+        type: integer
+        default: 10
+        maximum: 50
+      in: query
+      name: per_page
+      description: " This parameter indicates how many records to fetch in each request.
+        Default value is 10. The maximum allowed values is 50; any per_page value
+        over 50 will be changed to 10."
+    - schema:
+        type: string
+        enum:
+        - asc
+        - desc
+      in: query
+      name: direction
+      description: The sort direction of the returned records.

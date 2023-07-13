@@ -1,0 +1,56 @@
+---
+title: Custom price used for Subscription Create/Update
+type:
+- object
+description: "(Optional) Used in place of `product_price_point_id` to define a custom
+  price point unique to the subscription"
+properties:
+  name:
+    type:
+    - string
+    description: "(Optional)"
+  handle:
+    type:
+    - string
+    description: "(Optional)"
+  price_in_cents:
+    type:
+    - integer
+  interval:
+    type:
+    - integer
+  interval_unit:
+    schema:
+      "$ref": "#/components/schemas/Interval-Unit"
+  trial_price_in_cents:
+    type:
+    - integer
+    description: "(Optional)"
+  trial_interval:
+    type:
+    - integer
+    description: "(Optional)"
+  trial_interval_unit:
+    schema:
+      "$ref": "#/components/schemas/Interval-Unit"
+    description: "(Optional)"
+  initial_charge_in_cents:
+    type:
+    - integer
+    description: "(Optional)"
+  initial_charge_after_trial:
+    type:
+    - boolean
+    description: "(Optional)"
+  expiration_interval:
+    type:
+    - integer
+    description: "(Optional)"
+  expiration_interval_unit:
+    schema:
+      "$ref": "#/components/schemas/Interval-Unit"
+    description: "(Optional)"
+  tax_included:
+    type:
+    - boolean
+    description: "(Optional)"

@@ -1,0 +1,115 @@
+---
+"/subscriptions_mrr.json":
+  get:
+    summary: List MRR per subscription
+    tags:
+    - Insights
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  subscriptions_mrr: []
+              properties:
+                subscriptions_mrr:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/Subscription-MRR"
+              required:
+              - subscriptions_mrr
+            examples:
+              example-1:
+                value:
+                - subscriptions_mrr:
+                  - subscription_id: 0
+                    mrr_amount_in_cents: 0
+                    breakouts:
+                      plan_amount_in_cents: 0
+                      usage_amount_in_cents: 0
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                errors:
+                  type: object
+                  properties:
+                    attribute:
+                      type: array
+                      items:
+                        required: []
+                        properties: {}
+                  required:
+                  - attribute
+              required:
+              - errors
+              x-examples:
+                example-1:
+                  errors:
+                    attribute:
+                    - supplied value is invalid, expected ISO 8601 format
+            examples:
+              example-1:
+                value:
+                  errors:
+                    at_time:
+                    - supplied value is invalid, expected ISO 8601 format
+    operationId: listMrrPerSubscription
+    deprecated: true
+    description: This endpoint returns your site's current MRR, including plan and
+      usage breakouts split per subscription.
+    parameters:
+    - schema:
+        type: string
+        example: filter[subscription_ids]=1,2,3
+        minLength: 1
+      in: query
+      name: filter[subscription_ids]
+      description: Submit ids in order to limit results.
+    - schema:
+        type: string
+        example: at_time=2022-01-10T10:00:00-05:00
+      in: query
+      name: at_time
+      description: Submit a timestamp in ISO8601 format to request MRR for a historic
+        time.
+    - schema:
+        type: number
+        minimum: 1
+        example: page=2
+      in: query
+      name: page
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+    - schema:
+        type: number
+        minimum: 1
+        maximum: 200
+        example: per_page=50
+      in: query
+      name: per_page
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 20. The maximum allowed values is 200; any per_page value
+        over 200 will be changed to 200.
+    - schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        example: direction=desc
+      in: query
+      name: direction
+      description: Controls the order in which results are returned. Records are ordered
+        by subscription_id in ascending order by default.

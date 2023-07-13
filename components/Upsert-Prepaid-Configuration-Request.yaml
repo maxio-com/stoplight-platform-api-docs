@@ -1,0 +1,7 @@
+---
+title: Upsert Prepaid Configuration Request
+type: object
+properties:
+  prepaid_configuration:
+    schema:
+      "$ref": "#/components/schemas/Upsert-Prepaid-Configuration"

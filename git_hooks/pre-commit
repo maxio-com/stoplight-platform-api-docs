@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Run the resolve_refs.rb script before each commit
+ruby resolve_refs.rb
+
+# Stage the updated OpenAPI document
+git add reference/Chargify-API.v1.yaml
+
+# Proceed with the commit
+exit 0

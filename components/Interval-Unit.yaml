@@ -1,0 +1,7 @@
+---
+title: Interval Unit
+type:
+- string
+enum:
+- day
+- month

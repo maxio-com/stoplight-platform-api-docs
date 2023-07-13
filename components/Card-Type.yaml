@@ -1,0 +1,20 @@
+---
+title: Card Type
+type:
+- string
+description: "(Optional, used only for Subscription Import) If you know the card type
+  (i.e. Visa, MC, etc) you may supply it here so that we may display the card type
+  in the UI."
+enum:
+- visa
+- master
+- discover
+- american_express
+- diners_club
+- jcb
+- switch
+- solo
+- dankort
+- maestro
+- laser
+- forbrugsforeningen
