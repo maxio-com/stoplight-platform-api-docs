@@ -26,8 +26,5 @@ openapi_doc['paths']['/subscription_groups/{uid}.json']['put']['responses']['200
 # Dump the updated OpenAPI document to a string
 updated_yaml = Psych.dump(openapi_doc)
 
-# Add two spaces before each list item
-updated_yaml.gsub!(/^(\s*)-/, '\1  -')
-
 # Save the updated OpenAPI document as a new YAML file
 File.open('Chargify-API.v1.yaml', 'w') { |file| file.write(updated_yaml) }

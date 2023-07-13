@@ -19190,32 +19190,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_group:
-                    type: object
-                    properties:
-                      customer_id:
-                        type: integer
-                      payment_profile:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          masked_card_number:
-                            type: string
-                      payment_collection_method:
-                        type: string
-                      subscription_ids:
-                        type: array
-                        items:
-                          type: integer
-                      created_at:
-                        type: string
+                "$ref": "#/components/schemas/Update-Subscription-Group-Response"
               examples:
                 Example:
                   value:
@@ -19267,15 +19242,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription_group:
-                  type: object
-                  properties:
-                    member_ids:
-                      type: array
-                      items:
-                        type: integer
+              "$ref": "#/components/schemas/Update-Subscription-Group-Request"
             examples:
               Example:
                 value:
@@ -29107,6 +29074,45 @@ components:
               - string
               - 'null'
             completed:
+              type: string
+    Update-Subscription-Group:
+      type: object
+      properties:
+        member_ids:
+          type: array
+          items:
+            type: integer
+    Update-Subscription-Group-Request:
+      type: object
+      properties:
+        subscription_group:
+          "$ref": "#/components/schemas/Update-Subscription-Group"
+    Update-Subscription-Group-Response:
+      type: object
+      properties:
+        subscription_group:
+          type: object
+          properties:
+            customer_id:
+              type: integer
+            payment_profile:
+              type: object
+              properties:
+                id:
+                  type: integer
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                masked_card_number:
+                  type: string
+            payment_collection_method:
+              type: string
+            subscription_ids:
+              type: array
+              items:
+                type: integer
+            created_at:
               type: string
   securitySchemes:
     BasicAuth:
