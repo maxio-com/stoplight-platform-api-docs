@@ -1,0 +1,382 @@
+---
+"/coupons/find.json":
+  get:
+    summary: Find Coupon
+    tags:
+    - Coupons
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coupon:
+                  "$ref": "#/components/schemas/Coupon"
+    operationId: readCouponByCode
+    description: |-
+      You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
+
+      If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: product_family_id
+      description: The Chargify id of the product family to which the coupon belongs
+    - schema:
+        type: string
+      in: query
+      name: code
+"/coupons/validate.json":
+  get:
+    summary: Validate Coupon
+    tags:
+    - Coupons
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coupon:
+                  "$ref": "#/components/schemas/Coupon"
+            examples:
+              Example:
+                value:
+                  coupon:
+                    id: 66
+                    name: Foo Bar
+                    code: YEPPER9993
+                    description: my cool coupon
+                    amount_in_cents: 10000
+                    product_family_id: 4
+                    created_at: '2017-11-07T14:51:52-05:00'
+                    updated_at: '2017-11-07T15:14:24-05:00'
+                    start_date: '2017-11-07T14:51:52-05:00'
+                    end_date:
+                    percentage:
+                    recurring: false
+                    duration_period_count:
+                    duration_interval:
+                    duration_interval_unit:
+                    allow_negative_balance: false
+                    archived_at:
+                    conversion_limit:
+                    stackable: true
+                    compounding_strategy: full-price
+                    coupon_restrictions: []
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: string
+            examples:
+              Example:
+                value:
+                  errors: Coupon code could not be found.
+    operationId: validateCoupon
+    description: |-
+      You can verify if a specific coupon code is valid using the `validate` method. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
+
+      If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
+
+      + Coupon not found
+      + Coupon is invalid
+      + Coupon expired
+
+      If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, then you will need to specify the product family, either in the url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
+
+      Eg.
+
+      ```
+      https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.<format>?code=<coupon_code>
+      ```
+
+      Or:
+
+      ```
+      https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&product_family_id=<id>
+      ```
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: product_family_id
+      description: The Chargify id of the product family to which the coupon belongs
+    - schema:
+        type: string
+      in: query
+      name: code
+      required: true
+      description: The code of the coupon
+"/coupons/{coupon_id}/codes.json":
+  parameters:
+  - schema:
+      type: integer
+    name: coupon_id
+    in: path
+    required: true
+    description: The Chargify id of the coupon
+  post:
+    summary: Create Coupon Subcodes
+    tags:
+    - Coupons
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created_codes:
+                  type: array
+                  items:
+                    type: string
+                duplicate_codes:
+                  type: array
+                  items:
+                    type: string
+                invalid_codes:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  created_codes:
+                  - BALTIMOREFALL
+                  - ORLANDOFALL
+                  - DETROITFALL
+                  duplicate_codes: []
+                  invalid_codes: []
+    operationId: createCouponSubcodes
+    description: |-
+      ## Coupon Subcodes Intro
+
+      Coupon Subcodes allow you to create a set of unique codes that allow you to expand the use of one coupon.
+
+      For example:
+
+      Master Coupon Code:
+
+      + SPRING2020
+
+      Coupon Subcodes:
+
+      + SPRING90210
+      + DP80302
+      + SPRINGBALTIMORE
+
+      Coupon subcodes can be administered in the Admin Interface or via the API.
+
+      When creating a coupon subcode, you must specify a coupon to attach it to using the coupon_id. Valid coupon subcodes are all capital letters, contain only letters and numbers, and do not have any spaces. Lowercase letters will be capitalized before the subcode is created.
+
+      ## Coupon Subcodes Documentation
+
+      Full documentation on how to create coupon subcodes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#coupon-codes).
+
+      Additionally, for documentation on how to apply a coupon to a Subscription within the Chargify UI, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#coupon).
+
+      ## Create Coupon Subcode
+
+      This request allows you to create specific subcodes underneath an existing coupon code.
+
+      *Note*: If you are using any of the allowed special characters ("%", "@", "+", "-", "_", and "."), you must encode them for use in the URL.
+
+          % to %25
+          @ to %40
+          + to %2B
+          - to %2D
+          _ to %5F
+          . to %2E
+
+      So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode would be: `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              codes:
+                type: array
+                items:
+                  type: string
+          examples:
+            Example:
+              value:
+                codes:
+                - BALTIMOREFALL
+                - ORLANDOFALL
+                - DETROITFALL
+  get:
+    summary: List Coupon Subcodes
+    tags:
+    - Coupons
+    operationId: listCouponSubcodes
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                codes:
+                  type: array
+                  items:
+                    type: string
+            examples:
+              Example:
+                value:
+                  codes:
+                  - 3JU6PR
+                  - 9RO6MP
+                  - 8OG1VV
+                  - 5FL7VV
+                  - 2SV8XK
+                  - 4LW8LH
+                  - 3VL4GZ
+                  - 9UI9XO
+                  - 0LZ0CC
+                  - 8XI9JV
+                  - 9UV5YE
+                  - 3UI4GX
+                  - 6SL5ST
+                  - 9WC8IJ
+                  - 2KA3PZ
+                  - 7WR1VR
+                  - 3VY7MN
+                  - 6KC3KB
+                  - 7DF7YT
+                  - 9FH1ED
+    description: This request allows you to request the subcodes that are attached
+      to a coupon.
+    parameters:
+    - schema:
+        type: integer
+      in: query
+      name: page
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+    - schema:
+        type: integer
+        default: 20
+        maximum: 200
+      in: query
+      name: per_page
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 20. The maximum allowed values is 200; any per_page value
+        over 200 will be changed to 200.
+  put:
+    summary: Update Coupon Subcodes
+    tags:
+    - Coupons
+    operationId: updateCouponSubcodes
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created_codes:
+                  type: array
+                  items:
+                    type: string
+                duplicate_codes:
+                  type: array
+                  items:
+                    type: string
+                invalid_codes:
+                  type: array
+                  items:
+                    type: string
+    description: |-
+      You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
+      Send an array of new coupon subcodes.
+
+      **Note**: All current subcodes for that Coupon will be deleted first, and replaced with the list of subcodes sent to this endpoint.
+      The response will contain:
+
+      + The created subcodes,
+
+      + Subcodes that were not created because they already exist,
+
+      + Any subcodes not created because they are invalid.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              codes:
+                type: array
+                items:
+                  type: string
+          examples:
+            Example:
+              value:
+                codes:
+                - AAAA
+                - BBBB
+                - CCCC
+"/coupons/{coupon_id}/codes/{subcode}.json":
+  parameters:
+  - schema:
+      type: integer
+    name: coupon_id
+    in: path
+    required: true
+    description: The Chargify id of the coupon to which the subcode belongs
+  - schema:
+      type: string
+    name: subcode
+    in: path
+    required: true
+  delete:
+    summary: Delete Coupon Subcode
+    tags:
+    - Coupons
+    responses:
+      '200':
+        description: OK
+      '404':
+        description: Not Found
+    operationId: deleteCouponSubcode
+    description: |-
+      ## Example
+
+      Given a coupon with an ID of 567, and a coupon subcode of 20OFF, the URL to `DELETE` this coupon subcode would be:
+
+      ```
+      http://subdomain.chargify.com/coupons/567/codes/20OFF.<format>
+      ```
+
+      Note: If you are using any of the allowed special characters (“%”, “@”, “+”, “-”, “_”, and “.”), you must encode them for use in the URL.
+
+      | Special character | Encoding |
+      |-------------------|----------|
+      | %                 | %25      |
+      | @                 | %40      |
+      | +                 | %2B      |
+      | –                 | %2D      |
+      | _                 | %5F      |
+      | .                 | %2E      |
+
+      ## Percent Encoding Example
+
+      Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>

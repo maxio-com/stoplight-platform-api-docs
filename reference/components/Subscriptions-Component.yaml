@@ -1,0 +1,113 @@
+---
+title: Subscriptions Component
+type: object
+examples:
+- id: 0
+  name: string
+  kind: string
+  unit_name: string
+  enabled: true
+  currency: string
+  description: string
+  allocated_quantity: 0
+  component_id: 0
+  component_handle:
+  allow_fractional_quantities: false
+  subscription_id: 0
+  recurring: true
+  archived_at:
+  price_point_id: 0
+  price_point_handle: string
+  price_point_type: string
+  price_point_name: string
+  use_site_exchange_rate: true
+  product_family_id: 0
+  product_family_handle: string
+  created_at: string
+  updated_at: string
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  kind:
+    type: string
+  unit_name:
+    type: string
+  enabled:
+    type: boolean
+    description: "(for on/off components) indicates if the component is enabled for
+      the subscription"
+  unit_balance:
+    type: integer
+  currency:
+    type: string
+  allocated_quantity:
+    type: integer
+    description: 'For Quantity-based components: The current allocation for the component
+      on the given subscription. For On/Off components: Use 1 for on. Use 0 for off.'
+  pricing_scheme:
+    type:
+    - string
+    - 'null'
+  component_id:
+    type: integer
+  component_handle:
+    type:
+    - string
+    - 'null'
+  subscription_id:
+    type: integer
+  recurring:
+    type: boolean
+  archived_at:
+    type:
+    - 'null'
+    - string
+  price_point_id:
+    type:
+    - integer
+    - 'null'
+  price_point_handle:
+    type:
+    - string
+    - 'null'
+  price_point_type:
+    type:
+    - string
+    - 'null'
+    enum:
+    - default
+    - catalog
+    - custom
+  price_point_name:
+    type:
+    - string
+    - 'null'
+  product_family_id:
+    type: integer
+  product_family_handle:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  use_site_exchange_rate:
+    type:
+    - boolean
+    - 'null'
+  description:
+    type:
+    - string
+    - 'null'
+  allow_fractional_quantities:
+    type: boolean
+  subscription:
+    type: object
+    description: An optional object, will be returned if provided `include=subscription`
+      query param.
+    properties:
+      state:
+        type: string
+      updated_at:
+        type: string

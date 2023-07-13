@@ -1,0 +1,59 @@
+---
+title: Product Price Point
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  handle:
+    type: string
+  price_in_cents:
+    type: integer
+  interval:
+    type: integer
+  interval_unit:
+    type: string
+  trial_price_in_cents:
+    type: integer
+  trial_interval:
+    type: integer
+  trial_interval_unit:
+    type: string
+  trial_type:
+    type: string
+  introductory_offer:
+    type: boolean
+    description: reserved for future use
+  initial_charge_in_cents:
+    type: integer
+  initial_charge_after_trial:
+    type: boolean
+  expiration_interval:
+    type: integer
+  expiration_interval_unit:
+    type: string
+  product_id:
+    type: integer
+  archived_at:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  use_site_exchange_rate:
+    type: boolean
+    description: Whether or not to use the site's exchange rate or define your own
+      pricing when your site has multiple currencies defined.
+  type:
+    type: string
+    description: "We expose the following types:\n1. **default**: a price point that
+      is marked as a default price for a certain product. \n2. **custom**: a custom
+      price point.\n3. **catalog**: a price point that is **not** marked as a default
+      price for a certain product and is **not** a custom one."
+  tax_included:
+    type: boolean
+  subscription_id:
+    type:
+    - 'null'
+    - integer

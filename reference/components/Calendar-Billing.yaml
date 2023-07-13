@@ -1,0 +1,14 @@
+---
+title: Calendar Billing
+type:
+- object
+description: "(Optional). Cannot be used when also specifying next_billing_at"
+properties:
+  snap_day:
+    type:
+    - integer
+    - string
+    description: 1 - 28 or 'end'
+  calendar_billing_first_charge:
+    type:
+    - string

@@ -1,0 +1,33 @@
+---
+title: Usage
+type: object
+examples:
+- id: 0
+  memo: string
+  created_at: string
+  price_point_id: 0
+  quantity: 0
+  component_id: 0
+  component_handle: string
+  subscription_id: 0
+properties:
+  id:
+    type: integer
+  memo:
+    type: string
+  created_at:
+    type: string
+  price_point_id:
+    type: integer
+  quantity:
+    type:
+    - integer
+    - string
+  overage_quantity:
+    type: integer
+  component_id:
+    type: integer
+  component_handle:
+    type: string
+  subscription_id:
+    type: integer

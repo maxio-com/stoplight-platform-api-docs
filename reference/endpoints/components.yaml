@@ -1,0 +1,1480 @@
+---
+"/components/lookup.json":
+  get:
+    summary: Find Component
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Component"
+            examples:
+              Example:
+                value:
+                  component:
+                    id: 399853
+                    name: Annual Support Services
+                    pricing_scheme:
+                    unit_name: on/off
+                    unit_price: '100.0'
+                    product_family_id: 997233
+                    price_per_unit_in_cents:
+                    kind: on_off_component
+                    archived: false
+                    taxable: true
+                    description: Prepay for support services
+                    default_price_point_id: 121003
+                    price_point_count: 4
+                    price_points_url: https://general-goods.chargify.com/components/399853/price_points
+                    tax_code: D0000000
+                    recurring: true
+                    upgrade_charge:
+                    downgrade_credit:
+                    created_at: '2019-08-02T05:54:53-04:00'
+                    default_price_point_name: Original
+                    product_family_name: Chargify
+    operationId: readComponentByHandle
+    parameters:
+    - schema:
+        type: string
+      in: query
+      required: true
+      name: handle
+      description: The handle of the component to find
+    description: This request will return information regarding a component having
+      the handle you provide. You can identify your components with a handle so you
+      don't have to save or reference the IDs we generate.
+"/components/{component_id}/price_points/{price_point_id}/default.json":
+  parameters:
+  - schema:
+      type: integer
+    name: component_id
+    in: path
+    required: true
+    description: The Chargify id of the component to which the price point belongs
+  - schema:
+      type: integer
+    name: price_point_id
+    in: path
+    required: true
+    description: The Chargify id of the price point
+  put:
+    summary: Promote Price Point to Default
+    tags:
+    - Components
+    responses:
+      '201':
+        description: Created
+    operationId: updateDefaultPricePointForComponent
+    description: |-
+      Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
+
+      See [Price Points Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-points) for more information on price points and moving subscriptions between price points.
+
+      Note: Custom price points are not able to be set as the default for a component.
+"/components/{component_id}/price_points.json":
+  parameters:
+  - schema:
+      type: integer
+    name: component_id
+    in: path
+    required: true
+    description: The Chargify id of the component
+  post:
+    summary: Create Component Price Point
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Component-Price-Point"
+            examples: {}
+    operationId: createComponentPricePoint
+    description: This endpoint can be used to create a new price point for an existing
+      component.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            anyOf:
+            - properties:
+                price_point:
+                  "$ref": "#/components/schemas/Create-Component-Price-Point"
+            - properties:
+                price_point:
+                  "$ref": "#/components/schemas/Create-Prepaid-Usage-Component-Price-Point"
+            type: object
+          examples:
+            Example:
+              value:
+                price_point:
+                  name: Wholesale
+                  handle: wholesale-handle
+                  pricing_scheme: stairstep
+                  prices:
+                  - starting_quantity: '1'
+                    ending_quantity: '100'
+                    unit_price: '5.00'
+                  - starting_quantity: '101'
+                    ending_quantity:
+                    unit_price: '4.00'
+            Prepaid Usage Component:
+              value:
+                price_point:
+                  name: MSRP
+                  handle: msrp
+                  pricing_scheme: stairstep
+                  renew_prepaid_allocation: false
+                  rollover_prepaid_remainder: true
+                  expiration_interval: 2
+                  expiration_interval_unit: month
+                  prices:
+                  - starting_quantity: 1
+                    ending_quantity: 100
+                    unit_price: 5
+                  - starting_quantity: 101
+                    ending_quantity:
+                    unit_price: 4
+                  overage_pricing:
+                    pricing_scheme: stairstep
+                    prices:
+                    - starting_quantity: 1
+                      ending_quantity: 100
+                      unit_price: 4
+            On Off Component:
+              value:
+                price_point:
+                  name: Special Pricing
+                  handle: special
+                  prices:
+                  - starting_quantity: 1
+                    unit_price: 5
+  get:
+    summary: List Price Points
+    tags:
+    - Components
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_points:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/Component-Price-Point"
+            examples:
+              Example:
+                value:
+                  price_points:
+                  - id: 80
+                    default: false
+                    name: Wholesale Two
+                    pricing_scheme: per_unit
+                    component_id: 74
+                    handle: wholesale-two
+                    archived_at:
+                    created_at: '2017-07-05T13:55:40-04:00'
+                    updated_at: '2017-07-05T13:55:40-04:00'
+                    prices:
+                    - id: 121
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity:
+                      unit_price: '5.0'
+                  - id: 81
+                    default: false
+                    name: MSRP
+                    pricing_scheme: per_unit
+                    component_id: 74
+                    handle: msrp
+                    archived_at:
+                    created_at: '2017-07-05T13:55:40-04:00'
+                    updated_at: '2017-07-05T13:55:40-04:00'
+                    prices:
+                    - id: 122
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity:
+                      unit_price: '4.0'
+    operationId: listComponentPricePoints
+    description: |-
+      Use this endpoint to read current price points that are associated with a component.
+
+      You may specify the component by using either the numeric id or the `handle:gold` syntax.
+
+      When fetching a component's price points, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+
+      If the price point is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+    parameters:
+    - schema:
+        type: boolean
+      in: query
+      name: currency_prices
+      description: Include an array of currency price data
+    - schema:
+        type: integer
+      in: query
+      name: page
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+    - schema:
+        type: integer
+        default: 20
+        maximum: 200
+      in: query
+      name: per_page
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 20. The maximum allowed values is 200; any per_page value
+        over 200 will be changed to 200.
+    - in: query
+      name: filter
+      style: deepObject
+      schema:
+        type: object
+        example: "?filter[type]=catalog"
+      description: |-
+        #### Default type filter: `?filter[type]=catalog,default`
+        #### Type filter options: `catalog`, `default`, `custom`
+"/components/{component_id}/price_points/bulk.json":
+  parameters:
+  - schema:
+      type: string
+    name: component_id
+    in: path
+    required: true
+  post:
+    summary: Bulk Create Component Price Points
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_points:
+                  type: array
+                  items:
+                    "$ref": "#/components/schemas/Component-Price-Point"
+            examples:
+              Example:
+                value:
+                  price_points:
+                  - id: 80
+                    default: false
+                    name: Wholesale Two
+                    pricing_scheme: per_unit
+                    component_id: 74
+                    handle: wholesale-two
+                    archived_at:
+                    created_at: '2017-07-05T13:55:40-04:00'
+                    updated_at: '2017-07-05T13:55:40-04:00'
+                    prices:
+                    - id: 121
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity:
+                      unit_price: '5.0'
+                  - id: 81
+                    default: false
+                    name: MSRP
+                    pricing_scheme: per_unit
+                    component_id: 74
+                    handle: msrp
+                    archived_at:
+                    created_at: '2017-07-05T13:55:40-04:00'
+                    updated_at: '2017-07-05T13:55:40-04:00'
+                    prices:
+                    - id: 122
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity:
+                      unit_price: '4.0'
+    operationId: createComponentPricePoints
+    description: Use this endpoint to create multiple component price points in one
+      request.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              price_points:
+                type: array
+                items:
+                  anyOf:
+                  - "$ref": "#/components/schemas/Create-Component-Price-Point"
+                  - "$ref": "#/components/schemas/Create-Prepaid-Usage-Component-Price-Point"
+          examples:
+            Example:
+              value:
+                price_points:
+                - name: Wholesale
+                  handle: wholesale
+                  pricing_scheme: per_unit
+                  prices:
+                  - starting_quantity: 1
+                    unit_price: 5
+                - name: MSRP
+                  handle: msrp
+                  pricing_scheme: per_unit
+                  prices:
+                  - starting_quantity: 1
+                    unit_price: 4
+                - name: Special Pricing
+                  handle: special
+                  prices:
+                  - starting_quantity: 1
+                    unit_price: 5
+"/components/{component_id}/price_points/{price_point_id}.json":
+  parameters:
+  - schema:
+      type: integer
+    name: component_id
+    in: path
+    required: true
+    description: The Chargify id of the component to which the price point belongs
+  - schema:
+      type: integer
+    name: price_point_id
+    in: path
+    required: true
+    description: The Chargify id of the price point
+  put:
+    summary: Update Price Point
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_point:
+                  "$ref": "#/components/schemas/Component-Price-Point"
+    operationId: updateComponentPricePoint
+    description: |-
+      When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
+
+      Passing in a price bracket without an `id` will attempt to create a new price.
+
+      Including an `id` will update the corresponding price, and including the `_destroy` flag set to true along with the `id` will remove that price.
+
+      Note: Custom price points cannot be updated directly. They must be edited through the Subscription.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              price_point:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  prices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        ending_quantity:
+                          type: integer
+                        unit_price:
+                          type: integer
+                        _destroy:
+                          type: string
+                        starting_quantity:
+                          type: integer
+          examples:
+            Example:
+              value:
+                price_point:
+                  name: Default
+                  prices:
+                  - id: 1
+                    ending_quantity: 100
+                    unit_price: 5
+                  - id: 2
+                    _destroy: 'true'
+                  - starting_quantity: 101
+                    unit_price: 4
+  delete:
+    summary: Archive Price Point
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_point:
+                  "$ref": "#/components/schemas/Component-Price-Point"
+            examples:
+              Example:
+                value:
+                  price_point:
+                    id: 79
+                    default: false
+                    name: Wholesale
+                    pricing_scheme: stairstep
+                    component_id: 74
+                    handle: wholesale-handle
+                    archived_at: '2017-07-06T15:04:00-04:00'
+                    created_at: '2017-07-05T13:44:30-04:00'
+                    updated_at: '2017-07-05T13:44:30-04:00'
+                    prices:
+                    - id: 119
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity: 100
+                      unit_price: '5.0'
+                    - id: 120
+                      component_id: 74
+                      starting_quantity: 101
+                      ending_quantity:
+                      unit_price: '4.0'
+    operationId: archiveComponentPricePoint
+    description: A price point can be archived at any time. Subscriptions using a
+      price point that has been archived will continue using it until they're moved
+      to another price point.
+"/components/{component_id}/price_points/{price_point_id}/unarchive.json":
+  parameters:
+  - schema:
+      type: integer
+    name: component_id
+    in: path
+    required: true
+    description: The Chargify id of the component to which the price point belongs
+  - schema:
+      type: integer
+    name: price_point_id
+    in: path
+    required: true
+    description: The Chargify id of the price point
+  put:
+    summary: Unarchive Price Point
+    tags:
+    - Components
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                price_point:
+                  "$ref": "#/components/schemas/Component-Price-Point"
+            examples:
+              Example:
+                value:
+                  price_point:
+                    id: 79
+                    default: false
+                    name: Wholesale
+                    pricing_scheme: stairstep
+                    component_id: 74
+                    handle: wholesale-handle
+                    archived_at:
+                    created_at: '2017-07-05T13:44:30-04:00'
+                    updated_at: '2017-07-05T13:44:30-04:00'
+                    prices:
+                    - id: 119
+                      component_id: 74
+                      starting_quantity: 1
+                      ending_quantity: 100
+                      unit_price: '5.0'
+                    - id: 120
+                      component_id: 74
+                      starting_quantity: 101
+                      ending_quantity:
+                      unit_price: '4.0'
+    operationId: unarchiveComponentPricePoint
+    description: Use this endpoint to unarchive a component price point.
+"/components/{component_id}/price_points/{price_point_id}/segments.json/":
+  post:
+    summary: Create Single Segment
+    tags:
+    - 'Events-Based Billing: Segments'
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                segment:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    component_id:
+                      type: integer
+                    price_point_id:
+                      type: integer
+                    event_based_billing_metric_id:
+                      type: integer
+                    pricing_scheme:
+                      type: string
+                    segment_property_1_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_2_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_3_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_4_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                    prices:
+                      type: array
+                      uniqueItems: false
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          component_id:
+                            type: integer
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type:
+                            - integer
+                            - 'null'
+                          unit_price:
+                            type: string
+                          price_point_id:
+                            type: integer
+                          formatted_unit_price:
+                            type: string
+                          segment_id:
+                            type: integer
+            examples: {}
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  properties:
+                    base:
+                      type: array
+                      items:
+                        type: string
+                    pricing_scheme:
+                      type: array
+                      items:
+                        type: string
+                    prices:
+                      type: array
+                      items:
+                        type: string
+                    property_values_fingerprint:
+                      type: array
+                      items:
+                        type: string
+    operationId: createSegment
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              segment:
+                type: object
+                properties:
+                  segment_property_1_value:
+                    type:
+                    - string
+                    - number
+                    - integer
+                    - boolean
+                    description: A value that will occur in your events that you want
+                      to bill upon. The type of the value depends on the property
+                      type in the related event based billing metric.
+                  segment_property_2_value:
+                    type:
+                    - string
+                    - number
+                    - integer
+                    - boolean
+                    description: A value that will occur in your events that you want
+                      to bill upon. The type of the value depends on the property
+                      type in the related event based billing metric.
+                  segment_property_3_value:
+                    type:
+                    - string
+                    - number
+                    - integer
+                    - boolean
+                    description: A value that will occur in your events that you want
+                      to bill upon. The type of the value depends on the property
+                      type in the related event based billing metric.
+                  segment_property_4_value:
+                    type:
+                    - string
+                    - number
+                    - integer
+                    - boolean
+                    description: A value that will occur in your events that you want
+                      to bill upon. The type of the value depends on the property
+                      type in the related event based billing metric.
+                  pricing_scheme:
+                    type: string
+                    description: 'The handle for the pricing scheme. Available options:
+                      per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
+                      for an overview of pricing schemes.'
+                  prices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        starting_quantity:
+                          type: integer
+                        ending_quantity:
+                          type: integer
+                        unit_price:
+                          type:
+                          - string
+                          - number
+                          description: The price can contain up to 8 decimal places.
+                            i.e. 1.00 or 0.0012 or 0.00000065
+                      required:
+                      - unit_price
+                required:
+                - pricing_scheme
+          examples:
+            Create a Single Segment (related Metric has 2 segmented properties):
+              value:
+                segment:
+                  segment_property_1_value: France
+                  segment_property_2_value: Spain
+                  pricing_scheme: volume
+                  prices:
+                  - starting_quantity: 1
+                    ending_quantity: 10000
+                    unit_price: '0.19'
+                  - starting_quantity: 10001
+                    ending_quantity:
+                    unit_price: '0.09'
+    description: |-
+      This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+  parameters:
+  - schema:
+      type: string
+    name: component_id
+    in: path
+    required: true
+    description: ID or Handle for the Component
+  - schema:
+      type: string
+    name: price_point_id
+    in: path
+    required: true
+    description: ID or Handle for the Price Point belonging to the Component
+  get:
+    summary: List Segments for a Price Point
+    operationId: listSegmentsForPricePoint
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                segments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_2_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_3_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_4_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                              - integer
+                              - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+            examples: {}
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  properties:
+                    per_page:
+                      type: array
+                      items:
+                        type: string
+                    price_point:
+                      type: array
+                      items:
+                        type: string
+    description: |-
+      This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
+
+      You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+    parameters:
+    - schema:
+        type: integer
+        minimum: 1
+      in: query
+      name: page
+      description: Result records are organized in pages. By default, the first page
+        of results is displayed. The page parameter specifies a page number of results
+        to fetch. You can start navigating through the pages to consume the results.
+        You do this by passing in a page parameter. Retrieve the next page by adding
+        ?page=2 to the query string. If there are no results to return, then an empty
+        result set will be returned.
+    - schema:
+        type: integer
+        maximum: 200
+        minimum: 1
+        default: 30
+      in: query
+      name: per_page
+      description: This parameter indicates how many records to fetch in each request.
+        Default value is 30. The maximum allowed value is 200.
+    - schema:
+        type: string
+        example: "?filter[segment_property_1_value]=EU"
+      in: query
+      name: filter[segment_property_1_value]
+      description: The value passed here would be used to filter segments. Pass a
+        value related to `segment_property_1` on attached Metric. If empty string
+        is passed, this filter would be rejected.
+    - schema:
+        type: string
+      in: query
+      name: filter[segment_property_2_value]
+      description: The value passed here would be used to filter segments. Pass a
+        value related to `segment_property_2` on attached Metric. If empty string
+        is passed, this filter would be rejected.
+    - schema:
+        type: string
+      in: query
+      name: filter[segment_property_3_value]
+      description: The value passed here would be used to filter segments. Pass a
+        value related to `segment_property_3` on attached Metric. If empty string
+        is passed, this filter would be rejected.
+    - schema:
+        type: string
+      in: query
+      name: filter[segment_property_4_value]
+      description: The value passed here would be used to filter segments. Pass a
+        value related to `segment_property_4` on attached Metric. If empty string
+        is passed, this filter would be rejected.
+    tags:
+    - 'Events-Based Billing: Segments'
+"/components/{component_id}/price_points/{price_point_id}/segments/{id}.json":
+  parameters:
+  - schema:
+      type: string
+    name: component_id
+    in: path
+    required: true
+    description: ID or Handle of the Component
+  - schema:
+      type: string
+    name: price_point_id
+    in: path
+    required: true
+    description: ID or Handle of the Price Point belonging to the Component
+  - schema:
+      type: number
+    name: id
+    in: path
+    required: true
+    description: The ID of the Segment
+  put:
+    summary: Update Single Segment
+    tags:
+    - 'Events-Based Billing: Segments'
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                segment:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    component_id:
+                      type: integer
+                    price_point_id:
+                      type: integer
+                    event_based_billing_metric_id:
+                      type: integer
+                    pricing_scheme:
+                      type: string
+                    segment_property_1_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_2_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_3_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    segment_property_4_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                    prices:
+                      type: array
+                      uniqueItems: false
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          component_id:
+                            type: integer
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type:
+                            - integer
+                            - 'null'
+                          unit_price:
+                            type: string
+                          price_point_id:
+                            type: integer
+                          formatted_unit_price:
+                            type: string
+                          segment_id:
+                            type: integer
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  properties:
+                    pricing_scheme:
+                      type: array
+                      items:
+                        type: string
+                    prices:
+                      type: array
+                      items:
+                        type: string
+    operationId: updateSegment
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              segment:
+                type: object
+                properties:
+                  pricing_scheme:
+                    type: string
+                    description: 'The handle for the pricing scheme. Available options:
+                      per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
+                      for an overview of pricing schemes.'
+                  prices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        starting_quantity:
+                          type: integer
+                        ending_quantity:
+                          type: integer
+                        unit_price:
+                          type:
+                          - string
+                          - number
+                          description: The price can contain up to 8 decimal places.
+                            i.e. 1.00 or 0.0012 or 0.00000065
+                      required:
+                      - unit_price
+                required:
+                - pricing_scheme
+    description: |-
+      This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+  delete:
+    summary: Delete Single Segment
+    operationId: deleteSegment
+    responses:
+      '204':
+        description: No Content
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+    description: |-
+      This endpoint allows you to delete a Segment with specified ID.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+    tags:
+    - 'Events-Based Billing: Segments'
+"/components/{component_id}/price_points/{price_point_id}/segments/bulk.json":
+  parameters:
+  - schema:
+      type: string
+    name: component_id
+    in: path
+    required: true
+    description: ID or Handle for the Component
+  - schema:
+      type: string
+    name: price_point_id
+    in: path
+    required: true
+    description: ID or Handle for the Price Point belonging to the Component
+  post:
+    summary: Bulk Create Segments
+    tags:
+    - 'Events-Based Billing: Segments'
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_2_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_3_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_4_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                              - integer
+                              - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  required:
+                  - segments
+                  properties:
+                    segments:
+                      type: object
+                      properties:
+                        "'x'":
+                          type: object
+                          description: |-
+                            An attribute 'x' would be changed for a number (an index in request array) where the error occured.
+
+                            In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                          properties:
+                            base:
+                              type: array
+                              items:
+                                type: string
+                            pricing_scheme:
+                              type: array
+                              items:
+                                type: string
+                            prices:
+                              type: array
+                              items:
+                                type: string
+                            property_values_fingerprint:
+                              type: array
+                              items:
+                                type: string
+              required:
+              - errors
+            examples:
+              Error response when Pricing Scheme is missing:
+                value:
+                  errors:
+                    segments:
+                      '1':
+                        pricing_scheme:
+                        - 'Pricing scheme: cannot be blank'
+    operationId: createSegments
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              segments:
+                type: array
+                maxItems: 2000
+                items:
+                  type: object
+                  properties:
+                    segment_property_1_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                      description: A value that will occur in your events that you
+                        want to bill upon. The type of the value depends on the property
+                        type in the related event based billing metric.
+                    segment_property_2_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                      description: A value that will occur in your events that you
+                        want to bill upon. The type of the value depends on the property
+                        type in the related event based billing metric.
+                    segment_property_3_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                      description: A value that will occur in your events that you
+                        want to bill upon. The type of the value depends on the property
+                        type in the related event based billing metric.
+                    segment_property_4_value:
+                      type:
+                      - string
+                      - number
+                      - integer
+                      - boolean
+                      description: A value that will occur in your events that you
+                        want to bill upon. The type of the value depends on the property
+                        type in the related event based billing metric.
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options:
+                        per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
+                        for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                            - string
+                            - number
+                            description: The price can contain up to 8 decimal places.
+                              i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                        - unit_price
+                  required:
+                  - pricing_scheme
+                  - prices
+          examples: {}
+    description: |-
+      This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
+
+      If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
+  put:
+    summary: Bulk Update Segments
+    tags:
+    - 'Events-Based Billing: Segments'
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                segments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      component_id:
+                        type: integer
+                      price_point_id:
+                        type: integer
+                      event_based_billing_metric_id:
+                        type: integer
+                      pricing_scheme:
+                        type: string
+                      segment_property_1_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_2_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_3_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      segment_property_4_value:
+                        type:
+                        - string
+                        - number
+                        - integer
+                        - boolean
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      prices:
+                        type: array
+                        uniqueItems: false
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            component_id:
+                              type: integer
+                            starting_quantity:
+                              type: integer
+                            ending_quantity:
+                              type:
+                              - integer
+                              - 'null'
+                            unit_price:
+                              type: string
+                            price_point_id:
+                              type: integer
+                            formatted_unit_price:
+                              type: string
+                            segment_id:
+                              type: integer
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not Found
+      '422':
+        description: Unprocessable Entity (WebDAV)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errors:
+                  type: object
+                  required:
+                  - segments
+                  properties:
+                    segments:
+                      type: object
+                      properties:
+                        "'x'":
+                          type: object
+                          description: |-
+                            An attribute 'x' would be changed for a number (an index in request array) where the error occured.
+
+                            In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
+                          properties:
+                            base:
+                              type: array
+                              items:
+                                type: string
+                            pricing_scheme:
+                              type: array
+                              items:
+                                type: string
+                            prices:
+                              type: array
+                              items:
+                                type: string
+              required:
+              - errors
+            examples:
+              Error response when Pricing Scheme is missing:
+                value:
+                  errors:
+                    segments:
+                      '1':
+                        pricing_scheme:
+                        - 'Pricing scheme: cannot be blank'
+    operationId: updateSegments
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              segments:
+                type: array
+                maxItems: 1000
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: The ID of the segment you want to update.
+                    pricing_scheme:
+                      type: string
+                      description: 'The handle for the pricing scheme. Available options:
+                        per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules)
+                        for an overview of pricing schemes.'
+                    prices:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          starting_quantity:
+                            type: integer
+                          ending_quantity:
+                            type: integer
+                          unit_price:
+                            type:
+                            - string
+                            - number
+                            description: The price can contain up to 8 decimal places.
+                              i.e. 1.00 or 0.0012 or 0.00000065
+                        required:
+                        - unit_price
+                  required:
+                  - id
+                  - pricing_scheme
+                  - prices
+    description: |-
+      This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `1000` records.
+
+      If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
+
+      You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
