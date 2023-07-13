@@ -8,7 +8,7 @@ If you are a Chargify developer and need to make changes to the API documentatio
 
 Please setup pre-commit hook to resolve refs from `Chargify-API.v1.dev.yaml`, it will generate `Chargify-API.v1.yaml`. Here's how you can do this:
 ```
-ln -s -f git_hooks/* .git/hooks/
+cp git_hooks/pre-commit .git/hooks/pre-commit  
 ```
 
 ## SDK generation
