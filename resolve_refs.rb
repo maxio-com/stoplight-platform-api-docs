@@ -25,3 +25,5 @@ end
 
 # Save the resolved OpenAPI document
 File.open('reference/Chargify-API.v1.yaml', 'w') { |file| file.write(Psych.dump(openapi_doc)) }
+
+puts "Chargify-API.v1.dev.yaml refs were resolved into Chargify-API.v1.yaml"
