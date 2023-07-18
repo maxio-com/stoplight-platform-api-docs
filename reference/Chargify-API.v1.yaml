@@ -5513,6 +5513,7 @@ paths:
                   price_point:
                     name: Special Pricing
                     handle: special
+                    pricing_scheme: per_unit
                     prices:
                       - starting_quantity: 1
                         unit_price: 5
@@ -5682,6 +5683,7 @@ paths:
                           unit_price: 4
                     - name: Special Pricing
                       handle: special
+                      pricing_scheme: per_unit
                       prices:
                         - starting_quantity: 1
                           unit_price: 5
@@ -6158,8 +6160,6 @@ paths:
                       description: This is our gold plan.
                       accounting_code: '123'
                       request_credit_card: true
-                      expiration_interval: null
-                      expiration_interval_unit: null
                       created_at: '2016-11-04T16:31:15-04:00'
                       updated_at: '2016-11-04T16:31:15-04:00'
                       price_in_cents: 1000
@@ -6366,7 +6366,7 @@ paths:
           description: Include archived products
         - schema:
             type: string
-            example: include=prepaid_product_price_point
+            example: prepaid_product_price_point
             enum:
               - prepaid_product_price_point
           in: query
@@ -6377,13 +6377,13 @@ paths:
             enum:
               - 'null'
               - not_null
-            example: 'include=prepaid_product_price_point&filter[prepaid_product_price_point][product_price_point_id]=not_null'
+            example: not_null
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
           description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
           description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
@@ -6476,8 +6476,6 @@ paths:
                       description: This is our platinum plan.
                       accounting_code: '123'
                       request_credit_card: true
-                      expiration_interval: null
-                      expiration_interval_unit: null
                       created_at: '2016-11-04T16:34:29-04:00'
                       updated_at: '2016-11-04T16:37:11-04:00'
                       price_in_cents: 1000
@@ -6954,7 +6952,8 @@ paths:
           style: deepObject
           schema:
             type: object
-            example: '?filter[type]=catalog'
+            example: 
+              type: catalog
           description: |-
             #### Default type filter: `?filter[type]=catalog,default`
             #### Type filter options: `catalog`, `default`, `custom`
@@ -9152,7 +9151,7 @@ paths:
               - updated_at
               - paid_date
             default: due_date
-            example: date_field=issue_date
+            example: issue_date
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
@@ -13646,7 +13645,7 @@ paths:
           in: query
           schema:
             type: string
-            format: date
+            format: date-time
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
           example: '2022-07-01 09:00:05'
         - name: end_datetime
@@ -17236,15 +17235,16 @@ paths:
                 example-success-response:
                   value:
                     prepayments:
-                      - id: 17
-                        subscription_id: 3558750
-                        amount_in_cents: 2000
-                        remaining_amount_in_cents: 1100
-                        external: true
-                        memo: test
-                        details: test details
-                        payment_type: cash
-                        created_at: '2022-01-18T22:45:41+11:00'
+                      - prepayment:
+                          id: 17
+                          subscription_id: 3558750
+                          amount_in_cents: 2000
+                          remaining_amount_in_cents: 1100
+                          external: true
+                          memo: test
+                          details: test details
+                          payment_type: cash
+                          created_at: '2022-01-18T22:45:41+11:00'
         '401':
           description: Unauthorized
         '403':
@@ -17260,7 +17260,7 @@ paths:
             enum:
               - created_at
               - application_at
-            example: 'filter[date_field]=created_at'
+            example: created_at
           in: query
           name: 'filter[date_field]'
           description: The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice
@@ -17967,7 +17967,7 @@ paths:
                       subscription_ids:
                         type: array
                         items:
-                          type: Event
+                          type: integer
                       created_at:
                         type: string
               examples:
@@ -18291,17 +18291,17 @@ paths:
               examples:
                 Example:
                   value:
-                    subscription_group: null
-                    customer_id: 1
-                    payment_profile:
-                      id: 1
-                      first_name: t
-                      last_name: t
-                      masked_card_number: XXXX-XXXX-XXXX-1
-                    payment_collection_method: automatic
-                    subscription_ids:
-                      - 1
-                    created_at: '2021-01-21T05:47:38-05:00'
+                    subscription_group:
+                      customer_id: 1
+                      payment_profile:
+                        id: 1
+                        first_name: t
+                        last_name: t
+                        masked_card_number: XXXX-XXXX-XXXX-1
+                      payment_collection_method: automatic
+                      subscription_ids:
+                        - 1
+                      created_at: '2021-01-21T05:47:38-05:00'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -20803,7 +20803,12 @@ paths:
           description: Allows fetching components allocation only if price point id is present.
         - schema:
             type: array
-            example: 'product_family_ids=1,2,3'
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
@@ -21972,7 +21977,8 @@ paths:
               examples:
                 example-1:
                   value:
-                    - subscriptions_mrr:
+                    subscriptions_mrr:
+                     - subscriptions_mrr:
                         - subscription_id: 0
                           mrr_amount_in_cents: 0
                           breakouts:
@@ -22007,7 +22013,7 @@ paths:
                 example-1:
                   value:
                     errors:
-                      at_time:
+                      attribute:
                         - 'supplied value is invalid, expected ISO 8601 format'
       operationId: listMrrPerSubscription
       deprecated: true
@@ -22386,25 +22392,23 @@ paths:
                 example:
                   value:
                     price_points:
-                      - id: 1
-                        default: true
-                        name: Auto-created
-                        type: default
-                        pricing_scheme: null
-                        component_id: 2
-                        handle: auto-created
-                        archived_at: null
-                        created_at: '2021-02-21T11:05:57-05:00'
-                        updated_at: '2021-02-21T11:05:57-05:00'
-                        prices:
-                          - id: 3
-                            component_id: 2
-                            starting_quantity: 0
-                            ending_quantity: null
-                            unit_price: '1.0'
-                            price_point_id: 1
-                            formatted_unit_price: $1.00
-                            segment_id: null
+                      - price_point:
+                          id: 1
+                          name: Auto-created
+                          type: default
+                          component_id: 2
+                          handle: auto-created
+                          created_at: '2021-02-21T11:05:57-05:00'
+                          updated_at: '2021-02-21T11:05:57-05:00'
+                          prices:
+                            - id: 3
+                              component_id: 2
+                              starting_quantity: 0
+                              ending_quantity: null
+                              unit_price: '1.0'
+                              price_point_id: 1
+                              formatted_unit_price: $1.00
+                              segment_id: null
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -24860,6 +24864,7 @@ components:
         component_id:
           type:
             - integer
+            - string
         enabled:
           type:
             - boolean
@@ -24875,6 +24880,7 @@ components:
         price_point_id:
           type:
             - integer
+            - string
         custom_price:
           $ref: '#/components/schemas/Component-Custom-Price'
     Credit-Note:

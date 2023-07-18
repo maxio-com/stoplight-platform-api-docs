@@ -128,4 +128,6 @@ properties:
   site_gateway_setting_id:
     type: integer
   gateway_handle:
-    type: string
+    type:
+      - string
+      - 'null'
