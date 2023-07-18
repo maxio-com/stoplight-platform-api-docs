@@ -1398,7 +1398,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Subscription.yaml
+                  $ref: '#/components/schemas/Subscription-Response'
       operationId: listCustomerSubscriptions
       description: This method lists all subscriptions that belong to a customer.
   '/portal/customers/{customer_id}/enable.json':
@@ -1496,8 +1496,9 @@ paths:
                   expires_at:
                     type: string
                   last_invite_sent_at:
-                    type: string
-                    nullable: true
+                    type:
+                      - string
+                      - 'null'
               examples:
                 Example:
                   value:
@@ -3211,17 +3212,20 @@ paths:
                       type: integer
                       description: Number of times the coupon has been applied
                     savings:
-                      type: integer
+                      type:
+                        - integer
+                        - 'null'
                       description: Dollar amount of customer savings as a result of the coupon.
-                      nullable: true
                     savings_in_cents:
-                      type: integer
+                      type:
+                        - integer
+                        - 'null'
                       description: Dollar amount of customer savings as a result of the coupon.
-                      nullable: true
                     revenue:
-                      type: integer
+                      type:
+                        - integer
+                        - 'null'
                       description: Total revenue of the all subscriptions that have received a discount from this coupon.
-                      nullable: true
                     revenue_in_cents:
                       type: integer
                       description: Total revenue of the all subscriptions that have received a discount from this coupon.
@@ -3697,7 +3701,9 @@ paths:
                           type: string
                           minLength: 1
                         event_specific_data:
-                          type: object
+                          type:
+                            - object
+                            - 'null'
                           properties:
                             previous_subscription_state:
                               type: string
@@ -3708,7 +3714,6 @@ paths:
                           required:
                             - previous_subscription_state
                             - new_subscription_state
-                          nullable: true
                       required:
                         - id
                         - key
@@ -4274,16 +4279,18 @@ paths:
                         type: string
                         description: The name of the unit that the component’s usage is measured in. i.e. message
                       unit_price:
-                        type: string
+                        type:
+                          - string
+                          - 'null'
                         description: 'The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null.'
-                        nullable: true
                       product_family_id:
                         type: integer
                         description: The id of the Product Family to which the Component belongs
                       price_per_unit_in_cents:
-                        type: integer
+                        type:
+                          - integer
+                          - 'null'
                         description: deprecated - use unit_price instead
-                        nullable: true
                       kind:
                         type: string
                         description: A handle for the component type
@@ -4300,9 +4307,10 @@ paths:
                         type: boolean
                         description: Boolean flag describing whether a component is taxable or not.
                       description:
-                        type: string
+                        type:
+                          - string
+                          - 'null'
                         description: The description of the component.
-                        nullable: true
                       default_price_point_id:
                         type: integer
                       price_point_count:
@@ -4317,16 +4325,19 @@ paths:
                       recurring:
                         type: boolean
                       upgrade_charge:
-                        type: string
-                        nullable: true
+                        type:
+                          - string
+                          - 'null'
                       downgrade_credit:
-                        type: string
-                        nullable: true
+                        type:
+                          - string
+                          - 'null'
                       created_at:
                         type: string
                       prices:
-                        type: array
-                        nullable: true
+                        type:
+                          - array
+                          - 'null'
                         description: 'An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty.'
                         items:
                           type: object
@@ -4338,8 +4349,9 @@ paths:
                             starting_quantity:
                               type: integer
                             ending_quantity:
-                              type: integer
-                              nullable: true
+                              type:
+                                - integer
+                                - 'null'
                             unit_price:
                               type: string
                             price_point_id:
@@ -4789,10 +4801,7 @@ paths:
                           type: number
                           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
                         expiration_interval_unit:
-                          type: string
-                          enum:
-                            - day
-                            - month
+                          $ref: '#/components/schemas/Interval-Unit'
                   required:
                     - prepaid_usage_component
                 - properties:
@@ -7624,8 +7633,9 @@ paths:
                   last_name:
                     type: string
                   masked_card_number:
-                    type: string
-                    nullable: true
+                    type:
+                      - string
+                      - 'null'
                   card_type:
                     type: string
                   expiration_month:
@@ -7649,11 +7659,13 @@ paths:
                   billing_country:
                     type: string
                   customer_vault_token:
-                    type: string
-                    nullable: true
+                    type:
+                      - string
+                      - 'null'
                   billing_address_2:
-                    type: string
-                    nullable: true
+                    type:
+                      - string
+                      - 'null'
                   payment_type:
                     type: string
                   bank_name:
@@ -7979,21 +7991,7 @@ paths:
                       description: The full credit card number
                       example: '5424000000000015'
                     card_type:
-                      type: string
-                      description: '(used only for an Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI.'
-                      enum:
-                        - visa
-                        - master
-                        - discover
-                        - american_express
-                        - diners_club
-                        - jcb
-                        - switch
-                        - solo
-                        - dankort
-                        - maestro
-                        - laser
-                        - forbrugsforeningen
+                      $ref: '#/components/schemas/Card-Type'
                     expiration_month:
                       type:
                         - integer
@@ -8008,9 +8006,10 @@ paths:
                       type: string
                       description: The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.
                     billing_address_2:
-                      type: string
+                      type:
+                        - string
+                        - 'null'
                       description: Second line of the customer’s billing address i.e. Apt. 100
-                      nullable: true
                     billing_city:
                       type: string
                       description: The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.
@@ -8355,8 +8354,9 @@ paths:
                           site_gateway_setting_id:
                             type: integer
                           gateway_handle:
-                            type: string
-                            nullable: true
+                            type:
+                              - string
+                              - 'null'
                       - properties:
                           id:
                             type: integer
@@ -8399,8 +8399,9 @@ paths:
                           site_gateway_setting_id:
                             type: string
                           gateway_handle:
-                            type: string
-                            nullable: true
+                            type:
+                              - string
+                              - 'null'
                     type: object
               examples:
                 Card:
@@ -8535,8 +8536,9 @@ paths:
                       site_gateway_setting_id:
                         type: integer
                       gateway_handle:
-                        type: string
-                        nullable: true
+                        type:
+                          - string
+                          - 'null'
               examples:
                 Example:
                   value:
@@ -8631,8 +8633,9 @@ paths:
                     billing_country:
                       type: string
                     billing_address_2:
-                      type: string
-                      nullable: true
+                      type:
+                        - string
+                        - 'null'
             examples:
               Example:
                 value:
@@ -11622,7 +11625,7 @@ paths:
                 type: object
                 properties:
                   subscription:
-                    $ref: ../models/Subscription.yaml
+                    $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -12687,10 +12690,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -12811,9 +12811,9 @@ paths:
                       coupon_use_count: 1
                       coupon_uses_allowed: 1
                       next_product_handle: null
-                      stored_credential_transaction_id: 125566112256688,
-                      dunning_communication_delay_enabled: true,
-                      dunning_communication_delay_time_zone: 'Eastern Time (US & Canada)'
+                      stored_credential_transaction_id: 125566112256688
+                      dunning_communication_delay_enabled: true
+                      dunning_communication_delay_time_zone: Eastern Time (US & Canada)
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -13459,10 +13459,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Basic:
                 value:
@@ -13795,11 +13792,10 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    subscription:
-                      $ref: ../models/Subscription.yaml
+                  $ref: '#/components/schemas/Subscription-Response'
       operationId: listSubscriptions
+      x-operation-settings:
+        collectParameters: true
       description: |-
         This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
 
@@ -13811,109 +13807,71 @@ paths:
 
         Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
       parameters:
-        - schema:
-            type: integer
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
+        - name: state
           in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        - schema:
-            type: string
-            enum:
-              - active
-              - canceled
-              - expired
-              - expired_cards
-              - on_hold
-              - past_due
-              - pending_cancellation
-              - pending_renewal
-              - suspended
-              - trial_ended
-              - trialing
-              - unpaid
-          in: query
-          name: state
+          schema:
+            $ref: '#/components/schemas/Subscription-State'
           description: The current state of the subscription
-        - schema:
-            type: integer
+        - name: product
           in: query
-          name: product
+          schema:
+            type: integer
           description: The product id of the subscription. (Note that the product handle cannot be used.)
-        - schema:
-            type: integer
+        - name: product_price_point_id
           in: query
-          name: product_price_point_id
+          schema:
+            type: integer
           description: 'The ID of the product price point. If supplied, product is required'
-        - schema:
+        - name: coupon
+          in: query
+          schema:
             type: integer
-          in: query
-          name: coupon
           description: The numeric id of the coupon currently applied to the subscription. (This can be found in the URL when editing a coupon. Note that the coupon code cannot be used.)
-        - schema:
-            type: string
-            enum:
-              - current_period_ends_at
-              - current_period_starts_at
-              - created_at
-              - activated_at
-              - canceled_at
-              - expires_at
-              - trial_started_at
-              - trial_ended_at
-              - updated_at
+        - name: date_field
           in: query
-          name: date_field
+          schema:
+            $ref: '#/components/schemas/List-Subscriptions-Date-Field'
           description: 'The type of filter you''d like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at'
-        - schema:
-            type: string
+        - name: start_date
           in: query
-          name: start_date
+          schema:
+            type: string
+            format: date
           description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
-        - schema:
-            type: string
+          example: '2022-07-01'
+        - name: end_date
           in: query
-          name: end_date
+          schema:
+            type: string
+            format: date
           description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
-        - schema:
-            type: string
+          example: '2022-08-01'
+        - name: start_datetime
           in: query
-          name: start_datetime
+          schema:
+            type: string
+            format: date
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
-        - schema:
-            type: string
+          example: '2022-07-01 09:00:05'
+        - name: end_datetime
           in: query
-          name: end_datetime
+          schema:
+            type: string
+            format: date-time
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
-        - schema:
-            type: string
+          example: '2022-08-01 10:00:05'
+        - name: metadata
           in: query
-          name: 'metadata[fieldName]'
+          schema:
+            additionalProperties: true
+          style: deepObject
+          explode: true
           description: The value of the metadata field specified in the parameter
+        - $ref: '#/components/parameters/sort-direction'
         - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: 'Controls the order in which results are returned. '
-        - schema:
-            type: string
-            default: signup_date
-            enum:
-              - signup_date
-              - period_start
-              - period_end
-              - next_assessment
-              - updated_at
-              - created_at
+            $ref: '#/components/schemas/List-Subscriptions-Sort'
           in: query
           name: sort
           description: The attribute by which to sort
@@ -14616,8 +14574,9 @@ paths:
                         last_payment:
                           type: string
                         churn_date:
-                          type: string
-                          nullable: true
+                          type:
+                            - string
+                            - 'null'
               examples:
                 Example:
                   value:
@@ -14694,10 +14653,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -14852,12 +14808,7 @@ paths:
         The response will be `422 "Unprocessable Entity`.
   '/subscriptions/{subscription_id}.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Update Subscription
       tags:
@@ -14868,10 +14819,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15035,151 +14983,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    credit_card_attributes:
-                      type: object
-                      properties:
-                        full_number:
-                          type: string
-                        expiration_month:
-                          type: string
-                        expiration_year:
-                          type: string
-                    product_handle:
-                      type: string
-                      description: Set to the handle of a different product to change the subscription's product
-                    product_id:
-                      type: integer
-                      description: Set to the id of a different product to change the subscription's product
-                    product_change_delayed:
-                      type: boolean
-                      default: false
-                    next_product_id:
-                      type: string
-                      description: Set to an empty string to cancel a delayed product change.
-                    next_product_price_point_id:
-                      type: string
-                    snap_day:
-                      type:
-                        - string
-                        - integer
-                      minimum: 1
-                      maximum: 28
-                      enum:
-                        - end
-                      description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
-                    next_billing_at:
-                      type: string
-                    payment_collection_method:
-                      type: string
-                    receives_invoice_emails:
-                      type: boolean
-                    net_terms:
-                      type:
-                        - string
-                        - integer
-                    stored_credential_transaction_id:
-                      type: integer
-                    reference:
-                      type: string
-                    custom_price:
-                      type: object
-                      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
-                      properties:
-                        name:
-                          type: string
-                          description: (Optional)
-                        handle:
-                          type: string
-                          description: (Optional)
-                        price_in_cents:
-                          type: integer
-                        interval:
-                          type: integer
-                        interval_unit:
-                          type: string
-                          enum:
-                            - day
-                            - month
-                        trial_price_in_cents:
-                          type: integer
-                          description: (Optional)
-                        trial_interval:
-                          type: integer
-                          description: (Optional)
-                        trial_interval_unit:
-                          type: string
-                          description: (Optional)
-                          enum:
-                            - day
-                            - month
-                        initial_charge_in_cents:
-                          type: integer
-                          description: (Optional)
-                        initial_charge_after_trial:
-                          type: boolean
-                          description: (Optional)
-                        expiration_interval:
-                          type: integer
-                          description: (Optional)
-                        expiration_interval_unit:
-                          type: string
-                          description: (Optional)
-                          enum:
-                            - day
-                            - month
-                        tax_included:
-                          type: boolean
-                          description: (Optional)
-                    components:
-                      type: array
-                      description: (Optional) An array of component ids and custom prices to be added to the subscription.
-                      items:
-                        type: object
-                        properties:
-                          component_id:
-                            type: integer
-                          custom_price:
-                            type: object
-                            description: Create or update custom pricing unique to the subscription
-                            properties:
-                              pricing_scheme:
-                                type: string
-                                enum:
-                                  - stairstep
-                                  - volume
-                                  - per_unit
-                                  - tiered
-                                description: Omit for On/Off components
-                              prices:
-                                type: array
-                                description: On/off components only need one price bracket starting at 1
-                                items:
-                                  type: object
-                                  properties:
-                                    unit_price:
-                                      type: string
-                                    starting_quantity:
-                                      type: string
-                                    ending_quantity:
-                                      type: string
-                                      nullable: true
-                    dunning_communication_delay_enabled:
-                      type:
-                        - boolean
-                        - 'null'
-                      default: false
-                      description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
-                    dunning_communication_delay_time_zone:
-                      type:
-                        - string
-                        - 'null'
-                      example: '"Eastern Time (US & Canada)"'
-                      description: Time zone for the Dunning Communication Delay feature.
+              $ref: '#/components/schemas/Update-Subscription-Request'
             examples:
               Example:
                 value:
@@ -15225,10 +15029,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15403,10 +15204,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15538,14 +15336,17 @@ paths:
 
         Self-Service Page token for the subscription is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
       parameters:
-        - schema:
-            type: array
-            enum:
-              - coupons
-              - self_service_page_token
-            example: 'include[]=coupons, include[]=self_service_page_toke'
+        - name: 'include[]'
           in: query
-          name: 'include[]'
+          schema:
+            type: array
+            items:
+              enum:
+                - coupons
+                - self_service_page_token
+            example: 'include[]=coupons, include[]=self_service_page_token'
+          style: form
+          explode: true
           description: Allows including additional data in the response.
   '/subscriptions/{subscription_id}/resume.json':
     parameters:
@@ -15565,10 +15366,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15698,10 +15496,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -15854,10 +15649,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -16021,10 +15813,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -16378,10 +16167,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -16735,12 +16521,7 @@ paths:
                       description: The date that the proration is calculated from for the preview
   '/subscriptions/{subscription_id}/override.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Override Subscription
       tags:
@@ -16777,26 +16558,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    activated_at:
-                      type: string
-                      description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
-                    canceled_at:
-                      type: string
-                      description: 'Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.'
-                    cancellation_message:
-                      type: string
-                      description: Can be used to record a reason for the original cancellation.
-                    expires_at:
-                      type: string
-                      description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
-                    current_period_starts_at:
-                      type: string
-                      description: 'Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.'
+              $ref: '#/components/schemas/Override-Subscription-Request'
             examples:
               Example:
                 value:
@@ -16895,10 +16657,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
       operationId: cancelDunning
       description: 'If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.'
   '/subscriptions/{subscription_id}/renewals/preview.json':
@@ -17239,7 +16998,7 @@ paths:
           }
         }
         ```
-         
+
 
         The price for each line item will be calculated as well as a total due amount for the invoice. Multiple line items can be sent.
 
@@ -17323,7 +17082,7 @@ paths:
 
         #### Price Point
         Price point handle (with handle: prefix) or id from the scope of current subscription's site can be provided with `price_point_id` for components with `component_id` or `product_price_point_id` for products with `product_id` parameter. If price point is passed `unit_price` cannot be used. It can be used only with catalog items products and components.
-         
+
         #### Description
         Optional `description` parameter, it will overwrite default generated description for line item.
 
@@ -18243,10 +18002,8 @@ paths:
                                   - integer
                                 description: Required if using `custom_price` attribute.
                               interval_unit:
-                                type: string
-                                enum:
-                                  - day
-                                  - month
+                                schema:
+                                  $ref: '#/components/schemas/Interval-Unit'
                                 description: Required if using `custom_price` attribute.
                               trial_price_in_cents:
                                 type:
@@ -18257,10 +18014,8 @@ paths:
                                   - string
                                   - integer
                               trial_interval_unit:
-                                type: string
-                                enum:
-                                  - day
-                                  - month
+                                schema:
+                                  $ref: '#/components/schemas/Interval-Unit'
                               initial_charge_in_cents:
                                 type:
                                   - string
@@ -18272,10 +18027,8 @@ paths:
                                   - string
                                   - integer
                               expiration_interval_unit:
-                                type: string
-                                enum:
-                                  - day
-                                  - month
+                                schema:
+                                  $ref: '#/components/schemas/Interval-Unit'
                               tax_included:
                                 type: boolean
                           calendar_billing:
@@ -19469,10 +19222,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
       operationId: readSubscriptionByReference
       parameters:
         - schema:
@@ -19630,12 +19380,7 @@ paths:
         The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
   '/subscriptions/{subscription_id}/purge.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Purge Subscription
       tags:
@@ -19668,12 +19413,7 @@ paths:
           description: Options are "customer" or "payment_profile"
   '/subscriptions/{subscription_id}/prepaid_configurations.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Update Prepaid Subscription Configuration
       tags:
@@ -19684,21 +19424,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepaid_configuration:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      initial_funding_amount_in_cents:
-                        type: integer
-                      replenish_to_amount_in_cents:
-                        type: integer
-                      auto_replenish:
-                        type: boolean
-                      replenish_threshold_amount_in_cents:
-                        type: integer
+                $ref: '#/components/schemas/Prepaid-Configuration'
               examples:
                 Example:
                   value:
@@ -19714,10 +19440,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                prepaid_configuration:
-                  $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
+              $ref: '#/components/schemas/Upsert-Prepaid-Configuration-Request'
             examples:
               Example:
                 value:
@@ -19857,15 +19580,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_preview:
-                    type: object
-                    properties:
-                      current_billing_manifest:
-                        $ref: '#/components/schemas/Billing-Manifest'
-                      next_billing_manifest:
-                        $ref: '#/components/schemas/Billing-Manifest'
+                $ref: '#/components/schemas/Subscription-Preview-Response'
               examples:
                 Example:
                   value:
@@ -19990,10 +19705,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Product Only:
                 value:
@@ -20213,12 +19925,7 @@ paths:
           description: Not Found
   '/subscriptions/{subscription_id}/add_coupon.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     post:
       summary: Add Coupons to Subscription
       tags:
@@ -20229,10 +19936,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples:
                 Example:
                   value:
@@ -20416,12 +20120,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: '#/components/schemas/Add-Coupons-Request'
             examples:
               Example:
                 value:
@@ -20430,12 +20129,7 @@ paths:
                     - COUPON_2
   '/subscriptions/{subscription_id}/remove_coupon.json':
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargidy id of the subscription
+      - $ref: '#/components/parameters/subscription-id-required-path'
     delete:
       summary: Remove Coupon from Subscription
       tags:
@@ -23276,11 +22970,7 @@ paths:
           description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
   '/subscriptions/{subscription_id}/activate.json':
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: '#/components/parameters/subscription-id-required-path'
     put:
       summary: Activate Subscription
       tags:
@@ -23291,10 +22981,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: ../models/Subscription.yaml
+                $ref: '#/components/schemas/Subscription-Response'
               examples: {}
         '400':
           description: Bad Request
@@ -23321,11 +23008,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                revert_on_failure:
-                  type: boolean
-                  description: 'You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)'
+              $ref: '#/components/schemas/Activate-Subscription-Request'
         description: ''
       description: |
         Chargify offers the ability to activate awaiting signup and trialing subscriptions. This feature is only available on the Relationship Invoicing architecture. Subscriptions in a group may not be activated immediately.
@@ -23455,7 +23138,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Minimum payload:
                 value:
@@ -23569,7 +23252,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Create-Subscription'
+              $ref: '#/components/schemas/Create-Subscription-Request'
             examples:
               Minimum example:
                 value:
@@ -23918,7 +23601,52 @@ servers:
 security:
   - BasicAuth: []
 components:
+  parameters:
+    page:
+      name: page
+      in: query
+      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      schema:
+        type: integer
+    per-page:
+      name: per_page
+      in: query
+      description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      schema:
+        type: integer
+        default: 20
+        maximum: 200
+    sort-direction:
+      name: direction
+      in: query
+      description: Controls the order in which results are returned.
+      schema:
+        $ref: '#/components/schemas/Sort-Direction'
+    subscription-id-required-path:
+      name: subscription_id
+      in: path
+      description: The Chargify id of the subscription
+      schema:
+        type: integer
+      required: true
   schemas:
+    Activate-Subscription-Request:
+      title: Activate Subscription Request
+      type: object
+      properties:
+        revert_on_failure:
+          type:
+            - boolean
+            - 'null'
+          description: 'You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)'
+    Add-Coupons-Request:
+      title: Add Coupons Request
+      type: object
+      properties:
+        codes:
+          type: array
+          items:
+            type: string
     Allocation:
       title: Allocation
       type: object
@@ -23936,9 +23664,10 @@ components:
           type: integer
           description: The allocated quantity that was in effect before this allocation was created
         memo:
-          type: string
+          type:
+            - string
+            - 'null'
           description: The memo passed when the allocation was created
-          nullable: true
         timestamp:
           type: string
           description: 'The time that the allocation was recorded, in  format and UTC timezone, i.e. 2012-11-20T22:00:37Z'
@@ -24091,9 +23820,10 @@ components:
               type: string
               description: 'The name of the Component, suitable for display on statements. i.e. Text Messages.'
             pricing_scheme:
-              type: string
+              type:
+                - string
+                - 'null'
               description: 'The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes.'
-              nullable: true
             unit_name:
               type: string
               description: The name of the unit that the component’s usage is measured in. i.e. message
@@ -24132,7 +23862,7 @@ components:
               type: string
               description: URL that points to the location to read the existing price points via GET request
             tax_code:
-              type: 
+              type:
                 - string
                 - 'null'
               description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
@@ -24509,26 +24239,32 @@ components:
             type: string
     Create-or-Update-Coupon:
       title: Create or Update Coupon
-      type: object
+      type:
+        - object
       properties:
         coupon:
           oneOf:
             - $ref: '#/components/schemas/Create-or-Update-Percentage-Coupon'
             - $ref: '#/components/schemas/Create-or-Update-Flat-Amount-Coupon'
         restricted_products:
-          type: object
+          type:
+            - object
           description: An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product
           properties:
             '1':
-              type: boolean
+              type:
+                - boolean
         restricted_components:
-          type: object
+          type:
+            - object
           description: An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component
           properties:
             '1':
-              type: boolean
+              type:
+                - boolean
             '2':
-              type: boolean
+              type:
+                - boolean
     Create-or-Update-Endpoint:
       title: Create or Update Endpoint
       type: object
@@ -24649,8 +24385,22 @@ components:
         - name
         - code
         - percentage
-    Create-or-Update-Prepaid-Configuration:
-      title: Create or Update Prepaid Configuration
+    Prepaid-Configuration:
+      title: Prepaid Configuration
+      type: object
+      properties:
+        id:
+          type: integer
+        initial_funding_amount_in_cents:
+          type: integer
+        replenish_to_amount_in_cents:
+          type: integer
+        auto_replenish:
+          type: boolean
+        replenish_threshold_amount_in_cents:
+          type: integer
+    Upsert-Prepaid-Configuration:
+      title: Upsert Prepaid Configuration
       type: object
       properties:
         initial_funding_amount_in_cents:
@@ -24661,6 +24411,12 @@ components:
           type: boolean
         replenish_threshold_amount_in_cents:
           type: integer
+    Upsert-Prepaid-Configuration-Request:
+      title: Upsert Prepaid Configuration Request
+      type: object
+      properties:
+        prepaid_configuration:
+          $ref: '#/components/schemas/Upsert-Prepaid-Configuration'
     Create-or-Update-Product:
       title: Create or Update Product
       type: object
@@ -24773,11 +24529,7 @@ components:
           type: number
           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
         expiration_interval_unit:
-          type: string
-          description: ''
-          enum:
-            - day
-            - month
+          $ref: '#/components/schemas/Interval-Unit'
       required:
         - name
         - pricing_scheme
@@ -24824,401 +24576,144 @@ components:
         - interval_unit
     Create-Subscription:
       title: Create Subscription
-      type: object
+      type:
+        - object
       properties:
         product_handle:
-          type: string
+          type:
+            - string
           description: 'The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead.'
         product_id:
-          type: string
+          type:
+            - string
           description: 'The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead.'
         product_price_point_handle:
-          type: string
+          type:
+            - string
           description: The user-friendly API handle of a product's particular price point.
         product_price_point_id:
-          type: string
+          type:
+            - string
           description: The ID of the particular price point on the product.
         custom_price:
-          type: object
-          description: Used in place of `product_price_point_id` to define a custom price point unique to the subscription
-          properties:
-            name:
-              type: string
-              description: (Optional)
-            handle:
-              type: string
-              description: (Optional)
-            price_in_cents:
-              type: integer
-            interval:
-              type: integer
-            interval_unit:
-              type: string
-              enum:
-                - day
-                - month
-            trial_price_in_cents:
-              type: integer
-              description: (Optional)
-            trial_interval:
-              type: integer
-              description: (Optional)
-            trial_interval_unit:
-              type: string
-              description: (Optional)
-              enum:
-                - day
-                - month
-            initial_charge_in_cents:
-              type: integer
-              description: (Optional)
-            initial_charge_after_trial:
-              type: boolean
-              description: (Optional)
-            expiration_interval:
-              type: integer
-              description: (Optional)
-            expiration_interval_unit:
-              type: string
-              description: (Optional)
-              enum:
-                - day
-                - month
-            tax_included:
-              type: boolean
-              description: (Optional)
+          $ref: '#/components/schemas/Subscription-Custom-Price'
         coupon_code:
-          type: string
+          type:
+            - string
           description: (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon.
         coupon_codes:
-          type: array
+          type:
+            - array
           description: An array for all the coupons attached to the subscription.
           items:
             type: string
         payment_collection_method:
-          type: string
-          description: '(Optional) The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
-          enum:
-            - automatic
-            - remittance
-            - prepaid
-            - invoice
+          $ref: '#/components/schemas/Subscription-Payment-Collection-Method'
         receives_invoice_emails:
-          type: string
+          type:
+            - string
           description: '(Optional) Default: True - Whether or not this subscription is set to receive emails related to this subscription.'
         net_terms:
-          type: string
+          type:
+            - string
           description: '(Optional) Default: null The number of days after renewal (on invoice billing) that a subscription is due. A value between 0 (due immediately) and 180.'
         customer_id:
-          type: integer
+          type:
+            - integer
           description: 'The ID of an existing customer within Chargify. Required, unless a `customer_reference` or a set of `customer_attributes` is given.'
         next_billing_at:
-          type: string
+          type:
+            - string
           description: '(Optional) Set this attribute to a future date/time to sync imported subscriptions to your existing renewal schedule. See the notes on “Date/Time Format” in our [subscription import documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#date-format). If you provide a next_billing_at timestamp that is in the future, no trial or initial charges will be applied when you create the subscription. In fact, no payment will be captured at all. The first payment will be captured, according to the prices defined by the product, near the time specified by next_billing_at. If you do not provide a value for next_billing_at, any trial and/or initial charges will be assessed and charged at the time of subscription creation. If the card cannot be successfully charged, the subscription will not be created. See further notes in the section on Importing Subscriptions.'
         initial_billing_at:
-          type: string
+          type:
+            - string
           description: '(Optional) Set this attribute to a future date/time to create a subscription in the "Awaiting Signup" state, rather than "Active" or "Trialing". See the notes on “Date/Time Format” in our [subscription import documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404863655821#date-format). In the "Awaiting Signup" state, a subscription behaves like any other. It can be canceled, allocated to, had its billing date changed. etc. When the initial_billing_at date hits, the subscription will transition to the expected state. If the product has a trial, the subscription will enter a trial, otherwise it will go active. Setup fees will be respected either before or after the trial, as configured on the price point. If the payment is due at the initial_billing_at and it fails the subscription will be immediately canceled. See further notes in the section on Delayed Signups.'
         stored_credential_transaction_id:
-          type: integer
+          type:
+            - integer
           description: 'For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal.'
         sales_rep_id:
-          type: integer
+          type:
+            - integer
         payment_profile_id:
-          type: integer
+          type:
+            - integer
           description: 'The Payment Profile ID of an existing card or bank account, which belongs to an existing customer to use for payment for this subscription. If the card, bank account, or customer does not exist already, or if you want to use a new (unstored) card or bank account for the subscription, use `payment_profile_attributes` instead to create a new payment profile along with the subscription. (This value is available on an existing subscription via the API as `credit_card` > id or `bank_account` > id)'
         reference:
-          type: string
+          type:
+            - string
           description: The reference value (provided by your app) for the subscription itelf.
         customer_attributes:
-          type: object
-          properties:
-            first_name:
-              type: string
-              description: The first name of the customer. Required when creating a customer via attributes.
-            last_name:
-              type: string
-              description: The last name of the customer. Required when creating a customer via attributes.
-            email:
-              type: string
-              description: The email address of the customer. Required when creating a customer via attributes.
-            cc_emails:
-              type: string
-              description: A list of emails that should be cc’d on all customer communications. Optional.
-            organization:
-              type: string
-              description: The organization/company of the customer. Optional.
-            reference:
-              type: string
-              description: 'A customer “reference”, or unique identifier from your app, stored in Chargify. Can be used so that you may reference your customer’s within Chargify using the same unique value you use in your application. Optional.'
-            address:
-              type: string
-              description: (Optional) The customer’s shipping street address (i.e. “123 Main St.”).
-            address_2:
-              type: string
-              description: (Optional) Second line of the customer’s shipping address i.e. “Apt. 100”
-              nullable: true
-            city:
-              type: string
-              description: (Optional) The customer’s shipping address city (i.e. “Boston”).
-            state:
-              type: string
-              description: '(Optional) The customer’s shipping address state (i.e. “MA”). This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
-            zip:
-              type: string
-              description: (Optional) The customer’s shipping address zip code (i.e. “12345”).
-            country:
-              type: string
-              description: '(Optional) The customer shipping address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”).'
-            phone:
-              type: string
-              description: (Optional) The phone number of the customer.
-            verified:
-              type: boolean
-            tax_exempt:
-              type: boolean
-              description: (Optional) The tax_exempt status of the customer. Acceptable values are true or 1 for true and false or 0 for false.
-            vat_number:
-              type: string
-              description: '(Optional) Supplying the VAT number allows EU customer’s to opt-out of the Value Added Tax assuming the merchant address and customer billing address are not within the same EU country. It’s important to omit the country code from the VAT number upon entry. Otherwise, taxes will be assessed upon the purchase.'
+          $ref: '#/components/schemas/Customer-Attributes'
         payment_profile_attributes:
-          type: object
-          description: alias to credit_card_attributes
-          properties:
-            chargify_token:
-              type: string
-              description: (Optional) Token received after sending billing informations using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
-            id:
-              type: integer
-            payment_type:
-              type: string
-            first_name:
-              type: string
-              description: '(Optional) First name on card or bank account. If omitted, the first_name from customer attributes will be used.'
-            last_name:
-              type: string
-              description: '(Optional) Last name on card or bank account. If omitted, the last_name from customer attributes will be used.'
-            masked_card_number:
-              type: string
-            full_number:
-              type: string
-              description: 'The full credit card number (string representation, i.e. 5424000000000015)'
-            card_type:
-              type: string
-              description: '(Optional, used only for Subscription Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI.'
-              enum:
-                - visa
-                - master
-                - discover
-                - american_express
-                - diners_club
-                - jcb
-                - switch
-                - solo
-                - dankort
-                - maestro
-                - laser
-                - forbrugsforeningen
-            expiration_month:
-              type:
-                - integer
-                - string
-              description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5'
-            expiration_year:
-              type:
-                - integer
-                - string
-              description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012'
-            billing_address:
-              type: string
-              description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.'
-            billing_address_2:
-              type: string
-              description: Optional) Second line of the customer’s billing address i.e. Apt. 100
-              nullable: true
-            billing_city:
-              type: string
-              description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.'
-            billing_state:
-              type: string
-              description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
-            billing_country:
-              type: string
-              description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time.'
-            billing_zip:
-              type: string
-              description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.'
-            current_vault:
-              type: string
-              description: '(Optional, used only for Subscription Import) The vault that stores the payment profile with the provided vault_token. see additional notes on Braintree Blue'
-              enum:
-                - authorizenet
-                - trust_commerce
-                - payment_express
-                - beanstream
-                - braintree_blue
-                - paypal
-                - eway
-                - eway_rapid_std
-                - stripe_connect
-                - pin
-                - wirecard
-                - bpoint
-                - firstdata
-                - elavon
-                - cybersource
-                - paymill
-                - moneris
-                - litle
-                - square
-            vault_token:
-              type: string
-              description: '(Optional, used only for Subscription Import) The “token” provided by your vault storage for an already stored payment profile'
-            customer_vault_token:
-              type: string
-              description: '(Optional, used only for Subscription Import) (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
-            customer_id:
-              type: integer
-            paypal_email:
-              type: string
-            payment_method_nonce:
-              type: string
-              description: (Required for Square unless importing with vault_token and customer_vault_token) The nonce generated by the Square Javascript library (SqPaymentForm)
-            gateway_handle:
-              type: string
-              description: '(Optional) This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://chargify.zendesk.com/hc/en-us/articles/4407761759643#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
-            cvv:
-              type: string
-              description: '(Optional, may be required by your gateway settings) The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.'
-            last_four:
-              type: string
-              description: '(Optional, used only for Subscription Import) If you have the last 4 digits of the credit card number, you may supply them here so that we may create a masked card number (i.e. XXXX-XXXX-XXXX-1234) for display in the UI. Last 4 digits are required for refunds in Auth.Net.'
+          $ref: '#/components/schemas/Payment-Profile-Attributes'
         bank_account_attributes:
-          type: object
-          properties:
-            chargify_token:
-              type: string
-            bank_name:
-              type: string
-              description: (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides
-            bank_routing_number:
-              type: string
-              description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
-            bank_account_number:
-              type: string
-              description: (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
-            bank_account_type:
-              type: string
-            bank_branch_code:
-              type: string
-              description: '(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided'
-            bank_iban:
-              type: string
-              description: '(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided'
-            bank_account_holder_type:
-              type: string
-            payment_type:
-              type: string
+          $ref: '#/components/schemas/Bank-Account-Attributes'
         components:
-          type: array
+          type:
+            - array
           description: '(Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) for more information.'
           items:
-            type: object
-            properties:
-              component_id:
-                type: integer
-              enabled:
-                type: boolean
-                description: Used for on/off components only
-              unit_balance:
-                type: integer
-                description: Used for metered and events based components
-              allocated_quantity:
-                type: integer
-                description: Used for quantity based compo
-              price_point_id:
-                type: integer
-              custom_price:
-                type: object
-                description: Used in place of `price_point_id` to define a custom price point unique to the subscription
-                properties:
-                  pricing_scheme:
-                    type: string
-                    enum:
-                      - stairstep
-                      - volume
-                      - per_unit
-                      - tiered
-                    description: Omit for On/Off components
-                  prices:
-                    type: array
-                    description: On/off components only need one price bracket starting at 1
-                    items:
-                      type: object
-                      properties:
-                        unit_price:
-                          type: string
-                        starting_quantity:
-                          type: string
-                        ending_quantity:
-                          type: string
-                          nullable: true
+            $ref: '#/components/schemas/Create-Subscription-Component'
         calendar_billing:
-          type: object
-          description: (Optional). Cannot be used when also specifying next_billing_at
-          properties:
-            snap_day:
-              type: integer
-              description: 1 - 28 or 'end'
-            calendar_billing_first_charge:
-              type: string
+          $ref: '#/components/schemas/Calendar-Billing'
         metafields:
-          type: object
+          $ref: '#/components/schemas/Metafields'
           description: '(Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet.'
-          properties:
-            color:
-              type: string
-            comments:
-              type: string
         customer_reference:
-          type: string
+          type:
+            - string
           description: 'The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given.'
         group:
           $ref: '#/components/schemas/Group-Attributes'
         ref:
-          type: string
+          type:
+            - string
           description: 'A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail.'
         cancellation_message:
-          type: string
+          type:
+            - string
           description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation.
         cancellation_method:
-          type: string
+          type:
+            - string
           description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about how the subscription was canceled.
         currency:
-          type: string
+          type:
+            - string
           description: '(Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription.'
         expires_at:
-          type: string
+          type:
+            - string
           description: Timestamp giving the expiration date of this subscription (if any). You may manually change the expiration date at any point during a subscription period.
         expiration_tracks_next_billing_change:
-          type: string
+          type:
+            - string
           description: '(Optional, default false) When set to true, and when next_billing_at is present, if the subscription expires, the expires_at will be shifted by the same amount of time as the difference between the old and new “next billing” dates.'
         agreement_terms:
-          type: string
+          type:
+            - string
           description: '(Optional) The ACH authorization agreement terms. If enabled, an email will be sent to the customer with a copy of the terms.'
         authorizer_first_name:
-          type: string
+          type:
+            - string
           description: (Optional) The first name of the person authorizing the ACH agreement.
         authorizer_last_name:
-          type: string
+          type:
+            - string
           description: (Optional) The last name of the person authorizing the ACH agreement.
         calendar_billing_first_charge:
-          type: string
+          type:
+            - string
           description: '(Optional) One of “prorated” (the default – the prorated product price will be charged immediately), “immediate” (the full product price will be charged immediately), or “delayed” (the full product price will be charged with the first scheduled renewal).'
         reason_code:
-          type: string
+          type:
+            - string
           description: (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to indicate why a subscription was canceled.
         product_change_delayed:
-          type: boolean
+          type:
+            - boolean
           description: '(Optional, used only for Delayed Product Change When set to true, indicates that a changed value for product_handle should schedule the product change to the next subscription renewal.'
         offer_id:
           type:
@@ -25226,51 +24721,25 @@ components:
             - integer
           description: 'Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er'
         prepaid_subscription_configuration:
-          $ref: '#/components/schemas/Create-or-Update-Prepaid-Configuration'
+          $ref: '#/components/schemas/Upsert-Prepaid-Configuration'
         previous_billing_at:
-          type: string
+          type:
+            - string
           description: Providing a previous_billing_at that is in the past will set the current_period_starts_at when the subscription is created. It will also set activated_at if not explicitly passed during the subscription import. Can only be used if next_billing_at is also passed. Using this option will allow you to set the period start for the subscription so mid period component allocations have the correct prorated amount.
         import_mrr:
-          type: boolean
+          type:
+            - boolean
           description: 'Setting this attribute to true will cause the subscription''s MRR to be added to your MRR analytics immediately. For this value to be honored, a next_billing_at must be present and set to a future date. This key/value will not be returned in the subscription response body.'
         canceled_at:
-          type: string
+          type:
+            - string
         activated_at:
-          type: string
+          type:
+            - string
         agreement_acceptance:
-          type: object
-          description: Required when creating a subscription with Maxio Payments.
-          properties:
-            ip_address:
-              type: string
-              description: Required when providing agreement acceptance params.
-            terms_url:
-              type: string
-              description: Required when creating a subscription with Maxio Payments. Either terms_url or provacy_policy_url required when providing agreement_acceptance params.
-            privacy_policy_url:
-              type: string
-            return_refund_policy_url:
-              type: string
-            delivery_policy_url:
-              type: string
-            secure_checkout_policy_url:
-              type: string
+          $ref: '#/components/schemas/Agreement-Acceptance'
         ach_agreement:
-          type: object
-          description: '(Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.'
-          properties:
-            agreement_terms:
-              type: string
-              description: (Required when providing ACH agreement params) The ACH authorization agreement terms.
-            authorizer_first_name:
-              type: string
-              description: (Required when providing ACH agreement params) The first name of the person authorizing the ACH agreement.
-            authorizer_last_name:
-              type: string
-              description: (Required when providing ACH agreement params) The last name of the person authorizing the ACH agreement.
-            ip_address:
-              type: string
-              description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
+          $ref: '#/components/schemas/ACH-Agreement'
         dunning_communication_delay_enabled:
           type:
             - boolean
@@ -25284,9 +24753,434 @@ components:
           example: '"Eastern Time (US & Canada)"'
           description: Time zone for the Dunning Communication Delay feature.
         skip_billing_manifest_taxes:
-          type: boolean
+          type:
+            - boolean
           description: Valid only for the Subscription Preview endpoint. When set to `true` it skips calculating taxes for the current and next billing manifests.
           default: false
+    Create-Subscription-Request:
+      title: Create Subscription Request
+      type:
+        - object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Create-Subscription'
+    Subscription-Custom-Price:
+      title: Custom price used for Subscription Create/Update
+      type:
+        - object
+      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
+      properties:
+        name:
+          type:
+            - string
+          description: (Optional)
+        handle:
+          type:
+            - string
+          description: (Optional)
+        price_in_cents:
+          type:
+            - integer
+        interval:
+          type:
+            - integer
+        interval_unit:
+          $ref: '#/components/schemas/Interval-Unit'
+        trial_price_in_cents:
+          type:
+            - integer
+          description: (Optional)
+        trial_interval:
+          type:
+            - integer
+          description: (Optional)
+        trial_interval_unit:
+          $ref: '#/components/schemas/Interval-Unit'
+          description: (Optional)
+        initial_charge_in_cents:
+          type:
+            - integer
+          description: (Optional)
+        initial_charge_after_trial:
+          type:
+            - boolean
+          description: (Optional)
+        expiration_interval:
+          type:
+            - integer
+          description: (Optional)
+        expiration_interval_unit:
+          $ref: '#/components/schemas/Interval-Unit'
+          description: (Optional)
+        tax_included:
+          type:
+            - boolean
+          description: (Optional)
+    Subscription-Payment-Collection-Method:
+      title: Payment Collection Method for Subscription
+      type:
+        - string
+      description: '(Optional) The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.'
+      enum:
+        - automatic
+        - remittance
+        - prepaid
+        - invoice
+    Customer-Attributes:
+      title: Customer Attributes
+      type:
+        - object
+      properties:
+        first_name:
+          type:
+            - string
+          description: The first name of the customer. Required when creating a customer via attributes.
+        last_name:
+          type:
+            - string
+          description: The last name of the customer. Required when creating a customer via attributes.
+        email:
+          type:
+            - string
+          description: The email address of the customer. Required when creating a customer via attributes.
+        cc_emails:
+          type:
+            - string
+          description: A list of emails that should be cc’d on all customer communications. Optional.
+        organization:
+          type:
+            - string
+          description: The organization/company of the customer. Optional.
+        reference:
+          type:
+            - string
+          description: 'A customer “reference”, or unique identifier from your app, stored in Chargify. Can be used so that you may reference your customer’s within Chargify using the same unique value you use in your application. Optional.'
+        address:
+          type:
+            - string
+          description: (Optional) The customer’s shipping street address (i.e. “123 Main St.”).
+        address_2:
+          type:
+            - string
+            - 'null'
+          description: (Optional) Second line of the customer’s shipping address i.e. “Apt. 100”
+        city:
+          type:
+            - string
+          description: (Optional) The customer’s shipping address city (i.e. “Boston”).
+        state:
+          type:
+            - string
+          description: '(Optional) The customer’s shipping address state (i.e. “MA”). This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
+        zip:
+          type:
+            - string
+          description: (Optional) The customer’s shipping address zip code (i.e. “12345”).
+        country:
+          type:
+            - string
+          description: '(Optional) The customer shipping address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”).'
+        phone:
+          type:
+            - string
+          description: (Optional) The phone number of the customer.
+        verified:
+          type:
+            - boolean
+        tax_exempt:
+          type:
+            - boolean
+          description: (Optional) The tax_exempt status of the customer. Acceptable values are true or 1 for true and false or 0 for false.
+        vat_number:
+          type:
+            - string
+          description: '(Optional) Supplying the VAT number allows EU customer’s to opt-out of the Value Added Tax assuming the merchant address and customer billing address are not within the same EU country. It’s important to omit the country code from the VAT number upon entry. Otherwise, taxes will be assessed upon the purchase.'
+    Card-Type:
+      title: Card Type
+      type:
+        - string
+      description: '(Optional, used only for Subscription Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI.'
+      enum:
+        - visa
+        - master
+        - discover
+        - american_express
+        - diners_club
+        - jcb
+        - switch
+        - solo
+        - dankort
+        - maestro
+        - laser
+        - forbrugsforeningen
+    Current-Vault:
+      title: Current Vault
+      type:
+        - string
+      description: '(Optional, used only for Subscription Import) The vault that stores the payment profile with the provided vault_token. see additional notes on Braintree Blue'
+      enum:
+        - authorizenet
+        - trust_commerce
+        - payment_express
+        - beanstream
+        - braintree_blue
+        - paypal
+        - eway
+        - eway_rapid_std
+        - stripe_connect
+        - pin
+        - wirecard
+        - bpoint
+        - firstdata
+        - elavon
+        - cybersource
+        - paymill
+        - moneris
+        - litle
+        - square
+    Payment-Profile-Attributes:
+      title: Payment Profile Attributes
+      description: alias to credit_card_attributes
+      properties:
+        chargify_token:
+          type:
+            - string
+          description: (Optional) Token received after sending billing informations using chargify.js. This token must be passed as a sole attribute of `payment_profile_attributes` (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+        id:
+          type:
+            - integer
+        payment_type:
+          type:
+            - string
+        first_name:
+          type:
+            - string
+          description: '(Optional) First name on card or bank account. If omitted, the first_name from customer attributes will be used.'
+        last_name:
+          type:
+            - string
+          description: '(Optional) Last name on card or bank account. If omitted, the last_name from customer attributes will be used.'
+        masked_card_number:
+          type:
+            - string
+        full_number:
+          type:
+            - string
+          description: 'The full credit card number (string representation, i.e. 5424000000000015)'
+        card_type:
+          $ref: '#/components/schemas/Card-Type'
+        expiration_month:
+          type:
+            - integer
+            - string
+          description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5'
+        expiration_year:
+          type:
+            - integer
+            - string
+          description: '(Optional when performing a Subscription Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012'
+        billing_address:
+          type:
+            - string
+          description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.'
+        billing_address_2:
+          type:
+            - string
+            - 'null'
+          description: (Optional) Second line of the customer’s billing address i.e. Apt. 100
+        billing_city:
+          type:
+            - string
+          description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.'
+        billing_state:
+          type:
+            - string
+          description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes.'
+        billing_country:
+          type:
+            - string
+          description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time.'
+        billing_zip:
+          type:
+            - string
+          description: '(Optional, may be required by your product configuration or gateway settings) The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.'
+        current_vault:
+          $ref: '#/components/schemas/Current-Vault'
+        vault_token:
+          type:
+            - string
+          description: '(Optional, used only for Subscription Import) The “token” provided by your vault storage for an already stored payment profile'
+        customer_vault_token:
+          type:
+            - string
+          description: '(Optional, used only for Subscription Import) (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
+        customer_id:
+          type:
+            - integer
+        paypal_email:
+          type:
+            - string
+        payment_method_nonce:
+          type:
+            - string
+          description: (Required for Square unless importing with vault_token and customer_vault_token) The nonce generated by the Square Javascript library (SqPaymentForm)
+        gateway_handle:
+          type:
+            - string
+          description: '(Optional) This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://chargify.zendesk.com/hc/en-us/articles/4407761759643#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed.'
+        cvv:
+          type:
+            - string
+          description: '(Optional, may be required by your gateway settings) The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.'
+        last_four:
+          type:
+            - string
+          description: '(Optional, used only for Subscription Import) If you have the last 4 digits of the credit card number, you may supply them here so that we may create a masked card number (i.e. XXXX-XXXX-XXXX-1234) for display in the UI. Last 4 digits are required for refunds in Auth.Net.'
+    Bank-Account-Attributes:
+      title: Bank Account Attributes
+      type:
+        - object
+      properties:
+        chargify_token:
+          type:
+            - string
+        bank_name:
+          type:
+            - string
+          description: (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides
+        bank_routing_number:
+          type:
+            - string
+          description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
+        bank_account_number:
+          type:
+            - string
+          description: (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
+        bank_account_type:
+          type:
+            - string
+        bank_branch_code:
+          type:
+            - string
+          description: '(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided'
+        bank_iban:
+          type:
+            - string
+          description: '(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided'
+        bank_account_holder_type:
+          type:
+            - string
+        payment_type:
+          type:
+            - string
+    Metafields:
+      title: Metafields
+      description: A set of key/value pairs representing custom fields and their values.
+      type:
+        - object
+      additionalProperties: true
+    Calendar-Billing:
+      title: Calendar Billing
+      type:
+        - object
+      description: (Optional). Cannot be used when also specifying next_billing_at
+      properties:
+        snap_day:
+          type:
+            - integer
+            - string
+          description: 1 - 28 or 'end'
+        calendar_billing_first_charge:
+          type:
+            - string
+    Agreement-Acceptance:
+      title: Agreement Acceptance
+      type:
+        - object
+      description: Required when creating a subscription with Maxio Payments.
+      properties:
+        ip_address:
+          type:
+            - string
+          description: Required when providing agreement acceptance params.
+        terms_url:
+          type:
+            - string
+          description: Required when creating a subscription with Maxio Payments. Either terms_url or provacy_policy_url required when providing agreement_acceptance params.
+        privacy_policy_url:
+          type:
+            - string
+        return_refund_policy_url:
+          type:
+            - string
+        delivery_policy_url:
+          type:
+            - string
+        secure_checkout_policy_url:
+          type:
+            - string
+    ACH-Agreement:
+      title: ACH Agreement
+      type:
+        - object
+      description: '(Optional) If passed, the proof of the authorized ACH agreement terms will be persisted.'
+      properties:
+        agreement_terms:
+          type:
+            - string
+          description: (Required when providing ACH agreement params) The ACH authorization agreement terms.
+        authorizer_first_name:
+          type:
+            - string
+          description: (Required when providing ACH agreement params) The first name of the person authorizing the ACH agreement.
+        authorizer_last_name:
+          type:
+            - string
+          description: (Required when providing ACH agreement params) The last name of the person authorizing the ACH agreement.
+        ip_address:
+          type:
+            - string
+          description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
+    Component-Custom-Price:
+      title: Component Custom Price
+      type:
+        - object
+      description: Used in place of `price_point_id` to define a custom price point unique to the subscription
+      properties:
+        pricing_scheme:
+          $ref: '#/components/schemas/Pricing-Scheme'
+          description: Omit for On/Off components
+        prices:
+          type:
+            - array
+          description: On/off components only need one price bracket starting at 1
+          items:
+            $ref: '#/components/schemas/Price'
+    Create-Subscription-Component:
+      title: Create Subscription Component
+      type:
+        - object
+      properties:
+        component_id:
+          type:
+            - integer
+        enabled:
+          type:
+            - boolean
+          description: Used for on/off components only
+        unit_balance:
+          type:
+            - integer
+          description: Used for metered and events based components
+        allocated_quantity:
+          type:
+            - integer
+          description: Used for quantity based compo
+        price_point_id:
+          type:
+            - integer
+        custom_price:
+          $ref: '#/components/schemas/Component-Custom-Price'
     Credit-Note:
       title: Credit Note
       type: object
@@ -26020,15 +25914,17 @@ components:
                   * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the current billing date.
                   * For non-periodic charges, this date and the start date will match.
               product_id:
-                type: integer
-                nullable: true
+                type:
+                  - integer
+                  - 'null'
                 description: |-
                   The ID of the product subscribed when the charge was made.
 
                   This may be set even for component charges, so true product-only (non-component) charges will also have a nil `component_id`.
               product_version:
-                type: integer
-                nullable: true
+                type:
+                  - integer
+                  - 'null'
                 description: The version of the product subscribed when the charge was made.
               component_id:
                 type:
@@ -26231,6 +26127,13 @@ components:
                     type: string
                   outstanding_amount:
                     type: string
+    Interval-Unit:
+      title: Interval Unit
+      type:
+        - string
+      enum:
+        - day
+        - month
     Metadata:
       title: Metadata
       type: object
@@ -26375,21 +26278,40 @@ components:
                 type: string
     Overage-Pricing:
       title: Overage Pricing
-      type: object
+      type:
+        - object
       properties:
         pricing_scheme:
-          type: string
+          $ref: '#/components/schemas/Pricing-Scheme'
         prices:
-          type: array
+          type:
+            - array
           items:
-            type: object
-            properties:
-              starting_quantity:
-                type: integer
-              ending_quantity:
-                type: integer
-              unit_price:
-                type: number
+            items:
+              $ref: '#/components/schemas/Price'
+    Price:
+      title: Price
+      type:
+        - object
+      properties:
+        starting_quantity:
+          type:
+            - integer
+        ending_quantity:
+          type:
+            - integer
+        unit_price:
+          type:
+            - number
+    Pricing-Scheme:
+      title: Pricing Scheme
+      type:
+        - string
+      enum:
+        - stairstep
+        - volume
+        - per_unit
+        - tiered
     Paginated-Metadata:
       title: Paginated Metadata
       type: object
@@ -27258,6 +27180,26 @@ components:
           type: string
           description: |
             The memo attached to the entry
+    Subscription-Response:
+      title: Subscription Response
+      type: object
+      properties:
+        subscription:
+          $ref: ../models/Subscription.yaml
+    Subscription-Preview:
+      title: Subscription Preview
+      type: object
+      properties:
+        current_billing_manifest:
+          $ref: '#/components/schemas/Billing-Manifest'
+        next_billing_manifest:
+          $ref: '#/components/schemas/Billing-Manifest'
+    Subscription-Preview-Response:
+      title: Subscription Preview Response
+      type: object
+      properties:
+        subscription_preview:
+          $ref: '#/components/schemas/Subscription-Preview'
     Subscription-Note:
       title: Subscription Note
       type: object
@@ -27392,6 +27334,54 @@ components:
               type: string
             updated_at:
               type: string
+    List-Subscriptions-Date-Field:
+      title: List Subscriptions Date Field
+      type: string
+      enum:
+        - current_period_ends_at
+        - current_period_starts_at
+        - created_at
+        - activated_at
+        - canceled_at
+        - expires_at
+        - trial_started_at
+        - trial_ended_at
+        - updated_at
+    List-Subscriptions-Sort:
+      title: List Subscription Sort
+      type: string
+      enum:
+        - signup_date
+        - period_start
+        - period_end
+        - next_assessment
+        - updated_at
+        - created_at
+      default: signup_date
+    Subscription-State:
+      title: Subscription State
+      type:
+        - string
+      enum:
+        - active
+        - canceled
+        - expired
+        - expired_cards
+        - on_hold
+        - past_due
+        - pending_cancellation
+        - pending_renewal
+        - suspended
+        - trial_ended
+        - trialing
+        - unpaid
+    Sort-Direction:
+      title: Sorting direction
+      type:
+        - string
+      enum:
+        - asc
+        - desc
     Update-Customer:
       title: Update Customer
       type: object
@@ -27496,6 +27486,135 @@ components:
           description: Only applicable when input_type is radio or dropdown
           items:
             type: string
+    Update-Subscription:
+      title: Update Subscription
+      type: object
+      properties:
+        credit_card_attributes:
+          type: object
+          properties:
+            full_number:
+              type: string
+            expiration_month:
+              type: string
+            expiration_year:
+              type: string
+        product_handle:
+          type: string
+          description: Set to the handle of a different product to change the subscription's product
+        product_id:
+          type: integer
+          description: Set to the id of a different product to change the subscription's product
+        product_change_delayed:
+          type: boolean
+          default: false
+        next_product_id:
+          type: string
+          description: Set to an empty string to cancel a delayed product change.
+        next_product_price_point_id:
+          type: string
+        snap_day:
+          type:
+            - string
+            - integer
+          minimum: 1
+          maximum: 28
+          enum:
+            - end
+          description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
+        next_billing_at:
+          type: string
+        payment_collection_method:
+          type: string
+        receives_invoice_emails:
+          type: boolean
+        net_terms:
+          type:
+            - string
+            - integer
+        stored_credential_transaction_id:
+          type: integer
+        reference:
+          type: string
+        custom_price:
+          $ref: '#/components/schemas/Subscription-Custom-Price'
+        components:
+          type: array
+          description: (Optional) An array of component ids and custom prices to be added to the subscription.
+          items:
+            type: object
+            properties:
+              component_id:
+                type: integer
+              custom_price:
+                type: object
+                description: Create or update custom pricing unique to the subscription
+                properties:
+                  pricing_scheme:
+                    type: string
+                    enum:
+                      - stairstep
+                      - volume
+                      - per_unit
+                      - tiered
+                    description: Omit for On/Off components
+                  prices:
+                    type: array
+                    description: On/off components only need one price bracket starting at 1
+                    items:
+                      type: object
+                      properties:
+                        unit_price:
+                          type: string
+                        starting_quantity:
+                          type: string
+                        ending_quantity:
+                          type:
+                            - string
+                            - 'null'
+        dunning_communication_delay_enabled:
+          type:
+            - boolean
+            - 'null'
+          default: false
+          description: 'Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.'
+        dunning_communication_delay_time_zone:
+          type:
+            - string
+            - 'null'
+          example: '"Eastern Time (US & Canada)"'
+          description: Time zone for the Dunning Communication Delay feature.
+    Update-Subscription-Request:
+      title: Update Subscription Request
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Update-Subscription'
+    Override-Subscription:
+      title: Override Subscription
+      type: object
+      properties:
+        activated_at:
+          type: string
+          description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
+        canceled_at:
+          type: string
+          description: 'Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning.'
+        cancellation_message:
+          type: string
+          description: Can be used to record a reason for the original cancellation.
+        expires_at:
+          type: string
+          description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
+        current_period_starts_at:
+          type: string
+          description: 'Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration.'
+    Override-Subscription-Request:
+      title: Override Subscription Request
+      type: object
+      properties:
+        subscription:
+          $ref: '#/components/schemas/Override-Subscription'
     Usage:
       title: Usage
       type: object
