@@ -2698,6 +2698,8 @@ paths:
           name: 'filter[start_datetime]'
         - schema:
             type: array
+            items:
+              type: integer
             example:
               - 1
               - 2
@@ -2710,6 +2712,8 @@ paths:
           explode: false
         - schema:
             type: array
+            items:
+              type: string
             example:
               - free
               - free_trial
@@ -5242,9 +5246,9 @@ paths:
             items:
               type: string
             example:
-              - "1"
-              - "2"
-              - "3"
+              - '1'
+              - '2'
+              - '3'
           in: query
           name: 'filter[ids]'
           description: Allows fetching components with matching id based on provided value.
@@ -6952,7 +6956,7 @@ paths:
           style: deepObject
           schema:
             type: object
-            example: 
+            example:
               type: catalog
           description: |-
             #### Default type filter: `?filter[type]=catalog,default`
@@ -26980,14 +26984,14 @@ components:
           type: integer
         recurring:
           type: boolean
-        upgrade_charge: 
-           type:
+        upgrade_charge:
+          type:
             - string
             - 'null'
-        downgrade_credit: 
-           type:
+        downgrade_credit:
+          type:
             - string
-            - 'null'    
+            - 'null'
         archived_at:
           type:
             - 'null'
@@ -27441,7 +27445,7 @@ components:
                     - 'null'
                 accrue_charge:
                   type:
-                    - boolean   
+                    - boolean
             default_payment_collection_method:
               type: string
             organization_address:
