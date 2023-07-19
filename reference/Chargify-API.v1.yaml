@@ -20812,6 +20812,8 @@ paths:
           in: query
           name: product_family_ids
           description: Allows fetching components allocation with matching product family id based on provided ids.
+          style: form
+          explode: false
         - schema:
             type: string
             example: subscription
