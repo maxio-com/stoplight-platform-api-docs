@@ -2671,30 +2671,35 @@ paths:
             example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
             example: '2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[date_field]=2011-12-15`.'
         - schema:
             type: string
             example: '2011-12-1T10:15:30+01:00'
           in: query
           name: 'filter[end_datetime]'
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.
+          Use in query: `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.'
         - schema:
             type: string
             example: '2011-12-17'
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-17`.'
         - schema:
             type: string
             example: '2011-12-19T10:15:30+01:00'
           in: query
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `filter[start_datetime]=2011-12-19T10:15:30+01:00`.'
           name: 'filter[start_datetime]'
         - schema:
             type: array
@@ -2707,7 +2712,8 @@ paths:
             minItems: 1
           in: query
           name: 'filter[ids]'
-          description: Allows fetching coupons with matching id based on provided values.
+          description: 'Allows fetching coupons with matching id based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
           style: form
           explode: false
         - schema:
@@ -2719,7 +2725,8 @@ paths:
               - free_trial
           in: query
           name: 'filter[codes]'
-          description: Allows fetching coupons with matching codes based on provided values.
+          description: 'Allows fetching coupons with matching codes based on provided values. 
+          Use in query: `filter[codes]=free,free_trial`.'
           style: form
           explode: false
         - schema:
@@ -2727,12 +2734,14 @@ paths:
             example: true
           in: query
           name: currency_prices
-          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. 
+          Use in query: `currency_prices=true`.'
         - schema:
             type: boolean
             example: true
           in: query
-          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching coupons with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   /coupons/find.json:
     get:
@@ -3047,9 +3056,10 @@ paths:
             minItems: 1
           in: query
           name: 'filter[ids]'
-          description: Allows fetching coupons with matching id based on provided values.
+          description: 'Allows fetching coupons with matching id based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
           style: form
-          explode: true
+          explode: false
         - schema:
             type: array
             minItems: 1
@@ -3058,35 +3068,41 @@ paths:
               - free_trial
           in: query
           name: 'filter[codes]'
-          description: Allows fetching coupons with matching code based on provided values.
+          description: 'Allows fetching coupons with matching code based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
           style: form
-          explode: true
+          explode: false
         - schema:
             type: boolean
             example: true
           in: query
           name: currency_prices
-          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. 
+          Use in query: `currency_prices=true`.'
         - schema:
             type: string
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[end_date]=2011-12-17`.'
         - schema:
             type: string
           in: query
           name: 'filter[end_datetime]'
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `filter[end_datetime]=2011-12-19T10:15:30+01:00`.'
         - schema:
             type: string
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-19`.'
         - schema:
             type: string
           in: query
           name: 'filter[start_datetime]'
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `filter[start_datetime]=2011-12-19T10:15:30+01:00`.'
         - schema:
             type: string
             enum:
@@ -3095,12 +3111,14 @@ paths:
             example: updated_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `filter[date_field]=updated_at`.'
         - schema:
             type: boolean
             example: true
           in: query
-          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching coupons with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
@@ -3841,7 +3859,8 @@ paths:
               - payment_success
           in: query
           name: filter
-          description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
+          description: 'You can pass multiple event keys after comma. 
+          Use in query: `filter=signup_success,payment_success`'
           style: form
           explode: false
         - schema:
@@ -5251,7 +5270,8 @@ paths:
               - '3'
           in: query
           name: 'filter[ids]'
-          description: Allows fetching components with matching id based on provided value.
+          description: 'Allows fetching components with matching id based on provided value. 
+          Use in query: `filter[ids]=1,2,3`.'
           style: form
           explode: false
         - schema:
@@ -5259,7 +5279,8 @@ paths:
             example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
       description: This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
@@ -5399,10 +5420,15 @@ paths:
           name: include_archived
           description: Include archived items.
         - schema:
-            type: string
-            example: 'filter[ids]=1,2'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
           in: query
-          description: Allows fetching components with matching id based on provided value.
+          description: 'Allows fetching components with matching id based on provided value. 
+          Use in query: `filter[ids]=1,2`.'
           name: 'filter[ids]'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/per-page'
@@ -5414,7 +5440,8 @@ paths:
             example: created_at
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=created_at`.'
         - schema:
             type: string
           in: query
@@ -5439,7 +5466,8 @@ paths:
             type: boolean
             example: true
           in: query
-          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   '/components/{component_id}/price_points.json':
     parameters:
@@ -6375,7 +6403,8 @@ paths:
               - prepaid_product_price_point
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=prepaid_product_price_point`.'
         - schema:
             type: string
             enum:
@@ -6384,13 +6413,15 @@ paths:
             example: not_null
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
-          description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+          description: 'Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. 
+          Use in query: `filter[prepaid_product_price_point][product_price_point_id]=not_null`.'
         - schema:
             type: boolean
             example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
       tags:
         - Product Families
   '/products/{product_id}.json':
@@ -9158,7 +9189,8 @@ paths:
             example: issue_date
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=issue_date`.'
         - schema:
             type: string
           in: query
@@ -9170,23 +9202,46 @@ paths:
           name: end_datetime
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns invoices with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Allowed to be used only along with date_field set to created_at or updated_at.'
         - schema:
-            type: string
-            example: 'customer_ids=1,2,3'
+            type: array
+            item:
+              type:
+                integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: customer_ids
-          description: Allows fetching invoices with matching customer id based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching customer id based on provided values. 
+          Use in query: `customer_ids=1,2,3`.'
         - schema:
-            type: string
-            example: 'number=1234,1235'
+            type: array
+            items:
+              type: string
+            example:
+              - '1234'
+              - '1235'
           in: query
           name: number
-          description: Allows fetching invoices with matching invoice number based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching invoice number based on provided values. 
+          Use in query: `number=1234,1235`.'
         - schema:
-            type: string
-            example: 'product_ids=23,34'
+            type: array
+            items:
+              type: integer
+            example:
+              - 23
+              - 34
           in: query
           name: product_ids
-          description: Allows fetching invoices with matching line items product ids based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching line items product ids based on provided values. 
+          Use in query: `product_ids=23,34`.'
         - schema:
             type: string
             enum:
@@ -9202,7 +9257,8 @@ paths:
             default: number
           in: query
           name: sort
-          description: Allows specification of the order of the returned list.
+          description: 'Allows specification of the order of the returned list. 
+          Use in query: `sort=total_amount`.'
   '/invoices/{uid}.json':
     parameters:
       - schema:
@@ -11231,16 +11287,9 @@ paths:
               - updated_at
           in: query
           name: date_field
-          description: The type of filter you'd like to apply to your search.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+          description: 'The type of filter you''d like to apply to your search. 
+          Use in query: `date_field=updated_at`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
           in: query
@@ -11258,7 +11307,8 @@ paths:
             example: not_null
           in: query
           name: price_point_ids
-          description: Allows fetching components allocation only if price point id is present.
+          description: 'Allows fetching components allocation only if price point id is present. 
+          Use in query: `price_point_ids=not_null`.'
         - schema:
             type: array
             items:
@@ -11270,7 +11320,8 @@ paths:
           style: form
           explode: false
           in: query
-          description: Allows fetching components allocation with matching product family id based on provided ids.
+          description: 'Allows fetching components allocation with matching product family id based on provided ids. 
+          Use in query: `product_family_ids=1,2,3`.'
           name: product_family_ids
         - schema:
             type: string
@@ -11280,7 +11331,8 @@ paths:
             example: updated_at
           in: query
           name: sort
-          description: The attribute by which to sort.
+          description: 'The attribute by which to sort. 
+          Use in query: `sort=updated_at`.'
         - schema:
             type: string
           in: query
@@ -11297,19 +11349,26 @@ paths:
               - subscription
             example: subscription
           in: query
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=subscription`.'
           name: include
         - schema:
             type: boolean
             example: true
           in: query
-          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching components allocation with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
         - schema:
-            type: string
-            example: 'filter[currencies]=USD,EUR'
+            type: array
+            items:
+              type: string
+            example:
+              - EUR
+              - USD
           in: query
-          description: Allows fetching components allocation with matching currency based on provided values.
+          description: 'Allows fetching components allocation with matching currency based on provided values. 
+          Use in query: `filter[currencies]=EUR,USD`.'
           name: 'filter[currencies]'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
@@ -13636,28 +13695,32 @@ paths:
           schema:
             type: string
             format: date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `start_date=2022-07-01`.'
           example: '2022-07-01'
         - name: end_date
           in: query
           schema:
             type: string
             format: date
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `end_date=2022-08-01`.'
           example: '2022-08-01'
         - name: start_datetime
           in: query
           schema:
             type: string
             format: date-time
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `start_datetime=2022-07-01 09:00:05`.'
           example: '2022-07-01 09:00:05'
         - name: end_datetime
           in: query
           schema:
             type: string
             format: date-time
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `end_datetime=2022-08-01 10:00:05`.'
           example: '2022-08-01 10:00:05'
         - name: metadata
           in: query
@@ -13665,7 +13728,8 @@ paths:
             additionalProperties: true
           style: deepObject
           explode: true
-          description: The value of the metadata field specified in the parameter
+          description: 'The value of the metadata field specified in the parameter. 
+          Use in query: `metadata[my-field]=value&metadata[other-field]=another_value`.'
         - $ref: '#/components/parameters/sort-direction'
         - schema:
             $ref: '#/components/schemas/List-Subscriptions-Sort'
@@ -15134,7 +15198,8 @@ paths:
               - self_service_page_token
           style: form
           explode: true
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include[]=coupons&include[]=self_service_page_token`.'
   '/subscriptions/{subscription_id}/resume.json':
     parameters:
       - schema:
@@ -17267,19 +17332,22 @@ paths:
             example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice
+          description: 'The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. 
+          Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
-            example: 'filter[start_date]=2011-12-15'
+            example: '2011-12-15'
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-15`.'
         - schema:
             type: string
-            example: 'filter[end_date]=2011-12-15'
+            example: '2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[end_date]=2011-12-15`.'
   '/subscriptions/{subscription_id}/service_credits.json':
     parameters:
       - schema:
@@ -20742,16 +20810,8 @@ paths:
             example: updated_at
           in: query
           name: sort
-          description: The attribute by which to sort.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+          description: 'The attribute by which to sort. Use in query: `sort=updated_at`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
             enum:
@@ -20759,26 +20819,30 @@ paths:
             example: updated_at
           in: query
           name: date_field
-          description: The type of filter you'd like to apply to your search.
+          description: 'The type of filter you''d like to apply to your search. Use in query: `date_field=updated_at`.'
         - schema:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified,'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `start_date=2011-12-15`.'
         - schema:
             type: string
           in: query
           name: start_datetime
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `start_datetime=2022-07-01 09:00:05`.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `end_date=2011-12-16`.'
         - schema:
             type: string
           in: query
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `end_datetime=2022-07-01 09:00:05`.'
           name: end_datetime
         - schema:
             type: array
@@ -20796,7 +20860,8 @@ paths:
           explode: false
           in: query
           name: subscription_ids
-          description: Allows fetching components allocation with matching subscription id based on provided ids.
+          description: 'Allows fetching components allocation with matching subscription id based on provided ids. 
+          Use in query: `subscription_ids=1,2,3`.'
         - schema:
             type: string
             enum:
@@ -20804,7 +20869,8 @@ paths:
             example: not_null
           in: query
           name: price_point_ids
-          description: Allows fetching components allocation only if price point id is present.
+          description: 'Allows fetching components allocation only if price point id is present. 
+          Use in query: `price_point_ids=not_null`.'
         - schema:
             type: array
             items:
@@ -20815,7 +20881,8 @@ paths:
               - 3
           in: query
           name: product_family_ids
-          description: Allows fetching components allocation with matching product family id based on provided ids.
+          description: 'Allows fetching components allocation with matching product family id based on provided ids. 
+          Use in query: `product_family_ids=1,2,3`.'
           style: form
           explode: false
         - schema:
@@ -20825,7 +20892,8 @@ paths:
               - subscription
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=subscription`.'
         - schema:
             type: boolean
             enum:
@@ -20834,19 +20902,30 @@ paths:
             example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching components allocation with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
         - schema:
-            type: string
-            example: 'filter[currencies]=USD,EUR'
+            type: array
+            items:
+              type: string
+            example:
+              - EUR
+              - USD
           in: query
           name: 'filter[currencies]'
-          description: Allows fetching components allocation with matching currency based on provided values.
+          description: 'Allows fetching components allocation with matching currency based on provided values. 
+          Use in query: `filter[currencies]=USD,EUR`.'
         - schema:
-            type: string
-            example: 'filter[subscription][states]=active,canceled&include=subscription'
+            type: array
+            items:
+              type: string
+            example:
+              - active
+              - canceled
           in: query
           name: 'filter[subscription][states]'
-          description: Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
+          description: 'Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. 
+          Use in query: `filter[subscription][states]=active,canceled&include=subscription`.'
         - schema:
             type: string
             example: updated_at
@@ -21194,10 +21273,11 @@ paths:
         - $ref: '#/components/parameters/per-page-default-30'
         - schema:
             type: string
-            example: '?filter[segment_property_1_value]=EU'
+            example: EU
           in: query
           name: 'filter[segment_property_1_value]'
-          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected.'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected. 
+          Use in query: `filter[segment_property_1_value]=EU`.'
         - schema:
             type: string
           in: query
@@ -22026,18 +22106,25 @@ paths:
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts split per subscription.'
       parameters:
         - schema:
-            type: string
-            example: 'filter[subscription_ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
             minLength: 1
           in: query
           name: 'filter[subscription_ids]'
-          description: Submit ids in order to limit results.
+          description: 'Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: string
             example: 'at_time=2022-01-10T10:00:00-05:00'
           in: query
           name: at_time
-          description: Submit a timestamp in ISO8601 format to request MRR for a historic time.
+          description: 'Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`.'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/per-page'
         - schema:
@@ -22048,7 +22135,8 @@ paths:
             example: desc
           in: query
           name: direction
-          description: Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default.
+          description: 'Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default. 
+          Use in query: `direction=desc`.'
   '/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json':
     parameters:
       - schema:
@@ -22260,7 +22348,8 @@ paths:
             example: created_at
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=created_at`.'
         - schema:
             type: string
           in: query
@@ -22291,7 +22380,7 @@ paths:
             example: true
           in: query
           name: include_archived
-          description: Include archived products.
+          description: 'Include archived products. Use in query: `include_archived=true`.'
         - schema:
             type: string
             example: prepaid_product_price_point
@@ -22299,7 +22388,8 @@ paths:
               - prepaid_product_price_point
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=prepaid_product_price_point`.'
         - schema:
             type: string
             example: not_null
@@ -22308,13 +22398,15 @@ paths:
               - not_null
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
-          description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+          description: 'Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. 
+          Use in query: `filter[prepaid_product_price_point][product_price_point_id]=not_null`.'
         - schema:
             type: boolean
             example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
   '/invoices/{uid}/issue.json':
     parameters:
       - schema:
@@ -22449,7 +22541,7 @@ paths:
             example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
           in: query
@@ -22465,7 +22557,7 @@ paths:
             example: include=currency_prices
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. Use in query: `include=currency_prices`.'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/per-page'
         - schema:
@@ -22496,23 +22588,21 @@ paths:
           explode: false
           in: query
           name: 'filter[type]'
-          description: Allows fetching price points with matching type.
+          description: 'Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: desc
-            default: asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
-        - schema:
-            type: string
-            example: 'filter[ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: 'filter[ids]'
-          description: Allows fetching price points with matching id based on provided values.
+          description: 'Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: string
             default: 'null'
@@ -22522,7 +22612,7 @@ paths:
               - not_null
           in: query
           name: 'filter[archived_at]'
-          description: Allows fetching price points only if archived_at is present or not.
+          description: 'Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`.'
   /products_price_points.json:
     get:
       summary: List Products Price Points
@@ -22583,16 +22673,7 @@ paths:
       operationId: listAllProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
-        - schema:
-            type: string
-            default: asc
-            example: desc
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
             enum:
@@ -22602,7 +22683,7 @@ paths:
             example: not_null
           in: query
           name: 'filter[archived_at]'
-          description: Allows fetching price points only if archived_at is present or not.
+          description: 'Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`.'
         - schema:
             type: string
             enum:
@@ -22610,7 +22691,7 @@ paths:
               - updated_at
             example: created_at
           in: query
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`.'
           name: 'filter[date_field]'
         - schema:
             type: string
@@ -22623,11 +22704,16 @@ paths:
           name: 'filter[end_datetime]'
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
         - schema:
-            type: string
-            example: 'filter[ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: 'filter[ids]'
-          description: Allows fetching price points with matching id based on provided values.
+          description: 'Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`.'
         - schema:
             type: string
           in: query
@@ -22656,7 +22742,7 @@ paths:
           explode: false
           in: query
           name: 'filter[type]'
-          description: Allows fetching price points with matching type.
+          description: 'Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`.'
         - schema:
             type: string
             enum:
@@ -22664,7 +22750,7 @@ paths:
             example: currency_prices
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. Use in query: `include=currency_prices`.'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/per-page'
   '/subscriptions/{subscription_id}/activate.json':
@@ -23289,7 +23375,8 @@ components:
     page:
       name: page
       in: query
-      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.
+      Use in query: `page=1`.'
       schema:
         type: integer
         default: 1
@@ -23298,7 +23385,8 @@ components:
     per-page:
       name: per_page
       in: query
-      description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
       schema:
         type: integer
         default: 20
@@ -23307,7 +23395,8 @@ components:
     per-page-default-30:
       name: per_page
       in: query
-      description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
       schema:
         type: integer
         default: 30
@@ -23316,7 +23405,8 @@ components:
     per-page-default-50:
       name: per_page
       in: query
-      description: This parameter indicates how many records to fetch in each request. Default value is 50. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 50. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
       schema:
         type: integer
         default: 30
@@ -23325,7 +23415,8 @@ components:
     sort-direction:
       name: direction
       in: query
-      description: Controls the order in which results are returned.
+      description: 'Controls the order in which results are returned. 
+      Use in query: `direction=asc`.'
       schema:
         $ref: '#/components/schemas/Sort-Direction'
     subscription-id-required-path:
