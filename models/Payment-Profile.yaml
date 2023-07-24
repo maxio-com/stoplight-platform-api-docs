@@ -10,21 +10,21 @@ examples:
     expiration_year: 2022
     customer_id: 14543792
     current_vault: bogus
-    vault_token: '1'
+    vault_token: "1"
     billing_address: 123 Montana Way
     billing_city: Billings
     billing_state: MT
-    billing_zip: '59101'
+    billing_zip: "59101"
     billing_country: US
     customer_vault_token: null
-    billing_address_2: ''
+    billing_address_2: ""
     payment_type: credit_card
     site_gateway_setting_id: 1
     gateway_handle: null
 properties:
   id:
     type: integer
-    description: 'The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer'
+    description: "The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer"
   first_name:
     type: string
     description: The first name of the card holder
@@ -63,7 +63,7 @@ properties:
   current_vault:
     type:
       - string
-      - 'null'
+      - "null"
     description: The vault that stores the payment profile with the provided vault_token.
     enum:
       - bogus
@@ -81,43 +81,43 @@ properties:
   vault_token:
     type:
       - string
-      - 'null'
+      - "null"
     description: The “token” provided by your vault storage for an already stored payment profile
   billing_address:
     type:
       - string
-      - 'null'
+      - "null"
     description: The current billing street address for the card
   billing_city:
     type:
       - string
-      - 'null'
+      - "null"
     description: The current billing address city for the card
   billing_state:
     type:
       - string
-      - 'null'
+      - "null"
     description: The current billing address state for the card
   billing_zip:
     type:
       - string
-      - 'null'
+      - "null"
     description: The current billing address zip code for the card
   billing_country:
     type:
       - string
-      - 'null'
+      - "null"
     description: The current billing address country for the card
   customer_vault_token:
     type:
       - string
-      - 'null'
-    description: '(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token'
+      - "null"
+    description: "(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token"
   billing_address_2:
     type:
       - string
-      - 'null'
-    description: 'The current billing street address, second line, for the card'
+      - "null"
+    description: "The current billing street address, second line, for the card"
   payment_type:
     type: string
   disabled:
@@ -130,4 +130,4 @@ properties:
   gateway_handle:
     type:
       - string
-      - 'null'
+      - "null"
