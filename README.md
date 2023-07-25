@@ -7,16 +7,22 @@ The Chargify API is documented in this repository using the [OpenAPI Specificati
 If you are a Chargify developer and need to make changes to the API documentation, please refer to our internal documentation on Stoplight Studio.
 This repository is using [Prettier](https://prettier.io/docs/en/index.html) to enforce consistent formatting.
 
-Install Prettier:
+Install Prettier and Husky:
 
 ```shell
-npm install --save-dev --save-exact prettier
+npm install
 ```
 
 Reformat all files manually:
 
 ```shell
 npx prettier . --write
+```
+
+Husky is used to install pre-commit hook for reformatting changed files to ensure your files are properly formatted.
+
+```shell
+npm install
 ```
 
 If you want to use Prettier in your IDE check [JetBrains Configuration](https://prettier.io/docs/en/webstorm.html) if you are using JetBrains IDE or
