@@ -36,7 +36,6 @@ properties:
       - month
       - day
       - never
-      - 'null'
   created_at:
     type: string
     description: Timestamp indicating when this product was created

@@ -271,6 +271,8 @@ info:
       + [Invoices: Charges](./b3A6MTQxMTA0MTM-create-charge)
       + [Invoices: Credits](./b3A6MTQxMTA0MTQ-create-invoice-credit)
 tags:
+  - name: API Exports
+  - name: Advance Invoice
   - name: Billing Portal
   - name: Coupons
   - name: Components
@@ -422,18 +424,8 @@ paths:
           in: query
           name: until_date
           description: Format YYYY-MM-DD. Returns Webhooks with the created_at date less than or equal to the one specified.
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            maximum: 200
-            default: 20
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
@@ -735,9 +727,9 @@ paths:
                         name: string
                         phone: string
                       tax_configuration:
-                        kind: string
+                        kind: custom
                         fully_configured: true
-                        destination_address: string
+                        destination_address: shipping_then_billing
                       net_terms:
                         default_net_terms: 0
                         automatic_net_terms: 0
@@ -882,18 +874,8 @@ paths:
       operationId: listSubscriptionNotes
       description: Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            maximum: 200
-            default: 20
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
   '/subscriptions/{subscription_id}/notes/{note_id}.json':
     parameters:
       - schema:
@@ -1203,18 +1185,8 @@ paths:
           in: query
           name: direction
           description: Direction to sort customers by time of creation
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            maximum: 200
-            default: 50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page-default-50'
         - schema:
             type: string
             enum:
@@ -1918,18 +1890,8 @@ paths:
                         updated_at: '2017-02-17T16:29:59-05:00'
       description: This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
   '/reason_codes/{reason_code_id}.json':
     parameters:
       - schema:
@@ -2171,18 +2133,8 @@ paths:
           in: query
           name: name
           description: filter by the name of the metafield
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             default: asc
@@ -2352,18 +2304,8 @@ paths:
 
         This endpoint will also display the current stats of your metadata to use as a tool for pagination.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
     put:
       summary: Update Metadata
       tags:
@@ -2476,18 +2418,8 @@ paths:
 
         This endpoint will list the number of pages of metadata information that are contained within a site.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
@@ -2729,81 +2661,87 @@ paths:
 
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 30
-            maximum: 200
-            minimum: 1
-            example: per_page=50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page-default-30'
         - schema:
             type: string
             enum:
               - created_at
               - updated_at
-            example: 'filter[date_field]=updated_at'
+            example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
-            example: 'filter[end_date]=2011-12-15'
+            example: '2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[date_field]=2011-12-15`.'
         - schema:
             type: string
-            example: 'filter[end_datetime]=2011-12-1T10:15:30+01:00'
+            example: '2011-12-1T10:15:30+01:00'
           in: query
           name: 'filter[end_datetime]'
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.
+          Use in query: `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.'
         - schema:
             type: string
-            example: 'filter[start_date]=2011-12-17'
+            example: '2011-12-17'
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-17`.'
         - schema:
             type: string
-            example: 'filter[start_datetime]=2011-12-19T10:15:30+01:00'
+            example: '2011-12-19T10:15:30+01:00'
           in: query
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `filter[start_datetime]=2011-12-19T10:15:30+01:00`.'
           name: 'filter[start_datetime]'
         - schema:
             type: array
-            example: 'filter[ids]=1,2,3'
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
             minItems: 1
           in: query
           name: 'filter[ids]'
-          description: Allows fetching coupons with matching id based on provided values.
+          description: 'Allows fetching coupons with matching id based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: array
-            example: 'filter[codes]=free,free_trial'
+            items:
+              type: string
+            example:
+              - free
+              - free_trial
           in: query
           name: 'filter[codes]'
-          description: Allows fetching coupons with matching codes based on provided values.
+          description: 'Allows fetching coupons with matching codes based on provided values. 
+          Use in query: `filter[codes]=free,free_trial`.'
+          style: form
+          explode: false
         - schema:
             type: boolean
-            enum:
-              - 'true'
-            example: currency_prices=true
+            example: true
           in: query
           name: currency_prices
-          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. 
+          Use in query: `currency_prices=true`.'
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
-          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching coupons with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   /coupons/find.json:
     get:
@@ -3074,18 +3012,8 @@ paths:
 
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          name: page
-        - schema:
-            type: integer
-            default: 30
-            maximum: 200
-          in: query
-          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-          name: per_page
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page-default-30'
         - schema:
             type: string
             enum:
@@ -3121,58 +3049,76 @@ paths:
           deprecated: true
         - schema:
             type: array
-            example: 'filter[ids]=1,2,3'
+            example:
+              - 1
+              - 2
+              - 3
             minItems: 1
           in: query
           name: 'filter[ids]'
-          description: Allows fetching coupons with matching id based on provided values.
+          description: 'Allows fetching coupons with matching id based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: array
             minItems: 1
-            example: 'filter[codes]=free,free_trial'
+            example:
+              - free
+              - free_trial
           in: query
           name: 'filter[codes]'
-          description: Allows fetching coupons with matching code based on provided values.
+          description: 'Allows fetching coupons with matching code based on provided values. 
+          Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: boolean
-            example: currency_prices=true
+            example: true
           in: query
           name: currency_prices
-          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.'
+          description: 'When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. 
+          Use in query: `currency_prices=true`.'
         - schema:
             type: string
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[end_date]=2011-12-17`.'
         - schema:
             type: string
           in: query
           name: 'filter[end_datetime]'
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `filter[end_datetime]=2011-12-19T10:15:30+01:00`.'
         - schema:
             type: string
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-19`.'
         - schema:
             type: string
           in: query
           name: 'filter[start_datetime]'
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `filter[start_datetime]=2011-12-19T10:15:30+01:00`.'
         - schema:
             type: string
             enum:
               - created_at
               - updated_at
-            example: 'filter[date_field]=updated_at'
+            example: updated_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `filter[date_field]=updated_at`.'
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
-          description: Allows fetching coupons with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching coupons with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   '/product_families/{product_family_id}/coupons/{coupon_id}/usage.json':
     parameters:
@@ -3552,18 +3498,8 @@ paths:
                       - 9FH1ED
       description: This request allows you to request the subcodes that are attached to a coupon.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
     put:
       summary: Update Coupon Subcodes
       tags:
@@ -3787,6 +3723,8 @@ paths:
                           new_value: 'No'
                           resource_type: Subscription
                           resource_id: 117
+                          previous_subscription_state: active
+                          new_subscription_state: past_due
             application/xml:
               schema:
                 type: object
@@ -3859,18 +3797,8 @@ paths:
          }
         ```
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: integer
           in: query
@@ -3888,46 +3816,53 @@ paths:
           in: query
           name: direction
         - schema:
-            type: string
-            enum:
-              - account_transaction_changed
-              - billing_date_change
-              - component_allocation_change
-              - customer_update
-              - customer_create
-              - dunning_step_reached
-              - expiration_date_change
-              - expiring_card
-              - metered_usage
-              - payment_success
-              - payment_success_recreated
-              - payment_failure
-              - payment_failure_recreated
-              - refund_failure
-              - refund_success
-              - renewal_success
-              - renewal_success_recreated
-              - renewal_failure
-              - signup_success
-              - signup_failure
-              - statement_closed
-              - statement_settled
-              - subscription_bank_account_update
-              - subscription_deletion
-              - subscription_paypal_account_update
-              - subscription_product_change
-              - subscription_state_change
-              - trial_end_notice
-              - upgrade_downgrade_success
-              - upgrade_downgrade_failure
-              - upcoming_renewal_notice
+            type: array
+            items:
+              type: string
+              enum:
+                - account_transaction_changed
+                - billing_date_change
+                - component_allocation_change
+                - customer_update
+                - customer_create
+                - dunning_step_reached
+                - expiration_date_change
+                - expiring_card
+                - metered_usage
+                - payment_success
+                - payment_success_recreated
+                - payment_failure
+                - payment_failure_recreated
+                - refund_failure
+                - refund_success
+                - renewal_success
+                - renewal_success_recreated
+                - renewal_failure
+                - signup_success
+                - signup_failure
+                - statement_closed
+                - statement_settled
+                - subscription_bank_account_update
+                - subscription_deletion
+                - subscription_paypal_account_update
+                - subscription_product_change
+                - subscription_state_change
+                - trial_end_notice
+                - upgrade_downgrade_success
+                - upgrade_downgrade_failure
+                - upcoming_renewal_notice
+                - custom_field_value_change
+                - subscription_prepayment_account_balance_changed
+                - subscription_service_credit_account_balance_changed
+            example:
               - custom_field_value_change
-              - subscription_prepayment_account_balance_changed
-              - subscription_service_credit_account_balance_changed
-            example: filter=custom_field_value_change
+              - payment_success
           in: query
           name: filter
-          description: 'You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success'
+          description: 'You can pass multiple event keys after comma. 
+          Use in query: `filter=signup_success,payment_success`'
+          style: form
+          explode: false
         - schema:
             type: string
             enum:
@@ -4008,18 +3943,8 @@ paths:
 
         Each event type has its own `event_specific_data` specified.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: integer
           in: query
@@ -4096,18 +4021,8 @@ paths:
                     count: 144
       operationId: readEventsCount
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: integer
           in: query
@@ -4916,7 +4831,7 @@ paths:
                     description: Example of JSON per-unit component example
                     pricing_scheme: per_unit
                     unit_price: '10'
-                    taxable: '1'
+                    taxable: true
                     display_on_hosted_page: '1'
                     allow_fractional_quantities: '1'
                     public_signup_page_ids:
@@ -4928,7 +4843,7 @@ paths:
                     unit_name: Quantity Based Component
                     description: Example of JSON stairstep example
                     pricing_scheme: stairstep
-                    taxable: '1'
+                    taxable: true
                     prices_attributes:
                       - starting_quantity: '1'
                         ending_quantity: '100'
@@ -4947,7 +4862,7 @@ paths:
                     unit_name: Quantity Based Component
                     description: Example of JSON volume component example
                     pricing_scheme: volume
-                    taxable: '1'
+                    taxable: true
                     prices_attributes:
                       - starting_quantity: '1'
                         ending_quantity: '10'
@@ -4965,7 +4880,7 @@ paths:
                     name: Quantity Based Component
                     unit_name: Quantity Based Component
                     description: Example of JSON for tiered quantity based component
-                    taxable: '1'
+                    taxable: true
                     pricing_scheme: tiered
                     prices_attributes:
                       - starting_quantity: '1'
@@ -5343,30 +5258,29 @@ paths:
           in: query
           name: include_archived
           description: Include archived items
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        - schema:
-            type: string
-            example: 'filter[ids]=1,2,3'
+            type: array
+            items:
+              type: string
+            example:
+              - '1'
+              - '2'
+              - '3'
           in: query
           name: 'filter[ids]'
-          description: Allows fetching components with matching id based on provided value.
+          description: 'Allows fetching components with matching id based on provided value. 
+          Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: boolean
-            example: ' filter[use_site_exchange_rate]=true'
+            example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
       description: This request will return a list of components for a site.
   '/components/{component_id}/price_points/{price_point_id}/default.json':
     parameters:
@@ -5506,33 +5420,28 @@ paths:
           name: include_archived
           description: Include archived items.
         - schema:
-            type: string
-            example: 'filter[ids]=1,2'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
           in: query
-          description: Allows fetching components with matching id based on provided value.
+          description: 'Allows fetching components with matching id based on provided value. 
+          Use in query: `filter[ids]=1,2`.'
           name: 'filter[ids]'
-        - schema:
-            type: string
-            maxLength: 200
-            example: per_page=50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        - schema:
-            type: string
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
               - updated_at
               - created_at
-            example: date_field=created_at
+            example: created_at
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=created_at`.'
         - schema:
             type: string
           in: query
@@ -5555,9 +5464,10 @@ paths:
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
-          description: Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
   '/components/{component_id}/price_points.json':
     parameters:
@@ -5635,6 +5545,7 @@ paths:
                   price_point:
                     name: Special Pricing
                     handle: special
+                    pricing_scheme: per_unit
                     prices:
                       - starting_quantity: 1
                         unit_price: 5
@@ -5703,24 +5614,15 @@ paths:
           in: query
           name: currency_prices
           description: Include an array of currency price data
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - in: query
           name: filter
           style: deepObject
           schema:
             type: object
-            example: '?filter[type]=catalog'
+            example:
+              type: catalog
           description: |-
             #### Default type filter: `?filter[type]=catalog,default`
             #### Type filter options: `catalog`, `default`, `custom`
@@ -5813,6 +5715,7 @@ paths:
                           unit_price: 4
                     - name: Special Pricing
                       handle: special
+                      pricing_scheme: per_unit
                       prices:
                         - starting_quantity: 1
                           unit_price: 5
@@ -6246,12 +6149,7 @@ paths:
           in: query
           name: subscription_id
           description: optionally filter results by subscription
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned. '
+        - $ref: '#/components/parameters/page'
         - schema:
             type: integer
             default: 10
@@ -6294,8 +6192,6 @@ paths:
                       description: This is our gold plan.
                       accounting_code: '123'
                       request_credit_card: true
-                      expiration_interval: null
-                      expiration_interval_unit: null
                       created_at: '2016-11-04T16:31:15-04:00'
                       updated_at: '2016-11-04T16:31:15-04:00'
                       price_in_cents: 1000
@@ -6465,18 +6361,8 @@ paths:
                   value: A valid product_family_id is required
       description: This method allows to retrieve a list of Products belonging to a Product Family.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: ' This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
@@ -6512,27 +6398,30 @@ paths:
           description: Include archived products
         - schema:
             type: string
-            example: include=prepaid_product_price_point
+            example: prepaid_product_price_point
             enum:
               - prepaid_product_price_point
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=prepaid_product_price_point`.'
         - schema:
             type: string
             enum:
               - 'null'
               - not_null
-            example: 'include=prepaid_product_price_point&filter[prepaid_product_price_point][product_price_point_id]=not_null'
+            example: not_null
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
-          description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+          description: 'Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. 
+          Use in query: `filter[prepaid_product_price_point][product_price_point_id]=not_null`.'
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
       tags:
         - Product Families
   '/products/{product_id}.json':
@@ -6622,8 +6511,6 @@ paths:
                       description: This is our platinum plan.
                       accounting_code: '123'
                       request_credit_card: true
-                      expiration_interval: null
-                      expiration_interval_unit: null
                       created_at: '2016-11-04T16:34:29-04:00'
                       updated_at: '2016-11-04T16:37:11-04:00'
                       price_in_cents: 1000
@@ -7082,11 +6969,7 @@ paths:
                         updated_at: 'Tue, 23 Oct 2018 18:49:47 EDT -04:00'
       operationId: listProductPricePoints
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: ' Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - $ref: '#/components/parameters/page'
         - schema:
             type: integer
             maximum: 200
@@ -7104,7 +6987,8 @@ paths:
           style: deepObject
           schema:
             type: object
-            example: '?filter[type]=catalog'
+            example:
+              type: catalog
           description: |-
             #### Default type filter: `?filter[type]=catalog,default`
             #### Type filter options: `catalog`, `default`, `custom`
@@ -8269,18 +8153,8 @@ paths:
       operationId: listPaymentProfiles
       description: 'This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.'
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: integer
           in: query
@@ -9250,18 +9124,8 @@ paths:
           in: query
           name: subscription_group_uid
           description: The UID of the subscription group you want to fetch consolidated invoices for. This will return a paginated list of consolidated invoices for the specified group.
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             default: desc
@@ -9322,10 +9186,11 @@ paths:
               - updated_at
               - paid_date
             default: due_date
-            example: date_field=issue_date
+            example: issue_date
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=issue_date`.'
         - schema:
             type: string
           in: query
@@ -9337,23 +9202,46 @@ paths:
           name: end_datetime
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns invoices with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Allowed to be used only along with date_field set to created_at or updated_at.'
         - schema:
-            type: string
-            example: 'customer_ids=1,2,3'
+            type: array
+            item:
+              type:
+                integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: customer_ids
-          description: Allows fetching invoices with matching customer id based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching customer id based on provided values. 
+          Use in query: `customer_ids=1,2,3`.'
         - schema:
-            type: string
-            example: 'number=1234,1235'
+            type: array
+            items:
+              type: string
+            example:
+              - '1234'
+              - '1235'
           in: query
           name: number
-          description: Allows fetching invoices with matching invoice number based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching invoice number based on provided values. 
+          Use in query: `number=1234,1235`.'
         - schema:
-            type: string
-            example: 'product_ids=23,34'
+            type: array
+            items:
+              type: integer
+            example:
+              - 23
+              - 34
           in: query
           name: product_ids
-          description: Allows fetching invoices with matching line items product ids based on provided values.
+          style: form
+          explode: false
+          description: 'Allows fetching invoices with matching line items product ids based on provided values. 
+          Use in query: `product_ids=23,34`.'
         - schema:
             type: string
             enum:
@@ -9365,11 +9253,12 @@ paths:
               - issue_date
               - due_date
               - number
-            example: sort=total_amount
+            example: total_amount
             default: number
           in: query
           name: sort
-          description: Allows specification of the order of the returned list.
+          description: 'Allows specification of the order of the returned list. 
+          Use in query: `sort=total_amount`.'
   '/invoices/{uid}.json':
     parameters:
       - schema:
@@ -9882,15 +9771,12 @@ paths:
             type: integer
           in: query
           name: since_id
+        - $ref: '#/components/parameters/page'
         - schema:
-            type: string
-          in: query
-          name: page
-        - schema:
-            type: string
-            default: '100'
-            minLength: 1
-            maxLength: 200
+            type: integer
+            default: 100
+            min: 1
+            max: 200
           in: query
           name: per_page
         - schema:
@@ -10456,19 +10342,8 @@ paths:
           in: query
           name: subscription_id
           description: ' The subscription''s Chargify id'
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: boolean
             default: false
@@ -11248,19 +11123,8 @@ paths:
       operationId: listInvoiceSegments
       description: 'Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.'
       parameters:
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maxLength: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             default: asc
@@ -11418,21 +11282,14 @@ paths:
       parameters:
         - schema:
             type: string
-            example: date_field=updated_at
+            example: updated_at
             enum:
               - updated_at
           in: query
           name: date_field
-          description: The type of filter you'd like to apply to your search.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: direction=asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+          description: 'The type of filter you''d like to apply to your search. 
+          Use in query: `date_field=updated_at`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
           in: query
@@ -11447,25 +11304,35 @@ paths:
             type: string
             enum:
               - not_null
-            example: price_point_ids=not_null
+            example: not_null
           in: query
           name: price_point_ids
-          description: Allows fetching components allocation only if price point id is present.
+          description: 'Allows fetching components allocation only if price point id is present. 
+          Use in query: `price_point_ids=not_null`.'
         - schema:
             type: array
-            example: 'product_family_ids=1,2,3'
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
+          style: form
+          explode: false
           in: query
-          description: Allows fetching components allocation with matching product family id based on provided ids.
+          description: 'Allows fetching components allocation with matching product family id based on provided ids. 
+          Use in query: `product_family_ids=1,2,3`.'
           name: product_family_ids
         - schema:
             type: string
             enum:
               - id
               - updated_at
-            example: sort=updated_at
+            example: updated_at
           in: query
           name: sort
-          description: The attribute by which to sort.
+          description: 'The attribute by which to sort. 
+          Use in query: `sort=updated_at`.'
         - schema:
             type: string
           in: query
@@ -11480,24 +11347,28 @@ paths:
             type: string
             enum:
               - subscription
-            example: include=subscription
+            example: subscription
           in: query
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=subscription`.'
           name: include
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
-            enum:
-              - 'true'
-              - 'false'
+            example: true
           in: query
-          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching components allocation with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
           name: 'filter[use_site_exchange_rate]'
         - schema:
-            type: string
-            example: 'filter[currencies]=USD,EUR'
+            type: array
+            items:
+              type: string
+            example:
+              - EUR
+              - USD
           in: query
-          description: Allows fetching components allocation with matching currency based on provided values.
+          description: 'Allows fetching components allocation with matching currency based on provided values. 
+          Use in query: `filter[currencies]=EUR,USD`.'
           name: 'filter[currencies]'
   '/subscriptions/{subscription_id}/price_points.json':
     parameters:
@@ -11870,11 +11741,7 @@ paths:
         # => 23
         ```
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: Pass an integer in the page parameter via the query string to access subsequent pages of 50 allocations
+        - $ref: '#/components/parameters/page'
   '/subscriptions/{subscription_id}/allocations.json':
     parameters:
       - schema:
@@ -12613,19 +12480,8 @@ paths:
           in: query
           name: until_date
           description: 'Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified.'
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
-          description: The page number used for pagination.
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: The number of results used for pagination.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
   '/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/activate.json':
     parameters:
       - schema:
@@ -13732,17 +13588,17 @@ paths:
                         custom_price:
                           pricing_scheme: stairstep
                           prices:
-                            - unit_price: '5'
-                              starting_quantity: '1'
-                              ending_quantity: '15'
-                            - unit_price: '2'
-                              starting_quantity: '16'
+                            - unit_price: 5
+                              starting_quantity: 1
+                              ending_quantity: 15
+                            - unit_price: 2
+                              starting_quantity: 16
                       - component_id: 10
                         enabled: true
                         custom_price:
                           prices:
-                            - unit_price: '1'
-                              starting_quantity: '1'
+                            - unit_price: 1
+                              starting_quantity: 1
               With Agreement Acceptance:
                 value:
                   subscription:
@@ -13839,28 +13695,32 @@ paths:
           schema:
             type: string
             format: date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `start_date=2022-07-01`.'
           example: '2022-07-01'
         - name: end_date
           in: query
           schema:
             type: string
             format: date
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `end_date=2022-08-01`.'
           example: '2022-08-01'
         - name: start_datetime
           in: query
           schema:
             type: string
-            format: date
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+            format: date-time
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `start_datetime=2022-07-01 09:00:05`.'
           example: '2022-07-01 09:00:05'
         - name: end_datetime
           in: query
           schema:
             type: string
             format: date-time
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `end_datetime=2022-08-01 10:00:05`.'
           example: '2022-08-01 10:00:05'
         - name: metadata
           in: query
@@ -13868,7 +13728,8 @@ paths:
             additionalProperties: true
           style: deepObject
           explode: true
-          description: The value of the metadata field specified in the parameter
+          description: 'The value of the metadata field specified in the parameter. 
+          Use in query: `metadata[my-field]=value&metadata[other-field]=another_value`.'
         - $ref: '#/components/parameters/sort-direction'
         - schema:
             $ref: '#/components/schemas/List-Subscriptions-Sort'
@@ -14329,11 +14190,7 @@ paths:
             type: boolean
           in: query
           name: live_mode
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
+        - $ref: '#/components/parameters/page'
         - schema:
             type: integer
             default: 100
@@ -14508,11 +14365,7 @@ paths:
             type: boolean
           in: query
           name: live_mode
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
+        - $ref: '#/components/parameters/page'
         - schema:
             type: integer
             default: 100
@@ -14626,11 +14479,7 @@ paths:
             type: boolean
           in: query
           name: live_mode
-        - schema:
-            type: integer
-            default: 1
-          in: query
-          name: page
+        - $ref: '#/components/parameters/page'
         - schema:
             type: integer
             default: 100
@@ -14741,7 +14590,7 @@ paths:
                         accounting_code: ''
                         request_credit_card: true
                         expiration_interval: null
-                        expiration_interval_unit: ''
+                        expiration_interval_unit: month
                         created_at: '2019-02-15T10:15:00-07:00'
                         updated_at: '2019-02-15T10:30:34-07:00'
                         price_in_cents: 600
@@ -14996,7 +14845,7 @@ paths:
               With Custom Pricing:
                 value:
                   subscription:
-                    product_id: string
+                    product_id: 123
                     custom_price:
                       price_in_cents: 9900
                       interval: 1
@@ -15344,10 +15193,13 @@ paths:
               enum:
                 - coupons
                 - self_service_page_token
-            example: 'include[]=coupons, include[]=self_service_page_token'
+            example:
+              - coupons
+              - self_service_page_token
           style: form
           explode: true
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include[]=coupons&include[]=self_service_page_token`.'
   '/subscriptions/{subscription_id}/resume.json':
     parameters:
       - schema:
@@ -17452,15 +17304,16 @@ paths:
                 example-success-response:
                   value:
                     prepayments:
-                      - id: 17
-                        subscription_id: 3558750
-                        amount_in_cents: 2000
-                        remaining_amount_in_cents: 1100
-                        external: true
-                        memo: test
-                        details: test details
-                        payment_type: cash
-                        created_at: '2022-01-18T22:45:41+11:00'
+                      - prepayment:
+                          id: 17
+                          subscription_id: 3558750
+                          amount_in_cents: 2000
+                          remaining_amount_in_cents: 1100
+                          external: true
+                          memo: test
+                          details: test details
+                          payment_type: cash
+                          created_at: '2022-01-18T22:45:41+11:00'
         '401':
           description: Unauthorized
         '403':
@@ -17469,43 +17322,32 @@ paths:
           description: Not Found
       description: This request will list a subscription's prepayments.
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-            minimum: 1
-            example: per_page=50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
               - created_at
               - application_at
-            example: 'filter[date_field]=created_at'
+            example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice
+          description: 'The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. 
+          Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
-            example: 'filter[start_date]=2011-12-15'
+            example: '2011-12-15'
           in: query
           name: 'filter[start_date]'
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `filter[start_date]=2011-12-15`.'
         - schema:
             type: string
-            example: 'filter[end_date]=2011-12-15'
+            example: '2011-12-15'
           in: query
           name: 'filter[end_date]'
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `filter[end_date]=2011-12-15`.'
   '/subscriptions/{subscription_id}/service_credits.json':
     parameters:
       - schema:
@@ -18197,7 +18039,7 @@ paths:
                       subscription_ids:
                         type: array
                         items:
-                          type: Event
+                          type: integer
                       created_at:
                         type: string
               examples:
@@ -18360,14 +18202,8 @@ paths:
 
         Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: per_page
-        - schema:
-            type: integer
-          in: query
-          name: page
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
           in: query
@@ -18527,17 +18363,17 @@ paths:
               examples:
                 Example:
                   value:
-                    subscription_group: null
-                    customer_id: 1
-                    payment_profile:
-                      id: 1
-                      first_name: t
-                      last_name: t
-                      masked_card_number: XXXX-XXXX-XXXX-1
-                    payment_collection_method: automatic
-                    subscription_ids:
-                      - 1
-                    created_at: '2021-01-21T05:47:38-05:00'
+                    subscription_group:
+                      customer_id: 1
+                      payment_profile:
+                        id: 1
+                        first_name: t
+                        last_name: t
+                        masked_card_number: XXXX-XXXX-XXXX-1
+                      payment_collection_method: automatic
+                      subscription_ids:
+                        - 1
+                      created_at: '2021-01-21T05:47:38-05:00'
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -19760,17 +19596,17 @@ paths:
                         custom_price:
                           pricing_scheme: stairstep
                           prices:
-                            - unit_price: '5'
-                              starting_quantity: '1'
-                              ending_quantity: '15'
-                            - unit_price: '2'
-                              starting_quantity: '16'
+                            - unit_price: 5
+                              starting_quantity: 1
+                              ending_quantity: 15
+                            - unit_price: 2
+                              starting_quantity: 16
                       - component_id: 10
                         enabled: true
                         custom_price:
                           prices:
-                            - unit_price: '1'
-                              starting_quantity: '1'
+                            - unit_price: 1
+                              starting_quantity: 1
   /chargify_js_keys.json:
     get:
       summary: List Chargify.js Public Keys
@@ -19821,18 +19657,8 @@ paths:
       operationId: listChargifyJsPublicKeys
       description: This endpoint returns public keys used for Chargify.js.
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
   '/subscription_groups/{subscription_group_uid}/proforma_invoices.json':
     parameters:
       - schema:
@@ -20254,18 +20080,8 @@ paths:
           in: query
           name: status
           description: 'The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided'
-        - schema:
-            type: integer
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            default: 20
-            maximum: 200
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
@@ -20984,120 +20800,135 @@ paths:
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
       parameters:
-        - schema:
-            type: integer
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            example: per_page=50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
               - id
               - updated_at
-            example: sort=updated_at
+            example: updated_at
           in: query
           name: sort
-          description: The attribute by which to sort.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: direction=asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+          description: 'The attribute by which to sort. Use in query: `sort=updated_at`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
             enum:
               - updated_at
-            example: date_field=updated_at
+            example: updated_at
           in: query
           name: date_field
-          description: The type of filter you'd like to apply to your search.
+          description: 'The type of filter you''d like to apply to your search. Use in query: `date_field=updated_at`.'
         - schema:
             type: string
           in: query
           name: start_date
-          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified,'
+          description: 'The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. 
+          Use in query: `start_date=2011-12-15`.'
         - schema:
             type: string
           in: query
           name: start_datetime
-          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
+          description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date. 
+          Use in query: `start_datetime=2022-07-01 09:00:05`.'
         - schema:
             type: string
           in: query
           name: end_date
-          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.'
+          description: 'The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. 
+          Use in query: `end_date=2011-12-16`.'
         - schema:
             type: string
           in: query
-          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date.'
+          description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date. 
+          Use in query: `end_datetime=2022-07-01 09:00:05`.'
           name: end_datetime
         - schema:
             type: array
-            example: 'subscription_ids=1,2,3'
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
             maxLength: 200
             minLength: 1
             minItems: 1
             maxItems: 200
+          style: form
+          explode: false
           in: query
           name: subscription_ids
-          description: Allows fetching components allocation with matching subscription id based on provided ids.
+          description: 'Allows fetching components allocation with matching subscription id based on provided ids. 
+          Use in query: `subscription_ids=1,2,3`.'
         - schema:
             type: string
             enum:
               - not_null
-            example: price_point_ids=not_null
+            example: not_null
           in: query
           name: price_point_ids
-          description: Allows fetching components allocation only if price point id is present.
+          description: 'Allows fetching components allocation only if price point id is present. 
+          Use in query: `price_point_ids=not_null`.'
         - schema:
             type: array
-            example: 'product_family_ids=1,2,3'
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: product_family_ids
-          description: Allows fetching components allocation with matching product family id based on provided ids.
+          description: 'Allows fetching components allocation with matching product family id based on provided ids. 
+          Use in query: `product_family_ids=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: string
-            example: include=subscription
+            example: subscription
             enum:
               - subscription
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=subscription`.'
         - schema:
             type: boolean
             enum:
-              - 'true'
-              - 'false'
-            example: 'filter[use_site_exchange_rate]=true'
+              - true
+              - false
+            example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
+          description: 'Allows fetching components allocation with matching use_site_exchange_rate based on provided value. 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
         - schema:
-            type: string
-            example: 'filter[currencies]=USD,EUR'
+            type: array
+            items:
+              type: string
+            example:
+              - EUR
+              - USD
           in: query
           name: 'filter[currencies]'
-          description: Allows fetching components allocation with matching currency based on provided values.
+          description: 'Allows fetching components allocation with matching currency based on provided values. 
+          Use in query: `filter[currencies]=USD,EUR`.'
         - schema:
-            type: string
-            example: 'filter[subscription][states]=active,canceled&include=subscription'
+            type: array
+            items:
+              type: string
+            example:
+              - active
+              - canceled
           in: query
           name: 'filter[subscription][states]'
-          description: Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
+          description: 'Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. 
+          Use in query: `filter[subscription][states]=active,canceled&include=subscription`.'
         - schema:
             type: string
-            example: 'filter[subscription][date_field]=updated_at&include=subscription'
+            example: updated_at
             enum:
               - updated_at
           in: query
@@ -21124,7 +20955,7 @@ paths:
           name: 'filter[subscription][end_datetime]'
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`.'
     parameters: []
-  '/components/{component_id}/price_points/{price_point_id}/segments.json/':
+  '/components/{component_id}/price_points/{price_point_id}/segments.json':
     post:
       summary: Create Single Segment
       tags:
@@ -21306,10 +21137,9 @@ paths:
                     prices:
                       - starting_quantity: 1
                         ending_quantity: 10000
-                        unit_price: '0.19'
+                        unit_price: 0.19
                       - starting_quantity: 10001
-                        ending_quantity: null
-                        unit_price: '0.09'
+                        unit_price: 0.09
       description: |-
         This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
 
@@ -21439,26 +21269,15 @@ paths:
 
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: integer
-            maximum: 200
-            minimum: 1
-            default: 30
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed value is 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page-default-30'
         - schema:
             type: string
-            example: '?filter[segment_property_1_value]=EU'
+            example: EU
           in: query
           name: 'filter[segment_property_1_value]'
-          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected.'
+          description: 'The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected. 
+          Use in query: `filter[segment_property_1_value]=EU`.'
         - schema:
             type: string
           in: query
@@ -22244,7 +22063,8 @@ paths:
               examples:
                 example-1:
                   value:
-                    - subscriptions_mrr:
+                    subscriptions_mrr:
+                     - subscriptions_mrr:
                         - subscription_id: 0
                           mrr_amount_in_cents: 0
                           breakouts:
@@ -22279,49 +22099,44 @@ paths:
                 example-1:
                   value:
                     errors:
-                      at_time:
+                      attribute:
                         - 'supplied value is invalid, expected ISO 8601 format'
       operationId: listMrrPerSubscription
       deprecated: true
       description: 'This endpoint returns your site''s current MRR, including plan and usage breakouts split per subscription.'
       parameters:
         - schema:
-            type: string
-            example: 'filter[subscription_ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
             minLength: 1
           in: query
           name: 'filter[subscription_ids]'
-          description: Submit ids in order to limit results.
+          description: 'Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: string
             example: 'at_time=2022-01-10T10:00:00-05:00'
           in: query
           name: at_time
-          description: Submit a timestamp in ISO8601 format to request MRR for a historic time.
-        - schema:
-            type: number
-            minimum: 1
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: number
-            minimum: 1
-            maximum: 200
-            example: per_page=50
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+          description: 'Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`.'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
             enum:
               - asc
               - desc
-            example: direction=desc
+            example: desc
           in: query
           name: direction
-          description: Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default.
+          description: 'Controls the order in which results are returned. Records are ordered by subscription_id in ascending order by default. 
+          Use in query: `direction=desc`.'
   '/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json':
     parameters:
       - schema:
@@ -22530,10 +22345,11 @@ paths:
             enum:
               - updated_at
               - created_at
-            example: date_field=created_at
+            example: created_at
           in: query
           name: date_field
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. 
+          Use in query: `date_field=created_at`.'
         - schema:
             type: string
           in: query
@@ -22554,54 +22370,43 @@ paths:
           in: query
           name: start_datetime
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''''s time zone will be used. If provided, this parameter will be used instead of start_date.'
-        - schema:
-            type: number
-            minLength: 1
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: number
-            example: per_page=50
-            minLength: 1
-            maxLength: 200
-            default: 20
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: boolean
             enum:
-              - 'true'
-              - 'false'
-            example: include_archived=true
+              - true
+              - false
+            example: true
           in: query
           name: include_archived
-          description: Include archived products.
+          description: 'Include archived products. Use in query: `include_archived=true`.'
         - schema:
             type: string
-            example: include=prepaid_product_price_point
+            example: prepaid_product_price_point
             enum:
               - prepaid_product_price_point
           in: query
           name: include
-          description: Allows including additional data in the response.
+          description: 'Allows including additional data in the response. 
+          Use in query: `include=prepaid_product_price_point`.'
         - schema:
             type: string
-            example: 'include=prepaid_product_price_point&filter[prepaid_product_price_point][product_price_point_id]=not_null'
+            example: not_null
             enum:
               - 'null'
               - not_null
           in: query
           name: 'filter[prepaid_product_price_point][product_price_point_id]'
-          description: Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
+          description: 'Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. 
+          Use in query: `filter[prepaid_product_price_point][product_price_point_id]=not_null`.'
         - schema:
             type: boolean
-            example: 'filter[use_site_exchange_rate]=true'
+            example: true
           in: query
           name: 'filter[use_site_exchange_rate]'
-          description: Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
+          description: 'Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). 
+          Use in query: `filter[use_site_exchange_rate]=true`.'
   '/invoices/{uid}/issue.json':
     parameters:
       - schema:
@@ -22685,25 +22490,23 @@ paths:
                 example:
                   value:
                     price_points:
-                      - id: 1
-                        default: true
-                        name: Auto-created
-                        type: default
-                        pricing_scheme: null
-                        component_id: 2
-                        handle: auto-created
-                        archived_at: null
-                        created_at: '2021-02-21T11:05:57-05:00'
-                        updated_at: '2021-02-21T11:05:57-05:00'
-                        prices:
-                          - id: 3
-                            component_id: 2
-                            starting_quantity: 0
-                            ending_quantity: null
-                            unit_price: '1.0'
-                            price_point_id: 1
-                            formatted_unit_price: $1.00
-                            segment_id: null
+                      - price_point:
+                          id: 1
+                          name: Auto-created
+                          type: default
+                          component_id: 2
+                          handle: auto-created
+                          created_at: '2021-02-21T11:05:57-05:00'
+                          updated_at: '2021-02-21T11:05:57-05:00'
+                          prices:
+                            - id: 3
+                              component_id: 2
+                              starting_quantity: 0
+                              ending_quantity: null
+                              unit_price: '1.0'
+                              price_point_id: 1
+                              formatted_unit_price: $1.00
+                              segment_id: null
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -22735,10 +22538,10 @@ paths:
             enum:
               - created_at
               - updated_at
-            example: 'filter[date_field]=created_at'
+            example: created_at
           in: query
           name: 'filter[date_field]'
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`.'
         - schema:
             type: string
           in: query
@@ -22754,22 +22557,9 @@ paths:
             example: include=currency_prices
           in: query
           name: include
-          description: Allows including additional data in the response.
-        - schema:
-            type: number
-            minimum: 1
-            example: page=2
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-        - schema:
-            type: number
-            minimum: 1
-            maximum: 200
-            example: per_page=5
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+          description: 'Allows including additional data in the response. Use in query: `include=currency_prices`.'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
         - schema:
             type: string
           in: query
@@ -22781,42 +22571,48 @@ paths:
           name: 'filter[start_datetime]'
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
         - schema:
-            type: string
-            enum:
-              - catalog
+            type: array
+            items:
+              type: string
+              enum:
+                - catalog
+                - custom
+                - default
+            example:
               - custom
+              - catalog
+            default:
+              - catalog
               - default
-            example: 'filter[type]=custom,catalog'
-            default: 'filter[type]=catalog,default'
+          style: form
+          explode: false
           in: query
           name: 'filter[type]'
-          description: Allows fetching price points with matching type.
+          description: 'Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`.'
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            example: direction=desc
-            default: direction=asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
-        - schema:
-            type: string
-            example: 'filter[ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: 'filter[ids]'
-          description: Allows fetching price points with matching id based on provided values.
+          description: 'Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`.'
+          style: form
+          explode: false
         - schema:
             type: string
-            default: 'filter[archived_at]=null'
-            example: 'filter[archived_at]=not_null'
+            default: 'null'
+            example: not_null
             enum:
               - 'null'
               - not_null
           in: query
           name: 'filter[archived_at]'
-          description: Allows fetching price points only if archived_at is present or not.
+          description: 'Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`.'
   /products_price_points.json:
     get:
       summary: List Products Price Points
@@ -22838,26 +22634,25 @@ paths:
                 example:
                   value:
                     price_points:
-                      id: 0
-                      name: string
-                      handle: string
-                      price_in_cents: 0
-                      interval: 0
-                      interval_unit: string
-                      trial_price_in_cents: 0
-                      trial_interval: 0
-                      trial_interval_unit: string
-                      trial_type: string
-                      introductory_offer: true
-                      initial_charge_in_cents: 0
-                      initial_charge_after_trial: true
-                      expiration_interval: 0
-                      expiration_interval_unit: string
-                      product_id: 0
-                      archived_at: string
-                      created_at: string
-                      updated_at: string
-                      use_site_exchange_rate: true
+                      - id: 0
+                        name: My pricepoint
+                        handle: handle
+                        price_in_cents: 10
+                        interval: 5
+                        interval_unit: month
+                        trial_price_in_cents: 10
+                        trial_interval: 1
+                        trial_interval_unit: month
+                        trial_type: payment_expected
+                        introductory_offer: true
+                        initial_charge_in_cents: 0
+                        initial_charge_after_trial: true
+                        expiration_interval: 0
+                        expiration_interval_unit: month
+                        product_id: 1230
+                        created_at: '2021-04-02T17:52:09-04:00'
+                        updated_at: '2021-04-02T17:52:09-04:00'
+                        use_site_exchange_rate: true
         '422':
           description: Unprocessable Entity (WebDAV)
           content:
@@ -22878,34 +22673,25 @@ paths:
       operationId: listAllProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
-        - schema:
-            type: string
-            default: direction=asc
-            example: direction=desc
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "#/components/parameters/sort-direction"
         - schema:
             type: string
             enum:
               - 'null'
               - not_null
-            default: 'filter[archived_at]=null'
-            example: 'filter[archived_at]=not_null'
+            default: 'null'
+            example: not_null
           in: query
           name: 'filter[archived_at]'
-          description: Allows fetching price points only if archived_at is present or not.
+          description: 'Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`.'
         - schema:
             type: string
             enum:
               - created_at
               - updated_at
-            example: 'filter[date_field]=created_at'
+            example: created_at
           in: query
-          description: The type of filter you would like to apply to your search.
+          description: 'The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`.'
           name: 'filter[date_field]'
         - schema:
             type: string
@@ -22918,11 +22704,16 @@ paths:
           name: 'filter[end_datetime]'
           description: 'The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date.'
         - schema:
-            type: string
-            example: 'filter[ids]=1,2,3'
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+              - 2
+              - 3
           in: query
           name: 'filter[ids]'
-          description: Allows fetching price points with matching id based on provided values.
+          description: 'Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`.'
         - schema:
             type: string
           in: query
@@ -22934,40 +22725,34 @@ paths:
           name: 'filter[start_datetime]'
           description: 'The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date.'
         - schema:
-            type: string
-            enum:
+            type: array
+            items:
+              type: string
+              enum:
+                - catalog
+                - custom
+                - default
+            default:
               - catalog
-              - custom
               - default
-            default: 'filter[type]=catalog,default'
-            example: 'filter[type]=custom,catalog'
+            example:
+              - custom
+              - catalog
+          style: form
+          explode: false
           in: query
           name: 'filter[type]'
-          description: Allows fetching price points with matching type.
+          description: 'Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`.'
         - schema:
             type: string
             enum:
               - currency_prices
-            example: include=currency_prices
+            example: currency_prices
           in: query
           name: include
-          description: Allows including additional data in the response.
-        - schema:
-            type: number
-            minLength: 1
-            example: page=2
-            minimum: 1
-          in: query
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
-          name: page
-        - schema:
-            type: number
-            minimum: 1
-            maximum: 200
-            example: per_page=5
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+          description: 'Allows including additional data in the response. Use in query: `include=currency_prices`.'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/per-page'
   '/subscriptions/{subscription_id}/activate.json':
     parameters:
       - $ref: '#/components/parameters/subscription-id-required-path'
@@ -23298,12 +23083,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
-        - schema:
-            type: integer
-            minimum: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - $ref: '#/components/parameters/page'
       responses:
         '200':
           description: OK
@@ -23350,12 +23130,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
-        - schema:
-            type: integer
-            minimum: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - $ref: '#/components/parameters/page'
   '/api_exports/subscriptions/{batch_id}/rows.json':
     parameters:
       - schema:
@@ -23391,12 +23166,7 @@ paths:
           in: query
           name: per_page
           description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
-        - schema:
-            type: integer
-            minimum: 1
-          in: query
-          name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+        - $ref: '#/components/parameters/page'
   /api_exports/proforma_invoices.json:
     post:
       summary: Create Proforma Invoices Export
@@ -23605,21 +23375,48 @@ components:
     page:
       name: page
       in: query
-      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+      description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.
+      Use in query: `page=1`.'
       schema:
         type: integer
+        default: 1
+        minimum: 1
+        example: 2
     per-page:
       name: per_page
       in: query
-      description: This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
       schema:
         type: integer
         default: 20
         maximum: 200
+        example: 50
+    per-page-default-30:
+      name: per_page
+      in: query
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
+      schema:
+        type: integer
+        default: 30
+        maximum: 200
+        example: 50
+    per-page-default-50:
+      name: per_page
+      in: query
+      description: 'This parameter indicates how many records to fetch in each request. Default value is 50. The maximum allowed values is 200; any per_page value over 200 will be changed to 200. 
+      Use in query: `per_page=200`.'
+      schema:
+        type: integer
+        default: 30
+        maximum: 200
+        example: 50
     sort-direction:
       name: direction
       in: query
-      description: Controls the order in which results are returned.
+      description: 'Controls the order in which results are returned. 
+      Use in query: `direction=asc`.'
       schema:
         $ref: '#/components/schemas/Sort-Direction'
     subscription-id-required-path:
@@ -25164,6 +24961,7 @@ components:
         component_id:
           type:
             - integer
+            - string
         enabled:
           type:
             - boolean
@@ -25179,6 +24977,7 @@ components:
         price_point_id:
           type:
             - integer
+            - string
         custom_price:
           $ref: '#/components/schemas/Component-Custom-Price'
     Credit-Note:
@@ -27276,14 +27075,14 @@ components:
           type: integer
         recurring:
           type: boolean
-        upgrade_charge: 
-           type:
+        upgrade_charge:
+          type:
             - string
             - 'null'
-        downgrade_credit: 
-           type:
+        downgrade_credit:
+          type:
             - string
-            - 'null'    
+            - 'null'
         archived_at:
           type:
             - 'null'
@@ -27737,7 +27536,7 @@ components:
                     - 'null'
                 accrue_charge:
                   type:
-                    - boolean   
+                    - boolean
             default_payment_collection_method:
               type: string
             organization_address:
