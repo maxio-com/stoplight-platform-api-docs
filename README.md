@@ -13,6 +13,9 @@ Install Prettier and Husky:
 npm install
 ```
 
+If you want to use Prettier in your IDE check [JetBrains Configuration](https://prettier.io/docs/en/webstorm.html) if you are using JetBrains IDE or
+[Editor Integration](https://prettier.io/docs/en/editors.html) for other editors.
+
 Reformat all files manually:
 
 ```shell
@@ -20,13 +23,6 @@ npx prettier . --write
 ```
 
 Husky is used to install pre-commit hook for reformatting changed files to ensure your files are properly formatted.
-
-```shell
-npm install
-```
-
-If you want to use Prettier in your IDE check [JetBrains Configuration](https://prettier.io/docs/en/webstorm.html) if you are using JetBrains IDE or
-[Editor Integration](https://prettier.io/docs/en/editors.html) for other editors.
 
 Code needs to be reformatted before commit as formatting is checked by CI pipeline.
 
