@@ -1242,7 +1242,7 @@ paths:
                 properties:
                   customer:
                     $ref: ../models/Customer.yaml
-      operationId: readCustomer
+      operationId: read-customer
       description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
       parameters: []
     put:

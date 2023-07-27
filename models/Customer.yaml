@@ -112,6 +112,7 @@ properties:
     type:
       - integer
       - "null"
+    example: "test"
   locale:
     type:
       - string
