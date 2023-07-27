@@ -2,10 +2,14 @@
 
 The Chargify API is documented in this repository using the [OpenAPI Specification](https://swagger.io/specification/). It may be used as reference when building interactions with the Chargify API.
 
-### Development
+## Development
 
 If you are a Chargify developer and need to make changes to the API documentation, please refer to our internal documentation on Stoplight Studio.
 This repository is using [Prettier](https://prettier.io/docs/en/index.html) to enforce consistent formatting.
+
+### Required tools and validators
+
+#### Code formatting
 
 Install Prettier and Husky:
 
@@ -25,6 +29,24 @@ npx prettier . --write
 Husky is used to install pre-commit hook for reformatting changed files to ensure your files are properly formatted.
 
 Code needs to be reformatted before commit as formatting is checked by CI pipeline.
+
+#### Validation
+
+This project uses [Spectral](https://docs.stoplight.io/docs/spectral/674b27b261c3c-overview) for validation.
+Spectral is also used by Stoplight Studio underneath.
+You can use Spectral built-in Stoplight Studio, install Spectral plugin for your IDE or you can use standalone Spectral installation:
+
+```shell
+npm install -g @stoplight/spectral-cli
+```
+
+And then to run linting (execute in the main repo directory):
+
+```shell
+ spectral lint -v -F warn ./reference/Chargify-API.v1.yaml
+```
+
+You need to fix all Spectral warnings/errors before commit!
 
 ## SDK generation
 

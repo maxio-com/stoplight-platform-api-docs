@@ -23,9 +23,15 @@ jobs:
       - name: Install node deps
         shell: bash
         run: npm ci
+      - name: Install Spectral
+        shell: bash
+        run: npm install -g @stoplight/spectral-cli
       - name: Check code formatting
         shell: bash
         run: npx prettier . --check
+      - name: Run Spectral validator
+        shell: bash
+        run: spectral lint -v -F warn ./reference/Chargify-API.v1.yaml
   run-generator:
     runs-on: ubuntu-latest
     defaults:

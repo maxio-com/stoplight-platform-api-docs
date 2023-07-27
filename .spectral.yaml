@@ -1,0 +1,19 @@
+extends: ["spectral:oas"]
+formats: ["oas3_1"]
+
+aliases:
+  PathItem:
+    - $.paths[*]
+  MethodObject:
+    - "#PathItem[get,put,post,delete,options,head,patch,trace]"
+
+rules:
+  camel-case-operation-id:
+    description: operationId should be camelCased.
+    given: "#MethodObject"
+    severity: error
+    then:
+      field: operationId
+      function: casing
+      functionOptions:
+        type: camel

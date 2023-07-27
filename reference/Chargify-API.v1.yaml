@@ -7224,7 +7224,7 @@ paths:
                       archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
                       created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
                       updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-      operationId: patch-products-product_id-price_points-price_point_id-unarchive.json
+      operationId: unarchiveProductPricePoint
       description: Use this endpoint to unarchive an archived product price point.
   "/products/{product_id}/price_points/{price_point_id}/default.json":
     parameters:
@@ -7276,7 +7276,7 @@ paths:
                       archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
                       created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
                       updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-      operationId: patch-products-product_id-price_points-price_point_id-default.json
+      operationId: setDefaultPricePointForProduct
       description: |-
         Use this endpoint to make a product price point the default for the product.
 
