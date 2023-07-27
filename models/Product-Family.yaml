@@ -9,12 +9,12 @@ properties:
     type: string
   accounting_code:
     type:
-      - 'null'
+      - "null"
       - string
   description:
     type:
       - string
-      - 'null'
+      - "null"
   created_at:
     type: string
   updated_at:

@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Chargify Legacy API
-  version: '1.0'
+  version: "1.0"
   contact:
     email: support@chargify.com
   description: |-
@@ -15,7 +15,7 @@ tags:
   - name: Legacy Subscription Coupons
   - name: Legacy Transactions
 paths:
-  '/subscriptions/{subscription_id}/adjustments.json':
+  "/subscriptions/{subscription_id}/adjustments.json":
     parameters:
       - schema:
           type: string
@@ -28,7 +28,7 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '200':
+        "200":
           description: OK
           headers: {}
           content:
@@ -40,7 +40,7 @@ paths:
                     type: object
                     properties:
                       adjustment:
-                        $ref: '#/components/schemas/Legacy-Adjustment'
+                        $ref: "#/components/schemas/Legacy-Adjustment"
               examples:
                 Example:
                   value:
@@ -53,7 +53,7 @@ paths:
                       success: true
                       amount_in_cents: 1000
                       memo: null
-                      created_at: '2021-04-02T15:54:10-04:00'
+                      created_at: "2021-04-02T15:54:10-04:00"
                       starting_balance_in_cents: 8800
                       ending_balance_in_cents: 9800
                       gateway_used: null
@@ -66,16 +66,16 @@ paths:
                       statement_id: 56789
                       customer_id: 38921
                       item_name: null
-                      period_range_start: '2021-04-02'
-                      period_range_end: '2021-04-02'
+                      period_range_start: "2021-04-02"
+                      period_range_end: "2021-04-02"
                       currency: USD
                       exchange_rate: 1
                       component_handle: null
                       component_price_point_id: null
                       component_price_point_handle: null
-        '404':
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
@@ -90,7 +90,7 @@ paths:
                 Example:
                   value:
                     errors:
-                      - 'Amount: is not a number.'
+                      - "Amount: is not a number."
       operationId: post-subscriptions-subscriptionId-adjustments.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -124,33 +124,33 @@ paths:
                         - type: string
                           pattern: ^\d+$
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
                     amount:
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00."
                     memo:
                       type: string
                       description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
                       maxLength: 255
                     period_range_start:
                       type: string
-                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       format: date
                     period_range_end:
                       type: string
-                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       format: date
                     adjustment_method:
                       type: string
                       enum:
                         - target
-                      description: 'A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance.'
+                      description: "A string that toggles how the adjustment should be applied. If target is passed for this param, the adjustment will automatically set the subscription’s balance to the amount. If left blank, the amount will be added to the current balance."
               required:
                 - adjustment
-  '/subscriptions/{subscription_id}/charges.json':
+  "/subscriptions/{subscription_id}/charges.json":
     parameters:
       - schema:
           type: integer
@@ -163,7 +163,7 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
@@ -171,10 +171,10 @@ paths:
                 type: object
                 properties:
                   charge:
-                    $ref: '#/components/schemas/Legacy-Charge'
-        '404':
+                    $ref: "#/components/schemas/Legacy-Charge"
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
@@ -189,10 +189,10 @@ paths:
                 Example:
                   value:
                     errors:
-                      - 'Memo: cannot be blank.'
-                      - 'Amount: is not a number.'
+                      - "Memo: cannot be blank."
+                      - "Amount: is not a number."
                       - This subscription is not eligible to accept charges.
-                      - 'Bogus Gateway: Forced failure'
+                      - "Bogus Gateway: Forced failure"
       operationId: post-subscriptions-subscription_id-charges.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -231,7 +231,7 @@ paths:
                     - memo
                   properties:
                     amount_in_cents:
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
                       oneOf:
                         - type: string
                           pattern: ^\d+$
@@ -240,13 +240,13 @@ paths:
                       description: A helpful explanation for the charge. This amount will remind you and your customer for the reason for the assessment of the charge.
                       type: string
                     amount:
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00."
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
                     accrue_on_failure:
-                      description: 'If true, the charge will be added to the subscription whether or not the payment succeeds. If false, only the failed payment will be recorded, and the balance will not be increased. This attribute is ignored if delay_capture is true.'
+                      description: "If true, the charge will be added to the subscription whether or not the payment succeeds. If false, only the failed payment will be recorded, and the balance will not be increased. This attribute is ignored if delay_capture is true."
                       default: false
                       oneOf:
                         - type: boolean
@@ -256,10 +256,10 @@ paths:
                             - 1
                         - type: string
                           enum:
-                            - '0'
-                            - '1'
+                            - "0"
+                            - "1"
                     delay_capture:
-                      description: 'If true, Chargify does not attempt to immediately capture a payment for this charge (instead, wait until the next assessment date). Note if this option is used use_negative_balance is assumed as false.'
+                      description: "If true, Chargify does not attempt to immediately capture a payment for this charge (instead, wait until the next assessment date). Note if this option is used use_negative_balance is assumed as false."
                       oneOf:
                         - type: boolean
                         - type: integer
@@ -268,10 +268,10 @@ paths:
                             - 1
                         - type: string
                           enum:
-                            - '0'
-                            - '1'
+                            - "0"
+                            - "1"
                     taxable:
-                      description: 'If true, taxes will be assessed for the charge.'
+                      description: "If true, taxes will be assessed for the charge."
                       default: false
                       oneOf:
                         - type: boolean
@@ -281,23 +281,23 @@ paths:
                             - 1
                         - type: string
                           enum:
-                            - '0'
-                            - '1'
+                            - "0"
+                            - "1"
                     payment_collection_method:
                       type: string
-                      description: '(for subscriptions using legacy invoice billing only) When delay_capture is set to false, and payment_collection_method is set to invoice, a mid-period invoice will be created from this charge. The charge will not appear on the invoice created at the next renewal'
+                      description: "(for subscriptions using legacy invoice billing only) When delay_capture is set to false, and payment_collection_method is set to invoice, a mid-period invoice will be created from this charge. The charge will not appear on the invoice created at the next renewal"
                       default: automatic
                       enum:
                         - automatic
                         - invoice
                     period_range_start:
-                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       type: string
                     period_range_end:
-                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       type: string
                     use_negative_balance:
-                      description: 'This option specifies whether or not a negative current balance should be used when creating the new charge. If true, use the negative balance on the subscription to calculate the charge. If false, do not use the negative balance.'
+                      description: "This option specifies whether or not a negative current balance should be used when creating the new charge. If true, use the negative balance on the subscription to calculate the charge. If false, do not use the negative balance."
                       oneOf:
                         - type: boolean
                         - type: integer
@@ -306,8 +306,8 @@ paths:
                             - 1
                         - type: string
                           enum:
-                            - '0'
-                            - '1'
+                            - "0"
+                            - "1"
               required:
                 - charge
             examples:
@@ -322,7 +322,7 @@ paths:
                     success: true
                     amount_in_cents: 1000
                     memo: Upcharge
-                    created_at: '2021-04-02T17:52:09-04:00'
+                    created_at: "2021-04-02T17:52:09-04:00"
                     starting_balance_in_cents: -7486
                     ending_balance_in_cents: -6486
                     gateway_used: null
@@ -335,21 +335,21 @@ paths:
                     statement_id: 1220246
                     customer_id: 171137
                     item_name: prod_10430
-                    period_range_start: '2021-04-02'
-                    period_range_end: '2021-04-02'
+                    period_range_start: "2021-04-02"
+                    period_range_end: "2021-04-02"
                     currency: USD
                     exchange_rate: 1
                     component_handle: null
                     component_price_point_id: null
                     component_price_point_handle: null
-                    quantity: '1.0'
+                    quantity: "1.0"
                     original_amount_in_cents: 1000
                     discount_amount_in_cents: 0
                     taxable_amount_in_cents: null
                     price_point_id: null
                     price_point_handle: null
                     taxations: []
-  '/subscriptions/{subscription_id}/payments.json':
+  "/subscriptions/{subscription_id}/payments.json":
     parameters:
       - schema:
           type: integer
@@ -362,16 +362,16 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   payment:
-                    $ref: '#/components/schemas/Legacy-Payment'
+                    $ref: "#/components/schemas/Legacy-Payment"
               examples:
                 Example:
                   value:
@@ -384,7 +384,7 @@ paths:
                       success: true
                       amount_in_cents: 1000
                       memo: Client x paid with $10.00 of nickles
-                      created_at: '2016-11-03T14:58:30-04:00'
+                      created_at: "2016-11-03T14:58:30-04:00"
                       starting_balance_in_cents: -13989
                       ending_balance_in_cents: -14989
                       gateway_used: null
@@ -400,12 +400,12 @@ paths:
                       card_expiration: null
                       card_type: null
                       refunded_amount_in_cents: 0
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   errors:
@@ -415,7 +415,7 @@ paths:
                   value:
                     errors:
                       amount_in_cents:
-                        - 'Amount: is not a number.'
+                        - "Amount: is not a number."
       operationId: post-subscriptions-subscription_id-payments.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
@@ -433,10 +433,10 @@ paths:
               type: object
               properties:
                 payment:
-                  $ref: '#/components/schemas/Create-Legacy-Payment'
+                  $ref: "#/components/schemas/Create-Legacy-Payment"
               required:
                 - payment
-  '/subscriptions/{subscription_id}/refunds.json':
+  "/subscriptions/{subscription_id}/refunds.json":
     parameters:
       - schema:
           type: integer
@@ -449,12 +449,12 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   refund:
@@ -547,7 +547,7 @@ paths:
                       success: true
                       amount_in_cents: 1000
                       memo: Incorrectly billed
-                      created_at: '2021-04-08T14:26:23-04:00'
+                      created_at: "2021-04-08T14:26:23-04:00"
                       starting_balance_in_cents: 8800
                       ending_balance_in_cents: 8800
                       gateway_used: null
@@ -567,12 +567,12 @@ paths:
                       component_handle: null
                       component_price_point_id: null
                       component_price_point_handle: null
-        '422':
+        "422":
           description: Unprocessable Entity (WebDAV)
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   errors:
@@ -581,7 +581,7 @@ paths:
                 Example:
                   value:
                     errors:
-                      - 'Memo: cannot be blank.'
+                      - "Memo: cannot be blank."
       operationId: post-subscriptions-subscription_id-refunds.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
@@ -629,7 +629,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
+              description: ""
               type: object
               properties:
                 refund:
@@ -647,13 +647,13 @@ paths:
                         - type: string
                           pattern: ^\d+$
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
                     amount:
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00."
                     memo:
                       type: string
                       description: A helpful explanation for the refund. This amount will remind you and your customer for the reason for the refund.
@@ -667,7 +667,7 @@ paths:
               required:
                 - refund
             examples: {}
-  '/transactions/{transaction_id}.json':
+  "/transactions/{transaction_id}.json":
     parameters:
       - schema:
           type: integer
@@ -680,16 +680,16 @@ paths:
       tags:
         - Legacy Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   transaction:
-                    $ref: '#/components/schemas/Legacy-Transaction'
+                    $ref: "#/components/schemas/Legacy-Transaction"
               examples:
                 Example:
                   value:
@@ -701,12 +701,12 @@ paths:
                       transaction_type: payment
                       success: true
                       amount_in_cents: 10000
-                      memo: 'Payment for: 123'
-                      created_at: '2018-04-24T16:48:19-05:00'
+                      memo: "Payment for: 123"
+                      created_at: "2018-04-24T16:48:19-05:00"
                       starting_balance_in_cents: 10000
                       ending_balance_in_cents: 0
                       gateway_used: bogus
-                      gateway_transaction_id: '53433'
+                      gateway_transaction_id: "53433"
                       gateway_order_id: null
                       payment_id: null
                       product_id: 4610619
@@ -796,14 +796,14 @@ paths:
             type: boolean
           in: query
           name: gateway_response
-          description: 'for a Payment, include the response from the gateway'
+          description: "for a Payment, include the response from the gateway"
   /transactions.json:
     get:
       summary: List Transactions
       tags:
         - Legacy Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -813,7 +813,7 @@ paths:
                   type: object
                   properties:
                     transaction:
-                      $ref: '#/components/schemas/Legacy-Transaction'
+                      $ref: "#/components/schemas/Legacy-Transaction"
               examples:
                 Example:
                   value:
@@ -825,12 +825,12 @@ paths:
                         transaction_type: payment
                         success: true
                         amount_in_cents: 1000
-                        memo: 'Pookie Test - $10 Basic Plan: Renewal payment'
-                        created_at: '2016-11-17T14:03:14-05:00'
+                        memo: "Pookie Test - $10 Basic Plan: Renewal payment"
+                        created_at: "2016-11-17T14:03:14-05:00"
                         starting_balance_in_cents: 1000
                         ending_balance_in_cents: 0
                         gateway_used: bogus
-                        gateway_transaction_id: '53433'
+                        gateway_transaction_id: "53433"
                         gateway_order_id: null
                         payment_id: null
                         product_id: 3792003
@@ -853,12 +853,12 @@ paths:
                         transaction_type: payment
                         success: true
                         amount_in_cents: 2000
-                        memo: 'Pookie Test - $10 Basic Plan: Renewal payment'
-                        created_at: '2016-11-17T14:03:14-05:00'
+                        memo: "Pookie Test - $10 Basic Plan: Renewal payment"
+                        created_at: "2016-11-17T14:03:14-05:00"
                         starting_balance_in_cents: 2000
                         ending_balance_in_cents: 0
                         gateway_used: bogus
-                        gateway_transaction_id: '53433'
+                        gateway_transaction_id: "53433"
                         gateway_order_id: null
                         payment_id: null
                         product_id: 3792003
@@ -879,7 +879,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             maximum: 200
@@ -897,7 +897,7 @@ paths:
               - refund
           in: query
           name: kinds
-          description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+          description: "An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit"
         - schema:
             type: integer
           in: query
@@ -912,12 +912,12 @@ paths:
             type: string
           in: query
           name: since_date
-          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified"
         - schema:
             type: string
           in: query
           name: until_date
-          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified"
         - schema:
             type: string
             enum:
@@ -934,7 +934,7 @@ paths:
               - created_at
           in: query
           name: order_by
-          description: 'Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used.'
+          description: "Using an ID filter (since_id/max_id) will force id order, while using a Date filter (since_date/until_date) will force created_at order. Otherwise, your requested value will be used."
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -954,7 +954,7 @@ paths:
             GET /transactions.json?since_id=0&per_page=200&direction=asc
             GET /transactions.json?since_id=1567&per_page=200&direction=asc
         In the above example, 1567 is derived by adding 1 to the “last” ID you received from the first request.
-  '/subscriptions/{subscription_id}/transactions.json':
+  "/subscriptions/{subscription_id}/transactions.json":
     parameters:
       - schema:
           type: string
@@ -967,7 +967,7 @@ paths:
       tags:
         - Legacy Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -977,7 +977,7 @@ paths:
                   type: object
                   properties:
                     transaction:
-                      $ref: '#/components/schemas/Legacy-Transaction'
+                      $ref: "#/components/schemas/Legacy-Transaction"
               examples:
                 Example:
                   value:
@@ -989,12 +989,12 @@ paths:
                         transaction_type: payment
                         success: true
                         amount_in_cents: 1000
-                        memo: 'Amelia Example - $10 Basic Plan: Renewal payment'
-                        created_at: '2016-11-17T14:03:14-05:00'
+                        memo: "Amelia Example - $10 Basic Plan: Renewal payment"
+                        created_at: "2016-11-17T14:03:14-05:00"
                         starting_balance_in_cents: 1000
                         ending_balance_in_cents: 0
                         gateway_used: bogus
-                        gateway_transaction_id: '53433'
+                        gateway_transaction_id: "53433"
                         gateway_order_id: null
                         payment_id: null
                         product_id: 3792003
@@ -1018,7 +1018,7 @@ paths:
                         success: true
                         amount_in_cents: 1000
                         memo: $10 Basic Plan (11/17/2016 - 11/18/2016)
-                        created_at: '2016-11-17T14:03:13-05:00'
+                        created_at: "2016-11-17T14:03:13-05:00"
                         starting_balance_in_cents: 0
                         ending_balance_in_cents: 1000
                         gateway_used: null
@@ -1045,12 +1045,12 @@ paths:
                         transaction_type: payment
                         success: true
                         amount_in_cents: 1000
-                        memo: 'Amelia Example - $10 Basic Plan: Signup payment'
-                        created_at: '2016-11-16T13:47:44-05:00'
+                        memo: "Amelia Example - $10 Basic Plan: Signup payment"
+                        created_at: "2016-11-16T13:47:44-05:00"
                         starting_balance_in_cents: 1000
                         ending_balance_in_cents: 0
                         gateway_used: bogus
-                        gateway_transaction_id: '53433'
+                        gateway_transaction_id: "53433"
                         gateway_order_id: null
                         payment_id: null
                         product_id: 3792003
@@ -1074,7 +1074,7 @@ paths:
                         success: true
                         amount_in_cents: 1000
                         memo: $10 Basic Plan (11/16/2016 - 11/17/2016)
-                        created_at: '2016-11-16T13:47:43-05:00'
+                        created_at: "2016-11-16T13:47:43-05:00"
                         starting_balance_in_cents: 0
                         ending_balance_in_cents: 1000
                         gateway_used: null
@@ -1093,7 +1093,7 @@ paths:
                         discount_amount_in_cents: 0
                         taxable_amount_in_cents: null
                         taxations: []
-        '404':
+        "404":
           description: Not Found
       operationId: get-subscriptions-subscription_id-transactions.json
       parameters:
@@ -1101,7 +1101,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             maximum: 200
@@ -1119,7 +1119,7 @@ paths:
               - refund
           in: query
           name: kinds
-          description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+          description: "An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit"
         - schema:
             type: integer
           in: query
@@ -1134,12 +1134,12 @@ paths:
             type: string
           in: query
           name: since_date
-          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns transactions with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified"
         - schema:
             type: string
           in: query
           name: until_date
-          description: '(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns transactions with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified"
         - schema:
             type: string
             enum:
@@ -1161,12 +1161,12 @@ paths:
       tags:
         - Legacy Transactions
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   count:
@@ -1181,7 +1181,7 @@ paths:
         |-----------------------------------------------------------------------------|
 
         This method returns the full count of transactions associated with a Site.
-  '/statements/{statement_id}.json':
+  "/statements/{statement_id}.json":
     parameters:
       - schema:
           type: integer
@@ -1194,7 +1194,7 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -1202,7 +1202,7 @@ paths:
                 type: object
                 properties:
                   statement:
-                    $ref: '#/components/schemas/Legacy-Statement-with-UI-Tools'
+                    $ref: "#/components/schemas/Legacy-Statement-with-UI-Tools"
               examples:
                 Example:
                   value:
@@ -1381,23 +1381,23 @@ paths:
                             </tr>
                           </tbody>
                         </table>
-                      closed_at: '2016-10-24T16:20:13-04:00'
-                      created_at: '2016-10-24T16:20:12-04:00'
+                      closed_at: "2016-10-24T16:20:13-04:00"
+                      created_at: "2016-10-24T16:20:12-04:00"
                       customer_billing_address: 123 Anywhere Street
-                      customer_billing_address_2: ''
+                      customer_billing_address_2: ""
                       customer_billing_city: Anywhere
                       customer_billing_country: US
                       customer_billing_state: MA
-                      customer_billing_zip: '02120'
+                      customer_billing_zip: "02120"
                       customer_first_name: Amelia
                       customer_last_name: Example
-                      customer_organization: ''
+                      customer_organization: ""
                       customer_shipping_address: 123 Anywhere Street
-                      customer_shipping_address_2: ''
+                      customer_shipping_address_2: ""
                       customer_shipping_city: Anywhere
                       customer_shipping_country: US
                       customer_shipping_state: MA
-                      customer_shipping_zip: '02120'
+                      customer_shipping_zip: "02120"
                       ending_balance_in_cents: 0
                       future_payments: []
                       html_view: |
@@ -1549,8 +1549,8 @@ paths:
                           </div>
                         </div>
                       memo: We thank you for your continued business!
-                      opened_at: '2016-10-24T16:20:12-04:00'
-                      settled_at: '2016-10-24T16:20:13-04:00'
+                      opened_at: "2016-10-24T16:20:12-04:00"
+                      settled_at: "2016-10-24T16:20:13-04:00"
                       starting_balance_in_cents: 0
                       subscription_id: 14900541
                       text_view: |
@@ -1604,7 +1604,7 @@ paths:
                                       ct                                                                
                         ............  ..................................................................
                         We thank you for your continued business!
-                      updated_at: '2016-10-24T16:20:13-04:00'
+                      updated_at: "2016-10-24T16:20:13-04:00"
                       total_in_cents: 0
                       transactions:
                         - id: 159423810
@@ -1615,7 +1615,7 @@ paths:
                           success: true
                           amount_in_cents: 0
                           memo: Trial Price (10/24/2016 - 10/31/2016)
-                          created_at: '2016-10-24T16:20:12-04:00'
+                          created_at: "2016-10-24T16:20:12-04:00"
                           starting_balance_in_cents: 0
                           ending_balance_in_cents: 0
                           gateway_used: null
@@ -1638,7 +1638,7 @@ paths:
                             key: signup_success
                             message: Successful signup for Amelia Example's subscription to Trial Product
                             subscription_id: 14900541
-                            created_at: '2016-10-24T16:20:13-04:00'
+                            created_at: "2016-10-24T16:20:13-04:00"
                             event_specific_data:
                               product_id: 3861800
                               account_transaction_id: null
@@ -1668,7 +1668,7 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -1678,7 +1678,7 @@ paths:
                   type: object
                   properties:
                     statement:
-                      $ref: '#/components/schemas/Legacy-Statement'
+                      $ref: "#/components/schemas/Legacy-Statement"
               examples:
                 Example:
                   value:
@@ -1857,23 +1857,23 @@ paths:
                               </tr>
                             </tbody>
                           </table>
-                        closed_at: '2016-10-24T16:20:13-04:00'
-                        created_at: '2016-10-24T16:20:12-04:00'
+                        closed_at: "2016-10-24T16:20:13-04:00"
+                        created_at: "2016-10-24T16:20:12-04:00"
                         customer_billing_address: 123 Anywhere Street
-                        customer_billing_address_2: ''
+                        customer_billing_address_2: ""
                         customer_billing_city: Anywhere
                         customer_billing_country: US
                         customer_billing_state: MA
-                        customer_billing_zip: '02120'
+                        customer_billing_zip: "02120"
                         customer_first_name: Amelia
                         customer_last_name: Example
-                        customer_organization: ''
+                        customer_organization: ""
                         customer_shipping_address: 123 Anywhere Street
-                        customer_shipping_address_2: ''
+                        customer_shipping_address_2: ""
                         customer_shipping_city: Anywhere
                         customer_shipping_country: US
                         customer_shipping_state: MA
-                        customer_shipping_zip: '02120'
+                        customer_shipping_zip: "02120"
                         ending_balance_in_cents: 0
                         future_payments: []
                         html_view: |
@@ -2025,8 +2025,8 @@ paths:
                             </div>
                           </div>
                         memo: We thank you for your continued business!
-                        opened_at: '2016-10-24T16:20:12-04:00'
-                        settled_at: '2016-10-24T16:20:13-04:00'
+                        opened_at: "2016-10-24T16:20:12-04:00"
+                        settled_at: "2016-10-24T16:20:13-04:00"
                         starting_balance_in_cents: 0
                         subscription_id: 14900541
                         text_view: |
@@ -2080,7 +2080,7 @@ paths:
                                         ct                                                                
                           ............  ..................................................................
                           We thank you for your continued business!
-                        updated_at: '2016-10-24T16:20:13-04:00'
+                        updated_at: "2016-10-24T16:20:13-04:00"
                         total_in_cents: 0
                         transactions:
                           - id: 159423810
@@ -2091,7 +2091,7 @@ paths:
                             success: true
                             amount_in_cents: 0
                             memo: Trial Price (10/24/2016 - 10/31/2016)
-                            created_at: '2016-10-24T16:20:12-04:00'
+                            created_at: "2016-10-24T16:20:12-04:00"
                             starting_balance_in_cents: 0
                             ending_balance_in_cents: 0
                             gateway_used: null
@@ -2114,7 +2114,7 @@ paths:
                               key: signup_success
                               message: Successful signup for Amelia Example's subscription to Trial Product
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:13-04:00'
+                              created_at: "2016-10-24T16:20:13-04:00"
                               event_specific_data:
                                 product_id: 3861800
                                 account_transaction_id: null
@@ -2327,23 +2327,23 @@ paths:
                               </tr>
                             </tbody>
                           </table>
-                        closed_at: '2016-10-24T16:21:13-04:00'
-                        created_at: '2016-10-24T16:21:12-04:00'
+                        closed_at: "2016-10-24T16:21:13-04:00"
+                        created_at: "2016-10-24T16:21:12-04:00"
                         customer_billing_address: 123 Anywhere Street
-                        customer_billing_address_2: ''
+                        customer_billing_address_2: ""
                         customer_billing_city: Anywhere
                         customer_billing_country: US
                         customer_billing_state: MA
-                        customer_billing_zip: '02120'
+                        customer_billing_zip: "02120"
                         customer_first_name: Amelia
                         customer_last_name: Example
-                        customer_organization: ''
+                        customer_organization: ""
                         customer_shipping_address: 123 Anywhere Street
-                        customer_shipping_address_2: ''
+                        customer_shipping_address_2: ""
                         customer_shipping_city: Anywhere
                         customer_shipping_country: US
                         customer_shipping_state: MA
-                        customer_shipping_zip: '02120'
+                        customer_shipping_zip: "02120"
                         ending_balance_in_cents: 0
                         future_payments: []
                         html_view: |
@@ -2529,8 +2529,8 @@ paths:
                             </div>
                           </div>
                         memo: We thank you for your continued business!
-                        opened_at: '2016-10-24T16:20:14-04:00'
-                        settled_at: '2016-10-24T16:21:13-04:00'
+                        opened_at: "2016-10-24T16:20:14-04:00"
+                        settled_at: "2016-10-24T16:21:13-04:00"
                         starting_balance_in_cents: 0
                         subscription_id: 14900541
                         text_view: |
@@ -2607,7 +2607,7 @@ paths:
                                         Basic Plan                                                        
                           ............  ..................................................................
                           We thank you for your continued business!
-                        updated_at: '2016-10-24T16:21:13-04:00'
+                        updated_at: "2016-10-24T16:21:13-04:00"
                         total_in_cents: 4250
                         transactions:
                           - id: 159424439
@@ -2618,7 +2618,7 @@ paths:
                             success: true
                             amount_in_cents: 4000
                             memo: Basic Plan (10/24/2016 - 11/24/2016)
-                            created_at: '2016-10-24T16:21:12-04:00'
+                            created_at: "2016-10-24T16:21:12-04:00"
                             starting_balance_in_cents: 0
                             ending_balance_in_cents: 4000
                             gateway_used: null
@@ -2637,13 +2637,13 @@ paths:
                               - tax_id: null
                                 tax_charge_id: 159424444
                                 tax_name: MA Tax
-                                rate: '0.0625'
+                                rate: "0.0625"
                                 tax_amount_in_cents: 250
                                 tax_rules:
                                   - tax_rule_id: null
                                     country_code: US
                                     subdivision_code: MA
-                                    rate: '0.0625'
+                                    rate: "0.0625"
                                     tax_amount_in_cents: 250
                                     description: MA STATE TAX - MASSACHUSETTS
                           - id: 159424444
@@ -2654,7 +2654,7 @@ paths:
                             success: true
                             amount_in_cents: 250
                             memo: MA Tax (6.25%)
-                            created_at: '2016-10-24T16:21:12-04:00'
+                            created_at: "2016-10-24T16:21:12-04:00"
                             starting_balance_in_cents: 4000
                             ending_balance_in_cents: 4250
                             gateway_used: null
@@ -2677,12 +2677,12 @@ paths:
                             transaction_type: payment
                             success: true
                             amount_in_cents: 4250
-                            memo: 'Amelia Example - Basic Plan: Renewal payment'
-                            created_at: '2016-10-24T16:21:13-04:00'
+                            memo: "Amelia Example - Basic Plan: Renewal payment"
+                            created_at: "2016-10-24T16:21:13-04:00"
                             starting_balance_in_cents: 4250
                             ending_balance_in_cents: 0
                             gateway_used: bogus
-                            gateway_transaction_id: '53433'
+                            gateway_transaction_id: "53433"
                             gateway_order_id: null
                             payment_id: null
                             product_id: 3792003
@@ -2700,7 +2700,7 @@ paths:
                               key: subscription_state_change
                               message: State changed on Amelia Example's subscription to Basic Plan from trialing to active
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:43-04:00'
+                              created_at: "2016-10-24T16:20:43-04:00"
                               event_specific_data:
                                 previous_subscription_state: trialing
                                 new_subscription_state: active
@@ -2709,7 +2709,7 @@ paths:
                               key: subscription_product_change
                               message: Product changed on Amelia Example's subscription from 'Trial Product' to 'Basic Plan'
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:43-04:00'
+                              created_at: "2016-10-24T16:20:43-04:00"
                               event_specific_data:
                                 previous_product_id: 3861800
                                 new_product_id: 3792003
@@ -2718,14 +2718,14 @@ paths:
                               key: billing_date_change
                               message: Billing date changed on Amelia Example's subscription to Basic Plan from 10/31/2016 to 10/24/2016
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:11-04:00'
+                              created_at: "2016-10-24T16:21:11-04:00"
                               event_specific_data: null
                           - event:
                               id: 342037470
                               key: renewal_success
                               message: Successful renewal for Amelia Example's subscription to Basic Plan
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:14-04:00'
+                              created_at: "2016-10-24T16:21:14-04:00"
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
@@ -2734,7 +2734,7 @@ paths:
                               key: payment_success
                               message: Successful payment of $42.50 for Amelia Example's subscription to Basic Plan
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:14-04:00'
+                              created_at: "2016-10-24T16:21:14-04:00"
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
@@ -2744,7 +2744,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             maximum: 200
@@ -2776,7 +2776,7 @@ paths:
 
         This method will return a paginated list of all Statements generated by the Subscriptions in your Site.
         Note that this endpoint returns a "lighter" set of the Statement attributes than the "List Statements for a Subscription" endpoint.  This endpoint omits the HTML and textual representations for the Statement: `basic_html_view`, `html_view`, and `text_view`.  If you require these attributes, you can either build them yourself based on the other data returned or fetch a single subscription via the "Read/Show by Chargify ID" endpoint.
-  '/subscriptions/{subscription_id}/statements.json':
+  "/subscriptions/{subscription_id}/statements.json":
     parameters:
       - schema:
           type: string
@@ -2788,7 +2788,7 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -2798,7 +2798,7 @@ paths:
                   type: object
                   properties:
                     statement:
-                      $ref: '#/components/schemas/Legacy-Statement-with-UI-Tools'
+                      $ref: "#/components/schemas/Legacy-Statement-with-UI-Tools"
               examples:
                 Example:
                   value:
@@ -2977,23 +2977,23 @@ paths:
                               </tr>
                             </tbody>
                           </table>
-                        closed_at: '2016-10-24T16:20:13-04:00'
-                        created_at: '2016-10-24T16:20:12-04:00'
+                        closed_at: "2016-10-24T16:20:13-04:00"
+                        created_at: "2016-10-24T16:20:12-04:00"
                         customer_billing_address: 123 Anywhere Street
-                        customer_billing_address_2: ''
+                        customer_billing_address_2: ""
                         customer_billing_city: Anywhere
                         customer_billing_country: US
                         customer_billing_state: MA
-                        customer_billing_zip: '02120'
+                        customer_billing_zip: "02120"
                         customer_first_name: Amelia
                         customer_last_name: Example
-                        customer_organization: ''
+                        customer_organization: ""
                         customer_shipping_address: 123 Anywhere Street
-                        customer_shipping_address_2: ''
+                        customer_shipping_address_2: ""
                         customer_shipping_city: Anywhere
                         customer_shipping_country: US
                         customer_shipping_state: MA
-                        customer_shipping_zip: '02120'
+                        customer_shipping_zip: "02120"
                         ending_balance_in_cents: 0
                         future_payments: []
                         html_view: |
@@ -3145,8 +3145,8 @@ paths:
                             </div>
                           </div>
                         memo: We thank you for your continued business!
-                        opened_at: '2016-10-24T16:20:12-04:00'
-                        settled_at: '2016-10-24T16:20:13-04:00'
+                        opened_at: "2016-10-24T16:20:12-04:00"
+                        settled_at: "2016-10-24T16:20:13-04:00"
                         starting_balance_in_cents: 0
                         subscription_id: 14900541
                         text_view: |
@@ -3200,7 +3200,7 @@ paths:
                                         ct                                                                
                           ............  ..................................................................
                           We thank you for your continued business!
-                        updated_at: '2016-10-24T16:20:13-04:00'
+                        updated_at: "2016-10-24T16:20:13-04:00"
                         total_in_cents: 0
                         transactions:
                           - id: 159423810
@@ -3211,7 +3211,7 @@ paths:
                             success: true
                             amount_in_cents: 0
                             memo: Trial Price (10/24/2016 - 10/31/2016)
-                            created_at: '2016-10-24T16:20:12-04:00'
+                            created_at: "2016-10-24T16:20:12-04:00"
                             starting_balance_in_cents: 0
                             ending_balance_in_cents: 0
                             gateway_used: null
@@ -3234,7 +3234,7 @@ paths:
                               key: signup_success
                               message: Successful signup for Amelia Example's subscription to Trial Product
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:13-04:00'
+                              created_at: "2016-10-24T16:20:13-04:00"
                               event_specific_data:
                                 product_id: 3861800
                                 account_transaction_id: null
@@ -3447,23 +3447,23 @@ paths:
                               </tr>
                             </tbody>
                           </table>
-                        closed_at: '2016-10-24T16:21:13-04:00'
-                        created_at: '2016-10-24T16:21:12-04:00'
+                        closed_at: "2016-10-24T16:21:13-04:00"
+                        created_at: "2016-10-24T16:21:12-04:00"
                         customer_billing_address: 123 Anywhere Street
-                        customer_billing_address_2: ''
+                        customer_billing_address_2: ""
                         customer_billing_city: Anywhere
                         customer_billing_country: US
                         customer_billing_state: MA
-                        customer_billing_zip: '02120'
+                        customer_billing_zip: "02120"
                         customer_first_name: Amelia
                         customer_last_name: Example
-                        customer_organization: ''
+                        customer_organization: ""
                         customer_shipping_address: 123 Anywhere Street
-                        customer_shipping_address_2: ''
+                        customer_shipping_address_2: ""
                         customer_shipping_city: Anywhere
                         customer_shipping_country: US
                         customer_shipping_state: MA
-                        customer_shipping_zip: '02120'
+                        customer_shipping_zip: "02120"
                         ending_balance_in_cents: 0
                         future_payments: []
                         html_view: |
@@ -3649,8 +3649,8 @@ paths:
                             </div>
                           </div>
                         memo: We thank you for your continued business!
-                        opened_at: '2016-10-24T16:20:14-04:00'
-                        settled_at: '2016-10-24T16:21:13-04:00'
+                        opened_at: "2016-10-24T16:20:14-04:00"
+                        settled_at: "2016-10-24T16:21:13-04:00"
                         starting_balance_in_cents: 0
                         subscription_id: 14900541
                         text_view: |
@@ -3727,7 +3727,7 @@ paths:
                                         Basic Plan                                                        
                           ............  ..................................................................
                           We thank you for your continued business!
-                        updated_at: '2016-10-24T16:21:13-04:00'
+                        updated_at: "2016-10-24T16:21:13-04:00"
                         total_in_cents: 4250
                         transactions:
                           - id: 159424439
@@ -3738,7 +3738,7 @@ paths:
                             success: true
                             amount_in_cents: 4000
                             memo: Basic Plan (10/24/2016 - 11/24/2016)
-                            created_at: '2016-10-24T16:21:12-04:00'
+                            created_at: "2016-10-24T16:21:12-04:00"
                             starting_balance_in_cents: 0
                             ending_balance_in_cents: 4000
                             gateway_used: null
@@ -3757,13 +3757,13 @@ paths:
                               - tax_id: null
                                 tax_charge_id: 159424444
                                 tax_name: MA Tax
-                                rate: '0.0625'
+                                rate: "0.0625"
                                 tax_amount_in_cents: 250
                                 tax_rules:
                                   - tax_rule_id: null
                                     country_code: US
                                     subdivision_code: MA
-                                    rate: '0.0625'
+                                    rate: "0.0625"
                                     tax_amount_in_cents: 250
                                     description: MA STATE TAX - MASSACHUSETTS
                           - id: 159424444
@@ -3774,7 +3774,7 @@ paths:
                             success: true
                             amount_in_cents: 250
                             memo: MA Tax (6.25%)
-                            created_at: '2016-10-24T16:21:12-04:00'
+                            created_at: "2016-10-24T16:21:12-04:00"
                             starting_balance_in_cents: 4000
                             ending_balance_in_cents: 4250
                             gateway_used: null
@@ -3797,12 +3797,12 @@ paths:
                             transaction_type: payment
                             success: true
                             amount_in_cents: 4250
-                            memo: 'Amelia Example - Basic Plan: Renewal payment'
-                            created_at: '2016-10-24T16:21:13-04:00'
+                            memo: "Amelia Example - Basic Plan: Renewal payment"
+                            created_at: "2016-10-24T16:21:13-04:00"
                             starting_balance_in_cents: 4250
                             ending_balance_in_cents: 0
                             gateway_used: bogus
-                            gateway_transaction_id: '53433'
+                            gateway_transaction_id: "53433"
                             gateway_order_id: null
                             payment_id: null
                             product_id: 3792003
@@ -3820,7 +3820,7 @@ paths:
                               key: subscription_state_change
                               message: State changed on Amelia Example's subscription to Basic Plan from trialing to active
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:43-04:00'
+                              created_at: "2016-10-24T16:20:43-04:00"
                               event_specific_data:
                                 previous_subscription_state: trialing
                                 new_subscription_state: active
@@ -3829,7 +3829,7 @@ paths:
                               key: subscription_product_change
                               message: Product changed on Amelia Example's subscription from 'Trial Product' to 'Basic Plan'
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:20:43-04:00'
+                              created_at: "2016-10-24T16:20:43-04:00"
                               event_specific_data:
                                 previous_product_id: 3861800
                                 new_product_id: 3792003
@@ -3838,14 +3838,14 @@ paths:
                               key: billing_date_change
                               message: Billing date changed on Amelia Example's subscription to Basic Plan from 10/31/2016 to 10/24/2016
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:11-04:00'
+                              created_at: "2016-10-24T16:21:11-04:00"
                               event_specific_data: null
                           - event:
                               id: 342037470
                               key: renewal_success
                               message: Successful renewal for Amelia Example's subscription to Basic Plan
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:14-04:00'
+                              created_at: "2016-10-24T16:21:14-04:00"
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
@@ -3854,7 +3854,7 @@ paths:
                               key: payment_success
                               message: Successful payment of $42.50 for Amelia Example's subscription to Basic Plan
                               subscription_id: 14900541
-                              created_at: '2016-10-24T16:21:14-04:00'
+                              created_at: "2016-10-24T16:21:14-04:00"
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
@@ -3864,7 +3864,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             maximum: 200
@@ -3901,7 +3901,7 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -3929,7 +3929,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             default: 10000
@@ -3940,7 +3940,7 @@ paths:
             type: integer
           in: query
           name: settled_since
-          description: 'Format: UNIX timestamp'
+          description: "Format: UNIX timestamp"
         - schema:
             type: string
             enum:
@@ -3963,8 +3963,8 @@ paths:
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
 
-        This method will return a list of Statement IDs associated with an entire Site. 
-  '/subscriptions/{subscription_id}/statements/ids.json':
+        This method will return a list of Statement IDs associated with an entire Site.
+  "/subscriptions/{subscription_id}/statements/ids.json":
     parameters:
       - schema:
           type: integer
@@ -3977,7 +3977,7 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -4005,7 +4005,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             default: 10000
@@ -4016,7 +4016,7 @@ paths:
             type: integer
           in: query
           name: settled_since
-          description: 'Format: UNIX timestamp'
+          description: "Format: UNIX timestamp"
         - schema:
             type: string
             enum:
@@ -4046,12 +4046,12 @@ paths:
       tags:
         - Legacy Statements
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   count:
@@ -4066,7 +4066,7 @@ paths:
         |-----------------------------------------------------------------------------|
 
         This method returns the full count of statements associated with a Site.
-  '/invoices/{invoice_id}.json':
+  "/invoices/{invoice_id}.json":
     parameters:
       - schema:
           type: integer
@@ -4079,16 +4079,16 @@ paths:
       tags:
         - Legacy Invoices
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   invoice:
-                    $ref: '#/components/schemas/Legacy-Invoice'
+                    $ref: "#/components/schemas/Legacy-Invoice"
               examples:
                 Example:
                   value:
@@ -4099,13 +4099,13 @@ paths:
                       site_id: 31615
                       state: paid
                       total_amount_in_cents: 4250
-                      paid_at: '2016-11-01T12:20:21-04:00'
-                      created_at: '2016-10-26T14:38:40-04:00'
-                      updated_at: '2016-11-01T12:20:21-04:00'
+                      paid_at: "2016-11-01T12:20:21-04:00"
+                      created_at: "2016-10-26T14:38:40-04:00"
+                      updated_at: "2016-11-01T12:20:21-04:00"
                       amount_due_in_cents: 0
-                      number: '000014'
+                      number: "000014"
                       charges:
-                        - created_at: '2016-10-26T14:38:39-04:00'
+                        - created_at: "2016-10-26T14:38:39-04:00"
                           subscription_id: 14900541
                           type: Charge
                           memo: Basic Plan (10/26/2016 - 11/26/2016)
@@ -4123,7 +4123,7 @@ paths:
                           component_id: null
                           tax_id: null
                           customer_id: 14399371
-                        - created_at: '2016-10-26T14:38:39-04:00'
+                        - created_at: "2016-10-26T14:38:39-04:00"
                           subscription_id: 14900541
                           type: Charge
                           memo: MA Tax (6.25%)
@@ -4142,7 +4142,7 @@ paths:
                           tax_id: null
                           customer_id: 14399371
                       payments_and_credits:
-                        - created_at: '2016-11-01T12:20:20-04:00'
+                        - created_at: "2016-11-01T12:20:20-04:00"
                           subscription_id: 14900541
                           type: Payment
                           memo: One Time Credit Card Payment for Invoice
@@ -4154,7 +4154,7 @@ paths:
                           payment_id: null
                           product_id: 3792003
                           transaction_type: payment
-                          gateway_transaction_id: '53433'
+                          gateway_transaction_id: "53433"
                           gateway_order_id: null
                           starting_balance_in_cents: -200
                           component_id: null
@@ -4163,7 +4163,7 @@ paths:
                           card_number: XXXX-XXXX-XXXX-1
                           card_expiration: 01/2026
                           card_type: bogus
-        '404':
+        "404":
           description: Not Found
       operationId: get-invoices-invoice_id-.json
       description: |-
@@ -4188,7 +4188,7 @@ paths:
       tags:
         - Legacy Invoices
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -4198,7 +4198,7 @@ paths:
                   type: object
                   properties:
                     invoice:
-                      $ref: '#/components/schemas/Legacy-Invoice'
+                      $ref: "#/components/schemas/Legacy-Invoice"
               examples:
                 Example:
                   value:
@@ -4210,12 +4210,12 @@ paths:
                         state: unpaid
                         total_amount_in_cents: 1000
                         paid_at: null
-                        created_at: '2016-10-20T17:04:14-04:00'
-                        updated_at: '2016-10-20T17:04:14-04:00'
+                        created_at: "2016-10-20T17:04:14-04:00"
+                        updated_at: "2016-10-20T17:04:14-04:00"
                         amount_due_in_cents: 1000
-                        number: '000013'
+                        number: "000013"
                         charges:
-                          - created_at: '2016-10-20T17:04:14-04:00'
+                          - created_at: "2016-10-20T17:04:14-04:00"
                             subscription_id: 14735881
                             type: Charge
                             memo: Trial Product (10/20/2016 - 11/20/2016)
@@ -4242,12 +4242,12 @@ paths:
                         state: unpaid
                         total_amount_in_cents: 5000
                         paid_at: null
-                        created_at: '2016-10-19T12:53:02-04:00'
-                        updated_at: '2016-10-19T12:53:02-04:00'
+                        created_at: "2016-10-19T12:53:02-04:00"
+                        updated_at: "2016-10-19T12:53:02-04:00"
                         amount_due_in_cents: 5000
-                        number: '000012'
+                        number: "000012"
                         charges:
-                          - created_at: '2016-10-19T12:53:02-04:00'
+                          - created_at: "2016-10-19T12:53:02-04:00"
                             subscription_id: 14823387
                             type: Charge
                             memo: Will this invoice get paid
@@ -4274,12 +4274,12 @@ paths:
                         state: unpaid
                         total_amount_in_cents: 4000
                         paid_at: null
-                        created_at: '2016-10-17T12:13:42-04:00'
-                        updated_at: '2016-10-17T12:13:42-04:00'
+                        created_at: "2016-10-17T12:13:42-04:00"
+                        updated_at: "2016-10-17T12:13:42-04:00"
                         amount_due_in_cents: 4000
-                        number: '000010'
+                        number: "000010"
                         charges:
-                          - created_at: '2016-10-17T12:13:42-04:00'
+                          - created_at: "2016-10-17T12:13:42-04:00"
                             subscription_id: 14788195
                             type: Charge
                             memo: Basic Plan (10/17/2016 - 11/17/2016)
@@ -4304,7 +4304,7 @@ paths:
             type: integer
           in: query
           name: page
-          description: 'Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.'
+          description: "Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned."
         - schema:
             type: integer
             maximum: 200
@@ -4322,17 +4322,17 @@ paths:
               - refund
           in: query
           name: kinds
-          description: 'An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit'
+          description: "An array of transaction types. Example: http://example.chargify.com?kinds[]=charge&kinds[]=payment&kinds[]=credit"
         - schema:
             type: string
           in: query
           name: start_date
-          description: '(format YYYY-MM-DD) Returns invoices with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns invoices with a created_at timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified"
         - schema:
             type: string
           in: query
           name: end_date
-          description: '(format YYYY-MM-DD) Returns invoices with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified'
+          description: "(format YYYY-MM-DD) Returns invoices with a created_at timestamp up to and including 11:59:59PM in your site’s time zone on the date specified"
         - schema:
             type: string
             enum:
@@ -4358,7 +4358,7 @@ paths:
 
         Full documentation on how invoices function within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407745025947).
         For information that relates directly to invoices-by-subscription, please see our Subscription-based Invoice documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#invoices)
-  '/invoices/{invoice_id}/payments.json':
+  "/invoices/{invoice_id}/payments.json":
     parameters:
       - schema:
           type: number
@@ -4371,16 +4371,16 @@ paths:
       tags:
         - Legacy Invoices
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                description: ''
+                description: ""
                 type: object
                 properties:
                   payment:
-                    $ref: '#/components/schemas/Legacy-Payment'
+                    $ref: "#/components/schemas/Legacy-Payment"
               examples:
                 Example:
                   value:
@@ -4393,7 +4393,7 @@ paths:
                       success: true
                       amount_in_cents: 1000
                       memo: Lorem ipsum
-                      created_at: '2016-11-01T16:04:37-04:00'
+                      created_at: "2016-11-01T16:04:37-04:00"
                       starting_balance_in_cents: 3750
                       ending_balance_in_cents: 2750
                       gateway_used: null
@@ -4439,10 +4439,10 @@ paths:
               type: object
               properties:
                 payment:
-                  $ref: '#/components/schemas/Create-Legacy-Payment'
+                  $ref: "#/components/schemas/Create-Legacy-Payment"
               required:
                 - payment
-  '/invoices/{invoice_id}/charges.json':
+  "/invoices/{invoice_id}/charges.json":
     parameters:
       - schema:
           type: integer
@@ -4455,7 +4455,7 @@ paths:
       tags:
         - Legacy Invoices
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -4463,7 +4463,7 @@ paths:
                 type: object
                 properties:
                   charge:
-                    $ref: '#/components/schemas/Legacy-Charge'
+                    $ref: "#/components/schemas/Legacy-Charge"
       operationId: post-invoices-invoice_id-charges.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -4484,7 +4484,7 @@ paths:
                     - memo
                   properties:
                     amount_in_cents:
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents, either as a string or integer. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
                       oneOf:
                         - type: string
                           pattern: ^\d+$
@@ -4493,16 +4493,16 @@ paths:
                       description: A helpful explanation for the charge. This amount will remind you and your customer for the reason for the assessment of the charge.
                       type: string
                     amount:
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00."
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
                     period_range_start:
-                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       type: string
                     period_range_end:
-                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       type: string
               required:
                 - charge
@@ -4512,8 +4512,8 @@ paths:
                   charge:
                     amount_in_cents: 1000
                     memo: Support October 2016
-        description: ''
-  '/invoices/{invoice_id}/adjustments.json':
+        description: ""
+  "/invoices/{invoice_id}/adjustments.json":
     parameters:
       - schema:
           type: integer
@@ -4526,7 +4526,7 @@ paths:
       tags:
         - Legacy Invoices
       responses:
-        '200':
+        "200":
           description: OK
           headers: {}
           content:
@@ -4535,7 +4535,7 @@ paths:
                 type: object
                 properties:
                   adjustment:
-                    $ref: '#/components/schemas/Legacy-Adjustment'
+                    $ref: "#/components/schemas/Legacy-Adjustment"
               examples:
                 Example:
                   value:
@@ -4548,7 +4548,7 @@ paths:
                       success: true
                       amount_in_cents: -1000
                       memo: Credit for recycling old computers
-                      created_at: '2016-12-05T13:37:28-05:00'
+                      created_at: "2016-12-05T13:37:28-05:00"
                       starting_balance_in_cents: 177
                       ending_balance_in_cents: -823
                       gateway_used: null
@@ -4582,28 +4582,28 @@ paths:
                         - type: string
                           pattern: ^\d+$
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
                     amount:
                       oneOf:
                         - type: string
                           pattern: '^[1-9]\d*(\.\d+)?$'
                         - type: number
-                      description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00.'
+                      description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00 and -$10.00 would be represented as -10.00."
                     memo:
                       type: string
                       description: A helpful explanation for the adjustment. This amount will remind you and your customer for the reason for the assessment of the adjustment.
                       maxLength: 255
                     period_range_start:
                       type: string
-                      description: 'A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If a start is provided, an end must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       format: date
                     period_range_end:
                       type: string
-                      description: 'A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report.'
+                      description: "A date range represents a service period. If an end is provided, a start must be supplied as well. These dates are optional and do not impact the billing of the charge. If provided, the date range will be used for revenue placement on the Finance Report and Revenue Recognition report."
                       format: date
               required:
                 - adjustment
-  '/subscriptions/{subscription_id}/reset_balance.json':
+  "/subscriptions/{subscription_id}/reset_balance.json":
     parameters:
       - schema:
           type: integer
@@ -4616,7 +4616,7 @@ paths:
       tags:
         - Legacy Subscription Balance
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -4902,22 +4902,22 @@ paths:
                       total_revenue_in_cents: 14000
                       product_price_in_cents: 1000
                       product_version_number: 7
-                      current_period_ends_at: '2016-11-15T14:48:10-05:00'
-                      next_assessment_at: '2016-11-15T14:48:10-05:00'
+                      current_period_ends_at: "2016-11-15T14:48:10-05:00"
+                      next_assessment_at: "2016-11-15T14:48:10-05:00"
                       trial_started_at: null
                       trial_ended_at: null
-                      activated_at: '2016-11-14T14:48:12-05:00'
+                      activated_at: "2016-11-14T14:48:12-05:00"
                       expires_at: null
-                      created_at: '2016-11-14T14:48:10-05:00'
-                      updated_at: '2016-11-14T15:24:41-05:00'
+                      created_at: "2016-11-14T14:48:10-05:00"
+                      updated_at: "2016-11-14T15:24:41-05:00"
                       cancellation_message: null
                       cancellation_method: null
                       cancel_at_end_of_period: null
                       canceled_at: null
-                      current_period_started_at: '2016-11-14T14:48:10-05:00'
+                      current_period_started_at: "2016-11-14T14:48:10-05:00"
                       previous_state: active
                       signup_payment_id: 162269766
-                      signup_revenue: '260.00'
+                      signup_revenue: "260.00"
                       delayed_cancel_at: null
                       coupon_code: 5SNN6HFK3GBH
                       payment_collection_method: automatic
@@ -4931,24 +4931,24 @@ paths:
                         last_name: Test
                         email: curtis@example.com
                         cc_emails: jeff@example.com
-                        organization: ''
+                        organization: ""
                         reference: null
                         id: 14714298
-                        created_at: '2016-11-14T14:48:10-05:00'
-                        updated_at: '2016-11-14T14:48:13-05:00'
+                        created_at: "2016-11-14T14:48:10-05:00"
+                        updated_at: "2016-11-14T14:48:13-05:00"
                         address: 123 Anywhere Street
-                        address_2: ''
+                        address_2: ""
                         city: Boulder
                         state: CO
-                        zip: '80302'
+                        zip: "80302"
                         country: US
-                        phone: ''
+                        phone: ""
                         verified: false
-                        portal_customer_created_at: '2016-11-14T14:48:13-05:00'
-                        portal_invite_last_sent_at: '2016-11-14T14:48:13-05:00'
+                        portal_customer_created_at: "2016-11-14T14:48:13-05:00"
+                        portal_invite_last_sent_at: "2016-11-14T14:48:13-05:00"
                         portal_invite_last_accepted_at: null
                         tax_exempt: false
-                        vat_number: '012345678'
+                        vat_number: "012345678"
                       product:
                         id: 3792003
                         name: $10 Basic Plan
@@ -4965,27 +4965,27 @@ paths:
                         trial_interval: null
                         trial_interval_unit: month
                         initial_charge_after_trial: false
-                        return_params: ''
+                        return_params: ""
                         request_credit_card: false
                         require_credit_card: false
-                        created_at: '2016-03-24T13:38:39-04:00'
-                        updated_at: '2016-11-03T13:03:05-04:00'
+                        created_at: "2016-03-24T13:38:39-04:00"
+                        updated_at: "2016-11-03T13:03:05-04:00"
                         archived_at: null
-                        update_return_url: ''
-                        update_return_params: ''
+                        update_return_url: ""
+                        update_return_params: ""
                         product_family:
                           id: 527890
                           name: Acme Projects
                           handle: billing-plans
                           accounting_code: null
-                          description: ''
+                          description: ""
                         public_signup_pages:
                           - id: 281054
-                            url: 'https://general-goods.chargify.com/subscribe/kqvmfrbgd89q/basic'
+                            url: "https://general-goods.chargify.com/subscribe/kqvmfrbgd89q/basic"
                           - id: 281240
-                            url: 'https://general-goods.chargify.com/subscribe/dkffht5dxfd8/basic'
+                            url: "https://general-goods.chargify.com/subscribe/dkffht5dxfd8/basic"
                           - id: 282694
-                            url: 'https://general-goods.chargify.com/subscribe/jwffwgdd95s8/basic'
+                            url: "https://general-goods.chargify.com/subscribe/jwffwgdd95s8/basic"
                         taxable: false
                         version_number: 7
                         product_price_point_name: Default
@@ -4999,13 +4999,13 @@ paths:
                         expiration_month: 1
                         expiration_year: 2026
                         billing_address: 123 Anywhere Street
-                        billing_address_2: ''
+                        billing_address_2: ""
                         billing_city: Boulder
                         billing_state: null
-                        billing_country: ''
-                        billing_zip: '80302'
+                        billing_country: ""
+                        billing_zip: "80302"
                         current_vault: bogus
-                        vault_token: '1'
+                        vault_token: "1"
                         customer_vault_token: null
                         customer_id: 14714298
                       payment_type: credit_card
@@ -5016,7 +5016,7 @@ paths:
                       stored_credential_transaction_id: 166115589220288
                       next_product_handle: null
                       on_hold_at: null
-                      scheduled_cancellation_at: '2016-11-14T14:48:13-05:00'
+                      scheduled_cancellation_at: "2016-11-14T14:48:13-05:00"
       operationId: put-subscriptions-subscription_id-reset_balance.json
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
@@ -5028,7 +5028,7 @@ paths:
         ## Past Due & Unpaid Subscriptions
         If you have a subscription that is in the `past_due` or `unpaid` state, when you reset the balance, the subscription will transition to `active`.
 servers:
-  - url: 'https://{subdomain}.chargify.com'
+  - url: "https://{subdomain}.chargify.com"
     description: Production server
     variables:
       subdomain:
@@ -5047,13 +5047,13 @@ components:
             - type: string
               pattern: ^\d+$
             - type: number
-          description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded.'
+          description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass the amount represented as a number of cents. For example, $10.00 would be represented as 1000. If you pass a value for both amount and amount_in_cents, the value in amount_in_cents will be used and amount will be discarded."
         amount:
           oneOf:
             - type: string
               pattern: '^[1-9]\d*(\.\d+)?$'
             - type: number
-          description: '(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00.'
+          description: "(either amount or amount_in_cents is required) If you use this parameter, you should pass a dollar amount represented as a string. For example, $10.00 would be represented as 10.00."
         memo:
           type: string
           description: Typically the description of why the payment occured
@@ -5066,7 +5066,7 @@ components:
           description: The Chargify id of the adjustment
         success:
           type: boolean
-          description: 'Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true'
+          description: "Boolean indicating if the adjustment was successfully applied to the subscription balance. Note - At this time, this will always be true"
         memo:
           description: The supplied description of the adjustment
           type: string
@@ -5162,13 +5162,13 @@ components:
           nullable: true
           format: date
           description: The start of the billing period for which the adjustment applies
-          example: '2021-04-02'
+          example: "2021-04-02"
         period_range_end:
           type: string
           nullable: true
           format: date
           description: The end of the billing period period for which the adjustment applies
-          example: '2021-04-02'
+          example: "2021-04-02"
         gateway_used:
           type: string
           nullable: true
@@ -5202,10 +5202,10 @@ components:
           enum:
             - charge
         success:
-          description: 'The success of the charge. At this time, all charges that are returned will return true here'
+          description: "The success of the charge. At this time, all charges that are returned will return true here"
           type: boolean
         amount_in_cents:
-          description: 'The amount of the charge and captured payment, represented in cents.'
+          description: "The amount of the charge and captured payment, represented in cents."
           type: integer
         memo:
           description: The supplied memo for the charge
@@ -5305,7 +5305,7 @@ components:
         quantity:
           type: string
           enum:
-            - '1.0'
+            - "1.0"
         original_amount_in_cents:
           type: integer
         discount_amount_in_cents:
@@ -5677,7 +5677,7 @@ components:
           nullable: true
         customer_billing_address_2:
           type: string
-          description: 'The customer’s billing address, line 2'
+          description: "The customer’s billing address, line 2"
           nullable: true
         customer_billing_city:
           type: string
@@ -5705,7 +5705,7 @@ components:
           nullable: true
         customer_shipping_address_2:
           type: string
-          description: 'The customer’s shipping address, line 2'
+          description: "The customer’s shipping address, line 2"
           nullable: true
         customer_shipping_city:
           type: string
@@ -5748,7 +5748,7 @@ components:
             type: object
             properties:
               transaction:
-                $ref: '#/components/schemas/Legacy-Transaction'
+                $ref: "#/components/schemas/Legacy-Transaction"
         events:
           type: array
           description: A collection of the event objects associated with the statement
@@ -5812,7 +5812,7 @@ components:
           nullable: true
         customer_billing_address_2:
           type: string
-          description: 'The customer’s billing address, line 2'
+          description: "The customer’s billing address, line 2"
           nullable: true
         customer_billing_city:
           type: string
@@ -5840,7 +5840,7 @@ components:
           nullable: true
         customer_shipping_address_2:
           type: string
-          description: 'The customer’s shipping address, line 2'
+          description: "The customer’s shipping address, line 2"
           nullable: true
         customer_shipping_city:
           type: string
@@ -5883,7 +5883,7 @@ components:
             type: object
             properties:
               transaction:
-                $ref: '#/components/schemas/Legacy-Transaction'
+                $ref: "#/components/schemas/Legacy-Transaction"
         events:
           type: array
           description: A collection of the event objects associated with the statement
@@ -5989,18 +5989,18 @@ components:
           nullable: true
         gateway_transaction_id:
           type: string
-          description: 'The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists'
+          description: "The transaction ID from the remote gateway (i.e. Authorize.Net), if one exists"
           nullable: true
         gateway_response_code:
           type: string
-          description: 'The response code from the remote Gateway (only supported by: Vantiv (Litle), Maxio Payments)'
+          description: "The response code from the remote Gateway (only supported by: Vantiv (Litle), Maxio Payments)"
         gateway_order_id:
           type: integer
-          description: 'A gateway-specific identifier for the transaction, separate from the gateway_transaction_id'
+          description: "A gateway-specific identifier for the transaction, separate from the gateway_transaction_id"
           nullable: true
         payment_id:
           type: integer
-          description: 'The unique identifier for the payment being explicitly refunded (in whole or in part) by this transaction. Will be null for all transaction types except for “Refund”. May be null even for Refunds. For partial refunds, more than one Refund transaction may reference the same payment_id.'
+          description: "The unique identifier for the payment being explicitly refunded (in whole or in part) by this transaction. Will be null for all transaction types except for “Refund”. May be null even for Refunds. For partial refunds, more than one Refund transaction may reference the same payment_id."
           nullable: true
         product_id:
           type: integer
@@ -6014,7 +6014,7 @@ components:
           items: {}
         component_id:
           type: integer
-          description: 'The Chargify id of the component, only available for a charge'
+          description: "The Chargify id of the component, only available for a charge"
           nullable: true
         statement_id:
           type: integer
@@ -6053,7 +6053,7 @@ components:
           nullable: true
         role:
           type: string
-          description: '(Experimental, only for Payments) Payments may be marked with a role to define the context in which they were applied. Valid values are currently reserved for invoicing and consolidated invoicing: invoice_payment, consolidated_invoice_payment, invoice_segment_payment, payment_split'
+          description: "(Experimental, only for Payments) Payments may be marked with a role to define the context in which they were applied. Valid values are currently reserved for invoicing and consolidated invoicing: invoice_payment, consolidated_invoice_payment, invoice_segment_payment, payment_split"
           nullable: true
         card_number:
           type: string
