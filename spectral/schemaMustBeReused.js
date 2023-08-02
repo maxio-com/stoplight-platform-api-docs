@@ -2,7 +2,7 @@ export default (schema, _, context) => {
   if (schema.oneOf || schema.anyOf || schema.allOf) return;
 
   if (schema.type === "array") {
-    if (schema.items && !schema.items["$ref"]) {
+    if (schema.items && schema.items["$ref"] === "object") {
       return [
         {
           message: "Use $ref in 'items' field for 'array' type",
@@ -10,6 +10,8 @@ export default (schema, _, context) => {
       ];
     } else return;
   }
+
+  if (schema.type !== "object") return;
 
   if (!schema["$ref"]) {
     return [

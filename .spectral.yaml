@@ -85,10 +85,10 @@ rules:
           - application/xml
           - multipart/form-data
   reuse-schemas-in-media-types:
-    description: Use $ref instead of inline schema
+    description: Use $ref instead of inline schema for request/response
     given: "#MediaTypeObjects..schema"
     severity: error
     resolved: false
-    message: "{{error}}"
+    message: "Inline schema for media type: {{error}}"
     then:
       function: schemaMustBeReused
