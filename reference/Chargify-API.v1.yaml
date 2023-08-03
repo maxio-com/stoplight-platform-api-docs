@@ -375,7 +375,7 @@ paths:
           name: until_date
           description: Format YYYY-MM-DD. Returns Webhooks with the created_at date less than or equal to the one specified.
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - $ref: "../components/parameters/webhook-order.yaml"
         - schema:
             type: integer
@@ -782,7 +782,7 @@ paths:
       description: Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
   "/subscriptions/{subscription_id}/notes/{note_id}.json":
     parameters:
       - schema:
@@ -1093,7 +1093,7 @@ paths:
           name: direction
           description: Direction to sort customers by time of creation
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page-default-50"
+        - $ref: "../components/parameters/per-page-default-50.yaml"
         - schema:
             type: string
             enum:
@@ -1798,7 +1798,7 @@ paths:
       description: This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
   "/reason_codes/{reason_code_id}.json":
     parameters:
       - schema:
@@ -2041,7 +2041,7 @@ paths:
           name: name
           description: filter by the name of the metafield
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             default: asc
@@ -2212,7 +2212,7 @@ paths:
         This endpoint will also display the current stats of your metadata to use as a tool for pagination.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
     put:
       summary: Update Metadata
       tags:
@@ -2326,7 +2326,7 @@ paths:
         This endpoint will list the number of pages of metadata information that are contained within a site.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -2569,7 +2569,7 @@ paths:
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page-default-30"
+        - $ref: "../components/parameters/per-page-default-30.yaml"
         - schema:
             type: string
             enum:
@@ -2929,7 +2929,7 @@ paths:
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page-default-30"
+        - $ref: "../components/parameters/per-page-default-30.yaml"
         - schema:
             type: string
             enum:
@@ -3424,7 +3424,7 @@ paths:
       description: This request allows you to request the subcodes that are attached to a coupon.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
     put:
       summary: Update Coupon Subcodes
       tags:
@@ -3723,7 +3723,7 @@ paths:
         ```
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: integer
           in: query
@@ -3869,7 +3869,7 @@ paths:
         Each event type has its own `event_specific_data` specified.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: integer
           in: query
@@ -3947,7 +3947,7 @@ paths:
       operationId: readEventsCount
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: integer
           in: query
@@ -5184,7 +5184,7 @@ paths:
           name: include_archived
           description: Include archived items
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: array
             items:
@@ -5359,7 +5359,7 @@ paths:
             Use in query `filter[ids]=1,2`."
           name: "filter[ids]"
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -5545,7 +5545,7 @@ paths:
           name: currency_prices
           description: Include an array of currency price data
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - in: query
           name: filter
           style: deepObject
@@ -6292,7 +6292,7 @@ paths:
       description: This method allows to retrieve a list of Products belonging to a Product Family.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -8086,7 +8086,7 @@ paths:
       description: "This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404."
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: integer
           in: query
@@ -9057,7 +9057,7 @@ paths:
           name: subscription_group_uid
           description: The UID of the subscription group you want to fetch consolidated invoices for. This will return a paginated list of consolidated invoices for the specified group.
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             default: desc
@@ -10278,7 +10278,7 @@ paths:
           name: subscription_id
           description: " The subscription's Chargify id"
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: boolean
             default: false
@@ -11059,7 +11059,7 @@ paths:
       description: "Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`."
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             default: asc
@@ -11224,7 +11224,7 @@ paths:
           name: date_field
           description: "The type of filter you'd like to apply to your search.
             Use in query `date_field=updated_at`."
-        - $ref: "#/components/parameters/sort-direction"
+        - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             type: string
           in: query
@@ -12420,7 +12420,7 @@ paths:
           name: until_date
           description: "Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified."
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
   "/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/activate.json":
     parameters:
       - schema:
@@ -13603,7 +13603,7 @@ paths:
         Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - name: state
           in: query
           schema:
@@ -13674,7 +13674,7 @@ paths:
           description:
             "The value of the metadata field specified in the parameter.
             Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
-        - $ref: "#/components/parameters/sort-direction"
+        - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             $ref: "#/components/schemas/List-Subscriptions-Sort"
           in: query
@@ -17267,7 +17267,7 @@ paths:
       description: This request will list a subscription's prepayments.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -18150,7 +18150,7 @@ paths:
         Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
           in: query
@@ -19605,7 +19605,7 @@ paths:
       description: This endpoint returns public keys used for Chargify.js.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
   "/subscription_groups/{subscription_group_uid}/proforma_invoices.json":
     parameters:
       - schema:
@@ -20028,7 +20028,7 @@ paths:
           name: status
           description: "The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided"
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -20748,7 +20748,7 @@ paths:
       description: This request will list components applied to each subscription.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -20758,7 +20758,7 @@ paths:
           in: query
           name: sort
           description: "The attribute by which to sort. Use in query: `sort=updated_at`."
-        - $ref: "#/components/parameters/sort-direction"
+        - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             type: string
             enum:
@@ -21227,7 +21227,7 @@ paths:
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
       parameters:
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page-default-30"
+        - $ref: "../components/parameters/per-page-default-30.yaml"
         - schema:
             type: string
             example: EU
@@ -22084,7 +22084,7 @@ paths:
           name: at_time
           description: "Submit a timestamp in ISO8601 format to request MRR for a historic time. Use in query: `at_time=2022-01-10T10:00:00-05:00`."
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
             enum:
@@ -22331,7 +22331,7 @@ paths:
           name: start_datetime
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date."
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: boolean
             enum:
@@ -22521,7 +22521,7 @@ paths:
           name: include
           description: "Allows including additional data in the response. Use in query: `include=currency_prices`."
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: string
           in: query
@@ -22551,7 +22551,7 @@ paths:
           in: query
           name: "filter[type]"
           description: "Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`."
-        - $ref: "#/components/parameters/sort-direction"
+        - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             type: array
             items:
@@ -22635,7 +22635,7 @@ paths:
       operationId: listAllProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       parameters:
-        - $ref: "#/components/parameters/sort-direction"
+        - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             type: string
             enum:
@@ -22714,7 +22714,7 @@ paths:
           name: include
           description: "Allows including additional data in the response. Use in query: `include=currency_prices`."
         - $ref: "../components/parameters/page.yaml"
-        - $ref: "#/components/parameters/per-page"
+        - $ref: "../components/parameters/per-page.yaml"
   "/subscriptions/{subscription_id}/activate.json":
     parameters:
       - $ref: "#/components/parameters/subscription-id-required-path"
@@ -23334,46 +23334,6 @@ security:
   - BasicAuth: []
 components:
   parameters:
-    per-page:
-      name: per_page
-      in: query
-      description:
-        "This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        Use in query `per_page=200`."
-      schema:
-        type: integer
-        default: 20
-        maximum: 200
-        example: 50
-    per-page-default-30:
-      name: per_page
-      in: query
-      description:
-        "This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        Use in query `per_page=200`."
-      schema:
-        type: integer
-        default: 30
-        maximum: 200
-        example: 50
-    per-page-default-50:
-      name: per_page
-      in: query
-      description:
-        "This parameter indicates how many records to fetch in each request. Default value is 50. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.
-        Use in query `per_page=200`."
-      schema:
-        type: integer
-        default: 30
-        maximum: 200
-        example: 50
-    sort-direction:
-      name: direction
-      in: query
-      description: "Controls the order in which results are returned.
-        Use in query `direction=asc`."
-      schema:
-        $ref: "#/components/schemas/Sort-Direction"
     subscription-id-required-path:
       name: subscription_id
       in: path
@@ -27067,13 +27027,6 @@ components:
         - trial_ended
         - trialing
         - unpaid
-    Sort-Direction:
-      title: Sorting direction
-      type:
-        - string
-      enum:
-        - asc
-        - desc
     Update-Customer:
       title: Update Customer
       type: object
