@@ -17,7 +17,7 @@ aliases:
     - "#OperationObject.requestBody.content[*]"
     - "#OperationObject.responses[*].content[*]"
   ParameterObjects:
-    - "$..*.parameters[*]"
+    - "$..parameters[*]"
   DescribableObjects:
     - "$.info"
     - "#OperationObject"
@@ -37,7 +37,7 @@ rules:
         type: camel
   array-properties-must-have-items-with-type:
     description: Ensures all array properties have an items attribute with a type or $ref
-    given: "$..*.properties[*]"
+    given: "$..properties[*]"
     severity: error
     message: "Property of type 'array' must contain valid 'items.type' property"
     then:
@@ -89,6 +89,6 @@ rules:
     given: "#MediaTypeObjects..schema"
     severity: error
     resolved: false
-    message: "Inline schema for media type: {{error}}"
+    message: "{{error}}"
     then:
       function: schemaMustBeReused
