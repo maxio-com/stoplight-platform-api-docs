@@ -24273,6 +24273,8 @@ components:
       properties:
         prepaid_configuration:
           $ref: "#/components/schemas/Upsert-Prepaid-Configuration"
+      required:
+        - prepaid_configuration
     Create-or-Update-Product:
       title: Create or Update Product
       type: object
@@ -24620,6 +24622,8 @@ components:
       properties:
         subscription:
           $ref: "#/components/schemas/Create-Subscription"
+      required:
+        - subscription
     Subscription-Custom-Price:
       title: Custom price used for Subscription Create/Update
       type:
@@ -27448,6 +27452,8 @@ components:
       properties:
         subscription:
           $ref: "#/components/schemas/Update-Subscription"
+      required:
+        - subscription
     Override-Subscription:
       title: Override Subscription
       type: object
@@ -27473,6 +27479,8 @@ components:
       properties:
         subscription:
           $ref: "#/components/schemas/Override-Subscription"
+      required:
+        - subscription
     Usage:
       title: Usage
       type: object

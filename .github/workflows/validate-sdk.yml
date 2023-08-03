@@ -31,7 +31,7 @@ jobs:
         run: npx prettier . --check
       - name: Run Spectral validator
         shell: bash
-        run: spectral lint -v -F warn ./reference/Chargify-API.v1.yaml
+        run: spectral lint -v -F warn -r .spectral-build.yaml -f github-actions ./reference/Chargify-API.v1.yaml
   run-generator:
     runs-on: ubuntu-latest
     defaults:
