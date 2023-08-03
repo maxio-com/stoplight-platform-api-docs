@@ -1,0 +1,8 @@
+title: Update Endpoint Request
+description: Used to Create or Update Endpoint
+type: object
+properties:
+  endpoint:
+    $ref: "./Update-Endpoint.yaml"
+required:
+  - endpoint
