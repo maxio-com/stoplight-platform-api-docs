@@ -1430,41 +1430,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  seller_name:
-                    type: string
-                  site_name:
-                    type: string
-                  site_id:
-                    type: integer
-                  site_currency:
-                    type: string
-                  stats:
-                    type: object
-                    properties:
-                      total_subscriptions:
-                        type: integer
-                      subscriptions_today:
-                        type: integer
-                      total_revenue:
-                        type: string
-                      revenue_today:
-                        type: string
-                      revenue_this_month:
-                        type: string
-                      revenue_this_year:
-                        type: string
-                      total_canceled_subscriptions:
-                        type: integer
-                      total_active_subscriptions:
-                        type: number
-                      total_past_due_subscriptions:
-                        type: number
-                      total_unpaid_subscriptions:
-                        type: number
-                      total_dunning_subscriptions:
-                        type: number
+                $ref: "../components/schemas/Site-Summary.yaml"
               examples:
                 Example:
                   value:
@@ -1501,19 +1467,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  referral_code:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      site_id:
-                        type: integer
-                      subscription_id:
-                        type: integer
-                      code:
-                        type: string
+                $ref: "../components/schemas/Referral-Validation-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1564,10 +1518,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  reason_code:
-                    $ref: "#/components/schemas/Reason-Code"
+                $ref: "../components/schemas/Reason-Code-Response.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -1586,7 +1537,7 @@ paths:
                       - "Code: cannot be blank."
                       - "Code: This code is already in use."
                       - "Description: cannot be blank."
-      operationId: createResonCode
+      operationId: createReasonCode
       description: |-
         # Reason Codes Intro
 
@@ -1607,23 +1558,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                reason_code:
-                  type: object
-                  properties:
-                    code:
-                      type: string
-                      description: The unique identifier for the ReasonCode
-                    description:
-                      type: string
-                      description: The friendly summary of what the code signifies
-                    position:
-                      type: integer
-                      description: The order that code appears in lists
-                  required:
-                    - code
-                    - description
+              $ref: "../components/schemas/Create-Reason-Code-Request.yaml"
             examples:
               Example:
                 value:
@@ -1644,7 +1579,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Reason-Code"
+                  $ref: "../components/schemas/Reason-Code-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1694,10 +1629,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  reason_code:
-                    $ref: "#/components/schemas/Reason-Code"
+                $ref: "../components/schemas/Reason-Code-Response.yaml"
         "404":
           description: Not Found
       operationId: readReasonCode
@@ -1712,10 +1644,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  reason_code:
-                    $ref: "#/components/schemas/Reason-Code"
+                $ref: "../components/schemas/Reason-Code-Response.yaml"
         "404":
           description: Not Found
       operationId: updateReasonCode
@@ -1723,20 +1652,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                reason_code:
-                  type: object
-                  properties:
-                    code:
-                      type: string
-                      description: The unique identifier for the ReasonCode
-                    description:
-                      type: string
-                      description: The friendly summary of what the code signifies
-                    position:
-                      type: integer
-                      description: The order that code appears in lists
+              $ref: "../components/schemas/Update-Reason-Code-Request.yaml"
       description: This method gives a merchant the option to update an existing reason code for a given site.
     delete:
       summary: Delete Reason Code
@@ -1748,10 +1664,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ok:
-                    type: string
+                $ref: "../components/schemas/Ok-Response.yaml"
               examples:
                 Example:
                   value:
@@ -26623,24 +26536,6 @@ components:
               metadatum_id:
                 type: number
         public_url: {}
-    Reason-Code:
-      title: Reason Code
-      type: object
-      properties:
-        id:
-          type: integer
-        site_id:
-          type: integer
-        code:
-          type: string
-        description:
-          type: string
-        position:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
     Service-Credit:
       title: Service Credit
       type: object
