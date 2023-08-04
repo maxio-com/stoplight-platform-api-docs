@@ -673,15 +673,7 @@ paths:
 
         **This functionality will only work on sites in TEST mode. Attempts to perform this on sites in “live” mode will result in a response of 403 FORBIDDEN.**
       parameters:
-        - schema:
-            type: string
-            default: all
-            enum:
-              - all
-              - customers
-          in: query
-          name: cleanup_scope
-          description: "all: Will clear all products, customers, and related subscriptions from the site. customers: Will clear only customers and related subscriptions (leaving the products untouched) for the site. Revenue will also be reset to 0."
+        - $ref: "../components/parameters/cleanup-scope.yaml"
       responses:
         "200":
           description: OK
@@ -689,12 +681,7 @@ paths:
           description: Forbidden
   "/subscriptions/{subscription_id}/notes.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Create Subscription Note
       operationId: createSubscriptionNote
@@ -706,12 +693,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  note:
-                    $ref: "#/components/schemas/Subscription-Note"
-                required:
-                  - note
+                $ref: "../components/schemas/Subscription-Note-Response.yaml"
       description: |-
         Use the following method to create a note for a subscription.
 
@@ -726,10 +708,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                note:
-                  $ref: "#/components/schemas/Create-or-Update-Subscription-Note"
+              $ref: "../components/schemas/Update-Subscription-Note-Request.yaml"
             examples:
               Example:
                 value:
@@ -759,10 +738,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    note:
-                      $ref: "#/components/schemas/Subscription-Note"
+                  $ref: "../components/schemas/Subscription-Note-Response.yaml"
               examples:
                 Example:
                   value:
@@ -787,12 +763,7 @@ paths:
         - $ref: "../components/parameters/per-page.yaml"
   "/subscriptions/{subscription_id}/notes/{note_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription associated with the note
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: string
         name: note_id
@@ -809,10 +780,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  note:
-                    $ref: "#/components/schemas/Subscription-Note"
+                $ref: "../components/schemas/Subscription-Note-Response.yaml"
               examples:
                 Example:
                   value:
@@ -836,21 +804,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  note:
-                    $ref: "#/components/schemas/Subscription-Note"
+                $ref: "../components/schemas/Subscription-Note-Response.yaml"
       description: Use the following method to update a note for a Subscription.
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                note:
-                  $ref: "#/components/schemas/Create-or-Update-Subscription-Note"
-              required:
-                - note
+              $ref: "../components/schemas/Update-Subscription-Note-Request.yaml"
             examples:
               Example:
                 value:
@@ -868,10 +828,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customer:
-                    $ref: ../models/Customer.yaml
+                $ref: ../components/schemas/Customer-Response.yaml
               examples:
                 Example:
                   value:
@@ -961,10 +918,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                customer:
-                  $ref: "#/components/schemas/Create-Customer"
+              $ref: "../components/schemas/Create-Customer-Request.yaml"
             examples:
               Example:
                 value:
@@ -995,7 +949,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Customer.yaml
+                  $ref: ../components/schemas/Customer-Response.yaml
               examples:
                 Example:
                   value:
@@ -1086,24 +1040,13 @@ paths:
         To retrieve a single, exact match by reference, please use the [lookup endpoint](https://developers.chargify.com/docs/api-docs/b710d8fbef104-read-customer-by-reference).
       parameters:
         - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            default: asc
+            $ref: "../components/schemas/Sort-Direction.yaml"
           in: query
           name: direction
           description: Direction to sort customers by time of creation
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-50.yaml"
-        - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-          in: query
-          name: date_field
-          description: The type of filter you would like to apply to your search.
+        - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
             type: string
           in: query
@@ -1147,10 +1090,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customer:
-                    $ref: ../models/Customer.yaml
+                $ref: ../components/schemas/Customer-Response.yaml
       operationId: readCustomer
       description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
       parameters: []
@@ -1165,7 +1105,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/Customer.yaml
+                $ref: "../components/schemas/Customer-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1215,10 +1155,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                customer:
-                  $ref: "#/components/schemas/Update-Customer"
+              $ref: "../components/schemas/Update-Customer-Request.yaml"
             examples:
               Example:
                 value:
@@ -1246,10 +1183,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customer:
-                    $ref: ../models/Customer.yaml
+                $ref: "../components/schemas/Customer-Response.yaml"
       operationId: readCustomerByReference
       description: Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
       parameters:
@@ -1261,12 +1195,7 @@ paths:
       x-internal: false
   "/customers/{customer_id}/subscriptions.json":
     parameters:
-      - schema:
-          type: integer
-        name: customer_id
-        in: path
-        required: true
-        description: The Chargify id of the customer
+      - $ref: "../components/parameters/customer-id-path.yaml"
     get:
       summary: List Customer Subscriptions
       tags:
@@ -1284,12 +1213,7 @@ paths:
       description: This method lists all subscriptions that belong to a customer.
   "/portal/customers/{customer_id}/enable.json":
     parameters:
-      - schema:
-          type: integer
-        name: customer_id
-        in: path
-        required: true
-        description: The Chargify id of the customer
+      - $ref: "../components/parameters/customer-id-path.yaml"
     post:
       summary: Enable Billing Portal for Customer
       tags:
@@ -1300,10 +1224,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  customer:
-                    $ref: ../models/Customer.yaml
+                $ref: "../components/schemas/Customer-Response.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -1339,21 +1260,16 @@ paths:
         In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), please **do not** make an API request to Chargify every time.
       parameters:
         - schema:
-            type: integer
-            enum:
-              - 0
-              - 1
+            $ref: "../components/schemas/Auto-Invite.yaml"
           in: query
           name: auto_invite
-          description: "When set to 1, an Invitation email will be sent to the Customer. When set to 0, or not sent, an email will not be sent."
+          description: |-
+            When set to 1, an Invitation email will be sent to the Customer. 
+            When set to 0, or not sent, an email will not be sent.
+            Use in query: `auto_invite=1`.
   "/portal/customers/{customer_id}/management_link.json":
     parameters:
-      - schema:
-          type: integer
-        name: customer_id
-        in: path
-        required: true
-        description: The Chargify id of the customer
+      - $ref: "../components/parameters/customer-id-path.yaml"
     get:
       summary: Read Billing Portal Management Link
       tags:
@@ -1364,22 +1280,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  url:
-                    type: string
-                  fetch_count:
-                    type: integer
-                  created_at:
-                    type: string
-                  new_link_available_at:
-                    type: string
-                  expires_at:
-                    type: string
-                  last_invite_sent_at:
-                    type:
-                      - string
-                      - "null"
+                $ref: "../components/schemas/Portal-Management-Link.yaml"
               examples:
                 Example:
                   value:
@@ -1435,12 +1336,7 @@ paths:
         + You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`)
   "/portal/customers/{customer_id}/invitations/invite.json":
     parameters:
-      - schema:
-          type: integer
-        name: customer_id
-        in: path
-        required: true
-        description: The Chargify id of the customer
+      - $ref: "../components/parameters/customer-id-path.yaml"
     post:
       summary: Resend Billing Portal Invitation
       tags:
@@ -1451,16 +1347,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  last_sent_at:
-                    type: string
-                  last_accepted_at:
-                    type: string
-                  send_invite_link_text:
-                    type: string
-                  uninvited_count:
-                    type: integer
+                $ref: "../components/schemas/Resent-Invitation.yaml"
               examples:
                 Example:
                   value:
@@ -1503,12 +1390,7 @@ paths:
         This endpoint will only return a JSON response.
   "/portal/customers/{customer_id}/invitations/revoke.json":
     parameters:
-      - schema:
-          type: integer
-        name: customer_id
-        in: path
-        required: true
-        description: The Chargify id of the customer
+      - $ref: "../components/parameters/customer-id-path.yaml"
     delete:
       summary: Revoke Billing Portal Invitation for Customer
       tags:
@@ -1519,14 +1401,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  last_sent_at:
-                    type: string
-                  last_accepted_at:
-                    type: string
-                  uninvited_count:
-                    type: integer
+                $ref: "../components/schemas/Revoked-Invitation.yaml"
               examples:
                 Example:
                   value:
@@ -23833,50 +23708,6 @@ components:
         - name
         - pricing_scheme
         - prices
-    Create-Customer:
-      title: Create Customer
-      type: object
-      description: ""
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        cc_emails:
-          type: string
-        organization:
-          type: string
-        reference:
-          type: string
-        address:
-          type: string
-        address_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        country:
-          type: string
-        phone:
-          type: string
-        locale:
-          type: string
-          description: Set a specific language on a customer record.
-        vat_number:
-          type: string
-        tax_exempt:
-          type: boolean
-        tax_exempt_reason:
-          type: string
-      required:
-        - first_name
-        - last_name
-        - email
     Create-Metafield:
       title: Create Metafield
       type: object
@@ -27029,49 +26860,6 @@ components:
         - trial_ended
         - trialing
         - unpaid
-    Update-Customer:
-      title: Update Customer
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        cc_emails:
-          type: string
-        organization:
-          type: string
-        reference:
-          type: string
-        address:
-          type: string
-        address_2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        country:
-          type: string
-        phone:
-          type: string
-        locale:
-          type: string
-          description: Set a specific language on a customer record.
-        vat_number:
-          type: string
-        tax_exempt:
-          type: boolean
-        tax_exempt_reason:
-          type: string
-        parent_id:
-          type:
-            - "null"
-            - integer
     Update-Metafield:
       title: Update Metafield
       type: object

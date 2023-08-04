@@ -1,0 +1,6 @@
+title: Basic Date Field
+description: Allows to filter by `created_at` or `updated_at`.
+type: string
+enum:
+  - created_at
+  - updated_at
