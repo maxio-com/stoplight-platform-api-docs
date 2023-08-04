@@ -1,0 +1,9 @@
+title: Replay Webhooks Request
+type: object
+properties:
+  ids:
+    type: array
+    items:
+      type: integer
+required:
+  - ids
