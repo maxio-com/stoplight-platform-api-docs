@@ -5,3 +5,5 @@ properties:
     type: array
     items:
       $ref: "./Create-Metadata.yaml"
+required:
+  - metadata

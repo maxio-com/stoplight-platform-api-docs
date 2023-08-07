@@ -7,3 +7,5 @@ properties:
       - type: array
         items:
           $ref: "./Create-Metafield.yaml"
+required:
+  - metafields

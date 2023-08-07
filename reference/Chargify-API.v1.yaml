@@ -1783,8 +1783,6 @@ paths:
                       - id: 0
                         name: string
                         scope:
-                          hosted:
-                            - {}
                           csv: "0"
                           statements: "0"
                           invoices: "0"
@@ -2009,6 +2007,8 @@ paths:
           name: name
         - schema:
             type: array
+            items:
+              type: string
           in: query
           name: "names[]"
   "/{resource_type}/metadata.json":
@@ -2078,6 +2078,8 @@ paths:
           description: "Allow to fetch deleted metadata. "
         - schema:
             type: array
+            items:
+              type: integer
             maxItems: 50
           in: query
           name: "resource_ids[]"
@@ -2101,10 +2103,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -2141,7 +2140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Create-or-Update-Coupon"
+              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
             examples:
               Percentage Coupon Example:
                 value:
@@ -2192,7 +2191,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Coupon"
+                  $ref: "../components/schemas/Coupon.yaml"
               examples:
                 Example:
                   value:
@@ -2378,10 +2377,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
       operationId: readCouponByCode
       description: |-
         You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
@@ -2421,10 +2417,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2469,10 +2462,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2510,7 +2500,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Create-or-Update-Coupon"
+              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
             examples:
               Example:
                 value:
@@ -2541,10 +2531,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2588,10 +2575,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    coupon:
-                      $ref: "#/components/schemas/Coupon"
+                  $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 example:
                   value:
@@ -2673,6 +2657,8 @@ paths:
           deprecated: true
         - schema:
             type: array
+            items:
+              type: integer
             example:
               - 1
               - 2
@@ -2687,6 +2673,8 @@ paths:
           explode: false
         - schema:
             type: array
+            items:
+              type: string
             minItems: 1
             example:
               - free
@@ -2779,35 +2767,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: The Chargify id of the product
-                    name:
-                      type: string
-                      description: Name of the product
-                    signups:
-                      type: integer
-                      description: Number of times the coupon has been applied
-                    savings:
-                      type:
-                        - integer
-                        - "null"
-                      description: Dollar amount of customer savings as a result of the coupon.
-                    savings_in_cents:
-                      type:
-                        - integer
-                        - "null"
-                      description: Dollar amount of customer savings as a result of the coupon.
-                    revenue:
-                      type:
-                        - integer
-                        - "null"
-                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
-                    revenue_in_cents:
-                      type: integer
-                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
+                  $ref: "../components/schemas/Coupon-Usage.yaml"
               examples:
                 Example:
                   value:
@@ -2845,10 +2805,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2942,16 +2899,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    currency:
-                      type: string
-                    price:
-                      type: integer
-                    coupon_id:
-                      type: integer
+                  $ref: "../components/schemas/Coupon-Currency.yaml"
       operationId: updateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
@@ -2961,25 +2909,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      currency:
-                        type: string
-                        description: ISO code for the site defined currency.
-                      price:
-                        type: integer
-                        description: |
-                          Price for the given currency.
-                    required:
-                      - currency
-                      - price
-              required:
-                - currency_prices
+              $ref: "../components/schemas/Coupon-Currency-Request.yaml"
             examples:
               Example:
                 value:
@@ -3006,20 +2936,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  created_codes:
-                    type: array
-                    items:
-                      type: string
-                  duplicate_codes:
-                    type: array
-                    items:
-                      type: string
-                  invalid_codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Coupon-Subcodes-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3075,12 +2992,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: "../components/schemas/Subcodes.yaml"
             examples:
               Example:
                 value:
@@ -3099,12 +3011,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Subcodes.yaml"
               examples:
                 Example:
                   value:
@@ -3144,20 +3051,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  created_codes:
-                    type: array
-                    items:
-                      type: string
-                  duplicate_codes:
-                    type: array
-                    items:
-                      type: string
-                  invalid_codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Coupon-Subcodes-Response.yaml"
       description: |-
         You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
         Send an array of new coupon subcodes.
@@ -3174,12 +3068,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: "../components/schemas/Subcodes.yaml"
             examples:
               Example:
                 value:
@@ -23343,115 +23232,6 @@ components:
                 - string
                 - "null"
               description: E.g. Internal ID or SKU Number
-    Coupon:
-      title: Coupon
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-        amount:
-          type:
-            - number
-            - "null"
-        amount_in_cents:
-          type:
-            - integer
-            - "null"
-        product_family_id:
-          type: integer
-        product_family_name:
-          type: string
-        start_date:
-          type: string
-        end_date:
-          type:
-            - string
-            - "null"
-        percentage:
-          type:
-            - number
-            - "null"
-        recurring:
-          type: boolean
-        recurring_scheme:
-          type: string
-          enum:
-            - do_not_recur
-            - recur_indefinitely
-        duration_period_count:
-          type:
-            - integer
-            - "null"
-        duration_interval:
-          type:
-            - integer
-            - "null"
-        duration_interval_unit:
-          type:
-            - string
-            - "null"
-        duration_interval_span:
-          type: string
-        allow_negative_balance:
-          type: boolean
-        archived_at:
-          type:
-            - string
-            - "null"
-        conversion_limit:
-          type:
-            - string
-            - "null"
-        stackable:
-          type: boolean
-        compounding_strategy:
-          type:
-            - string
-            - "null"
-          enum:
-            - compound
-            - full-price
-        use_site_exchange_rate:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        discount_type:
-          type: string
-          enum:
-            - amount
-            - percent
-        exclude_mid_period_allocations:
-          type: boolean
-        "apply_on_cancel_at_end_of_period ":
-          type: boolean
-        coupon_restrictions:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              item_type:
-                type: string
-                enum:
-                  - Component
-                  - Product
-              item_id:
-                type: integer
-              name:
-                type: string
-              handle:
-                type:
-                  - string
-                  - "null"
     Create-Allocation:
       title: Create Allocation
       type: object
@@ -23539,104 +23319,6 @@ components:
         - name
         - pricing_scheme
         - prices
-    Create-or-Update-Coupon:
-      title: Create or Update Coupon
-      type:
-        - object
-      properties:
-        coupon:
-          oneOf:
-            - $ref: "#/components/schemas/Create-or-Update-Percentage-Coupon"
-            - $ref: "#/components/schemas/Create-or-Update-Flat-Amount-Coupon"
-        restricted_products:
-          type:
-            - object
-          description: An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product
-          properties:
-            "1":
-              type:
-                - boolean
-        restricted_components:
-          type:
-            - object
-          description: An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component
-          properties:
-            "1":
-              type:
-                - boolean
-            "2":
-              type:
-                - boolean
-    Create-or-Update-Flat-Amount-Coupon:
-      title: Create or Update Flat Amount Coupon
-      type: object
-      properties:
-        name:
-          type: string
-          description: the name of the coupon
-        code:
-          type: string
-          description: "may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”"
-        description:
-          type: string
-        amount_in_cents:
-          type: integer
-        allow_negative_balance:
-          type: string
-        recurring:
-          type: string
-        end_date:
-          type: string
-        product_family_id:
-          type: string
-        stackable:
-          type: string
-        compounding_strategy:
-          type: string
-        exclude_mid_period_allocations:
-          type: boolean
-        apply_on_cancel_at_end_of_period:
-          type: boolean
-      required:
-        - name
-        - code
-        - amount_in_cents
-    Create-or-Update-Percentage-Coupon:
-      title: Create or Update Percentage Coupon
-      type: object
-      properties:
-        name:
-          type: string
-          description: the name of the coupon
-        code:
-          type: string
-          description: "may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”"
-        description:
-          type: string
-        percentage:
-          type:
-            - number
-            - string
-        allow_negative_balance:
-          type: string
-        recurring:
-          type: string
-        end_date:
-          type: string
-        product_family_id:
-          type: string
-        stackable:
-          type: string
-        compounding_strategy:
-          type: string
-        exclude_mid_period_allocations:
-          type: boolean
-        apply_on_cancel_at_end_of_period:
-          type: boolean
-      required:
-        - name
-        - code
-        - percentage
     Prepaid-Configuration:
       title: Prepaid Configuration
       type: object
