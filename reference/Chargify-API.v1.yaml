@@ -1675,15 +1675,7 @@ paths:
       description: This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
   "/{resource_type}/metafields.json":
     parameters:
-      - schema:
-          type: string
-          enum:
-            - subscriptions
-            - customers
-        name: resource_type
-        in: path
-        required: true
-        description: the resource type to which the metafields belong
+      - $ref: "../components/parameters/resource-type.yaml"
     post:
       summary: Create Metafields
       tags:
@@ -1696,7 +1688,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metafield"
+                  $ref: "../components/schemas/Metafield.yaml"
               examples:
                 Example:
                   value:
@@ -1750,14 +1742,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metafields:
-                  anyOf:
-                    - $ref: "#/components/schemas/Create-Metafield"
-                    - type: array
-                      items:
-                        $ref: "#/components/schemas/Create-Metafield"
+              $ref: "../components/schemas/Create-Metafields-Request.yaml"
             examples:
               Single-Metafield:
                 value:
@@ -1786,20 +1771,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  total_count:
-                    type: integer
-                  current_page:
-                    type: integer
-                  total_pages:
-                    type: integer
-                  per_page:
-                    type: integer
-                  metafields:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Metafield"
+                $ref: "../components/schemas/List-Metafields-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -1813,12 +1785,12 @@ paths:
                         scope:
                           hosted:
                             - {}
-                          csv: string
-                          statements: string
-                          invoices: string
-                          portal: string
-                          public_show: string
-                          public_edit: string
+                          csv: "0"
+                          statements: "0"
+                          invoices: "0"
+                          portal: "0"
+                          public_show: "0"
+                          public_edit: "0"
                         data_count: 0
                         input_type: string
                         enum: null
@@ -1832,15 +1804,7 @@ paths:
           description: filter by the name of the metafield
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
-        - schema:
-            type: string
-            default: asc
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "../components/parameters/sort-direction.yaml"
     put:
       summary: Update Metafield
       tags:
@@ -1853,21 +1817,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metafield"
+                  $ref: "../components/schemas/Metafield.yaml"
       operationId: updateMetafield
       description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metafields:
-                  oneOf:
-                    - $ref: "#/components/schemas/Update-Metafield"
-                    - type: array
-                      items:
-                        $ref: "#/components/schemas/Update-Metafield"
+              $ref: "../components/schemas/Update-Metafields-Request.yaml"
         description: ""
       parameters:
         - schema:
@@ -1902,14 +1859,7 @@ paths:
           description: The name of the metafield to be deleted
   "/{resource_type}/{resource_id}/metadata.json":
     parameters:
-      - schema:
-          type: string
-          enum:
-            - customers
-            - subscriptions
-        name: resource_type
-        in: path
-        required: true
+      - $ref: "../components/parameters/resource-type.yaml"
       - schema:
           type: string
         name: resource_id
@@ -1954,17 +1904,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
+              $ref: "../components/schemas/Create-Metadata-Request.yaml"
             examples:
               Example:
                 value:
@@ -1981,7 +1921,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metadata"
+                  $ref: "../components/schemas/Metadata.yaml"
     get:
       summary: List Metadata
       tags:
@@ -1992,7 +1932,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Paginated-Metadata"
+                $ref: "../components/schemas/Paginated-Metadata.yaml"
       operationId: readMetadata
       description: |-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
@@ -2015,7 +1955,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metadata"
+                  $ref: "../components/schemas/Metadata.yaml"
       operationId: updateMetadata
       parameters:
         - schema:
@@ -2028,17 +1968,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: object
-                  properties:
-                    current_name:
-                      type: string
-                    name:
-                      type: string
-                    value:
-                      type: string
+              $ref: "../components/schemas/Update-Metadata-Request.yaml"
     delete:
       summary: Delete Metadata
       tags:
@@ -2083,11 +2013,7 @@ paths:
           name: "names[]"
   "/{resource_type}/metadata.json":
     parameters:
-      - schema:
-          type: string
-        name: resource_type
-        in: path
-        required: true
+      - $ref: "../components/parameters/resource-type.yaml"
     get:
       summary: List Metadata for Resource Type
       tags:
@@ -2098,7 +2024,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Paginated-Metadata"
+                $ref: "../components/schemas/Paginated-Metadata.yaml"
       operationId: listMetadata
       description: |-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
@@ -2156,15 +2082,7 @@ paths:
           in: query
           name: "resource_ids[]"
           description: Allow to fetch metadata for multiple records based on provided ids.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            default: asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/coupons.json":
     parameters:
       - schema:
@@ -23621,80 +23539,6 @@ components:
         - name
         - pricing_scheme
         - prices
-    Create-Metafield:
-      title: Create Metafield
-      type: object
-      examples:
-        - id: 0
-          name: string
-          scope:
-            csv: "0"
-            invoices: "0"
-            statements: "0"
-            portal: "0"
-            public_show: "0"
-            public_edit: "0"
-          input_type: text
-          enum:
-            - string
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        scope:
-          type: object
-          description: "Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings."
-          properties:
-            csv:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the csv export.
-            invoices:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from invoices.
-            statements:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from statements.
-            portal:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the portal.
-            public_show:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
-            public_edit:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
-        input_type:
-          type: string
-          description: "The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page."
-          enum:
-            - text
-            - radio
-            - dropdown
-          default: text
-        enum:
-          type: array
-          description: Only applicable when input_type is radio or dropdown
-          items:
-            type: string
     Create-or-Update-Coupon:
       title: Create or Update Coupon
       type:
@@ -25532,62 +25376,6 @@ components:
       enum:
         - day
         - month
-    Metadata:
-      title: Metadata
-      type: object
-      properties:
-        id:
-          type: integer
-        value:
-          type: string
-        resource_id:
-          type: integer
-        name:
-          type: string
-        deleted_at:
-          type:
-            - string
-            - "null"
-        metafield_id:
-          type: number
-    Metafield:
-      title: Metafield
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        scope:
-          type: object
-          properties:
-            hosted:
-              type: array
-              items:
-                type: object
-            csv:
-              type: string
-            statements:
-              type: string
-            invoices:
-              type: string
-            portal:
-              type: string
-            public_show:
-              type: string
-            public_edit:
-              type: string
-        data_count:
-          type: integer
-          description: the amount of subscriptions this metafield has been applied to in Chargify
-        input_type:
-          type: string
-        enum:
-          type:
-            - "null"
-            - array
-          items:
-            type: string
     Offer:
       title: Offer
       type: object
@@ -25710,22 +25498,6 @@ components:
         - volume
         - per_unit
         - tiered
-    Paginated-Metadata:
-      title: Paginated Metadata
-      type: object
-      properties:
-        total_count:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        per_page:
-          type: integer
-        metadata:
-          type: array
-          items:
-            $ref: "#/components/schemas/Metadata"
     Prepayment:
       description: ""
       type: object
@@ -26755,67 +26527,6 @@ components:
         - trial_ended
         - trialing
         - unpaid
-    Update-Metafield:
-      title: Update Metafield
-      type: object
-      properties:
-        current_name:
-          type: string
-        name:
-          type: string
-        scope:
-          type: object
-          description: "Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings."
-          properties:
-            csv:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the csv export.
-            invoices:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from invoices.
-            statements:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from statements.
-            portal:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the portal.
-            public_show:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
-            public_edit:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
-        input_type:
-          type: string
-          description: "The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page."
-          enum:
-            - text
-            - radio
-            - dropdown
-          default: text
-        enum:
-          type: array
-          description: Only applicable when input_type is radio or dropdown
-          items:
-            type: string
     Update-Subscription:
       title: Update Subscription
       type: object
