@@ -23857,17 +23857,6 @@ components:
         - price_in_cents
         - interval
         - interval_unit
-    Create-or-Update-Subscription-Note:
-      title: Create or Update Subscription Note
-      type: object
-      required:
-        - body
-        - sticky
-      properties:
-        body:
-          type: string
-        sticky:
-          type: boolean
     Create-Prepaid-Usage-Component-Price-Point:
       title: Create Prepaid Usage Component Price Point
       type: object
@@ -26580,22 +26569,6 @@ components:
       properties:
         subscription_preview:
           $ref: "#/components/schemas/Subscription-Preview"
-    Subscription-Note:
-      title: Subscription Note
-      type: object
-      properties:
-        id:
-          type: integer
-        body:
-          type: string
-        subscription_id:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        sticky:
-          type: boolean
     Subscriptions-Component:
       title: Subscriptions Component
       type: object
