@@ -1,0 +1,8 @@
+title: Override Subscription Request
+  type: object
+  description: ""
+  properties:
+    subscription:
+      $ref: "./Override-Subscription.yaml"
+  required:
+    - subscription
