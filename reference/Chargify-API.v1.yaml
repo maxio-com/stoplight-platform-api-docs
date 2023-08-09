@@ -16144,7 +16144,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Override-Subscription-Request"
+              $ref: "../components/schemas/Override-Subscription-Request.yaml"
             examples:
               Example:
                 value:
@@ -26893,15 +26893,6 @@ components:
       properties:
         subscription:
           $ref: "#/components/schemas/Update-Subscription"
-      required:
-        - subscription
-    Override-Subscription:
-    Override-Subscription-Request:
-      title: Override Subscription Request
-      type: object
-      properties:
-        subscription:
-          $ref: "#/components/schemas/Override-Subscription"
       required:
         - subscription
     Usage:

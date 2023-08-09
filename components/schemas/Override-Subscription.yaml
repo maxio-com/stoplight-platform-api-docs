@@ -1,5 +1,6 @@
 title: Override Subscription
 type: object
+description: ""
 properties:
   activated_at:
     type: string
