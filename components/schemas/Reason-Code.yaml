@@ -1,0 +1,17 @@
+title: Reason Code
+type: object
+properties:
+  id:
+    type: integer
+  site_id:
+    type: integer
+  code:
+    type: string
+  description:
+    type: string
+  position:
+    type: integer
+  created_at:
+    type: string
+  updated_at:
+    type: string
