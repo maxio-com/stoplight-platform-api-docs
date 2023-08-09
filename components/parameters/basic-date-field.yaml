@@ -1,0 +1,10 @@
+name: date_field
+in: query
+description: |-
+  The type of filter you would like to apply to your search.
+  Use in query: `date_field=created_at`.
+schema:
+  type: string
+  enum:
+    - created_at
+    - updated_at
