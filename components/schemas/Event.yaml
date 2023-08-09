@@ -1,0 +1,27 @@
+title: Event
+type: object
+properties:
+  id:
+    type: number
+  key:
+    type: string
+    minLength: 1
+  message:
+    type: string
+    minLength: 1
+  subscription_id:
+    type: number
+  created_at:
+    type: string
+    minLength: 1
+  event_specific_data:
+    oneOf:
+      - $ref: "./Event-Data.yaml"
+      - type: "null"
+required:
+  - id
+  - key
+  - message
+  - subscription_id
+  - created_at
+  - event_specific_data

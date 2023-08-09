@@ -1,9 +1,9 @@
 extends: [".spectral.yaml"]
 rules:
-  array-properties-must-have-items-with-type: info
-  array-parameters-must-have-items-with-type: info
-  array-parameters-must-have-serialisation-info: info
-  element-must-have-description: info
-  schema-must-be-valid: info
-  use-valid-media-type: info
-  reuse-schemas-in-media-types: info
+  array-properties-must-have-items-with-type: off
+  array-parameters-must-have-items-with-type: off
+  array-parameters-must-have-serialisation-info: off
+  element-must-have-description: off
+  schema-must-be-valid: off
+  use-valid-media-type: off
+  reuse-schemas-in-media-types: off
