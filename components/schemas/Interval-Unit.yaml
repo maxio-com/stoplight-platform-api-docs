@@ -1,5 +1,5 @@
 title: Interval Unit
-  type:
+type:
     - string
   enum:
     - day
