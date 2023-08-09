@@ -14566,7 +14566,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Update-Subscription-Request"
+              $ref: "../components/schemas/Update-Subscription-Request.yaml"
             examples:
               Example:
                 value:
@@ -24165,58 +24165,6 @@ components:
           $ref: "#/components/schemas/Create-Subscription"
       required:
         - subscription
-    Subscription-Custom-Price:
-      title: Custom price used for Subscription Create/Update
-      type:
-        - object
-      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
-      properties:
-        name:
-          type:
-            - string
-          description: (Optional)
-        handle:
-          type:
-            - string
-          description: (Optional)
-        price_in_cents:
-          type:
-            - integer
-        interval:
-          type:
-            - integer
-        interval_unit:
-          $ref: "#/components/schemas/Interval-Unit"
-        trial_price_in_cents:
-          type:
-            - integer
-          description: (Optional)
-        trial_interval:
-          type:
-            - integer
-          description: (Optional)
-        trial_interval_unit:
-          $ref: "#/components/schemas/Interval-Unit"
-          description: (Optional)
-        initial_charge_in_cents:
-          type:
-            - integer
-          description: (Optional)
-        initial_charge_after_trial:
-          type:
-            - boolean
-          description: (Optional)
-        expiration_interval:
-          type:
-            - integer
-          description: (Optional)
-        expiration_interval_unit:
-          $ref: "#/components/schemas/Interval-Unit"
-          description: (Optional)
-        tax_included:
-          type:
-            - boolean
-          description: (Optional)
     Subscription-Payment-Collection-Method:
       title: Payment Collection Method for Subscription
       type:
@@ -25514,13 +25462,6 @@ components:
                     type: string
                   outstanding_amount:
                     type: string
-    Interval-Unit:
-      title: Interval Unit
-      type:
-        - string
-      enum:
-        - day
-        - month
     Metadata:
       title: Metadata
       type: object
@@ -26789,112 +26730,6 @@ components:
           description: Only applicable when input_type is radio or dropdown
           items:
             type: string
-    Update-Subscription:
-      title: Update Subscription
-      type: object
-      properties:
-        credit_card_attributes:
-          type: object
-          properties:
-            full_number:
-              type: string
-            expiration_month:
-              type: string
-            expiration_year:
-              type: string
-        product_handle:
-          type: string
-          description: Set to the handle of a different product to change the subscription's product
-        product_id:
-          type: integer
-          description: Set to the id of a different product to change the subscription's product
-        product_change_delayed:
-          type: boolean
-          default: false
-        next_product_id:
-          type: string
-          description: Set to an empty string to cancel a delayed product change.
-        next_product_price_point_id:
-          type: string
-        snap_day:
-          type:
-            - string
-            - integer
-          minimum: 1
-          maximum: 28
-          enum:
-            - end
-          description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
-        next_billing_at:
-          type: string
-        payment_collection_method:
-          type: string
-        receives_invoice_emails:
-          type: boolean
-        net_terms:
-          type:
-            - string
-            - integer
-        stored_credential_transaction_id:
-          type: integer
-        reference:
-          type: string
-        custom_price:
-          $ref: "#/components/schemas/Subscription-Custom-Price"
-        components:
-          type: array
-          description: (Optional) An array of component ids and custom prices to be added to the subscription.
-          items:
-            type: object
-            properties:
-              component_id:
-                type: integer
-              custom_price:
-                type: object
-                description: Create or update custom pricing unique to the subscription
-                properties:
-                  pricing_scheme:
-                    type: string
-                    enum:
-                      - stairstep
-                      - volume
-                      - per_unit
-                      - tiered
-                    description: Omit for On/Off components
-                  prices:
-                    type: array
-                    description: On/off components only need one price bracket starting at 1
-                    items:
-                      type: object
-                      properties:
-                        unit_price:
-                          type: string
-                        starting_quantity:
-                          type: string
-                        ending_quantity:
-                          type:
-                            - string
-                            - "null"
-        dunning_communication_delay_enabled:
-          type:
-            - boolean
-            - "null"
-          default: false
-          description: "Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute."
-        dunning_communication_delay_time_zone:
-          type:
-            - string
-            - "null"
-          example: '"Eastern Time (US & Canada)"'
-          description: Time zone for the Dunning Communication Delay feature.
-    Update-Subscription-Request:
-      title: Update Subscription Request
-      type: object
-      properties:
-        subscription:
-          $ref: "#/components/schemas/Update-Subscription"
-      required:
-        - subscription
     Usage:
       title: Usage
       type: object
