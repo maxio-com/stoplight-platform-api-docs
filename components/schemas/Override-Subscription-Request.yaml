@@ -4,5 +4,5 @@ description: ""
 properties:
   subscription:
     $ref: "./Override-Subscription.yaml"
-  required:
-    - subscription
+required:
+  - subscription
