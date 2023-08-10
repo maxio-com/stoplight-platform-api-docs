@@ -4431,7 +4431,8 @@ paths:
                           type: number
                           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
                         expiration_interval_unit:
-                          $ref: "#/components/schemas/Interval-Unit"
+                          schema:
+                            $ref: "../components/schemas/Interval-Unit.yaml"
                   required:
                     - prepaid_usage_component
                 - properties:
@@ -17582,7 +17583,7 @@ paths:
                                 description: Required if using `custom_price` attribute.
                               interval_unit:
                                 schema:
-                                  $ref: "#/components/schemas/Interval-Unit"
+                                  $ref: "../components/schemas/Interval-Unit.yaml"
                                 description: Required if using `custom_price` attribute.
                               trial_price_in_cents:
                                 type:
@@ -17594,7 +17595,7 @@ paths:
                                   - integer
                               trial_interval_unit:
                                 schema:
-                                  $ref: "#/components/schemas/Interval-Unit"
+                                  $ref: "../components/schemas/Interval-Unit.yaml"
                               initial_charge_in_cents:
                                 type:
                                   - string
@@ -17607,7 +17608,7 @@ paths:
                                   - integer
                               expiration_interval_unit:
                                 schema:
-                                  $ref: "#/components/schemas/Interval-Unit"
+                                  $ref: "../components/schemas/Interval-Unit.yaml"
                               tax_included:
                                 type: boolean
                           calendar_billing:
@@ -23928,7 +23929,8 @@ components:
           type: number
           description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
         expiration_interval_unit:
-          $ref: "#/components/schemas/Interval-Unit"
+          schema:
+            $ref: "../components/schemas/Interval-Unit.yaml"
       required:
         - name
         - pricing_scheme
@@ -23995,7 +23997,7 @@ components:
             - string
           description: The ID of the particular price point on the product.
         custom_price:
-          $ref: "#/components/schemas/Subscription-Custom-Price"
+          $ref: "../components/schemas/Subscription-Custom-Price.yaml"
         coupon_code:
           type:
             - string
