@@ -1,6 +1,6 @@
 title: Interval Unit
 type:
-    - string
+  - string
 enum:
-    - day
-    - month
+  - day
+  - month

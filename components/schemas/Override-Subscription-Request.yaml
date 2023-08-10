@@ -3,6 +3,6 @@ type: object
 description: ""
 properties:
   subscription:
-      $ref: "./Override-Subscription.yaml"
+    $ref: "./Override-Subscription.yaml"
   required:
     - subscription

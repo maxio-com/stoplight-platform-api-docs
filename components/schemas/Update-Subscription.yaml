@@ -5,12 +5,12 @@ properties:
   credit_card_attributes:
     type: object
     properties:
-        full_number:
-          type: string
-        expiration_month:
-          type: string
-        expiration_year:
-          type: string
+      full_number:
+        type: string
+      expiration_month:
+        type: string
+      expiration_year:
+        type: string
     product_handle:
       type: string
       description: Set to the handle of a different product to change the subscription's product
