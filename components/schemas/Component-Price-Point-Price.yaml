@@ -1,0 +1,15 @@
+title: Component Price Point Price
+type: object
+properties:
+  id:
+    type: integer
+  component_id:
+    type: integer
+  starting_quantity:
+    type: integer
+  ending_quantity:
+    type:
+      - integer
+      - "null"
+  unit_price:
+    type: string
