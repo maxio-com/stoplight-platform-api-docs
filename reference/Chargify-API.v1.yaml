@@ -708,7 +708,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Update-Subscription-Note-Request.yaml"
+              $ref: "../components/schemas/Update-Subscription-Note-Request.yaml"
             examples:
               Example:
                 value:
@@ -16145,7 +16145,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Override-Subscription-Request.yaml"
+              $ref: "../components/schemas/Override-Subscription-Request.yaml"
             examples:
               Example:
                 value:
