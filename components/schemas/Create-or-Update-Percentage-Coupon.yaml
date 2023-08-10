@@ -24,7 +24,7 @@ properties:
   stackable:
     type: string
   compounding_strategy:
-    type: string
+    $ref: "./Compounding-Strategy.yaml"
   exclude_mid_period_allocations:
     type: boolean
   apply_on_cancel_at_end_of_period:
