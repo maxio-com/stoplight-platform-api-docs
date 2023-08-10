@@ -4,7 +4,7 @@ description: ""
 properties:
   credit_card_attributes:
     type: object
-      properties:
+    properties:
         full_number:
           type: string
         expiration_month:
