@@ -1,0 +1,9 @@
+title: Update Component Price Point
+type: object
+properties:
+  name:
+    type: string
+  prices:
+    type: array
+    items:
+      $ref: "./Update-Price.yaml"

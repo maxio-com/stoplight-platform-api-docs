@@ -1,0 +1,6 @@
+title: Compounding Strategy
+type:
+  - string
+enum:
+  - compound
+  - full-price

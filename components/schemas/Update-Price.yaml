@@ -1,0 +1,13 @@
+title: Update Price
+type: object
+properties:
+  id:
+    type: integer
+  ending_quantity:
+    type: integer
+  unit_price:
+    type: integer
+  _destroy:
+    type: string
+  starting_quantity:
+    type: integer

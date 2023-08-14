@@ -1,0 +1,6 @@
+title: Price Point Type
+type: string
+enum:
+  - catalog
+  - default
+  - custom
