@@ -1675,15 +1675,7 @@ paths:
       description: This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
   "/{resource_type}/metafields.json":
     parameters:
-      - schema:
-          type: string
-          enum:
-            - subscriptions
-            - customers
-        name: resource_type
-        in: path
-        required: true
-        description: the resource type to which the metafields belong
+      - $ref: "../components/parameters/resource-type.yaml"
     post:
       summary: Create Metafields
       tags:
@@ -1696,7 +1688,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metafield"
+                  $ref: "../components/schemas/Metafield.yaml"
               examples:
                 Example:
                   value:
@@ -1750,14 +1742,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metafields:
-                  anyOf:
-                    - $ref: "#/components/schemas/Create-Metafield"
-                    - type: array
-                      items:
-                        $ref: "#/components/schemas/Create-Metafield"
+              $ref: "../components/schemas/Create-Metafields-Request.yaml"
             examples:
               Single-Metafield:
                 value:
@@ -1786,20 +1771,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  total_count:
-                    type: integer
-                  current_page:
-                    type: integer
-                  total_pages:
-                    type: integer
-                  per_page:
-                    type: integer
-                  metafields:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Metafield"
+                $ref: "../components/schemas/List-Metafields-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -1811,14 +1783,12 @@ paths:
                       - id: 0
                         name: string
                         scope:
-                          hosted:
-                            - {}
-                          csv: string
-                          statements: string
-                          invoices: string
-                          portal: string
-                          public_show: string
-                          public_edit: string
+                          csv: "0"
+                          statements: "0"
+                          invoices: "0"
+                          portal: "0"
+                          public_show: "0"
+                          public_edit: "0"
                         data_count: 0
                         input_type: string
                         enum: null
@@ -1832,15 +1802,7 @@ paths:
           description: filter by the name of the metafield
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
-        - schema:
-            type: string
-            default: asc
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "../components/parameters/sort-direction.yaml"
     put:
       summary: Update Metafield
       tags:
@@ -1853,21 +1815,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metafield"
+                  $ref: "../components/schemas/Metafield.yaml"
       operationId: updateMetafield
       description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metafields:
-                  oneOf:
-                    - $ref: "#/components/schemas/Update-Metafield"
-                    - type: array
-                      items:
-                        $ref: "#/components/schemas/Update-Metafield"
+              $ref: "../components/schemas/Update-Metafields-Request.yaml"
         description: ""
       parameters:
         - schema:
@@ -1902,14 +1857,7 @@ paths:
           description: The name of the metafield to be deleted
   "/{resource_type}/{resource_id}/metadata.json":
     parameters:
-      - schema:
-          type: string
-          enum:
-            - customers
-            - subscriptions
-        name: resource_type
-        in: path
-        required: true
+      - $ref: "../components/parameters/resource-type.yaml"
       - schema:
           type: string
         name: resource_id
@@ -1954,17 +1902,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
+              $ref: "../components/schemas/Create-Metadata-Request.yaml"
             examples:
               Example:
                 value:
@@ -1981,7 +1919,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metadata"
+                  $ref: "../components/schemas/Metadata.yaml"
     get:
       summary: List Metadata
       tags:
@@ -1992,7 +1930,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Paginated-Metadata"
+                $ref: "../components/schemas/Paginated-Metadata.yaml"
       operationId: readMetadata
       description: |-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
@@ -2015,7 +1953,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Metadata"
+                  $ref: "../components/schemas/Metadata.yaml"
       operationId: updateMetadata
       parameters:
         - schema:
@@ -2028,17 +1966,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: object
-                  properties:
-                    current_name:
-                      type: string
-                    name:
-                      type: string
-                    value:
-                      type: string
+              $ref: "../components/schemas/Update-Metadata-Request.yaml"
     delete:
       summary: Delete Metadata
       tags:
@@ -2079,15 +2007,13 @@ paths:
           name: name
         - schema:
             type: array
+            items:
+              type: string
           in: query
           name: "names[]"
   "/{resource_type}/metadata.json":
     parameters:
-      - schema:
-          type: string
-        name: resource_type
-        in: path
-        required: true
+      - $ref: "../components/parameters/resource-type.yaml"
     get:
       summary: List Metadata for Resource Type
       tags:
@@ -2098,7 +2024,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Paginated-Metadata"
+                $ref: "../components/schemas/Paginated-Metadata.yaml"
       operationId: listMetadata
       description: |-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
@@ -2152,19 +2078,13 @@ paths:
           description: "Allow to fetch deleted metadata. "
         - schema:
             type: array
+            items:
+              type: integer
             maxItems: 50
           in: query
           name: "resource_ids[]"
           description: Allow to fetch metadata for multiple records based on provided ids.
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-            default: asc
-          in: query
-          name: direction
-          description: Controls the order in which results are returned.
+        - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/coupons.json":
     parameters:
       - schema:
@@ -2183,10 +2103,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -2223,7 +2140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Create-or-Update-Coupon"
+              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
             examples:
               Percentage Coupon Example:
                 value:
@@ -2274,7 +2191,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Coupon"
+                  $ref: "../components/schemas/Coupon.yaml"
               examples:
                 Example:
                   value:
@@ -2460,10 +2377,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
       operationId: readCouponByCode
       description: |-
         You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
@@ -2503,10 +2417,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2551,10 +2462,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2592,7 +2500,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Create-or-Update-Coupon"
+              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
             examples:
               Example:
                 value:
@@ -2623,10 +2531,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2670,10 +2575,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    coupon:
-                      $ref: "#/components/schemas/Coupon"
+                  $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 example:
                   value:
@@ -2755,6 +2657,8 @@ paths:
           deprecated: true
         - schema:
             type: array
+            items:
+              type: integer
             example:
               - 1
               - 2
@@ -2769,6 +2673,8 @@ paths:
           explode: false
         - schema:
             type: array
+            items:
+              type: string
             minItems: 1
             example:
               - free
@@ -2861,35 +2767,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: The Chargify id of the product
-                    name:
-                      type: string
-                      description: Name of the product
-                    signups:
-                      type: integer
-                      description: Number of times the coupon has been applied
-                    savings:
-                      type:
-                        - integer
-                        - "null"
-                      description: Dollar amount of customer savings as a result of the coupon.
-                    savings_in_cents:
-                      type:
-                        - integer
-                        - "null"
-                      description: Dollar amount of customer savings as a result of the coupon.
-                    revenue:
-                      type:
-                        - integer
-                        - "null"
-                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
-                    revenue_in_cents:
-                      type: integer
-                      description: Total revenue of the all subscriptions that have received a discount from this coupon.
+                  $ref: "../components/schemas/Coupon-Usage.yaml"
               examples:
                 Example:
                   value:
@@ -2927,10 +2805,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coupon:
-                    $ref: "#/components/schemas/Coupon"
+                $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3024,16 +2899,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    currency:
-                      type: string
-                    price:
-                      type: integer
-                    coupon_id:
-                      type: integer
+                  $ref: "../components/schemas/Coupon-Currency.yaml"
       operationId: updateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
@@ -3043,25 +2909,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      currency:
-                        type: string
-                        description: ISO code for the site defined currency.
-                      price:
-                        type: integer
-                        description: |
-                          Price for the given currency.
-                    required:
-                      - currency
-                      - price
-              required:
-                - currency_prices
+              $ref: "../components/schemas/Coupon-Currency-Request.yaml"
             examples:
               Example:
                 value:
@@ -3088,20 +2936,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  created_codes:
-                    type: array
-                    items:
-                      type: string
-                  duplicate_codes:
-                    type: array
-                    items:
-                      type: string
-                  invalid_codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Coupon-Subcodes-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3157,12 +2992,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: "../components/schemas/Subcodes.yaml"
             examples:
               Example:
                 value:
@@ -3181,12 +3011,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Subcodes.yaml"
               examples:
                 Example:
                   value:
@@ -3226,20 +3051,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  created_codes:
-                    type: array
-                    items:
-                      type: string
-                  duplicate_codes:
-                    type: array
-                    items:
-                      type: string
-                  invalid_codes:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Coupon-Subcodes-Response.yaml"
       description: |-
         You can update the subcodes for the given Coupon via the API with a PUT request to the resource endpoint.
         Send an array of new coupon subcodes.
@@ -3256,12 +3068,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                codes:
-                  type: array
-                  items:
-                    type: string
+              $ref: "../components/schemas/Subcodes.yaml"
             examples:
               Example:
                 value:
@@ -3331,47 +3138,7 @@ paths:
                 minItems: 1
                 uniqueItems: true
                 items:
-                  type: object
-                  required:
-                    - event
-                  properties:
-                    event:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        key:
-                          type: string
-                          minLength: 1
-                        message:
-                          type: string
-                          minLength: 1
-                        subscription_id:
-                          type: number
-                        created_at:
-                          type: string
-                          minLength: 1
-                        event_specific_data:
-                          type:
-                            - object
-                            - "null"
-                          properties:
-                            previous_subscription_state:
-                              type: string
-                              minLength: 1
-                            new_subscription_state:
-                              type: string
-                              minLength: 1
-                          required:
-                            - previous_subscription_state
-                            - new_subscription_state
-                      required:
-                        - id
-                        - key
-                        - message
-                        - subscription_id
-                        - created_at
-                        - event_specific_data
+                  $ref: "../components/schemas/Event-Response.yaml"
                 x-examples:
                   example-1:
                     - event:
@@ -3530,54 +3297,7 @@ paths:
             default: desc
           in: query
           name: direction
-        - schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - account_transaction_changed
-                - billing_date_change
-                - component_allocation_change
-                - customer_update
-                - customer_create
-                - dunning_step_reached
-                - expiration_date_change
-                - expiring_card
-                - metered_usage
-                - payment_success
-                - payment_success_recreated
-                - payment_failure
-                - payment_failure_recreated
-                - refund_failure
-                - refund_success
-                - renewal_success
-                - renewal_success_recreated
-                - renewal_failure
-                - signup_success
-                - signup_failure
-                - statement_closed
-                - statement_settled
-                - subscription_bank_account_update
-                - subscription_deletion
-                - subscription_paypal_account_update
-                - subscription_product_change
-                - subscription_state_change
-                - trial_end_notice
-                - upgrade_downgrade_success
-                - upgrade_downgrade_failure
-                - upcoming_renewal_notice
-                - custom_field_value_change
-                - subscription_prepayment_account_balance_changed
-                - subscription_service_credit_account_balance_changed
-            example:
-              - custom_field_value_change
-              - payment_success
-          in: query
-          name: filter
-          description: "You can pass multiple event keys after comma.
-            Use in query `filter=signup_success,payment_success`"
-          style: form
-          explode: false
+        - $ref: "../components/parameters/event-type-filter.yaml"
         - schema:
             type: string
             enum:
@@ -3607,12 +3327,7 @@ paths:
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
   "/subscriptions/{subscription_id}/events.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     get:
       summary: List Events for Subscription
       tags:
@@ -3625,7 +3340,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Event"
+                  $ref: "../components/schemas/Event-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3645,6 +3360,8 @@ paths:
                         event_specific_data:
                           product_id: 3792003
                           account_transaction_id: null
+                          previous_subscription_state: active
+                          new_subscription_state: active
                     - event:
                         id: 344799705
                         key: billing_date_change
@@ -3676,45 +3393,7 @@ paths:
             default: desc
           in: query
           name: direction
-        - schema:
-            type: string
-            enum:
-              - account_transaction_changed
-              - billing_date_change
-              - component_allocation_change
-              - customer_update
-              - customer_create
-              - dunning_step_reached
-              - expiration_date_change
-              - expiring_card
-              - metered_usage
-              - payment_success
-              - payment_success_recreated
-              - payment_failure
-              - payment_failure_recreated
-              - refund_failure
-              - refund_success
-              - renewal_success
-              - renewal_success_recreated
-              - renewal_failure
-              - signup_success
-              - signup_failure
-              - statement_closed
-              - statement_settled
-              - subscription_bank_account_update
-              - subscription_deletion
-              - subscription_paypal_account_update
-              - subscription_product_change
-              - subscription_state_change
-              - trial_end_notice
-              - upgrade_downgrade_success
-              - upgrade_downgrade_failure
-              - upcoming_renewal_notice
-              - subscription_prepayment_account_balance_changed
-              - subscription_service_credit_account_balance_changed
-          in: query
-          name: filter
-          description: "You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success"
+        - $ref: "../components/parameters/event-type-filter.yaml"
   /events/count.json:
     get:
       summary: Total Event Count
@@ -3726,10 +3405,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
+                $ref: "../components/schemas/Count.yaml"
               examples:
                 Example:
                   value:
@@ -3754,45 +3430,7 @@ paths:
             default: desc
           in: query
           name: direction
-        - schema:
-            type: string
-            enum:
-              - account_transaction_changed
-              - billing_date_change
-              - component_allocation_change
-              - customer_update
-              - customer_create
-              - dunning_step_reached
-              - expiration_date_change
-              - expiring_card
-              - metered_usage
-              - payment_success
-              - payment_success_recreated
-              - payment_failure
-              - payment_failure_recreated
-              - refund_failure
-              - refund_success
-              - renewal_success
-              - renewal_success_recreated
-              - renewal_failure
-              - signup_success
-              - signup_failure
-              - statement_closed
-              - statement_settled
-              - subscription_bank_account_update
-              - subscription_deletion
-              - subscription_paypal_account_update
-              - subscription_product_change
-              - subscription_state_change
-              - trial_end_notice
-              - upgrade_downgrade_success
-              - upgrade_downgrade_failure
-              - upcoming_renewal_notice
-              - subscription_prepayment_account_balance_changed
-              - subscription_service_credit_account_balance_changed
-          in: query
-          name: filter
-          description: "You can pass multiple event keys after comma. Example: /events.json?filter=signup_success,payment_success"
+        - $ref: "../components/parameters/event-type-filter.yaml"
       description: Get a count of all the events for a given site by using this method.
   /mrr.json:
     get:
@@ -3805,33 +3443,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  mrr:
-                    type: object
-                    properties:
-                      amount_in_cents:
-                        type: integer
-                      amount_formatted:
-                        type: string
-                      currency:
-                        type: string
-                      currency_symbol:
-                        type: string
-                      breakouts:
-                        type: object
-                        properties:
-                          plan_amount_in_cents:
-                            type: integer
-                          plan_amount_formatted:
-                            type: string
-                          usage_amount_in_cents:
-                            type: integer
-                          usage_amount_formatted:
-                            type: string
-                      at_time:
-                        type: string
-                        description: ISO8601 timestamp
+                $ref: "../components/schemas/MRR-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3846,7 +3458,7 @@ paths:
                         plan_amount_formatted: "$99,135.93"
                         usage_amount_in_cents: 2000
                         usage_amount_formatted: $20.00
-      operationId: readyMrr
+      operationId: readMrr
       description: "This endpoint returns your site's current MRR, including plan and usage breakouts."
       deprecated: true
       parameters:
@@ -3861,7 +3473,7 @@ paths:
           in: query
           name: subscription_id
           description: submit the id of a subscription in order to limit results
-  "/product_families/{product_family_id}/{plural_kind}.json":
+  "/product_families/{product_family_id}/{component_kind}.json":
     parameters:
       - schema:
           type: integer
@@ -3870,14 +3482,8 @@ paths:
         required: true
         description: The Chargify id of the product family to which the component belongs
       - schema:
-          type: string
-          enum:
-            - metered_components
-            - quantity_based_components
-            - on_off_components
-            - prepaid_usage_components
-            - event_based_components
-        name: plural_kind
+          $ref: "../components/schemas/Component-Kind-Path.yaml"
+        name: component_kind
         in: path
         required: true
         description: The component kind
@@ -3891,119 +3497,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  component:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API.
-                      name:
-                        type: string
-                        description: "The name of the Component, suitable for display on statements. i.e. Text Messages."
-                      pricing_scheme:
-                        type: string
-                        description: "The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes."
-                      unit_name:
-                        type: string
-                        description: The name of the unit that the component’s usage is measured in. i.e. message
-                      unit_price:
-                        type:
-                          - string
-                          - "null"
-                        description: "The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null."
-                      product_family_id:
-                        type: integer
-                        description: The id of the Product Family to which the Component belongs
-                      price_per_unit_in_cents:
-                        type:
-                          - integer
-                          - "null"
-                        description: deprecated - use unit_price instead
-                      kind:
-                        type: string
-                        description: A handle for the component type
-                        enum:
-                          - metered_component
-                          - quantity_based_component
-                          - on_off_component
-                          - prepaid_usage_component
-                          - event_based_component
-                      archived:
-                        type: boolean
-                        description: Boolean flag describing whether a component is archived or not.
-                      taxable:
-                        type: boolean
-                        description: Boolean flag describing whether a component is taxable or not.
-                      description:
-                        type:
-                          - string
-                          - "null"
-                        description: The description of the component.
-                      default_price_point_id:
-                        type: integer
-                      price_point_count:
-                        type: integer
-                        description: Count for the number of price points associated with the component
-                      price_points_url:
-                        type: string
-                        description: URL that points to the location to read the existing price points via GET request
-                      tax_code:
-                        type: string
-                        description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                      recurring:
-                        type: boolean
-                      upgrade_charge:
-                        type:
-                          - string
-                          - "null"
-                      downgrade_credit:
-                        type:
-                          - string
-                          - "null"
-                      created_at:
-                        type: string
-                      prices:
-                        type:
-                          - array
-                          - "null"
-                        description: "An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty."
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            component_id:
-                              type: integer
-                            starting_quantity:
-                              type: integer
-                            ending_quantity:
-                              type:
-                                - integer
-                                - "null"
-                            unit_price:
-                              type: string
-                            price_point_id:
-                              type: integer
-                            formatted_unit_price:
-                              type: string
-                      default_price_point_name:
-                        type: string
-                      product_family_name:
-                        type: string
-                      hide_date_range_on_invoice:
-                        type: boolean
-                        description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                      event_based_billing_metric_id:
-                        type: integer
-                        description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
-                      item_category:
-                        type: string
-                        description: "One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other"
-                      accounting_code:
-                        type: string
-                        description: E.g. Internal ID or SKU Number
+                $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -4071,463 +3565,12 @@ paths:
         content:
           application/json:
             schema:
-              anyOf:
-                - properties:
-                    metered_component:
-                      type: object
-                      required:
-                        - name
-                        - unit_name
-                        - pricing_scheme
-                      properties:
-                        name:
-                          type: string
-                          description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-                        unit_name:
-                          type: string
-                          description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
-                        description:
-                          type: string
-                          description: A description for the component that will be displayed to the user on the hosted signup page.
-                        handle:
-                          type: string
-                          description: "A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'."
-                          pattern: '\A[a-z0-9][a-z0-9\-_:.]*\z'
-                        taxable:
-                          type: boolean
-                          description: Boolean flag describing whether a component is taxable or not.
-                        pricing_scheme:
-                          type: string
-                          enum:
-                            - per_unit
-                            - volume
-                            - tiered
-                            - stairstep
-                          description: "The identifier for the pricing scheme. See [Product Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#pricing-schemes-explained) for an overview of pricing schemes."
-                        prices:
-                          type: array
-                          description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
-                          items:
-                            type: object
-                            properties:
-                              starting_quantity:
-                                type: integer
-                              unit_price:
-                                type:
-                                  - string
-                                  - number
-                                description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        upgrade_charge:
-                          type: string
-                        downgrade_credit:
-                          type: string
-                        price_points:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              pricing_scheme:
-                                type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    starting_quantity:
-                                      type: string
-                                    unit_price:
-                                      type:
-                                        - string
-                                        - number
-                                      description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        unit_price:
-                          type:
-                            - string
-                            - number
-                          description: "The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065"
-                        tax_code:
-                          type: string
-                          description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                        hide_date_range_on_invoice:
-                          type: boolean
-                          description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                        price_in_cents:
-                          type: string
-                          description: deprecated May 2011 - use unit_price instead
-                  required:
-                    - metered_component
-                - properties:
-                    quantity_based_component:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                          description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-                        unit_name:
-                          type: string
-                          description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
-                        description:
-                          type: string
-                          description: A description for the component that will be displayed to the user on the hosted signup page.
-                        handle:
-                          type: string
-                          description: "A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'."
-                          pattern: '\A[a-z0-9][a-z0-9\-_:.]*\z'
-                        taxable:
-                          type: boolean
-                          description: Boolean flag describing whether a component is taxable or not.
-                        pricing_scheme:
-                          type: string
-                          description: "The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes."
-                          enum:
-                            - per_unit
-                            - volume
-                            - tiered
-                            - stairstep
-                        prices:
-                          type: array
-                          description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
-                          items:
-                            type: object
-                            properties:
-                              starting_quantity:
-                                type: integer
-                              unit_price:
-                                type:
-                                  - string
-                                  - number
-                                description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        upgrade_charge:
-                          type: string
-                        downgrade_credit:
-                          type: string
-                        price_points:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              pricing_scheme:
-                                type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    starting_quantity:
-                                      type: string
-                                    unit_price:
-                                      type:
-                                        - string
-                                        - number
-                                      description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        unit_price:
-                          type:
-                            - string
-                            - number
-                          description: "The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065"
-                        tax_code:
-                          type: string
-                          description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                        hide_date_range_on_invoice:
-                          type: boolean
-                          description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                        price_in_cents:
-                          type: string
-                          description: deprecated May 2011 - use unit_price instead
-                        recurring:
-                          type: boolean
-                      required:
-                        - name
-                        - unit_name
-                        - pricing_scheme
-                - properties:
-                    on_off_component:
-                      type: object
-                      required:
-                        - name
-                        - pricing_scheme
-                      properties:
-                        name:
-                          type: string
-                          description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-                        unit_name:
-                          type: string
-                          description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
-                        description:
-                          type: string
-                          description: A description for the component that will be displayed to the user on the hosted signup page.
-                        handle:
-                          type: string
-                          description: "A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'."
-                          pattern: '\A[a-z0-9][a-z0-9\-_:.]*\z'
-                        taxable:
-                          type: boolean
-                          description: Boolean flag describing whether a component is taxable or not.
-                        pricing_scheme:
-                          type: string
-                          description: "The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes."
-                          enum:
-                            - per_unit
-                            - volume
-                            - tiered
-                            - stairstep
-                        prices:
-                          type: array
-                          description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
-                          items:
-                            type: object
-                            properties:
-                              starting_quantity:
-                                type: integer
-                              unit_price:
-                                type:
-                                  - string
-                                  - number
-                                description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        upgrade_charge:
-                          type: string
-                        downgrade_credit:
-                          type: string
-                        price_points:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              pricing_scheme:
-                                type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    starting_quantity:
-                                      type: string
-                                    unit_price:
-                                      type:
-                                        - string
-                                        - number
-                                      description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        unit_price:
-                          description: "The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065"
-                          type:
-                            - string
-                            - number
-                        tax_code:
-                          type: string
-                          description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                        hide_date_range_on_invoice:
-                          type: boolean
-                          description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                        price_in_cents:
-                          type: string
-                          description: deprecated May 2011 - use unit_price instead
-                  required:
-                    - on_off_component
-                - properties:
-                    prepaid_usage_component:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                          description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-                        unit_name:
-                          type: string
-                          description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
-                        description:
-                          type: string
-                          description: A description for the component that will be displayed to the user on the hosted signup page.
-                        handle:
-                          type: string
-                          description: "A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'."
-                          pattern: '\A[a-z0-9][a-z0-9\-_:.]*\z'
-                        taxable:
-                          type: boolean
-                          description: Boolean flag describing whether a component is taxable or not.
-                        pricing_scheme:
-                          type: string
-                          description: "The identifier for the pricing scheme. See [Product Components](https://chargify.zendesk.com/hc/en-us/articles/4407755865883) for an overview of pricing schemes."
-                          enum:
-                            - per_unit
-                            - volume
-                            - tiered
-                            - stairstep
-                        prices:
-                          type: array
-                          description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
-                          items:
-                            type: object
-                            properties:
-                              starting_quantity:
-                                type: integer
-                              unit_price:
-                                type:
-                                  - string
-                                  - number
-                                description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        upgrade_charge:
-                          type: string
-                        downgrade_credit:
-                          type: string
-                        price_points:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              pricing_scheme:
-                                type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    starting_quantity:
-                                      type: string
-                                    unit_price:
-                                      type:
-                                        - string
-                                        - number
-                                      description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                              overage_pricing:
-                                $ref: "#/components/schemas/Overage-Pricing"
-                        unit_price:
-                          type:
-                            - string
-                            - number
-                          description: "The amount the customer will be charged per unit when the pricing scheme is “per_unit”. For On/Off Components, this is the amount that the customer will be charged when they turn the component on for the subscription. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065"
-                        tax_code:
-                          type: string
-                          description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                        hide_date_range_on_invoice:
-                          type: boolean
-                          description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                        price_in_cents:
-                          type: string
-                          description: deprecated May 2011 - use unit_price instead
-                        overage_pricing:
-                          $ref: "#/components/schemas/Overage-Pricing"
-                        rollover_prepaid_remainder:
-                          type: boolean
-                          description: Boolean which controls whether or not remaining units should be rolled over to the next period
-                        renew_prepaid_allocation:
-                          type: boolean
-                          description: Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period
-                        expiration_interval:
-                          type: number
-                          description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
-                        expiration_interval_unit:
-                          schema:
-                            $ref: "../components/schemas/Interval-Unit.yaml"
-                  required:
-                    - prepaid_usage_component
-                - properties:
-                    event_based_component:
-                      type: object
-                      required:
-                        - name
-                        - unit_name
-                        - pricing_scheme
-                        - event_based_billing_metric_id
-                      properties:
-                        name:
-                          type: string
-                          description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-                        unit_name:
-                          type: string
-                          description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
-                        description:
-                          type: string
-                          description: A description for the component that will be displayed to the user on the hosted signup page.
-                        handle:
-                          type: string
-                          description: "A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'."
-                          pattern: '\A[a-z0-9][a-z0-9\-_:.]*\z'
-                        taxable:
-                          type: boolean
-                          description: Boolean flag describing whether a component is taxable or not.
-                        pricing_scheme:
-                          type: string
-                          description: "The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes."
-                          enum:
-                            - per_unit
-                            - volume
-                            - tiered
-                            - stairstep
-                        prices:
-                          type: array
-                          description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
-                          items:
-                            type: object
-                            properties:
-                              starting_quantity:
-                                type: integer
-                              unit_price:
-                                type:
-                                  - string
-                                  - number
-                                description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        upgrade_charge:
-                          type: string
-                        downgrade_credit:
-                          type: string
-                        price_points:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              pricing_scheme:
-                                type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    starting_quantity:
-                                      type: string
-                                    unit_price:
-                                      type:
-                                        - string
-                                        - number
-                                      description: The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        unit_price:
-                          type:
-                            - string
-                            - number
-                          description: The amount the customer will be charged per unit when the pricing scheme is “per_unit”. The price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065
-                        tax_code:
-                          type: string
-                          description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-                        hide_date_range_on_invoice:
-                          type: boolean
-                          description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-                        price_in_cents:
-                          type: string
-                          description: deprecated May 2011 - use unit_price instead
-                        event_based_billing_metric_id:
-                          type: integer
-                          description: The ID of an event based billing metric that will be attached to this component.
-                  required:
-                    - event_based_component
-              type: object
+              oneOf:
+                - $ref: "../components/schemas/Create-Metered-Component.yaml"
+                - $ref: "../components/schemas/Create-Quantity-Component.yaml"
+                - $ref: "../components/schemas/Create-On-Off-Component.yaml"
+                - $ref: "../components/schemas/Create-Prepaid-Component.yaml"
+                - $ref: "../components/schemas/Create-Ebb-Component.yaml"
             examples:
               Metered:
                 value:
@@ -4599,10 +3642,10 @@ paths:
                     taxable: true
                     pricing_scheme: tiered
                     prices_attributes:
-                      - starting_quantity: "1"
+                      - starting_quantity: 0
                         ending_quantity: "20"
                         unit_price: "50"
-                      - starting_quantity: "21"
+                      - starting_quantity: 21
                         ending_quantity: "40"
                         unit_price: "25"
                     display_on_hosted_page: "1"
@@ -4614,7 +3657,8 @@ paths:
                   on_off_component:
                     name: Annual Support Services
                     description: Prepay for support services
-                    taxable: "1"
+                    taxable: true
+                    pricing_scheme: tiered
                     price_attributes:
                       unit_price: "100.00"
                       starting_quantity: "0"
@@ -4647,11 +3691,11 @@ paths:
                   on_off_component:
                     name: Annual Support Services
                     description: Prepay for support services
-                    taxable: "1"
+                    taxable: true
                     pricing_scheme: per_unit
                     price_attributes:
                       unit_price: "100.00"
-                      starting_quantity: "0"
+                      starting_quantity: 0
                     display_on_hosted_page: "1"
                     public_signup_page_ids:
                       - "320495"
@@ -4660,36 +3704,37 @@ paths:
                         handle: wholesale-handle
                         pricing_scheme: per_unit
                         prices:
-                          - starting_quantity: "0"
+                          - starting_quantity: 0
                             unit_price: "89.00"
               On/Off with Default Proration Schemes:
                 value:
                   on_off_component:
                     name: Annual Support Services
                     description: Prepay for support services
-                    taxable: "1"
+                    taxable: true
                     price_attributes:
                       unit_price: "100.00"
-                      starting_quantity: "0"
+                      starting_quantity: 0
                     display_on_hosted_page: "1"
                     public_signup_page_ids:
                       - "320495"
                     upgrade_charge: full
                     downgrade_credit: prorated
+                    pricing_scheme: per_unit
               Event Based Component:
                 value:
                   event_based_component:
-                    name: string
+                    name: Component Name
                     unit_name: string
                     description: string
-                    handle: string
+                    handle: some_handle
                     taxable: true
                     pricing_scheme: per_unit
                     prices:
                       - starting_quantity: 1
                         unit_price: "0.49"
                         component: null
-                    event_based_billing_metric_id: integer
+                    event_based_billing_metric_id: 123
         description: ""
   /components/lookup.json:
     get:
@@ -4702,7 +3747,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Component"
+                $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -4762,7 +3807,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Component"
+                $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -4803,7 +3848,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Component"
+                $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -4858,7 +3903,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Component"
+                  $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5048,7 +4093,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Component"
+                  $ref: "../components/schemas/Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5208,22 +4253,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Component-Price-Point"
-              examples: {}
+                $ref: "../components/schemas/Component-Price-Point-Response.yaml"
       operationId: createComponentPricePoint
       description: This endpoint can be used to create a new price point for an existing component.
       requestBody:
         content:
           application/json:
             schema:
-              anyOf:
-                - properties:
-                    price_point:
-                      $ref: "#/components/schemas/Create-Component-Price-Point"
-                - properties:
-                    price_point:
-                      $ref: "#/components/schemas/Create-Prepaid-Usage-Component-Price-Point"
-              type: object
+              $ref: "../components/schemas/Create-Component-Price-Point-Request.yaml"
             examples:
               Example:
                 value:
@@ -5280,12 +4317,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Component-Price-Point"
+                $ref: "../components/schemas/Component-Price-Points-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5338,15 +4370,18 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - in: query
-          name: filter
-          style: deepObject
+          name: filter[type]
           schema:
-            type: object
+            type: array
+            items:
+              $ref: "../components/schemas/Price-Point-Type.yaml"
             example:
-              type: catalog
+              - catalog
+              - default
+          style: form
+          explode: false
           description: |-
-            #### Default type filter: `?filter[type]=catalog,default`
-            #### Type filter options: `catalog`, `default`, `custom`
+            Use in query: `filter[type]=catalog,default`.
   "/components/{component_id}/price_points/bulk.json":
     parameters:
       - schema:
@@ -5364,12 +4399,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Component-Price-Point"
+                $ref: "../components/schemas/Component-Price-Points-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5410,14 +4440,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                price_points:
-                  type: array
-                  items:
-                    anyOf:
-                      - $ref: "#/components/schemas/Create-Component-Price-Point"
-                      - $ref: "#/components/schemas/Create-Prepaid-Usage-Component-Price-Point"
+              $ref: "../components/schemas/Create-Component-Price-Points-Request.yaml"
             examples:
               Example:
                 value:
@@ -5464,10 +4487,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Component-Price-Point"
+                $ref: "../components/schemas/Component-Price-Point-Response.yaml"
       operationId: updateComponentPricePoint
       description: |-
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
@@ -5481,28 +4501,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                price_point:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    prices:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          ending_quantity:
-                            type: integer
-                          unit_price:
-                            type: integer
-                          _destroy:
-                            type: string
-                          starting_quantity:
-                            type: integer
+              $ref: "../components/schemas/Update-Component-Price-Point-Request.yaml"
             examples:
               Example:
                 value:
@@ -5526,10 +4525,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Component-Price-Point"
+                $ref: "../components/schemas/Component-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5580,10 +4576,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Component-Price-Point"
+                $ref: "../components/schemas/Component-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5630,7 +4623,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Currency-Price"
+                  $ref: "../components/schemas/Currency-Price.yaml"
       operationId: createCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -5642,22 +4635,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      currency:
-                        type: string
-                        description: ISO code for a currency defined on the site level
-                      price:
-                        type: integer
-                        description: Price for the price level in this currency
-                      price_id:
-                        type: integer
-                        description: ID of the price that this corresponds with
+              $ref: "../components/schemas/Create-Currency-Prices-Request.yaml"
             examples:
               Example:
                 value:
@@ -5680,7 +4658,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Currency-Price"
+                  $ref: "../components/schemas/Currency-Price.yaml"
       operationId: updateCurrencyPrices
       description: |-
         This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
@@ -5690,24 +4668,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: ID of the currency price record being updated
-                      price:
-                        type: integer
-                        description: New price for the given currency
-                    required:
-                      - id
-                      - price
-              required:
-                - currency_prices
+              $ref: "../components/schemas/Update-Currency-Prices-Request.yaml"
             examples:
               Example:
                 value:
@@ -7076,7 +6037,7 @@ paths:
         required: true
         description: The Chargify id of the product price point
     post:
-      summary: Create Currency Prices
+      summary: Create Product Currency Prices
       tags:
         - "Product: Price Points"
       responses:
@@ -22238,7 +21199,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Component-Price-Point"
+                      $ref: "../components/schemas/Component-Price-Point-Response.yaml"
               examples:
                 example:
                   value:
@@ -22326,11 +21287,7 @@ paths:
         - schema:
             type: array
             items:
-              type: string
-              enum:
-                - catalog
-                - custom
-                - default
+              $ref: "../components/schemas/Price-Point-Type.yaml"
             example:
               - custom
               - catalog
@@ -22480,11 +21437,7 @@ paths:
         - schema:
             type: array
             items:
-              type: string
-              enum:
-                - catalog
-                - custom
-                - default
+              $ref: "../components/schemas/Price-Point-Type.yaml"
             default:
               - catalog
               - default
@@ -23250,291 +22203,6 @@ components:
           type: string
         existing_balance_in_cents:
           type: integer
-    Component-Price-Point:
-      title: Component Price Point
-      type: object
-      properties:
-        price_point:
-          type: object
-          properties:
-            id:
-              type: integer
-            type:
-              type: string
-              enum:
-                - catalog
-                - default
-                - custom
-            default:
-              type: boolean
-              deprecated: true
-              description: "Note: Refer to type attribute instead"
-            name:
-              type: string
-            pricing_scheme:
-              type: string
-            component_id:
-              type: integer
-            handle:
-              type: string
-            archived_at:
-              type: "null"
-            created_at:
-              type: string
-            updated_at:
-              type: string
-            prices:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  component_id:
-                    type: integer
-                  starting_quantity:
-                    type: integer
-                  ending_quantity:
-                    type:
-                      - integer
-                      - "null"
-                  unit_price:
-                    type: string
-            use_site_exchange_rate:
-              type: boolean
-              description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
-              default: true
-            subscription_id:
-              type: integer
-              description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.
-            tax_included:
-              type: boolean
-    Component:
-      title: Component
-      type: object
-      properties:
-        component:
-          type: object
-          properties:
-            id:
-              type: integer
-              description: The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API.
-            name:
-              type: string
-              description: "The name of the Component, suitable for display on statements. i.e. Text Messages."
-            pricing_scheme:
-              type:
-                - string
-                - "null"
-              description: "The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes."
-            unit_name:
-              type: string
-              description: The name of the unit that the component’s usage is measured in. i.e. message
-            unit_price:
-              type: string
-              description: "The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null."
-            product_family_id:
-              type: integer
-              description: The id of the Product Family to which the Component belongs
-            price_per_unit_in_cents:
-              type: "null"
-              description: deprecated - use unit_price instead
-            kind:
-              type: string
-              description: A handle for the component type
-              enum:
-                - metered_component
-                - quantity_based_component
-                - on_off_component
-                - prepaid_usage_component
-            archived:
-              type: boolean
-              description: Boolean flag describing whether a component is archived or not.
-            taxable:
-              type: boolean
-              description: Boolean flag describing whether a component is taxable or not.
-            description:
-              type: string
-              description: The description of the component.
-            default_price_point_id:
-              type: integer
-            price_point_count:
-              type: integer
-              description: The number of price points associated with the component
-            price_points_url:
-              type: string
-              description: URL that points to the location to read the existing price points via GET request
-            tax_code:
-              type:
-                - string
-                - "null"
-              description: A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters.
-            recurring:
-              type: boolean
-            upgrade_charge:
-              type:
-                - "null"
-                - string
-            downgrade_credit:
-              type:
-                - "null"
-                - string
-            created_at:
-              type: string
-            prices:
-              type:
-                - "null"
-                - array
-              description: "An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty."
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  component_id:
-                    type: integer
-                  starting_quantity:
-                    type: integer
-                  ending_quantity:
-                    type: "null"
-                  unit_price:
-                    type: string
-                  price_point_id:
-                    type: integer
-                  formatted_unit_price:
-                    type: string
-            default_price_point_name:
-              type: string
-            product_family_name:
-              type: string
-            hide_date_range_on_invoice:
-              type: boolean
-              description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-            allow_fractional_quantities:
-              type: boolean
-            use_site_exchange_rate:
-              type:
-                - boolean
-                - "null"
-            item_category:
-              type:
-                - string
-                - "null"
-              description: "One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other"
-            accounting_code:
-              type:
-                - string
-                - "null"
-              description: E.g. Internal ID or SKU Number
-    Coupon:
-      title: Coupon
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-        amount:
-          type:
-            - number
-            - "null"
-        amount_in_cents:
-          type:
-            - integer
-            - "null"
-        product_family_id:
-          type: integer
-        product_family_name:
-          type: string
-        start_date:
-          type: string
-        end_date:
-          type:
-            - string
-            - "null"
-        percentage:
-          type:
-            - number
-            - "null"
-        recurring:
-          type: boolean
-        recurring_scheme:
-          type: string
-          enum:
-            - do_not_recur
-            - recur_indefinitely
-        duration_period_count:
-          type:
-            - integer
-            - "null"
-        duration_interval:
-          type:
-            - integer
-            - "null"
-        duration_interval_unit:
-          type:
-            - string
-            - "null"
-        duration_interval_span:
-          type: string
-        allow_negative_balance:
-          type: boolean
-        archived_at:
-          type:
-            - string
-            - "null"
-        conversion_limit:
-          type:
-            - string
-            - "null"
-        stackable:
-          type: boolean
-        compounding_strategy:
-          type:
-            - string
-            - "null"
-          enum:
-            - compound
-            - full-price
-        use_site_exchange_rate:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        discount_type:
-          type: string
-          enum:
-            - amount
-            - percent
-        exclude_mid_period_allocations:
-          type: boolean
-        "apply_on_cancel_at_end_of_period ":
-          type: boolean
-        coupon_restrictions:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              item_type:
-                type: string
-                enum:
-                  - Component
-                  - Product
-              item_id:
-                type: integer
-              name:
-                type: string
-              handle:
-                type:
-                  - string
-                  - "null"
     Create-Allocation:
       title: Create Allocation
       type: object
@@ -23583,217 +22251,6 @@ components:
           description: "Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used."
       required:
         - quantity
-    Create-Component-Price-Point:
-      title: Create Component Price Point
-      type: object
-      properties:
-        name:
-          type: string
-        handle:
-          type: string
-        pricing_scheme:
-          type: string
-        prices:
-          type: array
-          items:
-            type: object
-            properties:
-              starting_quantity:
-                type:
-                  - integer
-                  - string
-              ending_quantity:
-                type:
-                  - integer
-                  - string
-                  - "null"
-              unit_price:
-                type:
-                  - integer
-                  - string
-            required:
-              - starting_quantity
-              - unit_price
-        use_site_exchange_rate:
-          type: boolean
-          default: true
-          description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
-      required:
-        - name
-        - pricing_scheme
-        - prices
-    Create-Metafield:
-      title: Create Metafield
-      type: object
-      examples:
-        - id: 0
-          name: string
-          scope:
-            csv: "0"
-            invoices: "0"
-            statements: "0"
-            portal: "0"
-            public_show: "0"
-            public_edit: "0"
-          input_type: text
-          enum:
-            - string
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        scope:
-          type: object
-          description: "Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings."
-          properties:
-            csv:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the csv export.
-            invoices:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from invoices.
-            statements:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from statements.
-            portal:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the portal.
-            public_show:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
-            public_edit:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
-        input_type:
-          type: string
-          description: "The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page."
-          enum:
-            - text
-            - radio
-            - dropdown
-          default: text
-        enum:
-          type: array
-          description: Only applicable when input_type is radio or dropdown
-          items:
-            type: string
-    Create-or-Update-Coupon:
-      title: Create or Update Coupon
-      type:
-        - object
-      properties:
-        coupon:
-          oneOf:
-            - $ref: "#/components/schemas/Create-or-Update-Percentage-Coupon"
-            - $ref: "#/components/schemas/Create-or-Update-Flat-Amount-Coupon"
-        restricted_products:
-          type:
-            - object
-          description: An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product
-          properties:
-            "1":
-              type:
-                - boolean
-        restricted_components:
-          type:
-            - object
-          description: An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component
-          properties:
-            "1":
-              type:
-                - boolean
-            "2":
-              type:
-                - boolean
-    Create-or-Update-Flat-Amount-Coupon:
-      title: Create or Update Flat Amount Coupon
-      type: object
-      properties:
-        name:
-          type: string
-          description: the name of the coupon
-        code:
-          type: string
-          description: "may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”"
-        description:
-          type: string
-        amount_in_cents:
-          type: integer
-        allow_negative_balance:
-          type: string
-        recurring:
-          type: string
-        end_date:
-          type: string
-        product_family_id:
-          type: string
-        stackable:
-          type: string
-        compounding_strategy:
-          type: string
-        exclude_mid_period_allocations:
-          type: boolean
-        apply_on_cancel_at_end_of_period:
-          type: boolean
-      required:
-        - name
-        - code
-        - amount_in_cents
-    Create-or-Update-Percentage-Coupon:
-      title: Create or Update Percentage Coupon
-      type: object
-      properties:
-        name:
-          type: string
-          description: the name of the coupon
-        code:
-          type: string
-          description: "may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.”"
-        description:
-          type: string
-        percentage:
-          type:
-            - number
-            - string
-        allow_negative_balance:
-          type: string
-        recurring:
-          type: string
-        end_date:
-          type: string
-        product_family_id:
-          type: string
-        stackable:
-          type: string
-        compounding_strategy:
-          type: string
-        exclude_mid_period_allocations:
-          type: boolean
-        apply_on_cancel_at_end_of_period:
-          type: boolean
-      required:
-        - name
-        - code
-        - percentage
     Prepaid-Configuration:
       title: Prepaid Configuration
       type: object
@@ -23858,84 +22315,6 @@ components:
         - price_in_cents
         - interval
         - interval_unit
-    Create-Prepaid-Usage-Component-Price-Point:
-      title: Create Prepaid Usage Component Price Point
-      type: object
-      properties:
-        name:
-          type: string
-        handle:
-          type: string
-        pricing_scheme:
-          type: string
-        prices:
-          type: array
-          items:
-            type: object
-            properties:
-              starting_quantity:
-                type:
-                  - integer
-                  - string
-              ending_quantity:
-                type:
-                  - integer
-                  - string
-                  - "null"
-              unit_price:
-                type:
-                  - integer
-                  - string
-            required:
-              - starting_quantity
-              - unit_price
-        overage_pricing:
-          type: object
-          required:
-            - pricing_scheme
-          properties:
-            pricing_scheme:
-              type: string
-            prices:
-              type: array
-              items:
-                type: object
-                properties:
-                  starting_quantity:
-                    type: integer
-                  ending_quantity:
-                    type:
-                      - integer
-                      - string
-                      - "null"
-                  unit_price:
-                    type:
-                      - integer
-                      - string
-                required:
-                  - starting_quantity
-                  - unit_price
-        use_site_exchange_rate:
-          type: boolean
-          default: true
-          description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
-        rollover_prepaid_remainder:
-          type: boolean
-          description: Boolean which controls whether or not remaining units should be rolled over to the next period
-        renew_prepaid_allocation:
-          type: boolean
-          description: Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period
-        expiration_interval:
-          type: number
-          description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
-        expiration_interval_unit:
-          schema:
-            $ref: "../components/schemas/Interval-Unit.yaml"
-      required:
-        - name
-        - pricing_scheme
-        - prices
-        - overage_pricing
     Create-Product-Price-Point:
       title: Create Product Price Point
       type: object
@@ -24492,21 +22871,6 @@ components:
           type:
             - string
           description: (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement.
-    Component-Custom-Price:
-      title: Component Custom Price
-      type:
-        - object
-      description: Used in place of `price_point_id` to define a custom price point unique to the subscription
-      properties:
-        pricing_scheme:
-          $ref: "#/components/schemas/Pricing-Scheme"
-          description: Omit for On/Off components
-        prices:
-          type:
-            - array
-          description: On/off components only need one price bracket starting at 1
-          items:
-            $ref: "#/components/schemas/Price"
     Create-Subscription-Component:
       title: Create Subscription Component
       type:
@@ -24533,7 +22897,7 @@ components:
             - integer
             - string
         custom_price:
-          $ref: "#/components/schemas/Component-Custom-Price"
+          $ref: "../components/schemas/Component-Custom-Price.yaml"
     Credit-Note:
       title: Credit Note
       type: object
@@ -24860,47 +23224,6 @@ components:
               number:
                 type: string
                 description: The number of the invoice serving as an origin invoice.
-    Currency-Price:
-      title: Currency Price
-      type: object
-      properties:
-        id:
-          type: integer
-        currency:
-          type: string
-        price:
-          type: integer
-        formatted_price:
-          type: string
-        price_id:
-          type: integer
-        price_point_id:
-          type: integer
-    Event:
-      title: Event
-      type: object
-      properties:
-        id:
-          type: integer
-        key:
-          type: string
-        message:
-          type: string
-        subscription_id:
-          type: integer
-        customer_id:
-          type: integer
-        created_at:
-          type: string
-        event_specific_data:
-          type:
-            - "null"
-            - object
-          properties:
-            previous_subscription_state:
-              type: string
-            new_subscription_state:
-              type: string
     Group-Attributes:
       anyOf:
         - type: object
@@ -25464,62 +23787,6 @@ components:
                     type: string
                   outstanding_amount:
                     type: string
-    Metadata:
-      title: Metadata
-      type: object
-      properties:
-        id:
-          type: integer
-        value:
-          type: string
-        resource_id:
-          type: integer
-        name:
-          type: string
-        deleted_at:
-          type:
-            - string
-            - "null"
-        metafield_id:
-          type: number
-    Metafield:
-      title: Metafield
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        scope:
-          type: object
-          properties:
-            hosted:
-              type: array
-              items:
-                type: object
-            csv:
-              type: string
-            statements:
-              type: string
-            invoices:
-              type: string
-            portal:
-              type: string
-            public_show:
-              type: string
-            public_edit:
-              type: string
-        data_count:
-          type: integer
-          description: the amount of subscriptions this metafield has been applied to in Chargify
-        input_type:
-          type: string
-        enum:
-          type:
-            - "null"
-            - array
-          items:
-            type: string
     Offer:
       title: Offer
       type: object
@@ -25606,58 +23873,6 @@ components:
                 type: string
               url:
                 type: string
-    Overage-Pricing:
-      title: Overage Pricing
-      type:
-        - object
-      properties:
-        pricing_scheme:
-          $ref: "#/components/schemas/Pricing-Scheme"
-        prices:
-          type:
-            - array
-          items:
-            items:
-              $ref: "#/components/schemas/Price"
-    Price:
-      title: Price
-      type:
-        - object
-      properties:
-        starting_quantity:
-          type:
-            - integer
-        ending_quantity:
-          type:
-            - integer
-        unit_price:
-          type:
-            - number
-    Pricing-Scheme:
-      title: Pricing Scheme
-      type:
-        - string
-      enum:
-        - stairstep
-        - volume
-        - per_unit
-        - tiered
-    Paginated-Metadata:
-      title: Paginated Metadata
-      type: object
-      properties:
-        total_count:
-          type: integer
-        current_page:
-          type: integer
-        total_pages:
-          type: integer
-        per_page:
-          type: integer
-        metadata:
-          type: array
-          items:
-            $ref: "#/components/schemas/Metadata"
     Prepayment:
       description: ""
       type: object
@@ -26671,67 +24886,6 @@ components:
         - trial_ended
         - trialing
         - unpaid
-    Update-Metafield:
-      title: Update Metafield
-      type: object
-      properties:
-        current_name:
-          type: string
-        name:
-          type: string
-        scope:
-          type: object
-          description: "Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings."
-          properties:
-            csv:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the csv export.
-            invoices:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from invoices.
-            statements:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from statements.
-            portal:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from the portal.
-            public_show:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
-            public_edit:
-              type: string
-              enum:
-                - "0"
-                - "1"
-              description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
-        input_type:
-          type: string
-          description: "The input_type indicates how data should be added to the metafield. For example, a text type is just a string, so a given metafield of this type can have any value attached. On the other hand, dropdown and radio have a set of allowed values that can be input, and appear differently on a Public Signup Page."
-          enum:
-            - text
-            - radio
-            - dropdown
-          default: text
-        enum:
-          type: array
-          description: Only applicable when input_type is radio or dropdown
-          items:
-            type: string
     Usage:
       title: Usage
       type: object

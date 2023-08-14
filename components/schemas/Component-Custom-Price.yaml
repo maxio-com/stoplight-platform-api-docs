@@ -1,0 +1,14 @@
+title: Component Custom Price
+type:
+  - object
+description: Used in place of `price_point_id` to define a custom price point unique to the subscription
+properties:
+  pricing_scheme:
+    $ref: "./Pricing-Scheme.yaml"
+    description: Omit for On/Off components
+  prices:
+    type:
+      - array
+    description: On/off components only need one price bracket starting at 1
+    items:
+      $ref: "./Price.yaml"

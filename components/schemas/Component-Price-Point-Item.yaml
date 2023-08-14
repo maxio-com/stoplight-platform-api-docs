@@ -1,0 +1,13 @@
+title: Component Price Point Item
+type: object
+properties:
+  name:
+    type: string
+  handle:
+    type: string
+  pricing_scheme:
+    type: string
+  prices:
+    type: array
+    items:
+      $ref: "./Create-Component-Price.yaml"

@@ -1,0 +1,19 @@
+title: Price
+type: object
+properties:
+  starting_quantity:
+    type:
+      - integer
+      - string
+  ending_quantity:
+    type:
+      - integer
+      - string
+      - "null"
+  unit_price:
+    type:
+      - integer
+      - string
+required:
+  - starting_quantity
+  - unit_price

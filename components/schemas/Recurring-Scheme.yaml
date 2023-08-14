@@ -1,0 +1,5 @@
+title: Recurring Scheme
+type: string
+enum:
+  - do_not_recur
+  - recur_indefinitely
