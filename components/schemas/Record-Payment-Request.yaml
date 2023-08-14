@@ -1,0 +1,21 @@
+title: Record Payment Request
+type: object
+properties:
+  payment:
+    type: object
+    required:
+      - amount
+      - memo
+      - payment_details
+      - payment_method
+    properties:
+      amount:
+        type: string
+      memo:
+        type: string
+      payment_details:
+        type: string
+      payment_method:
+        type: string
+required:
+  - payment

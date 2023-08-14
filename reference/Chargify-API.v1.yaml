@@ -1208,7 +1208,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Subscription-Response"
+                  $ref: "../components/schemas/Subscription-Response.yaml"
       operationId: listCustomerSubscriptions
       description: This method lists all subscriptions that belong to a customer.
   "/portal/customers/{customer_id}/enable.json":
@@ -7242,18 +7242,8 @@ paths:
         If the payment profile is in use by one or more subscriptions or groups, a 422 and error message will be returned.
   "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription to which the payment profile belongs
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile
+      - $ref: "../components/parameters/subscription-id-path.yaml"
+      - $ref: "../components/parameters/payment-profile-id-path.yaml"
     delete:
       summary: Delete Subscription Payment Profile
       responses:
@@ -7788,13 +7778,7 @@ paths:
           name: end_date
           description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified."
         - schema:
-            type: string
-            enum:
-              - draft
-              - open
-              - paid
-              - pending
-              - voided
+            $ref: "../components/schemas/Invoice-Status.yaml"
           in: query
           name: status
           description: "The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided"
@@ -9300,12 +9284,7 @@ paths:
       description: Use this endpoint to retrieve the details for a credit note.
   "/subscriptions/{subscription_id}/payments.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Create Bulk Payment
       tags:
@@ -9316,42 +9295,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  paid_invoices:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        invoice_uid:
-                          type: string
-                          description: |
-                            The uid of the paid invoice
-                        status:
-                          type: string
-                          description: The status of the invoice
-                          enum:
-                            - open
-                            - paid
-                        due_amount:
-                          type: string
-                          description: |
-                            The remaining due amount on the invoice
-                        paid_amount:
-                          type: string
-                          description: The total amount paid on this invoice (including any prior payments)
-                  prepayment:
-                    type: object
-                    properties:
-                      subscription_id:
-                        type: string
-                        description: The subscription id for the prepayment account
-                      amount_in_cents:
-                        type: string
-                        description: The amount in cents of the prepayment that was created as a result of this payment.
-                      ending_balance_in_cents:
-                        type: string
-                        description: The total balance of the prepayment account for this subscription including any prior prepayments
+                $ref: "../components/schemas/Payment-Response.yaml"
               examples:
                 Example:
                   value:
@@ -9400,26 +9344,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                payment:
-                  type: object
-                  required:
-                    - amount
-                    - memo
-                    - payment_details
-                    - payment_method
-                  properties:
-                    amount:
-                      type: string
-                    memo:
-                      type: string
-                    payment_details:
-                      type: string
-                    payment_method:
-                      type: string
-              required:
-                - payment
+              $ref: "../components/schemas/Record-Payment-Request.yaml"
             examples:
               Example:
                 value:
@@ -9823,12 +9748,7 @@ paths:
           description: Sort direction of the returned segments.
   "/subscriptions/{subscription_id}/account_balances.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     get:
       summary: Read Account Balances
       tags:
@@ -9839,42 +9759,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  open_invoices:
-                    type: object
-                    properties:
-                      balance_in_cents:
-                        type: integer
-                        description: "The balance, in cents, of the sum of the subscription's  open, payable invoices."
-                  pending_discounts:
-                    type: object
-                    properties:
-                      balance_in_cents:
-                        type: integer
-                        description: "The balance, in cents, of the subscription's Pending Discount account."
-                  service_credits:
-                    type: object
-                    properties:
-                      balance_in_cents:
-                        type: integer
-                        description: "The balance, in cents, of the subscription's Service Credit account."
-                  prepayments:
-                    type: object
-                    properties:
-                      balance_in_cents:
-                        type: integer
-                        description: "The balance, in cents, of the subscription's Prepayment account."
+                $ref: "../components/schemas/Account-Balances.yaml"
       operationId: readAccountBalances
       description: "Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices."
   "/subscriptions/{subscription_id}/components/{component_id}.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: integer
         name: component_id
@@ -9891,10 +9781,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  component:
-                    $ref: "#/components/schemas/Subscriptions-Component"
+                $ref: "../components/schemas/Subscription-Component-Response.yaml"
               examples:
                 Example:
                   value:
@@ -9915,12 +9802,7 @@ paths:
       description: This request will list information regarding a specific component owned by a subscription.
   "/subscriptions/{subscription_id}/components.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     get:
       summary: List Subscription Components
       tags:
@@ -9933,10 +9815,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    component:
-                      $ref: "#/components/schemas/Subscriptions-Component"
+                  $ref: "../components/schemas/Subscription-Component-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -10063,12 +9942,7 @@ paths:
           name: "filter[currencies]"
   "/subscriptions/{subscription_id}/price_points.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Bulk Update Subscription Components' Price Points
       tags:
@@ -10085,19 +9959,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                components:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      component_id:
-                        type: integer
-                      price_point:
-                        type:
-                          - string
-                          - integer
+              $ref: "../components/schemas/Bulk-Price-Point-Assignment.yaml"
             examples:
               Example:
                 value:
@@ -10115,17 +9977,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  components:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        component_id:
-                          type: integer
-                        price_point:
-                          type: integer
+                $ref: "../components/schemas/Bulk-Price-Point-Assignment.yaml"
               examples:
                 Example:
                   value:
@@ -10168,12 +10020,7 @@ paths:
                         message: Price Point does not belong to Component
   "/subscriptions/{subscription_id}/price_points/reset.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Bulk Reset Subscription Components' Price Points
       tags:
@@ -10184,10 +10031,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10288,12 +10132,7 @@ paths:
         **Note**: this will update the price point for all of the subscription's components, even ones that have not been allocated yet.
   "/subscriptions/{subscription_id}/components/{component_id}/allocations.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: integer
         name: component_id
@@ -10310,10 +10149,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  allocation:
-                    $ref: "#/components/schemas/Allocation"
+                $ref: "../components/schemas/Allocation-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10342,10 +10178,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                allocation:
-                  $ref: "#/components/schemas/Create-Allocation"
+              $ref: "../components/schemas/Create-Allocation-Request.yaml"
             examples:
               Quantity Based:
                 value:
@@ -10374,10 +10207,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    allocation:
-                      $ref: "#/components/schemas/Allocation"
+                  $ref: "../components/schemas/Allocation-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10435,12 +10265,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
   "/subscriptions/{subscription_id}/allocations.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Allocate Components
       tags:
@@ -10453,10 +10278,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    allocation:
-                      $ref: "#/components/schemas/Allocation"
+                  $ref: "../components/schemas/Allocation-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10524,57 +10346,24 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                proration_upgrade_scheme:
-                  type: string
-                  default: no-prorate
-                  description: ""
-                  deprecated: true
-                proration_downgrade_scheme:
-                  type: string
-                  description: ""
-                  default: no-prorate
-                  deprecated: true
-                allocations:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      allocation:
-                        $ref: "#/components/schemas/Create-Allocation"
-                accrue_charge:
-                  type: boolean
-                upgrade_charge:
-                  type: string
-                downgrade_credit:
-                  type: string
-                payment_collection_method:
-                  type: string
-                  description: "(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription"
-                  enum:
-                    - automatic
-                    - invoice
+              $ref: "../components/schemas/Allocate-Components.yaml"
             examples:
               Example:
                 value:
                   proration_upgrade_scheme: prorate-attempt-capture
                   proration_downgrade_scheme: no-prorate
                   allocations:
-                    - component_id: 123
-                      quantity: 10
-                      memo: foo
-                    - component_id: 456
-                      quantity: 5
-                      memo: bar
+                    - allocation:
+                        component_id: 123
+                        quantity: 10
+                        memo: foo
+                    - allocation:
+                        component_id: 456
+                        quantity: 5
+                        memo: bar
   "/subscriptions/{subscription_id}/allocations/preview.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Preview Allocations
       tags:
@@ -10585,81 +10374,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  allocation_preview:
-                    type: object
-                    properties:
-                      start_date:
-                        type: string
-                      end_date:
-                        type: string
-                      subtotal_in_cents:
-                        type: integer
-                      total_tax_in_cents:
-                        type: integer
-                      total_discount_in_cents:
-                        type: integer
-                      total_in_cents:
-                        type: integer
-                      direction:
-                        type: string
-                      proration_scheme:
-                        type: string
-                      line_items:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            transaction_type:
-                              type: string
-                            kind:
-                              type: string
-                            amount_in_cents:
-                              type: integer
-                            memo:
-                              type: string
-                            discount_amount_in_cents:
-                              type: integer
-                            taxable_amount_in_cents:
-                              type: integer
-                            component_id:
-                              type: integer
-                            direction:
-                              type: string
-                      accrue_charge:
-                        type: boolean
-                      allocations:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            component_id:
-                              type: integer
-                            subscription_id:
-                              type: integer
-                            quantity:
-                              type:
-                                - number
-                                - integer
-                            previous_quantity:
-                              type: integer
-                            memo:
-                              type: string
-                            timestamp:
-                              type:
-                                - string
-                                - "null"
-                            proration_upgrade_scheme:
-                              type: string
-                            proration_downgrade_scheme:
-                              type: string
-                            accrue_charge:
-                              type: boolean
-                            upgrade_charge:
-                              type: string
-                            downgrade_credit:
-                              type: string
+                $ref: "../components/schemas/Allocation-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10793,32 +10508,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                allocation:
-                  $ref: "#/components/schemas/Create-Allocation"
+              $ref: "../components/schemas/Create-Allocation-Request.yaml"
             examples:
               Example:
                 value:
-                  proration_upgrade_scheme: prorate-attempt-capture
-                  proration_downgrade_scheme: prorate
-                  allocations:
-                    - component_id: 554108
-                      price_point_id: 325826
-                      quantity: 10
-                      memo: NOW
-                    - component_id: 565236
-                      price_point_id: 341315
-                      quantity: 10
-                      memo: NOW
+                  allocation:
+                    proration_upgrade_scheme: prorate-attempt-capture
+                    proration_downgrade_scheme: prorate
+                    component_id: 554108
+                    price_point_id: 325826
+                    quantity: 10
+                    memo: NOW
   "/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: integer
         name: component_id
@@ -10883,13 +10586,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                allocation:
-                  type: object
-                  properties:
-                    expires_at:
-                      type: string
+              $ref: "../components/schemas/Update-Allocation-Expiration-Date.yaml"
             examples:
               Example:
                 value:
@@ -11237,7 +10934,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -12339,7 +12036,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Subscription-Response"
+                  $ref: "../components/schemas/Subscription-Response.yaml"
       operationId: listSubscriptions
       x-operation-settings:
         collectParameters: true
@@ -13198,7 +12895,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13364,7 +13061,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13574,7 +13271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13749,7 +13446,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13914,7 +13611,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14044,7 +13741,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14197,7 +13894,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14361,7 +14058,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14715,7 +14412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15205,7 +14902,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
       operationId: cancelDunning
       description: "If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved."
   "/subscriptions/{subscription_id}/renewals/preview.json":
@@ -17757,7 +17454,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
       operationId: readSubscriptionByReference
       parameters:
         - schema:
@@ -18461,7 +18158,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples:
                 Example:
                   value:
@@ -19495,7 +19192,7 @@ paths:
                   subscriptions_components:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Subscriptions-Component"
+                      $ref: "../components/schemas/Subscription-Component.yaml"
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
       parameters:
@@ -21472,7 +21169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Response"
+                $ref: "../components/schemas/Subscription-Response.yaml"
               examples: {}
         "400":
           description: Bad Request
@@ -21861,7 +21558,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ../models/Subscription.yaml
+                  $ref: "../components/schemas/Subscription.yaml"
         "404":
           description: Not Found
       parameters:
@@ -22103,67 +21800,6 @@ components:
           type: array
           items:
             type: string
-    Allocation:
-      title: Allocation
-      type: object
-      properties:
-        component_id:
-          type: integer
-          description: The integer component ID for the allocation. This references a component that you have created in your Product setup
-        subscription_id:
-          type: integer
-          description: The integer subscription ID for the allocation. This references a unique subscription in your Site
-        quantity:
-          type: integer
-          description: The allocated quantity set in to effect by the allocation
-        previous_quantity:
-          type: integer
-          description: The allocated quantity that was in effect before this allocation was created
-        memo:
-          type:
-            - string
-            - "null"
-          description: The memo passed when the allocation was created
-        timestamp:
-          type: string
-          description: "The time that the allocation was recorded, in  format and UTC timezone, i.e. 2012-11-20T22:00:37Z"
-        proration_upgrade_scheme:
-          type: string
-          description: The scheme used if the proration was an upgrade. This is only present when the allocation was created mid-period.
-        proration_downgrade_scheme:
-          type: string
-          description: The scheme used if the proration was a downgrade. This is only present when the allocation was created mid-period.
-        price_point_id:
-          type: integer
-        price_point_name:
-          type: string
-        price_point_handle:
-          type: string
-        previous_price_point_id:
-          type: integer
-        accrue_charge:
-          type: boolean
-          description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately."
-        upgrade_charge:
-          type: string
-          description: The type of charge to be created if the change in cost is an upgrade.
-        downgrade_credit:
-          type: string
-          description: The type of credit to be created if the change in cost is a downgrade.
-        payment:
-          type:
-            - object
-            - "null"
-          description: "Information for captured payment, if applicable"
-          properties:
-            id:
-              type: number
-            amout_in_cents:
-              type: string
-            success:
-              type: boolean
-            memo:
-              type: string
     Billing-Manifest:
       title: Billing Manifest
       type: object
@@ -22203,54 +21839,6 @@ components:
           type: string
         existing_balance_in_cents:
           type: integer
-    Create-Allocation:
-      title: Create Allocation
-      type: object
-      properties:
-        quantity:
-          type:
-            - integer
-            - number
-          description: "The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off."
-        component_id:
-          type: integer
-          description: (required for the multiple allocations endpoint) The id associated with the component for which the allocation is being made
-        memo:
-          type: string
-          description: A memo to record along with the allocation
-        proration_downgrade_scheme:
-          type: string
-          description: The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided.
-          deprecated: true
-        proration_upgrade_scheme:
-          type: string
-          description: The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided.
-          deprecated: true
-        accrue_charge:
-          type: boolean
-          description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided."
-        downgrade_credit:
-          type: string
-          description: The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided.
-          enum:
-            - full
-            - prorated
-            - none
-        upgrade_charge:
-          type: string
-          description: The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided.
-          enum:
-            - full
-            - prorated
-            - none
-        price_point_id:
-          type:
-            - string
-            - integer
-            - "null"
-          description: "Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used."
-      required:
-        - quantity
     Prepaid-Configuration:
       title: Prepaid Configuration
       type: object
@@ -24759,12 +24347,6 @@ components:
           type: string
           description: |
             The memo attached to the entry
-    Subscription-Response:
-      title: Subscription Response
-      type: object
-      properties:
-        subscription:
-          $ref: ../models/Subscription.yaml
     Subscription-Preview:
       title: Subscription Preview
       type: object
@@ -24779,124 +24361,6 @@ components:
       properties:
         subscription_preview:
           $ref: "#/components/schemas/Subscription-Preview"
-    Subscriptions-Component:
-      title: Subscriptions Component
-      type: object
-      examples:
-        - id: 0
-          name: string
-          kind: string
-          unit_name: string
-          enabled: true
-          currency: string
-          description: string
-          allocated_quantity: 0
-          component_id: 0
-          component_handle: null
-          allow_fractional_quantities: false
-          subscription_id: 0
-          recurring: true
-          archived_at: null
-          price_point_id: 0
-          price_point_handle: string
-          price_point_type: string
-          price_point_name: string
-          use_site_exchange_rate: true
-          product_family_id: 0
-          product_family_handle: string
-          created_at: string
-          updated_at: string
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        kind:
-          type: string
-        unit_name:
-          type: string
-        enabled:
-          type: boolean
-          description: (for on/off components) indicates if the component is enabled for the subscription
-        unit_balance:
-          type: integer
-        currency:
-          type: string
-        allocated_quantity:
-          type: integer
-          description: "For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off."
-        pricing_scheme:
-          type:
-            - string
-            - "null"
-        component_id:
-          type: integer
-        component_handle:
-          type:
-            - string
-            - "null"
-        subscription_id:
-          type: integer
-        recurring:
-          type: boolean
-        upgrade_charge:
-          type:
-            - string
-            - "null"
-        downgrade_credit:
-          type:
-            - string
-            - "null"
-        archived_at:
-          type:
-            - "null"
-            - string
-        price_point_id:
-          type:
-            - integer
-            - "null"
-        price_point_handle:
-          type:
-            - string
-            - "null"
-        price_point_type:
-          type:
-            - string
-            - "null"
-          enum:
-            - default
-            - catalog
-            - custom
-        price_point_name:
-          type:
-            - string
-            - "null"
-        product_family_id:
-          type: integer
-        product_family_handle:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        use_site_exchange_rate:
-          type:
-            - boolean
-            - "null"
-        description:
-          type:
-            - string
-            - "null"
-        allow_fractional_quantities:
-          type: boolean
-        subscription:
-          type: object
-          description: "An optional object, will be returned if provided `include=subscription` query param."
-          properties:
-            state:
-              type: string
-            updated_at:
-              type: string
     List-Subscriptions-Date-Field:
       title: List Subscriptions Date Field
       type: string

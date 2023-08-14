@@ -1,5 +1,7 @@
 title: Price Point Type
 type: string
+description: |-
+  Price point type. Allowed values: `catalog`, `default`, `custom`.
 enum:
   - catalog
   - default

@@ -1,0 +1,84 @@
+title: Subscription Component
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  kind:
+    type: string
+  unit_name:
+    type: string
+  enabled:
+    type: boolean
+    description: (for on/off components) indicates if the component is enabled for the subscription
+  unit_balance:
+    type: integer
+  currency:
+    type: string
+  allocated_quantity:
+    type: integer
+    description: "For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off."
+  pricing_scheme:
+    type:
+      - string
+      - "null"
+  component_id:
+    type: integer
+  component_handle:
+    type:
+      - string
+      - "null"
+  subscription_id:
+    type: integer
+  recurring:
+    type: boolean
+  upgrade_charge:
+    type:
+      - string
+      - "null"
+  downgrade_credit:
+    type:
+      - string
+      - "null"
+  archived_at:
+    type:
+      - "null"
+      - string
+  price_point_id:
+    type:
+      - integer
+      - "null"
+  price_point_handle:
+    type:
+      - string
+      - "null"
+  price_point_type:
+    oneOf:
+      - type:
+          - "null"
+      - $ref: "./Price-Point-Type.yaml"
+  price_point_name:
+    type:
+      - string
+      - "null"
+  product_family_id:
+    type: integer
+  product_family_handle:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  use_site_exchange_rate:
+    type:
+      - boolean
+      - "null"
+  description:
+    type:
+      - string
+      - "null"
+  allow_fractional_quantities:
+    type: boolean
+  subscription:
+    $ref: "./Subscription-Component-Subscription.yaml"

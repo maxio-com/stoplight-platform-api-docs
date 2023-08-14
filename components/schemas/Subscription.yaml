@@ -114,11 +114,11 @@ properties:
       - remittance
       - prepaid
   customer:
-    $ref: ./Customer.yaml
+    $ref: ../../models/Customer.yaml
   product:
-    $ref: ./Product.yaml
+    $ref: ../../models/Product.yaml
   credit_card:
-    $ref: ./Payment-Profile.yaml
+    $ref: ../../models/Payment-Profile.yaml
   group:
     type:
       - object

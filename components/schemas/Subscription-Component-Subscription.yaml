@@ -1,0 +1,8 @@
+title: Subscription Component Subscription
+type: object
+description: "An optional object, will be returned if provided `include=subscription` query param."
+properties:
+  state:
+    type: string
+  updated_at:
+    type: string
