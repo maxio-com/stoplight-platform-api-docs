@@ -1,0 +1,10 @@
+title: Components with Custom price used for Subscription Create/Update
+type: array
+description: (Optional) An array of component ids and custom prices to be added to the subscription.
+items:
+  type: object
+  properties:
+    component_id:
+      type: integer
+    custom_price:
+      $ref: "./Component-Custom-Price.yaml"

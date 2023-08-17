@@ -44,15 +44,7 @@ properties:
   custom_price:
     $ref: "./Subscription-Custom-Price.yaml"
   components:
-    type: array
-    description: (Optional) An array of component ids and custom prices to be added to the subscription.
-    items:
-      type: object
-      properties:
-        component_id:
-          type: integer
-        custom_price:
-          $ref: "./Component-Custom-Price.yaml"
+
   dunning_communication_delay_enabled:
     type:
       - boolean
