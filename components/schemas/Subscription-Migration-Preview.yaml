@@ -1,0 +1,15 @@
+title: Subscription Migration Preview
+type: object
+properties:
+  prorated_adjustment_in_cents:
+    type: integer
+    description: The amount of the prorated adjustment that would be issued for the current subscription.
+  charge_in_cents:
+    type: integer
+    description: The amount of the charge that would be created for the new product.
+  payment_due_in_cents:
+    type: integer
+    description: The amount of the payment due in the case of an upgrade.
+  credit_applied_in_cents:
+    type: integer
+    description: The amount of the credit that would be applied in the case that some is available to the subscription

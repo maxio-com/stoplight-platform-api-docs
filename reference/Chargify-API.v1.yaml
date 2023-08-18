@@ -13560,12 +13560,7 @@ paths:
             Use in query `include[]=coupons&include[]=self_service_page_token`."
   "/subscriptions/{subscription_id}/resume.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Resume Subscription
       tags:
@@ -13679,23 +13674,13 @@ paths:
       description: "Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber."
       parameters:
         - schema:
-            type: string
-            default: prorated
-            enum:
-              - prorated
-              - immediate
-              - delayed
+            $ref: "../components/schemas/Resumption-Charge.yaml"
           in: query
           name: "calendar_billing['resumption_charge']"
           description: (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled
   "/subscriptions/{subscription_id}/hold.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Hold / Pause Subscription
       tags:
@@ -13832,18 +13817,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ""
-              type: object
-              x-examples:
-                example-1:
-                  hold:
-                    automatically_resume_at: "2017-05-25T11:25:00Z"
-              properties:
-                hold:
-                  type: object
-                  properties:
-                    automatically_resume_at:
-                      type: string
+              $ref: "../components/schemas/Pause-Request.yaml"
             examples:
               Example:
                 value:
@@ -13986,20 +13960,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ""
-              type: object
-              x-examples:
-                example-1:
-                  hold:
-                    automatically_resume_at: "2019-01-20"
-              properties:
-                hold:
-                  type: object
-                  properties:
-                    automatically_resume_at:
-                      type:
-                        - string
-                        - "null"
+              $ref: "../components/schemas/Pause-Request.yaml"
             examples:
               Example:
                 value:
@@ -14007,12 +13968,7 @@ paths:
                     automatically_resume_at: "2019-01-20"
   "/subscriptions/{subscription_id}/reactivate.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     put:
       summary: Reactivate Subscription
       tags:
@@ -14311,44 +14267,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                calendar_billing:
-                  type: object
-                  description: These values are only applicable to subscriptions using calendar billing
-                  properties:
-                    reactivation_charge:
-                      type: string
-                      enum:
-                        - prorated
-                        - immediate
-                        - delayed
-                      description: "You may choose how to handle the reactivation charge for that subscription: 1) `prorated` A prorated charge for the product price will be attempted for to complete the period 2) `immediate` A full-price charge for the product price will be attempted immediately 3) `delayed` A full-price charge for the product price will be attempted at the next renewal"
-                      default: prorated
-                include_trial:
-                  type: boolean
-                  description: "If `true` is sent, the reactivated Subscription will include a trial if one is available. If `false` is sent, the trial period will be ignored."
-                preserve_balance:
-                  type: boolean
-                  description: "If `true` is passed, the existing subscription balance will NOT be cleared/reset before adding the additional reactivation charges."
-                coupon_code:
-                  type: string
-                  description: The coupon code to be applied during reactivation.
-                use_credits_and_prepayments:
-                  type: boolean
-                  description: "If true is sent, Chargify will use service credits and prepayments upon reactivation. If false is sent, the service credits and prepayments will be ignored."
-                resume:
-                  type:
-                    - boolean
-                    - object
-                  description: "If `true`, Chargify will attempt to resume the subscription's billing period. if not resumable, the subscription will be reactivated with a new billing period. If `false`: Chargify will only attempt to reactivate the subscription."
-                  properties:
-                    require_resume:
-                      type: boolean
-                      description: "Chargify will only attempt to resume the subscription's billing period. If not resumable, the subscription will be left in it's current state."
-                    forgive_balance:
-                      type: boolean
-                      description: "Indicates whether or not Chargify should clear the subscription's existing balance before attempting to resume the subscription. If subscription cannot be resumed, the balance will remain as it was before the attempt to resume was made."
+              $ref: "../components/schemas/Reactivate-Subscription-Request.yaml"
             examples:
               Example:
                 value:
@@ -14361,12 +14280,7 @@ paths:
                   resume: true
   "/subscriptions/{subscription_id}/migrations.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Migrate Subscription Product
       tags:
@@ -14570,45 +14484,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                migration:
-                  type: object
-                  properties:
-                    product_id:
-                      type: integer
-                      description: "The ID of the target Product. Either a product_id or product_handle must be present. A Subscription can be migrated to another product for both the current Product Family and another Product Family. Note: Going to another Product Family, components will not be migrated as well."
-                    product_price_point_id:
-                      type: integer
-                      description: The ID of the specified product's price point. This can be passed to migrate to a non-default price point.
-                    include_trial:
-                      type: boolean
-                      description: "Whether to include the trial period configured for the product price point when starting a new billing period. Note that if preserve_period is set, then include_trial will be ignored."
-                      default: false
-                    include_initial_charge:
-                      type: boolean
-                      default: false
-                      description: "If `true` is sent initial charges will be assessed. "
-                    include_coupons:
-                      type: boolean
-                      description: "If `true` is sent, any coupons associated with the subscription will be applied to the migration. If `false` is sent, coupons will not be applied. Note: When migrating to a new product family, the coupon cannot migrate."
-                      default: true
-                    preserve_period:
-                      type: boolean
-                      description: "If `false` is sent, the subscription's billing period will be reset to today and the full price of the new product will be charged. If `true` is sent, the billing period will not change and a prorated charge will be issued for the new product."
-                      default: false
-                    product_handle:
-                      type: string
-                      description: "The handle of the target Product. Either a product_id or product_handle must be present. A Subscription can be migrated to another product for both the current Product Family and another Product Family. Note: Going to another Product Family, components will not be migrated as well. "
-                    product_price_point_handle:
-                      type: string
-                      description: The ID or handle of the specified product's price point. This can be passed to migrate to a non-default price point.
-                    proration:
-                      type: object
-                      properties:
-                        preserve_period:
-                          type: boolean
-                          description: The alternative to sending preserve_period as a direct attribute to migration
+              $ref: "../components/schemas/Subscription-Product-Migration-Request.yaml"
             examples:
               Example:
                 value:
@@ -14620,12 +14496,7 @@ paths:
                     preserve_period: true
   "/subscriptions/{subscription_id}/migrations/preview.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Preview Subscription Product Migration
       tags:
@@ -14636,23 +14507,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  migration:
-                    type: object
-                    properties:
-                      prorated_adjustment_in_cents:
-                        type: integer
-                        description: The amount of the prorated adjustment that would be issued for the current subscription.
-                      charge_in_cents:
-                        type: integer
-                        description: The amount of the charge that would be created for the new product.
-                      payment_due_in_cents:
-                        type: integer
-                        description: The amount of the payment due in the case of an upgrade.
-                      credit_applied_in_cents:
-                        type: integer
-                        description: The amount of the credit that would be applied in the case that some is available to the subscription
+                $ref: "../components/schemas/Subscription-Migration-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14687,48 +14542,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                migration:
-                  type: object
-                  properties:
-                    product_id:
-                      type: integer
-                      description: "The ID of the target Product. Either a product_id or product_handle must be present. A Subscription can be migrated to another product for both the current Product Family and another Product Family. Note: Going to another Product Family, components will not be migrated as well."
-                    product_price_point_id:
-                      type: integer
-                      description: The ID of the specified product's price point. This can be passed to migrate to a non-default price point.
-                    include_trial:
-                      type: boolean
-                      description: "Whether to include the trial period configured for the product price point when starting a new billing period. Note that if preserve_period is set, then include_trial will be ignored."
-                      default: false
-                    include_initial_charge:
-                      type: boolean
-                      default: false
-                      description: "If `true` is sent initial charges will be assessed. "
-                    include_coupons:
-                      type: boolean
-                      description: "If `true` is sent, any coupons associated with the subscription will be applied to the migration. If `false` is sent, coupons will not be applied. Note: When migrating to a new product family, the coupon cannot migrate."
-                      default: true
-                    preserve_period:
-                      type: boolean
-                      description: "If `false` is sent, the subscription's billing period will be reset to today and the full price of the new product will be charged. If `true` is sent, the billing period will not change and a prorated charge will be issued for the new product."
-                      default: false
-                    product_handle:
-                      type: string
-                      description: "The handle of the target Product. Either a product_id or product_handle must be present. A Subscription can be migrated to another product for both the current Product Family and another Product Family. Note: Going to another Product Family, components will not be migrated as well. "
-                    product_price_point_handle:
-                      type: string
-                      description: The ID or handle of the specified product's price point. This can be passed to migrate to a non-default price point.
-                    proration:
-                      type: object
-                      properties:
-                        preserve_period:
-                          type: boolean
-                          description: The alternative to sending preserve_period as a direct attribute to migration
-                    proration_date:
-                      type: string
-                      description: The date that the proration is calculated from for the preview
+              $ref: "../components/schemas/Subscription-Migration-Preview-Request.yaml"
   "/subscriptions/{subscription_id}/override.json":
     parameters:
       - $ref: "#/components/parameters/subscription-id-required-path"
@@ -14780,12 +14594,7 @@ paths:
         description: Only these fields are available to be set.
   "/subscriptions/{subscription_id}/delayed_cancel.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Initiate Delayed Cancellation
       tags:
@@ -14796,10 +14605,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                $ref: "../components/schemas/Delayed-Cancellation-Response.yaml"
         "404":
           description: Not Found
       operationId: initiateDelayedCancellation
@@ -14813,17 +14619,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    cancellation_message:
-                      type: string
-                      description: For your internal use. An indication as to why the subscription is being canceled
-                    reason_code:
-                      type: string
-                      description: The reason code associated with the cancellation. See the list of reason codes associated with your site.
+              $ref: "../components/schemas/Delayed-Cancellation-Request.yaml"
     delete:
       summary: Cancel Delayed Cancellation
       tags:
@@ -14834,10 +14630,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                $ref: "../components/schemas/Delayed-Cancellation-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14851,12 +14644,7 @@ paths:
         This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
   "/subscriptions/{subscription_id}/cancel_dunning.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Cancel Dunning
       tags:
@@ -14872,12 +14660,7 @@ paths:
       description: "If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved."
   "/subscriptions/{subscription_id}/renewals/preview.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Preview Renewal
       tags:
