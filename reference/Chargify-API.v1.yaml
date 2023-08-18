@@ -12849,11 +12849,7 @@ paths:
           name: per_page
   "/subscriptions/{subscription_id}/retry.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     put:
       summary: Retry Subscription
       tags:

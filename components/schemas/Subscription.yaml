@@ -114,7 +114,7 @@ properties:
       - remittance
       - prepaid
   customer:
-    $ref: ../../models/Customer.yaml
+    $ref: ./Customer.yaml
   product:
     $ref: ../../models/Product.yaml
   credit_card:
