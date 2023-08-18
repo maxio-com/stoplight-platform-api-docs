@@ -1,0 +1,7 @@
+title: MRR Movement
+type: object
+properties:
+  amount:
+    type: integer
+  category:
+    type: string

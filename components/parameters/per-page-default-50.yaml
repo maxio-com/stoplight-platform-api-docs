@@ -5,6 +5,6 @@ description: |-
   Use in query `per_page=200`.
 schema:
   type: integer
-  default: 30
+  default: 50
   maximum: 200
-  example: 50
+  example: 30
