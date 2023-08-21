@@ -21,12 +21,3 @@ properties:
     type: string
   subscription_id:
     type: integer
-examples:
-  - id: 0
-    memo: string
-    created_at: string
-    price_point_id: 0
-    quantity: 0
-    component_id: 0
-    component_handle: string
-    subscription_id: 0

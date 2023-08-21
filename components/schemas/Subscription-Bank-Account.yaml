@@ -29,7 +29,7 @@ properties:
     type: string
     description: The current billing address country for the bank account
   current_vault:
-    $ref: "./Current-Vault.yaml"
+    $ref: "./Bank-Account-Vault.yaml"
   customer_id:
     type: integer
     description: The Chargify-assigned id for the customer record to which the bank account belongs

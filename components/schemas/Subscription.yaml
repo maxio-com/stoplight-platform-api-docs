@@ -104,12 +104,12 @@ properties:
   customer:
     $ref: ./Customer.yaml
   product:
-    $ref: ../../models/Product.yaml
+    $ref: ./Product.yaml
   credit_card:
     $ref: ../../models/Payment-Profile.yaml
   group:
     oneOf:
-      - $ref: "./Subscription-Group.yaml"
+      - $ref: "./Subscription-Group-Inlined.yaml"
       - type: "null"
   bank_account:
     $ref: "./Subscription-Bank-Account.yaml"

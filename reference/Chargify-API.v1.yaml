@@ -21344,58 +21344,6 @@ components:
           $ref: "../components/schemas/Upsert-Prepaid-Configuration.yaml"
       required:
         - prepaid_configuration
-    Subscription-Custom-Price:
-      title: Custom price used for Subscription Create/Update
-      type:
-        - object
-      description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
-      properties:
-        name:
-          type:
-            - string
-          description: (Optional)
-        handle:
-          type:
-            - string
-          description: (Optional)
-        price_in_cents:
-          type:
-            - integer
-        interval:
-          type:
-            - integer
-        interval_unit:
-          $ref: "../components/schemas/Interval-Unit.yaml"
-        trial_price_in_cents:
-          type:
-            - integer
-          description: (Optional)
-        trial_interval:
-          type:
-            - integer
-          description: (Optional)
-        trial_interval_unit:
-          $ref: "../components/schemas/Interval-Unit.yaml"
-          description: (Optional)
-        initial_charge_in_cents:
-          type:
-            - integer
-          description: (Optional)
-        initial_charge_after_trial:
-          type:
-            - boolean
-          description: (Optional)
-        expiration_interval:
-          type:
-            - integer
-          description: (Optional)
-        expiration_interval_unit:
-          $ref: "../components/schemas/Interval-Unit.yaml"
-          description: (Optional)
-        tax_included:
-          type:
-            - boolean
-          description: (Optional)
     Credit-Note:
       title: Credit Note
       type: object
@@ -23135,7 +23083,7 @@ components:
         reference:
           type: string
         custom_price:
-          $ref: "#/components/schemas/Subscription-Custom-Price"
+          $ref: "../components/schemas/Subscription-Custom-Price.yaml"
         components:
           type: array
           description: (Optional) An array of component ids and custom prices to be added to the subscription.
