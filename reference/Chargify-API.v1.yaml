@@ -4778,6 +4778,7 @@ paths:
                       price_in_cents: 1000
                       interval: 1
                       interval_unit: month
+                      expiration_interval_unit: null
                       initial_charge_in_cents: null
                       trial_price_in_cents: null
                       trial_interval: null

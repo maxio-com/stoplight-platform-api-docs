@@ -44,12 +44,7 @@ properties:
     type: boolean
     description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
   type:
-    type: string
-    description: |-
-      We expose the following types:
-      1. **default**: a price point that is marked as a default price for a certain product.
-      2. **custom**: a custom price point.
-      3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one.
+    $ref: "./Price-Point-Type.yaml"
   tax_included:
     type: boolean
   subscription_id:

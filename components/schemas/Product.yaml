@@ -28,14 +28,10 @@ properties:
       - "null"
     description: A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
   expiration_interval_unit:
-    type:
-      - string
-      - "null"
+    oneOf:
+      - $ref: "./Extended-Interval-Unit.yaml"
+      - type: "null"
     description: "A string representing the trial interval unit for this product, either month or day"
-    enum:
-      - month
-      - day
-      - never
   created_at:
     type: string
     description: Timestamp indicating when this product was created
@@ -49,11 +45,8 @@ properties:
     type: integer
     description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days
   interval_unit:
-    type: string
     description: "A string representing the interval unit for this product, either month or day"
-    enum:
-      - month
-      - day
+    $ref: "./Interval-Unit.yaml"
   initial_charge_in_cents:
     type:
       - integer
@@ -70,14 +63,10 @@ properties:
       - "null"
     description: A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
   trial_interval_unit:
-    type:
-      - string
-      - "null"
+    oneOf:
+      - $ref: "./Interval-Unit.yaml"
+      - type: "null"
     description: "A string representing the trial interval unit for this product, either month or day"
-    enum:
-      - month
-      - day
-      - null
   archived_at:
     type:
       - string

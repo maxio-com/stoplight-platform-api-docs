@@ -12,11 +12,7 @@ properties:
   product_price_point_id:
     type: integer
   role:
-    type: string
-    enum:
-      - baseline
-      - trial
-      - initial
+    $ref: "./Currency-Price-Role.yaml"
 examples:
   - id: 0
     currency: string

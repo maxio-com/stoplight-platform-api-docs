@@ -10,12 +10,7 @@ properties:
     description: |
       Price for the given role.
   role:
-    type: string
-    description: Role for the price.
-    enum:
-      - baseline
-      - trial
-      - initial
+    $ref: "./Currency-Price-Role.yaml"
 required:
   - currency
   - price

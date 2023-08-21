@@ -1,4 +1,4 @@
-title: MRR
+title: List MRR Response Result
 type: object
 properties:
   page:
@@ -13,7 +13,7 @@ properties:
     type: string
   currency_symbol:
     type: string
-  movemenets:
+  movements:
     type: array
     items:
       $ref: "./Movement.yaml"
