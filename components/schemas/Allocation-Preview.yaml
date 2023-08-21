@@ -1,0 +1,29 @@
+title: Allocation Preview
+type: object
+properties:
+  start_date:
+    type: string
+  end_date:
+    type: string
+  subtotal_in_cents:
+    type: integer
+  total_tax_in_cents:
+    type: integer
+  total_discount_in_cents:
+    type: integer
+  total_in_cents:
+    type: integer
+  direction:
+    type: string
+  proration_scheme:
+    type: string
+  line_items:
+    type: array
+    items:
+      $ref: "./Allocation-Preview-Line-Item.yaml"
+  accrue_charge:
+    type: boolean
+  allocations:
+    type: array
+    items:
+      $ref: "./Allocation-Preview-Item.yaml"

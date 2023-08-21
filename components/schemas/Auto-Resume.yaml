@@ -1,0 +1,5 @@
+title: Auto Resume
+type: object
+properties:
+  automatically_resume_at:
+    type: string
