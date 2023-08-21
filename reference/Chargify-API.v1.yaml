@@ -4369,19 +4369,7 @@ paths:
           description: Include an array of currency price data
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
-        - in: query
-          name: filter[type]
-          schema:
-            type: array
-            items:
-              $ref: "../components/schemas/Price-Point-Type.yaml"
-            example:
-              - catalog
-              - default
-          style: form
-          explode: false
-          description: |-
-            Use in query: `filter[type]=catalog,default`.
+        - $ref: "../components/parameters/price-point-type-filter.yaml"
   "/components/{component_id}/price_points/bulk.json":
     parameters:
       - schema:
@@ -4688,83 +4676,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  mrr:
-                    type: object
-                    properties:
-                      page:
-                        type: integer
-                      per_page:
-                        type: integer
-                      total_pages:
-                        type: integer
-                      total_entries:
-                        type: integer
-                      currency:
-                        type: string
-                      currency_symbol:
-                        type: string
-                      movements:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            timestamp:
-                              type: string
-                            amount_in_cents:
-                              type: integer
-                            amount_formatted:
-                              type: string
-                            description:
-                              type: string
-                            category:
-                              type: string
-                            breakouts:
-                              type: object
-                              properties:
-                                plan_amount_in_cents:
-                                  type: integer
-                                plan_amount_formatted:
-                                  type: string
-                                usage_amount_in_cents:
-                                  type: integer
-                                usage_amount_formatted:
-                                  type: string
-                            line_items:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  product_id:
-                                    type: integer
-                                  component_id:
-                                    type: integer
-                                    description: 'For Product (or "baseline") line items, this field will have a value of `0`.'
-                                  name:
-                                    type: string
-                                  mrr:
-                                    type: integer
-                                  mrr_movements:
-                                    type: array
-                                    items:
-                                      type: object
-                                      properties:
-                                        amount:
-                                          type: integer
-                                        category:
-                                          type: string
-                                  quantity:
-                                    type: integer
-                                  prev_quantity:
-                                    type: integer
-                                  recurring:
-                                    type: boolean
-                                    description: "When `true`, the line item's MRR value will contribute to the `plan` breakout. When `false`, the line item contributes to the `usage` breakout."
-                            subscription_id:
-                              type: integer
-                            subscriber_name:
-                              type: string
+                $ref: "../components/schemas/List-MRR-Response.yaml"
               examples:
                 Example:
                   value:
@@ -4832,21 +4744,8 @@ paths:
           name: subscription_id
           description: optionally filter results by subscription
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 10
-            maximum: 50
-          in: query
-          name: per_page
-          description: " This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 50; any per_page value over 50 will be changed to 10."
-        - schema:
-            type: string
-            enum:
-              - asc
-              - desc
-          in: query
-          name: direction
-          description: The sort direction of the returned records.
+        - $ref: "../components/parameters/per-page-default-10.yaml"
+        - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/products.json":
     parameters:
       - schema:
@@ -4879,6 +4778,7 @@ paths:
                       price_in_cents: 1000
                       interval: 1
                       interval_unit: month
+                      expiration_interval_unit: null
                       initial_charge_in_cents: null
                       trial_price_in_cents: null
                       trial_interval: null
@@ -4904,10 +4804,7 @@ paths:
                           url: "https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold"
                       product_price_point_name: Default
               schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
+                $ref: "../components/schemas/Product-Response.yaml"
       operationId: createProduct
       description: |-
         Use this method to create a product within your Chargify site.
@@ -4918,10 +4815,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                product:
-                  $ref: "#/components/schemas/Create-or-Update-Product"
+              $ref: "../components/schemas/Create-or-Update-Product-Request.yaml"
             examples:
               Example:
                 value:
@@ -4947,10 +4841,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    product:
-                      $ref: ../models/Product.yaml
+                  $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5045,14 +4936,7 @@ paths:
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
-        - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-          in: query
-          name: date_field
-          description: The type of filter you would like to apply to your search.
+        - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
             type: string
           in: query
@@ -5126,10 +5010,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
+                $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5181,10 +5062,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
+                $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5254,10 +5132,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                product:
-                  $ref: "#/components/schemas/Create-or-Update-Product"
+              $ref: "../components/schemas/Create-or-Update-Product-Request.yaml"
     delete:
       summary: Archive Product
       tags:
@@ -5269,10 +5144,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
+                $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5333,10 +5205,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product:
-                    $ref: ../models/Product.yaml
+                $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5403,10 +5272,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product_family:
-                    $ref: ../models/Product-Family.yaml
+                $ref: "../components/schemas/Product-Family-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5425,15 +5291,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                product_family:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    description:
-                      type: string
+              $ref: "../components/schemas/Create-Product-Family-Request.yaml"
             examples:
               Example:
                 value:
@@ -5452,10 +5310,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    product_family:
-                      $ref: ../models/Product-Family.yaml
+                  $ref: "../components/schemas/Product-Family-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5478,14 +5333,7 @@ paths:
       operationId: listProductFamilies
       description: This method allows to retrieve a list of Product Families for a site.
       parameters:
-        - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-          in: query
-          name: date_field
-          description: The type of filter you would like to apply to your search.
+        - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
             type: string
           in: query
@@ -5524,10 +5372,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  product_family:
-                    $ref: ../models/Product-Family.yaml
+                $ref: "../components/schemas/Product-Family-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5560,10 +5405,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5592,10 +5434,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                price_point:
-                  $ref: "#/components/schemas/Create-Product-Price-Point"
+              $ref: "../components/schemas/Create-Product-Price-Point-Request.yaml"
             examples:
               Example:
                 value:
@@ -5623,12 +5462,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/List-Product-Price-Points-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5666,16 +5500,7 @@ paths:
           in: query
           name: currency_prices
           description: "When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency."
-        - in: query
-          name: filter
-          style: deepObject
-          schema:
-            type: object
-            example:
-              type: catalog
-          description: |-
-            #### Default type filter: `?filter[type]=catalog,default`
-            #### Type filter options: `catalog`, `default`, `custom`
+        - $ref: "../components/parameters/price-point-type-filter.yaml"
       description: Use this endpoint to retrieve a list of product price points.
   "/products/{product_id}/price_points/{price_point_id}.json":
     parameters:
@@ -5701,10 +5526,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5732,15 +5554,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                price_point:
-                  type: object
-                  properties:
-                    handle:
-                      type: string
-                    price_in_cents:
-                      type: integer
+              $ref: "../components/schemas/Update-Product-Price-Point-Request.yaml"
             examples:
               Example:
                 value:
@@ -5761,10 +5575,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5805,10 +5616,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5857,10 +5665,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5909,10 +5714,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_point:
-                    $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5958,12 +5760,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Product-Price-Point"
+                $ref: "../components/schemas/Bulk-Create-Product-Price-Points-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5992,12 +5789,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                price_points:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Create-Product-Price-Point"
+              $ref: "../components/schemas/Bulk-Create-Product-Price-Points-Request.yaml"
             examples:
               Example:
                 value:
@@ -6046,7 +5838,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Product-Price-Point-Currency-Price"
+                $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -6078,34 +5870,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      currency:
-                        type: string
-                        description: |
-                          ISO code for one of the site level currencies.
-                      price:
-                        type: integer
-                        description: |
-                          Price for the given role.
-                      role:
-                        type: string
-                        description: Role for the price.
-                        enum:
-                          - baseline
-                          - trial
-                          - initial
-                    required:
-                      - currency
-                      - price
-                      - role
-              required:
-                - currency_prices
+              $ref: "../components/schemas/Create-Product-Currency-Prices-Request.yaml"
             examples:
               Example:
                 value:
@@ -6132,7 +5897,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Product-Price-Point-Currency-Price"
+                  $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
               examples:
                 example-1:
                   value:
@@ -6153,26 +5918,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                currency_prices:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: |
-                          ID of the currency price record being updated.
-                      price:
-                        type: integer
-                        description: |
-                          New price for the currency price.
-                    required:
-                      - id
-                      - price
-              required:
-                - currency_prices
+              $ref: "../components/schemas/Update-Currency-Prices-Request.yaml"
             examples:
               Example:
                 value:
@@ -20995,10 +20741,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    product:
-                      $ref: ../models/Product.yaml
+                  $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -21051,17 +20794,7 @@ paths:
       operationId: listProducts
       description: This method allows to retrieve a list of Products belonging to a Site.
       parameters:
-        - schema:
-            type: string
-            enum:
-              - updated_at
-              - created_at
-            example: created_at
-          in: query
-          name: date_field
-          description:
-            "The type of filter you would like to apply to your search.
-            Use in query `date_field=created_at`."
+        - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
             type: string
           in: query
@@ -21339,7 +21072,7 @@ paths:
                   price_points:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Product-Price-Point"
+                      $ref: "../components/schemas/Product-Price-Point.yaml"
               examples:
                 example:
                   value:
@@ -22285,75 +22018,6 @@ components:
           $ref: "#/components/schemas/Upsert-Prepaid-Configuration"
       required:
         - prepaid_configuration
-    Create-or-Update-Product:
-      title: Create or Update Product
-      type: object
-      properties:
-        name:
-          type: string
-        handle:
-          type: string
-        description:
-          type: string
-        accounting_code:
-          type: string
-        require_credit_card:
-          type: boolean
-        price_in_cents:
-          type: integer
-        interval:
-          type: integer
-        interval_unit:
-          type: string
-        auto_create_signup_page:
-          type: boolean
-        tax_code:
-          type: string
-      required:
-        - name
-        - description
-        - price_in_cents
-        - interval
-        - interval_unit
-    Create-Product-Price-Point:
-      title: Create Product Price Point
-      type: object
-      properties:
-        name:
-          type: string
-        handle:
-          type: string
-        price_in_cents:
-          type: integer
-        interval:
-          type: integer
-        interval_unit:
-          type: string
-        trial_price_in_cents:
-          type: integer
-        trial_interval:
-          type: integer
-        trial_interval_unit:
-          type: string
-        trial_type:
-          type: string
-        initial_charge_in_cents:
-          type: integer
-        initial_charge_after_trial:
-          type: boolean
-        expiration_interval:
-          type: integer
-        expiration_interval_unit:
-          type: string
-        use_site_exchange_rate:
-          type: boolean
-          description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
-          default: true
-      required:
-        - name
-        - price_in_cents
-        - interval
-        - interval_unit
     Create-Subscription:
       title: Create Subscription
       type:
@@ -23972,100 +23636,6 @@ components:
             memo: sdf - Prepayment
             payment_type: null
             created_at: "2022-02-22T14:07:00-05:00"
-    Product-Price-Point-Currency-Price:
-      title: Product Price Point Currency Price
-      type: object
-      properties:
-        id:
-          type: integer
-        currency:
-          type: string
-        price:
-          type: integer
-        formatted_price:
-          type: string
-        product_price_point_id:
-          type: integer
-        role:
-          type: string
-          enum:
-            - baseline
-            - trial
-            - initial
-      examples:
-        - id: 0
-          currency: string
-          price: 0
-          formatted_price: string
-          product_price_point_id: 0
-          role: baseline
-        - id: 0
-          currency: string
-          price: 0
-          formatted_price: string
-          product_price_point_id: 0
-          role: baseline
-      description: |
-        object Product Price Point Currency Price:
-    Product-Price-Point:
-      title: Product Price Point
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        handle:
-          type: string
-        price_in_cents:
-          type: integer
-        interval:
-          type: integer
-        interval_unit:
-          type: string
-        trial_price_in_cents:
-          type: integer
-        trial_interval:
-          type: integer
-        trial_interval_unit:
-          type: string
-        trial_type:
-          type: string
-        introductory_offer:
-          type: boolean
-          description: reserved for future use
-        initial_charge_in_cents:
-          type: integer
-        initial_charge_after_trial:
-          type: boolean
-        expiration_interval:
-          type: integer
-        expiration_interval_unit:
-          type: string
-        product_id:
-          type: integer
-        archived_at:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        use_site_exchange_rate:
-          type: boolean
-          description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
-        type:
-          type: string
-          description: |-
-            We expose the following types:
-            1. **default**: a price point that is marked as a default price for a certain product. 
-            2. **custom**: a custom price point.
-            3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one.
-        tax_included:
-          type: boolean
-        subscription_id:
-          type:
-            - "null"
-            - integer
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
