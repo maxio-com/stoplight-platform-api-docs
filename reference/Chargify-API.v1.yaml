@@ -11978,10 +11978,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  offer:
-                    $ref: "#/components/schemas/Offer"
+                $ref: "../components/schemas/Offer-Response.yaml"
               examples:
                 Example:
                   value:
@@ -12052,34 +12049,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                offer:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    handle:
-                      type: string
-                    description:
-                      type: string
-                    product_id:
-                      type: integer
-                    product_price_point_id:
-                      type: integer
-                    components:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          component_id:
-                            type: integer
-                          starting_quantity:
-                            type: integer
-                    coupons:
-                      type: array
-                      items:
-                        type: string
+              $ref: "../components/schemas/Create-Offer-Request.yaml"
             examples:
               Example:
                 value:
@@ -12104,12 +12074,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  offers:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Offer"
+                $ref: "../components/schemas/List-Offers-Response.yaml"
               examples:
                 Example:
                   value:
@@ -12154,12 +12119,7 @@ paths:
       description: This endpoint will list offers for a site.
   "/offers/{offer_id}.json":
     parameters:
-      - schema:
-          type: integer
-        name: offer_id
-        in: path
-        required: true
-        description: The Chargify id of the offer
+      - $ref: "../components/parameters/offer-id-path.yaml"
     get:
       summary: Read Offer
       tags:
@@ -12170,10 +12130,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  offer:
-                    $ref: "#/components/schemas/Offer"
+                $ref: "../components/schemas/Offer-Response.yaml"
               examples: {}
         "401":
           description: Unauthorized
@@ -12181,12 +12138,7 @@ paths:
       description: "This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`."
   "/offers/{offer_id}/archive.json":
     parameters:
-      - schema:
-          type: integer
-        name: offer_id
-        in: path
-        required: true
-        description: The Chargify id of the offer
+      - $ref: "../components/parameters/offer-id-path.yaml"
     put:
       summary: Archive Offer
       tags:
@@ -12200,12 +12152,7 @@ paths:
       description: Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
   "/offers/{offer_id}/unarchive.json":
     parameters:
-      - schema:
-          type: integer
-        name: offer_id
-        in: path
-        required: true
-        description: The Chargify id of the offer
+      - $ref: "../components/parameters/offer-id-path.yaml"
     put:
       summary: Unarchive Offer
       tags:
@@ -21132,92 +21079,6 @@ components:
               number:
                 type: string
                 description: The number of the invoice serving as an origin invoice.
-    Offer:
-      title: Offer
-      type: object
-      properties:
-        id:
-          type: integer
-        site_id:
-          type: integer
-        product_family_id:
-          type: integer
-        product_id:
-          type: integer
-        product_price_point_id:
-          type: integer
-        product_revisable_number:
-          type: integer
-        name:
-          type: string
-        handle:
-          type: string
-        description:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        archived_at:
-          type: "null"
-        offer_items:
-          type: array
-          items:
-            type: object
-            properties:
-              component_id:
-                type: integer
-              price_point_id:
-                type: integer
-              starting_quantity:
-                type: string
-              editable:
-                type: boolean
-              component_unit_price:
-                type: string
-              component_name:
-                type: string
-              price_point_name:
-                type: string
-              currency_prices:
-                type: array
-                items: {}
-        offer_discounts:
-          type: array
-          items:
-            type: object
-            properties:
-              coupon_code:
-                type: string
-              coupon_id:
-                type: integer
-              coupon_name:
-                type: string
-        product_family_name:
-          type: string
-        product_name:
-          type: string
-        product_price_point_name:
-          type: string
-        product_price_in_cents:
-          type: integer
-        offer_signup_pages:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              nickname:
-                type: string
-              enabled:
-                type: boolean
-              return_url:
-                type: string
-              return_params:
-                type: string
-              url:
-                type: string
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
