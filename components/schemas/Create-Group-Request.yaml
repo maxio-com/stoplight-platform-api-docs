@@ -1,0 +1,7 @@
+title: Create Subscription Group Request
+type: object
+properties:
+  group:
+    oneOf:
+      - $ref: "./Group-Settings.yaml"
+      - type: boolean

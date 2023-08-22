@@ -15538,32 +15538,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_group:
-                    type: object
-                    properties:
-                      customer_id:
-                        type: integer
-                      payment_profile:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          masked_card_number:
-                            type: string
-                      payment_collection_method:
-                        type: string
-                      subscription_ids:
-                        type: array
-                        items:
-                          type: integer
-                      created_at:
-                        type: string
+                $ref: "../components/schemas/Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15856,32 +15831,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_group:
-                    type: object
-                    properties:
-                      customer_id:
-                        type: integer
-                      payment_profile:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          masked_card_number:
-                            type: string
-                      payment_collection_method:
-                        type: string
-                      subscription_ids:
-                        type: array
-                        items:
-                          type: integer
-                      created_at:
-                        type: string
+                $ref: "../components/schemas/Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16751,11 +16701,21 @@ paths:
             type: integer
           in: query
           name: ack
+          description: id of the customer.
         - schema:
             type: array
+            items:
+              $ref: "../components/schemas/Subscription-Purge-Type.yaml"
+            example:
+              - customer
+              - payment_profile
           in: query
-          name: cascade
-          description: Options are "customer" or "payment_profile"
+          name: cascade[]
+          style: form
+          explode: true
+          description: |-
+            Options are "customer" or "payment_profile".
+            Use in query: `cascade[]=customer&cascade[]=payment_profile`.
   "/subscriptions/{subscription_id}/prepaid_configurations.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -16769,7 +16729,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Prepaid-Configuration"
+                $ref: "../components/schemas/Prepaid-Configuration-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16785,7 +16745,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Upsert-Prepaid-Configuration-Request"
+              $ref: "../components/schemas/Upsert-Prepaid-Configuration-Request.yaml"
             examples:
               Example:
                 value:
@@ -16796,12 +16756,7 @@ paths:
                     replenish_threshold_amount_in_cents: 10000
   "/subscriptions/{subscription_id}/group.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Add Subscription to Group
       tags:
@@ -16812,32 +16767,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_group:
-                    type: object
-                    properties:
-                      customer_id:
-                        type: integer
-                      payment_profile:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          masked_card_number:
-                            type: string
-                      payment_collection_method:
-                        type: string
-                      subscription_ids:
-                        type: array
-                        items:
-                          type: integer
-                      created_at:
-                        type: string
+                $ref: "../components/schemas/Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16872,12 +16802,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                group:
-                  oneOf:
-                    - $ref: "../components/schemas/Group-Settings.yaml"
-                    - type: boolean
+              $ref: "../components/schemas/Create-Group-Request.yaml"
             examples:
               Example:
                 value:
@@ -20933,28 +20858,6 @@ components:
           type: string
         existing_balance_in_cents:
           type: integer
-    Prepaid-Configuration:
-      title: Prepaid Configuration
-      type: object
-      properties:
-        id:
-          type: integer
-        initial_funding_amount_in_cents:
-          type: integer
-        replenish_to_amount_in_cents:
-          type: integer
-        auto_replenish:
-          type: boolean
-        replenish_threshold_amount_in_cents:
-          type: integer
-    Upsert-Prepaid-Configuration-Request:
-      title: Upsert Prepaid Configuration Request
-      type: object
-      properties:
-        prepaid_configuration:
-          $ref: "../components/schemas/Upsert-Prepaid-Configuration.yaml"
-      required:
-        - prepaid_configuration
     Credit-Note:
       title: Credit Note
       type: object
