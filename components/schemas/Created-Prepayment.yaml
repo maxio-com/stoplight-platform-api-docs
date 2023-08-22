@@ -1,0 +1,17 @@
+title: Created Prepayment
+type: object
+properties:
+  id:
+    type: integer
+  subscription_id:
+    type: integer
+  amount_in_cents:
+    type: integer
+  memo:
+    type: string
+  created_at:
+    type: string
+  starting_balance_in_cents:
+    type: integer
+  ending_balance_in_cents:
+    type: integer

@@ -14812,25 +14812,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepayment:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      subscription_id:
-                        type: integer
-                      amount_in_cents:
-                        type: integer
-                      memo:
-                        type: string
-                      created_at:
-                        type: string
-                      starting_balance_in_cents:
-                        type: integer
-                      ending_balance_in_cents:
-                        type: integer
+                $ref: "../components/schemas/Create-Prepayment-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14855,37 +14837,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                prepayment:
-                  type: object
-                  required:
-                    - amount
-                    - details
-                    - memo
-                    - method
-                  properties:
-                    amount:
-                      type: number
-                    details:
-                      type: string
-                    memo:
-                      type: string
-                    method:
-                      type: string
-                      enum:
-                        - check
-                        - cash
-                        - money_order
-                        - ach
-                        - paypal_account
-                        - credit_card_on_file
-                        - other
-                      description: 'When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance.  This is especially useful for manual replenishment of prepaid subscriptions.'
-                    payment_profile_id:
-                      type: integer
-              required:
-                - prepayment
+              $ref: "../components/schemas/Create-Prepayment-Request.yaml"
             examples:
               Example:
                 value:
@@ -14911,7 +14863,7 @@ paths:
                     type: array
                     uniqueItems: true
                     items:
-                      $ref: "#/components/schemas/Prepayment"
+                      $ref: "../components/schemas/Prepayment-Response.yaml"
               examples:
                 example-success-response:
                   value:
@@ -14961,12 +14913,7 @@ paths:
             Use in query `filter[end_date]=2011-12-15`."
   "/subscriptions/{subscription_id}/service_credits.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Issue Service Credit
       tags:
@@ -14977,7 +14924,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Service-Credit"
+                $ref: "../components/schemas/Service-Credit.yaml"
               examples:
                 Example:
                   value:
@@ -14992,23 +14939,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                service_credit:
-                  type: object
-                  required:
-                    - amount
-                    - memo
-                  properties:
-                    amount:
-                      type:
-                        - number
-                        - string
-                      minimum: 0
-                    memo:
-                      type: string
-              required:
-                - service_credit
+              $ref: "../components/schemas/Issue-Service-Credit-Request.yaml"
             examples:
               Example:
                 value:
@@ -15017,12 +14948,7 @@ paths:
                     memo: Courtesy credit
   "/subscriptions/{subscription_id}/service_credit_deductions.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Deduct Service Credit
       tags:
@@ -15051,22 +14977,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                deduction:
-                  type: object
-                  required:
-                    - amount
-                    - memo
-                  properties:
-                    amount:
-                      type:
-                        - string
-                        - number
-                    memo:
-                      type: string
-              required:
-                - deduction
+              $ref: "../components/schemas/Deduct-Service-Credit-Request.yaml"
             examples:
               Example:
                 value:
@@ -16533,18 +16444,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  service_credit:
-                    $ref: "#/components/schemas/Service-Credit"
+                $ref: "../components/schemas/Service-Credit-Response.yaml"
               examples:
                 Example:
                   value:
-                    id: 101
-                    amount_in_cents: 1000
-                    ending_balance_in_cents: 2000
-                    entry_type: Credit
-                    memo: Credit to group account
+                    service_credit:
+                      id: 101
+                      amount_in_cents: 1000
+                      ending_balance_in_cents: 2000
+                      entry_type: Credit
+                      memo: Credit to group account
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -16605,7 +16514,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Service-Credit"
+                $ref: "../components/schemas/Service-Credit.yaml"
               examples:
                 Example:
                   value:
@@ -19784,7 +19693,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Prepayment"
+                $ref: "../components/schemas/Prepayment-Response.yaml"
         "400":
           description: Bad Request
           content:
@@ -21469,53 +21378,6 @@ components:
                 type: string
               url:
                 type: string
-    Prepayment:
-      description: ""
-      type: object
-      properties:
-        prepayment:
-          type: object
-          properties:
-            id:
-              type: number
-            subscription_id:
-              type: number
-            amount_in_cents:
-              type: number
-            remaining_amount_in_cents:
-              type: number
-            details: {}
-            external:
-              type: boolean
-            memo:
-              type: string
-              minLength: 1
-            payment_type: {}
-            created_at:
-              type: string
-              minLength: 1
-          required:
-            - id
-            - subscription_id
-            - amount_in_cents
-            - remaining_amount_in_cents
-            - external
-            - memo
-            - created_at
-      required:
-        - prepayment
-      x-examples:
-        example-1:
-          prepayment:
-            id: 353
-            subscription_id: 24
-            amount_in_cents: 1500
-            remaining_amount_in_cents: 1050
-            details: null
-            external: false
-            memo: sdf - Prepayment
-            payment_type: null
-            created_at: "2022-02-22T14:07:00-05:00"
     Proforma-Invoice:
       title: Proforma Invoice
       type: object
@@ -22185,30 +22047,6 @@ components:
               metadatum_id:
                 type: number
         public_url: {}
-    Service-Credit:
-      title: Service Credit
-      type: object
-      properties:
-        id:
-          type: integer
-        amount_in_cents:
-          type: integer
-          description: |
-            The amount in cents of the entry
-        ending_balance_in_cents:
-          type: integer
-          description: |
-            The new balance for the credit account
-        entry_type:
-          type: string
-          description: The type of entry
-          enum:
-            - Credit
-            - Debit
-        memo:
-          type: string
-          description: |
-            The memo attached to the entry
     Subscription-Preview:
       title: Subscription Preview
       type: object
