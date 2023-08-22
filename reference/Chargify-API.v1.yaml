@@ -16586,14 +16586,9 @@ paths:
           in: query
           name: reference
       description: Use this endpoint to find a subscription by its reference.
-  "/subscriptions/{id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
+  "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
-      - schema:
-          type: integer
-        name: id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: integer
         name: payment_profile_id
@@ -16610,10 +16605,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment_profile:
-                    $ref: ../models/Payment-Profile.yaml
+                $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16683,10 +16675,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment_profile:
-                    $ref: ../models/Payment-Profile.yaml
+                $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:

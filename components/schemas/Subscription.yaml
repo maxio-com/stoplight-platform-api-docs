@@ -106,7 +106,7 @@ properties:
   product:
     $ref: ./Product.yaml
   credit_card:
-    $ref: ../../models/Payment-Profile.yaml
+    $ref: ./Payment-Profile.yaml
   group:
     oneOf:
       - $ref: "./Subscription-Group-Inlined.yaml"
