@@ -13284,6 +13284,9 @@ paths:
             type: array
             items:
               $ref: "../components/schemas/Subscription-Include.yaml"
+            example:
+              - coupons
+              - self_service_page_token
           style: form
           explode: true
           description: "Allows including additional data in the response.

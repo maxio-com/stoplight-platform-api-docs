@@ -3,6 +3,3 @@ type: string
 enum:
   - coupons
   - self_service_page_token
-example:
-  - coupons
-  - self_service_page_token
