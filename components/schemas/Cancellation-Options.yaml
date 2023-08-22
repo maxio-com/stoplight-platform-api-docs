@@ -1,4 +1,4 @@
-title: Delayed Cancellation Options
+title: Cancellation Options
 type: object
 properties:
   cancellation_message:

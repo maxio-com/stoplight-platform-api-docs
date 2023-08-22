@@ -12761,7 +12761,7 @@ paths:
         The response will be `422 "Unprocessable Entity`.
   "/subscriptions/{subscription_id}.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     put:
       summary: Update Subscription
       tags:
@@ -12936,7 +12936,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Update-Subscription-Request"
+              $ref: "../components/schemas/Update-Subscription-Request.yaml"
             examples:
               Example:
                 value:
@@ -13135,18 +13135,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription:
-                  type: object
-                  properties:
-                    cancellation_message:
-                      type: string
-                      description: Can be used when canceling a subscription to make a note about the reason for cancellation.
-                    reason_code:
-                      type: string
-                      description: Can be used when canceling a subscription to indicate why a subscription was canceled. (See reason codes associated with your site)
-            examples: {}
+              $ref: "../components/schemas/Cancellation-Request.yaml"
     get:
       summary: Read Subscription
       tags:
@@ -13294,16 +13283,14 @@ paths:
           schema:
             type: array
             items:
-              enum:
-                - coupons
-                - self_service_page_token
+              $ref: "../components/schemas/Subscription-Include.yaml"
             example:
               - coupons
               - self_service_page_token
           style: form
           explode: true
           description: "Allows including additional data in the response.
-            Use in query `include[]=coupons&include[]=self_service_page_token`."
+            Use in query: `include[]=coupons&include[]=self_service_page_token`."
   "/subscriptions/{subscription_id}/resume.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -14291,7 +14278,7 @@ paths:
               $ref: "../components/schemas/Subscription-Migration-Preview-Request.yaml"
   "/subscriptions/{subscription_id}/override.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     put:
       summary: Override Subscription
       tags:
@@ -14328,7 +14315,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Override-Subscription-Request"
+              $ref: "../components/schemas/Override-Subscription-Request.yaml"
             examples:
               Example:
                 value:
@@ -14365,7 +14352,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Delayed-Cancellation-Request.yaml"
+              $ref: "../components/schemas/Cancellation-Request.yaml"
     delete:
       summary: Cancel Delayed Cancellation
       tags:
@@ -17106,7 +17093,7 @@ paths:
         The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
   "/subscriptions/{subscription_id}/purge.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Purge Subscription
       tags:
@@ -17139,7 +17126,7 @@ paths:
           description: Options are "customer" or "payment_profile"
   "/subscriptions/{subscription_id}/prepaid_configurations.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Update Prepaid Subscription Configuration
       tags:
@@ -17643,7 +17630,7 @@ paths:
           description: Not Found
   "/subscriptions/{subscription_id}/add_coupon.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Add Coupons to Subscription
       tags:
@@ -17847,7 +17834,7 @@ paths:
                     - COUPON_2
   "/subscriptions/{subscription_id}/remove_coupon.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     delete:
       summary: Remove Coupon from Subscription
       tags:
@@ -20641,7 +20628,7 @@ paths:
         - $ref: "../components/parameters/per-page.yaml"
   "/subscriptions/{subscription_id}/activate.json":
     parameters:
-      - $ref: "#/components/parameters/subscription-id-required-path"
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     put:
       summary: Activate Subscription
       tags:
@@ -21257,14 +21244,6 @@ servers:
 security:
   - BasicAuth: []
 components:
-  parameters:
-    subscription-id-required-path:
-      name: subscription_id
-      in: path
-      description: The Chargify id of the subscription
-      schema:
-        type: integer
-      required: true
   schemas:
     Activate-Subscription-Request:
       title: Activate Subscription Request
@@ -23032,139 +23011,6 @@ components:
       properties:
         subscription_preview:
           $ref: "#/components/schemas/Subscription-Preview"
-    Update-Subscription:
-      title: Update Subscription
-      type: object
-      properties:
-        credit_card_attributes:
-          type: object
-          properties:
-            full_number:
-              type: string
-            expiration_month:
-              type: string
-            expiration_year:
-              type: string
-        product_handle:
-          type: string
-          description: Set to the handle of a different product to change the subscription's product
-        product_id:
-          type: integer
-          description: Set to the id of a different product to change the subscription's product
-        product_change_delayed:
-          type: boolean
-          default: false
-        next_product_id:
-          type: string
-          description: Set to an empty string to cancel a delayed product change.
-        next_product_price_point_id:
-          type: string
-        snap_day:
-          type:
-            - string
-            - integer
-          minimum: 1
-          maximum: 28
-          enum:
-            - end
-          description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
-        next_billing_at:
-          type: string
-        payment_collection_method:
-          type: string
-        receives_invoice_emails:
-          type: boolean
-        net_terms:
-          type:
-            - string
-            - integer
-        stored_credential_transaction_id:
-          type: integer
-        reference:
-          type: string
-        custom_price:
-          $ref: "../components/schemas/Subscription-Custom-Price.yaml"
-        components:
-          type: array
-          description: (Optional) An array of component ids and custom prices to be added to the subscription.
-          items:
-            type: object
-            properties:
-              component_id:
-                type: integer
-              custom_price:
-                type: object
-                description: Create or update custom pricing unique to the subscription
-                properties:
-                  pricing_scheme:
-                    type: string
-                    enum:
-                      - stairstep
-                      - volume
-                      - per_unit
-                      - tiered
-                    description: Omit for On/Off components
-                  prices:
-                    type: array
-                    description: On/off components only need one price bracket starting at 1
-                    items:
-                      type: object
-                      properties:
-                        unit_price:
-                          type: string
-                        starting_quantity:
-                          type: string
-                        ending_quantity:
-                          type:
-                            - string
-                            - "null"
-        dunning_communication_delay_enabled:
-          type:
-            - boolean
-            - "null"
-          default: false
-          description: "Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute."
-        dunning_communication_delay_time_zone:
-          type:
-            - string
-            - "null"
-          example: '"Eastern Time (US & Canada)"'
-          description: Time zone for the Dunning Communication Delay feature.
-    Update-Subscription-Request:
-      title: Update Subscription Request
-      type: object
-      properties:
-        subscription:
-          $ref: "#/components/schemas/Update-Subscription"
-      required:
-        - subscription
-    Override-Subscription:
-      title: Override Subscription
-      type: object
-      properties:
-        activated_at:
-          type: string
-          description: Can be used to record an external signup date. Chargify uses this field to record when a subscription first goes active (either at signup or at trial end)
-        canceled_at:
-          type: string
-          description: "Can be used to record an external cancellation date. Chargify sets this field automatically when a subscription is canceled, whether by request or via dunning."
-        cancellation_message:
-          type: string
-          description: Can be used to record a reason for the original cancellation.
-        expires_at:
-          type: string
-          description: Can be used to record an external expiration date. Chargify sets this field automatically when a subscription expires (ceases billing) after a prescribed amount of time.
-        current_period_starts_at:
-          type: string
-          description: "Can only be used when a subscription is unbilled, which happens when a future initial billing date is passed at subscription creation. The value passed must be before the current date and time. Allows you to set when the period started so mid period component allocations have the correct proration."
-    Override-Subscription-Request:
-      title: Override Subscription Request
-      type: object
-      properties:
-        subscription:
-          $ref: "#/components/schemas/Override-Subscription"
-      required:
-        - subscription
     Subscription-MRR:
       description: ""
       type: object
