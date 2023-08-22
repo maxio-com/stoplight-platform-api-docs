@@ -1,0 +1,23 @@
+title: Billing Manifest
+type: object
+properties:
+  line_items:
+    type: array
+    items:
+      $ref: "./Billing-Manifest-Item.yaml"
+  total_in_cents:
+    type: integer
+  total_discount_in_cents:
+    type: integer
+  total_tax_in_cents:
+    type: integer
+  subtotal_in_cents:
+    type: integer
+  start_date:
+    type: string
+  end_date:
+    type: string
+  period_type:
+    type: string
+  existing_balance_in_cents:
+    type: integer

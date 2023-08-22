@@ -16852,7 +16852,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subscription-Preview-Response"
+                $ref: "../components/schemas/Subscription-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -20819,45 +20819,6 @@ components:
           type: array
           items:
             type: string
-    Billing-Manifest:
-      title: Billing Manifest
-      type: object
-      properties:
-        line_items:
-          type: array
-          items:
-            type: object
-            properties:
-              transaction_type:
-                type: string
-              kind:
-                type: string
-              amount_in_cents:
-                type: integer
-              memo:
-                type: string
-              discount_amount_in_cents:
-                type: integer
-              taxable_amount_in_cents:
-                type: integer
-              component_id:
-                type: integer
-        total_in_cents:
-          type: integer
-        total_discount_in_cents:
-          type: integer
-        total_tax_in_cents:
-          type: integer
-        subtotal_in_cents:
-          type: integer
-        start_date:
-          type: string
-        end_date:
-          type: string
-        period_type:
-          type: string
-        existing_balance_in_cents:
-          type: integer
     Credit-Note:
       title: Credit Note
       type: object
@@ -21939,20 +21900,6 @@ components:
               metadatum_id:
                 type: number
         public_url: {}
-    Subscription-Preview:
-      title: Subscription Preview
-      type: object
-      properties:
-        current_billing_manifest:
-          $ref: "#/components/schemas/Billing-Manifest"
-        next_billing_manifest:
-          $ref: "#/components/schemas/Billing-Manifest"
-    Subscription-Preview-Response:
-      title: Subscription Preview Response
-      type: object
-      properties:
-        subscription_preview:
-          $ref: "#/components/schemas/Subscription-Preview"
     Subscription-MRR:
       description: ""
       type: object
