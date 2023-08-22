@@ -17382,7 +17382,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Add-Coupons-Request"
+              $ref: "../components/schemas/Add-Coupons-Request.yaml"
             examples:
               Example:
                 value:
@@ -17435,12 +17435,7 @@ paths:
           description: The coupon code
   "/subscriptions/{subscription_id}/proforma_invoices.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_id
-        in: path
-        required: true
-        description: The Chargify id of the subscription
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Create Proforma Invoice
       tags:
@@ -20811,14 +20806,6 @@ components:
             - boolean
             - "null"
           description: "You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)"
-    Add-Coupons-Request:
-      title: Add Coupons Request
-      type: object
-      properties:
-        codes:
-          type: array
-          items:
-            type: string
     Credit-Note:
       title: Credit Note
       type: object
