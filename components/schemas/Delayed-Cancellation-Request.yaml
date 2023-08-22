@@ -1,7 +1,0 @@
-title: Delayed Cancellation Request
-type: object
-properties:
-  subscription:
-    $ref: "./Delayed-Cancellation-Options.yaml"
-required:
-  - subscription
