@@ -1,6 +1,7 @@
 title: Component Custom Price
 type: object
-description: Used in place of `price_point_id` to define a custom price point unique to the subscription
+description: |-
+  Create or update custom pricing unique to the subscription. Used in place of `price_point_id`.
 properties:
   pricing_scheme:
     $ref: "./Pricing-Scheme.yaml"

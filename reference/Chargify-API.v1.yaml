@@ -7152,7 +7152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
               examples: {}
       operationId: refundInvoice
       description: |-
@@ -7272,7 +7272,7 @@ paths:
                   invoices:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Invoice"
+                      $ref: "../components/schemas/Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -7694,7 +7694,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -7855,7 +7855,7 @@ paths:
                         timestamp:
                           type: string
                         invoice:
-                          $ref: "#/components/schemas/Invoice"
+                          $ref: "../components/schemas/Invoice.yaml"
                   page:
                     type: integer
                   per_page:
@@ -8229,7 +8229,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
       operationId: recordPaymentForInvoice
       description: |-
         This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
@@ -9117,7 +9117,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
         "404":
           description: Not Found
           content:
@@ -9172,7 +9172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
         "404":
           description: Not Found
           content:
@@ -9240,7 +9240,7 @@ paths:
                   invoices:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Invoice"
+                      $ref: "../components/schemas/Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -14404,63 +14404,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  renewal_preview:
-                    type: object
-                    properties:
-                      next_assessment_at:
-                        type: string
-                        description: The timestamp for the subscription’s next renewal
-                      subtotal_in_cents:
-                        type: integer
-                        description: "An integer representing the amount of the total pre-tax, pre-discount charges that will be assessed at the next renewal"
-                      total_tax_in_cents:
-                        type: integer
-                        description: An integer representing the total tax charges that will be assessed at the next renewal
-                      total_discount_in_cents:
-                        type: integer
-                        description: An integer representing the amount of the coupon discounts that will be applied to the next renewal
-                      total_in_cents:
-                        type: integer
-                        description: "An integer representing the total amount owed, less any discounts, that will be assessed at the next renewal"
-                      existing_balance_in_cents:
-                        type: integer
-                        description: An integer representing the amount of the subscription’s current balance
-                      total_amount_due_in_cents:
-                        type: integer
-                        description: An integer representing the existing_balance_in_cents plus the total_in_cents
-                      uncalculated_taxes:
-                        type: boolean
-                        description: A boolean indicating whether or not additional taxes will be calculated at the time of renewal. This will be true if you are using Avalara and the address of the subscription is in one of your defined taxable regions.
-                      line_items:
-                        type: array
-                        description: An array of objects representing the individual transactions that will be created at the next renewal
-                        items:
-                          type: object
-                          properties:
-                            transaction_type:
-                              type: string
-                            kind:
-                              type: string
-                            amount_in_cents:
-                              type: integer
-                            memo:
-                              type: string
-                            discount_amount_in_cents:
-                              type: integer
-                            taxable_amount_in_cents:
-                              type: integer
-                            product_id:
-                              type: integer
-                            component_id:
-                              type: integer
-                            component_handle:
-                              type: string
-                            component_name:
-                              type: string
-                            product_handle:
-                              type: string
+                $ref: "../components/schemas/Renewal-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14520,35 +14464,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                components:
-                  type: array
-                  description: "An optional array of component definitions to preview. Providing any component definitions here will override the actual components on the subscription (and their quantities), and the billing preview will contain only these components (in addition to any product base fees)."
-                  items:
-                    type: object
-                    properties:
-                      component_id:
-                        type:
-                          - string
-                          - integer
-                        description: "Either the component's Chargify id or its handle prefixed with `handle:`"
-                      quantity:
-                        type: integer
-                        description: |-
-                          The quantity for which you wish to preview billing. This is useful if you want to preview a predicted, higher usage value than is currently present on the subscription.
-
-                          This quantity represents:
-
-                          - Whether or not an on/off component is enabled - use 0 for disabled or 1 for enabled
-                          - The desired allocated_quantity for a quantity-based component
-                          - The desired unit_balance for a metered component
-                          - The desired metric quantity for an events-based component
-                      price_point_id:
-                        type:
-                          - string
-                          - integer
-                        description: "Either the component price point's Chargify id or its handle prefixed with `handle:`"
+              $ref: "../components/schemas/Renewal-Preview-Request.yaml"
             examples:
               Example:
                 value:
@@ -14564,11 +14480,7 @@ paths:
         description: ""
   "/subscriptions/{subscription_id}/invoices.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Create Invoice
       tags:
@@ -14579,10 +14491,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invoice:
-                    $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14673,7 +14582,6 @@ paths:
                       refunds: []
                       custom_fields: []
                       public_url: "https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x"
-          headers: {}
         "201":
           description: Created
         "401":
@@ -14837,173 +14745,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                invoice:
-                  type: object
-                  properties:
-                    line_items:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          title:
-                            type: string
-                          quantity:
-                            type:
-                              - number
-                              - string
-                            description: "The quantity can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place."
-                            minimum: 0
-                          unit_price:
-                            description: "The unit_price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with more than 8 decimal places, we will round it down to the 8th decimal place."
-                            type:
-                              - number
-                              - string
-                          taxable:
-                            type: boolean
-                            description: |-
-                              Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes.
-
-                              If using Avalara, a tax_code parameter must also be sent.
-                          tax_code:
-                            type: string
-                          period_range_start:
-                            type: string
-                            description: YYYY-MM-DD
-                          period_range_end:
-                            type: string
-                            description: YYYY-MM-DD
-                          product_id:
-                            type:
-                              - string
-                              - integer
-                            description: Product handle or product id.
-                          component_id:
-                            type:
-                              - string
-                              - integer
-                            description: Component handle or component id.
-                          price_point_id:
-                            type:
-                              - string
-                              - integer
-                            description: Price point handle or id. For component.
-                          product_price_point_id:
-                            type:
-                              - string
-                              - integer
-                          description:
-                            type: string
-                            maxLength: 255
-                    issue_date:
-                      type: string
-                    net_terms:
-                      type: integer
-                      description: "By default, invoices will be created with a due date matching the date of invoice creation. If a different due date is desired, the net_terms parameter can be sent indicating the number of days in advance the due date should be."
-                    payment_instructions:
-                      type: string
-                    memo:
-                      type: string
-                      description: A custom memo can be sent to override the site's default.
-                    seller_address:
-                      type: object
-                      description: Overrides the defaults for the site
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        phone:
-                          type: string
-                        address:
-                          type: string
-                        address_2:
-                          type: string
-                        city:
-                          type: string
-                        state:
-                          type: string
-                        zip:
-                          type: string
-                        country:
-                          type: string
-                    billing_address:
-                      type: object
-                      description: Overrides the default for the customer
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        phone:
-                          type: string
-                        address:
-                          type: string
-                        address_2:
-                          type: string
-                        city:
-                          type: string
-                        state:
-                          type: string
-                        zip:
-                          type: string
-                        country:
-                          type: string
-                    shipping_address:
-                      type: object
-                      description: Overrides the default for the customer
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        phone:
-                          type: string
-                        address:
-                          type: string
-                        address_2:
-                          type: string
-                        city:
-                          type: string
-                        state:
-                          type: string
-                        zip:
-                          type: string
-                        country:
-                          type: string
-                    coupons:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          code:
-                            type: string
-                          percentage:
-                            type:
-                              - string
-                              - number
-                            maximum: 100
-                            example: 50
-                          amount:
-                            type:
-                              - string
-                              - number
-                            minimum: 0
-                          description:
-                            type: string
-                            maxLength: 255
-                          product_family_id:
-                            type:
-                              - string
-                              - integer
-                          compounding_strategy:
-                            type:
-                              - string
-                    status:
-                      type: string
-                      example: draft
-                      default: open
+              $ref: "../components/schemas/Create-Invoice-Request.yaml"
             examples:
               Minimal Invoice (Relies on site defaults):
                 value:
@@ -15059,11 +14801,7 @@ paths:
         description: ""
   "/subscriptions/{subscription_id}/prepayments.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Create Prepayment
       tags:
@@ -15108,7 +14846,7 @@ paths:
       description: |
         ## Create Prepayment
 
-        In order to specify a prepayment made against a subcription, specify the `amount, memo, details, method`.
+        In order to specify a prepayment made against a subscription, specify the `amount, memo, details, method`.
 
         When the `method` specified is `"credit_card_on_file"`, the prepayment amount will be collected using the default credit card payment profile and applied to the prepayment account balance.  This is especially useful for manual replenishment of prepaid subscriptions.
 
@@ -15199,11 +14937,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
-            type: string
-            enum:
-              - created_at
-              - application_at
-            example: created_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: "filter[date_field]"
           description:
@@ -18355,7 +18089,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -18368,11 +18102,11 @@ paths:
                     issue_date: in e
                     due_date: magna elit tempor occaecat amet
                     paid_date: consectetur elit culpa magna sint
-                    status: veniam in
+                    status: open
                     collection_method: Excepteur
                     payment_instructions: enim officia
                     currency: dolore
-                    consolidation_level: exercitation officia labore
+                    consolidation_level: none
                     product_name: occaecat veniam culpa
                     product_family_name: qui commodo ea dolore cillum
                     seller:
@@ -19773,7 +19507,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
         "403":
           description: Forbidden
         "404":
@@ -19872,7 +19606,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
               examples: {}
         "403":
           description: Forbidden
@@ -19897,7 +19631,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
         "403":
           description: Forbidden
         "404":
@@ -20306,7 +20040,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Invoice"
+                $ref: "../components/schemas/Invoice.yaml"
         "401":
           description: Unauthorized
         "404":
@@ -20992,7 +20726,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Invoice"
+                  $ref: "../components/schemas/Invoice.yaml"
         "404":
           description: Not Found
       parameters:
@@ -21649,528 +21383,6 @@ components:
               number:
                 type: string
                 description: The number of the invoice serving as an origin invoice.
-    Invoice:
-      title: Invoice
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters.
-        site_id:
-          type: integer
-          description: ID of the site to which the invoice belongs.
-        customer_id:
-          type: integer
-          description: ID of the customer to which the invoice belongs.
-        subscription_id:
-          type: integer
-          description: ID of the subscription that generated the invoice.
-        number:
-          type: string
-          description: |-
-            A unique, identifying string that appears on the invoice and in places the invoice is referenced.
-
-            While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
-        sequence_number:
-          type: integer
-          description: A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices.
-        issue_date:
-          type: string
-          description: |-
-            Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.
-
-            The format is `"YYYY-MM-DD"`.
-        due_date:
-          type: string
-          description: |-
-            Date the invoice is due.
-
-            The format is `"YYYY-MM-DD"`.
-        paid_date:
-          type:
-            - string
-            - "null"
-          description: |-
-            Date the invoice became fully paid.
-
-            If partial payments are applied to the invoice, this date will not be present until payment has been made in full.
-
-            The format is `"YYYY-MM-DD"`.
-        status:
-          type: string
-          description: |-
-            Current status of the invoice.  One of:
-
-            * "draft"
-            * "pending"
-            * "open"
-            * "paid"
-            * "voided"
-            * "canceled"
-
-            See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more.
-        collection_method:
-          type: string
-          description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'
-        payment_instructions:
-          type: string
-          description: "A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant."
-        currency:
-          type: string
-          description: The ISO 4217 currency code (3 character string) representing the currency of invoice transaction.
-        consolidation_level:
-          type: string
-          description: |-
-            Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:
-
-            * "none": A normal invoice with no consolidation.
-            * "child": An invoice segment which has been combined into a consolidated invoice.
-            * "parent": A consolidated invoice, whose contents are composed of invoice segments.
-
-            "Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.
-
-            See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835).
-        parent_invoice_uid:
-          type:
-            - "null"
-            - string
-          description: "For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice."
-        parent_invoice_number:
-          type:
-            - "null"
-            - integer
-          description: "For invoices with `consolidation_level` of `child`, this specifies the number of the parent (consolidated) invoice."
-        group_primary_subscription_id:
-          type:
-            - "null"
-            - integer
-          description: "For invoices with `consolidation_level` of `parent`, this specifies the ID of the subscription which was the primary subscription of the subscription group that generated the invoice."
-        product_name:
-          type: string
-          description: The name of the product subscribed when the invoice was generated.
-        product_family_name:
-          type: string
-          description: The name of the product family subscribed when the invoice was generated.
-        seller:
-          type: object
-          description: Information about the seller (merchant) listed on the masthead of the invoice.
-          properties:
-            name:
-              type: string
-            address:
-              type: object
-              properties:
-                street:
-                  type:
-                    - "null"
-                    - string
-                line2:
-                  type:
-                    - "null"
-                    - string
-                city:
-                  type:
-                    - "null"
-                    - string
-                state:
-                  type:
-                    - "null"
-                    - string
-                zip:
-                  type:
-                    - "null"
-                    - string
-                country:
-                  type:
-                    - "null"
-                    - string
-            phone:
-              type: string
-        customer:
-          type: object
-          description: Information about the customer who is owner or recipient the invoiced subscription.
-          properties:
-            chargify_id:
-              type: integer
-            first_name:
-              type: string
-            last_name:
-              type: string
-            organization:
-              type:
-                - "null"
-                - string
-            email:
-              type: string
-        memo:
-          type: string
-          description: The memo printed on invoices of any collection type.  This message is in control of the merchant.
-        billing_address:
-          type: object
-          description: The invoice billing address.
-          properties:
-            street:
-              type:
-                - string
-                - "null"
-            line2:
-              type:
-                - string
-                - "null"
-            city:
-              type:
-                - string
-                - "null"
-            state:
-              type:
-                - string
-                - "null"
-            zip:
-              type:
-                - string
-                - "null"
-            country:
-              type:
-                - string
-                - "null"
-        shipping_address:
-          type: object
-          description: The invoice shipping address.
-          properties:
-            street:
-              type:
-                - string
-                - "null"
-            line2:
-              type:
-                - string
-                - "null"
-            city:
-              type:
-                - string
-                - "null"
-            state:
-              type:
-                - string
-                - "null"
-            zip:
-              type:
-                - string
-                - "null"
-            country:
-              type:
-                - string
-                - "null"
-        subtotal_amount:
-          type: string
-          description: "Subtotal of the invoice, which is the sum of all line items before discounts or taxes."
-        discount_amount:
-          type: string
-          description: Total discount applied to the invoice.
-        tax_amount:
-          type: string
-          description: Total tax on the invoice.
-        total_amount:
-          type: string
-          description: "The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.'"
-        credit_amount:
-          type: string
-          description: |-
-            The amount of credit (from credit notes) applied to this invoice.
-
-            Credits offset the amount due from the customer.
-        refund_amount:
-          type: string
-        paid_amount:
-          type: string
-          description: The amount paid on the invoice by the customer.
-        due_amount:
-          type: string
-          description: "Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`."
-        line_items:
-          type: array
-          description: Line items on the invoice.
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                description: Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists.
-              title:
-                type: string
-                description: A short descriptor for the charge or item represented by this line.
-              description:
-                type: string
-                description: |-
-                  Detailed description for the charge or item represented by this line.  May include proration details in plain text.
-
-                  Note: this string may contain line breaks that are hints for the best display format on the invoice.
-              quantity:
-                type: string
-                description: |-
-                  The quantity or count of units billed by the line item.
-
-                  This is a decimal number represented as a string. (See "About Decimal Numbers".)
-              unit_price:
-                type: string
-                description: |-
-                  The price per unit for the line item.
-
-                  When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
-              subtotal_amount:
-                type: string
-                description: "The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount)."
-              discount_amount:
-                type: string
-                description: |-
-                  The approximate discount applied to just this line.
-
-                  The value is approximated in cases where rounding errors make it difficult to apportion exactly a total discount among many lines. Several lines may have been summed prior to applying the discount to arrive at `discount_amount` for the invoice - backing that out to the discount on a single line may introduce rounding or precision errors.
-              tax_amount:
-                type: string
-                description: |-
-                  The approximate tax applied to just this line.
-
-                  The value is approximated in cases where rounding errors make it difficult to apportion exactly a total tax among many lines. Several lines may have been summed prior to applying the tax rate to arrive at `tax_amount` for the invoice - backing that out to the tax on a single line may introduce rounding or precision errors.
-              total_amount:
-                type: string
-                description: |-
-                  The non-canonical total amount for the line.
-
-                  `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
-              tiered_unit_price:
-                type: boolean
-                description: "When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units."
-              period_range_start:
-                type: string
-                description: |-
-                  Start date for the period covered by this line. The format is `"YYYY-MM-DD"`.
-
-                  * For periodic charges paid in advance, this date will match the billing date, and the end date will be in the future.
-                  * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the previous billing, and the end date will be the current billing date.
-                  * For non-periodic charges, this date and the end date will match.
-              period_range_end:
-                type: string
-                description: |-
-                  End date for the period covered by this line. The format is `"YYYY-MM-DD"`.
-
-                  * For periodic charges paid in advance, this date will match the next (future) billing date.
-                  * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the current billing date.
-                  * For non-periodic charges, this date and the start date will match.
-              product_id:
-                type:
-                  - integer
-                  - "null"
-                description: |-
-                  The ID of the product subscribed when the charge was made.
-
-                  This may be set even for component charges, so true product-only (non-component) charges will also have a nil `component_id`.
-              product_version:
-                type:
-                  - integer
-                  - "null"
-                description: The version of the product subscribed when the charge was made.
-              component_id:
-                type:
-                  - integer
-                  - "null"
-                description: The ID of the component being billed. Will be `nil` for non-component charges.
-              price_point_id:
-                type:
-                  - integer
-                  - "null"
-                description: The price point ID of the component being billed. Will be `nil` for non-component charges.
-              product_price_point_id:
-                type:
-                  - "null"
-                  - integer
-                description: The price point ID of the line item's product
-              custom_item:
-                type: boolean
-        discounts:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              title:
-                type: string
-              code:
-                type: string
-              source_type:
-                type: string
-              source_id:
-                type: integer
-              discount_type:
-                type: string
-              percentage:
-                type: string
-              eligible_amount:
-                type: string
-              discount_amount:
-                type: string
-              line_item_breakouts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uid:
-                      type: string
-                    eligible_amount:
-                      type: string
-                    discount_amount:
-                      type: string
-        taxes:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              title:
-                type: string
-              source_type:
-                type: string
-              source_id:
-                type: integer
-              percentage:
-                type: string
-              taxable_amount:
-                type: string
-              tax_amount:
-                type: string
-              line_item_breakouts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uid:
-                      type: string
-                    taxable_amount:
-                      type: string
-                    tax_amount:
-                      type: string
-        credits:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              credit_note_number:
-                type: string
-              credit_note_uid:
-                type: string
-              transaction_time:
-                type: string
-              memo:
-                type: string
-              original_amount:
-                type: string
-              applied_amount:
-                type: string
-        refunds:
-          type: array
-          items:
-            type: object
-            properties:
-              transaction_id:
-                type: integer
-              payment_id:
-                type: integer
-              memo:
-                type: string
-              original_amount:
-                type: string
-              applied_amount:
-                type: string
-              gateway_transaction_id:
-                type:
-                  - string
-                  - "null"
-                description: The transaction ID for the refund as returned from the payment gateway
-        payments:
-          type: array
-          items:
-            type: object
-            properties:
-              transaction_time:
-                type: string
-              memo:
-                type: string
-              original_amount:
-                type: string
-              applied_amount:
-                type: string
-              payment_method:
-                type: object
-                properties:
-                  details:
-                    type: string
-                  kind:
-                    type: string
-                  memo:
-                    type: string
-                  type:
-                    type: string
-                  card_brand:
-                    type: string
-                  card_expiration:
-                    type: string
-                  last_four:
-                    type:
-                      - string
-                      - "null"
-                  masked_card_number:
-                    type: string
-              transaction_id:
-                type: integer
-              prepayment:
-                type: boolean
-              gateway_handle:
-                type:
-                  - string
-                  - "null"
-              gateway_used:
-                type: string
-              gateway_transaction_id:
-                type:
-                  - string
-                  - "null"
-                description: The transaction ID for the payment as returned from the payment gateway
-        custom_fields:
-          type: array
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-              value:
-                type: string
-              owner_id:
-                type: number
-              owner_type:
-                type: string
-        public_url:
-          type: string
-          description: The public URL of the invoice
-        previous_balance_data:
-          type: object
-          properties:
-            capture_date:
-              type: string
-            invoices:
-              type: array
-              items:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  number:
-                    type: string
-                  outstanding_amount:
-                    type: string
     Offer:
       title: Offer
       type: object
