@@ -1,0 +1,8 @@
+title: Void Advance Invoice
+type: object
+required:
+  - reason
+properties:
+  reason:
+    type: string
+    minLength: 1
