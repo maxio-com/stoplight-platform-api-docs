@@ -1,7 +1,8 @@
 title: Card Type
 type: string
-description: "(Optional, used only for Subscription Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI."
+description: "The type of card used."
 enum:
+  - bogus
   - visa
   - master
   - discover

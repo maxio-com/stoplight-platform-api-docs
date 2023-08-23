@@ -1,0 +1,15 @@
+title: Subscription Group
+type: object
+properties:
+  customer_id:
+    type: integer
+  payment_profile:
+    $ref: "./Group-Payment-Profile.yaml"
+  payment_collection_method:
+    type: string
+  subscription_ids:
+    type: array
+    items:
+      type: integer
+  created_at:
+    type: string

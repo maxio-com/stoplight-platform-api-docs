@@ -1,0 +1,9 @@
+title: Invoice Previous Balance
+type: object
+properties:
+  capture_date:
+    type: string
+  invoices:
+    type: array
+    items:
+      $ref: "./Invoice-Balance-Item.yaml"
