@@ -21,6 +21,7 @@ properties:
     description: "The full credit card number (string representation, i.e. 5424000000000015)"
   card_type:
     $ref: "./Card-Type.yaml"
+    description: "(Optional, used only for Subscription Import) If you know the card type (i.e. Visa, MC, etc) you may supply it here so that we may display the card type in the UI."
   expiration_month:
     type:
       - integer

@@ -1,4 +1,4 @@
-description: ""
+title: Proforma Invoice Preview
 type: object
 properties:
   uid:
