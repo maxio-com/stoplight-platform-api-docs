@@ -17093,7 +17093,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "403":
           description: Forbidden
         "404":
@@ -17127,7 +17127,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "403":
           description: Forbidden
         "404":
@@ -17352,7 +17352,7 @@ paths:
                 type: string
               examples:
                 Example:
-                  value: Coupon succesfully removed
+                  value: Coupon successfully removed
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -17393,7 +17393,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "403":
           description: Forbidden
         "422":
@@ -17433,7 +17433,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Proforma-Invoice"
+                  $ref: "../components/schemas/Proforma-Invoice.yaml"
       operationId: listProformaInvoices
       description: "By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
       parameters:
@@ -17448,13 +17448,7 @@ paths:
           name: end_date
           description: "The ending date range for the invoice's Due Date, in the YYYY-MM-DD format."
         - schema:
-            type: string
-            enum:
-              - draft
-              - open
-              - paid
-              - pending
-              - voided
+            $ref: "../components/schemas/Invoice-Status.yaml"
           in: query
           name: status
           description: "The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided"
@@ -17523,7 +17517,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "403":
           description: Forbidden
         "404":
@@ -17574,11 +17568,7 @@ paths:
         description: ""
   "/subscriptions/{subscription_id}/proforma_invoices/preview.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Preview Proforma Invoice
       tags:
@@ -17589,7 +17579,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice-Preview"
+                $ref: "../components/schemas/Proforma-Invoice-Preview.yaml"
         "403":
           description: Forbidden
         "404":
@@ -19257,11 +19247,7 @@ paths:
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
   "/subscriptions/{subscription_id}/advance_invoice/issue.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Issue advance invoice
       tags:
@@ -19342,25 +19328,14 @@ paths:
         content:
           application/json:
             schema:
-              description: ""
-              type: object
-              x-examples:
-                example-1:
-                  force: true
-              properties:
-                force:
-                  type: boolean
+              $ref: "../components/schemas/Issue-Advance-Invoice-Request.yaml"
             examples:
               Force generation:
                 value:
                   force: true
   "/subscriptions/{subscription_id}/advance_invoice.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     get:
       summary: Read advance invoice
       tags:
@@ -19381,11 +19356,7 @@ paths:
       description: "Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle."
   "/subscriptions/{subscription_id}/advance_invoice/void.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Void advance invoice
       tags:
@@ -19409,23 +19380,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ""
-              type: object
-              x-examples:
-                example-1:
-                  void:
-                    reason: because
-              properties:
-                void:
-                  type: object
-                  required:
-                    - reason
-                  properties:
-                    reason:
-                      type: string
-                      minLength: 1
-              required:
-                - void
+              $ref: "../components/schemas/Void-Advance-Invoice-Request.yaml"
   /subscriptions_mrr.json:
     get:
       summary: List MRR per subscription
@@ -19529,11 +19484,7 @@ paths:
             Use in query `direction=desc`."
   "/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
           type: string
         name: prepayment_id
@@ -19629,38 +19580,7 @@ paths:
         content:
           application/json:
             schema:
-              description: ""
-              type: object
-              x-examples:
-                example-1:
-                  refund:
-                    amount_in_cents: 100
-                    memo: my memo
-                    external: true
-              properties:
-                refund:
-                  type: object
-                  required:
-                    - amount_in_cents
-                    - amount
-                    - memo
-                  properties:
-                    amount_in_cents:
-                      type: number
-                      description: "`amount` is not required if you pass `amount_in_cents`."
-                    amount:
-                      type:
-                        - string
-                        - number
-                      description: "`amount_in_cents` is not required if you pass `amount`."
-                    memo:
-                      type: string
-                      minLength: 1
-                    external:
-                      type: boolean
-                      description: "Specify the type of refund you wish to initiate. When the prepayment is external, the `external` flag is optional. But if the prepayment was made through a payment profile, the `external` flag is required."
-              required:
-                - refund
+              $ref: "../components/schemas/Refund-Prepayment-Request.yaml"
   /products.json:
     get:
       summary: List Products
@@ -20139,7 +20059,6 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Subscription-Response.yaml"
-              examples: {}
         "400":
           description: Bad Request
           content:
@@ -20165,8 +20084,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Activate-Subscription-Request"
-        description: ""
+              $ref: "../components/schemas/Activate-Subscription-Request.yaml"
       description: |
         Chargify offers the ability to activate awaiting signup and trialing subscriptions. This feature is only available on the Relationship Invoicing architecture. Subscriptions in a group may not be activated immediately.
 
@@ -20221,7 +20139,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Proforma-Invoice"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "400":
           description: Bad Request
           content:
@@ -20322,20 +20240,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                x-examples:
-                  example-1:
-                    proforma_invoice_preview:
-                      current_proforma_invoice: {}
-                      next_proforma_invoice: {}
-                properties:
-                  proforma_invoice_preview:
-                    type: object
-                    properties:
-                      current_proforma_invoice:
-                        type: object
-                      next_proforma_invoice:
-                        type: object
+                $ref: "../components/schemas/Signup-Proforma-Preview-Response.yaml"
         "400":
           description: Bad Request
           content:
@@ -20464,7 +20369,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Proforma-Invoice"
+                  $ref: "../components/schemas/Proforma-Invoice.yaml"
         "404":
           description: Not Found
   "/api_exports/invoices/{batch_id}/rows.json":
@@ -20690,11 +20595,7 @@ paths:
           description: Not Found
   "/subscriptions/{subscription_id}/request_payment_profiles_update.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
       summary: Send request payment update email
       tags:
@@ -20744,15 +20645,6 @@ security:
   - BasicAuth: []
 components:
   schemas:
-    Activate-Subscription-Request:
-      title: Activate Subscription Request
-      type: object
-      properties:
-        revert_on_failure:
-          type:
-            - boolean
-            - "null"
-          description: "You may choose how to handle the activation failure. `true` means do not change the subscription’s state and billing period. `false`  means to continue through with the activation and enter an end of life state. If this parameter is omitted or `null` is passed it will default to value set in the  site settings (default: `true`)"
     Credit-Note:
       title: Credit Note
       type: object
@@ -21079,675 +20971,6 @@ components:
               number:
                 type: string
                 description: The number of the invoice serving as an origin invoice.
-    Proforma-Invoice:
-      title: Proforma Invoice
-      type: object
-      properties:
-        uid:
-          type: string
-        site_id:
-          type: integer
-        customer_id:
-          type: integer
-        subscription_id:
-          type: integer
-        number:
-          type: integer
-        sequence_number:
-          type: integer
-        created_at:
-          type: string
-        delivery_date:
-          type: string
-        status:
-          type: string
-        collection_method:
-          type: string
-        payment_instructions:
-          type: string
-        currency:
-          type: string
-        consolidation_level:
-          type: string
-        product_name:
-          type: string
-        product_family_name:
-          type: string
-        role:
-          type: string
-        seller:
-          type: object
-          properties:
-            name:
-              type: string
-            address:
-              type: object
-              properties:
-                street:
-                  type: "null"
-                line2:
-                  type: "null"
-                city:
-                  type: "null"
-                state:
-                  type: "null"
-                zip:
-                  type: "null"
-                country:
-                  type: "null"
-            phone:
-              type: string
-        customer:
-          type: object
-          properties:
-            chargify_id:
-              type: integer
-            first_name:
-              type: string
-            last_name:
-              type: string
-            organization:
-              type: string
-            email:
-              type: string
-            vat_number:
-              type: "null"
-            reference:
-              type: "null"
-        memo:
-          type: string
-        billing_address:
-          type: object
-          properties:
-            street:
-              type: string
-            line2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            zip:
-              type: string
-            country:
-              type: string
-        shipping_address:
-          type: object
-          properties:
-            street:
-              type: string
-            line2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            zip:
-              type: string
-            country:
-              type: string
-        subtotal_amount:
-          type: string
-        discount_amount:
-          type: string
-        tax_amount:
-          type: string
-        total_amount:
-          type: string
-        credit_amount:
-          type: string
-        paid_amount:
-          type: string
-        refund_amount:
-          type: string
-        due_amount:
-          type: string
-        line_items:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              title:
-                type: string
-              description:
-                type: string
-              quantity:
-                type: string
-              unit_price:
-                type: string
-              subtotal_amount:
-                type: string
-              discount_amount:
-                type: string
-              tax_amount:
-                type: string
-              total_amount:
-                type: string
-              tiered_unit_price:
-                type: boolean
-              period_range_start:
-                type: string
-              period_range_end:
-                type: string
-              product_id:
-                type: integer
-              product_version:
-                type: integer
-              product_price_point_id:
-                type: integer
-              component_id:
-                type: "null"
-              price_point_id:
-                type: "null"
-        discounts:
-          type: array
-          items:
-            type: object
-        taxes:
-          type: array
-          items:
-            type: object
-        credits:
-          type: array
-          items:
-            type: object
-        payments:
-          type: array
-          items:
-            type: object
-        custom_fields:
-          type: array
-          items:
-            type: object
-        public_url:
-          type: string
-    Proforma-Invoice-Preview:
-      description: ""
-      type: object
-      x-examples:
-        example-1:
-          uid: pro_567wxy
-          site_id: 24
-          customer_id: 8
-          subscription_id: 7
-          number: null
-          sequence_number: null
-          created_at: "2022-01-19T12:25:02-05:00"
-          delivery_date: "2022-02-18"
-          status: draft
-          collection_method: automatic
-          payment_instructions: 'Please make checks payable to "Acme, Inc."'
-          currency: USD
-          consolidation_level: none
-          product_name: Professional Plan
-          product_family_name: Cloud Compute Servers
-          role: proforma_adhoc
-          seller:
-            name: "Acme, Inc."
-            address:
-              street: null
-              line2: null
-              city: null
-              state: null
-              zip: null
-              country: null
-            phone: 555-555-1234 x137
-          customer:
-            chargify_id: 8
-            first_name: Marty
-            last_name: McFly
-            organization: null
-            email: timetraveller1985@example.com
-            vat_number: null
-            reference: null
-          memo: "Thanks for your business! If you have any questions, please contact your account manager."
-          billing_address:
-            street: 200 Billing Rd.
-            line2: Suite 100
-            city: Needham
-            state: MA
-            zip: "02494"
-            country: US
-          shipping_address:
-            street: 100 Shipping St.
-            line2: Apt 200
-            city: Pleasantville
-            state: NC
-            zip: "12345"
-            country: US
-          subtotal_amount: "314.18"
-          discount_amount: "31.42"
-          tax_amount: "19.09"
-          total_amount: "301.85"
-          credit_amount: "50.0"
-          paid_amount: "50.0"
-          refund_amount: "0.0"
-          due_amount: "201.85"
-          line_items:
-            - uid: li_567wxy
-              title: Professional Plan
-              description: 02/18/2022 - 03/18/2022
-              quantity: "1.0"
-              unit_price: "299.0"
-              subtotal_amount: "299.0"
-              discount_amount: "29.9"
-              tax_amount: "18.16"
-              total_amount: "287.26"
-              tiered_unit_price: false
-              period_range_start: "2022-02-18"
-              period_range_end: "2022-03-18"
-              product_id: 138
-              product_version: null
-              product_price_point_id: 138
-              component_id: null
-              price_point_id: null
-            - uid: li_567wxy
-              title: IP Addresses
-              description: 02/18/2022 - 03/18/2022
-              quantity: "5.0"
-              unit_price: "2.0"
-              subtotal_amount: "10.0"
-              discount_amount: "1.0"
-              tax_amount: "0.61"
-              total_amount: "9.61"
-              tiered_unit_price: false
-              period_range_start: "2022-02-18"
-              period_range_end: "2022-03-18"
-              product_id: 138
-              product_version: null
-              product_price_point_id: 138
-              component_id: 121
-              price_point_id: 232
-            - uid: li_567wxy
-              title: Email Messages
-              description: 01/18/2022 - 02/18/2022
-              quantity: "20351.0"
-              unit_price: "0.00025453"
-              subtotal_amount: "5.18"
-              discount_amount: "0.52"
-              tax_amount: "0.31"
-              total_amount: "4.97"
-              tiered_unit_price: false
-              period_range_start: "2022-01-18"
-              period_range_end: "2022-02-18"
-              product_id: 138
-              product_version: null
-              product_price_point_id: 138
-              component_id: 120
-              price_point_id: 231
-          discounts:
-            - title: "Coupon: MULTI3 - Multi-service discount (10%)"
-              source_type: Coupon
-              discount_type: flat_amount
-              eligible_amount: "333.27"
-              discount_amount: "31.42"
-              line_item_breakouts:
-                - eligible_amount: "333.27"
-                  discount_amount: "31.42"
-          taxes:
-            - uid: tli_567wxy
-              title: NC Sales Tax
-              source_type: Tax
-              percentage: "6.75"
-              taxable_amount: "282.76"
-              tax_amount: "19.09"
-              line_item_breakouts:
-                - taxable_amount: "269.1"
-                  tax_amount: "18.16"
-                - taxable_amount: "9.0"
-                  tax_amount: "0.61"
-                - taxable_amount: "4.66"
-                  tax_amount: "0.31"
-          credits:
-            - uid: cn_9nv9kbkcv8bkv
-              memo: This credit amount is anticipated to apply when the invoice is generated
-              original_amount: "50.0"
-              applied_amount: "50.0"
-          payments:
-            - memo: This prepayment amount is anticipated to apply when the invoice is generated
-              original_amount: "50.0"
-              applied_amount: "50.0"
-              prepayment: true
-          custom_fields:
-            - owner_id: 7
-              owner_type: Subscription
-              name: Account Manager
-              value: Gerald Strickland
-              metadatum_id: 1
-            - owner_id: 7
-              owner_type: Subscription
-              name: Account Manager Phone
-              value: 555-555-9999 x807
-              metadatum_id: 2
-          public_url: null
-      properties:
-        uid:
-          type: string
-          minLength: 1
-        site_id:
-          type: number
-        customer_id:
-          type: number
-        subscription_id:
-          type: number
-        number: {}
-        sequence_number: {}
-        created_at:
-          type: string
-          minLength: 1
-        delivery_date:
-          type: string
-          minLength: 1
-        status:
-          type: string
-          minLength: 1
-        collection_method:
-          type: string
-          minLength: 1
-        payment_instructions:
-          type: string
-          minLength: 1
-        currency:
-          type: string
-          minLength: 1
-        consolidation_level:
-          type: string
-          minLength: 1
-        product_name:
-          type: string
-          minLength: 1
-        product_family_name:
-          type: string
-          minLength: 1
-        role:
-          type: string
-          minLength: 1
-        seller:
-          type: object
-          properties:
-            name:
-              type: string
-              minLength: 1
-            address:
-              type: object
-              properties:
-                street: {}
-                line2: {}
-                city: {}
-                state: {}
-                zip: {}
-                country: {}
-            phone:
-              type: string
-              minLength: 1
-        customer:
-          type: object
-          properties:
-            chargify_id:
-              type: number
-            first_name:
-              type: string
-              minLength: 1
-            last_name:
-              type: string
-              minLength: 1
-            organization: {}
-            email:
-              type: string
-              minLength: 1
-            vat_number: {}
-            reference: {}
-        memo:
-          type: string
-          minLength: 1
-        billing_address:
-          type: object
-          properties:
-            street:
-              type: string
-              minLength: 1
-            line2:
-              type: string
-              minLength: 1
-            city:
-              type: string
-              minLength: 1
-            state:
-              type: string
-              minLength: 1
-            zip:
-              type: string
-              minLength: 1
-            country:
-              type: string
-              minLength: 1
-        shipping_address:
-          type: object
-          properties:
-            street:
-              type: string
-              minLength: 1
-            line2:
-              type: string
-              minLength: 1
-            city:
-              type: string
-              minLength: 1
-            state:
-              type: string
-              minLength: 1
-            zip:
-              type: string
-              minLength: 1
-            country:
-              type: string
-              minLength: 1
-        subtotal_amount:
-          type: string
-          minLength: 1
-        discount_amount:
-          type: string
-          minLength: 1
-        tax_amount:
-          type: string
-          minLength: 1
-        total_amount:
-          type: string
-          minLength: 1
-        credit_amount:
-          type: string
-          minLength: 1
-        paid_amount:
-          type: string
-          minLength: 1
-        refund_amount:
-          type: string
-          minLength: 1
-        due_amount:
-          type: string
-          minLength: 1
-        line_items:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                minLength: 1
-              title:
-                type: string
-                minLength: 1
-              description:
-                type: string
-                minLength: 1
-              quantity:
-                type: string
-                minLength: 1
-              unit_price:
-                type: string
-                minLength: 1
-              subtotal_amount:
-                type: string
-                minLength: 1
-              discount_amount:
-                type: string
-                minLength: 1
-              tax_amount:
-                type: string
-                minLength: 1
-              total_amount:
-                type: string
-                minLength: 1
-              tiered_unit_price:
-                type: boolean
-              period_range_start:
-                type: string
-                minLength: 1
-              period_range_end:
-                type: string
-                minLength: 1
-              product_id:
-                type: number
-              product_version: {}
-              product_price_point_id:
-                type: number
-              component_id: {}
-              price_point_id: {}
-        discounts:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              title:
-                type: string
-                minLength: 1
-              source_type:
-                type: string
-                minLength: 1
-              discount_type:
-                type: string
-                minLength: 1
-              eligible_amount:
-                type: string
-                minLength: 1
-              discount_amount:
-                type: string
-                minLength: 1
-              line_item_breakouts:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    eligible_amount:
-                      type: string
-                      minLength: 1
-                    discount_amount:
-                      type: string
-                      minLength: 1
-        taxes:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                minLength: 1
-              title:
-                type: string
-                minLength: 1
-              source_type:
-                type: string
-                minLength: 1
-              percentage:
-                type: string
-                minLength: 1
-              taxable_amount:
-                type: string
-                minLength: 1
-              tax_amount:
-                type: string
-                minLength: 1
-              line_item_breakouts:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    taxable_amount:
-                      type: string
-                      minLength: 1
-                    tax_amount:
-                      type: string
-                      minLength: 1
-        credits:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                minLength: 1
-              memo:
-                type: string
-                minLength: 1
-              original_amount:
-                type: string
-                minLength: 1
-              applied_amount:
-                type: string
-                minLength: 1
-        payments:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              memo:
-                type: string
-                minLength: 1
-              original_amount:
-                type: string
-                minLength: 1
-              applied_amount:
-                type: string
-                minLength: 1
-              prepayment:
-                type: boolean
-        custom_fields:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            type: object
-            properties:
-              owner_id:
-                type: number
-              owner_type:
-                type: string
-                minLength: 1
-              name:
-                type: string
-                minLength: 1
-              value:
-                type: string
-                minLength: 1
-              metadatum_id:
-                type: number
-        public_url: {}
     Subscription-MRR:
       description: ""
       type: object

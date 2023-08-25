@@ -1,0 +1,9 @@
+title: Proforma Invoice Discount Breakout
+type: object
+properties:
+  eligible_amount:
+    type: string
+    minLength: 1
+  discount_amount:
+    type: string
+    minLength: 1

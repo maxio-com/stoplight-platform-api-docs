@@ -1,0 +1,16 @@
+title: Proforma Custom Field
+type: object
+properties:
+  owner_id:
+    type: number
+  owner_type:
+    type: string
+    minLength: 1
+  name:
+    type: string
+    minLength: 1
+  value:
+    type: string
+    minLength: 1
+  metadatum_id:
+    type: number

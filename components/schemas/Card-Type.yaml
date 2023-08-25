@@ -1,6 +1,6 @@
 title: Card Type
 type: string
-description: "The type of card used."
+description: The type of card used.
 enum:
   - bogus
   - visa
