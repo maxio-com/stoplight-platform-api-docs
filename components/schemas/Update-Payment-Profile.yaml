@@ -1,0 +1,31 @@
+title: Update Payment Profile
+type: object
+properties:
+  first_name:
+    type: string
+  last_name:
+    type: string
+  full_number:
+    type: string
+  card_type:
+    type: string
+  expiration_month:
+    type: string
+  expiration_year:
+    type: string
+  current_vault:
+    type: string
+  billing_address:
+    type: string
+  billing_city:
+    type: string
+  billing_state:
+    type: string
+  billing_zip:
+    type: string
+  billing_country:
+    type: string
+  billing_address_2:
+    type:
+      - string
+      - "null"
