@@ -5938,66 +5938,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  first_name:
-                    type: string
-                  last_name:
-                    type: string
-                  masked_card_number:
-                    type:
-                      - string
-                      - "null"
-                  card_type:
-                    type: string
-                  expiration_month:
-                    type: integer
-                  expiration_year:
-                    type: integer
-                  customer_id:
-                    type: integer
-                  current_vault:
-                    type: string
-                  vault_token:
-                    type: string
-                  billing_address:
-                    type: string
-                  billing_city:
-                    type: string
-                  billing_state:
-                    type: string
-                  billing_zip:
-                    type: string
-                  billing_country:
-                    type: string
-                  customer_vault_token:
-                    type:
-                      - string
-                      - "null"
-                  billing_address_2:
-                    type:
-                      - string
-                      - "null"
-                  payment_type:
-                    type: string
-                  bank_name:
-                    type: string
-                  masked_bank_routing_number:
-                    type: string
-                  masked_bank_account_number:
-                    type: string
-                  bank_account_type:
-                    type: string
-                  bank_account_holder_type:
-                    type: string
-                  verified:
-                    type: boolean
-                  site_gateway_setting_id:
-                    type: integer
-                  gateway_handle:
-                    type: string
+                $ref: "../components/schemas/Create-Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6020,7 +5961,7 @@ paths:
                       billing_address_2: null
                       payment_type: credit_card
                       site_gateway_setting_id: 1
-                      gateway_handle: null
+                      gateway_handle: handle
         "404":
           description: Not Found
       operationId: createPaymentProfile
@@ -6273,134 +6214,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                payment_profile:
-                  type: object
-                  properties:
-                    chargify_token:
-                      type: string
-                      description: Token received after sending billing informations using chargify.js.
-                      example: tok_9g6hw85pnpt6knmskpwp4ttt
-                    id:
-                      type: integer
-                    payment_type:
-                      type: string
-                      description: ""
-                      enum:
-                        - credit_card
-                        - bank_account
-                        - paypal_account
-                      default: credit_card
-                    first_name:
-                      type: string
-                      description: "First name on card or bank account. If omitted, the first_name from customer attributes will be used."
-                    last_name:
-                      type: string
-                      description: "Last name on card or bank account. If omitted, the last_name from customer attributes will be used."
-                    masked_card_number:
-                      type: string
-                    full_number:
-                      type: string
-                      description: The full credit card number
-                      example: "5424000000000015"
-                    card_type:
-                      $ref: "../components/schemas/Card-Type.yaml"
-                    expiration_month:
-                      type:
-                        - integer
-                        - string
-                      description: "(Optional when performing an Import via vault_token, required otherwise) The 1- or 2-digit credit card expiration month, as an integer or string, i.e. 5"
-                    expiration_year:
-                      type:
-                        - integer
-                        - string
-                      description: "(Optional when performing a Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012"
-                    billing_address:
-                      type: string
-                      description: The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.
-                    billing_address_2:
-                      type:
-                        - string
-                        - "null"
-                      description: Second line of the customer’s billing address i.e. Apt. 100
-                    billing_city:
-                      type: string
-                      description: The credit card or bank account billing address city (i.e. “Boston”). This value is merely passed through to the payment gateway.
-                    billing_state:
-                      type: string
-                      description: "The credit card or bank account billing address state (i.e. MA). This value is merely passed through to the payment gateway. This must conform to the [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in order to be valid for tax locale purposes."
-                    billing_country:
-                      type: string
-                      description: "The credit card or bank account billing address country, required in [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e. “US”). This value is merely passed through to the payment gateway. Some gateways require country codes in a specific format. Please check your gateway’s documentation. If creating an ACH subscription, only US is supported at this time."
-                    billing_zip:
-                      type: string
-                      description: The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.
-                    current_vault:
-                      type: string
-                      description: The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing
-                      enum:
-                        - bogus
-                        - authorizenet
-                        - authorizenet_cim
-                        - beanstream
-                        - braintree_blue
-                        - cybersource
-                        - elavon
-                        - eway
-                        - eway_rapid_std
-                        - firstdata
-                        - forte
-                        - gocardless
-                        - litle
-                        - moneris
-                        - orbital
-                        - payment_express
-                        - paymill
-                        - pin
-                        - square
-                        - stripe_connect
-                        - trust_commerce
-                        - wirecard
-                        - checkout
-                    vault_token:
-                      type: string
-                      description: The “token” provided by your vault storage for an already stored payment profile
-                    customer_vault_token:
-                      type: string
-                      description: (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token
-                    customer_id:
-                      type: integer
-                      description: (Required when creating a new payment profile) The Chargify customer id.
-                    paypal_email:
-                      type: string
-                      description: used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
-                      deprecated: true
-                    payment_method_nonce:
-                      type: string
-                      description: used by merchants that implemented BraintreeBlue javaScript libraries on their own. We recommend using Chargify.js instead.
-                      deprecated: true
-                    gateway_handle:
-                      type: string
-                      description: "This attribute is only available if MultiGateway feature is enabled for your Site. This feature is in the Private Beta currently. gateway_handle is used to directly select a gateway where a payment profile will be stored in. Every connected gateway must have a unique gateway handle specified. Read [Multigateway description](https://chargify.zendesk.com/hc/en-us/articles/4407761759643#connecting-with-multiple-gateways) to learn more about new concepts that MultiGateway introduces and the default behavior when this attribute is not passed."
-                    cvv:
-                      type: string
-                      description: The 3- or 4-digit Card Verification Value. This value is merely passed through to the payment gateway.
-                    bank_name:
-                      type: string
-                      description: "(Required when creating with ACH or GoCardless, optional with Stripe Direct Debit). The name of the bank where the customerʼs account resides"
-                    bank_iban:
-                      type: string
-                      description: "(Optional when creating with GoCardless, required with Stripe Direct Debit). International Bank Account Number. Alternatively, local bank details can be provided"
-                    bank_routing_number:
-                      type: string
-                      description: (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
-                    bank_account_number:
-                      type: string
-                      description: "(Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number"
-                    bank_branch_code:
-                      type: string
-                      description: "(Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided"
+              $ref: "../components/schemas/Create-Payment-Profile-Request.yaml"
             examples:
               ACH:
                 value:
@@ -6489,50 +6303,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    customer_id:
-                      type: integer
-                    current_vault:
-                      type: string
-                    vault_token:
-                      type: string
-                    billing_address:
-                      type: string
-                    billing_city:
-                      type: string
-                    billing_state:
-                      type: string
-                    billing_zip:
-                      type: string
-                    billing_country:
-                      type: string
-                    customer_vault_token:
-                      type: "null"
-                    billing_address_2:
-                      type: string
-                    bank_name:
-                      type: string
-                    masked_bank_routing_number:
-                      type: string
-                    masked_bank_account_number:
-                      type: string
-                    bank_account_type:
-                      type: string
-                    bank_account_holder_type:
-                      type: string
-                    payment_type:
-                      type: string
-                    site_gateway_setting_id:
-                      type: integer
-                    gateway_handle:
-                      type: string
+                  $ref: "../components/schemas/List-Payment-Profiles-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6557,7 +6328,7 @@ paths:
                         bank_account_holder_type: personal
                         payment_type: bank_account
                         site_gateway_setting_id: 1
-                        gateway_handle: null
+                        gateway_handle: handle
                     - payment_profile:
                         id: 10188522
                         first_name: Frankie
@@ -6579,7 +6350,7 @@ paths:
                         bank_account_holder_type: personal
                         payment_type: bank_account
                         site_gateway_setting_id: 1
-                        gateway_handle: null
+                        gateway_handle: handle
       operationId: listPaymentProfiles
       description: "This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404."
       parameters:
@@ -6592,12 +6363,7 @@ paths:
           description: The ID of the customer for which you wish to list payment profiles
   "/payment_profiles/{payment_profile_id}.json":
     parameters:
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile
+      - $ref: "../components/parameters/payment-profile-id-path.yaml"
     get:
       summary: Read Payment Profile
       tags:
@@ -6608,105 +6374,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment_profile:
-                    anyOf:
-                      - properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          customer_id:
-                            type: integer
-                          current_vault:
-                            type: string
-                          vault_token:
-                            type: string
-                          billing_address:
-                            type: string
-                          billing_city:
-                            type: string
-                          billing_state:
-                            type: string
-                          billing_zip:
-                            type: string
-                          billing_country:
-                            type: string
-                          customer_vault_token:
-                            type: "null"
-                          billing_address_2:
-                            type: string
-                          bank_name:
-                            type: string
-                          masked_bank_routing_number:
-                            type: string
-                          masked_bank_account_number:
-                            type: string
-                          bank_account_type:
-                            type: string
-                          bank_account_holder_type:
-                            type: string
-                          payment_type:
-                            type: string
-                          verified:
-                            type: boolean
-                            default: false
-                            description: denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account
-                          site_gateway_setting_id:
-                            type: integer
-                          gateway_handle:
-                            type:
-                              - string
-                              - "null"
-                      - properties:
-                          id:
-                            type: integer
-                          first_name:
-                            type: string
-                          last_name:
-                            type: string
-                          masked_card_number:
-                            type: string
-                          card_type:
-                            type: string
-                          expiration_month:
-                            type: integer
-                          expiration_year:
-                            type: integer
-                          customer_id:
-                            type: integer
-                          current_vault:
-                            type: string
-                          vault_token:
-                            type: string
-                          billing_address:
-                            type: string
-                          billing_city:
-                            type: string
-                          billing_state:
-                            type: string
-                          billing_zip:
-                            type: string
-                          billing_country:
-                            type: string
-                          customer_vault_token:
-                            type: "null"
-                          billing_address_2:
-                            type: string
-                          payment_type:
-                            type: string
-                          disabled:
-                            type: boolean
-                          site_gateway_setting_id:
-                            type: string
-                          gateway_handle:
-                            type:
-                              - string
-                              - "null"
-                    type: object
+                $ref: "../components/schemas/Read-Payment-Profile-Response.yaml"
               examples:
                 Card:
                   value:
@@ -6802,47 +6470,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment_profile:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      first_name:
-                        type: string
-                      last_name:
-                        type: string
-                      card_type:
-                        type: string
-                      expiration_month:
-                        type: integer
-                      expiration_year:
-                        type: integer
-                      customer_id:
-                        type: integer
-                      current_vault:
-                        type: string
-                      vault_token:
-                        type: string
-                      billing_address:
-                        type: string
-                      billing_city:
-                        type: string
-                      billing_state:
-                        type: string
-                      billing_zip:
-                        type: string
-                      billing_country:
-                        type: string
-                      payment_type:
-                        type: string
-                      site_gateway_setting_id:
-                        type: integer
-                      gateway_handle:
-                        type:
-                          - string
-                          - "null"
+                $ref: "../components/schemas/Update-Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6907,39 +6535,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                payment_profile:
-                  type: object
-                  properties:
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    full_number:
-                      type: string
-                    card_type:
-                      type: string
-                    expiration_month:
-                      type: string
-                    expiration_year:
-                      type: string
-                    current_vault:
-                      type: string
-                    billing_address:
-                      type: string
-                    billing_city:
-                      type: string
-                    billing_state:
-                      type: string
-                    billing_zip:
-                      type: string
-                    billing_country:
-                      type: string
-                    billing_address_2:
-                      type:
-                        - string
-                        - "null"
+              $ref: "../components/schemas/Update-Payment-Profile-Request.yaml"
             examples:
               Example:
                 value:
@@ -7021,57 +6617,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment_profile:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      first_name:
-                        type: string
-                      last_name:
-                        type: string
-                      customer_id:
-                        type: integer
-                      current_vault:
-                        type: string
-                      vault_token:
-                        type: string
-                      billing_address:
-                        type: string
-                      billing_city:
-                        type: string
-                      billing_state:
-                        type: string
-                      billing_zip:
-                        type: string
-                      billing_country:
-                        type: string
-                      customer_vault_token:
-                        type: "null"
-                      billing_address_2:
-                        type: string
-                      bank_name:
-                        type: string
-                      masked_bank_routing_number:
-                        type: string
-                      masked_bank_account_number:
-                        type: string
-                      bank_account_type:
-                        type: string
-                      bank_account_holder_type:
-                        type: string
-                      payment_type:
-                        type: string
-                      verified:
-                        type: boolean
-                        default: false
-                        description: denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account
-                      site_gateway_setting_id:
-                        type: integer
-                      gateway_handle:
-                        type: string
+                $ref: "../components/schemas/Bank-Account-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7119,15 +6665,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                bank_account_verification:
-                  type: object
-                  properties:
-                    deposit_1_in_cents:
-                      type: integer
-                    deposit_2_in_cents:
-                      type: integer
+              $ref: "../components/schemas/Bank-Account-Verification-Request.yaml"
             examples:
               Example:
                 value:

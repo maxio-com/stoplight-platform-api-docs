@@ -1,0 +1,61 @@
+title: Created Payment Profile
+type: object
+properties:
+  id:
+    type: integer
+  first_name:
+    type: string
+  last_name:
+    type: string
+  masked_card_number:
+    type:
+      - string
+      - "null"
+  card_type:
+    type: string
+  expiration_month:
+    type: integer
+  expiration_year:
+    type: integer
+  customer_id:
+    type: integer
+  current_vault:
+    type: string
+  vault_token:
+    type: string
+  billing_address:
+    type: string
+  billing_city:
+    type: string
+  billing_state:
+    type: string
+  billing_zip:
+    type: string
+  billing_country:
+    type: string
+  customer_vault_token:
+    type:
+      - string
+      - "null"
+  billing_address_2:
+    type:
+      - string
+      - "null"
+  payment_type:
+    type: string
+  bank_name:
+    type: string
+  masked_bank_routing_number:
+    type: string
+  masked_bank_account_number:
+    type: string
+  bank_account_type:
+    type: string
+  bank_account_holder_type:
+    type: string
+  verified:
+    type: boolean
+  site_gateway_setting_id:
+    type: integer
+  gateway_handle:
+    type: string
