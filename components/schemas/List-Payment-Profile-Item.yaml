@@ -1,4 +1,4 @@
-title: List Payment Profiles
+title: List Payment Profile Item
 type: object
 properties:
   id:
