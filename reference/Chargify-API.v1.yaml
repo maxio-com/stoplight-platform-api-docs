@@ -7691,7 +7691,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Multi-Invoice-Payment-Reponse.yaml"
+                $ref: "../components/schemas/Multi-Invoice-Payment-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8371,12 +8371,7 @@ paths:
                     payment_method: check
   "/invoices/{uid}/reopen.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The unique identifier of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Reopen Invoice
       tags:
@@ -8426,12 +8421,7 @@ paths:
         When reopening a consolidated invoice, all of its canceled segments will also be reopened.
   "/invoices/{uid}/void.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The unique identifier of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Void Invoice
       tags:
@@ -8471,17 +8461,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                void:
-                  type: object
-                  required:
-                    - reason
-                  properties:
-                    reason:
-                      type: string
-              required:
-                - void
+              $ref: "../components/schemas/Void-Invoice-Request.yaml"
             examples:
               Example:
                 value:
@@ -8505,12 +8485,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invoices:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Invoice.yaml"
+                $ref: "../components/schemas/Consolidated-Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -16884,12 +16859,7 @@ paths:
         Alternatively, if you have some proforma invoices already, you may make a preview call to determine whether any billing information for the subscription's upcoming renewal has changed.
   "/invoices/{uid}/deliveries.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Send Invoice
       tags:
@@ -16924,23 +16894,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
-                cc_recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
-                bcc_recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
+              $ref: "../components/schemas/Send-Invoice-Request.yaml"
             examples:
               Example:
                 value:
@@ -16952,12 +16906,7 @@ paths:
                     - user2@example.com
   "/invoices/{uid}/customer_information/preview.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Preview Customer Information Changes
       tags:
@@ -16968,65 +16917,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  changes:
-                    type: object
-                    properties:
-                      payer:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      shipping_address:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      billing_address:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      custom_fields:
-                        type: object
-                        properties:
-                          before:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                owner_id:
-                                  type: integer
-                                owner_type:
-                                  type: string
-                                name:
-                                  type: string
-                                value:
-                                  type: string
-                                metadatum_id:
-                                  type: integer
-                          after:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                owner_id:
-                                  type: integer
-                                owner_type:
-                                  type: string
-                                name:
-                                  type: string
-                                value:
-                                  type: string
-                                metadatum_id:
-                                  type: integer
+                $ref: "../components/schemas/Customer-Changes-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17098,12 +16989,7 @@ paths:
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
   "/invoices/{uid}/customer_information.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     put:
       summary: Update Customer Information
       tags:
@@ -18135,7 +18021,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Void-Advance-Invoice-Request.yaml"
+              $ref: "../components/schemas/Void-Invoice-Request.yaml"
   /subscriptions_mrr.json:
     get:
       summary: List MRR per subscription
@@ -18464,12 +18350,7 @@ paths:
             Use in query `filter[use_site_exchange_rate]=true`."
   "/invoices/{uid}/issue.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        description: The unique identifier of the invoice
-        required: true
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Issue Invoice
       tags:
@@ -18503,15 +18384,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                on_failed_payment:
-                  type: string
-                  enum:
-                    - leave_open_invoice
-                    - rollback_to_pending
-                    - initiate_dunning
-                  default: leave_open_invoice
+              $ref: "../components/schemas/Issue-Invoice-Request.yaml"
         description: ""
       description: |-
         This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.
