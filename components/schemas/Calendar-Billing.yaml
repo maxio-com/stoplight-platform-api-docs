@@ -6,6 +6,6 @@ properties:
     type:
       - integer
       - string
-    description: 1 - 28 or 'end'
+    description: A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'.
   calendar_billing_first_charge:
-    type: string
+    $ref: "./First-Charge-Type.yaml"

@@ -1,4 +1,4 @@
-title: Create Subscription Group Request
+title: Add Subscription to a Group
 type: object
 properties:
   group:

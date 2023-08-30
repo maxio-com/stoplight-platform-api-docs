@@ -1,0 +1,5 @@
+title: Holder Type
+type: string
+enum:
+  - personal
+  - business
