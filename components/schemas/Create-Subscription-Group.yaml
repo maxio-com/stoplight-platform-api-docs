@@ -1,0 +1,13 @@
+title: Create Subscription Group
+type: object
+properties:
+  subscription_id:
+    type:
+      - string
+      - integer
+  member_ids:
+    type: array
+    items:
+      type: integer
+required:
+  - subscription_id

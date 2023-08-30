@@ -14196,68 +14196,10 @@ paths:
       responses:
         "201":
           description: Created
-          headers: {}
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  scheme:
-                    type: integer
-                  customer_id:
-                    type: integer
-                  payment_profile_id:
-                    type: integer
-                  subscription_ids:
-                    type: array
-                    items:
-                      type: integer
-                  primary_subscription_id:
-                    type: integer
-                  next_assessment_at:
-                    type: string
-                  state:
-                    type: string
-                  cancel_at_end_of_period:
-                    type: boolean
-                  subscriptions:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        reference:
-                          type:
-                            - string
-                            - "null"
-                        product_id:
-                          type: integer
-                        product_handle:
-                          type:
-                            - "null"
-                            - string
-                        product_price_point_id:
-                          type: integer
-                        product_price_point_handle:
-                          type: string
-                        currency:
-                          type: string
-                        coupon_code:
-                          type:
-                            - string
-                            - "null"
-                        total_revenue_in_cents:
-                          type: integer
-                        balance_in_cents:
-                          type: integer
-                  payment_collection_method:
-                    type: string
-                    enum:
-                      - remittance
-                      - automatic
+                $ref: "../components/schemas/Subscription-Group-Signup-Response.yaml"
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -14280,329 +14222,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription_group:
-                  type: object
-                  required:
-                    - subscriptions
-                  properties:
-                    payment_profile_id:
-                      type: integer
-                    payer_id:
-                      type: integer
-                    payer_reference:
-                      type: string
-                    payment_collection_method:
-                      type: string
-                      enum:
-                        - automatic
-                        - remittance
-                      default: automatic
-                    payer_attributes:
-                      type: object
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        email:
-                          type: string
-                        cc_emails:
-                          type: string
-                        organization:
-                          type: string
-                        reference:
-                          type: string
-                        address:
-                          type: string
-                        address_2:
-                          type: string
-                        city:
-                          type: string
-                        state:
-                          type: string
-                        zip:
-                          type: string
-                        country:
-                          type: string
-                        phone:
-                          type: string
-                        locale:
-                          type: string
-                        vat_number:
-                          type: string
-                        tax_exempt:
-                          type: string
-                        tax_exempt_reason:
-                          type: string
-                        metafields:
-                          type: object
-                    credit_card_attributes:
-                      type: object
-                      properties:
-                        full_number:
-                          type:
-                            - string
-                            - integer
-                          example: 4111111111111111
-                        expiration_month:
-                          type:
-                            - string
-                            - integer
-                        expiration_year:
-                          type:
-                            - string
-                            - integer
-                        chargify_token:
-                          type: string
-                          example: tok_592nf92ng0sjd4300p
-                        vault_token:
-                          type: string
-                        current_vault:
-                          type: string
-                        gateway_handle:
-                          type: string
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        billing_address:
-                          type: string
-                        billing_address_2:
-                          type: string
-                        billing_city:
-                          type: string
-                        billing_state:
-                          type: string
-                        billing_zip:
-                          type: string
-                        billing_country:
-                          type: string
-                        last_four:
-                          type: string
-                        card_type:
-                          type: string
-                          example: visa
-                        customer_vault_token:
-                          type: string
-                        cvv:
-                          type: string
-                        payment_type:
-                          type: string
-                    bank_account_attributes:
-                      type: object
-                      properties:
-                        bank_name:
-                          type: string
-                          description: (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides
-                        bank_account_number:
-                          type: string
-                          description: (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
-                        bank_routing_number:
-                          type: string
-                          description: (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API
-                        bank_iban:
-                          type: string
-                          description: "(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided"
-                        bank_branch_code:
-                          type: string
-                          description: "(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided"
-                        bank_account_type:
-                          type: string
-                          enum:
-                            - checking
-                            - savings
-                          default: checking
-                        bank_account_holder_type:
-                          type: string
-                          enum:
-                            - personal
-                            - business
-                          default: personal
-                        payment_type:
-                          type: string
-                        billing_address:
-                          type: string
-                        billing_city:
-                          type: string
-                        billing_state:
-                          type: string
-                        billing_zip:
-                          type: string
-                        billing_country:
-                          type: string
-                        chargify_token:
-                          type: string
-                        current_vault:
-                          type: string
-                        gateway_handle:
-                          type: string
-                    subscriptions:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          product_handle:
-                            type: string
-                            description: "The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead."
-                          product_id:
-                            type: integer
-                            description: The Product ID of the product for which you are creating a subscription. You can pass either `product_id` or `product_handle`.
-                          product_price_point_id:
-                            type: integer
-                            description: The ID of the particular price point on the product.
-                          product_price_point_handle:
-                            type: string
-                            description: The user-friendly API handle of a product's particular price point.
-                          offer_id:
-                            type: integer
-                            description: "Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify ID of the offer or its handle prefixed with `handle:`"
-                          reference:
-                            type: string
-                            description: The reference value (provided by your app) for the subscription itelf.
-                          primary:
-                            type: boolean
-                            description: One of the subscriptions must be marked as primary in the group.
-                          currency:
-                            type: string
-                            description: "(Optional) If Multi-Currency is enabled and the currency is configured in Chargify, pass it at signup to create a subscription on a non-default currency. Note that you cannot update the currency of an existing subscription."
-                          coupon_codes:
-                            type: array
-                            description: An array for all the coupons attached to the subscription.
-                            items:
-                              type: string
-                          components:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                component_id:
-                                  type:
-                                    - string
-                                    - integer
-                                  description: Required if passing any component to `components` attribute.
-                                allocated_quantity:
-                                  type:
-                                    - string
-                                    - integer
-                                unit_balance:
-                                  type:
-                                    - string
-                                    - integer
-                                price_point_id:
-                                  type:
-                                    - string
-                                    - integer
-                                custom_price:
-                                  type: object
-                                  description: Used in place of `price_point_id` to define a custom price point unique to the subscription. You still need to provide `component_id`.
-                                  properties:
-                                    pricing_scheme:
-                                      type: string
-                                      enum:
-                                        - per_unit
-                                        - stairstep
-                                        - volume
-                                        - tiered
-                                    prices:
-                                      type: array
-                                      items:
-                                        type: object
-                                        properties:
-                                          unit_price:
-                                            type: string
-                                          starting_quantity:
-                                            type: string
-                                          ending_quantity:
-                                            type: string
-                                    overage_pricing:
-                                      type: array
-                                      items:
-                                        type: object
-                                        properties:
-                                          pricing_scheme:
-                                            type: string
-                                            enum:
-                                              - per_unit
-                                              - stairstep
-                                              - volume
-                                              - tiered
-                                          prices:
-                                            type: array
-                                            items:
-                                              type: object
-                                              properties:
-                                                unit_price:
-                                                  type: string
-                                                starting_quantity:
-                                                  type: string
-                                                ending_quantity:
-                                                  type: string
-                          custom_price:
-                            type: object
-                            description: Used in place of `product_price_point_id` to define a custom price point unique to the subscription. You still need to pass `product_id` or `product_handle`.
-                            properties:
-                              name:
-                                type: string
-                              handle:
-                                type: string
-                              price_in_cents:
-                                type:
-                                  - string
-                                  - integer
-                                description: Required if using `custom_price` attribute.
-                              interval:
-                                type:
-                                  - string
-                                  - integer
-                                description: Required if using `custom_price` attribute.
-                              interval_unit:
-                                schema:
-                                  $ref: "../components/schemas/Interval-Unit.yaml"
-                                description: Required if using `custom_price` attribute.
-                              trial_price_in_cents:
-                                type:
-                                  - string
-                                  - integer
-                              trial_interval:
-                                type:
-                                  - string
-                                  - integer
-                              trial_interval_unit:
-                                schema:
-                                  $ref: "../components/schemas/Interval-Unit.yaml"
-                              initial_charge_in_cents:
-                                type:
-                                  - string
-                                  - integer
-                              initial_charge_after_trial:
-                                type: boolean
-                              expiration_interval:
-                                type:
-                                  - string
-                                  - integer
-                              expiration_interval_unit:
-                                schema:
-                                  $ref: "../components/schemas/Interval-Unit.yaml"
-                              tax_included:
-                                type: boolean
-                          calendar_billing:
-                            type: object
-                            properties:
-                              snap_day:
-                                type: string
-                                description: A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'.
-                              calendar_billing_first_charge:
-                                type: string
-                                enum:
-                                  - prorated
-                                  - immediate
-                                  - delayed
-                          metafields:
-                            type: object
-              required:
-                - subscription_group
+              $ref: "../components/schemas/Subscription-Group-Signup-Request.yaml"
             examples:
               Basic request:
                 value:
@@ -14765,23 +14385,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription_group:
-                  type: object
-                  required:
-                    - subscription_id
-                  properties:
-                    subscription_id:
-                      type:
-                        - string
-                        - integer
-                    member_ids:
-                      type: array
-                      items:
-                        type: integer
-              required:
-                - subscription_group
+              $ref: "../components/schemas/Create-Subscription-Group-Request.yaml"
             examples:
               Example:
                 value:
@@ -14801,63 +14405,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription_groups:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        uid:
-                          type: string
-                        scheme:
-                          type: integer
-                        customer_id:
-                          type: integer
-                        payment_profile_id:
-                          type: integer
-                        subscription_ids:
-                          type: array
-                          items:
-                            type: integer
-                        primary_subscription_id:
-                          type: integer
-                        next_assessment_at:
-                          type: string
-                        state:
-                          type: string
-                        cancel_at_end_of_period:
-                          type: boolean
-                        account_balances:
-                          type: object
-                          properties:
-                            prepayments:
-                              type: object
-                              properties:
-                                balance_in_cents:
-                                  type: integer
-                            service_credits:
-                              type: object
-                              properties:
-                                balance_in_cents:
-                                  type: integer
-                            open_invoices:
-                              type: object
-                              properties:
-                                balance_in_cents:
-                                  type: integer
-                            pending_discounts:
-                              type: object
-                              properties:
-                                balance_in_cents:
-                                  type: integer
-                  meta:
-                    type: object
-                    properties:
-                      current_page:
-                        type: integer
-                      total_count:
-                        type: integer
+                $ref: "../components/schemas/List-Subscription-Groups-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14899,12 +14447,7 @@ paths:
           name: include
   "/subscription_groups/{uid}.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     get:
       summary: Read Subscription Group
       tags:
@@ -14915,66 +14458,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  scheme:
-                    type: integer
-                  customer_id:
-                    type: integer
-                  payment_profile_id:
-                    type: integer
-                  subscription_ids:
-                    type: array
-                    items:
-                      type: integer
-                  primary_subscription_id:
-                    type: integer
-                  next_assessment_at:
-                    type: string
-                  state:
-                    type: string
-                  cancel_at_end_of_period:
-                    type: boolean
-                  current_billing_amount_in_cents:
-                    type: integer
-                  customer:
-                    type: object
-                    properties:
-                      first_name:
-                        type: string
-                      last_name:
-                        type: string
-                      organization:
-                        type: string
-                      email:
-                        type: string
-                      reference:
-                        type: string
-                  account_balances:
-                    type: object
-                    properties:
-                      prepayments:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      service_credits:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      open_invoices:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      pending_discounts:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
+                $ref: "../components/schemas/Full-Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15075,15 +14559,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                subscription_group:
-                  type: object
-                  properties:
-                    member_ids:
-                      type: array
-                      items:
-                        type: integer
+              $ref: "../components/schemas/Update-Subscription-Group-Request.yaml"
             examples:
               Example:
                 value:
@@ -15102,12 +14578,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  deleted:
-                    type: boolean
+                $ref: "../components/schemas/Delete-Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15130,64 +14601,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  scheme:
-                    type: integer
-                  customer_id:
-                    type: integer
-                  payment_profile_id:
-                    type: integer
-                  subscription_ids:
-                    type: array
-                    items:
-                      type: integer
-                  primary_subscription_id:
-                    type: integer
-                  next_assessment_at:
-                    type: string
-                  state:
-                    type: string
-                  cancel_at_end_of_period:
-                    type: boolean
-                  customer:
-                    type: object
-                    properties:
-                      first_name:
-                        type: string
-                      last_name:
-                        type: string
-                      organization:
-                        type: string
-                      email:
-                        type: string
-                      reference:
-                        type: string
-                  account_balances:
-                    type: object
-                    properties:
-                      prepayments:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      service_credits:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      open_invoices:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
-                      pending_discounts:
-                        type: object
-                        properties:
-                          balance_in_cents:
-                            type: integer
+                $ref: "../components/schemas/Full-Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15234,12 +14648,7 @@ paths:
           description: The Chargify id of the subscription associated with the subscription group
   "/subscription_groups/{uid}/cancel.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Cancel Grouped Subscriptions
       tags:
@@ -15272,22 +14681,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                charge_unbilled_usage:
-                  type: boolean
+              $ref: "../components/schemas/Cancel-Grouped-Subscriptions-Request.yaml"
             examples:
               Example:
                 value:
                   charge_unbilled_usage: true
   "/subscription_groups/{uid}/delayed_cancel.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Initiate Delayed Group Cancellation
       tags:
@@ -15341,14 +14742,9 @@ paths:
                       - Subscriptions group does not have a pending delayed cancellation
       operationId: stopDelayedCancellationForGroup
       description: Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
-  "/subscription_groups/{subscription_group_uid}/reactivate.json":
+  "/subscription_groups/{uid}/reactivate.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_group_uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Reactivate / Resume Subscription Group
       tags:
@@ -15359,28 +14755,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  uid:
-                    type: string
-                  scheme:
-                    type: integer
-                  customer_id:
-                    type: integer
-                  payment_profile_id:
-                    type: integer
-                  subscription_ids:
-                    type: array
-                    items:
-                      type: integer
-                  primary_subscription_id:
-                    type: integer
-                  next_assessment_at:
-                    type: string
-                  state:
-                    type: string
-                  cancel_at_end_of_period:
-                    type: boolean
+                $ref: "../components/schemas/Reactivate-Subscription-Group-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15437,30 +14812,15 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                resume:
-                  type: boolean
-                resume_members:
-                  type: boolean
+              $ref: "../components/schemas/Reactivate-Subscription-Group-Request.yaml"
             examples:
               Example:
                 value:
                   resume: true
-  "/subscription_groups/{subscription_group_uid}/payment_profiles/{payment_profile_id}.json":
+  "/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: subscription_group_uid
-        in: path
-        required: true
-        description: The uid of the subscription group
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile
+      - $ref: "../components/parameters/group-uid-path.yaml"
+      - $ref: "../components/parameters/payment-profile-id-path.yaml"
     delete:
       summary: Delete Subscription Group Payment Profile
       responses:
@@ -15475,12 +14835,7 @@ paths:
         - Payment Profiles
   "/subscription_groups/{uid}/prepayments.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Create Prepayment
       tags:
@@ -15491,26 +14846,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  amount_in_cents:
-                    type: integer
-                    description: The amount in cents of the entry.
-                  ending_balance_in_cents:
-                    type: integer
-                    description: The ending balance in cents of the account.
-                  entry_type:
-                    type: string
-                    description: The type of account entry
-                    enum:
-                      - Credit
-                      - Debit
-                  memo:
-                    type: string
-                    description: |
-                      A memo attached to the entry.
+                $ref: "../components/schemas/Subscription-Group-Prepayment-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15541,41 +14877,10 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                prepayment:
-                  type: object
-                  required:
-                    - amount
-                    - details
-                    - memo
-                    - method
-                  properties:
-                    amount:
-                      type: integer
-                    details:
-                      type: string
-                    memo:
-                      type: string
-                    method:
-                      type: string
-                      enum:
-                        - check
-                        - cash
-                        - money_order
-                        - ach
-                        - paypal_account
-                        - other
-              required:
-                - prepayment
+              $ref: "../components/schemas/Subscription-Group-Prepayment-Request.yaml"
   "/subscription_groups/{uid}/service_credits.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Issue Service Credit
       tags:
@@ -15618,20 +14923,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                service_credit:
-                  type: object
-                  required:
-                    - amount
-                    - memo
-                  properties:
-                    amount:
-                      type: integer
-                    memo:
-                      type: string
-              required:
-                - service_credit
+              $ref: "../components/schemas/Issue-Service-Credit-Request.yaml"
             examples:
               Example:
                 value:
@@ -15640,12 +14932,7 @@ paths:
                     memo: Credit the group account
   "/subscription_groups/{uid}/service_credit_deductions.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Deduct Service Credit
       tags:
@@ -15687,22 +14974,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                deduction:
-                  type: object
-                  required:
-                    - amount
-                    - memo
-                  properties:
-                    amount:
-                      type:
-                        - string
-                        - number
-                    memo:
-                      type: string
-              required:
-                - deduction
+              $ref: "../components/schemas/Deduct-Service-Credit-Request.yaml"
             examples:
               Example:
                 value:
@@ -15795,18 +15067,8 @@ paths:
         You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
   "/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
-      - schema:
-          type: integer
-        name: uid
-        in: path
-        required: true
-        description: The Chargify uid of the subscription's group
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile
+      - $ref: "../components/parameters/group-uid-path.yaml"
+      - $ref: "../components/parameters/payment-profile-id-path.yaml"
     post:
       summary: Change Subscription Group Default Payment Profile
       tags:
@@ -15994,7 +15256,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-Group-Request.yaml"
+              $ref: "../components/schemas/Add-To-Group-Request.yaml"
             examples:
               Example:
                 value:
@@ -16287,14 +15549,9 @@ paths:
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
-  "/subscription_groups/{subscription_group_uid}/proforma_invoices.json":
+  "/subscription_groups/{uid}/proforma_invoices.json":
     parameters:
-      - schema:
-          type: integer
-        name: subscription_group_uid
-        in: path
-        required: true
-        description: The Chargify uid of the subscription group
+      - $ref: "../components/parameters/group-uid-path.yaml"
     post:
       summary: Create Consolidated Proforma Invoices
       tags:
