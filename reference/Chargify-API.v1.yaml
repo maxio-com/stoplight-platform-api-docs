@@ -3987,10 +3987,7 @@ paths:
       operationId: listComponents
       parameters:
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
+            $ref: "../components/schemas/List-Components-Date-Field.yaml"
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
@@ -7795,12 +7792,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  credit_notes:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Credit-Note"
+                $ref: "../components/schemas/List-Credit-Notes-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8079,7 +8071,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Credit-Note"
+                $ref: "../components/schemas/Credit-Note.yaml"
               examples:
                 Example:
                   value:
@@ -16056,17 +16048,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                void:
-                  type: object
-                  required:
-                    - reason
-                  properties:
-                    reason:
-                      type: string
-              required:
-                - void
+              $ref: "../components/schemas/Void-Invoice-Request.yaml"
         description: ""
   "/subscriptions/{subscription_id}/proforma_invoices/preview.json":
     parameters:
@@ -16572,32 +16554,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscriptions_components:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Subscription-Component.yaml"
+                $ref: "../components/schemas/List-Subscription-Components-Response.yaml"
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
-            type: string
-            enum:
-              - id
-              - updated_at
-            example: updated_at
+            $ref: "../components/schemas/List-Subscription-Components-Sort.yaml"
           in: query
           name: sort
           description: "The attribute by which to sort. Use in query: `sort=updated_at`."
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
-            type: string
-            enum:
-              - updated_at
-            example: updated_at
+            $ref: "../components/schemas/List-Subscription-Components-Date-Field.yaml"
           in: query
           name: date_field
           description: "The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`."
@@ -16649,10 +16619,7 @@ paths:
             "Allows fetching components allocation with matching subscription id based on provided ids.
             Use in query `subscription_ids=1,2,3`."
         - schema:
-            type: string
-            enum:
-              - not_null
-            example: not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: price_point_ids
           description:
@@ -16674,19 +16641,13 @@ paths:
           style: form
           explode: false
         - schema:
-            type: string
-            example: subscription
-            enum:
-              - subscription
+            $ref: "../components/schemas/List-Subscription-Components-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=subscription`."
         - schema:
             type: boolean
-            enum:
-              - true
-              - false
             example: true
           in: query
           name: "filter[use_site_exchange_rate]"
@@ -16708,20 +16669,19 @@ paths:
         - schema:
             type: array
             items:
-              type: string
+              $ref: "../components/schemas/Subscription-State.yaml"
             example:
               - active
               - canceled
           in: query
           name: "filter[subscription][states]"
+          style: form
+          explode: false
           description:
             "Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
             Use in query `filter[subscription][states]=active,canceled&include=subscription`."
         - schema:
-            type: string
-            example: updated_at
-            enum:
-              - updated_at
+            $ref: "../components/schemas/List-Subscription-Components-Subscription-Date-Field.yaml"
           in: query
           name: "filter[subscription][date_field]"
           description: The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`.
@@ -16745,7 +16705,6 @@ paths:
           in: query
           name: "filter[subscription][end_datetime]"
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`."
-    parameters: []
   "/components/{component_id}/price_points/{price_point_id}/segments.json":
     post:
       summary: Create Single Segment
@@ -17665,12 +17624,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Component-Price-Point-Response.yaml"
+                $ref: "../components/schemas/List-Components-Price-Points-Response.yaml"
               examples:
                 example:
                   value:
@@ -17719,11 +17673,7 @@ paths:
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
       parameters:
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-            example: created_at
+            $ref: "../components/schemas/List-Components-Price-Points-Date-Field.yaml"
           in: query
           name: "filter[date_field]"
           description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
@@ -17738,8 +17688,7 @@ paths:
           name: "filter[end_datetime]"
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
         - schema:
-            type: string
-            example: include=currency_prices
+            $ref: "../components/schemas/List-Components-Price-Points-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response. Use in query: `include=currency_prices`."
@@ -17805,12 +17754,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  price_points:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Product-Price-Point.yaml"
+                $ref: "../components/schemas/List-Product-Price-Points-Response.yaml"
               examples:
                 example:
                   value:
@@ -17856,21 +17800,12 @@ paths:
       parameters:
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
-            type: string
-            enum:
-              - "null"
-              - not_null
-            default: "null"
-            example: not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: "filter[archived_at]"
           description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-            example: created_at
+            $ref: "../components/schemas/List-Products-Price-Points-Date-Field.yaml"
           in: query
           description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
           name: "filter[date_field]"
@@ -17921,10 +17856,7 @@ paths:
           name: "filter[type]"
           description: "Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`."
         - schema:
-            type: string
-            enum:
-              - currency_prices
-            example: currency_prices
+            $ref: "../components/schemas/List-Products-Price-Points-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response. Use in query: `include=currency_prices`."
@@ -18530,332 +18462,6 @@ security:
   - BasicAuth: []
 components:
   schemas:
-    Credit-Note:
-      title: Credit Note
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier for the credit note. It is generated automatically by Chargify and has the prefix "cn_" followed by alphanumeric characters.
-        site_id:
-          type: integer
-          description: ID of the site to which the credit note belongs.
-        customer_id:
-          type: integer
-          description: ID of the customer to which the credit note belongs.
-        subscription_id:
-          type: integer
-          description: ID of the subscription that generated the credit note.
-        number:
-          type: string
-          description: |-
-            A unique, identifying string that appears on the credit note and in places it is referenced.
-
-            While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike.
-        sequence_number:
-          type: integer
-          description: A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes.
-        issue_date:
-          type: string
-          description: |-
-            Date the credit note was issued to the customer.  This is the date that the credit was made available for application, and may come before it is fully applied.
-
-            The format is `"YYYY-MM-DD"`.
-        applied_date:
-          type: string
-          description: |-
-            Credit notes are applied to invoices to offset invoiced amounts - they reduce the amount due. This field is the date the credit note became fully applied to invoices.
-
-            If the credit note has been partially applied, this field will not have a value until it has been fully applied.
-
-            The format is `"YYYY-MM-DD"`.
-        status:
-          type: string
-          description: |
-            Current status of the credit note. Valid values:
-
-            * open
-            * applied
-        currency:
-          type: string
-          description: The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields.
-        memo:
-          type: string
-          description: "The memo printed on credit note, which is a description of the reason for the credit."
-        seller:
-          type: object
-          description: Information about the seller (merchant) listed on the masthead of the credit note.
-          properties:
-            name:
-              type: string
-            address:
-              type: object
-              properties:
-                street:
-                  type: string
-                line2:
-                  type: string
-                city:
-                  type: string
-                state:
-                  type: string
-                zip:
-                  type: string
-                country:
-                  type: string
-            phone:
-              type: string
-        customer:
-          type: object
-          description: Information about the customer who is owner or recipient the credited subscription.
-          properties:
-            chargify_id:
-              type: integer
-            first_name:
-              type: string
-            last_name:
-              type: string
-            organization:
-              type: string
-            email:
-              type: string
-            reference:
-              type: "null"
-        billing_address:
-          type: object
-          description: The billing address of the credit subscription.
-          properties:
-            street:
-              type: string
-            line2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            zip:
-              type: string
-            country:
-              type: string
-        shipping_address:
-          type: object
-          description: The shipping address of the credited subscription.
-          properties:
-            street:
-              type: string
-            line2:
-              type: string
-            city:
-              type: string
-            state:
-              type: string
-            zip:
-              type: string
-            country:
-              type: string
-        subtotal_amount:
-          type: string
-          description: "Subtotal of the credit note, which is the sum of all line items before discounts or taxes. Note that this is a positive amount representing the credit back to the customer."
-        discount_amount:
-          type: string
-          description: "Total discount applied to the credit note. Note that this is a positive amount representing the discount amount being credited back to the customer (i.e. a credit on an earlier discount). For example, if the original purchase was $1.00 and the original discount was $0.10, a credit of $0.50 of the original purchase (half) would have a discount credit of $0.05 (also half)."
-        tax_amount:
-          type: string
-          description: "Total tax of the credit note. Note that this is a positive amount representing a previously taxex amount being credited back to the customer (i.e. a credit of an earlier tax). For example, if the original purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of the original purchase (half) would also have a tax credit of $0.05 (also half)."
-        total_amount:
-          type: string
-          description: "The credit note total, which is `subtotal_amount - discount_amount + tax_amount`.'"
-        applied_amount:
-          type: string
-          description: The amount of the credit note that has already been applied to invoices.
-        remaining_amount:
-          type: string
-          description: "The amount of the credit note remaining to be applied to invoices, which is `total_amount - applied_amount`."
-        line_items:
-          type: array
-          description: Line items on the credit note.
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                description: Unique identifier for the line item.  Useful when cross-referencing the line against individual discounts in the `discounts` or `taxes` lists.
-              title:
-                type: string
-                description: A short descriptor for the credit given by this line.
-              description:
-                type: string
-                description: |-
-                  Detailed description for the credit given by this line.  May include proration details in plain text.
-
-                  Note: this string may contain line breaks that are hints for the best display format on the credit note.
-              quantity:
-                type: string
-                description: |-
-                  The quantity or count of units credited by the line item.
-
-                  This is a decimal number represented as a string. (See "About Decimal Numbers".)
-              unit_price:
-                type: string
-                description: |-
-                  The price per unit for the line item.
-
-                  When tiered pricing was used (i.e. not every unit was actually priced at the same price) this will be the blended average cost per unit and the `tiered_unit_price` field will be set to `true`.
-              subtotal_amount:
-                type: string
-                description: "The line subtotal, generally calculated as `quantity * unit_price`. This is the canonical amount of record for the line - when rounding differences are in play, `subtotal_amount` takes precedence over the value derived from `quantity * unit_price` (which may not have the proper precision to exactly equal this amount)."
-              discount_amount:
-                type: string
-                description: |-
-                  The approximate discount of just this line.
-
-                  The value is approximated in cases where rounding errors make it difficult to apportion exactly a total discount among many lines. Several lines may have been summed prior to applying the discount to arrive at `discount_amount` for the invoice - backing that out to the discount on a single line may introduce rounding or precision errors.
-              tax_amount:
-                type: string
-                description: |-
-                  The approximate tax of just this line.
-
-                  The value is approximated in cases where rounding errors make it difficult to apportion exactly a total tax among many lines. Several lines may have been summed prior to applying the tax rate to arrive at `tax_amount` for the invoice - backing that out to the tax on a single line may introduce rounding or precision errors.
-              total_amount:
-                type: string
-                description: |-
-                  The non-canonical total amount for the line.
-
-                  `subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`.
-              tiered_unit_price:
-                type: boolean
-                description: "When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units."
-              period_range_start:
-                type: string
-                description: Start date for the period credited by this line. The format is `"YYYY-MM-DD"`.
-              period_range_end:
-                type: string
-                description: End date for the period credited by this line. The format is `"YYYY-MM-DD"`.
-              product_id:
-                type: integer
-                description: |-
-                  The ID of the product being credited.
-
-                  This may be set even for component credits, so true product-only (non-component) credits will also have a nil `component_id`.
-              product_version:
-                type: integer
-                description: The version of the product being credited.
-              component_id:
-                type:
-                  - integer
-                  - "null"
-                description: The ID of the component being credited. Will be `nil` for non-component credits.
-              price_point_id:
-                type:
-                  - integer
-                  - "null"
-                description: The price point ID of the component being credited. Will be `nil` for non-component credits.
-        discounts:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              title:
-                type: string
-              code:
-                type: string
-              source_type:
-                type: string
-              source_id:
-                type: integer
-              discount_type:
-                type: string
-              percentage:
-                type: string
-              eligible_amount:
-                type: string
-              discount_amount:
-                type: string
-              line_item_breakouts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uid:
-                      type: string
-                    eligible_amount:
-                      type: string
-                    discount_amount:
-                      type: string
-        taxes:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              title:
-                type: string
-              source_type:
-                type: string
-              source_id:
-                type: integer
-              percentage:
-                type: string
-              taxable_amount:
-                type: string
-              tax_amount:
-                type: string
-              line_item_breakouts:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uid:
-                      type: string
-                    taxable_amount:
-                      type: string
-                    tax_amount:
-                      type: string
-        applications:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-              transaction_time:
-                type: string
-              invoice_uid:
-                type: string
-              memo:
-                type: string
-              applied_amount:
-                type: string
-        refunds:
-          type: array
-          items:
-            type: object
-            properties:
-              transaction_id:
-                type: integer
-              payment_id:
-                type: integer
-              memo:
-                type: string
-              original_amount:
-                type: string
-              applied_amount:
-                type: string
-        origin_invoices:
-          type: array
-          description: "An array of origin invoices for the credit note. Learn more about [Origin Invoice from our docs](https://chargify.zendesk.com/hc/en-us/articles/4407753036699#origin-invoices)"
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                description: The UID of the invoice serving as an origin invoice.
-              number:
-                type: string
-                description: The number of the invoice serving as an origin invoice.
     Subscription-MRR:
       description: ""
       type: object
