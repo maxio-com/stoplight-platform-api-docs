@@ -6674,12 +6674,7 @@ paths:
                     deposit_2_in_cents: 45
   "/invoices/{uid}/refunds.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the Invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Refund Invoice
       tags:
@@ -6691,7 +6686,6 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Invoice.yaml"
-              examples: {}
       operationId: refundInvoice
       description: |-
         Refund an invoice, segment, or consolidated invoice.
@@ -6705,70 +6699,7 @@ paths:
         content:
           application/json:
             schema:
-              anyOf:
-                - properties:
-                    refund:
-                      type: object
-                      required:
-                        - amount
-                        - memo
-                        - payment_id
-                      description: Refund an invoice or a segment of a consolidated invoice.
-                      properties:
-                        amount:
-                          type: string
-                          description: 'The amount to be refunded in decimal format as a string. Example: "10.50". Must not exceed the remaining refundable balance of the payment.'
-                        memo:
-                          type: string
-                          description: A description that will be attached to the refund
-                        payment_id:
-                          type: integer
-                          description: The ID of the payment to be refunded
-                        external:
-                          type: boolean
-                          description: Flag that marks refund as external (no money is returned to the customer). Defaults to `false`.
-                        apply_credit:
-                          type: boolean
-                          description: "If set to true, creates credit and applies it to an invoice. Defaults to `false`."
-                        void_invoice:
-                          type: boolean
-                          description: "If `apply_credit` set to false and refunding full amount, if `void_invoice` set to true, invoice will be voided after refund. Defaults to `false`."
-                  required:
-                    - refund
-                - properties:
-                    refund:
-                      type: object
-                      required:
-                        - memo
-                        - payment_id
-                        - segment_uids
-                      description: Refund consolidated invoice
-                      properties:
-                        memo:
-                          type: string
-                          description: A description for the refund
-                        payment_id:
-                          type: integer
-                          description: The ID of the payment to be refunded
-                        segment_uids:
-                          type:
-                            - array
-                            - string
-                          description: An array of segment uids to refund or the string 'all' to indicate that all segments should be refunded
-                          items:
-                            type: string
-                        external:
-                          type: boolean
-                          description: Flag that marks refund as external (no money is returned to the customer). Defaults to `false`.
-                        apply_credit:
-                          type: boolean
-                          description: "If set to true, creates credit and applies it to an invoice. Defaults to `false`."
-                        amount:
-                          type: string
-                          description: 'The amount of payment to be refunded in decimal format. Example: "10.50". This will default to the full amount of the payment if not provided.'
-                  required:
-                    - refund
-              type: object
+              $ref: "../components/schemas/Refund-Invoice-Request.yaml"
             examples:
               Refund Invoice:
                 value:
@@ -6805,12 +6736,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invoices:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Invoice.yaml"
+                $ref: "../components/schemas/List-Invoices-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7130,15 +7056,7 @@ paths:
           name: refunds
           description: Include refunds data
         - schema:
-            type: string
-            enum:
-              - created_at
-              - due_date
-              - issue_date
-              - updated_at
-              - paid_date
-            default: due_date
-            example: issue_date
+            $ref: "../components/schemas/Invoice-Date-Field.yaml"
           in: query
           name: date_field
           description:
@@ -7198,30 +7116,14 @@ paths:
             "Allows fetching invoices with matching line items product ids based on provided values.
             Use in query `product_ids=23,34`."
         - schema:
-            type: string
-            enum:
-              - status
-              - total_amount
-              - due_amount
-              - created_at
-              - updated_at
-              - issue_date
-              - due_date
-              - number
-            example: total_amount
-            default: number
+            $ref: "../components/schemas/Invoice-Sort-Field.yaml"
           in: query
           name: sort
           description: "Allows specification of the order of the returned list.
             Use in query `sort=total_amount`."
   "/invoices/{uid}.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     get:
       summary: Read Invoice
       tags:
@@ -7343,63 +7245,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  events:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        event_type:
-                          type: string
-                          description: ""
-                          enum:
-                            - issue_invoice
-                            - apply_credit_note
-                            - apply_payment
-                            - refund_invoice
-                            - void_invoice
-                            - void_remainder
-                            - backport_invoice
-                            - change_invoice_status
-                            - change_invoice_collection_method
-                            - remove_payment
-                        event_data:
-                          description: "The event data is the data that, when combined with the command, results in the output invoice found in the invoice field."
-                          anyOf:
-                            - description: Example schema for an `apply_payment` event
-                              properties:
-                                memo:
-                                  type: string
-                                  description: The payment memo
-                                original_amount:
-                                  type: string
-                                  description: 'The full, original amount of the payment transaction as a string in full units. Incoming payments can be split amongst several invoices, which will result in a `applied_amount` less than the `original_amount`. Example: A $100.99 payment, of which $40.11 is applied to this invoice, will have an `original_amount` of `"100.99"`.'
-                                applied_amount:
-                                  type: string
-                                  description: 'The amount of the payment applied to this invoice. Incoming payments can be split amongst several invoices, which will result in a `applied_amount` less than the `original_amount`. Example: A $100.99 payment, of which $40.11 is applied to this invoice, will have an `applied_amount` of `"40.11"`.'
-                                transaction_time:
-                                  type: string
-                                  description: 'The time the payment was removed, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"'
-                                payment_method:
-                                  type: object
-                                  description: A nested data structure detailing the method of payment
-                                transaction_id:
-                                  type: integer
-                                  description: The Chargify id of the original payment
-                          type: object
-                        timestamp:
-                          type: string
-                        invoice:
-                          $ref: "../components/schemas/Invoice.yaml"
-                  page:
-                    type: integer
-                  per_page:
-                    type: integer
-                  total_pages:
-                    type: integer
+                $ref: "../components/schemas/List-Invoice-Events-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7745,20 +7591,19 @@ paths:
           description: Use this parameter if you want to fetch also invoice events with change_invoice_status type.
           name: with_change_invoice_status
         - schema:
-            type: string
+            type: array
+            items:
+              $ref: "../components/schemas/Invoice-Event-Type.yaml"
           in: query
           name: event_types
-          description: "Filter results by event_type. Supply a comma separated list of event types (listed above). eg: void_invoice,void_remainder"
+          style: form
+          explode: false
+          description: "Filter results by event_type. Supply a comma separated list of event types (listed above). Use in query: `event_types=void_invoice,void_remainder`."
   "/invoices/{uid}/payments.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: " The unique identifier for the invoice, this does not refer to the public facing invoice number"
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
-      summary: Create Payment
+      summary: Create Payment for Invoice
       tags:
         - Invoices
       responses:
@@ -7820,43 +7665,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                payment:
-                  type: object
-                  properties:
-                    amount:
-                      type:
-                        - string
-                        - number
-                      description: A string of the dollar amount to be refunded (eg. "10.50" => $10.50)
-                    memo:
-                      type: string
-                      description: A description to be attached to the payment.
-                    method:
-                      type: string
-                      description: The type of payment method used.
-                      enum:
-                        - credit_card
-                        - check
-                        - cash
-                        - money_order
-                        - ach
-                        - other
-                      default: other
-                    details:
-                      type: string
-                      description: |
-                        Additional information related to the payment method (eg. Check #)
-                type:
-                  type: string
-                  description: The type of payment to be applied to an Invoice.
-                  default: external
-                  enum:
-                    - external
-                    - prepayment
-                    - service_credit
-                    - payment
+              $ref: "../components/schemas/Create-Invoice-Payment-Request.yaml"
             examples:
               Example 1:
                 value:
@@ -7882,36 +7691,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payment:
-                    type: object
-                    properties:
-                      transaction_id:
-                        type: number
-                        description: The numeric ID of the transaction.
-                      total_amount:
-                        type: string
-                        description: Dollar amount of the sum of the paid invoices.
-                      currency_code:
-                        type: string
-                        description: The ISO 4217 currency code (3 character string) representing the currency of invoice transaction.
-                      applications:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            invoice_uid:
-                              type: string
-                              description: |
-                                Unique identifier for the paid invoice. It has the prefix "inv_" followed by alphanumeric characters.
-                            application_uid:
-                              type: string
-                              description: |
-                                Unique identifier for the payment. It has the prefix "pmt_" followed by alphanumeric characters.
-                            applied_amount:
-                              type: string
-                              description: Dollar amount of the paid invoice.
+                $ref: "../components/schemas/Multi-Invoice-Payment-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7988,55 +7768,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                payment:
-                  type: object
-                  required:
-                    - amount
-                    - applications
-                  properties:
-                    memo:
-                      type: string
-                      description: A description to be attached to the payment.
-                    details:
-                      type: string
-                      description: |
-                        Additional information related to the payment method (eg. Check #).
-                    method:
-                      type: string
-                      description: The type of payment method used.
-                      enum:
-                        - credit_card
-                        - check
-                        - cash
-                        - money_order
-                        - ach
-                        - other
-                      default: other
-                    amount:
-                      type:
-                        - string
-                        - number
-                      description: Dollar amount of the sum of the invoices payment (eg. "10.50" => $10.50).
-                    received_on:
-                      type: string
-                      description: Date reflecting when the payment was received from a customer. Must be in the past.
-                    applications:
-                      type: array
-                      items:
-                        type: object
-                        required:
-                          - invoice_uid
-                          - amount
-                        properties:
-                          invoice_uid:
-                            type: string
-                            description: |
-                              Unique identifier for the invoice. It has the prefix "inv_" followed by alphanumeric characters.
-                          amount:
-                            type: string
-                            description: Dollar amount of the invoice payment (eg. "10.50" => $10.50).
+              $ref: "../components/schemas/Create-Multi-Invoice-Payment-Request.yaml"
             examples:
               Example:
                 value:
@@ -8639,12 +8371,7 @@ paths:
                     payment_method: check
   "/invoices/{uid}/reopen.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The unique identifier of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Reopen Invoice
       tags:
@@ -8694,12 +8421,7 @@ paths:
         When reopening a consolidated invoice, all of its canceled segments will also be reopened.
   "/invoices/{uid}/void.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The unique identifier of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Void Invoice
       tags:
@@ -8739,17 +8461,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                void:
-                  type: object
-                  required:
-                    - reason
-                  properties:
-                    reason:
-                      type: string
-              required:
-                - void
+              $ref: "../components/schemas/Void-Invoice-Request.yaml"
             examples:
               Example:
                 value:
@@ -8773,12 +8485,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invoices:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/Invoice.yaml"
+                $ref: "../components/schemas/Consolidated-Invoice.yaml"
               examples:
                 Example:
                   value:
@@ -17152,12 +16859,7 @@ paths:
         Alternatively, if you have some proforma invoices already, you may make a preview call to determine whether any billing information for the subscription's upcoming renewal has changed.
   "/invoices/{uid}/deliveries.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Send Invoice
       tags:
@@ -17192,23 +16894,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
-                cc_recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
-                bcc_recipient_emails:
-                  type: array
-                  maxItems: 5
-                  items:
-                    type: string
+              $ref: "../components/schemas/Send-Invoice-Request.yaml"
             examples:
               Example:
                 value:
@@ -17220,12 +16906,7 @@ paths:
                     - user2@example.com
   "/invoices/{uid}/customer_information/preview.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Preview Customer Information Changes
       tags:
@@ -17236,65 +16917,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  changes:
-                    type: object
-                    properties:
-                      payer:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      shipping_address:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      billing_address:
-                        type: object
-                        properties:
-                          before:
-                            type: object
-                          after:
-                            type: object
-                      custom_fields:
-                        type: object
-                        properties:
-                          before:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                owner_id:
-                                  type: integer
-                                owner_type:
-                                  type: string
-                                name:
-                                  type: string
-                                value:
-                                  type: string
-                                metadatum_id:
-                                  type: integer
-                          after:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                owner_id:
-                                  type: integer
-                                owner_type:
-                                  type: string
-                                name:
-                                  type: string
-                                value:
-                                  type: string
-                                metadatum_id:
-                                  type: integer
+                $ref: "../components/schemas/Customer-Changes-Preview-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17366,12 +16989,7 @@ paths:
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
   "/invoices/{uid}/customer_information.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        required: true
-        description: The uid of the invoice
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     put:
       summary: Update Customer Information
       tags:
@@ -18403,7 +18021,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Void-Advance-Invoice-Request.yaml"
+              $ref: "../components/schemas/Void-Invoice-Request.yaml"
   /subscriptions_mrr.json:
     get:
       summary: List MRR per subscription
@@ -18732,12 +18350,7 @@ paths:
             Use in query `filter[use_site_exchange_rate]=true`."
   "/invoices/{uid}/issue.json":
     parameters:
-      - schema:
-          type: string
-        name: uid
-        in: path
-        description: The unique identifier of the invoice
-        required: true
+      - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
       summary: Issue Invoice
       tags:
@@ -18771,15 +18384,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                on_failed_payment:
-                  type: string
-                  enum:
-                    - leave_open_invoice
-                    - rollback_to_pending
-                    - initiate_dunning
-                  default: leave_open_invoice
+              $ref: "../components/schemas/Issue-Invoice-Request.yaml"
         description: ""
       description: |-
         This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.

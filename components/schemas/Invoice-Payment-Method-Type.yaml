@@ -1,0 +1,11 @@
+title: Invoice Payment Method Type
+type: string
+description: The type of payment method used.
+enum:
+  - credit_card
+  - check
+  - cash
+  - money_order
+  - ach
+  - other
+default: other

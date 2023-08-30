@@ -1,9 +1,9 @@
-title: Void Advance Invoice Request
+title: Void Invoice Request
 description: ""
 type: object
 properties:
   void:
-    $ref: "./Void-Advance-Invoice.yaml"
+    $ref: "./Void-Invoice.yaml"
 required:
   - void
 x-examples:

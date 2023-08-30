@@ -1,0 +1,5 @@
+title: Invoice Event
+type: object
+description: "The event data is the data that, when combined with the command, results in the output invoice found in the invoice field."
+anyOf:
+  - $ref: "Apply-Payment-Event-Data.yaml"

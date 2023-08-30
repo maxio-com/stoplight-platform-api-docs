@@ -5,6 +5,12 @@ The Chargify API is documented in this repository using the [OpenAPI Specificati
 ## Development
 
 If you are a Chargify developer and need to make changes to the API documentation, please refer to our internal documentation on Stoplight Studio.
+
+Recommended read before contributing:
+
+- [OpenAPI specification best practices](https://www.notion.so/maxioevolution/OpenAPI-specification-best-practices-a7e0fbec87584411a4570db7c2427dcb)
+- [Models in SDK](https://www.notion.so/maxioevolution/Models-in-SDK-ab54df1f0a9a4559aac1a6094540c22c).
+
 This repository is using [Prettier](https://prettier.io/docs/en/index.html) to enforce consistent formatting.
 
 ### Required tools and validators
@@ -47,6 +53,11 @@ And then to run linting (execute in the main repo directory):
 ```
 
 You need to fix all Spectral warnings/errors before commit!
+There are two Spectral profiles:
+
+- spectral-build.yaml - basic validation rules used during CI, you cannot break any rule defined there in your PR.
+- spectral.yaml - contains more rules than spectral-build.yaml. New rules are added here and when all issues with the new rule are resolved then the rule is promoted to spectral-build.yaml.
+  Use this to validate you are not introducing any new problems (compare with results before you introduced changes).
 
 ## SDK generation
 
