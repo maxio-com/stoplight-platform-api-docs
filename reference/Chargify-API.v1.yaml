@@ -3839,7 +3839,7 @@ paths:
 
         You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
     put:
-      summary: Update Component
+      summary: Update Product Family Component
       tags:
         - Components
       responses:
@@ -3890,7 +3890,7 @@ paths:
                   value:
                     errors:
                       - "Name: cannot be blank."
-      operationId: updateComponent
+      operationId: updateProductFamilyComponent
       parameters: []
       description: |-
         This request will update a component from a specific product family.
@@ -4119,15 +4119,20 @@ paths:
     put:
       summary: Update Component
       tags:
-        - Component
+        - Components
       responses:
         "200":
           description: Updated
-      operationID: updateComponent
+      operationId: updateComponent
       description: |-
         This request will update a component.
 
         You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/Update-Component-Request.yaml"
   "/components/{component_id}/price_points/{price_point_id}/default.json":
     parameters:
       - schema:
