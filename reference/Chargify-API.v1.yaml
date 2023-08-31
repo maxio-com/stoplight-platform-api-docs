@@ -17886,11 +17886,7 @@ paths:
           description: Choose to include a proforma invoice preview for the first renewal
   "/api_exports/proforma_invoices/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Proforma Invoices
       tags:
@@ -17901,13 +17897,7 @@ paths:
 
         Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
       responses:
         "200":
@@ -17922,11 +17912,7 @@ paths:
           description: Not Found
   "/api_exports/invoices/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Invoices
       tags:
@@ -17948,21 +17934,11 @@ paths:
         "404":
           description: Not Found
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
   "/api_exports/subscriptions/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Subscriptions
       tags:
@@ -17984,13 +17960,7 @@ paths:
         "404":
           description: Not Found
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
   /api_exports/proforma_invoices.json:
     post:
@@ -18008,7 +17978,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
         "409":
@@ -18038,7 +18008,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
         "409":
@@ -18064,7 +18034,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "409":
           description: Conflict
           content:
@@ -18077,11 +18047,7 @@ paths:
     parameters: []
   "/api_exports/proforma_invoices/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Proforma Invoices Export
       tags:
@@ -18094,16 +18060,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/api_exports/invoices/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Invoices Export
       tags:
@@ -18116,16 +18078,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/api_exports/subscriptions/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Subscriptions Export
       tags:
@@ -18138,7 +18096,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/subscriptions/{subscription_id}/request_payment_profiles_update.json":
@@ -18238,31 +18196,6 @@ components:
                 plan_amount_in_cents: 0
                 usage_amount_in_cents: 0
       title: Subscription-MRR
-    Batch-Job:
-      title: Batch-Job
-      x-stoplight:
-        id: igb6nbuojdj23
-      type: object
-      properties:
-        batchjob:
-          type: object
-          properties:
-            id:
-              type: integer
-            finished_at:
-              type:
-                - string
-                - "null"
-            row_count:
-              type:
-                - integer
-                - "null"
-            created_at:
-              type:
-                - string
-                - "null"
-            completed:
-              type: string
   securitySchemes:
     BasicAuth:
       type: http
