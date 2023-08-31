@@ -11120,24 +11120,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                chargify:
-                  type: object
-                  properties:
-                    timestamp:
-                      type: string
-                      description: "This timestamp determines what billing period the event will be billed in. If your request payload does not include it, Chargify will add `chargify.timestamp` to the event payload and set the value to `now`."
-                    id:
-                      type: string
-                      description: "A unique ID set by Chargify. Please note that this field is reserved. If `chargify.id` is present in the request payload, it will be overwritten. "
-                    created_at:
-                      type: string
-                      description: "An ISO-8601 timestamp, set by Chargify at the time each event is recorded. Please note that this field is reserved. If `chargify.created_at` is present in the request payload, it will be overwritten. "
-                    uniqueness_token:
-                      type: string
-                      description: User-defined string scoped per-stream. Duplicate events within a stream will be silently ignored. Tokens expire after 31 days.
-                      maxLength: 64
+              $ref: "../components/schemas/Ebb-Event.yaml"
             examples:
               Example:
                 value:
@@ -11146,6 +11129,13 @@ paths:
                     timestamp: "2020-02-27T17:45:50-05:00"
                   messages: 150
                   country: US
+                  customer:
+                    name: John
+                    lastName: Doe
+                    address:
+                      street: Maple Street
+                      zip: 4888
+                      state: MA
     servers:
       - url: "https://events.chargify.com"
         description: Production server
@@ -11187,7 +11177,7 @@ paths:
             schema:
               type: array
               items:
-                type: object
+                $ref: "../components/schemas/Ebb-Event.yaml"
     servers:
       - url: "https://events.chargify.com"
         description: Production server
