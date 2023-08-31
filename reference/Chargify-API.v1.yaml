@@ -609,7 +609,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Site"
+                $ref: "../components/schemas/Site-Response.yaml"
               examples:
                 Example:
                   value:
@@ -11403,12 +11403,7 @@ paths:
       description: Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
   "/sellers/{seller_id}/sales_commission_settings.json":
     parameters:
-      - schema:
-          type: string
-        name: seller_id
-        in: path
-        required: true
-        description: The Chargify id of your seller account
+      - $ref: "../components/parameters/seller-id-path.yaml"
     get:
       summary: List Sales Commission Settings
       tags:
@@ -11421,22 +11416,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    customer_name:
-                      type: string
-                    subscription_id:
-                      type: integer
-                    site_link:
-                      type: string
-                    site_name:
-                      type: string
-                    subscription_mrr:
-                      type: string
-                    sales_rep_id:
-                      type: integer
-                    sales_rep_name:
-                      type: string
+                  $ref: "../components/schemas/Sale-Rep-Settings.yaml"
               examples:
                 Example:
                   value:
@@ -11490,12 +11470,7 @@ paths:
           name: per_page
   "/sellers/{seller_id}/sales_reps.json":
     parameters:
-      - schema:
-          type: string
-        name: seller_id
-        in: path
-        required: true
-        description: The Chargify id of your seller account
+      - $ref: "../components/parameters/seller-id-path.yaml"
     get:
       summary: List Sales Reps
       tags:
@@ -11508,73 +11483,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    full_name:
-                      type: string
-                    subscriptions_count:
-                      type: integer
-                    mrr_data:
-                      type: object
-                      properties:
-                        november_2019:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                        december_2019:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                        january_2020:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                        february_2020:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                        march_2020:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                        april_2020:
-                          type: object
-                          properties:
-                            mrr:
-                              type: string
-                            usage:
-                              type: string
-                            recurring:
-                              type: string
-                    test_mode:
-                      type: boolean
+                  $ref: "../components/schemas/List-Sale-Rep-Item.yaml"
               examples:
                 Example:
                   value:
@@ -11665,11 +11574,7 @@ paths:
           name: per_page
   "/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: seller_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/seller-id-path.yaml"
       - schema:
           type: string
         name: sales_rep_id
@@ -11685,43 +11590,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  full_name:
-                    type: string
-                  subscriptions_count:
-                    type: integer
-                  test_mode:
-                    type: boolean
-                  subscriptions:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        site_name:
-                          type: string
-                        subscription_url:
-                          type: string
-                        customer_name:
-                          type: string
-                        created_at:
-                          type: string
-                        mrr:
-                          type: string
-                        usage:
-                          type: string
-                        recurring:
-                          type: string
-                        last_payment:
-                          type: string
-                        churn_date:
-                          type:
-                            - string
-                            - "null"
+                $ref: "../components/schemas/Sale-Rep.yaml"
               examples:
                 Example:
                   value:
@@ -15500,30 +15369,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  chargify_js_keys:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        public_key:
-                          type: string
-                        requires_security_token:
-                          type: boolean
-                        created_at:
-                          type: string
-                  meta:
-                    type: object
-                    properties:
-                      total_count:
-                        type: integer
-                      current_page:
-                        type: integer
-                      total_pages:
-                        type: integer
-                      per_page:
-                        type: integer
+                $ref: "../components/schemas/List-Public-Keys-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16410,109 +16256,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    payment_profile:
-                      billing_address: 1234 Hill St
-                      billing_address_2: null
-                      billing_city: Austin
-                      billing_country: US
-                      billing_state: TX
-                      billing_zip: "10001"
-                      card_type: visa
-                      current_vault: stripe_connect
-                      customer_id: null
-                      customer_vault_token: null
-                      disabled: false
-                      expiration_month: 1
-                      expiration_year: 2023
-                      first_name: John
-                      gateway_handle: null
-                      id: null
-                      last_name: Doe
-                      masked_card_number: XXXX-XXXX-XXXX-4242
-                      payment_type: credit_card
-                      site_gateway_setting_id: 104
-                      vault_token: cus_Koo8fbsumxWTht
-                properties:
-                  payment_profile:
-                    type: object
-                    required:
-                      - billing_address
-                      - billing_city
-                      - billing_country
-                      - billing_state
-                      - billing_zip
-                      - card_type
-                      - current_vault
-                      - disabled
-                      - expiration_month
-                      - expiration_year
-                      - first_name
-                      - last_name
-                      - masked_card_number
-                      - payment_type
-                      - site_gateway_setting_id
-                      - vault_token
-                    properties:
-                      billing_address:
-                        type: string
-                        minLength: 1
-                      billing_address_2:
-                        type: string
-                      billing_city:
-                        type: string
-                        minLength: 1
-                      billing_country:
-                        type: string
-                        minLength: 1
-                      billing_state:
-                        type: string
-                        minLength: 1
-                      billing_zip:
-                        type: string
-                        minLength: 1
-                      card_type:
-                        type: string
-                        minLength: 1
-                      current_vault:
-                        type: string
-                        minLength: 1
-                      customer_id:
-                        type: "null"
-                      customer_vault_token:
-                        type: "null"
-                      disabled:
-                        type: boolean
-                      expiration_month:
-                        type: number
-                      expiration_year:
-                        type: number
-                      first_name:
-                        type: string
-                        minLength: 1
-                      gateway_handle:
-                        type: "null"
-                      id:
-                        type: "null"
-                      last_name:
-                        type: string
-                        minLength: 1
-                      masked_card_number:
-                        type: string
-                        minLength: 1
-                      payment_type:
-                        type: string
-                        minLength: 1
-                      site_gateway_setting_id:
-                        type: number
-                      vault_token:
-                        type: string
-                        minLength: 1
-                required:
-                  - payment_profile
+                $ref: "../components/schemas/Get-One-Time-Token-Response.yaml"
         "404":
           description: Not Found
           content:
@@ -18507,130 +18251,6 @@ components:
                 plan_amount_in_cents: 0
                 usage_amount_in_cents: 0
       title: Subscription-MRR
-    Site:
-      type: object
-      examples: []
-      title: Site
-      description: ""
-      properties:
-        site:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            subdomain:
-              type: string
-            currency:
-              type: string
-            seller_id:
-              type: integer
-            non_primary_currencies:
-              type: array
-              items:
-                type: string
-            relationship_invoicing_enabled:
-              type: boolean
-            customer_hierarchy_enabled:
-              type: boolean
-            whopays_enabled:
-              type: boolean
-            whopays_default_payer:
-              type: string
-            allocation_settings:
-              type: object
-              properties:
-                upgrade_charge:
-                  type:
-                    - string
-                    - "null"
-                downgrade_credit:
-                  type:
-                    - string
-                    - "null"
-                accrue_charge:
-                  type:
-                    - boolean
-            default_payment_collection_method:
-              type: string
-            organization_address:
-              type: object
-              properties:
-                street:
-                  type:
-                    - string
-                    - "null"
-                line2:
-                  type:
-                    - string
-                    - "null"
-                city:
-                  type:
-                    - string
-                    - "null"
-                state:
-                  type:
-                    - string
-                    - "null"
-                zip:
-                  type:
-                    - string
-                    - "null"
-                country:
-                  type:
-                    - string
-                    - "null"
-                name:
-                  type:
-                    - string
-                    - "null"
-                phone:
-                  type:
-                    - string
-                    - "null"
-            tax_configuration:
-              type: object
-              properties:
-                kind:
-                  type: string
-                  default: custom
-                  enum:
-                    - custom
-                    - managed avalara
-                    - linked avalara
-                    - digital river
-                fully_configured:
-                  type: boolean
-                  default: false
-                  description: "Returns `true` when Chargify has been properly configured to charge tax using the specified tax system. More details about taxes: https://maxio-chargify.zendesk.com/hc/en-us/articles/5405488905869-Taxes-Introduction"
-                destination_address:
-                  type: string
-                  enum:
-                    - shipping_then_billing
-                    - billing_then_shipping
-                    - shipping_only
-                    - billing_only
-            net_terms:
-              type: object
-              properties:
-                default_net_terms:
-                  type: number
-                  default: 0
-                automatic_net_terms:
-                  type: number
-                  default: 0
-                remittance_net_terms:
-                  type: number
-                  default: 0
-                net_terms_on_remittance_signups_enabled:
-                  type: boolean
-                  default: false
-                custom_net_terms_enabled:
-                  type: boolean
-                  default: false
-            test:
-              type: boolean
     Batch-Job:
       title: Batch-Job
       x-stoplight:

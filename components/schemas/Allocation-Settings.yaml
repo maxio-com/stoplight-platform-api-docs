@@ -1,0 +1,13 @@
+title: Allocation Settings
+type: object
+properties:
+  upgrade_charge:
+    type:
+      - string
+      - "null"
+  downgrade_credit:
+    type:
+      - string
+      - "null"
+  accrue_charge:
+    type: boolean
