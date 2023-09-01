@@ -1,0 +1,21 @@
+title: List Subcription Group Prepayment Item
+type: object
+properties:
+  id:
+    type: number
+  subscription_group_uid:
+    type: string
+  amount_in_cents:
+    type: number
+  remaining_amount_in_cents:
+    type: number
+  details:
+    type: string
+  external:
+    type: boolean
+  memo:
+    type: string
+  payment_type:
+    $ref: "./Prepayment-Method.yaml"
+  created_at:
+    type: string
