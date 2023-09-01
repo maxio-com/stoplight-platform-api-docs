@@ -1,0 +1,12 @@
+title: Update Segment
+type: object
+properties:
+  pricing_scheme:
+    type: string
+    description: "The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#price-bracket-rules) for an overview of pricing schemes."
+  prices:
+    type: array
+    items:
+      $ref: "./Create-Or-Update-Segment-Price.yaml"
+required:
+  - pricing_scheme

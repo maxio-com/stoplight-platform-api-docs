@@ -1,0 +1,11 @@
+title: Customer Custom Fields Change
+type: object
+properties:
+  before:
+    type: array
+    items:
+      $ref: "./Proforma-Custom-Field.yaml"
+  after:
+    type: array
+    items:
+      $ref: "./Proforma-Custom-Field.yaml"

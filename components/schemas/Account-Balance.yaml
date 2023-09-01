@@ -1,0 +1,6 @@
+title: Account Balance
+type: object
+properties:
+  balance_in_cents:
+    type: integer
+    description: The balance in cents.

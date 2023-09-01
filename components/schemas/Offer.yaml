@@ -1,0 +1,47 @@
+title: Offer
+type: object
+properties:
+  id:
+    type: integer
+  site_id:
+    type: integer
+  product_family_id:
+    type: integer
+  product_id:
+    type: integer
+  product_price_point_id:
+    type: integer
+  product_revisable_number:
+    type: integer
+  name:
+    type: string
+  handle:
+    type: string
+  description:
+    type: string
+  created_at:
+    type: string
+  updated_at:
+    type: string
+  archived_at:
+    type: "null"
+  offer_items:
+    type: array
+    items:
+      $ref: "./Offer-Item.yaml"
+  offer_discounts:
+    type: array
+    items:
+      $ref: "./Offer-Discount.yaml"
+  product_family_name:
+    type: string
+  product_name:
+    type: string
+  product_price_point_name:
+    type: string
+  product_price_in_cents:
+    type: integer
+  offer_signup_pages:
+    type: array
+    items:
+      $ref: "./Offer-Signup-Page.yaml"

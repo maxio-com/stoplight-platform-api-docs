@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       sdkType:
-        description: 'SDK type'
+        description: "SDK type"
         required: true
-        default: 'All'
+        default: "All"
         type: choice
         options:
           - All
@@ -14,11 +14,11 @@ on:
           - Ruby
           - Js
       prTitle:
-        description: 'PR summary'
+        description: "PR summary"
         required: true
         type: string
       prDescription:
-        description: 'PR description'
+        description: "PR description"
         type: string
         required: true
 env:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: maxio-com/sdk-generator
-          ref: refs/tags/v1.0.7
+          ref: refs/tags/v1.0.8
           path: sdk-generator
           token: ${{ secrets.SDK_GENERATOR_TOKEN }}
       - name: Output Inputs
@@ -53,9 +53,10 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
       - name: Publish SDKs
         shell: bash
-        run: ./gradlew clean publish${{ inputs.sdkType }}Sdk -PoverrideApiDocsRelativePath=.. -PreleaseTitle='${{ inputs.prTitle }}'
+        run:
+          ./gradlew clean publish${{ inputs.sdkType }}Sdk -PoverrideApiDocsRelativePath=.. -PreleaseTitle='${{ inputs.prTitle }}'
           -PreleaseMessage='${{ inputs.prDescription }}' -PreleaseBranch='release-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}'

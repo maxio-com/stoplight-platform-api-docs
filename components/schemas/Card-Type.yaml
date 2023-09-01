@@ -1,0 +1,17 @@
+title: Card Type
+type: string
+description: The type of card used.
+enum:
+  - bogus
+  - visa
+  - master
+  - discover
+  - american_express
+  - diners_club
+  - jcb
+  - switch
+  - solo
+  - dankort
+  - maestro
+  - laser
+  - forbrugsforeningen

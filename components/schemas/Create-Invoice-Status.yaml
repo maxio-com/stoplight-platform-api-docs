@@ -1,0 +1,7 @@
+name: Create Invoice Status
+type: string
+enum:
+  - draft
+  - open
+example: draft
+default: open

@@ -1,0 +1,20 @@
+title: Metafield
+type: object
+properties:
+  id:
+    type: number
+  name:
+    type: string
+  scope:
+    $ref: "./Metafield-Scope.yaml"
+  data_count:
+    type: integer
+    description: the amount of subscriptions this metafield has been applied to in Chargify
+  input_type:
+    type: string
+  enum:
+    oneOf:
+      - type: "null"
+      - type: array
+        items:
+          type: string

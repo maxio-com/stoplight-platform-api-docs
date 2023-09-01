@@ -1,0 +1,24 @@
+title: Proforma Invoice Discount
+type: object
+properties:
+  title:
+    type: string
+    minLength: 1
+  source_type:
+    type: string
+    minLength: 1
+  discount_type:
+    type: string
+    minLength: 1
+  eligible_amount:
+    type: string
+    minLength: 1
+  discount_amount:
+    type: string
+    minLength: 1
+  line_item_breakouts:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: "./Proforma-Discount-Breakout.yaml"

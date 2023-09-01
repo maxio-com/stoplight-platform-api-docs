@@ -1,0 +1,11 @@
+title: Upsert Prepaid Configuration
+type: object
+properties:
+  initial_funding_amount_in_cents:
+    type: integer
+  replenish_to_amount_in_cents:
+    type: integer
+  auto_replenish:
+    type: boolean
+  replenish_threshold_amount_in_cents:
+    type: integer

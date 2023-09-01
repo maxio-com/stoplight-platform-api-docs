@@ -1,0 +1,26 @@
+title: Allocate Components
+type: object
+properties:
+  proration_upgrade_scheme:
+    type: string
+    default: no-prorate
+    description: ""
+    deprecated: true
+  proration_downgrade_scheme:
+    type: string
+    description: ""
+    default: no-prorate
+    deprecated: true
+  allocations:
+    type: array
+    items:
+      $ref: "./Create-Allocation-Request.yaml"
+  accrue_charge:
+    type: boolean
+  upgrade_charge:
+    type: string
+  downgrade_credit:
+    type: string
+  payment_collection_method:
+    $ref: "./Legacy-Collection-Method.yaml"
+    description: "(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription"

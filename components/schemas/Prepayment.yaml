@@ -1,0 +1,29 @@
+title: Prepayment
+type: object
+properties:
+  id:
+    type: number
+  subscription_id:
+    type: number
+  amount_in_cents:
+    type: number
+  remaining_amount_in_cents:
+    type: number
+  details: {}
+  external:
+    type: boolean
+  memo:
+    type: string
+    minLength: 1
+  payment_type: {}
+  created_at:
+    type: string
+    minLength: 1
+required:
+  - id
+  - subscription_id
+  - amount_in_cents
+  - remaining_amount_in_cents
+  - external
+  - memo
+  - created_at

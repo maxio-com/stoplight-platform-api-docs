@@ -1,0 +1,7 @@
+title: Bank Account Verification
+type: object
+properties:
+  deposit_1_in_cents:
+    type: integer
+  deposit_2_in_cents:
+    type: integer

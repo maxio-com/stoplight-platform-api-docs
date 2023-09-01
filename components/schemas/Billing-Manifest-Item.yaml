@@ -1,0 +1,17 @@
+title: Billing Manifest Item
+type: object
+properties:
+  transaction_type:
+    type: string
+  kind:
+    type: string
+  amount_in_cents:
+    type: integer
+  memo:
+    type: string
+  discount_amount_in_cents:
+    type: integer
+  taxable_amount_in_cents:
+    type: integer
+  component_id:
+    type: integer

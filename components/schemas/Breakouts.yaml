@@ -1,0 +1,11 @@
+title: Breakouts
+type: object
+properties:
+  plan_amount_in_cents:
+    type: integer
+  plan_amount_formatted:
+    type: string
+  usage_amount_in_cents:
+    type: integer
+  usage_amount_formatted:
+    type: string

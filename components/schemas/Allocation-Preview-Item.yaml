@@ -1,0 +1,29 @@
+title: Allocation Preview Item
+type: object
+properties:
+  component_id:
+    type: integer
+  subscription_id:
+    type: integer
+  quantity:
+    type:
+      - number
+      - integer
+  previous_quantity:
+    type: integer
+  memo:
+    type: string
+  timestamp:
+    type:
+      - string
+      - "null"
+  proration_upgrade_scheme:
+    type: string
+  proration_downgrade_scheme:
+    type: string
+  accrue_charge:
+    type: boolean
+  upgrade_charge:
+    type: string
+  downgrade_credit:
+    type: string

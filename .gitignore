@@ -6,6 +6,7 @@ log/*
 tmp/*
 .sas_ftp_cred
 **.DS_Store
+node_modules/**
 
 # Rubymine
 .idea/

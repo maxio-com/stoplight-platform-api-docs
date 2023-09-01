@@ -1,0 +1,11 @@
+title: Invoice Custom Field
+type: object
+properties:
+  name:
+    type: string
+  value:
+    type: string
+  owner_id:
+    type: number
+  owner_type:
+    type: string

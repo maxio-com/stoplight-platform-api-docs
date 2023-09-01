@@ -1,0 +1,15 @@
+title: Account Balances
+type: object
+properties:
+  open_invoices:
+    $ref: "./Account-Balance.yaml"
+    description: "The balance, in cents, of the sum of the subscription's  open, payable invoices."
+  pending_discounts:
+    $ref: "./Account-Balance.yaml"
+    description: "The balance, in cents, of the subscription's Pending Discount account."
+  service_credits:
+    $ref: "./Account-Balance.yaml"
+    description: "The balance, in cents, of the subscription's Service Credit account."
+  prepayments:
+    $ref: "./Account-Balance.yaml"
+    description: "The balance, in cents, of the subscription's Prepayment account."
