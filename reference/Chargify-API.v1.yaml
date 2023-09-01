@@ -14737,12 +14737,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepayments:
-                    type: array
-                    items:
-                      $ref: "../components/schemas/List-Subscription-Group-Prepayment.yaml"
+                $ref: "../components/schemas/List-Subscription-Group-Prepayment-Response.yaml"
               examples:
                 example-success-response:
                   value:
