@@ -14716,6 +14716,69 @@ paths:
           application/json:
             schema:
               $ref: "../components/schemas/Subscription-Group-Prepayment-Request.yaml"
+    get:
+      summary: List Prepayments
+      tags:
+        - Subscription Group Invoice Account
+      operationId: listPrepaymentsForSubscriptionGroup
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/List-Subscription-Group-Prepayment-Response.yaml"
+              examples:
+                example-success-response:
+                  value:
+                    prepayments:
+                      - prepayment:
+                          id: 142
+                          subscription_group_uid: grp_b4qhx3bvx72t8
+                          amount_in_cents: 10000
+                          remaining_amount_in_cents: 10000
+                          details: test
+                          external: true
+                          memo: test
+                          payment_type: cash
+                          created_at: "2023-06-21T04:37:02-04:00"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      security:
+        - BasicAuth: []
+      parameters:
+        - schema:
+            $ref: "../components/schemas/List-Subscription-Group-Prepayment-Date-Field.yaml"
+          in: query
+          name: "filter[date_field]"
+          description: |-
+            The type of filter you would like to apply to your search.
+            Use in query: `filter[date_field]=created_at`.
+        - schema:
+            type: string
+            example: "2011-12-15"
+          in: query
+          name: "filter[end_date]"
+          description: |-
+            The end date (format YYYY-MM-DD) with which to filter the date_field.
+            Returns prepayments with a timestamp up to and including 11:59:59PM in your site's time zone on the date specified.
+            Use in query: `filter[end_date]=2011-12-15`.
+        - schema:
+            type: string
+            example: "2011-12-15"
+          in: query
+          name: "filter[start_date]"
+          description: |-
+            The start date (format YYYY-MM-DD) with which to filter the date_field.
+            Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site's time zone on the date specified.
+            Use in query: `filter[start_date]=2011-12-15`.
+        - $ref: "../components/parameters/page.yaml"
+        - $ref: "../components/parameters/per-page.yaml"
+      description: This request will list a subscription group's prepayments.
   "/subscription_groups/{uid}/service_credits.json":
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
