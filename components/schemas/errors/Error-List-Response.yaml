@@ -1,0 +1,10 @@
+title: Error List Response
+type: object
+description: Error which contains list of messages.
+properties:
+  errors:
+    type: array
+    items:
+      type: string
+required:
+  - errors
