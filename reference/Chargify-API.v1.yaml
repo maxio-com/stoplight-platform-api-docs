@@ -11120,24 +11120,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                chargify:
-                  type: object
-                  properties:
-                    timestamp:
-                      type: string
-                      description: "This timestamp determines what billing period the event will be billed in. If your request payload does not include it, Chargify will add `chargify.timestamp` to the event payload and set the value to `now`."
-                    id:
-                      type: string
-                      description: "A unique ID set by Chargify. Please note that this field is reserved. If `chargify.id` is present in the request payload, it will be overwritten. "
-                    created_at:
-                      type: string
-                      description: "An ISO-8601 timestamp, set by Chargify at the time each event is recorded. Please note that this field is reserved. If `chargify.created_at` is present in the request payload, it will be overwritten. "
-                    uniqueness_token:
-                      type: string
-                      description: User-defined string scoped per-stream. Duplicate events within a stream will be silently ignored. Tokens expire after 31 days.
-                      maxLength: 64
+              $ref: "../components/schemas/Ebb-Event.yaml"
             examples:
               Example:
                 value:
@@ -11146,6 +11129,13 @@ paths:
                     timestamp: "2020-02-27T17:45:50-05:00"
                   messages: 150
                   country: US
+                  customer:
+                    name: John
+                    lastName: Doe
+                    address:
+                      street: Maple Street
+                      zip: 4888
+                      state: MA
     servers:
       - url: "https://events.chargify.com"
         description: Production server
@@ -11187,7 +11177,7 @@ paths:
             schema:
               type: array
               items:
-                type: object
+                $ref: "../components/schemas/Ebb-Event.yaml"
     servers:
       - url: "https://events.chargify.com"
         description: Production server
@@ -17043,28 +17033,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    subscriptions_mrr: []
-                properties:
-                  subscriptions_mrr:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Subscription-MRR"
-                required:
-                  - subscriptions_mrr
-              examples:
-                example-1:
-                  value:
-                    subscriptions_mrr:
-                      - subscriptions_mrr:
-                          - subscription_id: 0
-                            mrr_amount_in_cents: 0
-                            breakouts:
-                              plan_amount_in_cents: 0
-                              usage_amount_in_cents: 0
+                $ref: "../components/schemas/Subscription-Mrr-Response.yaml"
         "400":
           description: Bad Request
           content:
@@ -17949,11 +17918,7 @@ paths:
           description: Choose to include a proforma invoice preview for the first renewal
   "/api_exports/proforma_invoices/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Proforma Invoices
       tags:
@@ -17964,13 +17929,7 @@ paths:
 
         Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
       responses:
         "200":
@@ -17985,11 +17944,7 @@ paths:
           description: Not Found
   "/api_exports/invoices/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Invoices
       tags:
@@ -18011,21 +17966,11 @@ paths:
         "404":
           description: Not Found
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
   "/api_exports/subscriptions/{batch_id}/rows.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: List Exported Subscriptions
       tags:
@@ -18047,13 +17992,7 @@ paths:
         "404":
           description: Not Found
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 10000
-          in: query
-          name: per_page
-          description: This parameter indicates how many records to fetch in each request. Default value is 100. The maximum allowed values is 10000; any per_page value over 10000 will be changed to 10000.
+        - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
   /api_exports/proforma_invoices.json:
     post:
@@ -18071,7 +18010,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
         "409":
@@ -18101,7 +18040,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
         "409":
@@ -18127,7 +18066,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "409":
           description: Conflict
           content:
@@ -18140,11 +18079,7 @@ paths:
     parameters: []
   "/api_exports/proforma_invoices/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Proforma Invoices Export
       tags:
@@ -18157,16 +18092,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/api_exports/invoices/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Invoices Export
       tags:
@@ -18179,16 +18110,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/api_exports/subscriptions/{batch_id}.json":
     parameters:
-      - schema:
-          type: string
-        name: batch_id
-        in: path
-        required: true
+      - $ref: "../components/parameters/batch-id-path.yaml"
     get:
       summary: Read Subscriptions Export
       tags:
@@ -18201,7 +18128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Batch-Job"
+                $ref: "../components/schemas/Batch-Job-Response.yaml"
         "404":
           description: Not Found
   "/subscriptions/{subscription_id}/request_payment_profiles_update.json":
@@ -18255,77 +18182,6 @@ servers:
 security:
   - BasicAuth: []
 components:
-  schemas:
-    Subscription-MRR:
-      description: ""
-      type: object
-      properties:
-        subscriptions_mrr:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            required:
-              - subscription_id
-              - mrr_amount_in_cents
-            properties:
-              subscription_id:
-                type: number
-              mrr_amount_in_cents:
-                type: number
-              breakouts:
-                type: object
-                properties:
-                  plan_amount_in_cents:
-                    type: number
-                  usage_amount_in_cents:
-                    type: number
-                required:
-                  - plan_amount_in_cents
-                  - usage_amount_in_cents
-      required:
-        - subscriptions_mrr
-      x-examples:
-        example-1:
-          subscriptions_mrr:
-            - subscription_id: 17
-              mrr_amount_in_cents: 3558750
-              breakouts:
-                plan_amount_in_cents: 2342084
-                usage_amount_in_cents: 1216667
-      examples:
-        - subscriptions_mrr:
-            - subscription_id: 0
-              mrr_amount_in_cents: 0
-              breakouts:
-                plan_amount_in_cents: 0
-                usage_amount_in_cents: 0
-      title: Subscription-MRR
-    Batch-Job:
-      title: Batch-Job
-      x-stoplight:
-        id: igb6nbuojdj23
-      type: object
-      properties:
-        batchjob:
-          type: object
-          properties:
-            id:
-              type: integer
-            finished_at:
-              type:
-                - string
-                - "null"
-            row_count:
-              type:
-                - integer
-                - "null"
-            created_at:
-              type:
-                - string
-                - "null"
-            completed:
-              type: string
   securitySchemes:
     BasicAuth:
       type: http
