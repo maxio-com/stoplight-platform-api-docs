@@ -1,5 +1,5 @@
 title: Item Category
-type: enum
+type: string
 enum:
   - "Business Software"
   - "Consumer Software"
