@@ -1,0 +1,10 @@
+title: Subscription MRR Breakout
+type: object
+properties:
+  plan_amount_in_cents:
+    type: number
+  usage_amount_in_cents:
+    type: number
+required:
+  - plan_amount_in_cents
+  - usage_amount_in_cents

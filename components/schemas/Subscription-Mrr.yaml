@@ -1,0 +1,12 @@
+title: Subscription MRR
+type: object
+properties:
+  subscription_id:
+    type: number
+  mrr_amount_in_cents:
+    type: number
+  breakouts:
+    $ref: "./Subscription-Mrr-Breakout.yaml"
+required:
+  - subscription_id
+  - mrr_amount_in_cents
