@@ -4103,11 +4103,11 @@ paths:
   "/components/{component_id}.json":
     parameters:
       - schema:
-          type: integer
+          type: string
         name: component_id
         in: path
         required: true
-        description: The id of the component
+        description: The id or handle of the component
     put:
       summary: Update Component
       tags:
