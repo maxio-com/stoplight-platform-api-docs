@@ -1,4 +1,4 @@
-title: Create Currency Price
+title: Create Currency Prices Request
 type: object
 properties:
   currency_prices:
