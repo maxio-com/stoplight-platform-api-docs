@@ -1,7 +1,6 @@
 title: Update Component
 type: object
 properties:
-  # TODO: Figure out how to dry it up
   handle:
     type: string
   name:

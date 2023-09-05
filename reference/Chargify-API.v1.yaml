@@ -3874,10 +3874,6 @@ paths:
                       created_at: "2019-08-02T05:54:53-04:00"
                       default_price_point_name: Original
                       product_family_name: Chargify
-            application/xml:
-              schema:
-                type: object
-                properties: {}
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -3891,7 +3887,6 @@ paths:
                     errors:
                       - "Name: cannot be blank."
       operationId: updateProductFamilyComponent
-      parameters: []
       description: |-
         This request will update a component from a specific product family.
 
