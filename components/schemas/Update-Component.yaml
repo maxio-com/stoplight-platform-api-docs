@@ -26,6 +26,5 @@ properties:
   display_on_hosted_page:
     type: boolean
   upgrade_charge:
-    allOf:
-      $ref: "./Credit-Type.yaml"
+    $ref: "./Credit-Type.yaml"
     description: "The type of charge to be applied when a component is upgraded. Valid values are: `prorated`, `full`, `none`."
