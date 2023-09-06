@@ -471,14 +471,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -562,12 +555,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -865,18 +853,8 @@ paths:
             application/json:
               schema:
                 anyOf:
-                  - properties:
-                      errors:
-                        type: object
-                        properties:
-                          customer:
-                            type: string
-                  - properties:
-                      errors:
-                        type: array
-                        items:
-                          type: string
-                type: object
+                  - $ref: "../components/schemas/errors/Customer-Error-Response.yaml"
+                  - $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example-1:
                   value:
@@ -1139,12 +1117,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1192,6 +1165,7 @@ paths:
           in: query
           name: reference
           required: true
+          description: Customer reference
       x-internal: false
   "/customers/{customer_id}/subscriptions.json":
     parameters:
@@ -1230,12 +1204,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1295,12 +1264,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1362,12 +1326,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -1524,12 +1483,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -2109,12 +2063,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3528,12 +3477,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3877,12 +3821,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -5104,12 +5043,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6563,12 +6497,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6645,12 +6574,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7708,12 +7632,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8325,12 +8244,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8386,12 +8300,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8436,12 +8345,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -9302,17 +9206,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  Example:
-                    errors:
-                      - "Quantity: cannot be blank."
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -9667,12 +9561,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -10015,12 +9904,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -11907,12 +11791,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -12140,12 +12019,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example-1:
                   value:
@@ -12558,12 +12432,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -12847,12 +12716,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13172,12 +13036,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13284,12 +13143,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -13991,12 +13845,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14499,12 +14348,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14539,12 +14383,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14567,12 +14406,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14613,12 +14447,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14698,12 +14527,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14807,12 +14631,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14858,12 +14677,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14950,12 +14764,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15010,12 +14819,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15183,12 +14987,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15442,12 +15241,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15781,12 +15575,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15907,12 +15696,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15959,18 +15743,10 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      required: []
-                      properties: {}
-                required:
-                  - errors
-                x-examples:
-                  example-1:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                example-1:
+                  value:
                     errors:
                       - this subscription is not eligible to create proforma invoices
       operationId: previewProformaInvoice
@@ -15997,12 +15773,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16080,12 +15851,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16096,12 +15862,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16253,12 +16014,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16269,12 +16025,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16302,17 +16053,12 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: string
-                    minLength: 1
-                required:
-                  - errors
-                x-examples:
-                  example-1:
-                    errors: Chargify token not found
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                example-1:
+                  value:
+                    errors:
+                      - Chargify token not found
       operationId: readOneTimeToken
       x-internal: false
       description: |-
@@ -16327,6 +16073,7 @@ paths:
         name: chargify_token
         in: path
         required: true
+        description: Chargify Token
   /subscriptions_components.json:
     get:
       summary: List Subscription Components for Site
@@ -16450,6 +16197,8 @@ paths:
           description:
             "Allows fetching components allocation with matching currency based on provided values.
             Use in query `filter[currencies]=USD,EUR`."
+          style: form
+          explode: false
         - schema:
             type: array
             items:
@@ -16909,19 +16658,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - Cannot generate an invoice in advance for subscription in the group
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Nothing due:
                   value:
@@ -17110,6 +16847,7 @@ paths:
         name: prepayment_id
         in: path
         required: true
+        description: id of prepayment
     post:
       summary: Refund Prepayment
       tags:
@@ -17350,14 +17088,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
       operationId: issueInvoice
       requestBody:
         content:
@@ -17414,19 +17145,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - error message
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Invalid date format:
                   value:
@@ -17546,12 +17265,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 example:
                   value:
@@ -17592,6 +17306,8 @@ paths:
               - 3
           in: query
           name: "filter[ids]"
+          style: form
+          explode: false
           description: "Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`."
         - schema:
             type: string
@@ -17750,20 +17466,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
-                x-examples:
-                  example-1:
-                    errors:
-                      base:
-                        - Couldn't find Product by 1
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Product invalid:
                   value:
@@ -17851,20 +17554,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
-                x-examples:
-                  example-1:
-                    errors:
-                      base:
-                        - Couldn't find Product by 6067
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Missing product:
                   value:
@@ -18018,15 +17708,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-              examples: {}
-            application/xml:
-              schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
   /api_exports/invoices.json:
     post:
       summary: Create Invoices Export
@@ -18048,10 +17730,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
     parameters: []
   /api_exports/subscriptions.json:
     post:
@@ -18072,10 +17751,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
     parameters: []
   "/api_exports/proforma_invoices/{batch_id}.json":
     parameters:
@@ -18148,16 +17824,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: string
-                x-examples:
-                  Example 1:
-                    errors:
-                      - "Too many requests. You can perform 5 requests within 00:30:00"
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Too many requests:
                   value:
