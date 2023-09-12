@@ -86,10 +86,12 @@ properties:
     type: string
     description: The memo printed on invoices of any collection type.  This message is in control of the merchant.
   billing_address:
-    $ref: "./Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Invoice-Address.yaml"
     description: The invoice billing address.
   shipping_address:
-    $ref: "./Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Invoice-Address.yaml"
     description: The invoice shipping address.
   subtotal_amount:
     type: string

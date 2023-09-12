@@ -3,20 +3,26 @@ type: object
 description: "Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings."
 properties:
   csv:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from the csv export.
   invoices:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from invoices.
   statements:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from statements.
   portal:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from the portal.
   public_show:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from being viewable by your ecosystem.
   public_edit:
-    $ref: "./Include-Option.yaml"
+    allOf:
+      - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from being edited by your ecosystem.

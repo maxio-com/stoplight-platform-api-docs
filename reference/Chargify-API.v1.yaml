@@ -10900,7 +10900,8 @@ paths:
         - name: metadata
           in: query
           schema:
-            additionalProperties: true
+            additionalProperties:
+              type: string
           style: deepObject
           explode: true
           description:
