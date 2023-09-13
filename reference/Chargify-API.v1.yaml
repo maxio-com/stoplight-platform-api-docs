@@ -6098,7 +6098,7 @@ paths:
 
         ## 3D Secure - Checkout
 
-        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the payment profile is created; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077#psd2-flows-pre-authentication-and-post-authentication). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
@@ -13064,7 +13064,7 @@ paths:
 
         ## Migration 3D Secure - Stripe
 
-        It may happen that a payment needs 3D Secure Authentication when the subscription is migrated to a new product; this is referred to in our help docs as a [post-authentication flow](https://chargify.zendesk.com/hc/en-us/articles/4407754086811). The server returns `422 Unprocessable Entity` in this case with the following response:
+        It may happen that a payment needs 3D Secure Authentication when the subscription is migrated to a new product; this is referred to in our help docs as a [post-authentication flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405177432077#psd2-flows-pre-authentication-and-post-authentication). The server returns `422 Unprocessable Entity` in this case with the following response:
 
         ```json
         {
