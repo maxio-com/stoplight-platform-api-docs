@@ -1998,10 +1998,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
@@ -2227,11 +2224,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-30.yaml"
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-            example: created_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: "filter[date_field]"
           description:
@@ -2572,10 +2565,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-30.yaml"
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           description: "The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search."
           name: date_field
@@ -2672,11 +2662,7 @@ paths:
             "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date.
             Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`."
         - schema:
-            type: string
-            enum:
-              - created_at
-              - updated_at
-            example: updated_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: "filter[date_field]"
           description:
@@ -3248,9 +3234,7 @@ paths:
           name: direction
         - $ref: "../components/parameters/event-type-filter.yaml"
         - schema:
-            type: string
-            enum:
-              - created_at
+            $ref: "../components/schemas/List-Events-Date-Field.yaml"
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
@@ -3984,7 +3968,7 @@ paths:
       operationId: listComponents
       parameters:
         - schema:
-            $ref: "../components/schemas/List-Components-Date-Field.yaml"
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: date_field
           description: The type of filter you would like to apply to your search.
@@ -4216,11 +4200,7 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
-            type: string
-            enum:
-              - updated_at
-              - created_at
-            example: created_at
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: date_field
           description:
@@ -4982,20 +4962,13 @@ paths:
           name: include_archived
           description: Include archived products
         - schema:
-            type: string
-            example: prepaid_product_price_point
-            enum:
-              - prepaid_product_price_point
+            $ref: "../components/schemas/List-Products-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=prepaid_product_price_point`."
         - schema:
-            type: string
-            enum:
-              - "null"
-              - not_null
-            example: not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: "filter[prepaid_product_price_point][product_price_point_id]"
           description:
@@ -8817,10 +8790,7 @@ paths:
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
       parameters:
         - schema:
-            type: string
-            example: updated_at
-            enum:
-              - updated_at
+            $ref: "../components/schemas/List-Subscription-Components-Date-Field.yaml"
           in: query
           name: date_field
           description: "The type of filter you'd like to apply to your search.
@@ -8837,10 +8807,7 @@ paths:
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date."
           name: end_datetime
         - schema:
-            type: string
-            enum:
-              - not_null
-            example: not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: price_point_ids
           description:
@@ -8862,11 +8829,7 @@ paths:
             Use in query `product_family_ids=1,2,3`."
           name: product_family_ids
         - schema:
-            type: string
-            enum:
-              - id
-              - updated_at
-            example: updated_at
+            $ref: "../components/schemas/List-Subscription-Components-Sort.yaml"
           in: query
           name: sort
           description: "The attribute by which to sort.
@@ -8882,10 +8845,7 @@ paths:
           name: start_datetime
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date."
         - schema:
-            type: string
-            enum:
-              - subscription
-            example: subscription
+            $ref: "../components/schemas/List-Subscription-Components-Include.yaml"
           in: query
           description: "Allows including additional data in the response.
             Use in query `include=subscription`."
@@ -11023,7 +10983,8 @@ paths:
         - name: metadata
           in: query
           schema:
-            additionalProperties: true
+            additionalProperties:
+              type: string
           style: deepObject
           explode: true
           description:
@@ -17113,28 +17074,18 @@ paths:
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
             type: boolean
-            enum:
-              - true
-              - false
             example: true
           in: query
           name: include_archived
           description: "Include archived products. Use in query: `include_archived=true`."
         - schema:
-            type: string
-            example: prepaid_product_price_point
-            enum:
-              - prepaid_product_price_point
+            $ref: "../components/schemas/List-Products-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=prepaid_product_price_point`."
         - schema:
-            type: string
-            example: not_null
-            enum:
-              - "null"
-              - not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: "filter[prepaid_product_price_point][product_price_point_id]"
           description:
@@ -17238,7 +17189,7 @@ paths:
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
       parameters:
         - schema:
-            $ref: "../components/schemas/List-Components-Price-Points-Date-Field.yaml"
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           name: "filter[date_field]"
           description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
@@ -17299,12 +17250,7 @@ paths:
           style: form
           explode: false
         - schema:
-            type: string
-            default: "null"
-            example: not_null
-            enum:
-              - "null"
-              - not_null
+            $ref: "../components/schemas/Include-Not-Null.yaml"
           in: query
           name: "filter[archived_at]"
           description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
@@ -17365,7 +17311,7 @@ paths:
           name: "filter[archived_at]"
           description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
         - schema:
-            $ref: "../components/schemas/List-Products-Price-Points-Date-Field.yaml"
+            $ref: "../components/schemas/Basic-Date-Field.yaml"
           in: query
           description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
           name: "filter[date_field]"

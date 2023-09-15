@@ -16,13 +16,16 @@ properties:
     type: string
     description: A custom memo can be sent to override the site's default.
   seller_address:
-    $ref: "./Create-Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Create-Invoice-Address.yaml"
     description: Overrides the defaults for the site
   billing_address:
-    $ref: "./Create-Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Create-Invoice-Address.yaml"
     description: Overrides the default for the customer
   shipping_address:
-    $ref: "./Create-Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Create-Invoice-Address.yaml"
     description: Overrides the default for the customer
   coupons:
     type: array

@@ -24,10 +24,12 @@ properties:
     type: boolean
     description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided."
   downgrade_credit:
-    $ref: "./Credit-Type.yaml"
+    allOf:
+      - $ref: "./Credit-Type.yaml"
     description: The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided.
   upgrade_charge:
-    $ref: "./Credit-Type.yaml"
+    allOf:
+      - $ref: "./Credit-Type.yaml"
     description: The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided.
   price_point_id:
     type:

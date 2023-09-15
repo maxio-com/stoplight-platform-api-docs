@@ -50,16 +50,20 @@ properties:
     type: string
     description: "The memo printed on credit note, which is a description of the reason for the credit."
   seller:
-    $ref: "./Invoice-Seller.yaml"
+    allOf:
+      - $ref: "./Invoice-Seller.yaml"
     description: Information about the seller (merchant) listed on the masthead of the credit note.
   customer:
-    $ref: "./Invoice-Customer.yaml"
+    allOf:
+      - $ref: "./Invoice-Customer.yaml"
     description: Information about the customer who is owner or recipient the credited subscription.
   billing_address:
-    $ref: "./Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Invoice-Address.yaml"
     description: The billing address of the credit subscription.
   shipping_address:
-    $ref: "./Invoice-Address.yaml"
+    allOf:
+      - $ref: "./Invoice-Address.yaml"
     description: The shipping address of the credited subscription.
   subtotal_amount:
     type: string
