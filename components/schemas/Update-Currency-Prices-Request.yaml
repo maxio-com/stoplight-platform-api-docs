@@ -1,4 +1,4 @@
-title: Update Currency Price
+title: Update Currency Prices Request
 type: object
 properties:
   currency_prices:

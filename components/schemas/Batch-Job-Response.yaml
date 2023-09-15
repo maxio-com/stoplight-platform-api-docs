@@ -1,4 +1,4 @@
-title: Batch-Job
+title: Batch Job Response
 type: object
 properties:
   batchjob:

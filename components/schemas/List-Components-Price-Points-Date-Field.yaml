@@ -1,6 +1,0 @@
-title: List Components Price Points Date Field
-type: string
-enum:
-  - created_at
-  - updated_at
-example: created_at
