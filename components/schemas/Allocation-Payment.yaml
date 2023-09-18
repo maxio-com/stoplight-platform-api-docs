@@ -4,8 +4,8 @@ description: "Information for captured payment, if applicable"
 properties:
   id:
     type: number
-  amout_in_cents:
-    type: string
+  amount_in_cents:
+    type: integer
   success:
     type: boolean
   memo:
