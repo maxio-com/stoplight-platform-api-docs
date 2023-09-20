@@ -54,6 +54,8 @@ jobs:
           distribution: "temurin"
       - name: Build SDKs
         shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
   run-open-api-generator:
     runs-on: ubuntu-latest
