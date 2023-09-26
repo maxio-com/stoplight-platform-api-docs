@@ -3766,6 +3766,64 @@ paths:
         This request will return information regarding a component from a specific product family.
 
         You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
+    put:
+      summary: Update Product Family Component
+      tags:
+        - Components
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../components/schemas/Component-Response.yaml
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 399853
+                      name: Annual Support Services
+                      pricing_scheme: null
+                      unit_name: on/off
+                      unit_price: "100.0"
+                      product_family_id: 997233
+                      price_per_unit_in_cents: null
+                      kind: on_off_component
+                      archived: false
+                      taxable: true
+                      description: Prepay for support services
+                      default_price_point_id: 121003
+                      price_point_count: 4
+                      price_points_url: "https://general-goods.chargify.com/components/399853/price_points"
+                      tax_code: D0000000
+                      recurring: true
+                      upgrade_charge: null
+                      downgrade_credit: null
+                      created_at: "2019-08-02T05:54:53-04:00"
+                      default_price_point_name: Original
+                      product_family_name: Chargify
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Name: cannot be blank."
+      operationId: updateProductFamilyComponent
+      description: |-
+        This request will update a component from a specific product family.
+
+        You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/Update-Component-Request.yaml"
     delete:
       summary: Archive Component
       tags:
@@ -3965,6 +4023,31 @@ paths:
             "Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
             Use in query `filter[use_site_exchange_rate]=true`."
       description: This request will return a list of components for a site.
+  "/components/{component_id}.json":
+    parameters:
+      - schema:
+          type: string
+        name: component_id
+        in: path
+        required: true
+        description: The id or handle of the component
+    put:
+      summary: Update Component
+      tags:
+        - Components
+      responses:
+        "200":
+          description: Updated
+      operationId: updateComponent
+      description: |-
+        This request will update a component.
+
+        You may read the component by either the component's id or handle. When using the handle, it must be prefixed with `handle:`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/Update-Component-Request.yaml"
   "/components/{component_id}/price_points/{price_point_id}/default.json":
     parameters:
       - schema:

@@ -84,10 +84,7 @@ properties:
     type: integer
     description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
   item_category:
-    type:
-      - string
-      - "null"
-    description: "One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other"
+    $ref: "./Component-Item-Category-Type.yaml"
   allow_fractional_quantities:
     type: boolean
   use_site_exchange_rate:
