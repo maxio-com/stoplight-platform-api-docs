@@ -1,0 +1,20 @@
+name: Push changes to APIMatic
+on:
+  push:
+    branches:
+      - "main"
+      - "apimatic-push"
+jobs:
+  apimatic-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Zip files
+        run: zip -r maxio-api.zip ./reference ./components
+      - name: Import to APIMatic
+        run: | 
+          curl -X PUT --url 'https://www.apimatic.io/api/api-entities/${{ secrets.API_ENTITY_ID }}/import-via-file' \ 
+            -H 'content-type:multipart/form-data' \
+            -H 'Authorization:X-Auth-Key ${{ secrets.APIMATIC_API_KEY }}' \
+            -F 'file=@maxio-api.zip'
