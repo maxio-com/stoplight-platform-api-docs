@@ -1,0 +1,10 @@
+title: Metafields Values
+type: object
+patternProperties:
+  "^.*$":
+    description: key-value pairs of custom metafield names and values
+    type: string
+additionalProperties: false
+example:
+  custom_field_name_1: "custom_field_value_1"
+  custom_field_name_2: "custom_field_value_2"
