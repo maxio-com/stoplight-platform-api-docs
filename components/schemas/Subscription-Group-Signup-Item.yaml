@@ -39,4 +39,4 @@ properties:
   calendar_billing:
     $ref: "./Calendar-Billing.yaml"
   metafields:
-    type: object
+    $ref: "./Metafields-Values.yaml"
