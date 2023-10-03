@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - "main"
-      - "apimatic-push"
 jobs:
   apimatic-push:
     runs-on: ubuntu-latest
