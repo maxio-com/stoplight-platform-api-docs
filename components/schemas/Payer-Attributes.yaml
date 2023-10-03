@@ -36,4 +36,4 @@ properties:
   tax_exempt_reason:
     type: string
   metafields:
-    type: object
+    $ref: "./Metafields-Values.yaml"
