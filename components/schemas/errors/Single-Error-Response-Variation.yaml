@@ -1,0 +1,5 @@
+title: Single Error Response Variation
+type: object
+properties:
+  errors:
+    type: string

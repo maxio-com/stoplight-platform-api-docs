@@ -1275,13 +1275,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      error:
-                        type: string
+                $ref: "../components/schemas/errors/Error-TooManyRequests.yaml"
               examples:
                 Example:
                   value:
@@ -1440,10 +1434,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-Error-Response-Variation.yaml"
               examples:
                 Example:
                   value:
