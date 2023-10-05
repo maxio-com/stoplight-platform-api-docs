@@ -2,10 +2,4 @@ title: Too Many Management Link Requests Error
 type: object
 properties:
   errors:
-    type: object
-    properties:
-      error:
-        type: string
-      new_link_available_at:
-        type: string
-        format: date-time
+    $ref: "./Too-Many-Management-Link-Requests.yaml"
