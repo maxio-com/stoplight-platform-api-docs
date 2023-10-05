@@ -1275,18 +1275,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      error:
-                        type: string
+                $ref: "../components/schemas/errors/Too-Many-Management-Link-Requests-Error.yaml"
               examples:
                 Example:
                   value:
                     errors:
                       error: Too many requests for this customer's management link
+                      new_link_available_at: 2023-10-20T10:46:56Z
       operationId: readBillingPortalLink
       description: |-
         This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
@@ -1440,10 +1435,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-String-Error-Response.yaml"
               examples:
                 Example:
                   value:
