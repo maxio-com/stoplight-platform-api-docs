@@ -1,4 +1,4 @@
-title: Error response - Too Many Requests
+title: Too Many Management Link Requests Error
 type: object
 properties:
   errors:

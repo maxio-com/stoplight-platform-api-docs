@@ -1,4 +1,4 @@
-title: Single Error Response Variation
+title: Single String Error Response
 type: object
 properties:
   errors:
