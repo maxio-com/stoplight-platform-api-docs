@@ -9,8 +9,6 @@ properties:
     type: number
   remaining_amount_in_cents:
     type: number
-  refunded_amount_in_cents:
-    type: number
   details: {}
   external:
     type: boolean
