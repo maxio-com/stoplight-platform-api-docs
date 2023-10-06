@@ -11,7 +11,7 @@ x-examples:
       external: false
       memo: sdf - Prepayment
       payment_type: null
-      created_at: '2022-02-22T14:07:00-05:00'
+      created_at: "2022-02-22T14:07:00-05:00"
 properties:
   prepayment:
     $ref: ./Prepayment.yaml
