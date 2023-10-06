@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Maxio Advanced Billing formerly Chargify API
+  title: Maxio Advanced Billing
   version: "1.0"
   contact:
     email: support@chargify.com
@@ -9,7 +9,7 @@ info:
 
     ### API Integration
 
-    Maxio Advanced Billing can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
+    Maxio Advanced Billing (formerly Chargify API) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
     ### Testing Guide
 

@@ -19,7 +19,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: 19.4
+          node-version: 18.18
       - name: Install node deps
         shell: bash
         run: npm ci
