@@ -11,13 +11,24 @@ properties:
     type: number
   refunded_amount_in_cents:
     type: number
-  details: {}
+  details:
+    type: string
+    minLength: 1
   external:
     type: boolean
   memo:
     type: string
     minLength: 1
-  payment_type: {}
+  payment_type:
+    type: string
+    enum:
+      - check
+      - cash
+      - money_order
+      - ach
+      - paypal_account
+      - credit_card_on_file
+      - other
   created_at:
     type: string
     minLength: 1
