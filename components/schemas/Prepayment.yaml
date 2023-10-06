@@ -22,7 +22,7 @@ properties:
   payment_type:
     allOf:
       - $ref: "./Prepayment-Method.yaml"
-    description: ""
+    description: The payment type of the prepayment.
   created_at:
     type: string
     minLength: 1
