@@ -17465,7 +17465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Proforma-Bad-Request-Response.yaml"
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
         "403":
           description: Forbidden
         "422":
@@ -17536,7 +17536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Proforma-Bad-Request-Response.yaml"
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
         "403":
           description: Forbidden
         "422":
