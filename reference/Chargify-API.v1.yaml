@@ -13511,7 +13511,7 @@ paths:
               schema:
                 $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
-                Product invalid:
+                Generic error:
                   value:
                     errors:
                       base:
@@ -17382,17 +17382,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
-                example-1:
+                Generic error:
                   value:
                     errors:
                       base:
