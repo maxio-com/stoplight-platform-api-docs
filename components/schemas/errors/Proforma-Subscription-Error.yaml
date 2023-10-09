@@ -1,0 +1,7 @@
+title: Proforma Subscription Error
+type: object
+properties:
+  base:
+    type: array
+    items:
+      type: string
