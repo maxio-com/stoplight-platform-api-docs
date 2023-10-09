@@ -9,13 +9,20 @@ properties:
     type: number
   remaining_amount_in_cents:
     type: number
-  details: {}
+  refunded_amount_in_cents:
+    type: number
+  details:
+    type: string
+    minLength: 1
   external:
     type: boolean
   memo:
     type: string
     minLength: 1
-  payment_type: {}
+  payment_type:
+    allOf:
+      - $ref: "./Prepayment-Method.yaml"
+    description: The payment type of the prepayment.
   created_at:
     type: string
     minLength: 1
