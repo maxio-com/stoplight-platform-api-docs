@@ -2,4 +2,8 @@ title: Error Array Response
 type: array
 properties:
   errors:
-    $ref: "./Error-Map.yaml"
+    type: array
+    items:
+      $ref: "./Single-Error-Response.yaml"
+required:
+  - errors
