@@ -1,9 +1,0 @@
-title: Error Array Response
-type: array
-properties:
-  errors:
-    type: array
-    items:
-      $ref: "./Single-Error-Response.yaml"
-required:
-  - errors

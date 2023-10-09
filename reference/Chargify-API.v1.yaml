@@ -13509,7 +13509,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Array-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+              examples:
+                Product invalid:
+                  value:
+                    errors:
+                      base:
+                        - Couldn't create Proforma Invoice
       operationId: createInvoice
       description: |-
         This endpoint will allow you to create an ad hoc invoice.
