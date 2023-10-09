@@ -14157,9 +14157,9 @@ paths:
           in: query
           name: include
           description: |-
-              A list of additional information to include in the response. The following values are supported:
+            A list of additional information to include in the response. The following values are supported:
 
-              - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
+            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
