@@ -1,5 +1,4 @@
-base:
-  type: array
-  description: the error is base if it is not directly associated with a single attribute.
-  items:
-    type: string
+type: array
+description: the error is base if it is not directly associated with a single attribute.
+items:
+  type: string
