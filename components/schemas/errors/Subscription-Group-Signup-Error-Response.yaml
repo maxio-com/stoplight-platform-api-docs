@@ -1,0 +1,7 @@
+title: Subscription Group Signup Error Response
+type: object
+properties:
+  errors:
+    $ref: "./Subscription-Group-Signup-Error.yaml"
+required:
+  - errors
