@@ -10980,7 +10980,7 @@ paths:
           schema:
             allOf:
               - $ref: "../components/schemas/Metafields-Values.yaml"
-            description: "The value of the metadata field specified in the parameter."
+            description: "A set of key/value pairs representing custom fields and their values."
           style: deepObject
           explode: true
           description: "The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
