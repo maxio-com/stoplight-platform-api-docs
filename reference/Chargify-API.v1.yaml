@@ -17466,6 +17466,13 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      subscription:
+                        base:
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":
@@ -17537,6 +17544,13 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      subscription:
+                        base:
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":

@@ -3,9 +3,3 @@ type: object
 properties:
   errors:
     $ref: "./Proforma-Error.yaml"
-x-examples:
-  example-1:
-    errors:
-      subscription:
-        base:
-          - must be an object
