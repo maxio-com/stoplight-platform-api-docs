@@ -1,7 +1,0 @@
-title: Subscription Group Subscriptions Errors Object
-type: object
-description: Object that as key have subscription position in request subscriptions array and as value subscription
-  errors object.
-properties:
-  "0":
-    $ref: "./Subscription-Error.yaml"
