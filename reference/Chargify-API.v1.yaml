@@ -14751,6 +14751,7 @@ paths:
             type: string
           in: query
           name: reference
+          description: Subscription reference
       description: Use this endpoint to find a subscription by its reference.
   "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
