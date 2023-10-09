@@ -10975,7 +10975,15 @@ paths:
             "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date.
             Use in query `end_datetime=2022-08-01 10:00:05`."
           example: "2022-08-01 10:00:05"
-        - $ref: "../components/parameters/metadata-filter.yaml"
+        - name: metadata
+          in: query
+          schema:
+            allOf:
+              - $ref: "../components/schemas/Metafields-Values.yaml"
+            description: "The value of the metadata field specified in the parameter."
+          style: deepObject
+          explode: true
+          description: "The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             $ref: "../components/schemas/Subscription-Sort.yaml"
