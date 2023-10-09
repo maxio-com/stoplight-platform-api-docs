@@ -2,11 +2,10 @@ description: ""
 type: object
 properties:
   errors:
-    $ref: "./Subscriptions-MRR-Error.yaml"
+    $ref: "./Attribute-Error.yaml"
 required:
   - errors
-x-examples:
-  example-1:
-    errors:
-      attribute:
-        - "supplied value is invalid, expected ISO 8601 format"
+examples:
+  - errors:
+    attribute:
+      - "supplied value is invalid, expected ISO 8601 format"
