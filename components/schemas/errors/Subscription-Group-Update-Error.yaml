@@ -1,0 +1,6 @@
+title: Subscription Group Update Error
+type: object
+properties:
+  members:
+    type: array
+    $ref: "./Subscription-Group-Members-Error.yaml"

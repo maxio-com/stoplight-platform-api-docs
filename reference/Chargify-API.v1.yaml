@@ -13897,19 +13897,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      customer:
-                        type: object
-                      payment_profile:
-                        type: object
-                      subscriptions:
-                        type: object
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Subscription-Group-Signup-Error-Response.yaml"
       requestBody:
         content:
           application/json:
@@ -14063,10 +14051,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-String-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14137,6 +14122,10 @@ paths:
             type: string
           in: query
           name: include
+          description: |-
+            A list of additional information to include in the response. The following values are supported:
+
+            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
@@ -14219,30 +14208,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      members:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            type:
-                              type: string
-                            message:
-                              type: string
+                $ref: "../components/schemas/errors/Subscription-Group-Update-Error-Response.yaml"
               examples:
                 Example:
                   value:
                     errors:
                       members:
-                        - id: 10101
-                          type: not_found
-                          message: Subscription could not be found
+                        id: 10101
+                        type: not_found
+                        message: Subscription could not be found
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
