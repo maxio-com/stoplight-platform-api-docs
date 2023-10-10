@@ -3,7 +3,7 @@ type: object
 properties:
   id:
     type: integer
-    description: "The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer".
+    description: "The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer."
   first_name:
     type: string
     description: The first name of the card holder.
@@ -60,12 +60,12 @@ properties:
     type:
       - string
       - "null"
-    description: "(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token".
+    description: "(only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token."
   billing_address_2:
     type:
       - string
       - "null"
-    description: "The current billing street address, second line, for the card".
+    description: "The current billing street address, second line, for the card."
   payment_type:
     $ref: "./Payment-Type.yaml"
   disabled:

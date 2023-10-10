@@ -2,11 +2,14 @@ title: Create Payment Profile Vault
 type: string
 description: The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing.
 enum:
-  - bogus
+  - adyen
   - authorizenet
-  - authorizenet_cim
+  - avalara
   - beanstream
+  - blue_snap
+  - bogus
   - braintree_blue
+  - checkout
   - cybersource
   - elavon
   - eway
@@ -15,13 +18,14 @@ enum:
   - forte
   - gocardless
   - litle
+  - maxio_payments
+  - moduslink
   - moneris
+  - nmi
   - orbital
   - payment_express
-  - paymill
   - pin
   - square
   - stripe_connect
   - trust_commerce
-  - wirecard
-  - checkout
+  - unipaas

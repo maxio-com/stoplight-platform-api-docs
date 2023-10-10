@@ -25,7 +25,7 @@ properties:
       - string
     description: "(Optional when performing a Import via vault_token, required otherwise) The 4-digit credit card expiration year, as an integer or string, i.e. 2012"
   current_vault:
-    type: string
+    $ref: "./Payment-Profile-Vault.yaml"
   billing_address:
     type: string
     description: The credit card or bank account billing street address (i.e. 123 Main St.). This value is merely passed through to the payment gateway.
