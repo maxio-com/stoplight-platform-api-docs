@@ -1,0 +1,5 @@
+title: Nested Error Response
+type: object
+properties:
+  errors:
+    $ref: "./Base-String-Error.yaml"

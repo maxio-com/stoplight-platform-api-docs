@@ -13477,7 +13477,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17306,7 +17306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
               examples:
                 Generic error:
                   value:
