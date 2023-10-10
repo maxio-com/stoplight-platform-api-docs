@@ -9442,17 +9442,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-Allocation-Request.yaml"
+              $ref: "../components/schemas/Preview-Allocations-Request.yaml"
             examples:
               Example:
                 value:
-                  allocation:
-                    proration_upgrade_scheme: prorate-attempt-capture
-                    proration_downgrade_scheme: prorate
-                    component_id: 554108
-                    price_point_id: 325826
-                    quantity: 10
-                    memo: NOW
+                  allocations:
+                    - proration_upgrade_scheme: prorate-attempt-capture
+                      proration_downgrade_scheme: prorate
+                      component_id: 554108
+                      price_point_id: 325826
+                      quantity: 10
+                      memo: NOW
   "/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
