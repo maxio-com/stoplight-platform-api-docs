@@ -13477,9 +13477,7 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
-                title: Create Invoice Unprocessable Entity Error Response
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17308,11 +17306,9 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
-                title: Activate Subscription Bad Request Error Response
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
-                Example:
+                Generic error:
                   value:
                     errors:
                       base:
