@@ -1,0 +1,13 @@
+title: Event Based Billing Segment Single Error
+type: object
+additionalProperties:
+  type: object
+  properties:
+    base:
+      $ref: "./Error-Array-Response.yaml"
+    pricing_scheme:
+      $ref: "./Error-Array-Response.yaml"
+    prices:
+      $ref: "./Error-Array-Response.yaml"
+    property_values_fingerprint:
+      $ref: "./Error-Array-Response.yaml"
