@@ -2335,6 +2335,7 @@ paths:
             type: string
           in: query
           name: code
+          description: The code of the coupon
   "/product_families/{product_family_id}/coupons/{coupon_id}.json":
     parameters:
       - schema:
@@ -2771,10 +2772,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3024,6 +3022,7 @@ paths:
         name: subcode
         in: path
         required: true
+        description: The subcode of the coupon
     delete:
       summary: Delete Coupon Subcode
       tags:
@@ -15458,26 +15457,7 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - properties:
-                      codes:
-                        type: array
-                        items:
-                          type: string
-                      subscription:
-                        type: array
-                        items:
-                          type: string
-                  - properties:
-                      coupon_codes:
-                        type: array
-                        items:
-                          type: string
-                      subscription:
-                        type: array
-                        items:
-                          type: string
-                type: object
+                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Errors.yaml"
               examples:
                 Example:
                   value:
@@ -15500,6 +15480,7 @@ paths:
             type: string
           in: query
           name: code
+          description: A code for the coupon that would be applied to a subscription
           deprecated: true
       requestBody:
         content:
@@ -15534,12 +15515,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/Subscription-Remove-Coupon-Response.yaml"
               examples:
                 Example:
                   value:

@@ -1,0 +1,9 @@
+title: Subscription Remove Coupon Response
+type: object
+properties:
+  subscription:
+    type: array
+    items:
+      type: string
+required:
+  - subscription
