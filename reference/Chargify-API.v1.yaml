@@ -5826,12 +5826,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Example:
                   value:
                     errors:
-                      - A baseline price must be defined for this product price point.
+                      base:
+                        - A baseline price must be defined for this product price point.
       operationId: createProductCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
