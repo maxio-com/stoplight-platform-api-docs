@@ -9967,7 +9967,7 @@ paths:
                   value:
                     errors:
                       - "Bank routing number: cannot be blank."
-                      - "Bank account number: cannot be blank. "
+                      - "Bank account number: cannot be blank."
       operationId: createSubscription
       description: |-
         Full documentation on how subscriptions operate within Chargify can be located under the following topics:
@@ -10997,13 +10997,12 @@ paths:
         - name: metadata
           in: query
           schema:
-            additionalProperties:
-              type: string
+            allOf:
+              - $ref: "../components/schemas/Metafields-Values.yaml"
+            description: "A set of key/value pairs representing custom fields and their values."
           style: deepObject
           explode: true
-          description:
-            "The value of the metadata field specified in the parameter.
-            Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
+          description: "The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             $ref: "../components/schemas/Subscription-Sort.yaml"
@@ -11680,16 +11679,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
-                    errors: []
+                    errors:
+                      - "base: subscription retry was unsuccessful"
       operationId: retrySubscription
       description: |-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
@@ -13503,10 +13498,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      invoice:
+                        - "can't be blank"
       operationId: createInvoice
       description: |-
         This endpoint will allow you to create an ad hoc invoice.
@@ -14716,6 +14714,7 @@ paths:
             type: string
           in: query
           name: reference
+          description: Subscription reference
       description: Use this endpoint to find a subscription by its reference.
   "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
@@ -17328,21 +17327,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
               examples:
-                example-1:
+                Generic error:
                   value:
                     errors:
                       base:
-                        - Purchase Declined. The subscription is now in the 'awaiting_signup' state.
+                        - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
       operationId: activateSubscription
       requestBody:
         content:
