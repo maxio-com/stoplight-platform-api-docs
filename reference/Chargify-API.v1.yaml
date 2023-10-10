@@ -11366,21 +11366,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11470,21 +11459,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11493,6 +11471,7 @@ paths:
         name: sales_rep_id
         in: path
         required: true
+        description: The Chargify id of sales rep.
     get:
       summary: Read Sales Rep
       tags:
@@ -11544,21 +11523,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/subscriptions/{subscription_id}/retry.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -13944,19 +13912,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      customer:
-                        type: object
-                      payment_profile:
-                        type: object
-                      subscriptions:
-                        type: object
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Subscription-Group-Signup-Error-Response.yaml"
       requestBody:
         content:
           application/json:
@@ -14110,10 +14066,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-String-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14184,6 +14137,10 @@ paths:
             type: string
           in: query
           name: include
+          description: |-
+            A list of additional information to include in the response. The following values are supported:
+
+            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
@@ -14266,30 +14223,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      members:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            type:
-                              type: string
-                            message:
-                              type: string
+                $ref: "../components/schemas/errors/Subscription-Group-Update-Error-Response.yaml"
               examples:
                 Example:
                   value:
                     errors:
                       members:
-                        - id: 10101
-                          type: not_found
-                          message: Subscription could not be found
+                        id: 10101
+                        type: not_found
+                        message: Subscription could not be found
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
@@ -16828,26 +16770,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      attribute:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                    required:
-                      - attribute
-                required:
-                  - errors
-                x-examples:
-                  example-1:
-                    errors:
-                      attribute:
-                        - "supplied value is invalid, expected ISO 8601 format"
+                $ref: "../components/schemas/errors/Subscriptions-MRR-Error-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -17478,24 +17401,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      subscription:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: string
-                x-examples:
-                  example-1:
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
                     errors:
                       subscription:
                         base:
-                          - must be an object
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":
@@ -17566,24 +17479,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      subscription:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: string
-                x-examples:
-                  example-1:
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
                     errors:
                       subscription:
                         base:
-                          - must be an object
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":
