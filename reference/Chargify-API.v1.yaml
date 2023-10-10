@@ -13477,7 +13477,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+                allOf:
+                  - $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+                title: Create Invoice Unprocessable Entity Error Response
               examples:
                 Example:
                   value:
@@ -17306,14 +17308,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+                allOf:
+                  - $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+                title: Activate Subscription Bad Request Error Response
               examples:
                 Example:
                   value:
                     errors:
-                      subscription:
-                        base:
-                          - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
+                      base:
+                        - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
       operationId: activateSubscription
       requestBody:
         content:
