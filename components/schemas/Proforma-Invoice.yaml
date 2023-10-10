@@ -36,7 +36,7 @@ properties:
   seller:
     $ref: "./Invoice-Seller.yaml"
   customer:
-    $ref: "./Proforma-Customer.yaml"
+    $ref: "./Invoice-Customer.yaml"
   memo:
     type: string
   billing_address:
@@ -62,26 +62,26 @@ properties:
   line_items:
     type: array
     items:
-      $ref: "./Proforma-Line-Item.yaml"
+      $ref: "./Invoice-Line-Item.yaml"
   discounts:
     type: array
     items:
-      type: object
+      $ref: "./Proforma-Discount.yaml"
   taxes:
     type: array
     items:
-      type: object
+      $ref: "./Proforma-Tax.yaml"
   credits:
     type: array
     items:
-      type: object
+      $ref: "./Proforma-Credit.yaml"
   payments:
     type: array
     items:
-      type: object
+      $ref: "./Proforma-Payment.yaml"
   custom_fields:
     type: array
     items:
-      type: object
+      $ref: "./Proforma-Custom-Field.yaml"
   public_url:
     type: string

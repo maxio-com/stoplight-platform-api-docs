@@ -2,6 +2,6 @@ title: Signup Proforma Preview
 type: object
 properties:
   current_proforma_invoice:
-    type: object
+    $ref: "Proforma-Invoice.yaml"
   next_proforma_invoice:
-    type: object
+    $ref: "Proforma-Invoice.yaml"
