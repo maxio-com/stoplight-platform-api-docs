@@ -20,7 +20,7 @@ properties:
   vault_token:
     type: string
   current_vault:
-    type: string
+    $ref: "./Current-Vault.yaml"
   gateway_handle:
     type: string
   first_name:

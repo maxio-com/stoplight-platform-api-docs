@@ -10,7 +10,7 @@ properties:
   customer_id:
     type: integer
   current_vault:
-    type: string
+    $ref: "./Bank-Account-Vault.yaml"
   vault_token:
     type: string
   billing_address:

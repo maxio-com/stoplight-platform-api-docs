@@ -22,8 +22,7 @@ properties:
   customer_id:
     type: "null"
   current_vault:
-    type: string
-    minLength: 1
+    $ref: "./Current-Vault.yaml"
   vault_token:
     type: string
     minLength: 1
@@ -50,7 +49,7 @@ properties:
   disabled:
     type: boolean
   site_gateway_setting_id:
-    type: number
+    type: integer
   customer_vault_token:
     type: "null"
   gateway_handle:
