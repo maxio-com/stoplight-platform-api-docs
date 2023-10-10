@@ -11353,21 +11353,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11457,21 +11446,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11480,6 +11458,7 @@ paths:
         name: sales_rep_id
         in: path
         required: true
+        description: The Chargify id of sales rep.
     get:
       summary: Read Sales Rep
       tags:
@@ -11531,21 +11510,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/subscriptions/{subscription_id}/retry.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
