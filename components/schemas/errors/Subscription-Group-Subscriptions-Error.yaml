@@ -3,6 +3,5 @@ type: object
 description:
   Object that as key have subscription position in request subscriptions array and as value subscription
   errors object.
-patternProperties:
-  ^[0-9]+$:
-    $ref: "./Subscription-Group-Subscription-Error.yaml"
+additionalProperties:
+  $ref: "./Subscription-Group-Subscription-Error.yaml"
