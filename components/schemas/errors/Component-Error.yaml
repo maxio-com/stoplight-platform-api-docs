@@ -1,0 +1,12 @@
+description: ""
+type: object
+properties:
+  errors:
+    type: array
+    items:
+      type: object
+      properties:
+        component_id:
+          type: number
+        message:
+          type: string

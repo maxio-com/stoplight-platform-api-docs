@@ -1,0 +1,17 @@
+allOf:
+  - $ref: "./Component-Error.yaml"
+  - type: object
+    x-examples:
+      example-1:
+        errors:
+          - component_id: 6474
+            price_point: 12140
+            message: Price Point does not belong to Component
+    properties:
+      errors:
+        type: array
+        items:
+          type: object
+          properties:
+            price_point:
+              type: number

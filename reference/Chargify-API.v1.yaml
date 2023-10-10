@@ -8937,26 +8937,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - component_id: 6474
-                        price_point: 12140
-                        message: Price Point does not belong to Component
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        component_id:
-                          type: number
-                        price_point:
-                          type: number
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Component-PricePoint-Error.yaml"
               examples:
                 Example:
                   value:
@@ -9400,6 +9381,7 @@ paths:
           content:
             application/json:
               schema:
+                $ref: "../components/schemas/errors/Component-Allocation-Error.yaml"
                 description: ""
                 type: object
                 x-examples:
