@@ -17465,24 +17465,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      subscription:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: string
-                x-examples:
-                  example-1:
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
                     errors:
                       subscription:
                         base:
-                          - must be an object
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":
@@ -17553,24 +17543,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      subscription:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: string
-                x-examples:
-                  example-1:
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
+              examples:
+                Example:
+                  value:
                     errors:
                       subscription:
                         base:
-                          - must be an object
+                          - "must be an object"
         "403":
           description: Forbidden
         "422":
