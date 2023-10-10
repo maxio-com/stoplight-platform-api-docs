@@ -1776,7 +1776,7 @@ paths:
           in: query
           name: name
           required: true
-          description: name of the custom field
+          description: Name of the custom field.
         - schema:
             type: string
           in: query
@@ -1953,15 +1953,15 @@ paths:
             type: string
           in: query
           name: name
-          description: name of field to be removed
+          description: Name of field to be removed.
         - schema:
             type: array
             items:
               type: string
           in: query
-          description: names of fields to be removed
+          description: "Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`."
           name: "names[]"
-          style: pipeDelimited
+          style: form
           explode: true
   "/{resource_type}/metadata.json":
     parameters:
@@ -2032,9 +2032,9 @@ paths:
             maxItems: 50
           in: query
           name: "resource_ids[]"
-          style: pipeDelimited
+          style: form
           explode: true
-          description: Allow to fetch metadata for multiple records based on provided ids.
+          description: "Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`."
         - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/coupons.json":
     parameters:
