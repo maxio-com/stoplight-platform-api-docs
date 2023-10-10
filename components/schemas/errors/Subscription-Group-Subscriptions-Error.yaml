@@ -1,8 +1,8 @@
-title: Subscription Group Subscriptions Errors Object
+title: Subscription Group Subscriptions Errors
 type: object
 description:
   Object that as key have subscription position in request subscriptions array and as value subscription
   errors object.
-properties:
-  "0":
+patternProperties:
+  ^[0-9]+$:
     $ref: "./Subscription-Group-Subscription-Error.yaml"
