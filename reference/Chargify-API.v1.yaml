@@ -1233,7 +1233,7 @@ paths:
           in: query
           name: auto_invite
           description: |-
-            When set to 1, an Invitation email will be sent to the Customer. 
+            When set to 1, an Invitation email will be sent to the Customer.
             When set to 0, or not sent, an email will not be sent.
             Use in query: `auto_invite=1`.
   "/portal/customers/{customer_id}/management_link.json":
@@ -1776,10 +1776,12 @@ paths:
           in: query
           name: name
           required: true
+          description: Name of the custom field.
         - schema:
             type: string
           in: query
           name: current_name
+          required: false
           description: This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field
     delete:
       tags:
@@ -1951,12 +1953,16 @@ paths:
             type: string
           in: query
           name: name
+          description: Name of field to be removed.
         - schema:
             type: array
             items:
               type: string
           in: query
+          description: "Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`."
           name: "names[]"
+          style: form
+          explode: true
   "/{resource_type}/metadata.json":
     parameters:
       - $ref: "../components/parameters/resource-type.yaml"
@@ -2026,7 +2032,9 @@ paths:
             maxItems: 50
           in: query
           name: "resource_ids[]"
-          description: Allow to fetch metadata for multiple records based on provided ids.
+          style: form
+          explode: true
+          description: "Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`."
         - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/coupons.json":
     parameters:
@@ -3136,7 +3144,9 @@ paths:
                           new_subscription_state: past_due
             application/xml:
               schema:
-                type: object
+                type: array
+                items:
+                  $ref: "../components/schemas/Event-Response.yaml"
             multipart/form-data:
               schema:
                 type: array
@@ -3212,10 +3222,12 @@ paths:
             type: integer
           in: query
           name: since_id
+          description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
           in: query
           name: max_id
+          description: Returns events with an id less than or equal to the one specified
         - schema:
             type: string
             enum:
@@ -3224,6 +3236,7 @@ paths:
             default: desc
           in: query
           name: direction
+          description: The sort direction of the returned events.
         - $ref: "../components/parameters/event-type-filter.yaml"
         - schema:
             $ref: "../components/schemas/List-Events-Date-Field.yaml"
@@ -3306,10 +3319,12 @@ paths:
             type: integer
           in: query
           name: since_id
+          description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
           in: query
           name: max_id
+          description: Returns events with an id less than or equal to the one specified
         - schema:
             type: string
             enum:
@@ -3318,6 +3333,7 @@ paths:
             default: desc
           in: query
           name: direction
+          description: The sort direction of the returned events.
         - $ref: "../components/parameters/event-type-filter.yaml"
   /events/count.json:
     get:
@@ -3343,10 +3359,12 @@ paths:
             type: integer
           in: query
           name: since_id
+          description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
           in: query
           name: max_id
+          description: Returns events with an id less than or equal to the one specified
         - schema:
             type: string
             enum:
@@ -3355,6 +3373,7 @@ paths:
             default: desc
           in: query
           name: direction
+          description: The sort direction of the returned events.
         - $ref: "../components/parameters/event-type-filter.yaml"
       description: Get a count of all the events for a given site by using this method.
   /mrr.json:
@@ -10504,7 +10523,7 @@ paths:
         It is possible to provide a proof of customer's acceptance of terms and policies.
         We will be storing this proof in case it might be required (i.e. chargeback).
         Currently, we already keep it for subscriptions created via Public Signup Pages.
-        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `agreement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
+        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `agreement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and
         `secure_checkout_policy_url`.
 
         ```json
@@ -11069,11 +11088,13 @@ paths:
         name: subdomain
         in: path
         required: true
+        description: Your site's subdomain
       - schema:
           type: string
         name: api_handle
         in: path
         required: true
+        description: Identifies the Stream for which the events should be published.
     post:
       summary: Bulk Event Ingestion
       tags:
@@ -11353,21 +11374,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11457,21 +11467,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/sellers/{seller_id}/sales_reps/{sales_rep_id}.json":
     parameters:
       - $ref: "../components/parameters/seller-id-path.yaml"
@@ -11480,6 +11479,7 @@ paths:
         name: sales_rep_id
         in: path
         required: true
+        description: The Chargify id of sales rep.
     get:
       summary: Read Sales Rep
       tags:
@@ -11531,21 +11531,10 @@ paths:
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
       parameters:
-        - schema:
-            type: string
-            default: Bearer <<apiKey>>
-          in: header
-          name: Authorization
-        - schema:
-            type: boolean
-          in: query
-          name: live_mode
+        - $ref: "../components/parameters/user-authorization.yaml"
+        - $ref: "../components/parameters/live-mode.yaml"
         - $ref: "../components/parameters/page.yaml"
-        - schema:
-            type: integer
-            default: 100
-          in: query
-          name: per_page
+        - $ref: "../components/parameters/per-page-sales-commission.yaml"
   "/subscriptions/{subscription_id}/retry.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -13580,7 +13569,7 @@ paths:
                 "quantity": 1
               }
             ],
-            "coupons": [ 
+            "coupons": [
               {
                 "code": "COUPONCODE",
                 "percentage": 50.0
@@ -13593,7 +13582,7 @@ paths:
 
         ```json
         ...
-         "coupons": [ 
+         "coupons": [
               {
                 "code": "FREESETUP",
                 "product_family_id": 1
@@ -13607,12 +13596,12 @@ paths:
         Coupon `code` will be displayed on invoice discount section.
         Coupon code can only contain uppercase letters, numbers, and allowed special characters.
         Lowercase letters will be converted to uppercase. It can be used to select an existing coupon from the catalog, or as an ad hoc coupon when passed with `percentage` or `amount`.
-        #### Percentage 
+        #### Percentage
         Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Only for ad hoc coupons, will be ignored if `code` is used to select an existing coupon from the catalog.
         #### Amount
-        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`. 
+        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`.
         #### Description
-        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`. 
+        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`.
         #### Product Family id
         Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
         #### Compounding Strategy
@@ -13624,7 +13613,7 @@ paths:
         Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated. It is set by default.
 
         `full-price` strategy:
-        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. 
+        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied.
 
         ### Line Item Options
 
@@ -13931,19 +13920,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      customer:
-                        type: object
-                      payment_profile:
-                        type: object
-                      subscriptions:
-                        type: object
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Subscription-Group-Signup-Error-Response.yaml"
       requestBody:
         content:
           application/json:
@@ -14097,10 +14074,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-String-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14171,6 +14145,10 @@ paths:
             type: string
           in: query
           name: include
+          description: |-
+            A list of additional information to include in the response. The following values are supported:
+
+            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
@@ -14253,30 +14231,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      members:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                            type:
-                              type: string
-                            message:
-                              type: string
+                $ref: "../components/schemas/errors/Subscription-Group-Update-Error-Response.yaml"
               examples:
                 Example:
                   value:
                     errors:
                       members:
-                        - id: 10101
-                          type: not_found
-                          message: Subscription could not be found
+                        id: 10101
+                        type: not_found
+                        message: Subscription could not be found
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
@@ -14994,7 +14957,7 @@ paths:
         * `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
         * `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
 
-        To create a new subscription into a subscription group, please reference the following: 
+        To create a new subscription into a subscription group, please reference the following:
         [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
       requestBody:
         content:
@@ -16815,26 +16778,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      attribute:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                    required:
-                      - attribute
-                required:
-                  - errors
-                x-examples:
-                  example-1:
-                    errors:
-                      attribute:
-                        - "supplied value is invalid, expected ISO 8601 format"
+                $ref: "../components/schemas/errors/Subscriptions-MRR-Error-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -17410,11 +17354,11 @@ paths:
 
         For details on how the activation works, and how to activate subscriptions through the application, see [activation](#).
 
-        The `revert_on_failure` parameter controls the behavior upon activation failure. 
-        - If set to `true` and something goes wrong i.e. payment fails, then Chargify will not change the subscription's state. The subscription’s billing period will also remain the same. 
+        The `revert_on_failure` parameter controls the behavior upon activation failure.
+        - If set to `true` and something goes wrong i.e. payment fails, then Chargify will not change the subscription's state. The subscription’s billing period will also remain the same.
         - If set to `false` and something goes wrong i.e. payment fails, then Chargify will continue through with the activation and enter an end of life state. For trialing subscriptions, that will either be trial ended (if the trial is no obligation), past due (if the trial has an obligation), or canceled (if the site has no dunning strategy, or has a strategy that says to cancel immediately). For awaiting signup subscriptions, that will always be canceled.
 
-        The default activation failure behavior can be configured per activation attempt, or you may set a default value under Config > Settings > Subscription Activation Settings. 
+        The default activation failure behavior can be configured per activation attempt, or you may set a default value under Config > Settings > Subscription Activation Settings.
 
         ## Activation Scenarios
 

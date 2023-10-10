@@ -1,0 +1,17 @@
+title: Subscription Group Signup Error Response
+type: object
+properties:
+  errors:
+    $ref: "./Subscription-Group-Signup-Error.yaml"
+required:
+  - errors
+examples:
+  - errors:
+      subscriptions:
+        "0":
+          payment_profile.chargify_token:
+            - Chargify token not found
+          product:
+            - must be among the Products for this Site
+          product_price_point_id:
+            - Product price point must belong to product.
