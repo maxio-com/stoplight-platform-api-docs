@@ -49,7 +49,7 @@ properties:
   disabled:
     type: boolean
   site_gateway_setting_id:
-    type: number
+    type: integer
   customer_vault_token:
     type: "null"
   gateway_handle:
