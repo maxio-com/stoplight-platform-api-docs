@@ -4184,6 +4184,8 @@ paths:
             example:
               - 1
               - 2
+          style: form
+          explode: false
           in: query
           description:
             "Allows fetching components with matching id based on provided value.
@@ -4368,6 +4370,7 @@ paths:
         name: component_id
         in: path
         required: true
+        description: The Chargify id of the component for which you want to fetch price points.
     post:
       summary: Bulk Create Component Price Points
       tags:
@@ -5823,21 +5826,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
                     errors:
-                      base:
-                        - A baseline price must be defined for this product price point.
+                      - A baseline price must be defined for this product price point.
       operationId: createProductCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -11152,15 +11146,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      components:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Example:
                   value:
