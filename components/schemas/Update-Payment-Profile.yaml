@@ -8,7 +8,8 @@ properties:
   full_number:
     type: string
   card_type:
-    type: string
+    $ref: "./Card-Type.yaml"
+    required: false
   expiration_month:
     type: string
   expiration_year:
