@@ -3,4 +3,7 @@ type: string
 description: The vault that stores the payment profile with the provided vault_token.
 enum:
   - authorizenet
-  - stripe
+  - stripe_connect
+  - braintree_blue
+  - gocardless
+  - braintree_blue
