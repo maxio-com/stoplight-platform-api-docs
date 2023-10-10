@@ -16783,26 +16783,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      attribute:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                    required:
-                      - attribute
-                required:
-                  - errors
-                x-examples:
-                  example-1:
-                    errors:
-                      attribute:
-                        - "supplied value is invalid, expected ISO 8601 format"
+                $ref: "../components/schemas/errors/Subscriptions-MRR-Error-Response.yaml"
               examples:
                 example-1:
                   value:
