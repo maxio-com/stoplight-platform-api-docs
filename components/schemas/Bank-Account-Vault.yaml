@@ -6,4 +6,3 @@ enum:
   - stripe_connect
   - braintree_blue
   - gocardless
-  - braintree_blue
