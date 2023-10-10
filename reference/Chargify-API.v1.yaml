@@ -9423,11 +9423,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-Allocation-Request.yaml"
+              $ref: "../components/schemas/Preview-Allocation-Request.yaml"
             examples:
               Example:
                 value:
-                  allocation:
+                  allocations:
                     proration_upgrade_scheme: prorate-attempt-capture
                     proration_downgrade_scheme: prorate
                     component_id: 554108
