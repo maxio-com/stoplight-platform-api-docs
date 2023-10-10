@@ -8879,6 +8879,8 @@ paths:
             example:
               - EUR
               - USD
+          style: form
+          explode: false
           in: query
           description:
             "Allows fetching components allocation with matching currency based on provided values.
