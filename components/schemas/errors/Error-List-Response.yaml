@@ -3,8 +3,6 @@ type: object
 description: Error which contains list of messages.
 properties:
   errors:
-    type: array
-    items:
-      type: string
+    $ref: "./Error-Array-Response.yaml"
 required:
   - errors
