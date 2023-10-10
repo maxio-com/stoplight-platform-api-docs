@@ -3,6 +3,4 @@ description: The error is base if it is not directly associated with a single at
 type: object
 properties:
   base:
-    type: array
-    items:
-      type: string
+    $ref: "./Error-Array-Response.yaml"
