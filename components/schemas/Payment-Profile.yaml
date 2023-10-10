@@ -25,7 +25,7 @@ properties:
     type: integer
     description: The Chargify-assigned id for the customer record to which the card belongs.
   current_vault:
-    $ref: "./Payment-Profile-Vault.yaml"
+    $ref: "./Current-Vault.yaml"
   vault_token:
     type:
       - string
