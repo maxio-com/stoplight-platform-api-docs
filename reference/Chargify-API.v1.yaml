@@ -13477,13 +13477,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
               examples:
-                Generic error:
+                Example:
                   value:
                     errors:
-                      base:
-                        - Couldn't create Proforma Invoice
+                      invoice:
+                        - "can't be blank"
       operationId: createInvoice
       description: |-
         This endpoint will allow you to create an ad hoc invoice.
@@ -17306,13 +17306,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Proforma-Bad-Response.yaml"
               examples:
-                Generic error:
+                Example:
                   value:
                     errors:
-                      base:
-                        - Purchase Declined. The subscription is now in the 'awaiting_signup' state.
+                      subscription:
+                        base:
+                          - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
       operationId: activateSubscription
       requestBody:
         content:
