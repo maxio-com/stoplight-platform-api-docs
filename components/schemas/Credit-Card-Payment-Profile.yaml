@@ -1,5 +1,7 @@
 title: Credit Card Payment Profile
 type: object
+required:
+  - masked_card_number
 properties:
   id:
     type: integer
@@ -52,7 +54,7 @@ properties:
   customer_id:
     type: integer
   current_vault:
-    type: string
+    $ref: "./Current-Vault.yaml"
   vault_token:
     type: string
   billing_address:
@@ -74,7 +76,7 @@ properties:
   disabled:
     type: boolean
   site_gateway_setting_id:
-    type: string
+    type: integer
   gateway_handle:
     type:
       - string
