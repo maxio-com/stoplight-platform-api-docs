@@ -1,4 +1,8 @@
-type: array
-description: the error is base if it is not directly associated with a single attribute.
-items:
-  type: string
+title: Base String Error
+description: The error is base if it is not directly associated with a single attribute.
+type: object
+properties:
+  base:
+    type: array
+    items:
+      type: string

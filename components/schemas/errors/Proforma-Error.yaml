@@ -2,4 +2,4 @@ title: Proforma Error
 type: object
 properties:
   subscription:
-    $ref: "./Proforma-Subscription-Error.yaml"
+    $ref: "./Base-String-Error.yaml"

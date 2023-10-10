@@ -1,5 +1,0 @@
-title: Proforma Subscription Error
-type: object
-properties:
-  base:
-    $ref: "./Base-String-Error.yaml"
