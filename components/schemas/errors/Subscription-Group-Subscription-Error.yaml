@@ -18,3 +18,10 @@ properties:
     type: array
     items:
       type: string
+examples:
+  payment_profile.chargify_token:
+    - Chargify token not found
+  product:
+    - must be among the Products for this Site
+  product_price_point_id:
+    - Product price point must belong to product.
