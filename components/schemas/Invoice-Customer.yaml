@@ -14,3 +14,7 @@ properties:
       - string
   email:
     type: string
+  vat_number:
+    type: "null"
+  reference:
+    type: "null"

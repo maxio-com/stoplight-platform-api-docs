@@ -47,7 +47,7 @@ properties:
   seller:
     $ref: "./Invoice-Seller.yaml"
   customer:
-    $ref: "./Proforma-Customer.yaml"
+    $ref: "./Invoice-Customer.yaml"
   memo:
     type: string
     minLength: 1
@@ -84,7 +84,7 @@ properties:
     uniqueItems: true
     minItems: 1
     items:
-      $ref: "./Proforma-Line-Item.yaml"
+      $ref: "./Invoice-Line-Item.yaml"
   discounts:
     type: array
     uniqueItems: true
