@@ -1,0 +1,17 @@
+description: ""
+type: object
+x-examples:
+  example-1:
+    errors:
+      - kind: base
+        message: "Credit scheme must be one of credit, refund or none."
+properties:
+  errors:
+    type: array
+    items:
+      type: object
+      properties:
+        kind:
+          type: string
+        message:
+          type: string
