@@ -1233,7 +1233,7 @@ paths:
           in: query
           name: auto_invite
           description: |-
-            When set to 1, an Invitation email will be sent to the Customer. 
+            When set to 1, an Invitation email will be sent to the Customer.
             When set to 0, or not sent, an email will not be sent.
             Use in query: `auto_invite=1`.
   "/portal/customers/{customer_id}/management_link.json":
@@ -10504,7 +10504,7 @@ paths:
         It is possible to provide a proof of customer's acceptance of terms and policies.
         We will be storing this proof in case it might be required (i.e. chargeback).
         Currently, we already keep it for subscriptions created via Public Signup Pages.
-        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `agreement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and 
+        In order to create a subscription with the proof of agreement acceptance, you must provide additional parameters `agreement acceptance` with `ip_address` and at least one url to the policy that was accepted: `terms_url` or `privacy_policy_url`. Additional urls that can be provided: `return_refund_policy_url`, `delivery_policy_url` and
         `secure_checkout_policy_url`.
 
         ```json
@@ -13580,7 +13580,7 @@ paths:
                 "quantity": 1
               }
             ],
-            "coupons": [ 
+            "coupons": [
               {
                 "code": "COUPONCODE",
                 "percentage": 50.0
@@ -13593,7 +13593,7 @@ paths:
 
         ```json
         ...
-         "coupons": [ 
+         "coupons": [
               {
                 "code": "FREESETUP",
                 "product_family_id": 1
@@ -13607,12 +13607,12 @@ paths:
         Coupon `code` will be displayed on invoice discount section.
         Coupon code can only contain uppercase letters, numbers, and allowed special characters.
         Lowercase letters will be converted to uppercase. It can be used to select an existing coupon from the catalog, or as an ad hoc coupon when passed with `percentage` or `amount`.
-        #### Percentage 
+        #### Percentage
         Coupon `percentage` can take values from 0 to 100 and up to 4 decimal places. It cannot be used with `amount`. Only for ad hoc coupons, will be ignored if `code` is used to select an existing coupon from the catalog.
         #### Amount
-        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`. 
+        Coupon `amount` takes number value. It cannot be used with `percentage`. Used only when not matching existing coupon by `code`.
         #### Description
-        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`. 
+        Optional `description` will be displayed with coupon `code`. Used only when not matching existing coupon by `code`.
         #### Product Family id
         Optional `product_family_id` handle (with handle: prefix) or id is used to match existing coupon within site, when codes are not unique.
         #### Compounding Strategy
@@ -13624,7 +13624,7 @@ paths:
         Percentage-based discounts will be calculated against the remaining price, after prior discounts have been calculated. It is set by default.
 
         `full-price` strategy:
-        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied. 
+        Percentage-based discounts will always be calculated against the original item price, before other discounts are applied.
 
         ### Line Item Options
 
@@ -14994,7 +14994,7 @@ paths:
         * `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
         * `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
 
-        To create a new subscription into a subscription group, please reference the following: 
+        To create a new subscription into a subscription group, please reference the following:
         [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
       requestBody:
         content:
@@ -16815,26 +16815,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      attribute:
-                        type: array
-                        items:
-                          required: []
-                          properties: {}
-                    required:
-                      - attribute
-                required:
-                  - errors
-                x-examples:
-                  example-1:
-                    errors:
-                      attribute:
-                        - "supplied value is invalid, expected ISO 8601 format"
+                $ref: "../components/schemas/errors/Subscriptions-MRR-Error-Response.yaml"
               examples:
                 example-1:
                   value:
@@ -17410,11 +17391,11 @@ paths:
 
         For details on how the activation works, and how to activate subscriptions through the application, see [activation](#).
 
-        The `revert_on_failure` parameter controls the behavior upon activation failure. 
-        - If set to `true` and something goes wrong i.e. payment fails, then Chargify will not change the subscription's state. The subscription’s billing period will also remain the same. 
+        The `revert_on_failure` parameter controls the behavior upon activation failure.
+        - If set to `true` and something goes wrong i.e. payment fails, then Chargify will not change the subscription's state. The subscription’s billing period will also remain the same.
         - If set to `false` and something goes wrong i.e. payment fails, then Chargify will continue through with the activation and enter an end of life state. For trialing subscriptions, that will either be trial ended (if the trial is no obligation), past due (if the trial has an obligation), or canceled (if the site has no dunning strategy, or has a strategy that says to cancel immediately). For awaiting signup subscriptions, that will always be canceled.
 
-        The default activation failure behavior can be configured per activation attempt, or you may set a default value under Config > Settings > Subscription Activation Settings. 
+        The default activation failure behavior can be configured per activation attempt, or you may set a default value under Config > Settings > Subscription Activation Settings.
 
         ## Activation Scenarios
 
