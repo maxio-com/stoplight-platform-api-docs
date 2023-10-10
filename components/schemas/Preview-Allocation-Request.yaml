@@ -1,8 +1,0 @@
-title: Preview Allocation Request
-type: object
-properties:
-  allocations:
-    type: array
-    $ref: "./Create-Allocation.yaml"
-required:
-  - allocations
