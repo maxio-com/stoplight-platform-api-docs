@@ -3132,8 +3132,6 @@ paths:
                           new_value: "No"
                           resource_type: Subscription
                           resource_id: 117
-                          previous_subscription_state: active
-                          new_subscription_state: past_due
             application/xml:
               schema:
                 type: object
@@ -3285,8 +3283,6 @@ paths:
                         event_specific_data:
                           product_id: 3792003
                           account_transaction_id: null
-                          previous_subscription_state: active
-                          new_subscription_state: active
                     - event:
                         id: 344799705
                         key: billing_date_change
