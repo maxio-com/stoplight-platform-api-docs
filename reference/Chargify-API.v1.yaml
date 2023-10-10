@@ -1776,10 +1776,12 @@ paths:
           in: query
           name: name
           required: true
+          description: Name of the custom field.
         - schema:
             type: string
           in: query
           name: current_name
+          required: false
           description: This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field
     delete:
       tags:
@@ -1951,12 +1953,16 @@ paths:
             type: string
           in: query
           name: name
+          description: Name of field to be removed.
         - schema:
             type: array
             items:
               type: string
           in: query
+          description: "Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`."
           name: "names[]"
+          style: form
+          explode: true
   "/{resource_type}/metadata.json":
     parameters:
       - $ref: "../components/parameters/resource-type.yaml"
@@ -2026,7 +2032,9 @@ paths:
             maxItems: 50
           in: query
           name: "resource_ids[]"
-          description: Allow to fetch metadata for multiple records based on provided ids.
+          style: form
+          explode: true
+          description: "Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`."
         - $ref: "../components/parameters/sort-direction.yaml"
   "/product_families/{product_family_id}/coupons.json":
     parameters:
