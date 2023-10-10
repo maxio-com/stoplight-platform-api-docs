@@ -1,0 +1,18 @@
+- schema:
+    type: string
+    default: Bearer <<apiKey>>
+  in: header
+  name: Authorization
+  description: For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
+- schema:
+    type: boolean
+  in: query
+  name: live_mode
+  description: This parameter indicates if records should be fetched from live mode sites. Default value is true.
+- $ref: "../components/parameters/page.yaml"
+- schema:
+    type: integer
+    default: 100
+  in: query
+  name: per_page
+  description: This parameter indicates how many records to fetch in each request. Default value is 100.
