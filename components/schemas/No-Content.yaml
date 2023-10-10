@@ -1,0 +1,4 @@
+title: No Content
+type: object
+nullable: true
+description: Empty content
