@@ -22,7 +22,9 @@ properties:
   product_name:
     type: string
   line_items:
-    $ref: "./Invoice-Line-Items-Data.yaml"
+    type: array
+    items:
+      $ref: "./Invoice-Line-Items-Data.yaml"
 required:
   - uid
   - number

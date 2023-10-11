@@ -24,14 +24,7 @@ properties:
   allocation_details:
     type: array
     items:
-      type: object
-      properties:
-        allocation_id:
-          type: integer
-        charge_id:
-          type: integer
-        usage_quantity:
-          type: integer
+      $ref: "./Prepaid-Usage-Allocation-Detail.yaml"
 required:
   - previous_unit_balance
   - previous_overage_unit_balance

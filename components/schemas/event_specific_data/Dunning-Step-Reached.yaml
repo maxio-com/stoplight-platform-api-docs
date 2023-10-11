@@ -2,89 +2,11 @@ title: Dunning Step Reached
 type: object
 properties:
   dunner:
-    type: object
-    properties:
-      state:
-        type: string
-      subscription_id:
-        type: integer
-      revenue_at_risk_in_cents:
-        type: integer
-      created_at:
-        type: string
-      attempts:
-        type: integer
-      last_attempted_at:
-        type: string
-    required:
-      - state
-      - subscription_id
-      - revenue_at_risk_in_cents
-      - created_at
-      - attempts
-      - last_attempted_at
+    $ref: "./Dunning-Step-Reached-Dunner-Data.yaml"
   current_step:
-    type: object
-    properties:
-      day_threshold:
-        type: integer
-      action:
-        type: string
-      email_body:
-        type:
-          - string
-          - "null"
-      email_subject:
-        type:
-          - string
-          - "null"
-      send_email:
-        type: boolean
-      send_bcc_email:
-        type: boolean
-      send_sms:
-        type: boolean
-      sms_body:
-        type:
-          - string
-          - "null"
-    required:
-      - day_threshold
-      - action
-      - send_email
-      - send_bcc_email
-      - send_sms
+    $ref: "./Dunning-Step-Reached-Step-Data.yaml"
   next_step:
-    type: object
-    properties:
-      day_threshold:
-        type: integer
-      action:
-        type: string
-      email_body:
-        type:
-          - string
-          - "null"
-      email_subject:
-        type:
-          - string
-          - "null"
-      send_email:
-        type: boolean
-      send_bcc_email:
-        type: boolean
-      send_sms:
-        type: boolean
-      sms_body:
-        type:
-          - string
-          - "null"
-    required:
-      - day_threshold
-      - action
-      - send_email
-      - send_bcc_email
-      - send_sms
+    $ref: "./Dunning-Step-Reached-Step-Data.yaml"
 required:
   - dunner
   - current_step
