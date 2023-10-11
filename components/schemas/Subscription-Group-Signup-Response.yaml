@@ -26,4 +26,4 @@ properties:
     items:
       $ref: "./Subscription-Group-Item.yaml"
   payment_collection_method:
-    $ref: "./Signup-Collection-Method.yaml"
+    $ref: "./Collection-Method.yaml"

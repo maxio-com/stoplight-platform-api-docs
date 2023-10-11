@@ -1,6 +1,0 @@
-title: Signup Collection Method
-type: string
-enum:
-  - remittance
-  - automatic
-default: automatic
