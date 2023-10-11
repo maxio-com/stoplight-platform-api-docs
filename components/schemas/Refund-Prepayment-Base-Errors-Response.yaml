@@ -3,17 +3,9 @@ description: Errors returned on creating a refund prepayment when bad request
 type: object
 properties:
   errors:
-    type: object
-    properties:
-      refund:
-        type: object
-        properties:
-          base:
-            type: array
-            items:
-              type: object
-x-examples:
-  example-1:
+    $ref: "./Refund-Prepayment-Base-Refund-Error.yaml"
+examples:
+  Example:
     errors:
       refund:
         base:
