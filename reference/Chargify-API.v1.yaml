@@ -9382,29 +9382,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/errors/Component-Allocation-Error.yaml"
-                description: ""
                 type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: allocation
-                        component_id: 379512
-                        "on": base
-                        message: Allocations can only be updated for quantity and on/off components.
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        component_id:
-                          type: number
-                        "on":
-                          type: string
-                        message:
-                          type: string
               examples:
                 Example:
                   value:
