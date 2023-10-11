@@ -3,14 +3,4 @@ properties:
   errors:
     type: array
     items:
-      type: object
-      properties:
-        component_id:
-          type: number
-        message:
-          type: string
-        properties:
-          kind:
-            type: string
-          "on":
-            type: string
+      $ref: "./Component-Allocation-Error-Item.yaml"

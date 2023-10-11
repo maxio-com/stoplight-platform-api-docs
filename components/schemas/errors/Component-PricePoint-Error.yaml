@@ -3,11 +3,4 @@ properties:
   errors:
     type: array
     items:
-      type: object
-      properties:
-        component_id:
-          type: number
-        message:
-          type: string
-        price_point:
-          type: number
+      $ref: "./Component-PricePoint-Error-Item.yaml"
