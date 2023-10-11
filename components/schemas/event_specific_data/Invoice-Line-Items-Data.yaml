@@ -30,7 +30,7 @@ properties:
   pricing_details:
     type: array
     items:
-      $ref: "./Invoice-Line-Item-Pricing-Details.yaml"
+      $ref: "./Invoice-Line-Item-Pricing-Detail.yaml"
   tax_code:
     type: string
   tax_amount:
