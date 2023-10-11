@@ -1,5 +1,0 @@
-title: Legacy Payment Collection Method
-type: string
-enum:
-  - automatic
-  - invoice
