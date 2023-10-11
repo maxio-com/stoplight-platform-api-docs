@@ -16225,19 +16225,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
-                      pricing_scheme:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
-                      prices:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
-                      property_values_fingerprint:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: createSegment
       requestBody:
         content:
@@ -16295,15 +16283,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      per_page:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
-                      price_point:
-                        $ref: "../components/schemas/errors/Error-Array-Response.yaml"
+                $ref: "../components/schemas/errors/Event-Based-Billing-List-Segments-Errors.yaml"
       description: |-
         This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
 
@@ -16380,10 +16360,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Single-Error.yaml"
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: updateSegment
       requestBody:
         content:
