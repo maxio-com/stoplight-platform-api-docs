@@ -4,9 +4,3 @@ type: object
 properties:
   errors:
     $ref: "./Refund-Prepayment-Base-Refund-Error.yaml"
-examples:
-  Example:
-    errors:
-      refund:
-        base:
-          - must be an object

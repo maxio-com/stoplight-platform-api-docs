@@ -6588,6 +6588,7 @@ paths:
       - schema:
           type: integer
         name: bank_account_id
+        description: Identifier of the bank account in the system.
         in: path
         required: true
     put:
@@ -16698,12 +16699,22 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/No-Content.yaml"
+              examples:
+                Example:
+                  value: ""
         "422":
           description: Unprocessable Entity
           content:
             application/json:
               schema:
                 $ref: "../components/schemas/Refund-Prepayment-Aggregated-Errors-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      refund:
+                        amount_in_cents:
+                          - Refund amount exceeds prepayment amount
       operationId: refundPrepayment
       description: |-
         This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
