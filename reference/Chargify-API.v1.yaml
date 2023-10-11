@@ -6588,6 +6588,7 @@ paths:
       - schema:
           type: integer
         name: bank_account_id
+        description: Identifier of the bank account in the system.
         in: path
         required: true
     put:
@@ -13749,13 +13750,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepayments:
-                    type: array
-                    uniqueItems: true
-                    items:
-                      $ref: "../components/schemas/Prepayment.yaml"
+                $ref: "../components/schemas/Prepayments-Response.yaml"
               examples:
                 example-success-response:
                   value:
@@ -16697,66 +16692,24 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      refund:
-                        base:
-                          - must be an object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: object
+                $ref: "../components/schemas/Refund-Prepayment-Base-Errors-Response.yaml"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/No-Content.yaml"
+              examples:
+                Example:
+                  value: ""
         "422":
-          description: Unprocessable Entity (WebDAV)
+          description: Unprocessable Entity
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    refund:
-                      errors:
-                        amount_in_cents:
-                          - Refund amount exceeds prepayment amount
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          amount_in_cents:
-                            type: array
-                            items:
-                              type: string
-                          base:
-                            type: array
-                            items:
-                              type: string
-                          external:
-                            type: array
-                            items:
-                              type: string
+                $ref: "../components/schemas/Refund-Prepayment-Aggregated-Errors-Response.yaml"
               examples:
-                Example Error:
+                Example:
                   value:
                     errors:
                       refund:
