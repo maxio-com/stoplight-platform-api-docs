@@ -1,4 +1,4 @@
-title: Event Data
+title: Subscription State Change
 type: object
 properties:
   previous_subscription_state:

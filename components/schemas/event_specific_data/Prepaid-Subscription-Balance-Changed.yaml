@@ -1,0 +1,16 @@
+title: Prepaid Subscription Balance Changed
+type: object
+properties:
+  reason:
+    type: string
+  current_account_balance_in_cents:
+    type: integer
+  prepayment_account_balance_in_cents:
+    type: integer
+  current_usage_amount_in_cents:
+    type: integer
+required:
+  - reason
+  - current_account_balance_in_cents
+  - prepayment_account_balance_in_cents
+  - current_usage_amount_in_cents

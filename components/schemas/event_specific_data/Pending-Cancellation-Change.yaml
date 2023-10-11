@@ -1,0 +1,10 @@
+title: Pending Cancellation Change
+type: object
+properties:
+  cancellation_state:
+    type: string
+  cancels_at:
+    type: string
+required:
+  - cancellation_state
+  - cancels_at
