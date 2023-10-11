@@ -1,4 +1,6 @@
 title: No Content
-type: object
-nullable: true
+type: string
 description: Empty content
+examples:
+  Example:
+    value: ''

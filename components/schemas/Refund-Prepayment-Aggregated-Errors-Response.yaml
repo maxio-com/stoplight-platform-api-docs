@@ -3,26 +3,10 @@ description: Errors returned on creating a refund prepayment, grouped by field, 
 type: object
 properties:
   errors:
-    type: object
-    properties:
+    $ref: "./Refund-Prepayment-Aggregated-Error.yaml"
+examples:
+  Example:
+    errors:
       refund:
-        type: object
-        properties:
-          amount_in_cents:
-            type: array
-            items:
-              type: string
-          base:
-            type: array
-            items:
-              type: string
-          external:
-            type: array
-            items:
-              type: string
-x-examples:
-  example-1:
-    refund:
-      errors:
         amount_in_cents:
           - Refund amount exceeds prepayment amount
