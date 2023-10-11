@@ -8,7 +8,7 @@ properties:
   payer_reference:
     type: string
   payment_collection_method:
-    $ref: "./Signup-Collection-Method.yaml"
+    $ref: "./Collection-Method.yaml"
   payer_attributes:
     $ref: "./Payer-Attributes.yaml"
   credit_card_attributes:
