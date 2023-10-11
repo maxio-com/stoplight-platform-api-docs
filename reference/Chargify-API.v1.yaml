@@ -16221,27 +16221,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
-                      property_values_fingerprint:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: createSegment
       requestBody:
         content:
@@ -16299,19 +16279,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      per_page:
-                        type: array
-                        items:
-                          type: string
-                      price_point:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-List-Segments-Errors.yaml"
       description: |-
         This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
 
@@ -16388,19 +16356,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: updateSegment
       requestBody:
         content:
@@ -16467,41 +16423,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                              property_values_fingerprint:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
@@ -16544,37 +16466,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
