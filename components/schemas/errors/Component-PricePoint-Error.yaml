@@ -1,4 +1,5 @@
 type: object
+title: Component PricePoint Error
 properties:
   errors:
     type: array

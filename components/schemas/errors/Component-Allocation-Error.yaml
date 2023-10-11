@@ -1,4 +1,5 @@
 type: object
+title: Component Allocation Error
 properties:
   errors:
     type: array
