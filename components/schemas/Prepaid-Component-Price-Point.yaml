@@ -1,15 +1,12 @@
 title: Prepaid Component Price Point
 type: object
-properties:
-  name:
-    type: string
-  handle:
-    type: string
-  pricing_scheme:
-    type: string
-  prices:
-    type: array
-    items:
-      $ref: "./Price.yaml"
-  overage_pricing:
-    $ref: "./Pricing.yaml"
+allOf:
+  - $ref: "./Pricing.yaml"
+  - type: object
+    properties:
+      name:
+        type: string
+      handle:
+        type: string
+      overage_pricing:
+        $ref: "./Pricing.yaml"
