@@ -14829,6 +14829,7 @@ paths:
           in: query
           name: ack
           description: id of the customer.
+          required: true
         - schema:
             type: array
             items:
