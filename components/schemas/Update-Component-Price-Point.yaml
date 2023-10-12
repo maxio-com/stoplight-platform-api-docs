@@ -6,4 +6,11 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Update-Price.yaml"
+      allOf:
+        - $ref: "./Price.yaml"
+        - type: object
+          properties:
+            id:
+              type: integer
+            _destroy:
+              type: string
