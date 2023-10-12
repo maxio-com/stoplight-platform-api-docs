@@ -10,6 +10,6 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Create-Component-Price.yaml"
+      $ref: "./Price.yaml"
   overage_pricing:
     $ref: "./Pricing.yaml"
