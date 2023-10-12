@@ -8,6 +8,8 @@ properties:
     items:
       allOf:
         - $ref: "./Price.yaml"
+          required:
+            - "null"
         - type: object
           properties:
             id:
