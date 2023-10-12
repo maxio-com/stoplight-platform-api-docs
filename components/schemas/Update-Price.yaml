@@ -1,7 +1,0 @@
-title: Update Price
-type: object
-properties:
-  id:
-    type: integer
-  _destroy:
-    type: string
