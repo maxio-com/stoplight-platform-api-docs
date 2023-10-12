@@ -12821,16 +12821,6 @@ paths:
         ### Reactivating Trial Ended Subscription
 
         + Given you have a trial_ended subscription
-        + Send a PUT request
-
-        #### Results
-
-        + The subscription will transition to active
-
-        ### Reactivating a trial ended subscription, without the include_trial flag
-
-        + Given you have a trial_ended subscription
-        + The product associated with the subscription has a trial
         + Send a PUT request to `https://acme.chargify.com/subscriptions/{subscription_id}/reactivate.json`
 
         #### Results
