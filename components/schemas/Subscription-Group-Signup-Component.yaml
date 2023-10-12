@@ -24,7 +24,7 @@ properties:
     allOf:
       - $ref: "./Pricing.yaml"
       - type: object
-      - properties:
+        properties:
           overage_pricing:
             type: array
             items:
