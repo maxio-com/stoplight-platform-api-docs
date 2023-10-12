@@ -4,4 +4,4 @@ properties:
   component_id:
     type: integer
   custom_price:
-    $ref: "./Component-Custom-Price.yaml"
+    $ref: "./Pricing.yaml"

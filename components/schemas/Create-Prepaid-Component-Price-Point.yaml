@@ -12,7 +12,7 @@ properties:
     items:
       $ref: "./Price.yaml"
   overage_pricing:
-    $ref: "./Overage-Pricing.yaml"
+    $ref: "./Pricing.yaml"
   use_site_exchange_rate:
     type: boolean
     default: true

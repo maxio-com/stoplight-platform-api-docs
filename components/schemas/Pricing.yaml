@@ -1,12 +1,14 @@
-title: Overage Pricing
+title: Pricing
 type: object
 properties:
   pricing_scheme:
     $ref: "./Pricing-Scheme.yaml"
+    description: Omit for On/Off components
   prices:
     type:
       - array
     items:
+      description: On/off components only need one price bracket starting at 1
       $ref: "./Price.yaml"
 required:
   - pricing_scheme

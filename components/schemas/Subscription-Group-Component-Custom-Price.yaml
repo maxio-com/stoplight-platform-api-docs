@@ -11,4 +11,4 @@ properties:
   overage_pricing:
     type: array
     items:
-      $ref: "./Component-Custom-Price.yaml"
+      $ref: "./Pricing.yaml"

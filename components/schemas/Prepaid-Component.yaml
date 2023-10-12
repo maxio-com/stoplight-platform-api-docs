@@ -47,7 +47,7 @@ properties:
     type: string
     description: deprecated May 2011 - use unit_price instead
   overage_pricing:
-    $ref: "./Overage-Pricing.yaml"
+    $ref: "./Pricing.yaml"
   rollover_prepaid_remainder:
     type: boolean
     description: Boolean which controls whether or not remaining units should be rolled over to the next period
