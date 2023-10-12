@@ -1,0 +1,16 @@
+title: Issue Invoice Event Data
+type: object
+description: Example schema for an `issue_invoice` event
+properties:
+  consolidation_level:
+    -$ref: "../Consolidation-Level.yaml"
+  from_status:
+    -$ref: "../Invoice-Status-From.yaml"
+  to_status:
+    -$ref: "../Invoice-Status-To.yaml"
+  due_amount:
+    type: string
+    description: "Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`."
+  total_amount:
+    type: string
+    description: "The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.'"
