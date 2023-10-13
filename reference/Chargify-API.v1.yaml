@@ -13889,7 +13889,7 @@ paths:
                     subscriptions:
                       - product_id: 123
                         primary: true
-                        metfields:
+                        metafields:
                           mrr: $99
                           discounted: false
                       - product_handle: silver-plan
@@ -13916,7 +13916,7 @@ paths:
                     payer_id: 123
                     subscriptions:
                       - product_id: 19
-                        custom_pricing:
+                        custom_price:
                           handle: custom-price
                           price_in_cents: 9900
                           interval: 1
@@ -13926,7 +13926,7 @@ paths:
                         components:
                           - component_id: 29
                             allocated_quantity: 5
-                            custom_pricing:
+                            custom_price:
                               pricing_scheme: volume
                               prices:
                                 - unit_price: "5"
