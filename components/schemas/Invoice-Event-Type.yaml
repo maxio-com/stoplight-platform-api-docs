@@ -5,6 +5,7 @@ enum:
   - issue_invoice
   - apply_credit_note
   - apply_payment
+  - apply_debit_note
   - refund_invoice
   - void_invoice
   - void_remainder
