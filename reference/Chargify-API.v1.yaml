@@ -40,10 +40,6 @@ info:
     - [Watch our videos and tutorials](https://chargify.com/tutorials)
     - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
 
-    ### Available Consultants
-
-    Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
-
     ## API Overview
 
     The Chargify API allows you to interact with our system programmatically from your own application. Using the API you interact with Resources such as:
