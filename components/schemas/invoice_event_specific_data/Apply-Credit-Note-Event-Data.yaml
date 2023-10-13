@@ -19,6 +19,7 @@ properties:
     description: The amount of the credit note applied to invoice.
   transaction_time:
     type: string
+    format: date-time
     description: The time the credit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
   memo:
     type: string

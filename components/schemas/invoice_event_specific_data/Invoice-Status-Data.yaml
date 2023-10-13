@@ -1,0 +1,9 @@
+name: Invoice Status
+type: string
+enum:
+  - draft
+  - open
+  - paid
+  - pending
+  - voided
+  - canceled

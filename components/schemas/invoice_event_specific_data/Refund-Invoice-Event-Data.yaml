@@ -6,9 +6,9 @@ properties:
     type: boolean
     description: If true, credit was created and applied it to the invoice.
   consolidation_level:
-    -$ref: "../Consolidation-Level.yaml"
+    $ref: "../Consolidation-Level.yaml"
   credit_note_attributes:
-    -$ref: "../Credit-Note.yaml"
+    $ref: "../Credit-Note.yaml"
   memo:
     type: string
     description: The refund memo.
@@ -26,4 +26,5 @@ properties:
     description: The ID of the refund transaction.
   transaction_time:
     type: string
+    format: date-time
     description: The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"

@@ -3,11 +3,15 @@ type: object
 description: Example schema for an `issue_invoice` event
 properties:
   consolidation_level:
-    -$ref: "../Consolidation-Level.yaml"
+    $ref: "../Consolidation-Level.yaml"
   from_status:
-    -$ref: "../Invoice-Status-From.yaml"
+    allOf:
+      - $ref: "./Invoice-Status-Data.yaml"
+    description: "The status of the invoice before event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
   to_status:
-    -$ref: "../Invoice-Status-To.yaml"
+    allOf:
+      - $ref: "./Invoice-Status-Data.yaml"
+    description: "The status of the invoice after event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
   due_amount:
     type: string
     description: "Amount due on the invoice, which is `total_amount - credit_amount - paid_amount`."

@@ -16,7 +16,8 @@ properties:
     description: Applied amount of the original payment
   transaction_time:
     type: string
-    description: Transaction time of the original payment
+    format: date-time
+    description: 'Transaction time of the original payment, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"'
   payment_method:
     $ref: "./Payment-Method-Data.yaml"
   prepayment:
