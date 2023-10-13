@@ -9073,8 +9073,8 @@ paths:
                     allocation:
                       component_id: 4034995
                       subscription_id: 23737320
-                      quantity: -96752223
-                      previous_quantity: 3010509
+                      quantity: 3
+                      previous_quantity: 2
                       memo: dolore cupidatat elit
                       timestamp: ex proident dolor i
                       proration_upgrade_scheme: laboris ipsum dolore
@@ -9086,7 +9086,7 @@ paths:
                       downgrade_credit: full
                       payment:
                         id: -44566528
-                        amout_in_cents: labore in minim ad
+                        amount_in_cents: 123
                         success: false
                         memo: aliqua
       operationId: allocateComponent
@@ -14920,6 +14920,8 @@ paths:
                             product_id: 1
                             product_handle: gold-product
                             product_name: Gold Product
+                            period_range_start: "13 Oct 2023"
+                            period_range_end: "13 Nov 2023"
                           - transaction_type: charge
                             kind: component
                             amount_in_cents: 28000
