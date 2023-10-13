@@ -8870,6 +8870,8 @@ paths:
             example:
               - EUR
               - USD
+          style: form
+          explode: false
           in: query
           description:
             "Allows fetching components allocation with matching currency based on provided values.
@@ -8926,26 +8928,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - component_id: 6474
-                        price_point: 12140
-                        message: Price Point does not belong to Component
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        component_id:
-                          type: number
-                        price_point:
-                          type: number
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Component-PricePoint-Error.yaml"
               examples:
                 Example:
                   value:
@@ -9389,29 +9372,8 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
+                $ref: "../components/schemas/errors/Component-Allocation-Error.yaml"
                 type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: allocation
-                        component_id: 379512
-                        "on": base
-                        message: Allocations can only be updated for quantity and on/off components.
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        component_id:
-                          type: number
-                        "on":
-                          type: string
-                        message:
-                          type: string
               examples:
                 Example:
                   value:
@@ -9471,23 +9433,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: base
-                        message: "Credit scheme must be one of credit, refund or none."
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Subscription-Component-Allocation-Error.yaml"
               examples:
                 Example:
                   value:
@@ -9529,23 +9475,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: base
-                        message: "Credit scheme must be one of credit, refund or none."
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Subscription-Component-Allocation-Error.yaml"
               examples:
                 Example:
                   value:
