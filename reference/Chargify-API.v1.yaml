@@ -6588,6 +6588,7 @@ paths:
       - schema:
           type: integer
         name: bank_account_id
+        description: Identifier of the bank account in the system.
         in: path
         required: true
     put:
@@ -8869,6 +8870,8 @@ paths:
             example:
               - EUR
               - USD
+          style: form
+          explode: false
           in: query
           description:
             "Allows fetching components allocation with matching currency based on provided values.
@@ -8925,26 +8928,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - component_id: 6474
-                        price_point: 12140
-                        message: Price Point does not belong to Component
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        component_id:
-                          type: number
-                        price_point:
-                          type: number
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Component-PricePoint-Error.yaml"
               examples:
                 Example:
                   value:
@@ -9388,29 +9372,8 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
+                $ref: "../components/schemas/errors/Component-Allocation-Error.yaml"
                 type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: allocation
-                        component_id: 379512
-                        "on": base
-                        message: Allocations can only be updated for quantity and on/off components.
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        component_id:
-                          type: number
-                        "on":
-                          type: string
-                        message:
-                          type: string
               examples:
                 Example:
                   value:
@@ -9470,23 +9433,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: base
-                        message: "Credit scheme must be one of credit, refund or none."
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Subscription-Component-Allocation-Error.yaml"
               examples:
                 Example:
                   value:
@@ -9528,23 +9475,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      - kind: base
-                        message: "Credit scheme must be one of credit, refund or none."
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        kind:
-                          type: string
-                        message:
-                          type: string
+                $ref: "../components/schemas/errors/Subscription-Component-Allocation-Error.yaml"
               examples:
                 Example:
                   value:
@@ -12820,16 +12751,6 @@ paths:
         ### Reactivating Trial Ended Subscription
 
         + Given you have a trial_ended subscription
-        + Send a PUT request
-
-        #### Results
-
-        + The subscription will transition to active
-
-        ### Reactivating a trial ended subscription, without the include_trial flag
-
-        + Given you have a trial_ended subscription
-        + The product associated with the subscription has a trial
         + Send a PUT request to `https://acme.chargify.com/subscriptions/{subscription_id}/reactivate.json`
 
         #### Results
@@ -13749,13 +13670,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepayments:
-                    type: array
-                    uniqueItems: true
-                    items:
-                      $ref: "../components/schemas/Prepayment.yaml"
+                $ref: "../components/schemas/Prepayments-Response.yaml"
               examples:
                 example-success-response:
                   value:
@@ -14844,6 +14759,7 @@ paths:
           in: query
           name: ack
           description: id of the customer.
+          required: true
         - schema:
             type: array
             items:
@@ -16221,27 +16137,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
-                      property_values_fingerprint:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: createSegment
       requestBody:
         content:
@@ -16299,19 +16195,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      per_page:
-                        type: array
-                        items:
-                          type: string
-                      price_point:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-List-Segments-Errors.yaml"
       description: |-
         This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
 
@@ -16388,19 +16272,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: updateSegment
       requestBody:
         content:
@@ -16467,41 +16339,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                              property_values_fingerprint:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
@@ -16544,37 +16382,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
@@ -16805,66 +16613,24 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      refund:
-                        base:
-                          - must be an object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: object
+                $ref: "../components/schemas/Refund-Prepayment-Base-Errors-Response.yaml"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/No-Content.yaml"
+              examples:
+                Example:
+                  value: ""
         "422":
-          description: Unprocessable Entity (WebDAV)
+          description: Unprocessable Entity
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    refund:
-                      errors:
-                        amount_in_cents:
-                          - Refund amount exceeds prepayment amount
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          amount_in_cents:
-                            type: array
-                            items:
-                              type: string
-                          base:
-                            type: array
-                            items:
-                              type: string
-                          external:
-                            type: array
-                            items:
-                              type: string
+                $ref: "../components/schemas/Refund-Prepayment-Aggregated-Errors-Response.yaml"
               examples:
-                Example Error:
+                Example:
                   value:
                     errors:
                       refund:
