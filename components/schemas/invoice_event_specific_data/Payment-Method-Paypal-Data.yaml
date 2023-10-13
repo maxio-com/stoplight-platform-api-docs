@@ -1,0 +1,9 @@
+title: Payment Method Paypal Type
+type: object
+properties:
+  email:
+    type: string
+    format: email
+  type:
+    type: string
+    default: "paypal_account"

@@ -1,0 +1,6 @@
+title: Payment Method Apple Pay Type
+type: object
+properties:
+  type:
+    type: string
+    default: "apple_pay"
