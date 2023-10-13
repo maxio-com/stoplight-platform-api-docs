@@ -6,11 +6,11 @@ properties:
     $ref: "../Consolidation-Level.yaml"
   from_status:
     allOf:
-      - $ref: "./Invoice-Status-Data.yaml"
+      - $ref: "../Invoice-Status.yaml"
     description: "The status of the invoice before event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
   to_status:
     allOf:
-      - $ref: "./Invoice-Status-Data.yaml"
+      - $ref: "../Invoice-Status.yaml"
     description: "The status of the invoice after event occurence. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
   due_amount:
     type: string

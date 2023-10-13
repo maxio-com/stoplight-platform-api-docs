@@ -1,0 +1,10 @@
+title: Payment Method Bank Account Type
+type: object
+properties:
+  masked_account_number:
+    type: string
+  masked_routing_number:
+    type: string
+  type:
+    type: string
+    default: "bank_account"

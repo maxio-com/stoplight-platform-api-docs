@@ -1,6 +1,5 @@
-title: Payment Method Nested Data
+title: Payment Method External Type
 type: object
-description: A nested data structure detailing the method of payment
 properties:
   details:
     type: string
@@ -10,3 +9,4 @@ properties:
     type: string
   type:
     type: string
+    default: "external"
