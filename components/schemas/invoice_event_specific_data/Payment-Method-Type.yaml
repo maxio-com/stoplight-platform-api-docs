@@ -1,7 +1,7 @@
 title: Payment Method Nested Data
 type: object
 description: A nested data structure detailing the method of payment
-oneOf:
+anyOf:
   - $ref: "./Payment-Method-Apple-Pay-Data.yaml"
   - $ref: "./Payment-Method-Bank-Account-Data.yaml"
   - $ref: "./Payment-Method-Credit-Card-Data.yaml"
