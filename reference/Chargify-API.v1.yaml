@@ -10854,6 +10854,7 @@ paths:
                       - component_id: 10
                         enabled: true
                         custom_price:
+                          pricing_scheme: stairstep
                           prices:
                             - unit_price: 1
                               starting_quantity: 1
@@ -11882,6 +11883,7 @@ paths:
                       - component_id: 10
                         enabled: true
                         custom_price:
+                          pricing_scheme: stairstep
                           prices:
                             - unit_price: "1"
                               starting_quantity: "1"
@@ -15177,6 +15179,7 @@ paths:
                       - component_id: 10
                         enabled: true
                         custom_price:
+                          pricing_scheme: stairstep
                           prices:
                             - unit_price: 1
                               starting_quantity: 1

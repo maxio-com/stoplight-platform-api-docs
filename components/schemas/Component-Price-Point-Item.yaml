@@ -11,3 +11,6 @@ properties:
     type: array
     items:
       $ref: "./Price.yaml"
+      required:
+        - starting_quantity
+        - unit_price

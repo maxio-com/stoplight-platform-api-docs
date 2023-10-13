@@ -35,6 +35,8 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Create-Or-Update-Segment-Price.yaml"
+      $ref: "./Price.yaml"
+      required:
+        - unit_price
 required:
   - pricing_scheme
