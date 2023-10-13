@@ -17,4 +17,5 @@ properties:
     type: string
   currency_prices:
     type: array
-    items: {}
+    items:
+      $ref: "./Currency-Price.yaml"

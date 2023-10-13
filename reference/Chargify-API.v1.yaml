@@ -2335,6 +2335,7 @@ paths:
             type: string
           in: query
           name: code
+          description: The code of the coupon
   "/product_families/{product_family_id}/coupons/{coupon_id}.json":
     parameters:
       - schema:
@@ -2771,10 +2772,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: string
+                $ref: "../components/schemas/errors/Single-String-Error-Response.yaml"
               examples:
                 Example:
                   value:
@@ -3024,6 +3022,7 @@ paths:
         name: subcode
         in: path
         required: true
+        description: The subcode of the coupon
     delete:
       summary: Delete Coupon Subcode
       tags:
@@ -3140,8 +3139,6 @@ paths:
                           new_value: "No"
                           resource_type: Subscription
                           resource_id: 117
-                          previous_subscription_state: active
-                          new_subscription_state: past_due
             application/xml:
               schema:
                 type: array
@@ -3297,9 +3294,7 @@ paths:
                         created_at: "2016-11-01T12:41:28-04:00"
                         event_specific_data:
                           product_id: 3792003
-                          account_transaction_id: null
-                          previous_subscription_state: active
-                          new_subscription_state: active
+                          account_transaction_id: 7590246
                     - event:
                         id: 344799705
                         key: billing_date_change
@@ -4203,6 +4198,8 @@ paths:
             example:
               - 1
               - 2
+          style: form
+          explode: false
           in: query
           description:
             "Allows fetching components with matching id based on provided value.
@@ -4387,6 +4384,7 @@ paths:
         name: component_id
         in: path
         required: true
+        description: The Chargify id of the component for which you want to fetch price points.
     post:
       summary: Bulk Create Component Price Points
       tags:
@@ -5842,15 +5840,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6598,6 +6588,7 @@ paths:
       - schema:
           type: integer
         name: bank_account_id
+        description: Identifier of the bank account in the system.
         in: path
         required: true
     put:
@@ -9404,17 +9395,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-Allocation-Request.yaml"
+              $ref: "../components/schemas/Preview-Allocations-Request.yaml"
             examples:
               Example:
                 value:
-                  allocation:
-                    proration_upgrade_scheme: prorate-attempt-capture
-                    proration_downgrade_scheme: prorate
-                    component_id: 554108
-                    price_point_id: 325826
-                    quantity: 10
-                    memo: NOW
+                  allocations:
+                    - proration_upgrade_scheme: prorate-attempt-capture
+                      proration_downgrade_scheme: prorate
+                      component_id: 554108
+                      price_point_id: 325826
+                      quantity: 10
+                      memo: NOW
   "/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -9897,7 +9888,7 @@ paths:
                   value:
                     errors:
                       - "Bank routing number: cannot be blank."
-                      - "Bank account number: cannot be blank. "
+                      - "Bank account number: cannot be blank."
       operationId: createSubscription
       description: |-
         Full documentation on how subscriptions operate within Chargify can be located under the following topics:
@@ -10927,13 +10918,12 @@ paths:
         - name: metadata
           in: query
           schema:
-            additionalProperties:
-              type: string
+            allOf:
+              - $ref: "../components/schemas/Metafields-Values.yaml"
+            description: "A set of key/value pairs representing custom fields and their values."
           style: deepObject
           explode: true
-          description:
-            "The value of the metadata field specified in the parameter.
-            Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
+          description: "The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`."
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
             $ref: "../components/schemas/Subscription-Sort.yaml"
@@ -11103,15 +11093,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      components:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -11610,16 +11592,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: array
-                    items:
-                      type: object
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
-                    errors: []
+                    errors:
+                      - "base: subscription retry was unsuccessful"
       operationId: retrySubscription
       description: |-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
@@ -12773,16 +12751,6 @@ paths:
         ### Reactivating Trial Ended Subscription
 
         + Given you have a trial_ended subscription
-        + Send a PUT request
-
-        #### Results
-
-        + The subscription will transition to active
-
-        ### Reactivating a trial ended subscription, without the include_trial flag
-
-        + Given you have a trial_ended subscription
-        + The product associated with the subscription has a trial
         + Send a PUT request to `https://acme.chargify.com/subscriptions/{subscription_id}/reactivate.json`
 
         #### Results
@@ -13433,10 +13401,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      invoice:
+                        - "can't be blank"
       operationId: createInvoice
       description: |-
         This endpoint will allow you to create an ad hoc invoice.
@@ -13699,13 +13670,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  prepayments:
-                    type: array
-                    uniqueItems: true
-                    items:
-                      $ref: "../components/schemas/Prepayment.yaml"
+                $ref: "../components/schemas/Prepayments-Response.yaml"
               examples:
                 example-success-response:
                   value:
@@ -14646,6 +14611,7 @@ paths:
             type: string
           in: query
           name: reference
+          description: Subscription reference
       description: Use this endpoint to find a subscription by its reference.
   "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
@@ -14793,6 +14759,7 @@ paths:
           in: query
           name: ack
           description: id of the customer.
+          required: true
         - schema:
             type: array
             items:
@@ -15388,26 +15355,7 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - properties:
-                      codes:
-                        type: array
-                        items:
-                          type: string
-                      subscription:
-                        type: array
-                        items:
-                          type: string
-                  - properties:
-                      coupon_codes:
-                        type: array
-                        items:
-                          type: string
-                      subscription:
-                        type: array
-                        items:
-                          type: string
-                type: object
+                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Errors.yaml"
               examples:
                 Example:
                   value:
@@ -15430,6 +15378,7 @@ paths:
             type: string
           in: query
           name: code
+          description: A code for the coupon that would be applied to a subscription
           deprecated: true
       requestBody:
         content:
@@ -15464,12 +15413,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  subscription:
-                    type: array
-                    items:
-                      type: string
+                $ref: "../components/schemas/errors/Subscription-Remove-Coupon-Errors.yaml"
               examples:
                 Example:
                   value:
@@ -16193,27 +16137,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
-                      property_values_fingerprint:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: createSegment
       requestBody:
         content:
@@ -16271,19 +16195,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      per_page:
-                        type: array
-                        items:
-                          type: string
-                      price_point:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-List-Segments-Errors.yaml"
       description: |-
         This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
 
@@ -16360,19 +16272,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      pricing_scheme:
-                        type: array
-                        items:
-                          type: string
-                      prices:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment-Errors.yaml"
       operationId: updateSegment
       requestBody:
         content:
@@ -16439,41 +16339,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                              property_values_fingerprint:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
@@ -16516,37 +16382,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    required:
-                      - segments
-                    properties:
-                      segments:
-                        type: object
-                        properties:
-                          "'x'":
-                            type: object
-                            description: |-
-                              An attribute 'x' would be changed for a number (an index in request array) where the error occured.
-
-                              In this object, the key represents the field and the value is an array with error messages. In most cases this object would contain just one key.
-                            properties:
-                              base:
-                                type: array
-                                items:
-                                  type: string
-                              pricing_scheme:
-                                type: array
-                                items:
-                                  type: string
-                              prices:
-                                type: array
-                                items:
-                                  type: string
-                required:
-                  - errors
+                $ref: "../components/schemas/errors/Event-Based-Billing-Segment.yaml"
               examples:
                 Error response when Pricing Scheme is missing:
                   value:
@@ -16777,66 +16613,24 @@ paths:
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                      refund:
-                        base:
-                          - must be an object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          base:
-                            type: array
-                            items:
-                              type: object
+                $ref: "../components/schemas/Refund-Prepayment-Base-Errors-Response.yaml"
         "404":
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/No-Content.yaml"
+              examples:
+                Example:
+                  value: ""
         "422":
-          description: Unprocessable Entity (WebDAV)
+          description: Unprocessable Entity
           content:
             application/json:
               schema:
-                description: ""
-                type: object
-                x-examples:
-                  example-1:
-                    refund:
-                      errors:
-                        amount_in_cents:
-                          - Refund amount exceeds prepayment amount
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      refund:
-                        type: object
-                        properties:
-                          amount_in_cents:
-                            type: array
-                            items:
-                              type: string
-                          base:
-                            type: array
-                            items:
-                              type: string
-                          external:
-                            type: array
-                            items:
-                              type: string
+                $ref: "../components/schemas/Refund-Prepayment-Aggregated-Errors-Response.yaml"
               examples:
-                Example Error:
+                Example:
                   value:
                     errors:
                       refund:
@@ -17258,21 +17052,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  errors:
-                    type: object
-                    properties:
-                      base:
-                        type: array
-                        items:
-                          type: string
+                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
               examples:
-                example-1:
+                Generic error:
                   value:
                     errors:
                       base:
-                        - Purchase Declined. The subscription is now in the 'awaiting_signup' state.
+                        - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
       operationId: activateSubscription
       requestBody:
         content:

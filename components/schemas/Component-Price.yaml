@@ -17,3 +17,7 @@ properties:
     type: integer
   formatted_unit_price:
     type: string
+  segment_id:
+    type:
+      - integer
+      - "null"

@@ -1,0 +1,19 @@
+title: Credit Account Balance Changed
+type: object
+properties:
+  reason:
+    type: string
+  service_credit_account_balance_in_cents:
+    type: integer
+  service_credit_balance_change_in_cents:
+    type: integer
+  currency_code:
+    type: string
+  at_time:
+    type: string
+required:
+  - reason
+  - service_credit_account_balance_in_cents
+  - service_credit_balance_change_in_cents
+  - currency_code
+  - at_time

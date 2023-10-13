@@ -54,7 +54,7 @@ properties:
     type: string
     description: The credit card or bank account billing address zip code (i.e. 12345). This value is merely passed through to the payment gateway.
   current_vault:
-    $ref: "./Create-Payment-Profile-Vault.yaml"
+    $ref: "./Current-Vault.yaml"
   vault_token:
     type: string
     description: The “token” provided by your vault storage for an already stored payment profile
