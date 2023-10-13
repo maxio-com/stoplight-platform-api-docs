@@ -1,0 +1,12 @@
+title: Payment Method Nested Data
+type: object
+description: A nested data structure detailing the method of payment
+properties:
+  details:
+    type: string
+  kind:
+    type: string
+  memo:
+    type: string
+  type:
+    type: string

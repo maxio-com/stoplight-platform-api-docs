@@ -23,3 +23,14 @@ properties:
   memo:
     type: string
     description: The credit note memo.
+  role:
+    type: string
+    description: The role of the credit note (e.g. 'general')
+  consolidated_invoice:
+    type: boolean
+    description: Shows whether it was applied to consolidated invoice or not
+  applied_credit_notes:
+    type: array
+    description: List of credit notes applied to children invoices (if consolidated invoice)
+    items:
+      $ref: "./Apply-Credit-Note-Credit-Notes-Data.yaml"

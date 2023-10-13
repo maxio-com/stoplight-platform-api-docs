@@ -1,0 +1,24 @@
+title: Remove Payment Event Data
+type: object
+description: Example schema for an `remove_payment` event
+properties:
+  transaction_id:
+    type: integer
+    description: Transaction ID of the original payment that was removed
+  memo:
+    type: string
+    description: Memo of the original payment
+  original_amount:
+    type: string
+    description: Full amount of the original payment
+  applied_amount:
+    type: string
+    description: Applied amount of the original payment
+  transaction_time:
+    type: string
+    description: Transaction time of the original payment
+  payment_method:
+    $ref: "./Payment-Method-Data.yaml"
+  prepayment:
+    type: boolean
+    description: The flag that shows whether the original payment was a prepayment or not

@@ -2,9 +2,6 @@ title: Void Invoice Event Data
 type: object
 description: Example schema for an `void_invoice` event
 properties:
-  apply_credit:
-    type: boolean
-    description: If true, credit was created and applied it to the invoice.
   credit_note_attributes:
     -$ref: "../Credit-Note.yaml"
   memo:

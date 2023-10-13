@@ -15,8 +15,7 @@ properties:
     type: string
     description: 'The time the payment was removed, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"'
   payment_method:
-    type: object
-    description: A nested data structure detailing the method of payment
+    $ref: "./Payment-Method-Data.yaml"
   transaction_id:
     type: integer
     description: The Chargify id of the original payment
