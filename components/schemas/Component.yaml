@@ -7,6 +7,9 @@ properties:
   name:
     type: string
     description: "The name of the Component, suitable for display on statements. i.e. Text Messages."
+  handle:
+    type: string
+    description: "The component API handle"
   pricing_scheme:
     type:
       - string
@@ -23,6 +26,9 @@ properties:
   product_family_id:
     type: integer
     description: The id of the Product Family to which the Component belongs
+  product_family_name:
+    type: string
+    description: The name of the Product Family to which the Component belongs
   price_per_unit_in_cents:
     type:
       - integer
@@ -43,12 +49,21 @@ properties:
     description: The description of the component.
   default_price_point_id:
     type: integer
+  prices:
+    type:
+      - array
+      - "null"
+    description: "An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty."
+    items:
+      $ref: "./Component-Price.yaml"
   price_point_count:
     type: integer
     description: Count for the number of price points associated with the component
   price_points_url:
     type: string
     description: URL that points to the location to read the existing price points via GET request
+  default_price_point_name:
+    type: string
   tax_code:
     type:
       - string
@@ -66,27 +81,22 @@ properties:
       - "null"
   created_at:
     type: string
-  prices:
+    description: Timestamp indicating when this component was created
+  updated_at:
+    type: string
+    description: Timestamp indicating when this component was updated
+  archived_at:
     type:
-      - array
+      - string
       - "null"
-    description: "An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty."
-    items:
-      $ref: "./Component-Price.yaml"
-  default_price_point_name:
-    type: string
-  product_family_name:
-    type: string
+    description: Timestamp indicating when this component was archived
   hide_date_range_on_invoice:
     type: boolean
     description: (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices.
-  event_based_billing_metric_id:
-    type: integer
-    description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
-  item_category:
-    $ref: "./Component-Item-Category-Type.yaml"
   allow_fractional_quantities:
     type: boolean
+  item_category:
+    $ref: "./Component-Item-Category-Type.yaml"
   use_site_exchange_rate:
     type:
       - boolean
@@ -96,3 +106,6 @@ properties:
       - string
       - "null"
     description: E.g. Internal ID or SKU Number
+  event_based_billing_metric_id:
+    type: integer
+    description: (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events.
