@@ -13891,7 +13891,7 @@ paths:
                         primary: true
                         metafields:
                           mrr: $99
-                          discounted: false
+                          discounted: "false"
                       - product_handle: silver-plan
                         metafields:
                           mrr: $49
