@@ -3813,8 +3813,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -16619,10 +16618,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/No-Content.yaml"
-              examples:
-                Example:
-                  value: ""
+                type: string
         "422":
           description: Unprocessable Entity
           content:
