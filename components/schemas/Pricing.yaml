@@ -11,6 +11,7 @@ properties:
       description: On/off components only need one price bracket starting at 1
       allOf:
         - $ref: "./Price.yaml"
+        - type: object
           required:
             - starting_quantity
             - unit_price

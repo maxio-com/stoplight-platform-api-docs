@@ -12,6 +12,7 @@ properties:
     items:
       allOf:
         - $ref: "./Price.yaml"
+        - type: object
           required:
             - starting_quantity
             - unit_price
