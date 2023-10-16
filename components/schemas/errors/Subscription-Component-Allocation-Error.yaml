@@ -1,0 +1,12 @@
+title: Subscription Component Allocation Error
+type: object
+examples:
+  - Example:
+    errors:
+      - kind: base
+        message: "Credit scheme must be one of credit, refund or none."
+properties:
+  errors:
+    type: array
+    items:
+      $ref: "./Subscription-Component-Allocation-Error-Item.yaml"
