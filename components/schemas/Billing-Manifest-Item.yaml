@@ -15,3 +15,17 @@ properties:
     type: integer
   component_id:
     type: integer
+  component_handle:
+    type: string
+  component_name:
+    type: string
+  product_id:
+    type: integer
+  product_handle:
+    type: string
+  product_name:
+    type: string
+  period_range_start:
+    type: string
+  period_range_end:
+    type: string
