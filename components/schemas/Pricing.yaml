@@ -9,9 +9,11 @@ properties:
       - array
     items:
       description: On/off components only need one price bracket starting at 1
-      $ref: "./Price.yaml"
-      required:
-        - starting_quantity
-        - unit_price
+      allOf:
+        - $ref: "./Price.yaml"
+        - type: object
+          required:
+            - starting_quantity
+            - unit_price
 required:
   - pricing_scheme

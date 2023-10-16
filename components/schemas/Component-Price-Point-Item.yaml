@@ -10,7 +10,9 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Price.yaml"
-      required:
-        - starting_quantity
-        - unit_price
+      allOf:
+        - $ref: "./Price.yaml"
+        - type: object
+          required:
+            - starting_quantity
+            - unit_price

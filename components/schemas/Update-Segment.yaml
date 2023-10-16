@@ -7,8 +7,10 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Price.yaml"
-      required:
-        - unit_price
+      allOf:
+        - $ref: "./Price.yaml"
+        - type: object
+          required:
+            - unit_price
 required:
   - pricing_scheme
