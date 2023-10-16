@@ -223,3 +223,21 @@ properties:
       - "null"
     example: '"Eastern Time (US & Canada)"'
     description: Time zone for the Dunning Communication Delay feature.
+  receives_invoice_emails:
+    type:
+      - boolean
+      - "null"
+  locale:
+    type:
+      - string
+      - "null"
+  currency:
+    type: string
+  scheduled_cancellation_at:
+    type:
+      - string
+      - "null"
+  credit_balance_in_cents:
+    type: integer
+  prepayment_balance_in_cents:
+    type: integer

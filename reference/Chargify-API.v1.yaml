@@ -40,10 +40,6 @@ info:
     - [Watch our videos and tutorials](https://chargify.com/tutorials)
     - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
 
-    ### Available Consultants
-
-    Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
-
     ## API Overview
 
     The Chargify API allows you to interact with our system programmatically from your own application. Using the API you interact with Resources such as:
@@ -3813,8 +3809,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
               examples:
                 Example:
                   value:
@@ -9074,8 +9069,8 @@ paths:
                     allocation:
                       component_id: 4034995
                       subscription_id: 23737320
-                      quantity: -96752223
-                      previous_quantity: 3010509
+                      quantity: 3
+                      previous_quantity: 2
                       memo: dolore cupidatat elit
                       timestamp: ex proident dolor i
                       proration_upgrade_scheme: laboris ipsum dolore
@@ -9087,7 +9082,7 @@ paths:
                       downgrade_credit: full
                       payment:
                         id: -44566528
-                        amout_in_cents: labore in minim ad
+                        amount_in_cents: 123
                         success: false
                         memo: aliqua
       operationId: allocateComponent
@@ -13892,9 +13887,9 @@ paths:
                     subscriptions:
                       - product_id: 123
                         primary: true
-                        metfields:
+                        metafields:
                           mrr: $99
-                          discounted: false
+                          discounted: "false"
                       - product_handle: silver-plan
                         metafields:
                           mrr: $49
@@ -13919,7 +13914,7 @@ paths:
                     payer_id: 123
                     subscriptions:
                       - product_id: 19
-                        custom_pricing:
+                        custom_price:
                           handle: custom-price
                           price_in_cents: 9900
                           interval: 1
@@ -13929,7 +13924,7 @@ paths:
                         components:
                           - component_id: 29
                             allocated_quantity: 5
-                            custom_pricing:
+                            custom_price:
                               pricing_scheme: volume
                               prices:
                                 - unit_price: "5"
@@ -14923,6 +14918,8 @@ paths:
                             product_id: 1
                             product_handle: gold-product
                             product_name: Gold Product
+                            period_range_start: "13 Oct 2023"
+                            period_range_end: "13 Nov 2023"
                           - transaction_type: charge
                             kind: component
                             amount_in_cents: 28000
@@ -16622,10 +16619,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/No-Content.yaml"
-              examples:
-                Example:
-                  value: ""
+                type: string
         "422":
           description: Unprocessable Entity
           content:
