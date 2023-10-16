@@ -1631,6 +1631,9 @@ paths:
                           original_amount_in_cents: null
                           discount_amount_in_cents: null
                           taxable_amount_in_cents: null
+                          card_expiration: 10/2020
+                          card_number: XXXX-XXXX-XXXX-1
+                          card_type: visa
                           taxations: []
                       events:
                         - event:
