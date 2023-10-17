@@ -11796,7 +11796,6 @@ paths:
                       interval_unit: month
                     components:
                       - component_id: 20
-                        allocated_quantity: 10
                         custom_price:
                           pricing_scheme: stairstep
                           prices:
@@ -11806,7 +11805,6 @@ paths:
                             - unit_price: "2"
                               starting_quantity: "16"
                       - component_id: 10
-                        enabled: true
                         custom_price:
                           prices:
                             - unit_price: "1"
@@ -15045,7 +15043,7 @@ paths:
                       - component_id: 426665
                         unit_balance: 20
                       - component_id: 426670
-                        quantity: 1
+                        allocated_quantity: 1
               With Custom Taxes:
                 value:
                   subscription:

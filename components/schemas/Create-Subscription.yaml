@@ -55,6 +55,10 @@ properties:
     $ref: "./Customer-Attributes.yaml"
   payment_profile_attributes:
     $ref: "./Payment-Profile-Attributes.yaml"
+  credit_card_attributes:
+    allOf:
+      - $ref: "./Payment-Profile-Attributes.yaml"
+    description: "Credit Card data to create a new Subscription. Interchangeable with `payment_profile_attributes` property."
   bank_account_attributes:
     $ref: "./Bank-Account-Attributes.yaml"
   components:
