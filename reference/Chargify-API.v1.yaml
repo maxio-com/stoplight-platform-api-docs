@@ -10656,7 +10656,7 @@ paths:
                       email: joetest@example.com
                     bank_account_attributes:
                       bank_name: My Bank
-                      current_vault: stripe
+                      current_vault: stripe_connect
                       vault_token: "1234"
               Import With Future Billing Date:
                 value:

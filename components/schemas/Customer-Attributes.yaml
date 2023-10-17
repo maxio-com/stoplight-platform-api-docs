@@ -50,3 +50,5 @@ properties:
   vat_number:
     type: string
     description: "(Optional) Supplying the VAT number allows EU customer’s to opt-out of the Value Added Tax assuming the merchant address and customer billing address are not within the same EU country. It’s important to omit the country code from the VAT number upon entry. Otherwise, taxes will be assessed upon the purchase."
+  metafields:
+    $ref: "./Metafields-Values.yaml"
