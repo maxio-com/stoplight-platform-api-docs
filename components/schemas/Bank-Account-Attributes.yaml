@@ -28,3 +28,6 @@ properties:
     $ref: "./Bank-Account-Vault.yaml"
   vault_token:
     type: string
+  customer_vault_token:
+    type: string
+    description: (only for Authorize.Net CIM storage or Square) The customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token
