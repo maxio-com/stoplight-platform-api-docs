@@ -12,4 +12,4 @@ properties:
     description: The amount of the payment due in the case of an upgrade.
   credit_applied_in_cents:
     type: integer
-    description: The amount of the credit that would be applied in the case that some is available to the subscription
+    description: Represents a credit in cents that is applied to your subscription as part of a migration process for a specific product, which reduces the amount owed for the subscription.
