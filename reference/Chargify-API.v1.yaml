@@ -10640,7 +10640,7 @@ paths:
                       first_name: Child who pays for self
                       last_name: (No subscription group)
                       email: joe@example.com
-                      parent_id: "23554144"
+                      parent_id: 23554144
                     group: false
               Import as Canceled:
                 value:
