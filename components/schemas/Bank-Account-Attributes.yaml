@@ -24,3 +24,7 @@ properties:
     type: string
   payment_type:
     type: string
+  current_vault:
+    $ref: "./Bank-Account-Vault.yaml"
+  vault_token:
+    type: string

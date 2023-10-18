@@ -8,13 +8,17 @@ properties:
       - string
   enabled:
     type: boolean
-    description: Used for on/off components only
+    description: Used for on/off components only.
   unit_balance:
     type: integer
-    description: Used for metered and events based components
+    description: Used for metered and events based components.
   allocated_quantity:
     type: integer
-    description: Used for quantity based compo
+    description: Used for quantity based components.
+  quantity:
+    type: integer
+    deprecated: true
+    description: Deprecated. Use `allocated_quantity` instead.
   price_point_id:
     type:
       - integer
