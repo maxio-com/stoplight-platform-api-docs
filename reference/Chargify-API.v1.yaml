@@ -3533,7 +3533,7 @@ paths:
                     description: Example of JSON stairstep example
                     pricing_scheme: stairstep
                     taxable: true
-                    prices_attributes:
+                    prices:
                       - starting_quantity: "1"
                         ending_quantity: "100"
                         unit_price: "50"
@@ -3612,10 +3612,8 @@ paths:
                         - starting_quantity: 1
                           ending_quantity: 100
                           unit_price: 3
-                          formatted_unit_price: $3.00
                         - starting_quantity: 101
                           unit_price: 5
-                          formatted_unit_price: $5.00
               On/Off with Price Points:
                 value:
                   on_off_component:
