@@ -3524,7 +3524,7 @@ paths:
                     display_on_hosted_page: true
                     allow_fractional_quantities: true
                     public_signup_page_ids:
-                      - "323397"
+                      - 323397
               Quantity Based (stairstep):
                 value:
                   quantity_based_component:
@@ -3543,7 +3543,7 @@ paths:
                     display_on_hosted_page: true
                     allow_fractional_quantities: true
                     public_signup_page_ids:
-                      - "323397"
+                      - 323397
               Quantity Based (volume):
                 value:
                   quantity_based_component:
@@ -3562,7 +3562,7 @@ paths:
                     display_on_hosted_page: true
                     allow_fractional_quantities: true
                     public_signup_page_ids:
-                      - "323397"
+                      - 323397
               Quantity Based (tiered):
                 value:
                   quantity_based_component:
@@ -3581,7 +3581,7 @@ paths:
                     display_on_hosted_page: true
                     allow_fractional_quantities: true
                     public_signup_page_ids:
-                      - "323397"
+                      - 323397
               On/Off:
                 value:
                   on_off_component:
@@ -3594,7 +3594,7 @@ paths:
                         starting_quantity: "0"
                     display_on_hosted_page: true
                     public_signup_page_ids:
-                      - "320495"
+                      - 320495
               Prepaid Usage:
                 value:
                   prepaid_usage_component:
@@ -3626,7 +3626,7 @@ paths:
                         starting_quantity: 0
                     display_on_hosted_page: true
                     public_signup_page_ids:
-                      - "320495"
+                      - 320495
                     price_points:
                       - name: Wholesale
                         handle: wholesale-handle
@@ -3645,7 +3645,7 @@ paths:
                         starting_quantity: 0
                     display_on_hosted_page: true
                     public_signup_page_ids:
-                      - "320495"
+                      - 320495
                     upgrade_charge: full
                     downgrade_credit: prorated
                     pricing_scheme: per_unit

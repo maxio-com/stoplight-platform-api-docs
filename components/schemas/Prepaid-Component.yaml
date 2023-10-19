@@ -63,3 +63,7 @@ properties:
     type: boolean
   allow_fractional_quantities:
     type: boolean
+  public_signup_page_ids:
+    type: array
+    items:
+      type: integer
