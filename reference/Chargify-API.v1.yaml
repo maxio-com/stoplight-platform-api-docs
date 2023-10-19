@@ -2087,9 +2087,9 @@ paths:
               Percentage Coupon Example:
                 value:
                   coupon:
-                    name: 15% off
-                    code: 15OFF
-                    description: 15% off for life
+                    name: "15% off"
+                    code: "15OFF"
+                    description: "15% off for life"
                     percentage: "15"
                     allow_negative_balance: "false"
                     recurring: "false"
@@ -2097,6 +2097,8 @@ paths:
                     product_family_id: "2"
                     stackable: "true"
                     compounding_strategy: compound
+                    exclude_mid_period_allocations: true
+                    apply_on_cancel_at_end_of_period: true
                   restricted_products:
                     "1": true
                   restricted_components:
@@ -2105,9 +2107,9 @@ paths:
               Flat Amount Coupon Example:
                 value:
                   coupon:
-                    name: $10 off
-                    code: 10OFF
-                    description: $10 off for life
+                    name: "$10 off"
+                    code: "10OFF"
+                    description: "$10 off for life"
                     amount_in_cents: 1000
                     allow_negative_balance: "false"
                     recurring: "false"
@@ -2115,6 +2117,8 @@ paths:
                     product_family_id: "2"
                     stackable: "true"
                     compounding_strategy: compound
+                    exclude_mid_period_allocations: true
+                    apply_on_cancel_at_end_of_period: true
                   restricted_products:
                     "1": true
                   restricted_components:
