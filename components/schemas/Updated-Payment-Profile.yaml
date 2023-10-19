@@ -42,4 +42,6 @@ properties:
   masked_card_number:
     type: string
   customer_vault_token:
-    type: string
+    type:
+      - string
+      - "null"
