@@ -23,7 +23,7 @@ properties:
     type: array
     description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
     items:
-      $ref: "./Create-Component-Price.yaml"
+      $ref: "./Price.yaml"
   upgrade_charge:
     type: string
   downgrade_credit:
@@ -46,6 +46,10 @@ properties:
   price_in_cents:
     type: string
     description: deprecated May 2011 - use unit_price instead
+  display_on_hosted_page:
+    type: boolean
+  allow_fractional_quantities:
+    type: boolean
 required:
   - name
   - unit_name

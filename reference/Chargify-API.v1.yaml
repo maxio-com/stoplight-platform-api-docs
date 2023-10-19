@@ -3521,8 +3521,8 @@ paths:
                     pricing_scheme: per_unit
                     unit_price: "10"
                     taxable: true
-                    display_on_hosted_page: "1"
-                    allow_fractional_quantities: "1"
+                    display_on_hosted_page: true
+                    allow_fractional_quantities: true
                     public_signup_page_ids:
                       - "323397"
               Quantity Based (stairstep):
@@ -3540,8 +3540,8 @@ paths:
                       - starting_quantity: "101"
                         ending_quantity: "200"
                         unit_price: "10"
-                    display_on_hosted_page: "1"
-                    allow_fractional_quantities: "1"
+                    display_on_hosted_page: true
+                    allow_fractional_quantities: true
                     public_signup_page_ids:
                       - "323397"
               Quantity Based (volume):
@@ -3552,15 +3552,15 @@ paths:
                     description: Example of JSON volume component example
                     pricing_scheme: volume
                     taxable: true
-                    prices_attributes:
-                      - starting_quantity: "1"
-                        ending_quantity: "10"
-                        unit_price: "10"
+                    prices:
+                      - starting_quantity: 1
+                        ending_quantity: 10
+                        unit_price: 10
                       - starting_quantity: "11"
                         ending_quantity: "20"
                         unit_price: "5"
-                    display_on_hosted_page: "1"
-                    allow_fractional_quantities: "1"
+                    display_on_hosted_page: true
+                    allow_fractional_quantities: true
                     public_signup_page_ids:
                       - "323397"
               Quantity Based (tiered):
@@ -3571,15 +3571,15 @@ paths:
                     description: Example of JSON for tiered quantity based component
                     taxable: true
                     pricing_scheme: tiered
-                    prices_attributes:
+                    prices:
                       - starting_quantity: 0
                         ending_quantity: "20"
                         unit_price: "50"
                       - starting_quantity: 21
                         ending_quantity: "40"
                         unit_price: "25"
-                    display_on_hosted_page: "1"
-                    allow_fractional_quantities: "1"
+                    display_on_hosted_page: true
+                    allow_fractional_quantities: true
                     public_signup_page_ids:
                       - "323397"
               On/Off:
@@ -3589,10 +3589,10 @@ paths:
                     description: Prepay for support services
                     taxable: true
                     pricing_scheme: tiered
-                    price_attributes:
-                      unit_price: "100.00"
-                      starting_quantity: "0"
-                    display_on_hosted_page: "1"
+                    prices:
+                      - unit_price: "100.00"
+                        starting_quantity: "0"
+                    display_on_hosted_page: true
                     public_signup_page_ids:
                       - "320495"
               Prepaid Usage:
@@ -3623,10 +3623,10 @@ paths:
                     description: Prepay for support services
                     taxable: true
                     pricing_scheme: per_unit
-                    price_attributes:
-                      unit_price: "100.00"
-                      starting_quantity: 0
-                    display_on_hosted_page: "1"
+                    prices:
+                      - unit_price: "100.00"
+                        starting_quantity: 0
+                    display_on_hosted_page: true
                     public_signup_page_ids:
                       - "320495"
                     price_points:
@@ -3642,10 +3642,10 @@ paths:
                     name: Annual Support Services
                     description: Prepay for support services
                     taxable: true
-                    price_attributes:
-                      unit_price: "100.00"
-                      starting_quantity: 0
-                    display_on_hosted_page: "1"
+                    prices:
+                      - unit_price: "100.00"
+                        starting_quantity: 0
+                    display_on_hosted_page: true
                     public_signup_page_ids:
                       - "320495"
                     upgrade_charge: full
@@ -3663,7 +3663,6 @@ paths:
                     prices:
                       - starting_quantity: 1
                         unit_price: "0.49"
-                        component: null
                     event_based_billing_metric_id: 123
         description: ""
   /components/lookup.json:

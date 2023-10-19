@@ -23,7 +23,7 @@ properties:
     type: array
     description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://help.chargify.com/products/product-components.html#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
     items:
-      $ref: "./Create-Component-Price.yaml"
+      $ref: "./Price.yaml"
   upgrade_charge:
     type: string
   downgrade_credit:
