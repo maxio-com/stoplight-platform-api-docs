@@ -6,9 +6,7 @@ properties:
   subscription_id:
     type: integer
   quantity:
-    type:
-      - number
-      - integer
+    type: number
   previous_quantity:
     type: integer
   memo:
