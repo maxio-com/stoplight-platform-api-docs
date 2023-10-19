@@ -14122,9 +14122,9 @@ paths:
                   value:
                     errors:
                       members:
-                        id: 10101
-                        type: not_found
-                        message: Subscription could not be found
+                        - id: 10101
+                          type: not_found
+                          message: Subscription could not be found
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
