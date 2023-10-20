@@ -2087,9 +2087,9 @@ paths:
               Percentage Coupon Example:
                 value:
                   coupon:
-                    name: 15% off
-                    code: 15OFF
-                    description: 15% off for life
+                    name: "15% off"
+                    code: "15OFF"
+                    description: "15% off for life"
                     percentage: "15"
                     allow_negative_balance: "false"
                     recurring: "false"
@@ -2097,6 +2097,8 @@ paths:
                     product_family_id: "2"
                     stackable: "true"
                     compounding_strategy: compound
+                    exclude_mid_period_allocations: true
+                    apply_on_cancel_at_end_of_period: true
                   restricted_products:
                     "1": true
                   restricted_components:
@@ -2105,9 +2107,9 @@ paths:
               Flat Amount Coupon Example:
                 value:
                   coupon:
-                    name: $10 off
-                    code: 10OFF
-                    description: $10 off for life
+                    name: "$10 off"
+                    code: "10OFF"
+                    description: "$10 off for life"
                     amount_in_cents: 1000
                     allow_negative_balance: "false"
                     recurring: "false"
@@ -2115,6 +2117,8 @@ paths:
                     product_family_id: "2"
                     stackable: "true"
                     compounding_strategy: compound
+                    exclude_mid_period_allocations: true
+                    apply_on_cancel_at_end_of_period: true
                   restricted_products:
                     "1": true
                   restricted_components:
@@ -2133,15 +2137,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "../components/schemas/Coupon.yaml"
+                  $ref: "../components/schemas/Coupon-Response.yaml"
               examples:
-                Example:
+                example:
                   value:
                     - coupon:
                         id: 999999
-                        name: 50% coupon
-                        code: 50PERCENT
-                        description: 50 PERCENT OFF
+                        name: "50% coupon"
+                        code: "50PERCENT"
+                        description: "50 PERCENT OFF"
                         amount_in_cents: null
                         product_family_id: 527890
                         created_at: "2016-10-21T17:02:08-04:00"
@@ -2152,19 +2156,19 @@ paths:
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
-                        duration_interval_unit: day
+                        duration_interval_unit: "day"
                         allow_negative_balance: true
                         archived_at: null
-                        conversion_limit: 100
+                        conversion_limit: "100"
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
                         use_site_exchange_rate: true
                     - coupon:
                         id: 123456
-                        name: 100% coupon
-                        code: 100PERCENT
-                        description: 100 PERCENT OFF
+                        name: "100% coupon"
+                        code: "100PERCENT"
+                        description: "100 PERCENT OFF"
                         amount_in_cents: null
                         product_family_id: 527890
                         created_at: "2016-10-21T17:02:08-04:00"
@@ -2175,19 +2179,19 @@ paths:
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
-                        duration_interval_unit: day
+                        duration_interval_unit: "day"
                         allow_negative_balance: true
                         archived_at: null
-                        conversion_limit: 100
+                        conversion_limit: "100"
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions: []
                         use_site_exchange_rate: true
                     - coupon:
                         id: 888888
-                        name: 25% coupon
-                        code: 25PERCENT
-                        description: 25 PERCENT OFF
+                        name: "25% coupon"
+                        code: "25PERCENT"
+                        description: "25 PERCENT OFF"
                         amount_in_cents: null
                         product_family_id: 527890
                         created_at: "2016-10-21T17:02:08-04:00"
@@ -2198,17 +2202,17 @@ paths:
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
-                        duration_interval_unit: day
+                        duration_interval_unit: "day"
                         allow_negative_balance: true
                         archived_at: null
-                        conversion_limit: 100
+                        conversion_limit: "100"
                         stackable: false
                         compounding_strategy: compound
                         coupon_restrictions:
                           - id: 37
                             item_type: Component
                             item_id: 519
-                            name: test
+                            name: "test"
                             handle: null
                         use_site_exchange_rate: true
       operationId: listCouponsForProductFamily
@@ -2444,9 +2448,9 @@ paths:
               Example:
                 value:
                   coupon:
-                    name: 15% off
-                    code: 15OFF
-                    description: 15% off for life
+                    name: "15% off"
+                    code: "15OFF"
+                    description: "15% off for life"
                     percentage: "15"
                     allow_negative_balance: "false"
                     recurring: "false"
@@ -2546,9 +2550,9 @@ paths:
                         updated_at: string
                         discount_type: amount
                         exclude_mid_period_allocations: true
-                        "apply_on_cancel_at_end_of_period ": true
+                        apply_on_cancel_at_end_of_period: true
                         coupon_restrictions:
-                          - id: string
+                          - id: 0
                             item_type: Component
                             item_id: 0
                             name: string
@@ -2798,16 +2802,16 @@ paths:
         ```
       parameters:
         - schema:
-            type: integer
-          in: query
-          name: product_family_id
-          description: The Chargify id of the product family to which the coupon belongs
-        - schema:
             type: string
           in: query
           name: code
           required: true
           description: The code of the coupon
+        - schema:
+            type: integer
+          in: query
+          name: product_family_id
+          description: The Chargify id of the product family to which the coupon belongs
   "/coupon/{coupon_id}/currency_prices.json":
     parameters:
       - schema:
@@ -5925,7 +5929,6 @@ paths:
                     payment_profile:
                       first_name: Jessica
                       last_name: Test
-                      last_four: "1111"
                       card_type: visa
                       expiration_month: 10
                       expiration_year: 2018
@@ -6527,7 +6530,6 @@ paths:
                     expiration_month: "04"
                     expiration_year: "2030"
                     current_vault: bogus
-                    vault_token: "1"
                     billing_address: 456 Juniper Court
                     billing_city: Boulder
                     billing_state: CO
