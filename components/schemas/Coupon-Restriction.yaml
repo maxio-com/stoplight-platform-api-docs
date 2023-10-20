@@ -2,7 +2,7 @@ title: Coupon Restriction
 type: object
 properties:
   id:
-    type: string
+    type: integer
   item_type:
     $ref: "./Restriction-Type.yaml"
   item_id:
