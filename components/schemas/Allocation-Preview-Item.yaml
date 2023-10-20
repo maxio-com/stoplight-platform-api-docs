@@ -25,3 +25,9 @@ properties:
     type: string
   downgrade_credit:
     type: string
+  price_point_id:
+    type: integer
+  previous_price_point_id:
+    type: integer
+  component_handle:
+    type: string

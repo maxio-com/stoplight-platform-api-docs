@@ -15,5 +15,7 @@ properties:
     type: integer
   component_id:
     type: integer
+  component_handle:
+    type: string
   direction:
     type: string
