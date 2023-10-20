@@ -5932,7 +5932,6 @@ paths:
                     payment_profile:
                       first_name: Jessica
                       last_name: Test
-                      last_four: "1111"
                       card_type: visa
                       expiration_month: 10
                       expiration_year: 2018
@@ -6534,7 +6533,6 @@ paths:
                     expiration_month: "04"
                     expiration_year: "2030"
                     current_vault: bogus
-                    vault_token: "1"
                     billing_address: 456 Juniper Court
                     billing_city: Boulder
                     billing_state: CO
