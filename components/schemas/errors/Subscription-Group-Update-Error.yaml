@@ -3,4 +3,5 @@ type: object
 properties:
   members:
     type: array
-    $ref: "./Subscription-Group-Members-Error.yaml"
+    items:
+      $ref: "./Subscription-Group-Members-Error.yaml"

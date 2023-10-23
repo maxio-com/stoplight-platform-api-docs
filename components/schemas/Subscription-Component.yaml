@@ -82,3 +82,5 @@ properties:
     type: boolean
   subscription:
     $ref: "./Subscription-Component-Subscription.yaml"
+  display_on_hosted_page:
+    type: boolean

@@ -4,8 +4,7 @@ properties:
   pricing_scheme:
     $ref: "./Pricing-Scheme.yaml"
   prices:
-    type:
-      - array
+    type: array
     items:
       $ref: "./Price.yaml"
 required:
