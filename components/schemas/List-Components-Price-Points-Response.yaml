@@ -4,6 +4,6 @@ properties:
   price_points:
     type: array
     items:
-      $ref: "./Component-Price-Point-Response.yaml"
+      $ref: "./Component-Price-Point.yaml"
 required:
   - price_points
