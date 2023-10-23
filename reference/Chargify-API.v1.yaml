@@ -17495,12 +17495,15 @@ paths:
 
         These error responses are designed to prevent excessive or invalid requests, and to provide clear and helpful information to users who encounter errors during the request process.
 servers:
-  - url: "https://{subdomain}.chargify.com"
+  - url: "https://{subdomain}.{domain}"
     description: Production server
     variables:
       subdomain:
         default: subdomain
-        description: The subdomain for your Chargify site
+        description: The subdomain for your Chargify site.
+      domain:
+        default: chargify.com
+        description: The Chargify server domain.
 security:
   - BasicAuth: []
 components:
