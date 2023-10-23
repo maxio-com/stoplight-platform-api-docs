@@ -23,7 +23,7 @@ properties:
     type: array
     description: "(Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes."
     items:
-      $ref: "./Create-Component-Price.yaml"
+      $ref: "./Price.yaml"
   upgrade_charge:
     type: string
   downgrade_credit:
@@ -59,3 +59,11 @@ properties:
     description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
   expiration_interval_unit:
     $ref: "./Interval-Unit.yaml"
+  display_on_hosted_page:
+    type: boolean
+  allow_fractional_quantities:
+    type: boolean
+  public_signup_page_ids:
+    type: array
+    items:
+      type: integer
