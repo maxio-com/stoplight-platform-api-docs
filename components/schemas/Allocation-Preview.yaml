@@ -27,3 +27,8 @@ properties:
     type: array
     items:
       $ref: "./Allocation-Preview-Item.yaml"
+  period_type:
+    type: string
+  existing_balance_in_cents:
+    type: integer
+    description: An integer representing the amount of the subscription's current balance

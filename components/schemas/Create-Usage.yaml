@@ -2,9 +2,7 @@ title: Create Usage
 type: object
 properties:
   quantity:
-    type:
-      - integer
-      - number
+    type: number
     description: integer by default or decimal number if fractional quantities are enabled for the component
   price_point_id:
     type: string
