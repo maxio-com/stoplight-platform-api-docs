@@ -13,7 +13,7 @@ jobs:
         run: zip -r maxio-api.zip ./reference ./components
       - name: Import to APIMatic
         run: |
-          curl -X PUT -sS --url 'https://www.apimatic.io/api/api-entities/${{ secrets.API_ENTITY_ID }}/import-via-file' \
+          curl -X PUT -sS --url 'https://api.apimatic.io/api-entities/${{ secrets.API_ENTITY_ID }}/import-via-file' \
             -H 'Content-Type:multipart/form-data' \
             -H 'Accept: application/vnd.apimatic.apiEntity.full.v1+json' \
             -H 'Authorization:X-Auth-Key ${{ secrets.APIMATIC_API_KEY }}' \
