@@ -1,6 +1,8 @@
 title: Invoice
 type: object
 properties:
+  id:
+    type: integer
   uid:
     type: string
     description: Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters.
@@ -22,6 +24,15 @@ properties:
   sequence_number:
     type: integer
     description: A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices.
+  transaction_time:
+    type: string
+    format: date-time
+  created_at:
+    type: string
+    format: date-time
+  updated_at:
+    type: string
+    format: date-time
   issue_date:
     type: string
     description: |-
@@ -46,6 +57,12 @@ properties:
       The format is `"YYYY-MM-DD"`.
   status:
     $ref: "./Invoice-Status.yaml"
+  role:
+    type: string
+  parent_invoice_id:
+    type:
+      - integer
+      - "null"
   collection_method:
     type: string
     description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'
@@ -62,6 +79,10 @@ properties:
       - "null"
       - string
     description: "For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice."
+  subscription_group_id:
+    type:
+      - integer
+      - "null"
   parent_invoice_number:
     type:
       - "null"
@@ -82,6 +103,15 @@ properties:
     $ref: "./Invoice-Seller.yaml"
   customer:
     $ref: "./Invoice-Customer.yaml"
+  payer:
+    $ref: "./Invoice-Payer.yaml"
+  recipient_emails:
+    type: array
+    maxItems: 5
+    items:
+      type: string
+  net_terms:
+    type: integer
   memo:
     type: string
     description: The memo printed on invoices of any collection type.  This message is in control of the merchant.
@@ -148,6 +178,8 @@ properties:
     type: array
     items:
       $ref: "./Invoice-Custom-Field.yaml"
+  display_settings:
+    $ref: "./Invoice-Display-Settings.yaml"
   public_url:
     type: string
     description: The public URL of the invoice

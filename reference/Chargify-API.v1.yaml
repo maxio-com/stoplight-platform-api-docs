@@ -2020,7 +2020,7 @@ paths:
             type: boolean
           in: query
           name: with_deleted
-          description: "Allow to fetch deleted metadata. "
+          description: "Allow to fetch deleted metadata."
         - schema:
             type: array
             items:
@@ -3080,6 +3080,7 @@ paths:
                         key: subscription_state_change
                         message: State changed on Test subscription to Monthly Product from active to past_due
                         subscription_id: 14950962
+                        customer_id: 12345678
                         created_at: "2016-10-27T16:42:22-04:00"
                         event_specific_data:
                           previous_subscription_state: active
@@ -3089,6 +3090,7 @@ paths:
                         key: billing_date_change
                         message: Billing date changed on Test's subscription to Monthly Product from 11/27/2016 to 10/27/2016
                         subscription_id: 14950962
+                        customer_id: 12345678
                         created_at: "2016-10-27T16:42:19-04:00"
                         event_specific_data: null
                     - event:
@@ -3096,6 +3098,7 @@ paths:
                         key: statement_closed
                         message: Statement 79401838 closed (but not settled) for Test's subscription to ANNUAL product
                         subscription_id: 14950975
+                        customer_id: 87654321
                         created_at: "2016-10-27T16:40:40-04:00"
                         event_specific_data: null
               examples:
@@ -3106,6 +3109,7 @@ paths:
                         key: subscription_state_change
                         message: State changed on Test subscription to Monthly Product from active to past_due
                         subscription_id: 14950962
+                        customer_id: 12345678
                         created_at: "2016-10-27T16:42:22-04:00"
                         event_specific_data:
                           previous_subscription_state: active
@@ -3115,6 +3119,7 @@ paths:
                         key: billing_date_change
                         message: Billing date changed on Test's subscription to Monthly Product from 11/27/2016 to 10/27/2016
                         subscription_id: 14950962
+                        customer_id: 12345678
                         created_at: "2016-10-27T16:42:19-04:00"
                         event_specific_data: null
                     - event:
@@ -3122,6 +3127,7 @@ paths:
                         key: statement_closed
                         message: Statement 79401838 closed (but not settled) for Test's subscription to ANNUAL product
                         subscription_id: 14950975
+                        customer_id: 87654321
                         created_at: "2016-10-27T16:40:40-04:00"
                         event_specific_data: null
                     - event:
@@ -3129,7 +3135,7 @@ paths:
                         key: custom_field_value_change
                         message: Custom field (Extra support included) changed for Subscription 117 from 'Yes' to 'No'.
                         subscription_id: 117
-                        customer_id: null
+                        customer_id: 22334455
                         created_at: "2022-03-24T07:55:06-04:00"
                         event_specific_data:
                           event_type: updated
@@ -3284,6 +3290,7 @@ paths:
                         key: statement_settled
                         message: Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan
                         subscription_id: 14900541
+                        customer_id: 77223344
                         created_at: "2016-11-01T12:41:29-04:00"
                         event_specific_data: null
                     - event:
@@ -3291,6 +3298,7 @@ paths:
                         key: renewal_success
                         message: Successful renewal for Amelia Example's subscription to Basic Plan
                         subscription_id: 14900541
+                        customer_id: 77223344
                         created_at: "2016-11-01T12:41:28-04:00"
                         event_specific_data:
                           product_id: 3792003
@@ -3300,6 +3308,7 @@ paths:
                         key: billing_date_change
                         message: Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016
                         subscription_id: 14900541
+                        customer_id: 77223344
                         created_at: "2016-11-01T12:41:25-04:00"
                         event_specific_data: null
       operationId: listSubscriptionEvents
@@ -5332,7 +5341,7 @@ paths:
             type: string
           in: query
           name: start_date
-          description: " The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
+          description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
         - schema:
             type: string
           in: query
@@ -6774,6 +6783,7 @@ paths:
                         paid_amount: "100.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=n9fr5fxff5v74c7h9srg3cwd"
                       - uid: inv_8hr3546xp4h8n
                         site_id: 51288
                         customer_id: 21687686
@@ -6832,6 +6842,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "100.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=n9fr5fxff5v74c7h9srg3cwd"
                       - uid: inv_8hr3546wdwxkr
                         site_id: 51288
                         customer_id: 21687670
@@ -6890,6 +6901,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=n9fr5fxff5v74c7h9srg3cwd"
                       - uid: inv_8hjtk8bz56bbp
                         site_id: 51288
                         customer_id: 20137757
@@ -6948,7 +6960,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
-                    public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8hjtk8bz56bbp?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: listInvoices
       description: "By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
       parameters:
@@ -7238,9 +7250,7 @@ paths:
                             last_four: null
                             masked_card_number: XXXX-XXXX-XXXX-1111
                             type: credit_card
-                          transaction_id: 126
                           consolidation_level: none
-                          parent_invoice_number: null
                         timestamp: "2018-08-01T16:00:00Z"
                         invoice:
                           id: 614942008934401500
@@ -7291,7 +7301,7 @@ paths:
                             organization: null
                             email: evan4@example.com
                           recipient_emails: []
-                          terms: due_on_receipt
+                          net_terms: 0
                           memo: "Thanks for your business! If you have any questions, please contact your account manager."
                           billing_address:
                             street: 200 Billing Rd.
@@ -7326,7 +7336,6 @@ paths:
                               component_id: null
                               price_point_id: null
                               hide: false
-                              component_cost_data: null
                             - uid: li_8gk5bwkct3gqm
                               title: Small Instance (Hourly)
                               description: 07/22/2018 - 08/01/2018
@@ -7996,7 +8005,7 @@ paths:
             type: integer
           in: query
           name: subscription_id
-          description: " The subscription's Chargify id"
+          description: "The subscription's Chargify id"
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - schema:
@@ -8501,6 +8510,7 @@ paths:
                         paid_amount: "100.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=fb6kpjz5rcr2vttyjs4rcv6y"
                       - uid: inv_8hr3546xp4h8n
                         site_id: 51288
                         customer_id: 21687686
@@ -8559,6 +8569,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "100.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=fb6kpjz5rcr2vttyjs4rcv6y"
                       - uid: inv_8hr3546wdwxkr
                         site_id: 51288
                         customer_id: 21687670
@@ -8617,6 +8628,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=fb6kpjz5rcr2vttyjs4rcv6y"
                       - uid: inv_8hjtk8bz56bbp
                         site_id: 51288
                         customer_id: 20137757
@@ -8675,7 +8687,7 @@ paths:
                         paid_amount: "0.0"
                         refund_amount: "0.0"
                         due_amount: "0.0"
-                    public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+                        public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: listInvoiceSegments
       description: "Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`."
       parameters:
@@ -15482,7 +15494,7 @@ paths:
             type: string
           in: query
           name: start_date
-          description: " The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format."
+          description: "The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format."
         - schema:
             type: string
           in: query

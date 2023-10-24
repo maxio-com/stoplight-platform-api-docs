@@ -5,6 +5,10 @@ properties:
     type: string
   title:
     type: string
+  description:
+    type:
+      - string
+      - "null"
   code:
     type: string
   source_type:
@@ -19,6 +23,8 @@ properties:
     type: string
   discount_amount:
     type: string
+  transaction_id:
+    type: integer
   line_item_breakouts:
     type: array
     items:

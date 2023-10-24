@@ -5,6 +5,10 @@ properties:
     type: string
   title:
     type: string
+  description:
+    type:
+      - string
+      - "null"
   source_type:
     type: string
   source_id:
@@ -15,7 +19,13 @@ properties:
     type: string
   tax_amount:
     type: string
+  transaction_id:
+    type: integer
   line_item_breakouts:
     type: array
     items:
       $ref: "./Invoice-Tax-Breakout.yaml"
+  tax_component_breakouts:
+    type: array
+    items:
+      $ref: "./Invoice-Tax-Component-Breakout.yaml"

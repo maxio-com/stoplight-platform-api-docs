@@ -65,6 +65,8 @@ properties:
       * For periodic charges paid in advance, this date will match the next (future) billing date.
       * For periodic charges paid in arrears (e.g. metered charges), this date will be the date of the current billing date.
       * For non-periodic charges, this date and the start date will match.
+  transaction_id:
+    type: integer
   product_id:
     type:
       - integer
@@ -88,6 +90,12 @@ properties:
       - integer
       - "null"
     description: The price point ID of the component being billed. Will be `nil` for non-component charges.
+  hide:
+    type: boolean
+  component_cost_data:
+    oneOf:
+      - type: "null"
+      - $ref: "./Invoice-Line-Item-Component-Cost-Data.yaml"
   product_price_point_id:
     type:
       - "null"
