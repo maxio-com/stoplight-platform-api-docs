@@ -3460,7 +3460,7 @@ paths:
                           ending_quantity: null
                           unit_price: "1.0"
                           price_point_id: 173
-                          formatted_unit_price: $1.00
+                          formatted_unit_price: "$1.00"
                       default_price_point_name: Original
         "422":
           description: Unprocessable Entity (WebDAV)
@@ -3910,7 +3910,7 @@ paths:
                             ending_quantity: null
                             unit_price: "1.0"
                             price_point_id: 121000
-                            formatted_unit_price: $1.00
+                            formatted_unit_price: "$1.00"
                         price_point_count: 2
                         price_points_url: "https://general-goods.chargify.com/components/399850/price_points"
                         tax_code: null
@@ -4122,7 +4122,7 @@ paths:
                             ending_quantity: null
                             unit_price: "1.0"
                             price_point_id: 121000
-                            formatted_unit_price: $1.00
+                            formatted_unit_price: "$1.00"
                         price_point_count: 2
                         price_points_url: "https://general-goods.chargify.com/components/399850/price_points"
                         tax_code: null
@@ -4689,33 +4689,35 @@ paths:
                       per_page: 10
                       total_pages: 80
                       total_entries: 791
-                      currency: USD
-                      currency_symbol: $
+                      currency: "USD"
+                      currency_symbol: "$"
                       movements:
                         - timestamp: "2014-12-03T13:59:46-05:00"
                           amount_in_cents: 2173
-                          amount_formatted: $21.73
-                          description: Awesome Company signed up for Super Product ($21.73/mo)
-                          category: new_business
+                          amount_formatted: "$21.73"
+                          description: "Awesome Company signed up for Super Product ($21.73/mo)"
+                          category: "new_business"
                           breakouts:
                             plan_amount_in_cents: 2173
-                            plan_amount_formatted: $21.73
+                            plan_amount_formatted: "$21.73"
                             usage_amount_in_cents: 0
-                            usage_amount_formatted: $0.00
+                            usage_amount_formatted: "$0.00"
                           line_items:
                             - product_id: 306386
                               component_id: 0
                               price_point_id: 3856987
-                              name: string
+                              name: "Cached Queries"
                               mrr: 2173
                               mrr_movements:
                                 - amount: 2173
-                                  category: new_business
+                                  category: "new_business"
+                                  subscriber_delta: 0
+                                  lead_delta: 0
                               quantity: 1
                               prev_quantity: 0
                               recurring: true
                           subscription_id: 12355
-                          subscriber_name: Amy Smith
+                          subscriber_name: "Amy Smith"
       operationId: readMrrMovements
       deprecated: true
       description: |-
@@ -16811,23 +16813,25 @@ paths:
                 example:
                   value:
                     price_points:
-                      - price_point:
-                          id: 1
-                          name: Auto-created
-                          type: default
-                          component_id: 2
-                          handle: auto-created
-                          created_at: "2021-02-21T11:05:57-05:00"
-                          updated_at: "2021-02-21T11:05:57-05:00"
-                          prices:
-                            - id: 3
-                              component_id: 2
-                              starting_quantity: 0
-                              ending_quantity: null
-                              unit_price: "1.0"
-                              price_point_id: 1
-                              formatted_unit_price: $1.00
-                              segment_id: null
+                      - id: 1
+                        name: "Auto-created"
+                        type: "default"
+                        pricing_scheme: "per_unit"
+                        component_id: 2
+                        handle: "auto-created"
+                        archived_at: null
+                        created_at: "2021-02-21T11:05:57-05:00"
+                        updated_at: "2021-02-21T11:05:57-05:00"
+                        prices:
+                          - id: 3
+                            component_id: 2
+                            starting_quantity: 0
+                            ending_quantity: null
+                            unit_price: "1.0"
+                            price_point_id: 1
+                            formatted_unit_price: "$1.00"
+                            segment_id: null
+                        tax_included: false
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -16875,12 +16879,11 @@ paths:
           name: "filter[start_datetime]"
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
         - schema:
-            type: array
-            items:
-              $ref: "../components/schemas/Price-Point-Type.yaml"
+            $ref: "../components/schemas/Price-Point-Type.yaml"
             example:
-              - custom
               - catalog
+              - default
+              - custom
             default:
               - catalog
               - default
@@ -17004,8 +17007,7 @@ paths:
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
         - schema:
             type: array
-            items:
-              $ref: "../components/schemas/Price-Point-Type.yaml"
+            $ref: "../components/schemas/Price-Point-Type.yaml"
             default:
               - catalog
               - default

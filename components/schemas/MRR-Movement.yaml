@@ -5,3 +5,7 @@ properties:
     type: integer
   category:
     type: string
+  subscriber_delta:
+    type: integer
+  lead_delta:
+    type: integer
