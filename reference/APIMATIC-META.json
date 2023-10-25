@@ -1,8 +1,8 @@
 {
   "ImportSettings": {
     "PreferJsonSchemaNameOverTitle": false,
-    "AppendParentNameForClashes": true,
-    "AllowModelTypesWithNoFields": true,
+    "AppendParentNameForClashes": false,
+    "AllowModelTypesWithNoFields": false,
     "AutoGenerateTestCases": false
   },
   "CodeGenSettings": {
