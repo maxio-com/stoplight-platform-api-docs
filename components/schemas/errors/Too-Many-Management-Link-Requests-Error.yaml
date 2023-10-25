@@ -3,3 +3,5 @@ type: object
 properties:
   errors:
     $ref: "./Too-Many-Management-Link-Requests.yaml"
+required:
+  - errors

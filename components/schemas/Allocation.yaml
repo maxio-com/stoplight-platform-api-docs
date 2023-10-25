@@ -45,6 +45,6 @@ properties:
     type: string
     description: The type of credit to be created if the change in cost is a downgrade.
   payment:
-    anyOf:
+    oneOf:
       - type: "null"
       - $ref: "Allocation-Payment.yaml"
