@@ -8,3 +8,7 @@ properties:
     $ref: "./Invoice-Address.yaml"
   phone:
     type: string
+  logo_url:
+    type:
+      - string
+      - "null"
