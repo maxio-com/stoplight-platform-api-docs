@@ -1,4 +1,4 @@
-title: List Subscription Components Date Field
+title: Subscription List Date Field
 type: string
 enum:
   - updated_at

@@ -3350,7 +3350,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Count.yaml"
+                $ref: "../components/schemas/Count-Response.yaml"
               examples:
                 Example:
                   value:
@@ -8803,7 +8803,7 @@ paths:
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
       parameters:
         - schema:
-            $ref: "../components/schemas/List-Subscription-Components-Date-Field.yaml"
+            $ref: "../components/schemas/Subscription-List-Date-Field.yaml"
           in: query
           name: date_field
           description: "The type of filter you'd like to apply to your search.
@@ -15363,7 +15363,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Errors.yaml"
+                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Error.yaml"
               examples:
                 Example:
                   value:
@@ -15982,7 +15982,7 @@ paths:
           description: "The attribute by which to sort. Use in query: `sort=updated_at`."
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
-            $ref: "../components/schemas/List-Subscription-Components-Date-Field.yaml"
+            $ref: "../components/schemas/Subscription-List-Date-Field.yaml"
           in: query
           name: date_field
           description: "The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`."
@@ -16098,7 +16098,7 @@ paths:
             "Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
             Use in query `filter[subscription][states]=active,canceled&include=subscription`."
         - schema:
-            $ref: "../components/schemas/List-Subscription-Components-Subscription-Date-Field.yaml"
+            $ref: "../components/schemas/Subscription-List-Date-Field.yaml"
           in: query
           name: "filter[subscription][date_field]"
           description: The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`.
