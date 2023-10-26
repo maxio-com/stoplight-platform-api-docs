@@ -7659,8 +7659,8 @@ paths:
                   payment:
                     amount: 124.33
                     memo: for John Smith
-                    payment_method_name: check
-                    payment_method_details: "#0102"
+                    method: check
+                    details: "#0102"
               Example 2:
                 value:
                   type: prepayment
@@ -15682,7 +15682,7 @@ paths:
                     - user0@example.com
                   cc_recipient_emails:
                     - user1@example.com
-                  bcc_receipient_emails:
+                  bcc_recipient_emails:
                     - user2@example.com
   "/invoices/{uid}/customer_information/preview.json":
     parameters:
