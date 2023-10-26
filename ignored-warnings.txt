@@ -1,0 +1,7 @@
+subscription_service_credit_account_balance_changed
+filter[prepaid_product_price_point][product_price_point_id]
+EBB Event > Example
+mrr_data > Example
+mrr_data -> november_2019, mrr_data -> december_2019, mrr_data -> january_2020, mrr_data -> february_2020, mrr_data -> march_2020, mrr_data -> april_2020
+errors -> subscriptions -> 0
+messages, country, customer
