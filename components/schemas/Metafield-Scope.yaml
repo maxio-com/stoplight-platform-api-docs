@@ -26,3 +26,7 @@ properties:
     allOf:
       - $ref: "./Include-Option.yaml"
     description: Include (1) or exclude (0) metafields from being edited by your ecosystem.
+  hosted:
+    type: array
+    items:
+      type: string
