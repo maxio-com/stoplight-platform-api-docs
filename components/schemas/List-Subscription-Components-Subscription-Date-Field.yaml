@@ -1,5 +1,0 @@
-title: List Subscription Components Subscription Date Field
-type: string
-enum:
-  - updated_at
-example: updated_at
