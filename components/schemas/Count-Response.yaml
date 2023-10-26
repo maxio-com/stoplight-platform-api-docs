@@ -1,4 +1,4 @@
-title: Count
+title: Count Response
 type: object
 properties:
   count:

@@ -3350,7 +3350,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Count.yaml"
+                $ref: "../components/schemas/Count-Response.yaml"
               examples:
                 Example:
                   value:
@@ -15363,7 +15363,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Errors.yaml"
+                $ref: "../components/schemas/errors/Subscription-Add-Coupon-Error.yaml"
               examples:
                 Example:
                   value:
