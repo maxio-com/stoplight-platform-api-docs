@@ -4,7 +4,7 @@ properties:
   allocations:
     type: array
     items:
-      $ref: ./Create-Allocation.yaml
+      $ref: "./Create-Allocation.yaml"
   effective_proration_date:
     type: string
     example: "2023-12-01"
