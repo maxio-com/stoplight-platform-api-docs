@@ -9412,6 +9412,7 @@ paths:
                       price_point_id: 325826
                       quantity: 10
                       memo: NOW
+                  effective_proration_date: "2023-11-01"
   "/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
