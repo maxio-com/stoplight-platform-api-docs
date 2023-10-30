@@ -848,9 +848,7 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: "../components/schemas/errors/Customer-Error-Response.yaml"
-                  - $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Customer-Error-Response.yaml"
               examples:
                 Example-1:
                   value:
