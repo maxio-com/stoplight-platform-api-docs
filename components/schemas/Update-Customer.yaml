@@ -40,7 +40,3 @@ properties:
     type:
       - "null"
       - integer
-required:
-  - first_name
-  - last_name
-  - email
