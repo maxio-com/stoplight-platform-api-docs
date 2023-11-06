@@ -1111,12 +1111,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Customer-Error-Response.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     errors:
-                      - "Email: must be a valid email address"
+                      customer: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      - "First name: cannot be blank."
+                      - "Last name: cannot be blank."
+                      - "Email address: cannot be blank."
       description: This method allows to update the Customer.
       requestBody:
         content:
