@@ -13,6 +13,7 @@
     "SynchronyMode": "Synchronous",
     "ModelSerializationScheme": "Json",
     "ArraySerialization": "CSV",
+    "ApplyCustomizations": ["maxio-ghua3c"],
 
     "ProjectName": "Advanced Billing",
     "BrandLabel": "Maxio",
