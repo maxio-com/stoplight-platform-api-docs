@@ -11,5 +11,5 @@ properties:
     type: string
     description: The subscription ID of the primary within the group. Applicable to scheme 1.
   primary:
-    type: string
+    type: boolean
     description: A boolean indicating whether the subscription is the primary in the group. Applicable to scheme 1.
