@@ -380,8 +380,6 @@ paths:
           in: query
           name: subscription
           description: The Chargify id of a subscription you'd like to filter for
-      x-operation-settings:
-        collectParameters: true
   /webhooks/settings.json:
     put:
       summary: Enable Webhooks
@@ -744,8 +742,6 @@ paths:
                         updated_at: "2015-06-15T13:26:33-04:00"
       operationId: listSubscriptionNotes
       description: Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -1048,8 +1044,6 @@ paths:
           in: query
           name: q
           description: "A search query by which to filter customers (can be an email, an ID, a reference, organization)"
-      x-operation-settings:
-        collectParameters: true
   "/customers/{id}.json":
     parameters:
       - schema:
@@ -1560,8 +1554,6 @@ paths:
                         created_at: "2017-02-17T16:29:42-05:00"
                         updated_at: "2017-02-17T16:29:59-05:00"
       description: This method gives a merchant the option to retrieve a list of all of the current churn codes for a given site.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -1757,8 +1749,6 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - $ref: "../components/parameters/sort-direction.yaml"
-      x-operation-settings:
-        collectParameters: true
     put:
       summary: Update Metafield
       tags:
@@ -1896,8 +1886,6 @@ paths:
         ## Metadata Data
 
         This endpoint will also display the current stats of your metadata to use as a tool for pagination.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -2048,8 +2036,6 @@ paths:
           explode: true
           description: "Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`."
         - $ref: "../components/parameters/sort-direction.yaml"
-      x-operation-settings:
-        collectParameters: true
   "/product_families/{product_family_id}/coupons.json":
     parameters:
       - schema:
@@ -2326,8 +2312,6 @@ paths:
             "Allows fetching coupons with matching use_site_exchange_rate based on provided value.
             Use in query `filter[use_site_exchange_rate]=true`."
           name: "filter[use_site_exchange_rate]"
-      x-operation-settings:
-        collectParameters: true
   /coupons/find.json:
     get:
       summary: Find Coupon
@@ -2697,8 +2681,6 @@ paths:
             "Allows fetching coupons with matching use_site_exchange_rate based on provided value.
             Use in query `filter[use_site_exchange_rate]=true`."
           name: "filter[use_site_exchange_rate]"
-      x-operation-settings:
-        collectParameters: true
   "/product_families/{product_family_id}/coupons/{coupon_id}/usage.json":
     parameters:
       - schema:
@@ -2992,8 +2974,6 @@ paths:
                       - 7DF7YT
                       - 9FH1ED
       description: This request allows you to request the subcodes that are attached to a coupon.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -3290,8 +3270,6 @@ paths:
           in: query
           name: end_datetime
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
-      x-operation-settings:
-        collectParameters: true
   "/subscriptions/{subscription_id}/events.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -3365,8 +3343,6 @@ paths:
           name: direction
           description: The sort direction of the returned events.
         - $ref: "../components/parameters/event-type-filter.yaml"
-      x-operation-settings:
-        collectParameters: true
   /events/count.json:
     get:
       summary: Total Event Count
@@ -3408,8 +3384,6 @@ paths:
           description: The sort direction of the returned events.
         - $ref: "../components/parameters/event-type-filter.yaml"
       description: Get a count of all the events for a given site by using this method.
-      x-operation-settings:
-        collectParameters: true
   /mrr.json:
     get:
       summary: Read MRR
@@ -4007,8 +3981,6 @@ paths:
                         product_family_name: Chargify
                         use_site_exchange_rate: true
       operationId: listComponents
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             $ref: "../components/schemas/Basic-Date-Field.yaml"
@@ -4222,8 +4194,6 @@ paths:
                         use_site_exchange_rate: true
       operationId: listComponentsForProductFamily
       description: This request will return a list of components for a particular product family.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: boolean
@@ -4416,8 +4386,6 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
         - $ref: "../components/parameters/price-point-type-filter.yaml"
-      x-operation-settings:
-        collectParameters: true
   "/components/{component_id}/price_points/bulk.json":
     parameters:
       - schema:
@@ -4797,8 +4765,6 @@ paths:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-10.yaml"
         - $ref: "../components/parameters/sort-direction.yaml"
-      x-operation-settings:
-        collectParameters: true
   "/product_families/{product_family_id}/products.json":
     parameters:
       - schema:
@@ -4986,8 +4952,6 @@ paths:
                 Example:
                   value: A valid product_family_id is required
       description: This method allows to retrieve a list of Products belonging to a Product Family.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -5375,8 +5339,6 @@ paths:
                         updated_at: "2014-04-16T12:41:13-06:00"
       operationId: listProductFamilies
       description: This method allows to retrieve a list of Product Families for a site.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
@@ -5531,8 +5493,6 @@ paths:
                         created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
                         updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
       operationId: listProductPricePoints
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - schema:
@@ -6391,8 +6351,6 @@ paths:
                         gateway_handle: handle
       operationId: listPaymentProfiles
       description: "This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404."
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -7009,8 +6967,6 @@ paths:
                         public_url: "https://www.chargifypay.com/invoice/inv_8hjtk8bz56bbp?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: listInvoices
       description: "By default, invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, `custom_fields`, or `refunds`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: string
@@ -7595,8 +7551,6 @@ paths:
         If both a `since_date` and `since_id` are provided in request parameters, the `since_date` will be used.
 
         Note - invoice events that occurred prior to 09/05/2018 __will not__ contain an `invoice` snapshot.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: string
@@ -8050,8 +8004,6 @@ paths:
         Credit Notes are like inverse invoices. They reduce the amount a customer owes.
 
         By default, the credit notes returned by this endpoint will exclude the arrays of `line_items`, `discounts`, `taxes`, `applications`, or `refunds`. To include these arrays, pass the specific field as a key in the query with a value set to `true`.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: integer
@@ -8742,8 +8694,6 @@ paths:
                         public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: listInvoiceSegments
       description: "Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`."
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -8855,8 +8805,6 @@ paths:
         ## Archived Components
 
         When requesting to list components for a given subscription, if the subscription contains **archived** components they will be listed in the server response.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             $ref: "../components/schemas/Subscription-List-Date-Field.yaml"
@@ -9731,8 +9679,6 @@ paths:
         ## Read Usage by Handle
 
         Use this endpoint to read the previously recorded components for a subscription.  You can now specify either the component id (integer) or the component handle prefixed by "handle:" to specify the unique identifier for the component you are working with.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: integer
@@ -11352,8 +11298,6 @@ paths:
         Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/user-authorization.yaml"
         - $ref: "../components/parameters/live-mode.yaml"
@@ -11447,8 +11391,6 @@ paths:
         Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
 
         > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/user-authorization.yaml"
         - $ref: "../components/parameters/live-mode.yaml"
@@ -13761,8 +13703,6 @@ paths:
         "404":
           description: Not Found
       description: This request will list a subscription's prepayments.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -14104,8 +14044,6 @@ paths:
         #### Account Balance Information
 
         Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -14544,8 +14482,6 @@ paths:
           description: Not Found
       security:
         - BasicAuth: []
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             $ref: "../components/schemas/List-Subscription-Group-Prepayment-Date-Field.yaml"
@@ -15199,8 +15135,6 @@ paths:
                       per_page: 10
       operationId: listChargifyJsPublicKeys
       description: This endpoint returns public keys used for Chargify.js.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -15560,8 +15494,6 @@ paths:
                   $ref: "../components/schemas/Proforma-Invoice.yaml"
       operationId: listProformaInvoices
       description: "By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: string
@@ -16045,8 +15977,6 @@ paths:
                 $ref: "../components/schemas/List-Subscription-Components-Response.yaml"
       operationId: listSubscriptionComponentsForSite
       description: This request will list components applied to each subscription.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
@@ -16285,8 +16215,6 @@ paths:
         You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
 
         You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-30.yaml"
@@ -16639,8 +16567,6 @@ paths:
       operationId: listMrrPerSubscription
       deprecated: true
       description: "This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription."
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             type: array
@@ -16795,8 +16721,6 @@ paths:
                         default_product_price_point_id: 0
       operationId: listProducts
       description: This method allows to retrieve a list of Products belonging to a Site.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/basic-date-field.yaml"
         - schema:
@@ -16938,8 +16862,6 @@ paths:
                       - "start_date supplied value is invalid, expected ISO 8601 format"
       operationId: listAllComponentPricePoints
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - schema:
             $ref: "../components/schemas/Basic-Date-Field.yaml"
@@ -17055,8 +16977,6 @@ paths:
                       - "start_date supplied value is invalid, expected ISO 8601 format"
       operationId: listAllProductPricePoints
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
@@ -17372,8 +17292,6 @@ paths:
         This API returns an array of exported proforma invoices for a provided `batch_id`. Pay close attention to pagination in order to control responses from the server.
 
         Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_page=10000&page=1`.
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
@@ -17411,8 +17329,6 @@ paths:
                   $ref: "../components/schemas/Invoice.yaml"
         "404":
           description: Not Found
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
@@ -17439,8 +17355,6 @@ paths:
                   $ref: "../components/schemas/Subscription.yaml"
         "404":
           description: Not Found
-      x-operation-settings:
-        collectParameters: true
       parameters:
         - $ref: "../components/parameters/per-page-export.yaml"
         - $ref: "../components/parameters/page.yaml"
