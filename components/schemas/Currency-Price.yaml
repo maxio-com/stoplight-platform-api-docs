@@ -6,7 +6,7 @@ properties:
   currency:
     type: string
   price:
-    type: integer
+    type: number
   formatted_price:
     type: string
   price_id:
