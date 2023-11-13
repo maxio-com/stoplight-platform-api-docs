@@ -6,4 +6,4 @@ properties:
     items:
       $ref: "./Payment.yaml"
   prepayment:
-    $ref: "./Pre-Payment.yaml"
+    $ref: "./Invoice-Prepayment.yaml"
