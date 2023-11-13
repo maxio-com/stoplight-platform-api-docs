@@ -7,12 +7,16 @@ properties:
     type: string
   subtotal_in_cents:
     type: integer
+    format: int64
   total_tax_in_cents:
     type: integer
+    format: int64
   total_discount_in_cents:
     type: integer
+    format: int64
   total_in_cents:
     type: integer
+    format: int64
   direction:
     type: string
   proration_scheme:
@@ -31,4 +35,5 @@ properties:
     type: string
   existing_balance_in_cents:
     type: integer
+    format: int64
     description: An integer representing the amount of the subscription's current balance

@@ -9,12 +9,15 @@ properties:
     description: "The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html)"
   balance_in_cents:
     type: integer
+    format: int64
     description: Gives the current outstanding subscription balance in the number of cents.
   total_revenue_in_cents:
     type: integer
+    format: int64
     description: Gives the total revenue from the subscription in the number of cents.
   product_price_in_cents:
     type: integer
+    format: int64
     description: "(Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version."
   product_version_number:
     type: integer
@@ -170,6 +173,7 @@ properties:
     description: "On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled."
   current_billing_amount_in_cents:
     type: integer
+    format: int64
     description: The balance in cents plus the estimated renewal amount in cents.
   product_price_point_id:
     type: integer
@@ -238,5 +242,7 @@ properties:
       - "null"
   credit_balance_in_cents:
     type: integer
+    format: int64
   prepayment_balance_in_cents:
     type: integer
+    format: int64

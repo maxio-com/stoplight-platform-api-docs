@@ -7,12 +7,16 @@ properties:
       $ref: "./Billing-Manifest-Item.yaml"
   total_in_cents:
     type: integer
+    format: int64
   total_discount_in_cents:
     type: integer
+    format: int64
   total_tax_in_cents:
     type: integer
+    format: int64
   subtotal_in_cents:
     type: integer
+    format: int64
   start_date:
     type: string
   end_date:
@@ -21,3 +25,4 @@ properties:
     type: string
   existing_balance_in_cents:
     type: integer
+    format: int64

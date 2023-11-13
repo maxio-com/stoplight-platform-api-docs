@@ -13,6 +13,7 @@ properties:
     type: boolean
   price_in_cents:
     type: integer
+    format: int64
   interval:
     type: integer
   interval_unit:

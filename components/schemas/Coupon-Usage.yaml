@@ -19,6 +19,7 @@ properties:
     type:
       - integer
       - "null"
+    format: int64
     description: Dollar amount of customer savings as a result of the coupon.
   revenue:
     type:
@@ -27,4 +28,5 @@ properties:
     description: Total revenue of the all subscriptions that have received a discount from this coupon.
   revenue_in_cents:
     type: integer
+    format: int64
     description: Total revenue of the all subscriptions that have received a discount from this coupon.

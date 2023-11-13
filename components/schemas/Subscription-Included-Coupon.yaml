@@ -21,6 +21,7 @@ properties:
     type:
       - integer
       - "null"
+    format: int64
     example: 1000
   percentage:
     type:

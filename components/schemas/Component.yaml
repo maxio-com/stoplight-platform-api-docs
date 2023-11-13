@@ -33,6 +33,7 @@ properties:
     type:
       - integer
       - "null"
+    format: int64
     description: deprecated - use unit_price instead
   kind:
     $ref: "./Component-Kind.yaml"

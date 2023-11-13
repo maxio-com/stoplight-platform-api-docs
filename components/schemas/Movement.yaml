@@ -5,6 +5,7 @@ properties:
     type: string
   amount_in_cents:
     type: integer
+    format: int64
   amount_formatted:
     type: string
   description:

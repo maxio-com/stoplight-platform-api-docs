@@ -5,8 +5,10 @@ properties:
     type: string
   service_credit_account_balance_in_cents:
     type: integer
+    format: int64
   service_credit_balance_change_in_cents:
     type: integer
+    format: int64
   currency_code:
     type: string
   at_time:

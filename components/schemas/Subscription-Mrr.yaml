@@ -2,9 +2,10 @@ title: Subscription MRR
 type: object
 properties:
   subscription_id:
-    type: number
+    type: integer
   mrr_amount_in_cents:
-    type: number
+    type: integer
+    format: int64
   breakouts:
     $ref: "./Subscription-Mrr-Breakout.yaml"
 required:

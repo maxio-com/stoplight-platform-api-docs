@@ -25,5 +25,7 @@ properties:
       - "null"
   total_revenue_in_cents:
     type: integer
+    format: int64
   balance_in_cents:
     type: integer
+    format: int64
