@@ -2,7 +2,7 @@ title: Event
 type: object
 properties:
   id:
-    type: number
+    type: integer
   key:
     type: string
     minLength: 1
@@ -10,9 +10,9 @@ properties:
     type: string
     minLength: 1
   subscription_id:
-    type: number
+    type: integer
   customer_id:
-    type: number
+    type: integer
   created_at:
     type: string
     minLength: 1

@@ -2,7 +2,7 @@ title: Component Allocation Error Item
 type: object
 properties:
   component_id:
-    type: number
+    type: integer
   message:
     type: string
   kind:
