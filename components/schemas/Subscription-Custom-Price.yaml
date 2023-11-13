@@ -12,6 +12,7 @@ properties:
     type:
       - string
       - integer
+    format: int64
     description: Required if using `custom_price` attribute.
   interval:
     type:
@@ -25,6 +26,7 @@ properties:
     type:
       - string
       - integer
+    format: int64
     description: (Optional)
   trial_interval:
     type:
@@ -38,6 +40,7 @@ properties:
     type:
       - string
       - integer
+    format: int64
     description: (Optional)
   initial_charge_after_trial:
     type: boolean

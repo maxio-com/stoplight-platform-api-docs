@@ -23,6 +23,7 @@ properties:
     type: boolean
   current_billing_amount_in_cents:
     type: integer
+    format: int64
   customer:
     $ref: "./Subscription-Group-Customer.yaml"
   account_balances:

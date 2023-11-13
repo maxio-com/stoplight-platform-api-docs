@@ -5,9 +5,11 @@ properties:
     type: integer
   amount_in_cents:
     type: integer
+    format: int64
     description: The amount in cents of the entry.
   ending_balance_in_cents:
     type: integer
+    format: int64
     description: The ending balance in cents of the account.
   entry_type:
     $ref: "./Service-Credit-Type.yaml"

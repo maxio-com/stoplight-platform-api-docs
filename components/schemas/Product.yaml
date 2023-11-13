@@ -40,6 +40,7 @@ properties:
     description: Timestamp indicating when this product was last updated
   price_in_cents:
     type: integer
+    format: int64
     description: "The product price, in integer cents"
   interval:
     type: integer
@@ -51,11 +52,13 @@ properties:
     type:
       - integer
       - "null"
+    format: int64
     description: The up front charge you have specified.
   trial_price_in_cents:
     type:
       - integer
       - "null"
+    format: int64
     description: "The price of the trial period for a subscription to this product, in integer cents."
   trial_interval:
     type:

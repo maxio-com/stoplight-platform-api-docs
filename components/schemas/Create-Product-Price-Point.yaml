@@ -7,12 +7,14 @@ properties:
     type: string
   price_in_cents:
     type: integer
+    format: int64
   interval:
     type: integer
   interval_unit:
     type: string
   trial_price_in_cents:
     type: integer
+    format: int64
   trial_interval:
     type: integer
   trial_interval_unit:
@@ -21,6 +23,7 @@ properties:
     type: string
   initial_charge_in_cents:
     type: integer
+    format: int64
   initial_charge_after_trial:
     type: boolean
   expiration_interval:

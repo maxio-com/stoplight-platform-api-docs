@@ -6,6 +6,7 @@ properties:
     type: number
   amount_in_cents:
     type: integer
+    format: int64
   success:
     type: boolean
   memo:

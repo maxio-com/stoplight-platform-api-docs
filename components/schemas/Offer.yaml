@@ -41,6 +41,7 @@ properties:
     type: string
   product_price_in_cents:
     type: integer
+    format: int64
   offer_signup_pages:
     type: array
     items:

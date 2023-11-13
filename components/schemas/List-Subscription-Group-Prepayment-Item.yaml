@@ -2,13 +2,15 @@ title: List Subcription Group Prepayment Item
 type: object
 properties:
   id:
-    type: number
+    type: integer
   subscription_group_uid:
     type: string
   amount_in_cents:
-    type: number
+    type: integer
+    format: int64
   remaining_amount_in_cents:
-    type: number
+    type: integer
+    format: int64
   details:
     type: string
   external:

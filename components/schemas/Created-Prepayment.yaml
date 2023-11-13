@@ -7,11 +7,14 @@ properties:
     type: integer
   amount_in_cents:
     type: integer
+    format: int64
   memo:
     type: string
   created_at:
     type: string
   starting_balance_in_cents:
     type: integer
+    format: int64
   ending_balance_in_cents:
     type: integer
+    format: int64
