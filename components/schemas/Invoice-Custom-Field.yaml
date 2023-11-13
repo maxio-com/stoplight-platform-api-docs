@@ -6,6 +6,6 @@ properties:
   value:
     type: string
   owner_id:
-    type: number
+    type: integer
   owner_type:
     type: string

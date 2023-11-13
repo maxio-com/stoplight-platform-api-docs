@@ -2,7 +2,7 @@ title: Proforma Custom Field
 type: object
 properties:
   owner_id:
-    type: number
+    type: integer
   owner_type:
     type: string
     minLength: 1
@@ -13,4 +13,4 @@ properties:
     type: string
     minLength: 1
   metadatum_id:
-    type: number
+    type: integer

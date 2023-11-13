@@ -14,4 +14,4 @@ properties:
       - string
       - "null"
   metafield_id:
-    type: number
+    type: integer

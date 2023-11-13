@@ -2,7 +2,7 @@ title: Multi Invoice Payment
 type: object
 properties:
   transaction_id:
-    type: number
+    type: integer
     description: The numeric ID of the transaction.
   total_amount:
     type: string

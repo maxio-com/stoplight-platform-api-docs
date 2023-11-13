@@ -5,11 +5,11 @@ properties:
     type: string
     minLength: 1
   site_id:
-    type: number
+    type: integer
   customer_id:
-    type: number
+    type: integer
   subscription_id:
-    type: number
+    type: integer
   number:
     type: string
   sequence_number:

@@ -3,7 +3,7 @@ type: object
 description: "Information for captured payment, if applicable"
 properties:
   id:
-    type: number
+    type: integer
   amount_in_cents:
     type: integer
     format: int64
