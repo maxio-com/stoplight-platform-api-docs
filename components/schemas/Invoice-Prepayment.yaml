@@ -1,4 +1,4 @@
-title: Pre-Payment
+title: Invoice PrePayment
 type: object
 properties:
   subscription_id:

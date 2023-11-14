@@ -15,6 +15,7 @@ properties:
   enum:
     oneOf:
       - type: "null"
+      - type: string
       - type: array
         items:
           type: string
