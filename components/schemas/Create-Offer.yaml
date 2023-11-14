@@ -19,3 +19,7 @@ properties:
     type: array
     items:
       type: string
+required:
+  - name
+  - handle
+  - product_id

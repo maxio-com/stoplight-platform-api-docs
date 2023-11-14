@@ -11254,6 +11254,11 @@ paths:
                             url: "https://general-goods.chargifypay.com/subscribe/hjpvhnw63tzy"
       operationId: listOffers
       description: This endpoint will list offers for a site.
+      x-operation-settings:
+        collectParameters: true
+      parameters:
+        - $ref: "../components/parameters/page.yaml"
+        - $ref: "../components/parameters/per-page.yaml"
   "/offers/{offer_id}.json":
     parameters:
       - $ref: "../components/parameters/offer-id-path.yaml"
