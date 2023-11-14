@@ -11259,6 +11259,12 @@ paths:
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page.yaml"
+        - schema:
+            type: boolean
+            example: true
+          in: query
+          name: include_archived
+          description: "Include archived products. Use in query: `include_archived=true`."
   "/offers/{offer_id}.json":
     parameters:
       - $ref: "../components/parameters/offer-id-path.yaml"
