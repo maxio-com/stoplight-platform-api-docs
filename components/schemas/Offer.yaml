@@ -18,13 +18,17 @@ properties:
   handle:
     type: string
   description:
-    type: string
+    type:
+      - string
+      - "null"
   created_at:
     type: string
   updated_at:
     type: string
   archived_at:
-    type: "null"
+    type:
+      - string
+      - "null"
   offer_items:
     type: array
     items:
