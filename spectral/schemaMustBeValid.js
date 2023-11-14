@@ -3,7 +3,8 @@ export default (schema, _, context) => {
 
   if (
     schema.type === "object" &&
-    (!schema.properties || Object.keys(schema.properties).length === 0)
+    (!schema.properties || Object.keys(schema.properties).length === 0) &&
+    !schema.additionalProperties
   ) {
     return [
       {
