@@ -5473,6 +5473,30 @@ paths:
                       archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
                       created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
                       updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Product-Price-Point-Error-Response.yaml"
+              examples:
+                Example-1:
+                  value:
+                    errors:
+                      price_point: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      interval:
+                        - "Recurring Interval: cannot be blank."
+                      interval_unit:
+                        - "Interval unit: must be 'month' or 'day'."
+                      name:
+                        - "Name: cannot be blank."
+                      price:
+                        - "Price: is not a number."
+                      price_in_cents:
+                        - "Price in cents: cannot be blank."
       operationId: createProductPricePoint
       description: "[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)"
       requestBody:
@@ -5830,6 +5854,29 @@ paths:
                         archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
                         created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
                         updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Map.yaml"
+              examples:
+                Example:
+                  value:
+                    price_points[0].interval:
+                      - "Recurring Interval: cannot be blank."
+                    price_points[0].interval_unit:
+                      - "Interval unit: must be 'month' or 'day'."
+                    price_points[0].name:
+                      - "Name: cannot be blank."
+                    price_points[0].price:
+                      - "Price: is not a number."
+                    price_points[0].price_in_cents:
+                      - "Price in cents: cannot be blank."
+                    price_points[1].currency_prices:
+                      - "Currency prices: is invalid."
+                    price_points[1].name:
+                      - "Name: cannot be blank."
       operationId: createProductPricePoints
       description: Use this endpoint to create multiple product price points in one request.
       requestBody:

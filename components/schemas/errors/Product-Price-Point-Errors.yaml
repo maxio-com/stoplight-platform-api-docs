@@ -1,0 +1,25 @@
+title: Product Price Point Errors
+type: object
+properties:
+  price_point:
+    type: string
+  interval:
+    type: array
+    items:
+      type: string
+  interval_unit:
+    type: array
+    items:
+      type: string
+  name:
+    type: array
+    items:
+      type: string
+  price:
+    type: array
+    items:
+      type: string
+  price_in_cents:
+    type: array
+    items:
+      type: string
