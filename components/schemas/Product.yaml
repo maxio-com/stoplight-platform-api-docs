@@ -28,7 +28,9 @@ properties:
       - "null"
     description: A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
   expiration_interval_unit:
-    type: "null"
+    type:
+      - "null"
+      - string
     allOf:
       - $ref: "./Extended-Interval-Unit.yaml"
     description: "A string representing the trial interval unit for this product, either month or day"
@@ -67,7 +69,9 @@ properties:
       - "null"
     description: A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval
   trial_interval_unit:
-    type: "null"
+    type:
+      - "null"
+      - string
     allOf:
       - $ref: "./Interval-Unit.yaml"
     description: "A string representing the trial interval unit for this product, either month or day"

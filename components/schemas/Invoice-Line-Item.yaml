@@ -95,6 +95,8 @@ properties:
   component_cost_data:
     type:
       - "null"
+      - array
+    allOf:
       - $ref: "./Invoice-Line-Item-Component-Cost-Data.yaml"
   product_price_point_id:
     type:

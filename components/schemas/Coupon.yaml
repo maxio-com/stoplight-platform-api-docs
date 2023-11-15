@@ -62,7 +62,9 @@ properties:
   stackable:
     type: boolean
   compounding_strategy:
-    type: "null"
+    type:
+      - "null"
+      - string
     allOf:
       - $ref: "./Compounding-Strategy.yaml"
   use_site_exchange_rate:
