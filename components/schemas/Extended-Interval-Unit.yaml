@@ -1,6 +1,5 @@
 title: Extended Interval Unit
-type:
-  - string
+type: string
 enum:
   - day
   - month

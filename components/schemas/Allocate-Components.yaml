@@ -22,5 +22,6 @@ properties:
   downgrade_credit:
     type: string
   payment_collection_method:
-    $ref: "./Collection-Method.yaml"
+    allOf:
+      - $ref: "./Collection-Method.yaml"
     description: "(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription"

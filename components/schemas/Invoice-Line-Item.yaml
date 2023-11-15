@@ -93,8 +93,8 @@ properties:
   hide:
     type: boolean
   component_cost_data:
-    oneOf:
-      - type: "null"
+    type:
+      - "null"
       - $ref: "./Invoice-Line-Item-Component-Cost-Data.yaml"
   product_price_point_id:
     type:

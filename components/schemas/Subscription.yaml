@@ -58,9 +58,9 @@ properties:
       - "null"
     description: "Seller-provided reason for, or note about, the cancellation."
   cancellation_method:
-    oneOf:
+    type: "null"
+    allOf:
       - $ref: "./Cancellation-Method.yaml"
-      - type: "null"
     description: "The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled."
   cancel_at_end_of_period:
     type:
@@ -101,9 +101,9 @@ properties:
       - "null"
     description: "The day of the month that the subscription will charge according to calendar billing rules, if used."
   payment_collection_method:
-    oneOf:
+    type: "null"
+    allOf:
       - $ref: "Collection-Method.yaml"
-      - type: "null"
   customer:
     $ref: ./Customer.yaml
   product:
@@ -111,9 +111,9 @@ properties:
   credit_card:
     $ref: ./Payment-Profile.yaml
   group:
-    oneOf:
+    type: "null"
+    allOf:
       - $ref: "./Subscription-Group-Inlined.yaml"
-      - type: "null"
   bank_account:
     $ref: "./Subscription-Bank-Account.yaml"
   payment_type:
