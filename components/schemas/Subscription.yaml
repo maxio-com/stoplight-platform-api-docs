@@ -169,7 +169,9 @@ properties:
       - "null"
     description: The ID of the offer associated with the subscription.
   payer_id:
-    type: integer
+    type:
+      - integer
+      - "null"
     description: "On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled."
   current_billing_amount_in_cents:
     type: integer
