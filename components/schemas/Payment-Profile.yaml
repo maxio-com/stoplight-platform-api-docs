@@ -74,7 +74,9 @@ properties:
     type: string
     description: Token received after sending billing informations using chargify.js.
   site_gateway_setting_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   gateway_handle:
     type:
       - string

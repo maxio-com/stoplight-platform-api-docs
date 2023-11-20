@@ -8,7 +8,9 @@ properties:
     type: string
     description: "The name of the Component, suitable for display on statements. i.e. Text Messages."
   handle:
-    type: string
+    type:
+      - string
+      - "null"
     description: "The component API handle"
   pricing_scheme:
     type:
