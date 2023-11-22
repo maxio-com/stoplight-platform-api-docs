@@ -4858,6 +4858,17 @@ paths:
                       product_price_point_name: Default
               schema:
                 $ref: "../components/schemas/Product-Response.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Name: cannot be blank."
       operationId: createProduct
       description: |-
         Use this method to create a product within your Chargify site.
@@ -5226,6 +5237,17 @@ paths:
                         accounting_code: null
                       public_signup_pages: []
                       product_price_point_name: Default
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Product cannot be archived."
       description: |-
         Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly.
 
