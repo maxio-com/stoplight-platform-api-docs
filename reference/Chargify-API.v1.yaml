@@ -5490,6 +5490,7 @@ paths:
                       interval:
                         - "Recurring Interval: cannot be blank."
                       interval_unit:
+                        - "Interval unit: cannot be blank."
                         - "Interval unit: must be 'month' or 'day'."
                       name:
                         - "Name: cannot be blank."
@@ -5497,6 +5498,16 @@ paths:
                         - "Price: is not a number."
                       price_in_cents:
                         - "Price in cents: cannot be blank."
+                Example-3:
+                  value:
+                    errors:
+                      interval:
+                        - "Recurring Interval: must be greater than or equal to 1."
+                Example-4:
+                  value:
+                    errors:
+                      price:
+                        - "Price: must be greater than or equal to 0."
       operationId: createProductPricePoint
       description: "[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)"
       requestBody:
@@ -5861,8 +5872,10 @@ paths:
               schema:
                 $ref: "../components/schemas/errors/Error-Map.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
+                    price_points[0].currency_prices:
+                      - "Currency prices: is invalid."
                     price_points[0].interval:
                       - "Recurring Interval: cannot be blank."
                     price_points[0].interval_unit:
@@ -5875,8 +5888,26 @@ paths:
                       - "Price in cents: cannot be blank."
                     price_points[1].currency_prices:
                       - "Currency prices: is invalid."
+                    price_points[1].interval:
+                      - "Recurring Interval: cannot be blank."
+                    price_points[1].interval_unit:
+                      - "Interval unit: must be 'month' or 'day'."
                     price_points[1].name:
                       - "Name: cannot be blank."
+                    price_points[1].price:
+                      - "Price: is not a number."
+                    price_points[1].price_in_cents:
+                      - "Price in cents: cannot be blank."
+                Example-2:
+                  value:
+                    price_points[0].interval:
+                      - "Recurring Interval: must be greater than or equal to 1."
+                Example-3:
+                  value:
+                    price_points[0].currency_prices:
+                      - "Currency prices: is invalid."
+                    price_points[0].price:
+                      - "Price: must be greater than or equal to 0."
       operationId: createProductPricePoints
       description: Use this endpoint to create multiple product price points in one request.
       requestBody:
