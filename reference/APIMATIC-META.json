@@ -7,7 +7,6 @@
   },
   "CodeGenSettings": {
     "ValidateRequiredParameters": true,
-    "Nullify404": true,
     "LiftParameterDescriptionFromCustomType": true,
     "UseEnumPrefix": false,
     "SynchronyMode": "Synchronous",
