@@ -17215,13 +17215,15 @@ paths:
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
         - schema:
             type: array
-            $ref: "../components/schemas/Price-Point-Type.yaml"
+            items:
+              $ref: "../components/schemas/Price-Point-Type.yaml"
             default:
               - catalog
               - default
             example:
-              - custom
               - catalog
+              - default
+              - custom
           style: form
           explode: false
           in: query
