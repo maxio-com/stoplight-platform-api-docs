@@ -5,3 +5,5 @@ mrr_data > Example
 mrr_data -> november_2019, mrr_data -> december_2019, mrr_data -> january_2020, mrr_data -> february_2020, mrr_data -> march_2020, mrr_data -> april_2020
 errors -> subscriptions -> 0
 messages, country, customer
+listAllProductPricePoints [GET, /products_price_points.json] > Parameters[8] > filter[type] > Default Value
+listAllComponentPricePoints [GET, /components_price_points.json] > Parameters[8] > filter[type] > Default Value

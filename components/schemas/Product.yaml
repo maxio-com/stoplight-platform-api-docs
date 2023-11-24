@@ -46,8 +46,9 @@ properties:
     type: integer
     description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days
   interval_unit:
+    allOf:
+      - $ref: "./Interval-Unit.yaml"
     description: "A string representing the interval unit for this product, either month or day"
-    $ref: "./Interval-Unit.yaml"
   initial_charge_in_cents:
     type:
       - integer

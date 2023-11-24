@@ -20,7 +20,8 @@ properties:
       - integer
     description: Required if using `custom_price` attribute.
   interval_unit:
-    $ref: "./Interval-Unit.yaml"
+    allOf:
+      - $ref: "./Interval-Unit.yaml"
     description: Required if using `custom_price` attribute.
   trial_price_in_cents:
     type:
@@ -34,7 +35,8 @@ properties:
       - integer
     description: (Optional)
   trial_interval_unit:
-    $ref: "./Interval-Unit.yaml"
+    allOf:
+      - $ref: "./Interval-Unit.yaml"
     description: (Optional)
   initial_charge_in_cents:
     type:
@@ -51,7 +53,8 @@ properties:
       - integer
     description: (Optional)
   expiration_interval_unit:
-    $ref: "./Interval-Unit.yaml"
+    allOf:
+      - $ref: "./Interval-Unit.yaml"
     description: (Optional)
   tax_included:
     type: boolean
