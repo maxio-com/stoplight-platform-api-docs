@@ -24,33 +24,41 @@ properties:
     description: The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility.
   current_period_ends_at:
     type: string
+    format: date-time
     description: "Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur)"
   next_assessment_at:
     type: string
+    format: date-time
     description: "Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases)"
   trial_started_at:
     type:
       - string
       - "null"
+    format: date-time
     description: Timestamp for when the trial period (if any) began
   trial_ended_at:
     type:
       - string
       - "null"
+    format: date-time
     description: Timestamp for when the trial period (if any) ended
   activated_at:
     type: string
+    format: date-time
     description: "Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial)"
   expires_at:
     type:
       - string
       - "null"
+    format: date-time
     description: Timestamp giving the expiration date of this subscription (if any)
   created_at:
     type: string
+    format: date-time
     description: The creation date for this subscription
   updated_at:
     type: string
+    format: date-time
     description: The date of last update for this subscription
   cancellation_message:
     type:
@@ -71,9 +79,11 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
     description: The timestamp of the most recent cancellation
   current_period_started_at:
     type: string
+    format: date-time
     description: Timestamp relating to the start of the current (recurring) period
   previous_state:
     type: string
@@ -88,6 +98,7 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
     description: Timestamp for when the subscription is currently set to cancel.
   coupon_code:
     type:
@@ -242,6 +253,7 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
   credit_balance_in_cents:
     type: integer
     format: int64

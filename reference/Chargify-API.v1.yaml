@@ -9122,13 +9122,13 @@ paths:
                       state: mollit exercitation ipsum
                       trial_started_at: null
                       trial_ended_at: null
-                      activated_at: nostrud nulla et
-                      created_at: qui L
-                      updated_at: in veniam aute in
+                      activated_at: 2023-11-23T10:28:34-05:00
+                      created_at: 2023-11-23T10:28:34-05:00
+                      updated_at: 2023-11-23T10:28:34-05:00
                       expires_at: null
                       balance_in_cents: 50504234
-                      current_period_ends_at: Lorem anim eu
-                      next_assessment_at: adipisicing ullamco
+                      current_period_ends_at: 2023-11-23T10:28:34-05:00
+                      next_assessment_at: 2023-11-23T10:28:34-05:00
                       canceled_at: null
                       cancellation_message: lorem ipsum
                       next_product_id: null
@@ -9136,7 +9136,7 @@ paths:
                       payment_collection_method: remittance
                       snap_day: null
                       cancellation_method: dunning
-                      current_period_started_at: Ut quis non
+                      current_period_started_at: 2023-11-23T10:28:34-05:00
                       previous_state: "occaecat proident sunt cillum "
                       signup_payment_id: -45156092
                       signup_revenue: do aliquip ea
@@ -10840,12 +10840,12 @@ paths:
                       email: joe@example.com
                     credit_card_attributes:
                       chargify_token: tok_cwhvpfcnbtgkd8nfkzf9dnjn
-                    next_billing_at: "2020-06-01"
+                    next_billing_at: "2020-06-01T12:00:00-04:00"
               Import Authorize.Net ACH:
                 value:
                   subscription:
                     product_handle: product
-                    next_billing_at: "2020-08-29"
+                    next_billing_at: "2020-08-29T12:00:00-04:00"
                     customer_attributes:
                       first_name: John
                       last_name: Doe
@@ -10859,7 +10859,7 @@ paths:
                 value:
                   subscription:
                     product_handle: product
-                    next_billing_at: "2020-08-29"
+                    next_billing_at: "2020-08-29T12:00:00-04:00"
                     customer_attributes:
                       first_name: John
                       last_name: Doe
@@ -17085,7 +17085,9 @@ paths:
           name: "filter[start_datetime]"
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
         - schema:
-            $ref: "../components/schemas/Price-Point-Type.yaml"
+            type: array
+            items:
+              $ref: "../components/schemas/Price-Point-Type.yaml"
             example:
               - catalog
               - default
