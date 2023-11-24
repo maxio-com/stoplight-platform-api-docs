@@ -34,9 +34,11 @@ properties:
     description: "A string representing the trial interval unit for this product, either month or day"
   created_at:
     type: string
+    format: date-time
     description: Timestamp indicating when this product was created
   updated_at:
     type: string
+    format: date-time
     description: Timestamp indicating when this product was last updated
   price_in_cents:
     type: integer
@@ -75,6 +77,7 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
     description: Timestamp indicating when this product was archived
   require_credit_card:
     type: boolean
