@@ -10932,7 +10932,7 @@ paths:
               With Custom Pricing:
                 value:
                   subscription:
-                    product_id: string
+                    product_id: 123
                     custom_price:
                       handle: custom-price
                       price_in_cents: 9900
@@ -15262,7 +15262,7 @@ paths:
               With Custom Pricing:
                 value:
                   subscription:
-                    product_id: string
+                    product_id: 1234
                     custom_price:
                       price_in_cents: 9900
                       interval: 1
