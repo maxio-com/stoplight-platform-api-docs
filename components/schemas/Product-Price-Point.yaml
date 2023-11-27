@@ -70,7 +70,8 @@ properties:
     type: boolean
     description: Whether or not to use the site's exchange rate or define your own pricing when your site has multiple currencies defined.
   type:
-    $ref: "./Price-Point-Type.yaml"
+    allOf:
+      - $ref: "./Price-Point-Type.yaml"
     description: The type of price point
   tax_included:
     type: boolean
