@@ -5,8 +5,7 @@ properties:
     type: integer
     description: The subscription unique id within Chargify.
   state:
-    type: string
-    description: "The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html)"
+    $ref: "./Subscription-State.yaml"
   balance_in_cents:
     type: integer
     format: int64
