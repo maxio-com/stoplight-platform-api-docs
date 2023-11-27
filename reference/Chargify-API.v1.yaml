@@ -5492,9 +5492,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -5584,9 +5584,9 @@ paths:
                         expiration_interval: 12
                         expiration_interval_unit: month
                         product_id: 901
-                        archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                        created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                        updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                        archived_at: 2023-11-30T06:37:20-05:00
+                        created_at: 2023-11-27T06:37:20-05:00
+                        updated_at: 2023-11-27T06:37:20-05:00
       operationId: listProductPricePoints
       x-operation-settings:
         collectParameters: true
@@ -5650,9 +5650,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
       operationId: updateProductPricePoint
       requestBody:
         content:
@@ -5699,9 +5699,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
       operationId: readProductPricePoint
       description: Use this endpoint to retrieve details for a specific product price point.
       parameters:
@@ -5740,9 +5740,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
       operationId: archiveProductPricePoint
       description: Use this endpoint to archive a product price point.
   "/products/{product_id}/price_points/{price_point_id}/unarchive.json":
@@ -5789,9 +5789,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
       operationId: unarchiveProductPricePoint
       description: Use this endpoint to unarchive an archived product price point.
   "/products/{product_id}/price_points/{price_point_id}/default.json":
@@ -5838,9 +5838,9 @@ paths:
                       expiration_interval: 12
                       expiration_interval_unit: month
                       product_id: 901
-                      archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                      created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                      updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                      archived_at: 2023-11-30T06:37:20-05:00
+                      created_at: 2023-11-27T06:37:20-05:00
+                      updated_at: 2023-11-27T06:37:20-05:00
       operationId: setDefaultPricePointForProduct
       description: |-
         Use this endpoint to make a product price point the default for the product.
@@ -5884,9 +5884,9 @@ paths:
                         expiration_interval: 12
                         expiration_interval_unit: month
                         product_id: 901
-                        archived_at: "Tue, 30 Oct 2018 18:49:47 EDT -04:00"
-                        created_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
-                        updated_at: "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+                        archived_at: 2023-11-30T06:37:20-05:00
+                        created_at: 2023-11-27T06:37:20-05:00
+                        updated_at: 2023-11-27T06:37:20-05:00
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
