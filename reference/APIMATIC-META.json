@@ -13,6 +13,7 @@
     "ModelSerializationScheme": "Json",
     "ArraySerialization": "CSV",
     "ApplyCustomizations": ["maxio-ghua3c"],
+    "StoreTimezoneInformation": true,
 
     "ProjectName": "Advanced Billing",
     "BrandLabel": "Maxio",
