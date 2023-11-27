@@ -5,13 +5,13 @@ properties:
     type: string
     description: "The API Handle of the product for which you are creating a subscription. Required, unless a `product_id` is given instead."
   product_id:
-    type: string
+    type: integer
     description: "The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead."
   product_price_point_handle:
     type: string
     description: The user-friendly API handle of a product's particular price point.
   product_price_point_id:
-    type: string
+    type: integer
     description: The ID of the particular price point on the product.
   custom_price:
     $ref: "./Subscription-Custom-Price.yaml"
