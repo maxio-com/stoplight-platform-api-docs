@@ -17188,11 +17188,15 @@ paths:
           name: "filter[date_field]"
         - schema:
             type: string
+            format: date
+            example: "2019-06-07"
           in: query
           name: "filter[end_date]"
           description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified."
         - schema:
             type: string
+            format: date-time
+            example: "2019-06-07T17:20:06Z"
           in: query
           name: "filter[end_datetime]"
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
@@ -17211,11 +17215,15 @@ paths:
           description: "Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`."
         - schema:
             type: string
+            format: date
+            example: "2019-06-07"
           in: query
           description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
           name: "filter[start_date]"
         - schema:
             type: string
+            format: date-time
+            example: "2019-06-07T17:20:06Z"
           in: query
           name: "filter[start_datetime]"
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
