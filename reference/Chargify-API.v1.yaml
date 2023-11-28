@@ -12135,12 +12135,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Cancel-Subscription-Error-Response.yaml"
               examples:
                 Example-1:
                   value:
-                    errors:
-                      - The subscription is already canceled
+                    error: The subscription is already canceled
                 Example-2:
                   value:
                     errors:
