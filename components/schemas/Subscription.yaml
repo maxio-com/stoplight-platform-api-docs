@@ -82,7 +82,8 @@ properties:
     format: date-time
     description: Timestamp relating to the start of the current (recurring) period
   previous_state:
-    type: string
+    allOf:
+      - $ref: "./Subscription-State.yaml"
     description: "Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state)"
   signup_payment_id:
     type: integer
@@ -108,19 +109,15 @@ properties:
       - "null"
     description: "The day of the month that the subscription will charge according to calendar billing rules, if used."
   payment_collection_method:
-    oneOf:
-      - $ref: "Collection-Method.yaml"
-      - type: "null"
+    $ref: "./Collection-Method.yaml"
   customer:
-    $ref: ./Customer.yaml
+    $ref: "./Customer.yaml"
   product:
-    $ref: ./Product.yaml
+    $ref: "./Product.yaml"
   credit_card:
-    $ref: ./Payment-Profile.yaml
+    $ref: "./Payment-Profile.yaml"
   group:
-    oneOf:
-      - $ref: "./Subscription-Group-Inlined.yaml"
-      - type: "null"
+    $ref: "./Subscription-Group-Inlined.yaml"
   bank_account:
     $ref: "./Subscription-Bank-Account.yaml"
   payment_type:
