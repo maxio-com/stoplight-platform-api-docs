@@ -162,6 +162,7 @@ properties:
       - string
       - "null"
     description: The date the subscription is scheduled to automatically resume from the on_hold state.
+    format: date-time
   coupon_codes:
     type: array
     description: An array for all the coupons attached to the subscription.
