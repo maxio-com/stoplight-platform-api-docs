@@ -3,7 +3,7 @@ type: object
 properties:
   quantity:
     type: number
-    description: "The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off."
+    description: 'The allocated quantity to which to set the line-items allocated quantity. By default, this is an integer. If decimal allocations are enabled for the component, it will be a decimal number. For On/Off components, use 1for on and 0 for off.'
   component_id:
     type: integer
     description: (required for the multiple allocations endpoint) The id associated with the component for which the allocation is being made
@@ -20,20 +20,26 @@ properties:
     deprecated: true
   accrue_charge:
     type: boolean
-    description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided."
+    description: 'If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided.'
   downgrade_credit:
     allOf:
-      - $ref: "./Credit-Type.yaml"
-    description: The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided.
+      - $ref: ./Credit-Type.yaml
   upgrade_charge:
     allOf:
-      - $ref: "./Credit-Type.yaml"
-    description: The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided.
+      - $ref: ./Credit-Type.yaml
   price_point_id:
     type:
       - string
       - integer
-      - "null"
-    description: "Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used."
+      - 'null'
+    description: 'Price point that the allocation should be charged at. Accepts either the price point''s id (integer) or handle (string). When not specified, the default price point will be used.'
+  billing_schedule:
+    type: object
+    properties:
+      initial_billing_at:
+        type: string
+        format: date
+        example: '2024-01-01'
+        description: 'If set, component will start being issued on provided time. Accept only today or future date, i.e. "2024-01-01" or "01/01/2024". Only ISO8601 format is supported.'
 required:
   - quantity
