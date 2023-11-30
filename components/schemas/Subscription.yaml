@@ -85,7 +85,8 @@ properties:
     format: date-time
     description: Timestamp relating to the start of the current (recurring) period
   previous_state:
-    type: string
+    allOf:
+      - $ref: "./Subscription-State.yaml"
     description: "Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state)"
   signup_payment_id:
     type: integer
