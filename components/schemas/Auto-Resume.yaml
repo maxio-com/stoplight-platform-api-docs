@@ -3,3 +3,4 @@ type: object
 properties:
   automatically_resume_at:
     type: string
+    format: date-time

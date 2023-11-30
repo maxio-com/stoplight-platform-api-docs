@@ -2,5 +2,5 @@ name: subscription_id
 in: path
 description: The Chargify id of the subscription
 schema:
-  type: string
+  type: integer
 required: true

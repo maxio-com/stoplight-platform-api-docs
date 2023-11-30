@@ -212,6 +212,7 @@ properties:
       - string
       - "null"
     description: The timestamp of the most recent on hold action.
+    format: date-time
   prepaid_dunning:
     type: boolean
     description: Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled
