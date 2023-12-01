@@ -742,7 +742,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
-          type: string
+          type: integer
         name: note_id
         in: path
         required: true
