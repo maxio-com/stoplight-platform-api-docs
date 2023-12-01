@@ -1,6 +1,5 @@
 title: Create or Update Coupon
-type:
-  - object
+type: object
 properties:
   coupon:
     oneOf:
