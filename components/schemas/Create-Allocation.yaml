@@ -23,10 +23,10 @@ properties:
     description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided."
   downgrade_credit:
     allOf:
-      - $ref: ./Credit-Type.yaml
+      - $ref: "./Credit-Type.yaml"
   upgrade_charge:
     allOf:
-      - $ref: ./Credit-Type.yaml
+      - $ref: "./Credit-Type.yaml"
   price_point_id:
     type:
       - string
@@ -34,6 +34,6 @@ properties:
       - "null"
     description: "Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used."
   billing_schedule:
-    $ref: ../../models/Billing-Schedule.yaml
+    $ref: "./Billing-Schedule.yaml"
 required:
   - quantity
