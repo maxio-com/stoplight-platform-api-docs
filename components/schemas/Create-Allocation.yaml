@@ -35,5 +35,7 @@ properties:
       - integer
       - "null"
     description: "Price point that the allocation should be charged at. Accepts either the price point's id (integer) or handle (string). When not specified, the default price point will be used."
+  billing_schedule:
+    $ref: "./Billing-Schedule.yaml"
 required:
   - quantity
