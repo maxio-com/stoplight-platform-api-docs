@@ -1,6 +1,5 @@
 title: Create Subscription Component
-type:
-  - object
+type: object
 properties:
   component_id:
     type:
