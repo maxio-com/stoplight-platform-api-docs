@@ -5761,6 +5761,17 @@ paths:
                       archived_at: 2023-11-30T06:37:20-05:00
                       created_at: 2023-11-27T06:37:20-05:00
                       updated_at: 2023-11-27T06:37:20-05:00
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Cannot archive the default price point."
       operationId: archiveProductPricePoint
       description: Use this endpoint to archive a product price point.
   "/products/{product_id}/price_points/{price_point_id}/unarchive.json":
