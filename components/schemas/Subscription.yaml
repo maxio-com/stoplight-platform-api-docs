@@ -117,7 +117,9 @@ properties:
   credit_card:
     $ref: "./Payment-Profile.yaml"
   group:
-    $ref: "./Subscription-Group-Inlined.yaml"
+    oneOf:
+      - $ref: "./Subscription-Group-Inlined.yaml"
+      - type: "null"
   bank_account:
     $ref: "./Subscription-Bank-Account.yaml"
   payment_type:
