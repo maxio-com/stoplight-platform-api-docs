@@ -12,7 +12,9 @@ properties:
       - "null"
     description: The product API handle
   description:
-    type: string
+    type:
+      - string
+      - "null"
     description: The product description
   accounting_code:
     type:
