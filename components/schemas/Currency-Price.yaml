@@ -9,7 +9,7 @@ properties:
     type: number
   formatted_price:
     type: string
-  price_id:
+  product_price_point_id:
     type: integer
-  price_point_id:
-    type: integer
+  role:
+    $ref: "./Currency-Price-Role.yaml"
