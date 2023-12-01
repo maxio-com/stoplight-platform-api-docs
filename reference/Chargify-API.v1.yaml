@@ -6110,6 +6110,18 @@ paths:
                         formatted_price: €123,00
                         product_price_point_id: 32669
                         role: baseline
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      base:
+                        - "This product price point requires that prices are defined for: [baseline]."
       operationId: updateProductCurrencyPrices
       description: |-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
