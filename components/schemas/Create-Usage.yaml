@@ -8,3 +8,5 @@ properties:
     type: string
   memo:
     type: string
+  billing_schedule:
+    $ref: ./Billing-Schedule.yaml
