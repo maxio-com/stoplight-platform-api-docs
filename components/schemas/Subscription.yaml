@@ -186,8 +186,7 @@ properties:
     type: integer
     description: The product price point currently subscribed to.
   product_price_point_type:
-    type: string
-    description: "One of the following: custom, default, catalog."
+    $ref: "./Price-Point-Type.yaml"
   next_product_price_point_id:
     type:
       - integer

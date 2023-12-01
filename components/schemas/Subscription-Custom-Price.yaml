@@ -1,4 +1,4 @@
-title: Custom price used for Subscription Create/Update
+title: Subscription Custom Price
 type: object
 description: (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription
 properties:
@@ -59,3 +59,7 @@ properties:
   tax_included:
     type: boolean
     description: (Optional)
+required:
+  - price_in_cents
+  - interval
+  - interval_unit
