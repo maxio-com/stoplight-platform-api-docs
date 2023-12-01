@@ -5,5 +5,5 @@ properties:
   initial_billing_at:
     type: string
     format: date
-    example: '2024-01-01'
+    example: "2024-01-01"
     description: The initial_billing_at attribute in Maxio allows you to specify a custom starting date for billing cycles associated with components that have their own billing frequency set. Only ISO8601 format is supported.
