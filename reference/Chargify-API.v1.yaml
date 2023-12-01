@@ -5847,30 +5847,56 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Product-Price-Point-Response.yaml"
+                $ref: "../components/schemas/Product-Response.yaml"
               examples:
                 Example:
                   value:
-                    price_point:
-                      id: 283
+                    product:
+                      id: 29778
                       name: Educational
                       handle: educational
-                      price_in_cents: 1000
-                      interval: 1
+                      description: null
+                      accounting_code: null
+                      request_credit_card: true
+                      expiration_interval: 12
+                      expiration_interval_unit: month
+                      created_at: 2023-12-01T06:56:12-05:00
+                      updated_at: 2023-12-01T06:56:26-05:00
+                      price_in_cents: 100
+                      interval: 2
                       interval_unit: month
+                      initial_charge_in_cents: 120000
                       trial_price_in_cents: 4900
                       trial_interval: 1
                       trial_interval_unit: month
-                      trial_type: payment_expected
-                      initial_charge_in_cents: 120000
+                      archived_at: null
+                      require_credit_card: true
+                      return_params: null
+                      taxable: false
+                      update_return_url: null
+                      tax_code: null
                       initial_charge_after_trial: false
-                      expiration_interval: 12
-                      expiration_interval_unit: month
-                      product_id: 901
-                      archived_at: 2023-11-30T06:37:20-05:00
-                      created_at: 2023-11-27T06:37:20-05:00
-                      updated_at: 2023-11-27T06:37:20-05:00
-      operationId: setDefaultPricePointForProduct
+                      version_number: 1
+                      update_return_params: null
+                      default_product_price_point_id: 32395
+                      request_billing_address: false
+                      require_billing_address: false
+                      require_shipping_address: false
+                      use_site_exchange_rate: true
+                      item_category: null
+                      product_price_point_id: 32395
+                      product_price_point_name: Default
+                      product_price_point_handle: "uuid:8c878f50-726e-013c-c71b-0286551bb34f"
+                      product_family:
+                        id: 933860
+                        name: Acme Projects
+                        description: Amazing project management tool
+                        handle: acme-projects
+                        accounting_code: null
+                        created_at: 2023-12-01T06:56:12-05:00
+                        updated_at: 2023-12-01T06:56:12-05:00
+                      public_signup_pages: []
+      operationId: promoteProductPricePointToDefault
       description: |-
         Use this endpoint to make a product price point the default for the product.
 
