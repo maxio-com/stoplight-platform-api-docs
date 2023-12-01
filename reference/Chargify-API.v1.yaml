@@ -701,17 +701,6 @@ paths:
                   note:
                     body: New test note.
                     sticky: true
-    delete:
-      summary: Delete Subscription Note
-      operationId: deleteSubscriptionNote
-      tags:
-        - Subscription Notes
-      responses:
-        "200":
-          description: OK
-        "422":
-          description: Unprocessable Entity (WebDAV)
-      description: Use the following method to delete a note for a Subscription.
     get:
       summary: List Subscription Notes
       tags:
@@ -753,7 +742,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
-          type: string
+          type: integer
         name: note_id
         in: path
         required: true
@@ -805,6 +794,17 @@ paths:
                   note:
                     body: Modified test note.
                     sticky: true
+    delete:
+      summary: Delete Subscription Note
+      operationId: deleteSubscriptionNote
+      tags:
+        - Subscription Notes
+      responses:
+        "200":
+          description: OK
+        "422":
+          description: Unprocessable Entity (WebDAV)
+      description: Use the following method to delete a note for a Subscription.
   /customers.json:
     post:
       summary: Create Customer
