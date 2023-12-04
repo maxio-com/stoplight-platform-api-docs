@@ -22,9 +22,9 @@ properties:
   accrue_charge:
     type: boolean
   upgrade_charge:
-    type: string
+    $ref: "./Credit-Type.yaml"
   downgrade_credit:
-    type: string
+    $ref: "./Credit-Type.yaml"
   price_point_id:
     type: integer
   previous_price_point_id:

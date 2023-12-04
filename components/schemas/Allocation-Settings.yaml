@@ -2,12 +2,8 @@ title: Allocation Settings
 type: object
 properties:
   upgrade_charge:
-    type:
-      - string
-      - "null"
+    $ref: "./Credit-Type.yaml"
   downgrade_credit:
-    type:
-      - string
-      - "null"
+    $ref: "./Credit-Type.yaml"
   accrue_charge:
     type: boolean

@@ -39,11 +39,9 @@ properties:
     type: boolean
     description: "If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately."
   upgrade_charge:
-    type: string
-    description: The type of charge to be created if the change in cost is an upgrade.
+    $ref: "./Credit-Type.yaml"
   downgrade_credit:
-    type: string
-    description: The type of credit to be created if the change in cost is a downgrade.
+    $ref: "./Credit-Type.yaml"
   payment:
     oneOf:
       - type: "null"

@@ -34,13 +34,9 @@ properties:
   recurring:
     type: boolean
   upgrade_charge:
-    type:
-      - string
-      - "null"
+    $ref: "./Credit-Type.yaml"
   downgrade_credit:
-    type:
-      - string
-      - "null"
+    $ref: "./Credit-Type.yaml"
   archived_at:
     type:
       - "null"
