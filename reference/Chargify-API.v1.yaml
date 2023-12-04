@@ -3893,30 +3893,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Component-Response.yaml"
+                $ref: "../components/schemas/Component.yaml"
               examples:
                 Example:
                   value:
-                    component:
-                      id: 25407138
-                      name: cillum aute
-                      pricing_scheme: in incididu
-                      unit_name: nulla in
-                      unit_price: Excepteur veniam
-                      product_family_id: -56705047
-                      kind: prepaid_usage_component
-                      archived: true
-                      taxable: false
-                      description: reprehenderit laborum qui fugiat
-                      default_price_point_id: -64328176
-                      price_point_count: 15252407
-                      price_points_url: dolor mollit consequat
-                      tax_code: ea nisi
-                      recurring: false
-                      created_at: dolor qui deserunt tempor
-                      default_price_point_name: cupidatat Lorem non aliqua
-                      product_family_name: do elit
-                      hide_date_range_on_invoice: false
+                    id: 25407138
+                    name: cillum aute
+                    pricing_scheme: in incididu
+                    unit_name: nulla in
+                    unit_price: Excepteur veniam
+                    product_family_id: -56705047
+                    kind: prepaid_usage_component
+                    archived: true
+                    taxable: false
+                    description: reprehenderit laborum qui fugiat
+                    default_price_point_id: -64328176
+                    price_point_count: 15252407
+                    price_points_url: dolor mollit consequat
+                    tax_code: ea nisi
+                    recurring: false
+                    created_at: dolor qui deserunt tempor
+                    default_price_point_name: cupidatat Lorem non aliqua
+                    product_family_name: do elit
+                    hide_date_range_on_invoice: false
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
