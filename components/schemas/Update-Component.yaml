@@ -12,7 +12,9 @@ properties:
       - "null"
     description: The description of the component.
   accounting_code:
-    type: string
+    type:
+      - string
+      - "null"
   taxable:
     type: boolean
     description: Boolean flag describing whether a component is taxable or not.
