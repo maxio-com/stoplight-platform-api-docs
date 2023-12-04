@@ -5475,7 +5475,9 @@ paths:
   "/products/{product_id}/price_points.json":
     parameters:
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: product_id
         in: path
         required: true
@@ -5627,13 +5629,17 @@ paths:
   "/products/{product_id}/price_points/{price_point_id}.json":
     parameters:
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: product_id
         in: path
         required: true
         description: "The id or handle of the product. When using the handle, it must be prefixed with `handle:`"
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: price_point_id
         in: path
         required: true
