@@ -256,3 +256,5 @@ properties:
   prepayment_balance_in_cents:
     type: integer
     format: int64
+  prepaid_configuration:
+    $ref: "./Prepaid-Configuration.yaml"

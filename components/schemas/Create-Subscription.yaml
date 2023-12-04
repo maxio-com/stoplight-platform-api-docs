@@ -76,9 +76,7 @@ properties:
     type: string
     description: "The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given."
   group:
-    oneOf:
-      - $ref: "./Group-Settings.yaml"
-      - type: boolean
+    $ref: "./Group-Settings.yaml"
   ref:
     type: string
     description: "A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail."
@@ -121,7 +119,7 @@ properties:
       - string
       - integer
     description: "Use in place of passing product and component information to set up the subscription with an existing offer. May be either the Chargify id of the offer or its handle prefixed with `handle:`.er"
-  prepaid_subscription_configuration:
+  prepaid_configuration:
     $ref: "./Upsert-Prepaid-Configuration.yaml"
   previous_billing_at:
     type: string
