@@ -13,3 +13,5 @@ enum:
   - change_invoice_status
   - change_invoice_collection_method
   - remove_payment
+  - create_debit_note
+  - failed_payment
