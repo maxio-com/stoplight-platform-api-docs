@@ -701,17 +701,6 @@ paths:
                   note:
                     body: New test note.
                     sticky: true
-    delete:
-      summary: Delete Subscription Note
-      operationId: deleteSubscriptionNote
-      tags:
-        - Subscription Notes
-      responses:
-        "200":
-          description: OK
-        "422":
-          description: Unprocessable Entity (WebDAV)
-      description: Use the following method to delete a note for a Subscription.
     get:
       summary: List Subscription Notes
       tags:
@@ -753,7 +742,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
-          type: string
+          type: integer
         name: note_id
         in: path
         required: true
@@ -805,6 +794,17 @@ paths:
                   note:
                     body: Modified test note.
                     sticky: true
+    delete:
+      summary: Delete Subscription Note
+      operationId: deleteSubscriptionNote
+      tags:
+        - Subscription Notes
+      responses:
+        "200":
+          description: OK
+        "422":
+          description: Unprocessable Entity (WebDAV)
+      description: Use the following method to delete a note for a Subscription.
   /customers.json:
     post:
       summary: Create Customer
@@ -6041,6 +6041,16 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
+              examples:
+                example-1:
+                  value:
+                    currency_prices:
+                      - id: 123
+                        currency: EUR
+                        price: 100
+                        formatted_price: €123,00
+                        product_price_point_id: 32669
+                        role: baseline
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -6052,7 +6062,7 @@ paths:
                   value:
                     errors:
                       base:
-                        - A baseline price must be defined for this product price point.
+                        - "This product price point requires that prices are defined for: [baseline]."
       operationId: createProductCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -6089,18 +6099,29 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
+                $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
               examples:
                 example-1:
                   value:
-                    - id: 0
-                      currency: string
-                      price: 0
-                      formatted_price: string
-                      product_price_point_id: 0
-                      role: baseline
+                    currency_prices:
+                      - id: 123
+                        currency: EUR
+                        price: 100
+                        formatted_price: €123,00
+                        product_price_point_id: 32669
+                        role: baseline
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      base:
+                        - "This product price point requires that prices are defined for: [baseline]."
       operationId: updateProductCurrencyPrices
       description: |-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
