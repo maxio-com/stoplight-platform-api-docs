@@ -25,9 +25,9 @@ properties:
     items:
       $ref: "./Price.yaml"
   upgrade_charge:
-    type: string
+    $ref: "./Credit-Type.yaml"
   downgrade_credit:
-    type: string
+    $ref: "./Credit-Type.yaml"
   price_points:
     type: array
     items:
