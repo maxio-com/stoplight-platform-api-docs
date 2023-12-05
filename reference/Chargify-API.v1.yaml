@@ -3761,7 +3761,7 @@ paths:
                       created_at: "2019-08-02T05:54:53-04:00"
                       default_price_point_name: Original
                       product_family_name: Chargify
-      operationId: readComponentByHandle
+      operationId: findComponent
       parameters:
         - schema:
             type: string
