@@ -118,7 +118,7 @@ properties:
     $ref: "./Payment-Profile.yaml"
   group:
     oneOf:
-      - $ref: "./Subscription-Group-Inlined.yaml"
+      - $ref: "./Nested-Subscription-Group.yaml"
       - type: "null"
   bank_account:
     $ref: "./Subscription-Bank-Account.yaml"

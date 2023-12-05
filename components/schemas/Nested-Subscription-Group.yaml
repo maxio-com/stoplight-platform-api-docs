@@ -1,14 +1,14 @@
-title: Subscription Group Inlined
+title: Nested Subscription Group
 type: object
 properties:
   uid:
     type: string
     description: The UID for the group
   scheme:
-    type: string
+    type: integer
     description: "Whether the group is configured to rely on a primary subscription for billing. At this time, it will always be 1."
   primary_subscription_id:
-    type: string
+    type: integer
     description: The subscription ID of the primary within the group. Applicable to scheme 1.
   primary:
     type: boolean
