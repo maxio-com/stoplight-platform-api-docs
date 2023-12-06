@@ -4167,8 +4167,37 @@ paths:
       tags:
         - Components
       responses:
-        "201":
-          description: Created
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/Component-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    component:
+                      id: 292609
+                      name: Text messages
+                      pricing_scheme: stairstep
+                      unit_name: text message
+                      unit_price: null
+                      product_family_id: 528484
+                      price_per_unit_in_cents: null
+                      kind: metered_component
+                      archived: false
+                      taxable: false
+                      description: null
+                      created_at: "2019-08-02T05:54:53-04:00"
+                      prices:
+                        - id: 47
+                          component_id: 292609
+                          starting_quantity: 1
+                          ending_quantity: null
+                          unit_price: "1.0"
+                          price_point_id: 173
+                          formatted_unit_price: "$1.00"
+                      default_price_point_name: Original
       operationId: updateDefaultPricePointForComponent
       description: |-
         Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
