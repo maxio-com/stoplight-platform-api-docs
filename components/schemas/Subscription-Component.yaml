@@ -20,9 +20,9 @@ properties:
     type: integer
     description: "For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off."
   pricing_scheme:
-    type:
-      - string
-      - "null"
+    oneOf:
+      - $ref: "./Pricing-Scheme.yaml"
+      - type: "null"
   component_id:
     type: integer
   component_handle:

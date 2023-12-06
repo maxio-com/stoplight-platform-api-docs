@@ -10,7 +10,7 @@ properties:
   event_based_billing_metric_id:
     type: integer
   pricing_scheme:
-    type: string
+    $ref: "./Pricing-Scheme.yaml"
   segment_property_1_value:
     type:
       - string

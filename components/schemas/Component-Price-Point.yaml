@@ -12,7 +12,7 @@ properties:
   name:
     type: string
   pricing_scheme:
-    type: string
+    $ref: "./Pricing-Scheme.yaml"
   component_id:
     type: integer
   handle:

@@ -6,7 +6,7 @@ properties:
   handle:
     type: string
   pricing_scheme:
-    type: string
+    $ref: "./Pricing-Scheme.yaml"
   prices:
     type: array
     items:
