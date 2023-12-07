@@ -7765,6 +7765,13 @@ paths:
         + change_invoice_status
         + change_invoice_collection_method
         + remove_payment
+<<<<<<< Updated upstream
+=======
+        + failed_payment
+        + apply_debit_note
+        + create_debit_note
+        + change_chargeback_status
+>>>>>>> Stashed changes
 
         Invoice events are returned in ascending order.
 

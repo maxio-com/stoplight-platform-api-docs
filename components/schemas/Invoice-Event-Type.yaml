@@ -13,3 +13,9 @@ enum:
   - change_invoice_status
   - change_invoice_collection_method
   - remove_payment
+<<<<<<< Updated upstream
+=======
+  - failed_payment
+  - change_chargeback_status
+  
+>>>>>>> Stashed changes
