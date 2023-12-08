@@ -13,10 +13,9 @@ properties:
       - "null"
     description: "The component API handle"
   pricing_scheme:
-    type:
-      - string
-      - "null"
-    description: "The handle for the pricing scheme. Available options: per_unit, volume, tiered, stairstep. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#price-bracket-rules) for an overview of pricing schemes."
+    oneOf:
+      - $ref: "./Pricing-Scheme.yaml"
+      - type: "null"
   unit_name:
     type: string
     description: The name of the unit that the component’s usage is measured in. i.e. message

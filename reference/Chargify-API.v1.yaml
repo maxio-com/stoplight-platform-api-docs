@@ -3899,7 +3899,7 @@ paths:
                   value:
                     id: 25407138
                     name: cillum aute
-                    pricing_scheme: in incididu
+                    pricing_scheme: stairstep
                     unit_name: nulla in
                     unit_price: Excepteur veniam
                     product_family_id: -56705047
@@ -9087,7 +9087,7 @@ paths:
                         component_id: 0
                         subscription_id: 0
                         allocated_quantity: 0
-                        pricing_scheme: string
+                        pricing_scheme: per_unit
                         name: string
                         kind: string
                         unit_name: string
