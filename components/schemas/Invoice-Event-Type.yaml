@@ -15,3 +15,4 @@ enum:
   - change_invoice_collection_method
   - remove_payment
   - failed_payment
+  - change_chargeback_status
