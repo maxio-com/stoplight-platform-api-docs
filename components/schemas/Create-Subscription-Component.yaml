@@ -12,7 +12,9 @@ properties:
     type: integer
     description: Used for metered and events based components.
   allocated_quantity:
-    type: integer
+    oneOf:
+      - type: integer
+      - type: string
     description: Used for quantity based components.
   quantity:
     type: integer

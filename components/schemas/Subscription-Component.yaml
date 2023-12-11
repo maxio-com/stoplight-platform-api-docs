@@ -6,7 +6,7 @@ properties:
   name:
     type: string
   kind:
-    type: string
+    $ref: "./Component-Kind.yaml"
   unit_name:
     type: string
   enabled:
@@ -17,7 +17,9 @@ properties:
   currency:
     type: string
   allocated_quantity:
-    type: integer
+    oneOf:
+      - type: integer
+      - type: string
     description: "For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off."
   pricing_scheme:
     oneOf:
@@ -64,8 +66,10 @@ properties:
     type: string
   created_at:
     type: string
+    format: date-time
   updated_at:
     type: string
+    format: date-time
   use_site_exchange_rate:
     type:
       - boolean
