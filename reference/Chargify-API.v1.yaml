@@ -13595,6 +13595,8 @@ paths:
                           product_id: 1
                           product_handle: gold-product
                           product_name: Gold Product
+                          period_range_start: "01/10/2024"
+                          period_range_end: "02/10/2024"
                         - transaction_type: charge
                           kind: quantity_based_component
                           amount_in_cents: 1000
@@ -13604,6 +13606,19 @@ paths:
                           component_id: 104
                           component_handle: quantity-component
                           component_name: Quantity Component
+                          period_range_start: "01/10/2024"
+                          period_range_end: "02/10/2024"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - Couldn't find Component by handle:unknown
       operationId: previewRenewal
       description: |-
         The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.

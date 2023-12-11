@@ -28,3 +28,7 @@ properties:
     type: string
   product_handle:
     type: string
+  period_range_start:
+    type: string
+  period_range_end:
+    type: string
