@@ -11250,6 +11250,17 @@ paths:
           in: query
           name: sort
           description: The attribute by which to sort
+        - name: "include[]"
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: "../components/schemas/Subscription-List-Include.yaml"
+            example:
+              - self_service_page_token
+          style: form
+          explode: true
+          description: "Allows including additional data in the response. Use in query: `include[]=self_service_page_token`."
   "/{subdomain}/events/{api_handle}.json":
     parameters:
       - schema:
