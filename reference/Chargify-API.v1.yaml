@@ -3649,7 +3649,6 @@ paths:
                     name: Annual Support Services
                     description: Prepay for support services
                     taxable: true
-                    pricing_scheme: tiered
                     prices:
                       - unit_price: "100.00"
                         starting_quantity: "0"
@@ -3681,7 +3680,6 @@ paths:
                     name: Annual Support Services
                     description: Prepay for support services
                     taxable: true
-                    pricing_scheme: per_unit
                     prices:
                       - unit_price: "100.00"
                         starting_quantity: 0
@@ -3709,7 +3707,6 @@ paths:
                       - 320495
                     upgrade_charge: full
                     downgrade_credit: prorated
-                    pricing_scheme: per_unit
               Event Based Component:
                 value:
                   event_based_component:
