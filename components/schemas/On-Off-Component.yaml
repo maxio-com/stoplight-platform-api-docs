@@ -54,4 +54,3 @@ properties:
       type: integer
 required:
   - name
-  - pricing_scheme
