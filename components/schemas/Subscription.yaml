@@ -258,3 +258,6 @@ properties:
     format: int64
   prepaid_configuration:
     $ref: "./Prepaid-Configuration.yaml"
+  self_service_page_token:
+    type: string
+    description: Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided.
