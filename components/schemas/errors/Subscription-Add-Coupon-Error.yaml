@@ -1,7 +1,7 @@
 title: Subscription Add Coupon Error
 type: object
 properties:
-  codes:
+  coupon_code:
     type: array
     items:
       type: string
