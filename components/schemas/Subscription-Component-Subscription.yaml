@@ -3,6 +3,6 @@ type: object
 description: "An optional object, will be returned if provided `include=subscription` query param."
 properties:
   state:
-    type: string
+    ref: "./Subscription-State.yaml"
   updated_at:
     type: string

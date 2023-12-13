@@ -9822,7 +9822,9 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
-          type: integer
+          oneOf:
+            - type: integer
+            - type: string
         name: component_id
         in: path
         required: true
@@ -9997,11 +9999,13 @@ paths:
           description: Returns usages with an id less than or equal to the one specified
         - schema:
             type: string
+            format: date
           in: query
           name: since_date
           description: "Returns usages with a created_at date greater than or equal to midnight (12:00 AM) on the date specified."
         - schema:
             type: string
+            format: date
           in: query
           name: until_date
           description: "Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified."
