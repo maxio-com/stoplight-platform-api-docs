@@ -15752,11 +15752,17 @@ paths:
               schema:
                 $ref: "../components/schemas/errors/Subscription-Add-Coupon-Error.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     coupon_codes:
                       - "Coupon Codes: 'COUPONA' - That coupon is not stackable"
                       - "Coupon Codes: 'COUPONB' - That coupon is not stackable"
+                    subscription:
+                      - Coupon is invalid.
+                Example-2:
+                  value:
+                    coupon_code:
+                      - "Coupon Codes: 'COUPONA' - Coupon code could not be found."
                     subscription:
                       - Coupon is invalid.
       operationId: applyCouponToSubscription
