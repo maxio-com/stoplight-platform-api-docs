@@ -15765,6 +15765,12 @@ paths:
                       - "Coupon Codes: 'COUPONA' - Coupon code could not be found."
                     subscription:
                       - Coupon is invalid.
+                Example-3:
+                  value:
+                    codes:
+                      - "Coupon Codes: Subscription already has at least one non-stackable coupon."
+                    subscription:
+                      - Coupon is invalid.
       operationId: applyCouponToSubscription
       description: |-
         An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
