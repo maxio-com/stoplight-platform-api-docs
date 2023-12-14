@@ -7,6 +7,8 @@ properties:
       $ref: "./Create-Invoice-Item.yaml"
   issue_date:
     type: string
+    format: date
+    example: "2024-01-01"
   net_terms:
     type: integer
     description: "By default, invoices will be created with a due date matching the date of invoice creation. If a different due date is desired, the net_terms parameter can be sent indicating the number of days in advance the due date should be."

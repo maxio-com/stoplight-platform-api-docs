@@ -16185,9 +16185,9 @@ paths:
                     subscription_id: 12801726
                     number: dolore et ut
                     sequence_number: -84210096
-                    issue_date: in e
-                    due_date: magna elit tempor occaecat amet
-                    paid_date: consectetur elit culpa magna sint
+                    issue_date: 2017-01-01
+                    due_date: 2017-01-30
+                    paid_date: 2017-01-28
                     status: open
                     collection_method: Excepteur
                     payment_instructions: enim officia

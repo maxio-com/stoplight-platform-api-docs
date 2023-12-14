@@ -36,12 +36,16 @@ properties:
     format: date-time
   issue_date:
     type: string
+    format: date
+    example: "2024-01-01"
     description: |-
       Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.
 
       The format is `"YYYY-MM-DD"`.
   due_date:
     type: string
+    format: date
+    example: "2024-01-01"
     description: |-
       Date the invoice is due.
 
@@ -50,6 +54,8 @@ properties:
     type:
       - string
       - "null"
+    format: date
+    example: "2024-01-01"
     description: |-
       Date the invoice became fully paid.
 
