@@ -4,15 +4,15 @@ properties:
   id:
     type: integer
   type:
-    $ref: "./Price-Point-Type.yaml"
+    $ref: ./Price-Point-Type.yaml
   default:
     type: boolean
     deprecated: true
-    description: "Note: Refer to type attribute instead"
+    description: 'Note: Refer to type attribute instead'
   name:
     type: string
   pricing_scheme:
-    $ref: "./Pricing-Scheme.yaml"
+    $ref: ./Pricing-Scheme.yaml
   component_id:
     type: integer
   handle:
@@ -20,7 +20,7 @@ properties:
   archived_at:
     type:
       - string
-      - "null"
+      - 'null'
   created_at:
     type: string
   updated_at:
@@ -28,7 +28,7 @@ properties:
   prices:
     type: array
     items:
-      $ref: "./Component-Price-Point-Price.yaml"
+      $ref: ./Component-Price.yaml
   use_site_exchange_rate:
     type: boolean
     description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
