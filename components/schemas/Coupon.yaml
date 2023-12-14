@@ -20,7 +20,9 @@ properties:
   product_family_id:
     type: integer
   product_family_name:
-    type: string
+    type:
+      - string
+      - "null"
   start_date:
     type: string
   end_date:
@@ -48,7 +50,9 @@ properties:
       - string
       - "null"
   duration_interval_span:
-    type: string
+    type:
+      - string
+      - "null"
   allow_negative_balance:
     type: boolean
   archived_at:
