@@ -13508,10 +13508,10 @@ paths:
               Example:
                 value:
                   subscription:
-                    activated_at: "1999-12-01"
-                    canceled_at: "2000-12-31"
+                    activated_at: "1999-12-01T10:28:34-05:00"
+                    canceled_at: "2000-12-31T10:28:34-05:00"
                     cancellation_message: Original cancellation in 2000
-                    expires_at: "2001-07-15"
+                    expires_at: "2001-07-15T10:28:34-05:00"
         description: Only these fields are available to be set.
   "/subscriptions/{subscription_id}/delayed_cancel.json":
     parameters:
