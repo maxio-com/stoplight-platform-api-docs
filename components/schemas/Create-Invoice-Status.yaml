@@ -1,4 +1,4 @@
-name: Create Invoice Status
+title: Create Invoice Status
 type: string
 enum:
   - draft
