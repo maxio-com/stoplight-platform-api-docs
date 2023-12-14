@@ -13470,6 +13470,14 @@ paths:
           description: Bad Request
         "422":
           description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "Current period starts at: must be a valid date/time"
       operationId: overrideSubscription
       description: |-
         This API endpoint allows you to set certain subscription fields that are usually managed for you automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can only be set using this endpoint.
