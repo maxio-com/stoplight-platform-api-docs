@@ -117,8 +117,6 @@ properties:
     maxItems: 5
     items:
       type: string
-  net_terms:
-    type: integer
   memo:
     type: string
     description: The memo printed on invoices of any collection type.  This message is in control of the merchant.
