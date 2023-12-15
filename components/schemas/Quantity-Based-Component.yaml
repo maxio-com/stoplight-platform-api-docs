@@ -56,6 +56,13 @@ properties:
     type: array
     items:
       type: integer
+  interval:
+    type: integer
+    description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days
+  interval_unit:
+    allOf:
+      - $ref: "./Interval-Unit.yaml" 
+    description: "A string representing the interval unit for this component's default price point, either month or day" 
 required:
   - name
   - unit_name

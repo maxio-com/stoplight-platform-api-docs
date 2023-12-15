@@ -21,16 +21,3 @@ properties:
     type:
       - integer
       - 'null'
-  interval:
-    type: integer
-    x-stoplight:
-      id: 6ja8ut6j2t57y
-    description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days
-  interval_unit:
-    x-stoplight:
-      id: uqlo3qy6mixam
-    allOf:
-      - $ref: ./Interval-Unit.yaml
-        x-stoplight:
-          id: ffpdjrxso6pn7
-    description: 'A string representing the interval unit for this component price point, either month or day'
