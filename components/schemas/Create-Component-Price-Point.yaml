@@ -15,6 +15,13 @@ properties:
     type: boolean
     default: true
     description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
+  interval:
+    type: integer
+    description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days
+  interval_unit:
+    allOf:
+      - $ref: "./Interval-Unit.yaml" 
+    description: "A string representing the interval unit for this price point, either month or day" 
 required:
   - name
   - pricing_scheme
