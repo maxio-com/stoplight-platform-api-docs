@@ -2852,7 +2852,7 @@ paths:
           in: query
           name: product_family_id
           description: The Chargify id of the product family to which the coupon belongs
-  "/coupon/{coupon_id}/currency_prices.json":
+  "/coupons/{coupon_id}/currency_prices.json":
     parameters:
       - schema:
           type: integer
