@@ -8,4 +8,5 @@ enum:
   - merchant_api
   - dunning
   - billing_portal
+  - unknown
   - null
