@@ -2852,7 +2852,7 @@ paths:
           in: query
           name: product_family_id
           description: The Chargify id of the product family to which the coupon belongs
-  "/coupon/{coupon_id}/currency_prices.json":
+  "/coupons/{coupon_id}/currency_prices.json":
     parameters:
       - schema:
           type: integer
@@ -2870,9 +2870,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Coupon-Currency.yaml"
+                $ref: "../components/schemas/Coupon-Currency-Response.yaml"
       operationId: updateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
