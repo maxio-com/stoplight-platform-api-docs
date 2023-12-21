@@ -25,6 +25,11 @@ properties:
     $ref: "./Credit-Type.yaml"
   upgrade_charge:
     $ref: "./Credit-Type.yaml"
+  initiate_dunning:
+    type: boolean
+    description: |-
+      If set to true, if the immediate component payment fails, initiate dunning for the subscription. 
+      Otherwise, leave the charges on the subscription to pay for at renewal. Defaults to false.
   price_point_id:
     type:
       - string
