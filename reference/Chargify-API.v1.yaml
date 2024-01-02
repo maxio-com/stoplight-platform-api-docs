@@ -9390,7 +9390,7 @@ paths:
                       quantity: 3
                       previous_quantity: 2
                       memo: dolore cupidatat elit
-                      timestamp: ex proident dolor i
+                      timestamp: 2022-11-23T10:28:34-05:00
                       proration_upgrade_scheme: laboris ipsum dolore
                       proration_downgrade_scheme: eiusmod dolore
                       price_point_id: -69720370
@@ -9574,14 +9574,12 @@ paths:
                   proration_upgrade_scheme: prorate-attempt-capture
                   proration_downgrade_scheme: no-prorate
                   allocations:
-                    - allocation:
-                        component_id: 123
-                        quantity: 10
-                        memo: foo
-                    - allocation:
-                        component_id: 456
-                        quantity: 5
-                        memo: bar
+                    - component_id: 123
+                      quantity: 10
+                      memo: foo
+                    - component_id: 456
+                      quantity: 5
+                      memo: bar
   "/subscriptions/{subscription_id}/allocations/preview.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -9701,7 +9699,7 @@ paths:
 
         ## Fine-grained Component Control: Use with multiple `upgrade_charge`s or `downgrade_credits`
 
-        When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the response will not include `direction` and `proration` within the `allocation_preview` at the `line_items` and `allocations` level respectfully.
+        When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the response will not include `direction` and `proration` within the `allocation_preview`, but at the `line_items` and `allocations` level respectfully.
 
         See example below for Fine-Grained Component Control response.
       requestBody:

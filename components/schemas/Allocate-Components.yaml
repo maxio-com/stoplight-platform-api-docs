@@ -14,7 +14,7 @@ properties:
   allocations:
     type: array
     items:
-      $ref: "./Create-Allocation-Request.yaml"
+      $ref: "./Create-Allocation.yaml"
   accrue_charge:
     type: boolean
   upgrade_charge:
@@ -24,3 +24,8 @@ properties:
   payment_collection_method:
     $ref: "./Collection-Method.yaml"
     description: "(Optional) If not passed, the allocation(s) will use the payment collection method on the subscription"
+  initiate_dunning:
+    type: boolean
+    description: |-
+      If true, if the immediate component payment fails, initiate dunning for the subscription. 
+      Otherwise, leave the charges on the subscription to pay for at renewal.

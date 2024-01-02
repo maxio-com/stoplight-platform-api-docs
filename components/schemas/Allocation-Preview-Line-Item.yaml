@@ -21,4 +21,6 @@ properties:
   component_handle:
     type: string
   direction:
-    type: string
+    allOf:
+      - $ref: "./Allocation-Preview-Direction.yaml"
+    description: Visible when using Fine-grained Component Control
