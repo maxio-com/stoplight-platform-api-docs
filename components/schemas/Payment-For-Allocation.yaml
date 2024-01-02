@@ -1,4 +1,4 @@
-title: Allocation Payment
+title: Payment for Allocation
 type: object
 description: "Information for captured payment, if applicable"
 properties:
