@@ -9481,6 +9481,15 @@ paths:
           description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "invalid page: 0"
       operationId: listAllocations
       description: |-
         This endpoint returns the 50 most recent Allocations, ordered by most recent first.
