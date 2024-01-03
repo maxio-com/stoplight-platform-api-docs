@@ -3,13 +3,11 @@ type: object
 properties:
   proration_upgrade_scheme:
     type: string
-    default: no-prorate
     description: ""
     deprecated: true
   proration_downgrade_scheme:
     type: string
     description: ""
-    default: no-prorate
     deprecated: true
   allocations:
     type: array
