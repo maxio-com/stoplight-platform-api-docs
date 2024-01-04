@@ -3,8 +3,17 @@ type: object
 properties:
   transaction_type:
     type: string
+    enum:
+      - charge
+      - credit
   kind:
     type: string
+    enum:
+      - quantity_based_component
+      - on_off_component
+      - metered_component
+      - event_based_component
+      - prepaid_usage_component
   amount_in_cents:
     type: integer
     format: int64
