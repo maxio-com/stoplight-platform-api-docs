@@ -2,11 +2,7 @@ title: Renewal Preview Line Item
 type: object
 properties:
   transaction_type:
-    type: string
-    enum:
-      - charge
-      - credit
-      - adjustment
+    $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
     $ref: "./Line-Item-Kind.yaml"
   amount_in_cents:

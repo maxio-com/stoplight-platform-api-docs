@@ -2,18 +2,9 @@ title: Allocation Preview Line Item
 type: object
 properties:
   transaction_type:
-    type: string
-    enum:
-      - charge
-      - credit
-      - adjustment
+    $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
-    type: string
-    enum:
-      - quantity_based_component
-      - on_off_component
-      - coupon
-      - tax
+    $ref: "./Allocation-Preview-Line-Item-Kind.yaml"
   amount_in_cents:
     type: integer
     format: int64

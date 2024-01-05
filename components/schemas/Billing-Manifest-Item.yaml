@@ -2,12 +2,7 @@ title: Billing Manifest Item
 type: object
 properties:
   transaction_type:
-    type: string
-    enum:
-      - charge
-      - credit
-      - adjustment
-      - payment
+    $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
     $ref: "./Line-Item-Kind.yaml"
   amount_in_cents:
