@@ -10,6 +10,7 @@ properties:
     type: string
     enum:
       - baseline
+      - initial
       - trial
       - quantity_based_component
       - on_off_component

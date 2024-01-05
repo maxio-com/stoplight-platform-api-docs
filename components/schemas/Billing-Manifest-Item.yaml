@@ -3,8 +3,22 @@ type: object
 properties:
   transaction_type:
     type: string
+    enum:
+      - charge
+      - credit
+      - adjustment
+      - payment
   kind:
     type: string
+    enum:
+      - baseline
+      - initial
+      - trial
+      - quantity_based_component
+      - on_off_component
+      - metered_component
+      - event_based_component
+      - tax
   amount_in_cents:
     type: integer
     format: int64
