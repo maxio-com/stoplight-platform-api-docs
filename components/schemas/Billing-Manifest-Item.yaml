@@ -2,9 +2,9 @@ title: Billing Manifest Item
 type: object
 properties:
   transaction_type:
-    type: string
+    $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
-    type: string
+    $ref: "./Line-Item-Kind.yaml"
   amount_in_cents:
     type: integer
     format: int64
