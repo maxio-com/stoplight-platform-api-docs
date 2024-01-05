@@ -18,6 +18,7 @@ properties:
       - on_off_component
       - metered_component
       - event_based_component
+      - coupon
       - tax
   amount_in_cents:
     type: integer

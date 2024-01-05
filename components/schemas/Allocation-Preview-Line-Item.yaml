@@ -6,11 +6,14 @@ properties:
     enum:
       - charge
       - credit
+      - adjustment
   kind:
     type: string
     enum:
       - quantity_based_component
       - on_off_component
+      - coupon
+      - tax
   amount_in_cents:
     type: integer
     format: int64
