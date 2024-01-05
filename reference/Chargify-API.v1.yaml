@@ -15395,7 +15395,7 @@ paths:
                             product_handle: gold-product
                             product_name: Gold Product
                           - transaction_type: charge
-                            kind: component
+                            kind: quantity_based_component
                             amount_in_cents: 28000
                             memo: "Component name: 14 Unit names"
                             discount_amount_in_cents: 0
@@ -15404,7 +15404,7 @@ paths:
                             component_handle: handle
                             component_name: Component name
                           - transaction_type: charge
-                            kind: component
+                            kind: on_off_component
                             amount_in_cents: 0
                             memo: On/Off Component
                             discount_amount_in_cents: 0
