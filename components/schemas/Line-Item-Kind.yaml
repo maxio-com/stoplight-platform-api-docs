@@ -6,6 +6,7 @@ enum:
   - initial
   - trial
   - quantity_based_component
+  - prepaid_usage_component
   - on_off_component
   - metered_component
   - event_based_component
