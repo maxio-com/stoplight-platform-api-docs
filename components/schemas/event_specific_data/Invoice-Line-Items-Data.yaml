@@ -32,13 +32,17 @@ properties:
     items:
       $ref: "./Invoice-Line-Item-Pricing-Detail.yaml"
   tax_code:
-    type: string
+    type:
+      - string
+      - "null"
   tax_amount:
     type: string
   product_id:
     type: integer
   product_price_point_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   price_point_id:
     type:
       - integer
@@ -52,4 +56,6 @@ properties:
       - integer
       - "null"
   custom_item:
-    type: boolean
+    type:
+      - boolean
+      - "null"
