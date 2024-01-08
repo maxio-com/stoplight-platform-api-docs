@@ -40,7 +40,9 @@ properties:
   product_id:
     type: integer
   product_price_point_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   price_point_id:
     type:
       - integer
