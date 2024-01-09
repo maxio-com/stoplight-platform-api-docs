@@ -1666,6 +1666,16 @@ paths:
                       data_count: 0
                       input_type: text
                       enum: null
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "'name' must be present to create or update metafields"
       operationId: createMetafields
       description: |-
         ## Custom Fields: Metafield Intro
@@ -1878,6 +1888,16 @@ paths:
                 type: array
                 items:
                   $ref: "../components/schemas/Metadata.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "'name' must be present to create or update metafields"
     get:
       summary: List Metadata
       tags:
@@ -2109,11 +2129,11 @@ paths:
                     code: "15OFF"
                     description: "15% off for life"
                     percentage: "15"
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                     exclude_mid_period_allocations: true
                     apply_on_cancel_at_end_of_period: true
@@ -2129,11 +2149,11 @@ paths:
                     code: "10OFF"
                     description: "$10 off for life"
                     amount_in_cents: 1000
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                     exclude_mid_period_allocations: true
                     apply_on_cancel_at_end_of_period: true
@@ -2476,11 +2496,11 @@ paths:
                     code: "15OFF"
                     description: "15% off for life"
                     percentage: "15"
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                   restricted_products:
                     "1": true
@@ -5428,6 +5448,17 @@ paths:
                       description: Amazing project management tool
                       handle: acme-projects
                       accounting_code: null
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "API Handle: must be unique - that value has been taken."
       operationId: createProductFamily
       description: |-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
