@@ -1,8 +1,9 @@
 title: Invoice Previous Balance
 type: object
 properties:
-  capture_date:
+  captured_at:
     type: string
+    format: date-time
   invoices:
     type: array
     items:
