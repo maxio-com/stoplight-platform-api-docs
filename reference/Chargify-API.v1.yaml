@@ -1860,12 +1860,6 @@ paths:
         ### Subscription or Customer Resource
 
         Please pay special attention to the resource you use when creating metadata.
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: value
-          description: Can be a single item or a list of metadata
       requestBody:
         content:
           application/json:
@@ -1935,12 +1929,6 @@ paths:
                 items:
                   $ref: "../components/schemas/Metadata.yaml"
       operationId: updateMetadata
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: value
-          description: Can be a single item or a list of metadata
       description: This method allows you to update the existing metadata associated with a subscription or customer.
       requestBody:
         content:
