@@ -4,7 +4,7 @@ properties:
   transaction_type:
     $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
-    $ref: "./Line-Item-Kind.yaml"
+    $ref: "./Billing-Manifest-Line-Item-Kind.yaml"
   amount_in_cents:
     type: integer
     format: int64
