@@ -1909,7 +1909,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Paginated-Metadata.yaml"
-      operationId: readMetadata
+      operationId: listMetadata
       description: |-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
@@ -2009,7 +2009,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Paginated-Metadata.yaml"
-      operationId: listMetadata
+      operationId: listMetadataForResourceType
       description: |-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
