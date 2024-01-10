@@ -15362,7 +15362,7 @@ paths:
                             period_range_start: "13 Oct 2023"
                             period_range_end: "13 Nov 2023"
                           - transaction_type: charge
-                            kind: quantity_based_component
+                            kind: component
                             amount_in_cents: 28000
                             memo: "Component name: 14 Unit names"
                             discount_amount_in_cents: 0
@@ -15371,7 +15371,7 @@ paths:
                             component_handle: handle
                             component_name: Component name
                           - transaction_type: charge
-                            kind: metered_component
+                            kind: component
                             amount_in_cents: 2000
                             memo: "Fractional Metered Components: 20.0 Fractional Metereds"
                             discount_amount_in_cents: 0
@@ -15380,7 +15380,7 @@ paths:
                             component_handle: handle
                             component_name: Fractional Metered Components
                           - transaction_type: charge
-                            kind: on_off_component
+                            kind: component
                             amount_in_cents: 0
                             memo: On/Off Component
                             discount_amount_in_cents: 0
@@ -15414,7 +15414,7 @@ paths:
                             product_handle: gold-product
                             product_name: Gold Product
                           - transaction_type: charge
-                            kind: quantity_based_component
+                            kind: component
                             amount_in_cents: 28000
                             memo: "Component name: 14 Unit names"
                             discount_amount_in_cents: 0
@@ -15423,7 +15423,7 @@ paths:
                             component_handle: handle
                             component_name: Component name
                           - transaction_type: charge
-                            kind: on_off_component
+                            kind: component
                             amount_in_cents: 0
                             memo: On/Off Component
                             discount_amount_in_cents: 0
