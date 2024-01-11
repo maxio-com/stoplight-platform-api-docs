@@ -6,4 +6,5 @@ properties:
   downgrade_credit:
     $ref: "./Credit-Type.yaml"
   accrue_charge:
-    type: boolean
+    type: string
+    description: Either "true" or "false".
