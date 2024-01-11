@@ -477,7 +477,7 @@ paths:
                       - "URL: invalid, only http and https supported"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createEndpoint
       description: |-
         The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
@@ -565,7 +565,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateEndpoint
       description: |-
         You can update an Endpoint via the API with a PUT request to the resource endpoint.
@@ -873,7 +873,7 @@ paths:
                       - "Email address: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createCustomer
       description: |-
         You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value.
@@ -1142,7 +1142,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       description: This method allows to update the Customer.
       requestBody:
         content:
@@ -1232,7 +1232,7 @@ paths:
                       - Portal is already enabled for this customer.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: enableBillingPortalForCustomer
       description: |-
         ## Billing Portal Documentation
@@ -1307,8 +1307,8 @@ paths:
                       new_link_available_at: 2023-10-20T10:46:56Z
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
-          "429": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+          "429": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: readBillingPortalLink
       description: |-
         This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
@@ -1357,7 +1357,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: resendBillingPortalInvitation
       description: |-
         You can resend a customer's Billing Portal invitation.
@@ -1517,7 +1517,7 @@ paths:
                       - "Description: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createReasonCode
       description: |-
         # Reason Codes Intro
@@ -1716,7 +1716,7 @@ paths:
                     error: "'name' must be present to create or update metafields"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createMetafields
       description: |-
         ## Custom Fields: Metafield Intro
@@ -1938,7 +1938,7 @@ paths:
                     error: "'name' must be present to create or update metafields"
     x-operation-settings:
       ErrorTemplates:
-        "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+        "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     get:
       summary: List Metadata
       tags:
@@ -2140,7 +2140,7 @@ paths:
                       - Expiration Date cannot be in the past
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createCoupon
       description: |-
         ## Coupons Documentation
@@ -3600,7 +3600,7 @@ paths:
                       - At least 1 price bracket must be defined
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createComponent
       parameters: []
       description: |-
@@ -3940,7 +3940,7 @@ paths:
                       - "Name: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateProductFamilyComponent
       description: |-
         This request will update a component from a specific product family.
@@ -3997,7 +3997,7 @@ paths:
                       - Component cannot be archived. Please make sure it hasn't already been archived.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: archiveComponent
       description: Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
   /components.json:
@@ -4211,7 +4211,7 @@ paths:
                       - "Name: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateComponent
       description: |-
         This request will update a component.
@@ -5031,7 +5031,7 @@ paths:
                       - "Name: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProduct
       description: |-
         Use this method to create a product within your Chargify site.
@@ -5339,7 +5339,7 @@ paths:
                       - "Name: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       description: |-
         Use this method to change aspects of an existing product.
 
@@ -5418,7 +5418,7 @@ paths:
                       - "Product cannot be archived."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       description: |-
         Sending a DELETE request to this endpoint will archive the product. All current subscribers will be unffected; their subscription/purchase will continue to be charged monthly.
 
@@ -5531,7 +5531,7 @@ paths:
                       - "API Handle: must be unique - that value has been taken."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProductFamily
       description: |-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
@@ -5719,7 +5719,7 @@ paths:
                         - "Price: must be greater than or equal to 0."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProductPricePoint
       description: "[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)"
       requestBody:
@@ -5950,7 +5950,7 @@ paths:
                       - "Cannot archive the default price point."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: archiveProductPricePoint
       description: Use this endpoint to archive a product price point.
   "/products/{product_id}/price_points/{price_point_id}/unarchive.json":
@@ -6166,7 +6166,7 @@ paths:
                       - "Price: must be greater than or equal to 0."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProductPricePoints
       description: Use this endpoint to create multiple product price points in one request.
       requestBody:
@@ -6247,7 +6247,7 @@ paths:
                         - "This product price point requires that prices are defined for: [baseline]."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProductCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -6309,7 +6309,7 @@ paths:
                         - "This product price point requires that prices are defined for: [baseline]."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateProductCurrencyPrices
       description: |-
         This endpoint allows you to update the `price`s of currency prices for a given currency that exists on the product price point.
@@ -6386,7 +6386,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createPaymentProfile
       description: |-
         Use this endpoint to create a payment profile for a customer.
@@ -6998,7 +6998,7 @@ paths:
                       - The payment profile is in use by one or more subscriptions and cannot be deleted
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deleteUnusedPaymentProfile
       description: |-
         Deletes an unused payment profile.
@@ -7080,7 +7080,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: verifyBankAccount
       description: Submit the two small deposit amounts the customer received in their bank account in order to verify the bank account. (Stripe only)
       requestBody:
@@ -8166,7 +8166,7 @@ paths:
                       - "Multiple applications associated to a single invoice, please aggregate and send as a single application per invoice."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: recordExternalPaymentForInvoices
       description: |-
         This API call should be used when you want to record an external payment against multiple invoices.
@@ -8772,7 +8772,7 @@ paths:
                       - "If in a group, the Subscription must be the primary"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: recordPaymentForSubscription
       description: |-
         Record an external payment made against a subscription that will pay partially or in full one or more invoices.
@@ -8829,7 +8829,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: reopenInvoice
       description: |-
         This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
@@ -8878,7 +8878,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: voidInvoice
       description: This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
       requestBody:
@@ -9387,7 +9387,7 @@ paths:
         description: ""
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       responses:
         "200":
           description: OK
@@ -9583,7 +9583,7 @@ paths:
                       - "One or more allocation changes are required."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: allocateComponent
       description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997). It is focused on how allocations operate within the Chargify UI.It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-upgrades-vs-downgrades).\nSee the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997-Component-Allocations#component-allocations-0-0)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n### Order of Resolution for accrue charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
       requestBody:
@@ -9657,7 +9657,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: listAllocations
       description: |-
         This endpoint returns the 50 most recent Allocations, ordered by most recent first.
@@ -9745,7 +9745,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: allocateComponents
       description: |-
         Creates multiple allocations, setting the current allocated quantity for each of the components and recording a memo. The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of Resolutions explained below in determining the proration scheme.
@@ -9885,7 +9885,7 @@ paths:
                         message: Allocations can only be updated for quantity and on/off components.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewAllocations
       description: |-
         Chargify offers the ability to preview a potential subscription's **quantity-based** or **on/off** component allocation in the middle of the current billing period.  This is useful if you want users to be able to see the effect of a component operation before actually doing it.
@@ -9947,7 +9947,7 @@ paths:
                         message: "Credit scheme must be one of credit, refund or none."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updatePrepaidUsageAllocation
       description: |-
         When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
@@ -9992,7 +9992,7 @@ paths:
                         message: "Credit scheme must be one of credit, refund or none."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deletePrepaidUsageAllocation
       description: |-
         Prepaid Usage components are unique in that their allocations are always additive. In order to reduce a subscription's allocated quantity for a prepaid usage component each allocation must be destroyed individually via this endpoint.
@@ -10060,7 +10060,7 @@ paths:
                       - "Price point: could not be found."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createUsage
       description: |-
         ## Documentation
@@ -10411,7 +10411,7 @@ paths:
                       - "Bank account number: cannot be blank."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSubscription
       description: |-
         Full documentation on how subscriptions operate within Chargify can be located under the following topics:
@@ -11635,7 +11635,7 @@ paths:
                         - "starting_quantity for an On/Off component can only be '1' or '0': 24"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createOffer
       description: |-
         Create an offer within your Chargify site by sending a POST request.
@@ -12145,7 +12145,7 @@ paths:
                       - "base: subscription retry was unsuccessful"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: retrySubscription
       description: |-
         Chargify offers the ability to retry collecting the balance due on a past due Subscription without waiting for the next scheduled attempt.
@@ -12284,7 +12284,7 @@ paths:
                       - "'expires_at' cannot be set for subscriptions on calendar billing"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSubscription
       description: |-
         The subscription endpoint allows you to instantly update one or many attributes about a subscription in a single call.
@@ -12521,7 +12521,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       description: 'The DELETE action causes the cancellation of the Subscription. This means, the method sets the Subscription state to "canceled".'
       requestBody:
         content:
@@ -12808,7 +12808,7 @@ paths:
                       - "Only subscriptions that are on hold can be resumed."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: resumeSubscription
       description: "Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber."
       parameters:
@@ -12942,7 +12942,7 @@ paths:
                       - This subscription is not eligible to be put on hold.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: pauseSubscription
       description: |-
         This will place the subscription in the on_hold state and it will not renew.
@@ -13101,7 +13101,7 @@ paths:
                       - "Automatic resume date: must be at least 24 hours in the future."
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateAutomaticSubscriptionResumption
       description: |-
         Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
@@ -13249,7 +13249,7 @@ paths:
                       - The credit card on file could not be charged.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: reactivateSubscription
       description: |-
         Chargify offers the ability to reactivate a previously canceled subscription. For details on how the reactivation works, and how to reactivate subscriptions through the application, see [reactivation](https://chargify.zendesk.com/hc/en-us/articles/4407898737691).
@@ -13562,7 +13562,7 @@ paths:
                       - Invalid Product
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: migrateSubscriptionProduct
       description: |-
         In order to create a migration, you must pass the `product_id` or `product_handle` in the object when you send a POST request. You may also pass either a `product_price_point_id` or `product_price_point_handle` to choose which price point the subscription is moved to. If no price point identifier is passed the subscription will be moved to the products default price point. The response will be the updated subscription.
@@ -13670,7 +13670,7 @@ paths:
                       - Subscription must be active
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewSubscriptionProductMigration
       description: |-
         ## Previewing a future date
@@ -13704,7 +13704,7 @@ paths:
                     error: "Current period starts at: must be a valid date/time"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: overrideSubscription
       description: |-
         This API endpoint allows you to set certain subscription fields that are usually managed for you automatically. Some of the fields can be set via the normal Subscriptions Update API, but others can only be set using this endpoint.
@@ -13874,7 +13874,7 @@ paths:
                       - Couldn't find Component by handle:unknown
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewRenewal
       description: |-
         The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
@@ -14037,7 +14037,7 @@ paths:
                         - "can't be blank"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createInvoice
       description: |-
         This endpoint will allow you to create an ad hoc invoice.
@@ -14408,7 +14408,7 @@ paths:
                       - Amount cannot exceed current service credit account balance.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deductServiceCredit
       requestBody:
         content:
@@ -14453,7 +14453,7 @@ paths:
                 $ref: "../components/schemas/errors/Subscription-Group-Signup-Error-Response.yaml"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       requestBody:
         content:
           application/json:
@@ -14614,7 +14614,7 @@ paths:
                     errors: Subscription is already in group
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSubscriptionGroup
       description: Creates a subscription group with given members.
       requestBody:
@@ -14780,7 +14780,7 @@ paths:
                           message: Subscription could not be found
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
@@ -14905,7 +14905,7 @@ paths:
                       - One or more subscriptions are not on automatic billing
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: cancelSubscriptionsInGroup
       description: |-
         This endpoint will immediately cancel all subscriptions within the specified group. The group is identified by it's `uid` passed in the URL. To successfully cancel the group, the primary subscription must be on automatic billing. The group members as well must be on automatic billing or they must be prepaid.
@@ -14943,7 +14943,7 @@ paths:
                       - Subscriptions group is in a past due state
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: initiateDelayedCancellationForGroup
       description: |-
         This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
@@ -14969,7 +14969,7 @@ paths:
                       - Subscriptions group does not have a pending delayed cancellation
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: stopDelayedCancellationForGroup
       description: Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
   "/subscription_groups/{uid}/reactivate.json":
@@ -15013,7 +15013,7 @@ paths:
                       - Must be inside the current billing period to resume this subscription group
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: reactivateSubscriptionGroup
       description: |-
         This endpoint will attempt to reactivate or resume a cancelled subscription group. Upon reactivation, any canceled invoices created after the beginning of the primary subscription's billing period will be reopened and payment will be attempted on them. If the subscription group is being reactivated (as opposed to resumed), new charges will also be assessed for the new billing period.
@@ -15096,7 +15096,7 @@ paths:
                       - Amount must be greater than 0
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSubscriptionGroupPrepayment
       description: "A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance."
       requestBody:
@@ -15205,7 +15205,7 @@ paths:
                       - Amount must be greater than 0
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: issueSubscriptionGroupServiceCredits
       description: Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
       requestBody:
@@ -15254,7 +15254,7 @@ paths:
                       - Amount must be greater than 0
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deductSubscriptionGroupServiceCredits
       description: Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
       requestBody:
@@ -15345,7 +15345,7 @@ paths:
                       - This is already the current payment profile
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSubscriptionDefaultPaymentProfile
       description: |-
         This will change the default payment profile on the subscription to the existing payment profile with the id specified.
@@ -15403,7 +15403,7 @@ paths:
                       - This is already the current payment profile
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSubscriptionGroupDefaultPaymentProfile
       description: |-
         This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
@@ -15574,7 +15574,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: removeSubscriptionFromGroup
       description: "For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group."
   /subscriptions/preview.json:
@@ -15835,7 +15835,7 @@ paths:
                       - Consolidated proforma invoice generation already in progress
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createConsolidatedProformaInvoice
       description: |-
         This endpoint will trigger the creation of a consolidated proforma invoice asynchronously. It will return a 201 with no message, or a 422 with any errors. To find and view the new consolidated proforma invoice, you may poll the subscription group listing for proforma invoices; only one consolidated proforma invoice may be created per group at a time.
@@ -16070,7 +16070,7 @@ paths:
                       - Coupon is invalid.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: applyCouponToSubscription
       description: |-
         An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
@@ -16128,7 +16128,7 @@ paths:
                       - There's no coupon applied to this subscription
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deleteCouponFromSubscription
       description: |-
         Use this endpoint to remove a coupon from an existing subscription.
@@ -16167,7 +16167,7 @@ paths:
                       - this subscription is not eligible to create proforma invoices
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createProformaInvoice
       description: |-
         This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
@@ -16293,7 +16293,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: voidProformaInvoice
       description: |-
         This endpoint will void a proforma invoice that has the status "draft".
@@ -16341,7 +16341,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewProformaInvoice
       description: |-
         Return a preview of the data that will be included on a given subscription's proforma invoice if one were to be generated. It will have similar line items and totals as a renewal preview, but the response will be presented in the format of a proforma invoice. Consequently it will include additional information such as the name and addresses that will appear on the proforma invoice.
@@ -16374,7 +16374,7 @@ paths:
                       - "cc_recipient_emails: must be a valid email address"
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: sendInvoice
       description: |-
         This endpoint allows for invoices to be programmatically delivered via email. This endpoint supports the delivery of both ad-hoc and automatically generated invoices. Additionally, this endpoint supports email delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
@@ -16467,7 +16467,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewCustomerInformationChanges
       description: |-
         Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
@@ -16634,7 +16634,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateCustomerInformation
       description: |-
         This endpoint updates customer information on an open invoice and returns the updated invoice. If you would like to preview changes that will be applied, use the `/invoices/{uid}/customer_information/preview.json` endpoint before.
@@ -16870,7 +16870,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSegment
       requestBody:
         content:
@@ -16935,7 +16935,7 @@ paths:
         collectParameters: true
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       parameters:
         - $ref: "../components/parameters/page.yaml"
         - $ref: "../components/parameters/per-page-default-30.yaml"
@@ -17006,7 +17006,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSegment
       requestBody:
         content:
@@ -17030,7 +17030,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       description: |-
         This endpoint allows you to delete a Segment with specified ID.
 
@@ -17081,7 +17081,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSegments
       requestBody:
         content:
@@ -17124,7 +17124,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateSegments
       requestBody:
         content:
@@ -17199,7 +17199,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: issueAdvanceInvoice
       description: |
         Generate an invoice in advance for a subscription's next renewal date. [Please see our docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for more information on advance invoices, including eligibility on generating one; for the most part, they function like any other invoice, except they are issued early and have special behavior upon being voided.
@@ -17294,7 +17294,7 @@ paths:
       description: "This endpoint returns your site's current MRR, including plan and usage breakouts split per subscription."
       x-operation-settings:
         ErrorTemplates:
-          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
         collectParameters: true
       parameters:
         - schema:
@@ -17377,9 +17377,9 @@ paths:
                           - Refund amount exceeds prepayment amount
       x-operation-settings:
         ErrorTemplates:
-          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: refundPrepayment
       description: |-
         This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
@@ -17537,7 +17537,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: issueInvoice
       requestBody:
         content:
@@ -17606,7 +17606,7 @@ paths:
       description: This method allows to retrieve a list of Components Price Points belonging to a Site.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
         collectParameters: true
       parameters:
         - schema:
@@ -17734,7 +17734,7 @@ paths:
       description: This method allows retrieval of a list of Products Price Points belonging to a Site.
       x-operation-settings:
         ErrorTemplates:
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
         collectParameters: true
       parameters:
         - $ref: "../components/parameters/sort-direction.yaml"
@@ -17840,7 +17840,7 @@ paths:
                         - "Purchase Declined. The subscription is now in the 'awaiting_signup' state."
       x-operation-settings:
         ErrorTemplates:
-          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: activateSubscription
       requestBody:
         content:
@@ -17939,8 +17939,8 @@ paths:
                         - currency must be a string
       x-operation-settings:
         ErrorTemplates:
-          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createSignupProformaInvoice
       description: |-
         This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoices or preview prepaid subscriptions.
@@ -18019,8 +18019,8 @@ paths:
                         - organization must be a string
       x-operation-settings:
         ErrorTemplates:
-          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: previewSignupProformaInvoice
       description: |-
         This endpoint is only available for Relationship Invoicing sites. It cannot be used to create consolidated proforma invoice previews or preview prepaid subscriptions.
@@ -18174,7 +18174,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
   /api_exports/invoices.json:
     post:
       summary: Create Invoices Export
@@ -18200,7 +18200,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     parameters: []
   /api_exports/subscriptions.json:
     post:
@@ -18224,7 +18224,7 @@ paths:
                 $ref: "../components/schemas/errors/Single-Error-Response.yaml"
       x-operation-settings:
         ErrorTemplates:
-          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     parameters: []
   "/api_exports/proforma_invoices/{batch_id}.json":
     parameters:
@@ -18315,7 +18315,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: {$response.body}."
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: sendRequestUpdatePaymentEmail
       description: |-
         You can send a "request payment update" email to the customer associated with the subscription.
