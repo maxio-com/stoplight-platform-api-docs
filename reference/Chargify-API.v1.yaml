@@ -4481,29 +4481,6 @@ paths:
                       - starting_quantity: "101"
                         ending_quantity: null
                         unit_price: "4.00"
-              Prepaid Usage Component:
-                value:
-                  price_point:
-                    name: MSRP
-                    handle: msrp
-                    pricing_scheme: stairstep
-                    renew_prepaid_allocation: false
-                    rollover_prepaid_remainder: true
-                    expiration_interval: 2
-                    expiration_interval_unit: month
-                    prices:
-                      - starting_quantity: 1
-                        ending_quantity: 100
-                        unit_price: 5
-                      - starting_quantity: 101
-                        ending_quantity: null
-                        unit_price: 4
-                    overage_pricing:
-                      pricing_scheme: stairstep
-                      prices:
-                        - starting_quantity: 1
-                          ending_quantity: 100
-                          unit_price: 4
               On Off Component:
                 value:
                   price_point:
