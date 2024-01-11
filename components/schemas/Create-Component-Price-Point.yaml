@@ -22,6 +22,7 @@ properties:
     allOf:
       - $ref: "./Interval-Unit.yaml"
     description: A string representing the interval unit for this price point, either month or day. This property is only available for sites with Multifrequency enabled.
+additionalProperties: false
 required:
   - name
   - pricing_scheme
