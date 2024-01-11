@@ -632,6 +632,10 @@ paths:
                         net_terms_on_remittance_signups_enabled: false
                         custom_net_terms_enabled: false
                       test: true
+                      allocation_settings:
+                        upgrade_charge: prorated
+                        downgrade_credit: none
+                        accrue_charge: "true"
       operationId: readSite
       description: |-
         This endpoint allows you to fetch some site data.
