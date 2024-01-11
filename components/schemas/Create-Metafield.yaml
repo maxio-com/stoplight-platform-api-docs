@@ -1,8 +1,6 @@
 title: Create Metafield
 type: object
 properties:
-  id:
-    type: integer
   name:
     type: string
   scope:
@@ -15,8 +13,7 @@ properties:
     items:
       type: string
 examples:
-  - id: 0
-    name: my_field
+  - name: my_field
     scope:
       csv: "0"
       invoices: "0"

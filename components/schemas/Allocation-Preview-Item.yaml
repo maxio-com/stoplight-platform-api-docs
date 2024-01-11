@@ -6,19 +6,27 @@ properties:
   subscription_id:
     type: integer
   quantity:
-    type: number
+    oneOf:
+      - type: integer
+      - type: string
   previous_quantity:
-    type: integer
+    oneOf:
+      - type: integer
+      - type: string
   memo:
-    type: string
+    type:
+      - string
+      - "null"
   timestamp:
     type:
       - string
       - "null"
   proration_upgrade_scheme:
     type: string
+    deprecated: true
   proration_downgrade_scheme:
     type: string
+    deprecated: true
   accrue_charge:
     type: boolean
   upgrade_charge:
@@ -36,5 +44,11 @@ properties:
     description: A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled.
   previous_price_point_id:
     type: integer
-  component_handle:
+  price_point_handle:
     type: string
+  price_point_name:
+    type: string
+  component_handle:
+    type:
+      - string
+      - "null"

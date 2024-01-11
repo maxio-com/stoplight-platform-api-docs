@@ -2,9 +2,9 @@ title: Allocation Preview Line Item
 type: object
 properties:
   transaction_type:
-    type: string
+    $ref: "./Line-Item-Transaction-Type.yaml"
   kind:
-    type: string
+    $ref: "./Allocation-Preview-Line-Item-Kind.yaml"
   amount_in_cents:
     type: integer
     format: int64
@@ -21,4 +21,6 @@ properties:
   component_handle:
     type: string
   direction:
-    type: string
+    allOf:
+      - $ref: "./Allocation-Preview-Direction.yaml"
+    description: Visible when using Fine-grained Component Control

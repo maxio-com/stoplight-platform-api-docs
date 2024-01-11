@@ -1666,6 +1666,16 @@ paths:
                       data_count: 0
                       input_type: text
                       enum: null
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "'name' must be present to create or update metafields"
       operationId: createMetafields
       description: |-
         ## Custom Fields: Metafield Intro
@@ -1850,12 +1860,6 @@ paths:
         ### Subscription or Customer Resource
 
         Please pay special attention to the resource you use when creating metadata.
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: value
-          description: Can be a single item or a list of metadata
       requestBody:
         content:
           application/json:
@@ -1878,6 +1882,16 @@ paths:
                 type: array
                 items:
                   $ref: "../components/schemas/Metadata.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "'name' must be present to create or update metafields"
     get:
       summary: List Metadata
       tags:
@@ -1889,7 +1903,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Paginated-Metadata.yaml"
-      operationId: readMetadata
+      operationId: listMetadata
       description: |-
         This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
@@ -1915,12 +1929,6 @@ paths:
                 items:
                   $ref: "../components/schemas/Metadata.yaml"
       operationId: updateMetadata
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: value
-          description: Can be a single item or a list of metadata
       description: This method allows you to update the existing metadata associated with a subscription or customer.
       requestBody:
         content:
@@ -1989,7 +1997,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Paginated-Metadata.yaml"
-      operationId: listMetadata
+      operationId: listMetadataForResourceType
       description: |-
         This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
@@ -2109,11 +2117,11 @@ paths:
                     code: "15OFF"
                     description: "15% off for life"
                     percentage: "15"
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                     exclude_mid_period_allocations: true
                     apply_on_cancel_at_end_of_period: true
@@ -2129,11 +2137,11 @@ paths:
                     code: "10OFF"
                     description: "$10 off for life"
                     amount_in_cents: 1000
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                     exclude_mid_period_allocations: true
                     apply_on_cancel_at_end_of_period: true
@@ -2476,11 +2484,11 @@ paths:
                     code: "15OFF"
                     description: "15% off for life"
                     percentage: "15"
-                    allow_negative_balance: "false"
-                    recurring: "false"
+                    allow_negative_balance: false
+                    recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
                     product_family_id: "2"
-                    stackable: "true"
+                    stackable: true
                     compounding_strategy: compound
                   restricted_products:
                     "1": true
@@ -2870,9 +2878,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Coupon-Currency.yaml"
+                $ref: "../components/schemas/Coupon-Currency-Response.yaml"
       operationId: updateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
@@ -5430,6 +5436,17 @@ paths:
                       description: Amazing project management tool
                       handle: acme-projects
                       accounting_code: null
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "API Handle: must be unique - that value has been taken."
       operationId: createProductFamily
       description: |-
         This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
@@ -9392,7 +9409,7 @@ paths:
                       quantity: 3
                       previous_quantity: 2
                       memo: dolore cupidatat elit
-                      timestamp: ex proident dolor i
+                      timestamp: 2022-11-23T10:28:34-05:00
                       proration_upgrade_scheme: laboris ipsum dolore
                       proration_downgrade_scheme: eiusmod dolore
                       price_point_id: -69720370
@@ -9405,6 +9422,17 @@ paths:
                         amount_in_cents: 123
                         success: false
                         memo: aliqua
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "One or more allocation changes are required."
       operationId: allocateComponent
       description: "This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.\n\n**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.\n\n## Allocations Documentation\n\nFull documentation on how to record Allocations in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997). It is focused on how allocations operate within the Chargify UI.It goes into greater detail on how the user interface will react when recording allocations.\n\nThis documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.\n\n## Proration Schemes\n\nChanging the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.\n\n**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.\n\nFor background information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-upgrades-vs-downgrades).\nSee the tables below for valid values.\n\n| upgrade_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|----------------|-------------------------------------------------------------------|\n| `full` \_ \_ \_ \_ |\_A charge is added for the full price of the component. \_\_\_ \_ \_ \_ \_|\n| `prorated` \_ \_ |\_A charge is added for the prorated price of the component change. |\n| `none` \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| downgrade_credit | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_|\n|------------------|---------------------------------------------------|\n| `full` \_ \_ \_ \_ \_ |\_A full price credit is added for the amount owed. |\n| `prorated` \_ \_ \_ |\_A prorated credit is added for the amount owed. \_ |\n| `none` \_ \_ \_ \_ \_ |\_No charge is added. \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ |\n\n| accrue_charge | Definition \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_   |\n|---------------|------------------------------------------------------------------------------------------------------------|\n| `true` \_ \_ \_ \_| Attempt to charge the customer at next renewal.                                                            |\n| `false` \_ \_ \_ |\_Attempt to charge the customer right away.\_If it fails, the charge will be accrued until the next renewal. |\n\n### Order of Resolution for upgrade_charge and downgrade_credit\n\n1. Per allocation in API call (within a single allocation of the `allocations` array)\n2. [Component-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997-Component-Allocations#component-allocations-0-0)\n3. Allocation API call top level (outside of the `allocations` array)\n4. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n### Order of Resolution for accrue charge\n\n1. Allocation API call top level (outside of the `allocations` array)\n2. [Site-level default value](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997#proration-schemes)\n\n**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**"
       requestBody:
@@ -9472,6 +9500,15 @@ paths:
           description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "invalid page: 0"
       operationId: listAllocations
       description: |-
         This endpoint returns the 50 most recent Allocations, ordered by most recent first.
@@ -9576,14 +9613,12 @@ paths:
                   proration_upgrade_scheme: prorate-attempt-capture
                   proration_downgrade_scheme: no-prorate
                   allocations:
-                    - allocation:
-                        component_id: 123
-                        quantity: 10
-                        memo: foo
-                    - allocation:
-                        component_id: 456
-                        quantity: 5
-                        memo: bar
+                    - component_id: 123
+                      quantity: 10
+                      memo: foo
+                    - component_id: 456
+                      quantity: 5
+                      memo: bar
   "/subscriptions/{subscription_id}/allocations/preview.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
@@ -9703,7 +9738,7 @@ paths:
 
         ## Fine-grained Component Control: Use with multiple `upgrade_charge`s or `downgrade_credits`
 
-        When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the response will not include `direction` and `proration` within the `allocation_preview` at the `line_items` and `allocations` level respectfully.
+        When the allocation uses multiple different types of `upgrade_charge`s or `downgrade_credit`s, the Allocation is viewed as an Allocation which uses "Fine-Grained Component Control". As a result, the response will not include `direction` and `proration` within the `allocation_preview`, but at the `line_items` and `allocations` level respectfully.
 
         See example below for Fine-Grained Component Control response.
       requestBody:
@@ -16300,7 +16335,7 @@ paths:
                       - name: ullamco non deserunt in
                     public_url: dolo
                     previous_balance_data:
-                      capture_date: aliqua velit quis voluptate
+                      captured_at: "2024-01-09T11:22:23-05:00"
                       invoices:
                         - number: veniam dolore labore ipsum cupidatat
                           uid: tempor
