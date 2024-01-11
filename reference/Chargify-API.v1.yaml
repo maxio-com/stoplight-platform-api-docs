@@ -3640,7 +3640,7 @@ paths:
                     pricing_scheme: stairstep
                     prices:
                       - starting_quantity: 1
-                        unit_price: 1
+                        unit_price: 1.0
               Quantity Based (per unit):
                 value:
                   quantity_based_component:
@@ -3684,7 +3684,7 @@ paths:
                     prices:
                       - starting_quantity: 1
                         ending_quantity: 10
-                        unit_price: 10
+                        unit_price: 10.0
                       - starting_quantity: "11"
                         ending_quantity: "20"
                         unit_price: "5"
@@ -3739,9 +3739,9 @@ paths:
                       prices:
                         - starting_quantity: 1
                           ending_quantity: 100
-                          unit_price: 3
+                          unit_price: 3.0
                         - starting_quantity: 101
-                          unit_price: 5
+                          unit_price: 5.0
               On/Off with Price Points:
                 value:
                   on_off_component:

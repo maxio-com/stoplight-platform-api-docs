@@ -4,9 +4,6 @@ properties:
   name:
     type: string
     description: 'A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes".'
-  unit_name:
-    type: string
-    description: "The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item"
   description:
     type: string
     description: A description for the component that will be displayed to the user on the hosted signup page.
