@@ -4,7 +4,7 @@ properties:
   price_points:
     type: array
     items:
-      anyOf:
+      oneOf:
         - $ref: "./Create-Component-Price-Point.yaml"
         - $ref: "./Create-Prepaid-Component-Price-Point.yaml"
 required:

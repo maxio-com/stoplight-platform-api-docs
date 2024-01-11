@@ -2,7 +2,7 @@ title: Create Component Price Point Request
 type: object
 properties:
   price_point:
-    anyOf:
+    oneOf:
       - $ref: "./Create-Component-Price-Point.yaml"
       - $ref: "./Create-Prepaid-Component-Price-Point.yaml"
 required:
