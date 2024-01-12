@@ -4474,6 +4474,7 @@ paths:
                     name: Wholesale
                     handle: wholesale-handle
                     pricing_scheme: stairstep
+                    use_site_exchange_rate: false
                     prices:
                       - starting_quantity: "1"
                         ending_quantity: "100"
