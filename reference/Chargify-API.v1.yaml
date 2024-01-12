@@ -6365,6 +6365,7 @@ paths:
                       payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: handle
+                      disabled: false
         "404":
           description: Not Found
         "422":
