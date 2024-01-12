@@ -2,7 +2,7 @@ title: Update Metafields Request
 type: object
 properties:
   metafields:
-    anyOf:
+    oneOf:
       - $ref: "./Update-Metafield.yaml"
       - type: array
         items:

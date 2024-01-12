@@ -2,7 +2,7 @@ title: Create Metafields Request
 type: object
 properties:
   metafields:
-    anyOf:
+    oneOf:
       - $ref: "./Create-Metafield.yaml"
       - type: array
         items:
