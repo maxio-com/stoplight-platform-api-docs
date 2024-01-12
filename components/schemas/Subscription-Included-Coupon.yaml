@@ -22,7 +22,7 @@ properties:
       - integer
       - "null"
     format: int64
-    minimum: 1
+    minimum: 0
     example: 1000
   percentage:
     type:
