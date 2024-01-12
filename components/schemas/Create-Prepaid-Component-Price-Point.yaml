@@ -28,9 +28,8 @@ properties:
     description: (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire
   expiration_interval_unit:
     $ref: "./Interval-Unit.yaml"
-additionalProperties: false
 required:
   - name
   - pricing_scheme
-  - overage_pricing
   - prices
+  - overage_pricing
