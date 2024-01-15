@@ -1830,20 +1830,6 @@ paths:
           application/json:
             schema:
               $ref: "../components/schemas/Update-Metafields-Request.yaml"
-        description: ""
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: name
-          required: true
-          description: Name of the custom field.
-        - schema:
-            type: string
-          in: query
-          name: current_name
-          required: false
-          description: This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field
     delete:
       tags:
         - Custom Fields
