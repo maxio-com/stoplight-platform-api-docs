@@ -4672,6 +4672,41 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Component-Price-Point-Response.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+              examples:
+                Invalid price id:
+                  value:
+                    errors:
+                      base:
+                        - all prices must belong to the price point
+                Invalid price definition:
+                  value:
+                    errors:
+                      prices:
+                        - Successive brackets may not have gaps in quantity (i.e. if one bracket ends at quantity 10, the next must begin at quantity 11)
+                Missing price:
+                  value:
+                    errors:
+                      prices:
+                        - At least 1 price bracket must be defined
+                Overlapping prices:
+                  value:
+                    errors:
+                      prices:
+                        - There cannot be any overlapping bracket ranges
+                Invalid handle:
+                  value:
+                    errors:
+                      handle:
+                        - "Handle: This handle is already in use."
+          x-operation-settings:
+            ErrorTemplates:
+              "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateComponentPricePoint
       description: |-
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
@@ -4734,6 +4769,20 @@ paths:
                           starting_quantity: 101
                           ending_quantity: null
                           unit_price: "4.0"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Price point is already archived."
+          x-operation-settings:
+            ErrorTemplates:
+              "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: archiveComponentPricePoint
       description: A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
   "/components/{component_id}/price_points/{price_point_id}/unarchive.json":
@@ -14042,7 +14091,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17845,7 +17894,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Nested-Error-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
               examples:
                 Generic error:
                   value:

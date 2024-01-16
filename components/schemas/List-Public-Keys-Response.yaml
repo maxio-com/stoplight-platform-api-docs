@@ -6,4 +6,4 @@ properties:
     items:
       $ref: "./Public-Key.yaml"
   meta:
-    $ref: "./List-Public-Keys-Meta.yaml"
+    $ref: "./List-Meta.yaml"

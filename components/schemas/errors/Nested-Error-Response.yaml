@@ -1,5 +1,0 @@
-title: Nested Error Response
-type: object
-properties:
-  errors:
-    $ref: "./Error-Map.yaml"
