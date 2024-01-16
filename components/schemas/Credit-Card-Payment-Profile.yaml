@@ -12,41 +12,7 @@ properties:
   masked_card_number:
     type: string
   card_type:
-    type: string
-    enum:
-      - visa
-      - master
-      - elo
-      - cabal
-      - alelo
-      - discover
-      - american_express
-      - naranja
-      - diners_club
-      - jcb
-      - dankort
-      - maestro
-      - maestro_no_luhn
-      - forbrugsforeningen
-      - sodexo
-      - alia
-      - vr
-      - unionpay
-      - carnet
-      - cartes_bancaires
-      - olimpica
-      - creditel
-      - confiable
-      - synchrony
-      - routex
-      - mada
-      - bp_plus
-      - passcard
-      - edenred
-      - anda
-      - tarjeta-d
-      - hipercard
-      - bogus
+    $ref: "./Card-Type.yaml"
   expiration_month:
     type: integer
   expiration_year:
@@ -58,25 +24,41 @@ properties:
   vault_token:
     type: string
   billing_address:
-    type: string
+    type:
+      - string
+      - "null"
   billing_city:
-    type: string
+    type:
+      - string
+      - "null"
   billing_state:
-    type: string
+    type:
+      - string
+      - "null"
   billing_zip:
-    type: string
+    type:
+      - string
+      - "null"
   billing_country:
-    type: string
+    type:
+      - string
+      - "null"
   customer_vault_token:
-    type: "null"
+    type:
+      - string
+      - "null"
   billing_address_2:
-    type: string
+    type:
+      - string
+      - "null"
   payment_type:
     type: string
   disabled:
     type: boolean
   site_gateway_setting_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   gateway_handle:
     type:
       - string

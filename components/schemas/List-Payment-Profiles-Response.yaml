@@ -1,5 +1,0 @@
-title: List Payment Profiles Response
-type: object
-properties:
-  payment_profile:
-    $ref: "./List-Payment-Profile-Item.yaml"
