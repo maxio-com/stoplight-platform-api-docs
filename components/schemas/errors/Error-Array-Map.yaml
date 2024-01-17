@@ -1,4 +1,4 @@
-title: Error Map
+title: Error Array Map
 type: object
 additionalProperties:
   type: array
