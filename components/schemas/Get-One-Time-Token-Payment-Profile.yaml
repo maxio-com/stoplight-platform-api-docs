@@ -13,7 +13,7 @@ properties:
     type: string
     minLength: 1
   card_type:
-    type: string
+    $ref: "./Card-Type.yaml"
     minLength: 1
   expiration_month:
     type: number

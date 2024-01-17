@@ -42,7 +42,7 @@ properties:
   last_four:
     type: string
   card_type:
-    type: string
+    $ref: "./Card-Type.yaml"
     example: visa
   customer_vault_token:
     type: string
