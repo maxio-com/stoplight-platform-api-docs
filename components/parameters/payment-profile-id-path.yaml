@@ -2,5 +2,5 @@ name: payment_profile_id
 in: path
 description: The Chargify id of the payment profile
 schema:
-  type: string
+  type: integer
 required: true

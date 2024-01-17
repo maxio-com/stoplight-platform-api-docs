@@ -4677,7 +4677,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Invalid price id:
                   value:
@@ -6162,7 +6162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map.yaml"
               examples:
                 Example-1:
                   value:
@@ -6274,7 +6274,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6336,7 +6336,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6911,6 +6911,8 @@ paths:
                       payment_type: bank_account
                       site_gateway_setting_id: 1
                       gateway_handle: null
+        "404":
+          description: Not Found
       operationId: readPaymentProfile
       description: |-
         Using the GET method you can retrieve a Payment Profile identified by its unique ID.
@@ -6983,6 +6985,22 @@ paths:
                       payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: null
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-String-Map-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      payment_profile: "can't be blank"
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updatePaymentProfile
       description: |-
         ## Partial Card Updates
@@ -11689,7 +11707,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -14091,7 +14109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Example:
                   value:
@@ -17894,7 +17912,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Generic error:
                   value:
@@ -17983,7 +18001,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Product invalid:
                   value:
@@ -18063,7 +18081,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-Map-Response.yaml"
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
               examples:
                 Missing product:
                   value:
