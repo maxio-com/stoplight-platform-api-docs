@@ -3,6 +3,8 @@ type: object
 properties:
   id:
     type: integer
+    format: int64
+    min: 0
   memo:
     type: string
   created_at:
