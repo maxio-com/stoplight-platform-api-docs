@@ -15,6 +15,9 @@ properties:
     type: boolean
     default: true
     description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
+  tax_included:
+    type: boolean
+    description: Whether or not the price point includes tax
   interval:
     type: integer
     description: The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this price point would renew every 30 days. This property is only available for sites with Multifrequency enabled.

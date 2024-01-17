@@ -81,3 +81,8 @@ properties:
       - "null"
       - integer
     description: The subscription id this price point belongs to
+  currency_prices:
+    type: array
+    description: "An array of currency pricing data is available when multiple currencies are defined for the site. It varies based on the use_site_exchange_rate setting for the price point. This parameter is present only in the response of read endpoints, after including the appropriate query parameter."
+    items:
+      $ref: "./Currency-Price.yaml"
