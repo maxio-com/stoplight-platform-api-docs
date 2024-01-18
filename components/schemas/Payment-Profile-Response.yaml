@@ -2,6 +2,8 @@ title: Payment Profile Response
 type: object
 properties:
   payment_profile:
-    $ref: "./Payment-Profile.yaml"
+    oneOf:
+      - $ref: "./Bank-Account-Payment-Profile.yaml"
+      - $ref: "./Credit-Card-Payment-Profile.yaml"
 required:
   - payment_profile

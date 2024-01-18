@@ -6377,7 +6377,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Create-Payment-Profile-Response.yaml"
+                $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:
@@ -6385,6 +6385,7 @@ paths:
                       first_name: Jessica
                       last_name: Test
                       card_type: visa
+                      masked_card_number: XXXX-XXXX-XXXX-1111
                       expiration_month: 10
                       expiration_year: 2018
                       customer_id: 19195410
@@ -6763,7 +6764,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "../components/schemas/Read-Payment-Profile-Response.yaml"
+                  $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Example-1:
                   value:
@@ -6862,7 +6863,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Read-Payment-Profile-Response.yaml"
+                $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Card:
                   value:
@@ -6960,7 +6961,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Update-Payment-Profile-Response.yaml"
+                $ref: "../components/schemas/Payment-Profile-Response.yaml"
               examples:
                 Example:
                   value:
@@ -7066,6 +7067,8 @@ paths:
       responses:
         "204":
           description: No Content
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -15372,12 +15375,7 @@ paths:
   "/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
-      - schema:
-          type: integer
-        name: payment_profile_id
-        in: path
-        required: true
-        description: The Chargify id of the payment profile
+      - $ref: "../components/parameters/payment-profile-id-path.yaml"
     post:
       summary: Change Subscription Default Payment Profile
       tags:
@@ -15413,6 +15411,8 @@ paths:
                       payment_type: credit_card
                       site_gateway_setting_id: 1
                       gateway_handle: null
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
