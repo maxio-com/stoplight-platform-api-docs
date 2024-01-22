@@ -2155,7 +2155,7 @@ paths:
                     name: "15% off"
                     code: "15OFF"
                     description: "15% off for life"
-                    percentage: "15"
+                    percentage: 15
                     allow_negative_balance: false
                     recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
@@ -2217,7 +2217,7 @@ paths:
                         updated_at: "2016-10-21T17:06:11-04:00"
                         start_date: "2016-10-21T17:02:08-04:00"
                         end_date: null
-                        percentage: 50
+                        percentage: "50"
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
@@ -2240,7 +2240,7 @@ paths:
                         updated_at: "2016-10-21T17:06:11-04:00"
                         start_date: "2016-10-21T17:02:08-04:00"
                         end_date: null
-                        percentage: 50
+                        percentage: "50"
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
@@ -2263,7 +2263,7 @@ paths:
                         updated_at: "2016-10-21T17:06:11-04:00"
                         start_date: "2016-10-21T17:02:08-04:00"
                         end_date: null
-                        percentage: 25
+                        percentage: "25"
                         recurring: true
                         duration_period_count: null
                         duration_interval: 1
@@ -2447,7 +2447,7 @@ paths:
                       updated_at: "2017-11-08T10:01:15-05:00"
                       start_date: "2017-11-08T10:01:15-05:00"
                       end_date: null
-                      percentage: 33.3333
+                      percentage: "33.3333"
                       duration_period_count: null
                       duration_interval: null
                       duration_interval_unit: null
@@ -2522,7 +2522,7 @@ paths:
                     name: "15% off"
                     code: "15OFF"
                     description: "15% off for life"
-                    percentage: "15"
+                    percentage: 15
                     allow_negative_balance: false
                     recurring: false
                     end_date: "2012-08-29T12:00:00-04:00"
@@ -2604,7 +2604,7 @@ paths:
                         product_family_name: string
                         start_date: string
                         end_date: string
-                        percentage: 0
+                        percentage: "10"
                         recurring: true
                         recurring_scheme: do_not_recur
                         duration_period_count: 0
