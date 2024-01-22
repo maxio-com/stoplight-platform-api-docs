@@ -31,7 +31,7 @@ properties:
       - "null"
   percentage:
     type:
-      - number
+      - string
       - "null"
   recurring:
     type: boolean
