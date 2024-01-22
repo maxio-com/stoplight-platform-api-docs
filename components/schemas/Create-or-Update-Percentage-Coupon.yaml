@@ -12,7 +12,6 @@ properties:
   percentage:
     type:
       - number
-      - string
   allow_negative_balance:
     type: boolean
   recurring:

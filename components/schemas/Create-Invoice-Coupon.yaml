@@ -5,7 +5,6 @@ properties:
     type: string
   percentage:
     type:
-      - string
       - number
     maximum: 100
     example: 50
