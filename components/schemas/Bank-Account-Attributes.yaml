@@ -13,7 +13,7 @@ properties:
     type: string
     description: (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number
   bank_account_type:
-    type: string
+    $ref: "./Bank-Account-Type.yaml"
   bank_branch_code:
     type: string
     description: "(Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided"
@@ -21,9 +21,9 @@ properties:
     type: string
     description: "(Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided"
   bank_account_holder_type:
-    type: string
+    $ref: "./Bank-Account-Holder-Type.yaml"
   payment_type:
-    type: string
+    $ref: "./Payment-Type.yaml"
   current_vault:
     $ref: "./Bank-Account-Vault.yaml"
   vault_token:

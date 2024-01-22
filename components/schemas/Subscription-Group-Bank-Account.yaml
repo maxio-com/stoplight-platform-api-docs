@@ -19,9 +19,9 @@ properties:
   bank_account_type:
     $ref: "./Bank-Account-Type.yaml"
   bank_account_holder_type:
-    $ref: "./Holder-Type.yaml"
+    $ref: "./Bank-Account-Holder-Type.yaml"
   payment_type:
-    type: string
+    $ref: "./Payment-Type.yaml"
   billing_address:
     type: string
   billing_city:
