@@ -1,7 +1,0 @@
-title: Update Payment Profile Response
-type: object
-properties:
-  payment_profile:
-    $ref: "./Updated-Payment-Profile.yaml"
-required:
-  - payment_profile

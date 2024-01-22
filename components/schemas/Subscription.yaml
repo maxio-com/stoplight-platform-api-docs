@@ -115,13 +115,13 @@ properties:
   product:
     $ref: "./Product.yaml"
   credit_card:
-    $ref: "./Payment-Profile.yaml"
+    $ref: "./Credit-Card-Payment-Profile.yaml"
   group:
     oneOf:
       - $ref: "./Nested-Subscription-Group.yaml"
       - type: "null"
   bank_account:
-    $ref: "./Subscription-Bank-Account.yaml"
+    $ref: "./Bank-Account-Payment-Profile.yaml"
   payment_type:
     type:
       - string
