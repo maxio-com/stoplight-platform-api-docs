@@ -67,10 +67,8 @@ properties:
     description: A string representation of the stored bank account number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’)
   bank_account_type:
     $ref: "./Bank-Account-Type.yaml"
-    description: Defaults to checking
   bank_account_holder_type:
-    $ref: "./Holder-Type.yaml"
-    description: Defaults to personal
+    $ref: "./Bank-Account-Holder-Type.yaml"
   payment_type:
     $ref: "./Payment-Type.yaml"
   verified:

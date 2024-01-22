@@ -94,9 +94,9 @@ properties:
     type: string
     description: "(Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided"
   bank_account_type:
-    type: string
+    $ref: "./Bank-Account-Type.yaml"
   bank_account_holder_type:
-    type: string
+    $ref: "./Bank-Account-Holder-Type.yaml"
   last_four:
     type: string
     description: "(Optional) Used for creating subscription with payment profile imported using vault_token, for proper display in Advanced Billing UI"
