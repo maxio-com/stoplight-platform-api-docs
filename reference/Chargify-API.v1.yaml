@@ -4859,9 +4859,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Currency-Price.yaml"
+                $ref: "../components/schemas/Currency-Prices-Response.yaml"
+              examples:
+                example-1:
+                  value:
+                    currency_prices:
+                      - id: 100
+                        currency: EUR
+                        price: 123
+                        formatted_price: €123,00
+                        product_price_point_id: 32669
+                        role: baseline
       operationId: createCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -6263,14 +6271,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
+                $ref: "../components/schemas/Currency-Prices-Response.yaml"
               examples:
                 example-1:
                   value:
                     currency_prices:
-                      - id: 123
+                      - id: 100
                         currency: EUR
-                        price: 100
+                        price: 123
                         formatted_price: €123,00
                         product_price_point_id: 32669
                         role: baseline
@@ -6325,7 +6333,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Product-Price-Point-Currency-Price.yaml"
+                $ref: "../components/schemas/Currency-Prices-Response.yaml"
               examples:
                 example-1:
                   value:
