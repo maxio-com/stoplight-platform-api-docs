@@ -5,7 +5,7 @@ properties:
     type: string
     description: ISO code for a currency defined on the site level
   price:
-    type: integer
+    type: number
     description: Price for the price level in this currency
   price_id:
     type: integer

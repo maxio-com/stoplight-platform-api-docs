@@ -1,4 +1,4 @@
-title: Product Price Point Currency Price
+title: Currency Prices Response
 type: object
 properties:
   currency_prices:
