@@ -7197,6 +7197,19 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Invoice.yaml"
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Amount: must be greater than 0."
       operationId: refundInvoice
       description: |-
         Refund an invoice, segment, or consolidated invoice.
@@ -16653,7 +16666,7 @@ paths:
                         title: incididunt est mollit irure
                     credits:
                       - uid: exercitation eiusmod
-                        transaction_time: Lorem ea
+                        transaction_time: 2024-01-23T13:51:27Z
                         credit_note_number: qui fugiat labore laborum
                         credit_note_uid: ipsum sunt
                       - memo: dolor
@@ -16663,7 +16676,7 @@ paths:
                     payments:
                       - prepayment: false
                         memo: enim Excepteur Lorem magna sit
-                      - transaction_time: deserunt
+                      - transaction_time: 2024-01-23T13:51:27Z
                         prepayment: false
                         payment_method:
                           details: labore ut et

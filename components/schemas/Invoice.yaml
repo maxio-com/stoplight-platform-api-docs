@@ -1,9 +1,6 @@
 title: Invoice
 type: object
 properties:
-  id:
-    type: integer
-    format: int64
   uid:
     type: string
     description: Unique identifier for the invoice. It is generated automatically by Chargify and has the prefix "inv_" followed by alphanumeric characters.
@@ -66,10 +63,6 @@ properties:
     $ref: "./Invoice-Status.yaml"
   role:
     type: string
-  parent_invoice_id:
-    type:
-      - integer
-      - "null"
   collection_method:
     type: string
     description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'

@@ -51,6 +51,7 @@ properties:
     description: "When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units."
   period_range_start:
     type: string
+    format: date
     description: |-
       Start date for the period covered by this line. The format is `"YYYY-MM-DD"`.
 
@@ -59,6 +60,7 @@ properties:
       * For non-periodic charges, this date and the end date will match.
   period_range_end:
     type: string
+    format: date
     description: |-
       End date for the period covered by this line. The format is `"YYYY-MM-DD"`.
 
