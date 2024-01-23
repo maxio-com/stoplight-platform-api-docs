@@ -7205,6 +7205,20 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Invoice.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      - "Amount: must be greater than 0."
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: refundInvoice
       description: |-
         Refund an invoice, segment, or consolidated invoice.
@@ -16633,18 +16647,18 @@ paths:
                     due_amount: non esse ullamco
                     line_items:
                       - description: qui
-                        price_point_id: -95020509
+                        price_point_id: 123
                         tax_amount: occaecat deserunt veniam
                         subtotal_amount: commodo consequat tempor et Duis
                       - uid: ""
                         subtotal_amount: ven
                       - price_point_id: 94750853
                         product_id: 79058036
-                        tax_amount: Duis
-                        subtotal_amount: irure officia ipsum
+                        tax_amount: "1.0"
+                        subtotal_amount: "128.5"
                       - unit_price: eiusmod consequat ut nostrud
                         tax_amount: quis nulla proident
-                      - period_range_end: ut dolor
+                      - period_range_end: 2022-02-02
                         product_id: 57352537
                         description: minim in dolore Ut Excepteur
                         uid: sit qui in ullamco anim
@@ -16661,7 +16675,7 @@ paths:
                         title: incididunt est mollit irure
                     credits:
                       - uid: exercitation eiusmod
-                        transaction_time: Lorem ea
+                        transaction_time: 2024-01-23T13:51:27Z
                         credit_note_number: qui fugiat labore laborum
                         credit_note_uid: ipsum sunt
                       - memo: dolor
@@ -16671,7 +16685,7 @@ paths:
                     payments:
                       - prepayment: false
                         memo: enim Excepteur Lorem magna sit
-                      - transaction_time: deserunt
+                      - transaction_time: 2024-01-23T13:51:27Z
                         prepayment: false
                         payment_method:
                           details: labore ut et
