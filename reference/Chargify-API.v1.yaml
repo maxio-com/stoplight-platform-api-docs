@@ -7197,8 +7197,6 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Invoice.yaml"
-        "404":
-          description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
