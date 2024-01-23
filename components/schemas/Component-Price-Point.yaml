@@ -18,13 +18,16 @@ properties:
   handle:
     type: string
   archived_at:
+    format: date-time
     type:
       - string
       - "null"
   created_at:
     type: string
+    format: date-time
   updated_at:
     type: string
+    format: date-time
   prices:
     type: array
     items:

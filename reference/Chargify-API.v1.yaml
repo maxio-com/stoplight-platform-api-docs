@@ -1922,9 +1922,9 @@ paths:
                 Example:
                   value:
                     error: "'name' must be present to create or update metafields"
-    x-operation-settings:
-      ErrorTemplates:
-        "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
     get:
       summary: List Metadata
       tags:
@@ -4704,9 +4704,14 @@ paths:
                     errors:
                       handle:
                         - "Handle: This handle is already in use."
-          x-operation-settings:
-            ErrorTemplates:
-              "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+                Invalid quantity:
+                  value:
+                    errors:
+                      prices.ending_quantity:
+                        - "Ending quantity: must be greater than the low end bracket quantity, if given"
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateComponentPricePoint
       description: |-
         When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
@@ -4731,7 +4736,7 @@ paths:
                         ending_quantity: 100
                         unit_price: 5
                       - id: 2
-                        _destroy: "true"
+                        _destroy: true
                       - starting_quantity: 101
                         unit_price: 4
     delete:
@@ -4780,9 +4785,9 @@ paths:
                   value:
                     errors:
                       - "Price point is already archived."
-          x-operation-settings:
-            ErrorTemplates:
-              "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: archiveComponentPricePoint
       description: A price point can be archived at any time. Subscriptions using a price point that has been archived will continue using it until they're moved to another price point.
   "/components/{component_id}/price_points/{price_point_id}/unarchive.json":
