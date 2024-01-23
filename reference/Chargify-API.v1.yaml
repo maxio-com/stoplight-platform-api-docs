@@ -7796,6 +7796,7 @@ paths:
                           consolidation_level: none
                         timestamp: "2018-08-01T16:00:00Z"
                         invoice:
+                          id: 614942008934401500
                           uid: inv_8gk5bwkct3gqt
                           site_id: 20
                           customer_id: 6
@@ -7814,6 +7815,7 @@ paths:
                           payment_instructions: 'Please make checks payable to "Acme, Inc."'
                           currency: USD
                           consolidation_level: none
+                          parent_invoice_id: null
                           subscription_group_id: null
                           parent_invoice_number: null
                           product_name: Standard Plan
@@ -16644,8 +16646,8 @@ paths:
                         subtotal_amount: ven
                       - price_point_id: 94750853
                         product_id: 79058036
-                        tax_amount: 1.0
-                        subtotal_amount: 128.5
+                        tax_amount: "1.0"
+                        subtotal_amount: "128.5"
                       - unit_price: eiusmod consequat ut nostrud
                         tax_amount: quis nulla proident
                       - period_range_end: 2022-02-02
