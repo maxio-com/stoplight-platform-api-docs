@@ -50,7 +50,16 @@ properties:
       - "null"
     description: The description of the component.
   default_price_point_id:
-    type: integer
+    type:
+      - integer
+      - "null"
+  overage_prices:
+    type:
+      - array
+      - "null"
+    description: "An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty."
+    items:
+      $ref: "./Component-Price.yaml"
   prices:
     type:
       - array
@@ -79,9 +88,11 @@ properties:
     $ref: "./Credit-Type.yaml"
   created_at:
     type: string
+    format: date-time
     description: Timestamp indicating when this component was created
   updated_at:
     type: string
+    format: date-time
     description: Timestamp indicating when this component was updated
   archived_at:
     type:

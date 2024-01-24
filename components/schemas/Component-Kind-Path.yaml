@@ -1,8 +1,0 @@
-title: Component Kind Path
-type: string
-enum:
-  - metered_components
-  - quantity_based_components
-  - on_off_components
-  - prepaid_usage_components
-  - event_based_components

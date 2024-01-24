@@ -67,3 +67,6 @@ properties:
     type: array
     items:
       type: integer
+
+required:
+  - name
