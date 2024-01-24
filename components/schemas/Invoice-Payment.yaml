@@ -3,6 +3,7 @@ type: object
 properties:
   transaction_time:
     type: string
+    format: date-time
   memo:
     type: string
   original_amount:
