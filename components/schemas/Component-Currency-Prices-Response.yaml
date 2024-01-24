@@ -1,4 +1,4 @@
-title: Currency Prices Response
+title: Component Currency Prices Response
 type: object
 properties:
   currency_prices:
