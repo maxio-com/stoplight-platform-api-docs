@@ -4859,17 +4859,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Currency-Prices-Response.yaml"
+                $ref: "../components/schemas/Component-Currency-Prices-Response.yaml"
               examples:
                 example-1:
                   value:
                     currency_prices:
                       - id: 100
                         currency: EUR
-                        price: 123
+                        price: "123"
                         formatted_price: €123,00
-                        product_price_point_id: 32669
-                        role: baseline
+                        price_id: 32669
+                        price_point_id: 25554
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      currency_prices[0].currency:
+                        - "Currency: cannot be blank."
+                        - "Currency: is not one of the allowed values."
       operationId: createCurrencyPrices
       description: |-
         This endpoint allows you to create currency prices for a given currency that has been defined on the site level in your settings.
@@ -4902,9 +4915,29 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Currency-Price.yaml"
+                $ref: "../components/schemas/Component-Currency-Prices-Response.yaml"
+              examples:
+                example-1:
+                  value:
+                    currency_prices:
+                      - id: 100
+                        currency: EUR
+                        price: "123"
+                        formatted_price: €123,00
+                        price_id: 32669
+                        price_point_id: 25554
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-Array-Map-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    errors:
+                      currency_prices[0].currency:
+                        - "Pricing already exists for this currency."
       operationId: updateCurrencyPrices
       description: |-
         This endpoint allows you to update currency prices for a given currency that has been defined on the site level in your settings.
