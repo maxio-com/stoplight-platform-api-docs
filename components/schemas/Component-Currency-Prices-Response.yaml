@@ -4,6 +4,6 @@ properties:
   currency_prices:
     type: array
     items:
-      $ref: "./Currency-Price.yaml"
+      $ref: "./Component-Currency-Price.yaml"
 required:
   - currency_prices

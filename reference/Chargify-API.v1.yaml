@@ -4866,7 +4866,7 @@ paths:
                     currency_prices:
                       - id: 100
                         currency: EUR
-                        price: 123
+                        price: "123"
                         formatted_price: €123,00
                         price_id: 32669
                         price_point_id: 25554
@@ -4922,7 +4922,7 @@ paths:
                     currency_prices:
                       - id: 100
                         currency: EUR
-                        price: 123
+                        price: "123"
                         formatted_price: €123,00
                         price_id: 32669
                         price_point_id: 25554
