@@ -1,6 +1,6 @@
-title: Void Invoice Event Data
+title: Void Remainder Event Data
 type: object
-description: Example schema for an `void_invoice` event
+description: Example schema for an `void_remainder` event
 properties:
   credit_note_attributes:
     $ref: "../Credit-Note.yaml"
