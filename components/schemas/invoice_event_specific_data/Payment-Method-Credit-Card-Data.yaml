@@ -14,3 +14,7 @@ properties:
   type:
     type: string
     default: "credit_card"
+required:
+  - card_brand
+  - masked_card_number
+  - type

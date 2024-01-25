@@ -23,3 +23,10 @@ properties:
   prepayment:
     type: boolean
     description: The flag that shows whether the original payment was a prepayment or not
+required:
+  - transaction_id
+  - prepayment
+  - memo
+  - applied_amount
+  - transaction_time
+  - payment_method

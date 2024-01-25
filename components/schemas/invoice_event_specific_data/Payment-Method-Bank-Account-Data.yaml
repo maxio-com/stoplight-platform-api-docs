@@ -8,3 +8,7 @@ properties:
   type:
     type: string
     default: "bank_account"
+required:
+  - masked_account_number
+  - masked_routing_number
+  - type

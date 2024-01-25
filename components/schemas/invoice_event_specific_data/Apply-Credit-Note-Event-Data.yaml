@@ -35,3 +35,9 @@ properties:
     description: List of credit notes applied to children invoices (if consolidated invoice)
     items:
       $ref: "./Apply-Credit-Note-Credit-Notes-Data.yaml"
+required:
+  - uid
+  - credit_note_number
+  - credit_note_uid
+  - original_amount
+  - applied_amount

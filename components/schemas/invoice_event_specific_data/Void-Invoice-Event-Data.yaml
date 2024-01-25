@@ -17,3 +17,9 @@ properties:
   is_advance_invoice:
     type: boolean
     description: If true, the invoice is an advance invoice.
+required:
+  - credit_note_attributes
+  - memo
+  - applied_amount
+  - transaction_time
+  - is_advance_invoice

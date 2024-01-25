@@ -7,3 +7,6 @@ properties:
   type:
     type: string
     default: "paypal_account"
+required:
+  - email
+  - type
