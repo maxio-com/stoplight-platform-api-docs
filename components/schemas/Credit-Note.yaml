@@ -37,12 +37,7 @@ properties:
 
       The format is `"YYYY-MM-DD"`.
   status:
-    type: string
-    description: |
-      Current status of the credit note. Valid values:
-
-      * open
-      * applied
+    $ref: "./Credit-Note-Status.yaml"
   currency:
     type: string
     description: The ISO 4217 currency code (3 character string) representing the currency of the credit note amount fields.
