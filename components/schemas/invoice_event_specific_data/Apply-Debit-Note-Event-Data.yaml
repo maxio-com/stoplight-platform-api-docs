@@ -14,3 +14,8 @@ properties:
   applied_amount:
     type: string
     description: The amount of the debit note applied to invoice.
+required:
+  - debit_note_number
+  - debit_note_uid
+  - original_amount
+  - applied_amount

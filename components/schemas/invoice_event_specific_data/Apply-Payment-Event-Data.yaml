@@ -20,3 +20,9 @@ properties:
   transaction_id:
     type: integer
     description: The Chargify id of the original payment
+required:
+  - memo
+  - original_amount
+  - applied_amount
+  - transaction_time
+  - payment_method

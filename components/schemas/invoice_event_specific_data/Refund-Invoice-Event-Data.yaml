@@ -28,3 +28,10 @@ properties:
     type: string
     format: date-time
     description: The time the refund was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
+required:
+  - apply_credit
+  - credit_note_attributes
+  - payment_id
+  - refund_amount
+  - refund_id
+  - transaction_time

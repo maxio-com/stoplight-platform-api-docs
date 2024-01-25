@@ -18,3 +18,9 @@ properties:
   total_amount:
     type: string
     description: "The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.'"
+required:
+  - consolidation_level
+  - from_status
+  - to_status
+  - due_amount
+  - total_amount
