@@ -65,14 +65,13 @@ properties:
   status:
     $ref: "./Invoice-Status.yaml"
   role:
-    type: string
+    $ref: "./Invoice-Role.yaml"
   parent_invoice_id:
     type:
       - integer
       - "null"
   collection_method:
-    type: string
-    description: 'The collection method of the invoice, which is either "automatic" (tried and retried on an existing payment method by Chargify) or "remittance" (payment must be remitted by the customer or keyed in by the merchant).'
+    $ref: "./Collection-Method.yaml"
   payment_instructions:
     type: string
     description: "A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant."
