@@ -1795,7 +1795,7 @@ paths:
                           public_show: "0"
                           public_edit: "0"
                         data_count: 0
-                        input_type: string
+                        input_type: text
                         enum: null
       operationId: listMetafields
       description: This endpoint lists metafields associated with a site. The metafield description and usage is contained in the response.
@@ -1823,6 +1823,16 @@ paths:
                 type: array
                 items:
                   $ref: "../components/schemas/Metafield.yaml"
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Single-Error-Response.yaml"
+              examples:
+                Example:
+                  value:
+                    error: "Metafield name must be unique for the Attachment Type"
       operationId: updateMetafield
       description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
@@ -1857,7 +1867,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/resource-type.yaml"
       - schema:
-          type: string
+          type: integer
         name: resource_id
         in: path
         required: true
