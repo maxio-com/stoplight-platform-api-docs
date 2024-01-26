@@ -8,3 +8,6 @@ properties:
   to_collection_method:
     type: string
     description: The new collection method of the invoice.
+required:
+  - from_collection_method
+  - to_collection_method
