@@ -1833,6 +1833,9 @@ paths:
                 Example:
                   value:
                     error: "Metafield name must be unique for the Attachment Type"
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updateMetafield
       description: Use the following method to update metafields for your Site. Metafields can be populated with metadata after the fact.
       requestBody:
