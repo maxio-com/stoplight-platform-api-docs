@@ -71,6 +71,7 @@ properties:
     $ref: "./Bank-Account-Holder-Type.yaml"
   payment_type:
     $ref: "./Payment-Type.yaml"
+    default: bank_account
   verified:
     type: boolean
     default: false

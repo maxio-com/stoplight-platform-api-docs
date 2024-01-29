@@ -70,6 +70,7 @@ properties:
     description: "The current billing street address, second line, for the card."
   payment_type:
     $ref: "./Payment-Type.yaml"
+    default: credit_card
   disabled:
     type: boolean
   chargify_token:

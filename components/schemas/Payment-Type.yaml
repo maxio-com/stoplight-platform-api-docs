@@ -4,4 +4,3 @@ enum:
   - credit_card
   - bank_account
   - paypal_account
-default: credit_card
