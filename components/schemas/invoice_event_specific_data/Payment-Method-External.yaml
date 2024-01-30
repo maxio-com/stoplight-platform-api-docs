@@ -13,6 +13,7 @@ properties:
       - "null"
   type:
     $ref: "./Invoice-Event-Payment-Method.yaml"
+    example: "external"
 required:
   - details
   - kind

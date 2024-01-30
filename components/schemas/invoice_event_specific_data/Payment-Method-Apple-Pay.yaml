@@ -3,5 +3,6 @@ type: object
 properties:
   type:
     $ref: "./Invoice-Event-Payment-Method.yaml"
+    example: "apple_pay"
 required:
   - type

@@ -13,6 +13,7 @@ properties:
     type: string
   type:
     $ref: "./Invoice-Event-Payment-Method.yaml"
+    example: "credit_card"
 required:
   - card_brand
   - masked_card_number
