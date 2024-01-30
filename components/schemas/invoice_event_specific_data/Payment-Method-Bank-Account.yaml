@@ -1,4 +1,4 @@
-title: Payment Method Bank Account Type
+title: Payment Method Bank Account
 type: object
 properties:
   masked_account_number:
@@ -6,8 +6,7 @@ properties:
   masked_routing_number:
     type: string
   type:
-    type: string
-    default: "bank_account"
+    $ref: "./Invoice-Event-Payment-Method.yaml"
 required:
   - masked_account_number
   - masked_routing_number

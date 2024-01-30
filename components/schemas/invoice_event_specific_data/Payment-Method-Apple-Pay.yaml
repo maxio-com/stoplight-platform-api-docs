@@ -1,0 +1,7 @@
+title: Payment Method Apple Pay
+type: object
+properties:
+  type:
+    $ref: "./Invoice-Event-Payment-Method.yaml"
+required:
+  - type

@@ -1,4 +1,4 @@
-title: Invoice Event
+title: Invoice Event Data
 type: object
 description: "The event data is the data that, when combined with the command, results in the output invoice found in the invoice field."
 anyOf:

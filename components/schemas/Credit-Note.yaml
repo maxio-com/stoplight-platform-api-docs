@@ -24,12 +24,14 @@ properties:
     description: A monotonically increasing number assigned to credit notes as they are created.  This number is unique within a site and can be used to sort and order credit notes.
   issue_date:
     type: string
+    format: date
     description: |-
       Date the credit note was issued to the customer.  This is the date that the credit was made available for application, and may come before it is fully applied.
 
       The format is `"YYYY-MM-DD"`.
   applied_date:
     type: string
+    format: date
     description: |-
       Credit notes are applied to invoices to offset invoiced amounts - they reduce the amount due. This field is the date the credit note became fully applied to invoices.
 

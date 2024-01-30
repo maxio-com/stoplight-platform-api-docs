@@ -1,0 +1,20 @@
+title: Payment Method External
+type: object
+properties:
+  details:
+    type:
+      - string
+      - "null"
+  kind:
+    type: string
+  memo:
+    type:
+      - string
+      - "null"
+  type:
+    $ref: "./Invoice-Event-Payment-Method.yaml"
+required:
+  - details
+  - kind
+  - memo
+  - type
