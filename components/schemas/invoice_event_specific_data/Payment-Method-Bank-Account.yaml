@@ -7,6 +7,7 @@ properties:
     type: string
   type:
     $ref: "./Invoice-Event-Payment-Method.yaml"
+    example: "bank_account"
 required:
   - masked_account_number
   - masked_routing_number
