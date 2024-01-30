@@ -18871,7 +18871,7 @@ components:
           bank_account: "#/components/schemas/Payment-Method-Bank-Account"
           credit_card: "#/components/schemas/Payment-Method-Credit-Card"
           external: "#/components/schemas/Payment-Method-External"
-          paypal_account: "#/components/schemas/Payment-Method-Apple-Paypal"
+          paypal_account: "#/components/schemas/Payment-Method-Paypal"
     Payment-Method-Apple-Pay:
       $ref: "../components/schemas/invoice_event_specific_data/Payment-Method-Apple-Pay.yaml"
     Payment-Method-Bank-Account:
