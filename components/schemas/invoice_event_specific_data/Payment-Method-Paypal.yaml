@@ -1,12 +1,11 @@
-title: Payment Method Paypal Type
+title: Payment Method Paypal
 type: object
 properties:
   email:
     type: string
     format: email
   type:
-    type: string
-    default: "paypal_account"
+    $ref: "./Invoice-Event-Payment-Method.yaml"
 required:
   - email
   - type

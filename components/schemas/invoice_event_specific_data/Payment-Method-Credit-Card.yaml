@@ -1,4 +1,4 @@
-title: Payment Method Credit Card Type
+title: Payment Method Credit Card
 type: object
 properties:
   card_brand:
@@ -12,8 +12,7 @@ properties:
   masked_card_number:
     type: string
   type:
-    type: string
-    default: "credit_card"
+    $ref: "./Invoice-Event-Payment-Method.yaml"
 required:
   - card_brand
   - masked_card_number
