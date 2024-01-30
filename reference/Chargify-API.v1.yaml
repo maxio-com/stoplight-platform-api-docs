@@ -18863,7 +18863,7 @@ components:
         - $ref: "#/components/schemas/Payment-Method-Bank-Account"
         - $ref: "#/components/schemas/Payment-Method-Credit-Card"
         - $ref: "#/components/schemas/Payment-Method-External"
-        - $ref: "#/components/schemas/Payment-Method-Apple-Paypal"
+        - $ref: "#/components/schemas/Payment-Method-Paypal"
       discriminator:
         propertyName: type
         mapping:
@@ -18880,5 +18880,5 @@ components:
       $ref: "../components/schemas/invoice_event_specific_data/Payment-Method-Credit-Card.yaml"
     Payment-Method-External:
       $ref: "../components/schemas/invoice_event_specific_data/Payment-Method-External.yaml"
-    Payment-Method-Apple-Paypal:
+    Payment-Method-Paypal:
       $ref: "../components/schemas/invoice_event_specific_data/Payment-Method-Paypal.yaml"
