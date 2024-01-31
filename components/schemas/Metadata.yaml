@@ -2,11 +2,17 @@ title: Metadata
 type: object
 properties:
   id:
-    type: integer
+    type:
+      - integer
+      - "null"
   value:
-    type: string
+    type:
+      - string
+      - "null"
   resource_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   name:
     type: string
   deleted_at:
@@ -14,4 +20,6 @@ properties:
       - string
       - "null"
   metafield_id:
-    type: integer
+    type:
+      - integer
+      - "null"
