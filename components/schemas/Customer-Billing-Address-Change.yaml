@@ -1,7 +1,0 @@
-title: Customer Billing Address Change
-type: object
-properties:
-  before:
-    type: object
-  after:
-    type: object

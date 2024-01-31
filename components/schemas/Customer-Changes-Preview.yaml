@@ -4,8 +4,8 @@ properties:
   payer:
     $ref: "./Customer-Payer-Change.yaml"
   shipping_address:
-    $ref: "./Customer-Shipping-Address-Change.yaml"
+    $ref: "./Address-Change.yaml"
   billing_address:
-    $ref: "./Customer-Billing-Address-Change.yaml"
+    $ref: "./Address-Change.yaml"
   custom_fields:
     $ref: "./Customer-Custom-Fields-Change.yaml"
