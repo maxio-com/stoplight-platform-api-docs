@@ -2,6 +2,6 @@ title: Customer Payer Change
 type: object
 properties:
   before:
-    type: object
+    $ref: "./Payer-Attributes.yaml"
   after:
-    type: object
+    $ref: "./Payer-Attributes.yaml"

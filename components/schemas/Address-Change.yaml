@@ -1,0 +1,7 @@
+title: Address Change
+type: object
+properties:
+  before:
+    $ref: "./Invoice-Address.yaml"
+  after:
+    $ref: "./Invoice-Address.yaml"
