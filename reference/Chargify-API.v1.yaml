@@ -2421,7 +2421,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Coupon-Response.yaml"
-      operationId: readCouponByCode
+      operationId: findCoupon
       description: |-
         You can search for a coupon via the API with the find method. By passing a code parameter, the find will attempt to locate a coupon that matches that code. If no coupon is found, a 404 is returned.
 
@@ -2951,7 +2951,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Coupon-Currency-Response.yaml"
-      operationId: updateCouponCurrencyPrices
+      operationId: createOrUpdateCouponCurrencyPrices
       description: |-
         This endpoint allows you to create and/or update currency prices for an existing coupon. Multiple prices can be created or updated in a single request but each of the currencies must be defined on the site level already and the coupon must be an amount-based coupon, not percentage.
 
@@ -3468,7 +3468,7 @@ paths:
         collectParameters: true
   /events/count.json:
     get:
-      summary: Total Event Count
+      summary: Read Total Event Count
       tags:
         - Events
       responses:
@@ -4198,7 +4198,7 @@ paths:
                       created_at: "2019-08-02T05:54:53-04:00"
                       default_price_point_name: Original
                       product_family_name: Chargify
-      operationId: readComponentByHandle
+      operationId: findComponent
       parameters:
         - schema:
             type: string
@@ -4258,7 +4258,7 @@ paths:
                       created_at: "2019-08-02T05:54:53-04:00"
                       default_price_point_name: Original
                       product_family_name: Chargify
-      operationId: readComponentById
+      operationId: readComponent
       description: |-
         This request will return information regarding a component from a specific product family.
 
@@ -4644,7 +4644,7 @@ paths:
                           price_point_id: 173
                           formatted_unit_price: "$1.00"
                       default_price_point_name: Original
-      operationId: updateDefaultPricePointForComponent
+      operationId: promoteComponentPricePointToDefault
       description: |-
         Sets a new default price point for the component. This new default will apply to all new subscriptions going forward - existing subscriptions will remain on their current price point.
 
@@ -4887,7 +4887,7 @@ paths:
                       - starting_quantity: 1
                         unit_price: 5
     get:
-      summary: List Price Points
+      summary: List Component Price Points
       tags:
         - Components
       responses:
@@ -5004,7 +5004,7 @@ paths:
                             starting_quantity: 1
                             ending_quantity: null
                             unit_price: "4.0"
-      operationId: createComponentPricePoints
+      operationId: bulkCreateComponentPricePoints
       description: Use this endpoint to create multiple component price points in one request.
       requestBody:
         content:
@@ -5048,7 +5048,7 @@ paths:
         required: true
         description: The Chargify id of the price point
     put:
-      summary: Update Price Point
+      summary: Update Component Price Point
       tags:
         - Components
       responses:
@@ -5126,7 +5126,7 @@ paths:
                       - starting_quantity: 101
                         unit_price: 4
     delete:
-      summary: Archive Price Point
+      summary: Archive Component Price Point
       tags:
         - Components
       responses:
@@ -5191,7 +5191,7 @@ paths:
         required: true
         description: The Chargify id of the price point
     put:
-      summary: Unarchive Price Point
+      summary: Unarchive Component Price Point
       tags:
         - Components
       responses:
@@ -5391,7 +5391,7 @@ paths:
                               recurring: true
                           subscription_id: 12355
                           subscriber_name: "Amy Smith"
-      operationId: readMrrMovements
+      operationId: listMrrMovements
       deprecated: true
       description: |-
         This endpoint returns your site's MRR movements.
@@ -6635,7 +6635,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: createProductPricePoints
+      operationId: bulkCreateProductPricePoints
       description: Use this endpoint to create multiple product price points in one request.
       requestBody:
         content:
@@ -6743,7 +6743,7 @@ paths:
                       role: initial
         description: ""
     put:
-      summary: Update Currency Prices
+      summary: Update Product Currency Prices
       tags:
         - "Product: Price Points"
       responses:
@@ -8566,7 +8566,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/invoice-uid-path.yaml"
     post:
-      summary: Create Payment for Invoice
+      summary: Record Payment for Invoice
       tags:
         - Invoices
       responses:
@@ -8645,7 +8645,7 @@ paths:
         description: ""
   /invoices/payments.json:
     post:
-      summary: Create Payment for Multiple Invoices
+      summary: Record Payment for Multiple Invoices
       tags:
         - Invoices
       responses:
@@ -8697,7 +8697,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: recordExternalPaymentForInvoices
+      operationId: recordPaymentForMultipleInvoices
       description: |-
         This API call should be used when you want to record an external payment against multiple invoices.
 
@@ -9260,7 +9260,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
-      summary: Create Bulk Payment
+      summary: Record Payment For Subscription
       tags:
         - Invoices
       responses:
@@ -9680,7 +9680,7 @@ paths:
                         refund_amount: "0.0"
                         due_amount: "0.0"
                         public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
-      operationId: listInvoiceSegments
+      operationId: listConsolidatedInvoiceSegments
       description: "Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`."
       x-operation-settings:
         collectParameters: true
@@ -9891,7 +9891,7 @@ paths:
       summary: Bulk Update Subscription Components' Price Points
       tags:
         - Subscription Components
-      operationId: updateSubscriptionComponentsPricePoints
+      operationId: bulkUpdateSubscriptionComponentsPricePoints
       description: |-
         Updates the price points on one or more of a subscription's components.
 
@@ -10053,7 +10053,7 @@ paths:
                           handle: ea dolore dolore sunt
                           accounting_code: null
                         public_signup_pages: []
-      operationId: resetSubscriptionComponentsPricePoints
+      operationId: bulkResetSubscriptionComponentsPricePoints
       description: |-
         Resets all of a subscription's components to use the current default.
 
@@ -10478,7 +10478,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: updatePrepaidUsageAllocation
+      operationId: updatePrepaidUsageAllocationExpirationDate
       description: |-
         When the expiration interval options are selected on a prepaid usage component price point, all allocations will be created with an expiration date. This expiration date can be changed after the fact to allow for extending or shortening the allocation's active window.
 
@@ -12085,7 +12085,7 @@ paths:
       responses:
         "201":
           description: Created
-      operationId: recordEvents
+      operationId: bulkRecordEvents
       description: |-
         Use this endpoint to record a collection of events.
 
@@ -12279,7 +12279,7 @@ paths:
               schema:
                 $ref: "../components/schemas/Offer-Response.yaml"
               examples: {}
-      operationId: readOffers
+      operationId: readOffer
       description: "This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`."
   "/offers/{offer_id}/archive.json":
     parameters:
@@ -14321,7 +14321,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-      operationId: stopDelayedCancellation
+      operationId: cancelDelayedCancellation
       description: |-
         Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
 
@@ -15270,7 +15270,7 @@ paths:
 
         Current billing amount for the subscription group is not returned by default. If this information is desired, the `include[]=current_billing_amount_in_cents` parameter must be provided with the request.
     put:
-      summary: Update Subscription Group
+      summary: Update Subscription Group Members
       tags:
         - Subscription Groups
       responses:
@@ -15400,7 +15400,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
-      operationId: readSubscriptionGroupBySubscriptionId
+      operationId: findSubscriptionGroup
       description: |-
         Use this endpoint to find subscription group associated with subscription.
 
@@ -15500,7 +15500,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: stopDelayedCancellationForGroup
+      operationId: cancelDelayedCancellationForGroup
       description: Removing the delayed cancellation on a subscription group will ensure that the subscriptions do not get canceled at the end of the period. The request will reset the `cancel_at_end_of_period` flag to false on each member in the group.
   "/subscription_groups/{uid}/reactivate.json":
     parameters:
@@ -15595,7 +15595,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
     post:
-      summary: Create Prepayment
+      summary: Create Subscription Group Prepayment
       tags:
         - Subscription Group Invoice Account
       responses:
@@ -15635,7 +15635,7 @@ paths:
             schema:
               $ref: "../components/schemas/Subscription-Group-Prepayment-Request.yaml"
     get:
-      summary: List Prepayments
+      summary: List Prepayments For Subscription Group
       tags:
         - Subscription Group Invoice Account
       operationId: listPrepaymentsForSubscriptionGroup
@@ -15703,7 +15703,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
     post:
-      summary: Issue Service Credit
+      summary: Issue Subscription Group Service Credit
       tags:
         - Subscription Group Invoice Account
       responses:
@@ -15736,7 +15736,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: issueSubscriptionGroupServiceCredits
+      operationId: issueSubscriptionGroupServiceCredit
       description: Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
       requestBody:
         content:
@@ -15753,7 +15753,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/group-uid-path.yaml"
     post:
-      summary: Deduct Service Credit
+      summary: Deduct Subscription Group Service Credit
       tags:
         - Subscription Group Invoice Account
       responses:
@@ -15785,7 +15785,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: deductSubscriptionGroupServiceCredits
+      operationId: deductSubscriptionGroupServiceCredit
       description: Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
       requestBody:
         content:
@@ -15810,7 +15810,7 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Subscription-Response.yaml"
-      operationId: readSubscriptionByReference
+      operationId: findSubscription
       parameters:
         - schema:
             type: string
@@ -15873,7 +15873,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: updateSubscriptionDefaultPaymentProfile
+      operationId: changeSubscriptionDefaultPaymentProfile
       description: |-
         This will change the default payment profile on the subscription to the existing payment profile with the id specified.
 
@@ -15931,7 +15931,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: updateSubscriptionGroupDefaultPaymentProfile
+      operationId: changeSubscriptionGroupDefaultPaymentProfile
       description: |-
         This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
 
@@ -16003,7 +16003,7 @@ paths:
                       auto_replenish: true
                       replenish_to_amount_in_cents: 50000
                       replenish_threshold_amount_in_cents: 10000
-      operationId: createPrepaidSubscription
+      operationId: updatePrepaidSubscriptionConfiguration
       description: Use this endpoint to update a subscription's prepaid configuration.
       requestBody:
         content:
@@ -16047,7 +16047,7 @@ paths:
                         - 33060
                         - 32986
                       created_at: "2018-08-30T17:14:30-04:00"
-      operationId: createSubscriptionGroupHierarchy
+      operationId: addSubscriptionToGroup
       description: |
         For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
 
@@ -16106,7 +16106,7 @@ paths:
       description: "For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group."
   /subscriptions/preview.json:
     post:
-      summary: Subscription Preview
+      summary: Preview Subscription
       tags:
         - Subscriptions
       responses:
@@ -16428,7 +16428,7 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
     post:
-      summary: Add Coupons to Subscription
+      summary: Apply Coupons to Subscription
       tags:
         - Subscriptions
       responses:
@@ -16598,7 +16598,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: applyCouponToSubscription
+      operationId: applyCouponsToSubscription
       description: |-
         An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
 
@@ -16656,7 +16656,7 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: deleteCouponFromSubscription
+      operationId: removeCouponFromSubscription
       description: |-
         Use this endpoint to remove a coupon from an existing subscription.
 
@@ -17171,7 +17171,7 @@ paths:
         The endpoint doesn't accept a request body. Customer information differences are calculated on the application side.
   "/one_time_tokens/{chargify_token}.json":
     get:
-      summary: Get one time token details
+      summary: Read one time token details
       tags:
         - Payment Profiles
       responses:
@@ -17611,7 +17611,7 @@ paths:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: createSegments
+      operationId: bulkCreateSegments
       requestBody:
         content:
           application/json:
@@ -17654,7 +17654,7 @@ paths:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-      operationId: updateSegments
+      operationId: bulkUpdateSegments
       requestBody:
         content:
           application/json:
@@ -18087,7 +18087,7 @@ paths:
         - `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
   /components_price_points.json:
     get:
-      summary: List Components Price Points
+      summary: List All Components Price Points
       tags:
         - Components
       responses:
@@ -18214,7 +18214,7 @@ paths:
           description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
   /products_price_points.json:
     get:
-      summary: List Products Price Points
+      summary: List All Products Price Points
       tags:
         - "Product: Price Points"
       responses:
