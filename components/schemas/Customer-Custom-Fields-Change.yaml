@@ -9,3 +9,6 @@ properties:
     type: array
     items:
       $ref: "./Invoice-Custom-Field.yaml"
+required:
+  - before
+  - after
