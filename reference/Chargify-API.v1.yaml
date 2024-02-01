@@ -17120,14 +17120,16 @@ paths:
                       - original_amount: c
                         memo: dolore fugiat labore
                     custom_fields:
-                      - name: non nul
-                        value: consectetur aliqua
-                        owner_type: ad
+                      - name: CustomerStatus
+                        value: Gold
+                        owner_type: Customer
                         owner_id: 18482224
-                      - value: anim
-                        owner_type: in
-                      - owner_id: -13438519
-                      - name: ullamco non deserunt in
+                        metadatum_id: 13924
+                      - name: SubscriptionTag
+                        value: Special Subscriber
+                        owner_type: Subscription
+                        owner_id: 21344
+                        metadatum_id: 139245
                     public_url: dolo
                     previous_balance_data:
                       captured_at: "2024-01-09T11:22:23-05:00"

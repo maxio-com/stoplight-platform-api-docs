@@ -114,7 +114,7 @@ properties:
     uniqueItems: true
     minItems: 1
     items:
-      $ref: "./Proforma-Custom-Field.yaml"
+      $ref: "./Invoice-Custom-Field.yaml"
   public_url:
     type: string
 x-examples:

@@ -82,6 +82,6 @@ properties:
   custom_fields:
     type: array
     items:
-      $ref: "./Proforma-Custom-Field.yaml"
+      $ref: "./Invoice-Custom-Field.yaml"
   public_url:
     type: string
