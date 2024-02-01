@@ -10,9 +10,9 @@ properties:
   description:
     type: string
   percentage:
-    type:
-      - string
-      - number
+    oneOf:
+      - type: string
+      - type: number
   allow_negative_balance:
     type: boolean
   recurring:
