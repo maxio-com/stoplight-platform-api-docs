@@ -4,8 +4,11 @@ properties:
   before:
     type: array
     items:
-      $ref: "./Proforma-Custom-Field.yaml"
+      $ref: "./Invoice-Custom-Field.yaml"
   after:
     type: array
     items:
-      $ref: "./Proforma-Custom-Field.yaml"
+      $ref: "./Invoice-Custom-Field.yaml"
+required:
+  - before
+  - after

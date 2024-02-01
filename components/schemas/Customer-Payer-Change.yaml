@@ -2,6 +2,9 @@ title: Customer Payer Change
 type: object
 properties:
   before:
-    $ref: "./Payer-Attributes.yaml"
+    $ref: "./Invoice-Payer-Change.yaml"
   after:
-    $ref: "./Payer-Attributes.yaml"
+    $ref: "./Invoice-Payer-Change.yaml"
+required:
+  - before
+  - after
