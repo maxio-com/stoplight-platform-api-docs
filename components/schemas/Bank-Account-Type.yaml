@@ -4,4 +4,3 @@ description: Defaults to checking
 enum:
   - checking
   - savings
-default: checking

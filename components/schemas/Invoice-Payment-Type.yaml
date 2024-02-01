@@ -1,7 +1,6 @@
 title: Invoice Payment Type
 type: string
-description: The type of payment to be applied to an Invoice.
-default: external
+description: The type of payment to be applied to an Invoice. Defaults to external.
 enum:
   - external
   - prepayment

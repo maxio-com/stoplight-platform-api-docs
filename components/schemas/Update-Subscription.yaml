@@ -11,7 +11,6 @@ properties:
     description: Set to the id of a different product to change the subscription's product
   product_change_delayed:
     type: boolean
-    default: false
   next_product_id:
     type: string
     description: Set to an empty string to cancel a delayed product change.
@@ -51,7 +50,6 @@ properties:
     type:
       - boolean
       - "null"
-    default: false
     description: "Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute."
   dunning_communication_delay_time_zone:
     type:
