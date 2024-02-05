@@ -34,8 +34,7 @@ properties:
       $ref: "./Component-Price.yaml"
   use_site_exchange_rate:
     type: boolean
-    description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.
-    default: true
+    description: Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. Defaults to true during creation.
   subscription_id:
     type: integer
     description: (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for.

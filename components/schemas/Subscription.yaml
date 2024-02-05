@@ -228,7 +228,6 @@ properties:
   dunning_communication_delay_enabled:
     type: boolean
     description: "Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute."
-    default: false
   dunning_communication_delay_time_zone:
     type:
       - string
