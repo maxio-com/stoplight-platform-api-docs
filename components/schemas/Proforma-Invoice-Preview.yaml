@@ -16,8 +16,8 @@ properties:
       - null
   sequence_number:
     type:
-    - integer
-    - null
+      - integer
+      - null
   created_at:
     type: string
     minLength: 1
@@ -121,8 +121,8 @@ properties:
       $ref: "./Invoice-Custom-Field.yaml"
   public_url:
     type:
-    - string
-    - null
+      - string
+      - null
 x-examples:
   example-1:
     uid: pro_567wxy

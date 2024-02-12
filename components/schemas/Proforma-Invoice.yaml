@@ -11,12 +11,12 @@ properties:
     type: integer
   number:
     type:
-    - integer
-    - null
+      - integer
+      - null
   sequence_number:
     type:
-    - integer
-    - null
+      - integer
+      - null
   created_at:
     type: string
   delivery_date:
@@ -89,5 +89,5 @@ properties:
       $ref: "./Invoice-Custom-Field.yaml"
   public_url:
     type:
-    - string
-    - null
+      - string
+      - null
