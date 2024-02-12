@@ -10,9 +10,13 @@ properties:
   subscription_id:
     type: integer
   number:
-    type: integer
+    type:
+    - integer
+    - null
   sequence_number:
-    type: integer
+    type:
+    - integer
+    - null
   created_at:
     type: string
   delivery_date:
@@ -84,4 +88,6 @@ properties:
     items:
       $ref: "./Invoice-Custom-Field.yaml"
   public_url:
-    type: string
+    type:
+    - string
+    - null
