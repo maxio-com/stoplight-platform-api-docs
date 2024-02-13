@@ -33,7 +33,7 @@ properties:
     description: The product trial price, in integer cents
   trial_interval:
     type: integer
-    description: "The numerical trial interval. i.e. an interval of ‘30’ coupled with a `trial_interval_unit` of day would mean this product would renew every 30 days. Note: cannot be used with `expiration_interval`."
+    description: "The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product would renew every 30 days. Note: cannot be used with `expiration_interval`."
   trial_interval_unit:
     allOf:
       - $ref: "./Interval-Unit.yaml"
