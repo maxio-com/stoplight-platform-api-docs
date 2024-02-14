@@ -33,7 +33,7 @@ properties:
     oneOf:
       - $ref: "./Extended-Interval-Unit.yaml"
       - type: "null"
-    description: "A string representing the trial interval unit for this product, either month or day"
+    description: "A string representing the expiration interval unit for this product, either month or day"
   created_at:
     type: string
     format: date-time
