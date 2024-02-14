@@ -1,9 +1,0 @@
-title: Payment Response
-type: object
-properties:
-  paid_invoices:
-    type: array
-    items:
-      $ref: "./Payment.yaml"
-  prepayment:
-    $ref: "./Invoice-Prepayment.yaml"

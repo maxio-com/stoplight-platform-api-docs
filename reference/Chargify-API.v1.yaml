@@ -9298,28 +9298,48 @@ paths:
       tags:
         - Invoices
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Payment-Response.yaml"
+                $ref: "../components/schemas/Record-Payment-Response.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     paid_invoices:
-                      - invoice_uid: xyz_012345678
+                      - invoice_id: inv_bchyhr6z5grby
                         status: paid
                         due_amount: "0.0"
                         paid_amount: "50.0"
-                      - invoice_uid: xyz_012345678
+                      - invoice_id: inv_bchyhrgvyb6vm
+                        status: paid
+                        due_amount: "0.0"
+                        paid_amount: "50.0"
+                    prepayment: null
+                Example-2:
+                  value:
+                    paid_invoices:
+                      - invoice_id: inv_bchyhr6z5grby
+                        status: open
+                        due_amount: "10.0"
+                        paid_amount: "50.0"
+                    prepayment: null
+                Example-3:
+                  value:
+                    paid_invoices:
+                      - invoice_id: inv_bchyhr6z5grby
+                        status: paid
+                        due_amount: "0.0"
+                        paid_amount: "50.0"
+                      - invoice_id: inv_bchyhrgvyb6vm
                         status: paid
                         due_amount: "0.0"
                         paid_amount: "50.0"
                     prepayment:
-                      subscription_id: "123456"
-                      amount_in_cents: "5000"
-                      ending_balance_in_cents: "5000"
+                      subscription_id: 123456
+                      amount_in_cents: 9500
+                      ending_balance_in_cents: 9500
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
