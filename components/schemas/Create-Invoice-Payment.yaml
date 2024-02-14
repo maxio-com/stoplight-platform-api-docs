@@ -15,3 +15,6 @@ properties:
     type: string
     description: |
       Additional information related to the payment method (eg. Check #)
+  payment_profile_id:
+    type: integer
+    description: The ID of the payment profile to be used for the payment.
