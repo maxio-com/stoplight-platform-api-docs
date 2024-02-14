@@ -16430,7 +16430,7 @@ paths:
   "/proforma_invoices/{proforma_invoice_uid}.json":
     parameters:
       - schema:
-          type: integer
+          type: string
         name: proforma_invoice_uid
         in: path
         required: true
@@ -16748,9 +16748,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Proforma-Invoice.yaml"
+                $ref: "../components/schemas/List-Proforma-Invoices-Response.yaml"
       operationId: listProformaInvoices
       description: "By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
       x-operation-settings:
