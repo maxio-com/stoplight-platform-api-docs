@@ -31,9 +31,11 @@ properties:
   created_at:
     type: string
     description: The timestamp in which the customer object was created in Chargify
+    format: date-time
   updated_at:
     type: string
     description: The timestamp in which the customer object was last edited
+    format: date-time
   address:
     type:
       - string
@@ -89,16 +91,19 @@ properties:
       - string
       - "null"
     description: The timestamp of when the Billing Portal entry was created at for the customer
+    format: date-time
   portal_invite_last_sent_at:
     type:
       - string
       - "null"
     description: The timestamp of when the Billing Portal invite was last sent at
+    format: date-time
   portal_invite_last_accepted_at:
     description: The timestamp of when the Billing Portal invite was last accepted
     type:
       - string
       - "null"
+    format: date-time
   tax_exempt:
     type: boolean
     description: The tax exempt status for the customer. Acceptable values are true or 1 for true and false or 0 for false.

@@ -16,10 +16,10 @@ properties:
   total_canceled_subscriptions:
     type: integer
   total_active_subscriptions:
-    type: number
+    type: integer
   total_past_due_subscriptions:
-    type: number
+    type: integer
   total_unpaid_subscriptions:
-    type: number
+    type: integer
   total_dunning_subscriptions:
-    type: number
+    type: integer

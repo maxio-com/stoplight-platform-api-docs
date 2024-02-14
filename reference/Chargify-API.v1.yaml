@@ -488,7 +488,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Update-Endpoint-Request.yaml"
+              $ref: "../components/schemas/Create-or-Update-Endpoint-Request.yaml"
             examples:
               Example:
                 value:
@@ -581,7 +581,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Update-Endpoint-Request.yaml"
+              $ref: "../components/schemas/Create-or-Update-Endpoint-Request.yaml"
             examples:
               Example:
                 value:
@@ -1471,7 +1471,7 @@ paths:
                     errors: Referral code is invalid.
       x-operation-settings:
         ErrorTemplates:
-          "404": "Not Found:'{$response.body}'"
+          "404": "Invalid referral code."
       operationId: validateReferralCode
       parameters:
         - schema:
