@@ -6,4 +6,4 @@ properties:
     items:
       $ref: "./Proforma-Invoice.yaml"
   meta:
-    $ref: "./List-Meta.yaml"
+    $ref: "./List-Proforma-Invoices-Meta.yaml"
