@@ -51,9 +51,11 @@ properties:
     description: "When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units."
   period_range_start:
     type: string
+    format: date
     description: Start date for the period credited by this line. The format is `"YYYY-MM-DD"`.
   period_range_end:
     type: string
+    format: date
     description: End date for the period credited by this line. The format is `"YYYY-MM-DD"`.
   product_id:
     type: integer
@@ -74,3 +76,9 @@ properties:
       - integer
       - "null"
     description: The price point ID of the component being credited. Will be `nil` for non-component credits.
+  billing_schedule_item_id:
+    type:
+      - integer
+      - "null"
+  custom_item:
+    type: boolean

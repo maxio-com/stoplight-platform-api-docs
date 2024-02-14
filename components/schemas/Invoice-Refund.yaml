@@ -16,3 +16,9 @@ properties:
       - string
       - "null"
     description: The transaction ID for the refund as returned from the payment gateway
+  gateway_used:
+    type: string
+  gateway_handle:
+    type:
+      - string
+      - "null"
