@@ -3,3 +3,4 @@ type: object
 properties:
   expires_at:
     type: string
+    format: date-time

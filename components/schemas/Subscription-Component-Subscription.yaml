@@ -6,3 +6,4 @@ properties:
     $ref: "./Subscription-State.yaml"
   updated_at:
     type: string
+    format: date-time

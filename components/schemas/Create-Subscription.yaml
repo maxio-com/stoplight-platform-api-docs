@@ -130,6 +130,7 @@ properties:
     description: "Setting this attribute to true will cause the subscription's MRR to be added to your MRR analytics immediately. For this value to be honored, a next_billing_at must be present and set to a future date. This key/value will not be returned in the subscription response body."
   canceled_at:
     type: string
+    format: date-time
   activated_at:
     type: string
     format: date-time

@@ -5,6 +5,7 @@ properties:
     type: string
   transaction_time:
     type: string
+    format: date-time
   invoice_uid:
     type: string
   memo:

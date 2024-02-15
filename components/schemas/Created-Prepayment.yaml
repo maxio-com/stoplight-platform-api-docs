@@ -12,6 +12,7 @@ properties:
     type: string
   created_at:
     type: string
+    format: date-time
   starting_balance_in_cents:
     type: integer
     format: int64

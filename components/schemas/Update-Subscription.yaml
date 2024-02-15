@@ -27,6 +27,7 @@ properties:
     description: Use for subscriptions with product eligible for calendar billing only. Value can be 1-28 or 'end'.
   next_billing_at:
     type: string
+    format: date-time
   payment_collection_method:
     type: string
   receives_invoice_emails:

@@ -9,8 +9,10 @@ properties:
     type: string
   delivery_date:
     type: string
+    format: date
   created_at:
     type: string
+    format: date-time
   due_amount:
     type: string
   paid_amount:

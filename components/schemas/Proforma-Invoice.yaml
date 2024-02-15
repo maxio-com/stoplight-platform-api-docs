@@ -19,8 +19,10 @@ properties:
       - null
   created_at:
     type: string
+    format: date-time
   delivery_date:
     type: string
+    format: date
   status:
     type: string
   collection_method:

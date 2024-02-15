@@ -20,10 +20,10 @@ properties:
       - null
   created_at:
     type: string
-    minLength: 1
+    format: date-time
   delivery_date:
     type: string
-    minLength: 1
+    format: date
   status:
     type: string
     minLength: 1

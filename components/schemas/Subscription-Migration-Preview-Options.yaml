@@ -33,4 +33,5 @@ properties:
     $ref: "./Proration.yaml"
   proration_date:
     type: string
+    format: date-time
     description: The date that the proration is calculated from for the preview

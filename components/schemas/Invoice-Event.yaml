@@ -9,5 +9,6 @@ properties:
     $ref: "./Invoice-Event-Data.yaml"
   timestamp:
     type: string
+    format: date-time
   invoice:
     $ref: "./Invoice.yaml"
