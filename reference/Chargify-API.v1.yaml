@@ -8576,6 +8576,28 @@ paths:
             application/json:
               schema:
                 $ref: "../components/schemas/Invoice.yaml"
+        "422":
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+              examples:
+                Example-1:
+                  value:
+                    errors:
+                      - "Amount: is not a number."
+                Example-2:
+                  value:
+                    errors:
+                      - Payment amount 10.50 exceeds due amount 4.00
+                Example-3:
+                  value:
+                    errors:
+                      - Invoice must be open or in collections to apply payment
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: recordPaymentForInvoice
       description: |-
         This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
@@ -9106,6 +9128,8 @@ paths:
                         product_version: 1
                         component_id: 81
                         price_point_id: 165
+                        billing_schedule_item_id: null
+                        custom_item: false
                       - uid: cnli_8kjttvjcjx8b4
                         title: Professional Plan
                         description: 38.2% credit
@@ -9122,6 +9146,8 @@ paths:
                         product_version: 1
                         component_id: null
                         price_point_id: null
+                        billing_schedule_item_id: null
+                        custom_item: false
                       - uid: cnli_8kjttvjknzhx7
                         title: Small Instance (Hourly)
                         description: 38.2% credit
@@ -9138,6 +9164,8 @@ paths:
                         product_version: 1
                         component_id: 78
                         price_point_id: null
+                        billing_schedule_item_id: null
+                        custom_item: false
                       - uid: cnli_8kjttvjnmh25w
                         title: Large Instance (Hourly)
                         description: 38.2% credit
@@ -9154,6 +9182,8 @@ paths:
                         product_version: 1
                         component_id: 79
                         price_point_id: null
+                        billing_schedule_item_id: null
+                        custom_item: false
                       - uid: cnli_8kjttvjqn86kc
                         title: Email Messages
                         description: 38.2% credit
@@ -9170,6 +9200,8 @@ paths:
                         product_version: 1
                         component_id: 80
                         price_point_id: null
+                        billing_schedule_item_id: null
+                        custom_item: false
                       - uid: cnli_8kjttvjtxxbdd
                         title: IP Addresses
                         description: 38.2% credit
@@ -9186,6 +9218,8 @@ paths:
                         product_version: 1
                         component_id: 81
                         price_point_id: 165
+                        billing_schedule_item_id: null
+                        custom_item: false
                     discounts:
                       - uid: cndli_8k5jvdzct4h9y
                         title: Multi-service discount (10%)
@@ -9264,28 +9298,48 @@ paths:
       tags:
         - Invoices
       responses:
-        "200":
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Payment-Response.yaml"
+                $ref: "../components/schemas/Record-Payment-Response.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     paid_invoices:
-                      - invoice_uid: xyz_012345678
+                      - invoice_id: inv_bchyhr6z5grby
                         status: paid
                         due_amount: "0.0"
                         paid_amount: "50.0"
-                      - invoice_uid: xyz_012345678
+                      - invoice_id: inv_bchyhrgvyb6vm
+                        status: paid
+                        due_amount: "0.0"
+                        paid_amount: "50.0"
+                    prepayment: null
+                Example-2:
+                  value:
+                    paid_invoices:
+                      - invoice_id: inv_bchyhr6z5grby
+                        status: open
+                        due_amount: "10.0"
+                        paid_amount: "50.0"
+                    prepayment: null
+                Example-3:
+                  value:
+                    paid_invoices:
+                      - invoice_id: inv_bchyhr6z5grby
+                        status: paid
+                        due_amount: "0.0"
+                        paid_amount: "50.0"
+                      - invoice_id: inv_bchyhrgvyb6vm
                         status: paid
                         due_amount: "0.0"
                         paid_amount: "50.0"
                     prepayment:
-                      subscription_id: "123456"
-                      amount_in_cents: "5000"
-                      ending_balance_in_cents: "5000"
+                      subscription_id: 123456
+                      amount_in_cents: 9500
+                      ending_balance_in_cents: 9500
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -16396,7 +16450,7 @@ paths:
   "/proforma_invoices/{proforma_invoice_uid}.json":
     parameters:
       - schema:
-          type: integer
+          type: string
         name: proforma_invoice_uid
         in: path
         required: true
@@ -16714,9 +16768,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "../components/schemas/Proforma-Invoice.yaml"
+                $ref: "../components/schemas/List-Proforma-Invoices-Response.yaml"
       operationId: listProformaInvoices
       description: "By default, proforma invoices returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the specific field as a key in the query with a value set to `true`."
       x-operation-settings:
