@@ -1,8 +1,8 @@
-title: Upsert Endpoint Request
+title: Create or Update Endpoint Request
 description: Used to Create or Update Endpoint
 type: object
 properties:
   endpoint:
-    $ref: "./Upsert-Endpoint.yaml"
+    $ref: "./Create-or-Update-Endpoint.yaml"
 required:
   - endpoint

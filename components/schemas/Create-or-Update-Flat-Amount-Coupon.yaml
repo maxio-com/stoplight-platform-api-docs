@@ -1,4 +1,4 @@
-title: Upsert Flat Amount Coupon
+title: Create or Update Flat Amount Coupon
 type: object
 properties:
   name:

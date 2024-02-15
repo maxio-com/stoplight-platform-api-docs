@@ -1,4 +1,4 @@
-title: Upsert Product
+title: Create or Update Product
 type: object
 properties:
   name:

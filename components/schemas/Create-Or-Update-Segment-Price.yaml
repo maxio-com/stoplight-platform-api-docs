@@ -1,4 +1,4 @@
-title: Upsert Segment Price
+title: Create or Update Segment Price
 type: object
 properties:
   starting_quantity:

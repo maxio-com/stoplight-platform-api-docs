@@ -1,4 +1,4 @@
-title: Upsert Percentage Coupon
+title: Create or Update Percentage Coupon
 type: object
 properties:
   name:
