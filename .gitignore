@@ -12,4 +12,4 @@ node_modules/**
 .idea/
 .idea/*
 public/system/**
-./build/**
+build/
