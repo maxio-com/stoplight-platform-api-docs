@@ -8,7 +8,7 @@ properties:
   payment_details:
     type: string
   payment_method:
-    type: string
+    $ref: "./Invoice-Payment-Method-Type.yaml"
 required:
   - amount
   - memo
