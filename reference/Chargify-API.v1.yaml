@@ -2632,8 +2632,8 @@ paths:
                         amount_in_cents: 0
                         product_family_id: 0
                         product_family_name: string
-                        start_date: string
-                        end_date: string
+                        start_date: "2021-05-03T16:00:21-04:00"
+                        end_date: "2023-05-05T16:00:21-04:00"
                         percentage: "10"
                         recurring: true
                         recurring_scheme: do_not_recur
@@ -2642,13 +2642,13 @@ paths:
                         duration_interval_unit: string
                         duration_interval_span: string
                         allow_negative_balance: true
-                        archived_at: string
+                        archived_at: null
                         conversion_limit: string
                         stackable: true
                         compounding_strategy: compound
                         use_site_exchange_rate: true
-                        created_at: string
-                        updated_at: string
+                        created_at: "2021-05-05T16:00:21-04:00"
+                        updated_at: "2021-05-05T16:00:21-04:00"
                         discount_type: amount
                         exclude_mid_period_allocations: true
                         apply_on_cancel_at_end_of_period: true
@@ -9790,7 +9790,7 @@ paths:
                         created_at: "2022-02-22T14:07:00-05:00"
                         updated_at: "2022-02-22T14:07:00-05:00"
                         component_handle: string
-                        archived_at: string
+                        archived_at: null
       operationId: listSubscriptionComponents
       description: |-
         This request will list a subscription's applied components.
@@ -10004,8 +10004,8 @@ paths:
                         last_name: esse
                         organization: null
                         email: ex eiusmod
-                        created_at: ad occaecat cillum
-                        updated_at: ut aute proident est
+                        created_at: "2021-05-05T16:00:21-04:00"
+                        updated_at: "2021-05-05T16:00:21-04:00"
                         reference: laboris ea cupidatat
                         address: null
                         address_2: null
@@ -10015,8 +10015,8 @@ paths:
                         country: null
                         phone: null
                         portal_invite_last_sent_at: null
-                        portal_invite_last_accepted_at: reprehenderit labore voluptate
-                        portal_customer_created_at: nisi aute reprehenderit Excepteur Duis
+                        portal_invite_last_accepted_at: "2021-05-05T20:00:21-04:00"
+                        portal_customer_created_at: "2021-05-05T16:00:21-04:00"
                         cc_emails: eiusmod sunt
                         tax_exempt: true
                       product:
@@ -10461,7 +10461,7 @@ paths:
       tags:
         - Subscription Components
       responses:
-        "200":
+        "204":
           description: OK
         "422":
           description: Unprocessable Entity (WebDAV)
@@ -10500,7 +10500,7 @@ paths:
               Example:
                 value:
                   allocation:
-                    expires_at: 05/07/2021
+                    expires_at: "2021-05-05T16:00:00"
     delete:
       summary: Delete Prepaid Usage Allocation
       tags:
@@ -15184,7 +15184,7 @@ paths:
                           - 42768907
                           - 82370782
                         primary_subscription_id: 69844395
-                        next_assessment_at: "Sun, 09 Aug 2020 15:59:06 EDT -04:00"
+                        next_assessment_at: "2021-05-05T16:00:21-04:00"
                         state: active
                         cancel_at_end_of_period: false
                         account_balances:
@@ -17358,21 +17358,25 @@ paths:
           description: The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`.
         - schema:
             type: string
+            format: date
           in: query
           name: "filter[subscription][start_date]"
           description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`."
         - schema:
             type: string
+            format: date-time
           in: query
           name: "filter[subscription][start_datetime]"
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`."
         - schema:
             type: string
+            format: date
           in: query
           name: "filter[subscription][end_date]"
           description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`."
         - schema:
             type: string
+            format: date-time
           in: query
           name: "filter[subscription][end_datetime]"
           description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`."
@@ -17968,8 +17972,8 @@ paths:
                           handle: string
                           accounting_code: null
                           description: string
-                          created_at: string
-                          updated_at: string
+                          created_at: "2021-05-05T16:00:21-04:00"
+                          updated_at: "2021-05-05T16:00:21-04:00"
                         public_signup_pages:
                           - id: 0
                             return_url: string

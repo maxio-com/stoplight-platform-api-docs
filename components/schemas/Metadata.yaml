@@ -19,6 +19,7 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
   metafield_id:
     type:
       - integer

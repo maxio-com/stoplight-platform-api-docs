@@ -23,9 +23,12 @@ properties:
       - "null"
   created_at:
     type: string
+    format: date-time
   updated_at:
     type: string
+    format: date-time
   archived_at:
+    format: date-time
     type:
       - string
       - "null"

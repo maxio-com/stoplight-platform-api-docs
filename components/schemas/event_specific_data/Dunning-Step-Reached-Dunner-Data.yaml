@@ -10,10 +10,12 @@ properties:
     format: int64
   created_at:
     type: string
+    format: date-time
   attempts:
     type: integer
   last_attempted_at:
     type: string
+    format: date-time
 required:
   - state
   - subscription_id

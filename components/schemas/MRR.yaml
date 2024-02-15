@@ -14,4 +14,5 @@ properties:
     $ref: "./Breakouts.yaml"
   at_time:
     type: string
+    format: date-time
     description: ISO8601 timestamp

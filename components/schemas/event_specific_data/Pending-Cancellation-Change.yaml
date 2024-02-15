@@ -5,6 +5,7 @@ properties:
     type: string
   cancels_at:
     type: string
+    format: date-time
 required:
   - cancellation_state
   - cancels_at
