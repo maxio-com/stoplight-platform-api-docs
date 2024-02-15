@@ -8,7 +8,7 @@ properties:
   memo:
     type: string
   method:
-    $ref: "./Prepayment-Method.yaml"
+    $ref: "./Create-Prepayment-Method.yaml"
   payment_profile_id:
     type: integer
 required:
