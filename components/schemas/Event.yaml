@@ -17,7 +17,7 @@ properties:
     type: integer
   created_at:
     type: string
-    minLength: 1
+    format: date-time
   event_specific_data:
     oneOf:
       - $ref: "./event_specific_data/Subscription-Product-Change.yaml"

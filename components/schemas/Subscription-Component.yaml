@@ -43,6 +43,7 @@ properties:
     type:
       - "null"
       - string
+    format: date-time
   price_point_id:
     type:
       - integer

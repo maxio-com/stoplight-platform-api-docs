@@ -9,10 +9,13 @@ properties:
     type: string
   due_date:
     type: string
+    format: date
   issue_date:
     type: string
+    format: date
   paid_date:
     type: string
+    format: date
   due_amount:
     type: string
   paid_amount:

@@ -17,6 +17,7 @@ properties:
     type: integer
   next_assessment_at:
     type: string
+    format: date-time
   state:
     type: string
   cancel_at_end_of_period:
