@@ -1,0 +1,7 @@
+title: Upsert Product Request
+type: object
+properties:
+  product:
+    $ref: "./Upsert-Product.yaml"
+required:
+  - product

@@ -488,7 +488,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Endpoint-Request.yaml"
+              $ref: "../components/schemas/Upsert-Endpoint-Request.yaml"
             examples:
               Example:
                 value:
@@ -581,7 +581,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Endpoint-Request.yaml"
+              $ref: "../components/schemas/Upsert-Endpoint-Request.yaml"
             examples:
               Example:
                 value:
@@ -2177,7 +2177,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
+              $ref: "../components/schemas/Upsert-Coupon.yaml"
             examples:
               Percentage Coupon Example:
                 value:
@@ -2544,7 +2544,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Coupon.yaml"
+              $ref: "../components/schemas/Upsert-Coupon.yaml"
             examples:
               Example:
                 value:
@@ -5510,7 +5510,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Product-Request.yaml"
+              $ref: "../components/schemas/Upsert-Product-Request.yaml"
             examples:
               Example:
                 value:
@@ -5822,7 +5822,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Create-or-Update-Product-Request.yaml"
+              $ref: "../components/schemas/Upsert-Product-Request.yaml"
     delete:
       summary: Archive Product
       tags:

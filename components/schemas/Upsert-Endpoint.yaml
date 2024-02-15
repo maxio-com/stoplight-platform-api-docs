@@ -1,4 +1,4 @@
-title: Create or Update Endpoint
+title: Upsert Endpoint
 description: Used to Create or Update Endpoint
 type: object
 properties:

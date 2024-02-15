@@ -1,7 +1,0 @@
-title: Create or Update Product Request
-type: object
-properties:
-  product:
-    $ref: "./Create-or-Update-Product.yaml"
-required:
-  - product
