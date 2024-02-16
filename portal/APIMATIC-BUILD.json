@@ -1,0 +1,77 @@
+{
+  "$schema": "https://titan.apimatic.io/api/build/schema",
+  "buildFileVersion": "1",
+  "generatePortal": {
+    "debug": {
+      "publishReport": true
+    },
+    "pageTitle": "Maxio Advanced-Billing Developer Portal",
+    "navTitle": "Maxio Advanced-Billing Developer Portal",
+    "logoUrl": "/static/images/maxio_logo.png",
+    "logoLink": "https://www.maxio.com/",
+    "logoAltText": "Maxio Logo",
+    "faviconUrl": "/static/images/favicon.png",
+    "languageConfig": {
+      "http": {},
+      "csharp": {
+        "packageRepository": "NuGet",
+        "packageSettings": {
+          "PackageName": "Maxio.AdvancedBillingSdk",
+          "Version": "1.0.0"
+        }
+      },
+      "java": {
+        "packageRepository": "Maven",
+        "packageSettings": {
+          "GroupId": "com.maxio",
+          "PackageName": "advanced-billing-sdk",
+          "Version": "1.0.0"
+        }
+      },
+      "php": {
+        "packageRepository": "Packagist",
+        "packageSettings": {
+          "VendorName": "maxio",
+          "PackageName": "advanced-billing-sdk",
+          "Version": "1.0.0"
+        }
+      },
+      "python": {
+        "packageRepository": "PyPI",
+        "packageSettings": {
+          "PackageName": "maxio-advanced-billing-sdk",
+          "Version": "1.0.0"
+        }
+      },
+      "ruby": {
+        "packageRepository": "RubyGems",
+        "packageSettings": {
+          "PackageName": "maxio-advanced-billing-sdk",
+          "Version": "1.0.0"
+        }
+      },
+      "typescript": {
+        "packageRepository": "Npm",
+        "packageSettings": {
+          "PackageName": "@maxio-com/advanced-billing-sdk",
+          "Version": "1.0.0"
+        }
+      },
+      "go": {
+        "packageSettings": {
+          "PackageName": "github.com/maxio-com/ab-golang-sdk",
+          "Version": "v1.0.0-alpha.1"
+        }
+      }
+    },
+    "portalSettings": {
+      "enableExport": true,
+      "enableConsoleCalls": true,
+      "useProxyForConsoleCalls": false,
+      "portalSettings": {
+        "initialPlatform": "http_curl_v1",
+        "useHostedPortalScript": true
+      }
+    }
+  }
+}
