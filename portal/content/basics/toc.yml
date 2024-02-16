@@ -1,0 +1,5 @@
+toc:
+  - group: Basics
+    items:
+      - page: Signup
+        file: signup.md

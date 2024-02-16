@@ -1,0 +1,94 @@
+extends: ["spectral:oas"]
+formats: ["oas3_1"]
+functionsDir: "./spectral"
+functions:
+  - arrayPropertiesShouldHaveItemType
+  - arrayParametersShouldHaveSerializationFormat
+  - arrayParametersShouldHaveItemType
+  - schemaMustBeValid
+  - schemaMustBeReused
+
+aliases:
+  PathItem:
+    - $.paths[*]
+  OperationObject:
+    - "#PathItem[get,put,post,delete,options,head,patch,trace]"
+  MediaTypeObjects:
+    - "#OperationObject.requestBody.content[*]"
+    - "#OperationObject.responses[*].content[*]"
+  ParameterObjects:
+    - "$..parameters[*]"
+  DescribableObjects:
+    - "$.info"
+    - "#OperationObject"
+    - "#OperationObject.responses[*]"
+    - "#ParameterObjects"
+    - "$.servers[*]"
+
+rules:
+  camel-case-operation-id:
+    description: operationId should be camelCased
+    given: "#OperationObject"
+    severity: error
+    then:
+      field: operationId
+      function: casing
+      functionOptions:
+        type: camel
+  array-properties-must-have-items-with-type:
+    description: Ensures all array properties have an items attribute with a type or $ref
+    given: "$..properties[*]"
+    severity: error
+    message: "Property of type 'array' must contain valid 'items.type' property"
+    then:
+      function: arrayPropertiesShouldHaveItemType
+  array-parameters-must-have-items-with-type:
+    description: Ensures all array parameters have an items attribute with a type or $ref
+    given: "#ParameterObjects"
+    severity: error
+    message: "Parameter of type 'array' must contain valid 'items.type' property"
+    then:
+      function: arrayParametersShouldHaveItemType
+  array-parameters-must-have-serialisation-info:
+    description: Array parameters should explicitly define serialization using form and explode
+    given: "#ParameterObjects"
+    severity: warn
+    message: "{{error}}"
+    then:
+      function: arrayParametersShouldHaveSerializationFormat
+  element-must-have-description:
+    description: Parameters must have a description
+    given: "#DescribableObjects"
+    severity: warn
+    recommended: true
+    message: "Element must have a description"
+    then:
+      field: description
+      function: truthy
+  schema-must-be-valid:
+    description: Schema should use $ref or valid type and properties
+    given: "$..*.schema"
+    severity: error
+    message: "{{error}}"
+    then:
+      function: schemaMustBeValid
+  use-valid-media-type:
+    description: Use proper media type for request/response
+    given: "#MediaTypeObjects~"
+    severity: error
+    message: "Use application/json, application/xml or multipart/form-data for request/response 'content'"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - application/json
+          - application/xml
+          - multipart/form-data
+  reuse-schemas-in-media-types:
+    description: Use $ref instead of inline schema for request/response
+    given: "#MediaTypeObjects..schema"
+    severity: error
+    resolved: false
+    message: "{{error}}"
+    then:
+      function: schemaMustBeReused

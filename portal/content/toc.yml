@@ -1,0 +1,15 @@
+toc:
+  - group: Getting Started
+    items:
+      - page: Overview
+        file: introduction/overview.md
+      - generate: How to Get Started
+        from: getting-started
+      - page: Authentication
+        file: introduction/authentication.md
+  - group: Basics
+    dir: basics
+  - generate: API Endpoints
+    from: endpoints
+  - generate: Models
+    from: models
