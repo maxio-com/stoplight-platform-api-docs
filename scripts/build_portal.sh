@@ -16,8 +16,6 @@ mkdir -p build/portal
 mkdir -p build/tmp/download
 
 cp -r ./portal build/tmp/portal
-mkdir -p build/tmp/portal/spec/reference
-
 cp -r openapi/advanced-billing/ build/tmp/portal/spec/
 
 # overwrite base url for staging
