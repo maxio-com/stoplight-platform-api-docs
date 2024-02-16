@@ -18,8 +18,7 @@ mkdir -p build/tmp/download
 cp -r ./portal build/tmp/portal
 mkdir -p build/tmp/portal/spec/reference
 
-cp reference/Chargify-API.v1.yaml build/tmp/portal/spec/reference/Chargify-API.v1.yaml
-cp -r components build/tmp/portal/spec/
+cp -r openapi/advanced-billing/ build/tmp/portal/spec/
 
 # overwrite base url for staging
 if [ "$BASE_URL" != "" ]; then
