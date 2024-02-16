@@ -77,5 +77,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Upload portal
         shell: bash
-        run: echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/${{ GITHUB_REF#refs/heads/ }}'
+        run: echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/${ GITHUB_REF#refs/heads/ }'
 
