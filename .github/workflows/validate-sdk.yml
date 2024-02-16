@@ -10,6 +10,8 @@ on:
     branches:
       - "main"
       - "staging"
+env:
+  AWS_REGION : us-east-2
 jobs:
   validate-spec:
     runs-on: ubuntu-latest
@@ -57,3 +59,23 @@ jobs:
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
+  deploy-staging:
+    needs: [validate-spec, apimatic-validation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_portal.sh
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::561546946299:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Upload portal
+        shell: bash
+        run: echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/${{GITHUB_REF#refs/heads/}}'
+
