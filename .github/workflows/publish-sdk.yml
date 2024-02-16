@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: maxio-com/sdk-generator
-          ref: refs/tags/v1.0.14
+          ref: refs/tags/v2.0.0
           path: sdk-generator
           token: ${{ secrets.SDK_GENERATOR_TOKEN }}
       - name: Output Inputs
