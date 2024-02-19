@@ -10,6 +10,11 @@ on:
     branches:
       - "main"
       - "staging"
+env:
+  AWS_REGION: us-west-2
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
 jobs:
   validate-spec:
     runs-on: ubuntu-latest
@@ -31,7 +36,7 @@ jobs:
         run: npx prettier . --check
       - name: Run Spectral validator
         shell: bash
-        run: spectral lint -v -F warn -r .spectral-build.yaml -f github-actions ./reference/Chargify-API.v1.yaml
+        run: spectral lint -v -F warn -r .spectral-build.yaml -f github-actions ./openapi/advanced-billing/openapi.yaml
   apimatic-validation:
     runs-on: ubuntu-latest
     defaults:
@@ -44,7 +49,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: maxio-com/sdk-generator
-          ref: refs/tags/v1.0.15
+          ref: refs/tags/v2.0.0
           path: sdk-generator
           token: ${{ secrets.SDK_GENERATOR_TOKEN }}
       - name: Set up JDK 17
@@ -57,3 +62,23 @@ jobs:
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
+  deploy-staging:
+    needs: [validate-spec, apimatic-validation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_portal.sh
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::561546946299:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Upload portal
+        shell: bash
+        run: |
+          echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/${ GITHUB_REF#refs/heads/ }'
