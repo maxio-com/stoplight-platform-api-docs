@@ -34,7 +34,7 @@ fi
 echo "Generating portal" | tee -a "$GITHUB_STEP_SUMMARY"
 echo "Using APIMATIC-BUILD.json: " | tee -a "$GITHUB_STEP_SUMMARY"
 echo '```' >> "$GITHUB_STEP_SUMMARY"
-./build/tmp/portal/APIMATIC-BUILD.json | tee -a "$GITHUB_STEP_SUMMARY"
+cat ./build/tmp/portal/APIMATIC-BUILD.json | tee -a "$GITHUB_STEP_SUMMARY"
 echo '```' >> "$GITHUB_STEP_SUMMARY"
 
 
