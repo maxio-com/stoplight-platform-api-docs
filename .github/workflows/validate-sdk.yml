@@ -71,7 +71,7 @@ jobs:
       - name: Set envs
         run: |
           echo "BRANCH=$GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "BASE_URL=/$BRANCH" >> $GITHUB_ENV
+          echo "BASE_URL=/$GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
       - name: Build portal
         shell: bash
         env:
