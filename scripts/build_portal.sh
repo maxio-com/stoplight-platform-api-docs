@@ -32,7 +32,11 @@ fi
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
 echo "Generating portal" | tee "$GITHUB_STEP_SUMMARY"
-echo "Using APIMATIC-BUILD.json: $(cat ./build/tmp/portal/APIMATIC-BUILD.json)" | tee "$GITHUB_STEP_SUMMARY"
+echo "Using APIMATIC-BUILD.json: " | tee "$GITHUB_STEP_SUMMARY"
+echo '```' >> "$GITHUB_STEP_SUMMARY"
+./build/tmp/portal/APIMATIC-BUILD.json | tee "$GITHUB_STEP_SUMMARY"
+echo '```' >> "$GITHUB_STEP_SUMMARY"
+
 
 #RESPONSE=$(curl -X POST -sSL \
 #  --write-out '%{http_code}:::%{content_type}' \
