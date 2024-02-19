@@ -10,7 +10,7 @@ jobs:
       - name: Checkout main repository
         uses: actions/checkout@v3
       - name: Zip files
-        run: zip -r maxio-api.zip ./reference ./components
+        run: zip -r maxio-api.zip ./openapi/advanced-billing
       - name: Import to APIMatic
         run: |
           curl -X PUT -sS --url 'https://api.apimatic.io/api-entities/${{ secrets.API_ENTITY_ID }}/import-via-file' \
