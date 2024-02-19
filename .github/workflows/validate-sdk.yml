@@ -82,17 +82,10 @@ jobs:
         shell: bash
         run: |
           branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "Generating portal for branch $branch"
-          echo "Generating portal for branch $branch" >> "$GITHUB_STEP_SUMMARY"
-               
-          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch" 
-          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch" >> "$GITHUB_STEP_SUMMARY"
-          
-          echo "S3 upload completed"
-          echo "S3 upload completed" >> "$GITHUB_STEP_SUMMARY"
-               
-          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\""
-          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" >> "$GITHUB_STEP_SUMMARY"
-          
-          echo "You can access your portal at https://staging-developers.maxio.com/$branch"
-          echo "You can access your portal at https://staging-developers.maxio.com/$branch" >> "$GITHUB_STEP_SUMMARY"
+          echo "Generating portal for branch $branch" | tee "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch" | tee "$GITHUB_STEP_SUMMARY"
+
+          echo "S3 upload completed" | tee "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee "$GITHUB_STEP_SUMMARY"
+
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch" | tee "$GITHUB_STEP_SUMMARY"
