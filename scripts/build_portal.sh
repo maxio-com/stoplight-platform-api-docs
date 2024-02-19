@@ -24,8 +24,7 @@ cp -r components build/tmp/portal/spec/
 
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
-echo "Generating portal"
-echo "Generating portal" >> "$GITHUB_STEP_SUMMARY"
+echo "Generating portal" | tee "$GITHUB_STEP_SUMMARY"
 
 RESPONSE=$(curl -X POST -sSL \
   --write-out '%{http_code}:::%{content_type}' \
@@ -39,23 +38,18 @@ echo "RESPONSE=$RESPONSE"
 HTTP_CODE=$(echo "$RESPONSE" | awk -F ":::" '{print $1}')
 CONTENT_TYPE=$(echo "$RESPONSE" | awk -F ":::" '{print $2}')
 
-echo "HTTP_CODE=$HTTP_CODE"
-echo "CONTENT_TYPE=$CONTENT_TYPE"
-
-echo "HTTP_CODE=$HTTP_CODE" >> "$GITHUB_STEP_SUMMARY"
-echo "CONTENT_TYPE=$CONTENT_TYPE" >> "$GITHUB_STEP_SUMMARY"
+echo "HTTP_CODE=$HTTP_CODE" | tee "$GITHUB_STEP_SUMMARY"
+echo "CONTENT_TYPE=$CONTENT_TYPE" | tee "$GITHUB_STEP_SUMMARY"
 
 if [ "$HTTP_CODE" != "200" ]; then
-  echo "# Failed" >> "$GITHUB_STEP_SUMMARY"
+  echo "# Failed" | tee "$GITHUB_STEP_SUMMARY"
   if [ "$CONTENT_TYPE" = "application/zip" ]; then
-    echo "Portal build failed, See: build/error for details"
-    echo "Portal build failed, See: build/error for details" >> "$GITHUB_STEP_SUMMARY"
+    echo "Portal build failed, See: build/error for details" | tee "$GITHUB_STEP_SUMMARY"
     (cd build/tmp/download && unzip -qq error.zip -d error)
     /bin/mv -f build/tmp/download/error/ build/error
     exit 1
   else
-    echo "Portal build failed with message: $(cat build/tmp/download/portal)"
-    echo "Portal build failed with message: $(cat build/tmp/download/portal)" >> "$GITHUB_STEP_SUMMARY"
+    echo "Portal build failed with message: $(cat build/tmp/download/portal)" | tee "$GITHUB_STEP_SUMMARY"
     exit 1
   fi
 else
