@@ -86,12 +86,12 @@ jobs:
         shell: bash
         run: |
           branch=${{ env.BRANCH }}
-          echo "Generating portal for branch $branch" | tee "$GITHUB_STEP_SUMMARY"
-          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee "$GITHUB_STEP_SUMMARY"
+          echo "Generating portal for branch $branch" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
 
 
-          echo "S3 upload completed" | tee "$GITHUB_STEP_SUMMARY"
-          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee "$GITHUB_STEP_SUMMARY"
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
 
 
-          echo "You can access your portal at https://staging-developers.maxio.com/$branch" | tee "$GITHUB_STEP_SUMMARY"
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch" | tee -a "$GITHUB_STEP_SUMMARY"

@@ -24,17 +24,17 @@ cp -r components build/tmp/portal/spec/
 
 # overwrite base url for staging
 if [ "$BASE_URL" != "" ]; then
-  echo "Overriding base url with $BASE_URL" | tee "$GITHUB_STEP_SUMMARY"
+  echo "Overriding base url with $BASE_URL" | tee -a "$GITHUB_STEP_SUMMARY"
   sed -i '.backup' -e "s,\"baseUrl\": \"./\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
   rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 fi
 
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
-echo "Generating portal" | tee "$GITHUB_STEP_SUMMARY"
-echo "Using APIMATIC-BUILD.json: " | tee "$GITHUB_STEP_SUMMARY"
+echo "Generating portal" | tee -a "$GITHUB_STEP_SUMMARY"
+echo "Using APIMATIC-BUILD.json: " | tee -a "$GITHUB_STEP_SUMMARY"
 echo '```' >> "$GITHUB_STEP_SUMMARY"
-./build/tmp/portal/APIMATIC-BUILD.json | tee "$GITHUB_STEP_SUMMARY"
+./build/tmp/portal/APIMATIC-BUILD.json | tee -a "$GITHUB_STEP_SUMMARY"
 echo '```' >> "$GITHUB_STEP_SUMMARY"
 
 
@@ -50,18 +50,18 @@ echo '```' >> "$GITHUB_STEP_SUMMARY"
 #HTTP_CODE=$(echo "$RESPONSE" | awk -F ":::" '{print $1}')
 #CONTENT_TYPE=$(echo "$RESPONSE" | awk -F ":::" '{print $2}')
 #
-#echo "HTTP_CODE=$HTTP_CODE" | tee "$GITHUB_STEP_SUMMARY"
-#echo "CONTENT_TYPE=$CONTENT_TYPE" | tee "$GITHUB_STEP_SUMMARY"
+#echo "HTTP_CODE=$HTTP_CODE" | tee -a "$GITHUB_STEP_SUMMARY"
+#echo "CONTENT_TYPE=$CONTENT_TYPE" | tee -a "$GITHUB_STEP_SUMMARY"
 #
 #if [ "$HTTP_CODE" != "200" ]; then
-#  echo "# Failed" | tee "$GITHUB_STEP_SUMMARY"
+#  echo "# Failed" | tee -a "$GITHUB_STEP_SUMMARY"
 #  if [ "$CONTENT_TYPE" = "application/zip" ]; then
-#    echo "Portal build failed, See: build/error for details" | tee "$GITHUB_STEP_SUMMARY"
+#    echo "Portal build failed, See: build/error for details" | tee -a "$GITHUB_STEP_SUMMARY"
 #    (cd build/tmp/download && unzip -qq error.zip -d error)
 #    /bin/mv -f build/tmp/download/error/ build/error
 #    exit 1
 #  else
-#    echo "Portal build failed with message: $(cat build/tmp/download/portal)" | tee "$GITHUB_STEP_SUMMARY"
+#    echo "Portal build failed with message: $(cat build/tmp/download/portal)" | tee -a "$GITHUB_STEP_SUMMARY"
 #    exit 1
 #  fi
 #else
