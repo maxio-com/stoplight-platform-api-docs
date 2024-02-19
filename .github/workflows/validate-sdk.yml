@@ -82,4 +82,4 @@ jobs:
         shell: bash
         run: |
           branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch'
+          echo "aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch"
