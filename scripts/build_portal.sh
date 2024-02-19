@@ -68,6 +68,7 @@ else
   rm -rf build/static-portal
   (cd build/tmp/download && unzip -qq portal.zip -d ../../static-portal)
   /bin/mv -f build/static-portal/apimatic-debug/ build/apimatic-debug
+  /bin/mv -f build/static-portal/static/sdks build/sdks
   echo "## Portal generated with success" >> "$GITHUB_STEP_SUMMARY"
   echo "Success. Go to build/static-portal and run 'http-server' (you need to install http-server first: 'npm install http-server -g')"
 fi
