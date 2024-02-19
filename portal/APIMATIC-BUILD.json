@@ -10,7 +10,8 @@
     "logoUrl": "/static/images/maxio_logo.png",
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
-    "faviconUrl": "/static/images/favicon.png",
+    "faviconUrl": "static/images/favicon.png",
+    "useHostedPortalScript": true,
     "languageConfig": {
       "http": {},
       "csharp": {
@@ -70,8 +71,8 @@
       "enableConsoleCalls": true,
       "useProxyForConsoleCalls": false,
       "initialPlatform": "http_curl_v1",
-      "useHostedPortalScript": true,
       "languageSettings": {
+        "http_curl_v1": {},
         "java_eclipse_jre_lib": {
           "disableSdkDownload": true
         },
