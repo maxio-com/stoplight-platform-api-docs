@@ -65,6 +65,8 @@ jobs:
   deploy-staging:
     needs: [validate-spec, apimatic-validation]
     runs-on: ubuntu-latest
+    env:
+      BRANCH: ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
@@ -72,7 +74,7 @@ jobs:
         shell: bash
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
-          BASE_URL: /${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          BASE_URL: /${{ env.BRANCH }}
         run: ./scripts/build_portal.sh
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -82,13 +84,13 @@ jobs:
       - name: Upload portal
         shell: bash
         run: |
-          branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          branch=${{ env.BRANCH }}
           echo "Generating portal for branch $branch" | tee "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee "$GITHUB_STEP_SUMMARY"
-          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
+          
 
           echo "S3 upload completed" | tee "$GITHUB_STEP_SUMMARY"
           echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee "$GITHUB_STEP_SUMMARY"
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
+         
 
           echo "You can access your portal at https://staging-developers.maxio.com/$branch" | tee "$GITHUB_STEP_SUMMARY"
