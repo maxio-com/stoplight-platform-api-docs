@@ -49,7 +49,7 @@ npm install -g @stoplight/spectral-cli
 And then to run linting (execute in the main repo directory):
 
 ```shell
- spectral lint -v -F warn ./openapi/advanced-billing/openapi.yaml
+ spectral lint -v -F warn ./reference/Chargify-API.v1.yaml
 ```
 
 You need to fix all Spectral warnings/errors before commit!
@@ -68,7 +68,7 @@ Look at `Build SDKs` step, here is a sample error message:
 
 ```text
 > Task :validateSpec
-Validating spec ../openapi/advanced-billing/openapi.yaml
+Validating spec ../reference/Chargify-API.v1.yaml
 
 Spec has issues or recommendations.
 

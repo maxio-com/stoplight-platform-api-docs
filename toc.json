@@ -7,12 +7,12 @@
     {
       "type": "item",
       "title": "Chargify API",
-      "uri": "openapi/advanced-billing/openapi.yaml"
+      "uri": "reference/Chargify-API.v1.yaml"
     },
     {
       "type": "item",
       "title": "Chargify Legacy API",
-      "uri": "openapi/advanced-billing-legacy/openapi.yaml"
+      "uri": "reference/Chargify-Legacy-API.yaml"
     }
   ]
 }

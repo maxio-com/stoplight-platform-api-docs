@@ -65,7 +65,6 @@
       }
     },
     "portalSettings": {
-      "baseUrl": "./",
       "enableExport": true,
       "enableConsoleCalls": true,
       "useProxyForConsoleCalls": false,
