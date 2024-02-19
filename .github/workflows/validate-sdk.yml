@@ -81,4 +81,5 @@ jobs:
       - name: Upload portal
         shell: bash
         run: |
-          echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/${ GITHUB_REF#refs/heads/ }'
+          branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo 'aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch'
