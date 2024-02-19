@@ -65,16 +65,17 @@ jobs:
   deploy-staging:
     needs: [validate-spec, apimatic-validation]
     runs-on: ubuntu-latest
-    env:
-      BRANCH: ${ {GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} }
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
+      - name: Set envs
+        run: |
+          echo "BRANCH=$GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "BASE_URL=/BRANCH" >> $GITHUB_ENV
       - name: Build portal
         shell: bash
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
-          BASE_URL: /${{ env.BRANCH }}
         run: ./scripts/build_portal.sh
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
