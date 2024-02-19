@@ -71,7 +71,6 @@ jobs:
       - name: Set envs
         run: |
           echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "BASE_URL=https://staging-developers.maxio.com/${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
       - name: Build portal
         shell: bash
         env:
