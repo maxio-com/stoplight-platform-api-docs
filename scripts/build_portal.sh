@@ -22,6 +22,13 @@ cp reference/Chargify-API.v1.yaml build/tmp/portal/spec/reference/Chargify-API.v
 cp reference/APIMATIC-META.json build/tmp/portal/spec/reference/APIMATIC-META.json
 cp -r components build/tmp/portal/spec/
 
+# overwrite base url for staging
+if [ "$BASE_URL" != "" ]; then
+  echo "Overriding base url with $BASE_URL" | tee "$GITHUB_STEP_SUMMARY"
+  sed -i '.backup' -e "s,\"baseUrl\": \"./\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
+  rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
+fi
+
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
 echo "Generating portal" | tee "$GITHUB_STEP_SUMMARY"
