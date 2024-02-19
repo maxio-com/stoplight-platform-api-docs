@@ -7,7 +7,7 @@
     },
     "pageTitle": "Maxio Advanced-Billing Developer Portal",
     "navTitle": "Maxio Advanced-Billing Developer Portal",
-    "logoUrl": "/static/images/maxio_logo.png",
+    "logoUrl": "static/images/maxio_logo.png",
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
     "faviconUrl": "static/images/favicon.png",
