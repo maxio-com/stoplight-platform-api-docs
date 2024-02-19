@@ -88,5 +88,11 @@ jobs:
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch" 
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch" >> "$GITHUB_STEP_SUMMARY"
 #          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch
-
-
+          echo "S3 upload completed"
+          echo "S3 upload completed" >> "$GITHUB_STEP_SUMMARY"
+               
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\""
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" >> "$GITHUB_STEP_SUMMARY"
+#          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch"
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch" >> "$GITHUB_STEP_SUMMARY"
