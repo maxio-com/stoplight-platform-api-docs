@@ -70,8 +70,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Set envs
         run: |
-          echo "BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "BASE_URL=/${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "BASE_URL=/${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
       - name: Build portal
         shell: bash
         env:
