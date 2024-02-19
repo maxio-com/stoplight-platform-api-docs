@@ -69,9 +69,30 @@
       "enableExport": true,
       "enableConsoleCalls": true,
       "useProxyForConsoleCalls": false,
-      "portalSettings": {
-        "initialPlatform": "http_curl_v1",
-        "useHostedPortalScript": true
+      "initialPlatform": "http_curl_v1",
+      "useHostedPortalScript": true,
+      "languageSettings": {
+        "java_eclipse_jre_lib": {
+          "disableSdkDownload": true
+        },
+        "cs_net_standard_lib": {
+          "disableSdkDownload": true
+        },
+        "php_generic_lib_v2": {
+          "disableSdkDownload": true
+        },
+        "python_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "ruby_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "ts_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "go_generic_lib": {
+          "disableSdkDownload": true
+        }
       }
     }
   }
