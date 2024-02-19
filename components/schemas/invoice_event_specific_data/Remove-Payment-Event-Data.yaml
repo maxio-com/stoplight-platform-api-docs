@@ -19,7 +19,7 @@ properties:
     format: date-time
     description: 'Transaction time of the original payment, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"'
   payment_method:
-    $ref: "../../../openapi.yaml#/components/schemas/Invoice-Event-Payment"
+    $ref: "../../../reference/Chargify-API.v1.yaml#/components/schemas/Invoice-Event-Payment"
   prepayment:
     type: boolean
     description: The flag that shows whether the original payment was a prepayment or not

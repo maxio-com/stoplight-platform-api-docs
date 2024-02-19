@@ -16,7 +16,7 @@ properties:
     format: date-time
     description: 'The time the payment was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"'
   payment_method:
-    $ref: "../../../openapi.yaml#/components/schemas/Invoice-Event-Payment"
+    $ref: "../../../reference/Chargify-API.v1.yaml#/components/schemas/Invoice-Event-Payment"
   transaction_id:
     type: integer
     description: The Chargify id of the original payment
