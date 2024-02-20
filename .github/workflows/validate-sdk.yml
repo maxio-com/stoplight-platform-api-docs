@@ -1,6 +1,6 @@
-# This workflow will validate the OpenAPI specification and build SDKs based on the specification
+# This workflow will validate the OpenAPI specification and build portal based on the specification
 # PRs cannot be merged if the specification is not compatible with SDK generator.
-name: Validate specification and build SDKs
+name: Build and deploy
 on:
   push:
     branches:
@@ -81,11 +81,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::561546946299:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
           aws-region: ${{ env.AWS_REGION }}
-      - name: Upload portal
+      - name: Deploy Staging
         shell: bash
         run: |
           branch=${{ env.BRANCH }}
-          echo "Generating portal for branch $branch" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
 

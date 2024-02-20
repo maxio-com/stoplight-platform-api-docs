@@ -1,0 +1,38 @@
+name: Deploy prod
+on:
+  push:
+    branches:
+      - "main"
+env:
+  AWS_REGION: us-west-2
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_portal.sh
+      #       TODO use role for prod
+      #      - name: Configure aws credentials
+      #        uses: aws-actions/configure-aws-credentials@v4
+      #        with:
+      #          role-to-assume: arn:aws:iam::561546946299:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+      #          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy Prod
+        shell: bash
+        run: |
+          echo "This is a dry run! No production env is available yet and nothing will be deployed!" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths "/*" | tee -a "$GITHUB_STEP_SUMMARY"
+
+          echo "Deploy completed" | tee -a "$GITHUB_STEP_SUMMARY"
