@@ -1,6 +1,6 @@
 # This workflow will validate the OpenAPI specification and build portal based on the specification
 # PRs cannot be merged if the specification is not compatible with SDK generator.
-name: Build and deploy
+name: Validate and deploy to staging
 on:
   push:
     branches:
