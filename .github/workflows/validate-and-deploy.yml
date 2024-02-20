@@ -113,7 +113,7 @@ jobs:
 
           echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Skip deploy Prod
-        if: github.event_name != 'push' && github.ref_name != 'main' && github.ref_type != 'branch'
+        if: github.event_name != 'push' || github.ref_name != 'main' || github.ref_type != 'branch'
         shell: bash
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
