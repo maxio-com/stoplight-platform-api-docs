@@ -13,7 +13,7 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::561546946299:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
           aws-region: ${{ env.AWS_REGION }}
       - name: Delete portal
         shell: bash
