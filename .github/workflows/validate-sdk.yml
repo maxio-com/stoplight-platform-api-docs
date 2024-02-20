@@ -1,6 +1,6 @@
-# This workflow will validate the OpenAPI specification and build SDKs based on the specification
+# This workflow will validate the OpenAPI specification and build portal based on the specification
 # PRs cannot be merged if the specification is not compatible with SDK generator.
-name: Validate specification and build SDKs
+name: Validate and deploy to staging
 on:
   push:
     branches:
@@ -10,6 +10,11 @@ on:
     branches:
       - "main"
       - "staging"
+env:
+  AWS_REGION: us-west-2
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
 jobs:
   validate-spec:
     runs-on: ubuntu-latest
@@ -57,3 +62,35 @@ jobs:
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
+  deploy-staging:
+    needs: [validate-spec, apimatic-validation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Set envs
+        run: |
+          echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_portal.sh
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy Staging
+        shell: bash
+        run: |
+          branch=${{ env.BRANCH }}
+          echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
+
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
