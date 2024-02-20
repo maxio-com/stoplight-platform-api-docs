@@ -64,7 +64,7 @@ jobs:
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
-  deploy-staging:
+  deploy:
     needs: [validate-spec, apimatic-validation]
     runs-on: ubuntu-latest
     steps:
@@ -88,6 +88,7 @@ jobs:
         run: |
           branch=${{ env.BRANCH }}
           branch="${branch// /_}"
+          echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
@@ -101,6 +102,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
         shell: bash
         run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete
@@ -110,3 +112,10 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/*"
 
           echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Skip deploy Prod
+        if: github.ref != 'refs/heads/main' || github.event_name != 'pull_request' || github.event.action != 'closed' || github.event.pull_request.merged != true
+        shell: bash
+        run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "### Skipped" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Reason: Not a merge to main" | tee -a "$GITHUB_STEP_SUMMARY"
