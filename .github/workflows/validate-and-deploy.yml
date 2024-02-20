@@ -119,3 +119,4 @@ jobs:
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "### Skipped" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Reason: Not a merge to main" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "$GITHUB_CONTEXT"
