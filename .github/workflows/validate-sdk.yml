@@ -93,4 +93,4 @@ jobs:
           echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
 
-          echo "You can access your portal at https://staging-developers.maxio.com/$branch" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
