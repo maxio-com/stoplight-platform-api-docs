@@ -1,6 +1,8 @@
 # This workflow will validate the OpenAPI specification and build portal based on the specification
 # PRs cannot be merged if the specification is not compatible with SDK generator.
-name: Validate and deploy to staging
+# Portal will be deployed to a /branch path on staging.
+# When PR is merged to the main it would be deployed to prod.
+name: Validate and deploy
 on:
   push:
     branches:
@@ -95,3 +97,16 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
 
           echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Deploy Prod
+        if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        shell: bash
+        run: |
+          echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/*"
+
+          echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
