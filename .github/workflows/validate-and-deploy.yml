@@ -115,6 +115,8 @@ jobs:
       - name: Skip deploy Prod
         if: github.ref != 'refs/heads/main' || github.event_name != 'pull_request' || github.event.action != 'closed' || github.event.pull_request.merged != true
         shell: bash
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "### Skipped" | tee -a "$GITHUB_STEP_SUMMARY"
