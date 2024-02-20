@@ -19,5 +19,7 @@ jobs:
         shell: bash
         run: |
           branch=${{ github.event.ref }}
+          branch="${branch// /_}"
           echo "Deleting staging deployment for $branch" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 rm --recursive s3://STAGING_S3_BUCKET/$branch" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 rm --recursive s3://STAGING_S3_BUCKET/$branch

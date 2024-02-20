@@ -85,6 +85,7 @@ jobs:
         shell: bash
         run: |
           branch=${{ env.BRANCH }}
+          branch="${branch// /_}"
           echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
