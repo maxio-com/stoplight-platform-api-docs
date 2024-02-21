@@ -6,9 +6,13 @@ properties:
   site_id:
     type: integer
   customer_id:
-    type: integer
+    type:
+      - integer
+      - null
   subscription_id:
-    type: integer
+    type:
+      - integer
+      - null
   number:
     type:
       - integer
