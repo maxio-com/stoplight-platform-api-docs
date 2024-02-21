@@ -7,6 +7,10 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
+      - page: Client Libraries
+        file: introduction/client-libraries.md
+      - page: API Guidelines
+        file: introduction/api-guidelines.md
   - group: Basics
     dir: basics
   - generate: API Endpoints

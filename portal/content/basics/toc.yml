@@ -3,3 +3,9 @@ toc:
     items:
       - page: Signup
         file: signup.md
+      - page: Product
+        file: product.md
+      - page: Components
+        file: components.md
+      - page: Subscription
+        file: subscriptions.md
