@@ -6,17 +6,21 @@ properties:
   site_id:
     type: integer
   customer_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   subscription_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   number:
     type:
       - integer
-      - null
+      - "null"
   sequence_number:
     type:
       - integer
-      - null
+      - "null"
   created_at:
     type: string
     format: date-time
@@ -92,4 +96,4 @@ properties:
   public_url:
     type:
       - string
-      - null
+      - "null"
