@@ -14,7 +14,9 @@ properties:
       - integer
       - "null"
   customer_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   created_at:
     type: string
     format: date-time
