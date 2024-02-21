@@ -3,7 +3,9 @@ type: object
 description: Information about the customer who is owner or recipient the invoiced subscription.
 properties:
   chargify_id:
-    type: integer
+    type:
+      - integer
+      - "null"
   first_name:
     type: string
   last_name:
