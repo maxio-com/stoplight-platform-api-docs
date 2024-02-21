@@ -5,7 +5,7 @@ properties:
   chargify_id:
     type:
       - integer
-      - null
+      - "null"
   first_name:
     type: string
   last_name:

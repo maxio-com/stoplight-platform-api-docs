@@ -79,7 +79,7 @@ properties:
   site_gateway_setting_id:
     type:
       - integer
-      - null
+      - "null"
   gateway_handle:
     type:
       - string

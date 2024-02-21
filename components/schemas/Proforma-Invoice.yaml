@@ -8,19 +8,19 @@ properties:
   customer_id:
     type:
       - integer
-      - null
+      - "null"
   subscription_id:
     type:
       - integer
-      - null
+      - "null"
   number:
     type:
       - integer
-      - null
+      - "null"
   sequence_number:
     type:
       - integer
-      - null
+      - "null"
   created_at:
     type: string
     format: date-time
@@ -96,4 +96,4 @@ properties:
   public_url:
     type:
       - string
-      - null
+      - "null"
