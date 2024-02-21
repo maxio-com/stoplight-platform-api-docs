@@ -13,11 +13,11 @@ properties:
   number:
     type:
       - string
-      - null
+      - "null"
   sequence_number:
     type:
       - integer
-      - null
+      - "null"
   created_at:
     type: string
     format: date-time
@@ -122,7 +122,7 @@ properties:
   public_url:
     type:
       - string
-      - null
+      - "null"
 x-examples:
   example-1:
     uid: pro_567wxy
