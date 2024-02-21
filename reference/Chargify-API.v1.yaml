@@ -7,67 +7,51 @@ info:
   description: |-
     ## Introduction
 
-    ### API Integration
+    ### API Reference
 
-    Maxio Advanced Billing (formerly Chargify API) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
-
-    ### Testing Guide
-
-    Maxio Advanced Billing has compiled a [testing guide](https://chargify.zendesk.com/hc/en-us/articles/4407904658587) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
-
-    + Test credit card basics
-    + Test site limits
-    + Live mode versus test mode
-
-    We strongly suggest reading over the testing guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
-
-    ### Engage Support
-
-    We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” so we can coordinate with you to ensure your import process goes smoothly.
-
-    Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Advanced Billing API.
-
-    If you have any additional questions regarding our documentation please don't hesitate in reaching out.
-
-    ### Support Access
-
-    Access to our Technical Specialist team for API support is currently limited to purchasers of our larger Maxio support plans.
-
-    But don’t worry! There are quite a few options to help you get the answers you need:
-
-    - [Read our documentation for developers](https://developers.chargify.com/docs/developer-docs/ZG9jOjM0NjA3MQ-overview)
-    - Explore the endpoints of our API Documentation
-    - [Watch our videos and tutorials](https://chargify.com/tutorials)
-    - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
-
-    ## API Overview
-
-    The Chargify API allows you to interact with our system programmatically from your own application. Using the API you interact with Resources such as:
-
-    - Products
-    - Subscriptions
-    - Customers
-    - etc.
-
-    The API attempts to conform to the [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) design principles.
-    You interact with the resources exposed via the API by accessing resource collection and element URIs using the HTTP verbs (GET, POST, PUT, and DELETE).
-    Chargify accepts and returns both JSON and XML data via the API.
-
-    You’ll likely need access to a web developer or programmer (if you’re not one) to get the most use out of the API.
-
-    ### Available Formats: JSON and XML
-
-    JSON is the primary and recommended format for use with the Chargify API.  XML is also provided as a backwards compatible option for Merchants who require it.
+    Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST. One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples).
+    The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
     ### Authentication
 
     Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](https://developers.chargify.com/docs/developer-docs/ZG9jOjE1NTUxNQ-authentication)
+
+    ### Account
+
+    Your account can be reached upon logging in at [app.chargify.com](https://app.chargify.com/login.html).
 
     ### URL
 
     The URL for API requests includes the subdomain of the Site you are working with:
 
     `https://<subdomain>.chargify.com/<resource URI>`
+
+    ## Integrations
+
+    Advanced Billing has partnered with many SaaS solutions to help you manage your business. The complete list of integrations is available [on Maxio.com](https://www.maxio.com/integrations).
+
+    For more information about existing integrations, please see this [Integrations help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405429933069).
+
+    ## Development
+
+    If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
+
+    Another handy tool is [Webhook.site](https://webhook.site/). You could send your request to their temporary URL instead of us to see visually what it is you’re sending, if you’re not sure.
+
+    While you can certainly write your own code to interact with Advanced Billing, it's likely someone has already written code for your platform.
+
+    ### Security
+
+    **TLS/SSL**
+
+    Advanced Billing no longer supports TLS 1.0 or TLS 1.1 over HTTPS on the chargify.com domain. Any older browsers or API clients that do not support TLS 1.2 will no longer work. This change is mandated by the PCI Security Council and affects all merchants and service providers processing or transmitting credit card data.
+
+    For more information, please see our [help article on Security](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404986900493).
+
+    **Payment Card Industry (PCI)**
+
+    For more information about our PCI auditing and related updates, please see our blog post, [What You Need to Know About PCI](https://www.maxio.com/blog/what-you-need-to-know-about-pci).
+
 
     ### Response Data
 
