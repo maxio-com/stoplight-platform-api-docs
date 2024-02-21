@@ -1,0 +1,121 @@
+# This workflow will validate the OpenAPI specification and build portal based on the specification
+# PRs cannot be merged if the specification is not compatible with SDK generator.
+# Portal will be deployed to a /branch path on staging.
+# When PR is merged to the main it would be deployed to prod.
+name: Validate and deploy
+on:
+  push:
+    branches:
+      - "main"
+      - "staging"
+  pull_request:
+    branches:
+      - "main"
+      - "staging"
+env:
+  AWS_REGION: us-west-2
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+jobs:
+  validate-spec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.18
+      - name: Install node deps
+        shell: bash
+        run: npm ci
+      - name: Install Spectral
+        shell: bash
+        run: npm install -g @stoplight/spectral-cli
+      - name: Check code formatting
+        shell: bash
+        run: npx prettier . --check
+      - name: Run Spectral validator
+        shell: bash
+        run: spectral lint -v -F warn -r .spectral-build.yaml -f github-actions ./reference/Chargify-API.v1.yaml
+  apimatic-validation:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./sdk-generator
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Checkout sdk-generator
+        uses: actions/checkout@v3
+        with:
+          repository: maxio-com/sdk-generator
+          ref: refs/tags/v1.0.15
+          path: sdk-generator
+          token: ${{ secrets.SDK_GENERATOR_TOKEN }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+      - name: Validate spec with APIMatic
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./gradlew clean apimaticValidation -PoverrideApiDocsRelativePath=..
+  deploy:
+    needs: [validate-spec, apimatic-validation]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Set envs
+        run: |
+          echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_portal.sh
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy Staging
+        shell: bash
+        run: |
+          branch=${{ env.BRANCH }}
+          branch="${branch// /_}"
+          echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
+
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Deploy Prod
+        if: github.event_name == 'push' && github.ref_name == 'main' && github.ref_type == 'branch'
+        shell: bash
+        run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/*"
+
+          echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Skip deploy Prod
+        if: github.event_name != 'push' || github.ref_name != 'main' || github.ref_type != 'branch'
+        shell: bash
+        run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "### Skipped" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Reason: Not a merge to main" | tee -a "$GITHUB_STEP_SUMMARY"

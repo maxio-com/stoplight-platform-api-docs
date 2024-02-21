@@ -7,10 +7,11 @@
     },
     "pageTitle": "Maxio Advanced-Billing Developer Portal",
     "navTitle": "Maxio Advanced-Billing Developer Portal",
-    "logoUrl": "/static/images/maxio_logo.png",
+    "logoUrl": "static/images/maxio_logo.png",
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
-    "faviconUrl": "/static/images/favicon.png",
+    "faviconUrl": "static/images/favicon.png",
+    "useHostedPortalScript": true,
     "languageConfig": {
       "http": {},
       "csharp": {
@@ -65,12 +66,34 @@
       }
     },
     "portalSettings": {
+      "baseUrl": "./",
       "enableExport": true,
       "enableConsoleCalls": true,
       "useProxyForConsoleCalls": false,
-      "portalSettings": {
-        "initialPlatform": "http_curl_v1",
-        "useHostedPortalScript": true
+      "initialPlatform": "http_curl_v1",
+      "languageSettings": {
+        "http_curl_v1": {},
+        "java_eclipse_jre_lib": {
+          "disableSdkDownload": true
+        },
+        "cs_net_standard_lib": {
+          "disableSdkDownload": true
+        },
+        "php_generic_lib_v2": {
+          "disableSdkDownload": true
+        },
+        "python_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "ruby_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "ts_generic_lib": {
+          "disableSdkDownload": true
+        },
+        "go_generic_lib": {
+          "disableSdkDownload": true
+        }
       }
     }
   }
