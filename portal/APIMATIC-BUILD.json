@@ -118,31 +118,37 @@
           "headings": {
             "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
             "h1": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "1.5rem",
               "fontWeight": "600",
               "lineHeight": "2rem"
             },
             "h2": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "1.25rem",
               "fontWeight": "600",
               "lineHeight": "1.75rem"
             },
             "h3": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "1rem",
               "fontWeight": "600",
               "lineHeight": "1.5rem"
             },
             "h4": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "0.875rem",
               "fontWeight": "600",
               "lineHeight": "1.25rem"
             },
             "h5": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "0.875rem",
               "fontWeight": "600",
               "lineHeight": "1.25rem"
             },
             "h6": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "0.875rem",
               "fontWeight": "600",
               "lineHeight": "1.25rem"
@@ -151,16 +157,19 @@
           "body": {
             "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
             "text1": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "1rem",
               "fontWeight": "400",
               "lineHeight": "1.5rem"
             },
             "text2": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "0.875rem",
               "fontWeight": "400",
               "lineHeight": "1.25rem"
             },
             "text3": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
               "fontSize": "0.75rem",
               "fontWeight": "400",
               "lineHeight": "1.125rem"
@@ -169,11 +178,13 @@
           "code": {
             "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
             "inlineCode": {
+              "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
               "fontSize": "0.875rem",
               "fontWeight": "400",
               "lineHeight": "1.25rem"
             },
             "blockCode": {
+              "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
               "fontSize": "0.875rem",
               "fontWeight": "400",
               "lineHeight": "1.25rem"
