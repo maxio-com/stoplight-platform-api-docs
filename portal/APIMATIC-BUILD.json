@@ -99,15 +99,15 @@
         "palette": {
           "primaryColor": "#0046FF",
           "secondaryColor": "#FFFFFF",
-          "linkColor": "#000000",
+          "linkColor": "#006EFE",
           "colors": {
             "C000": "#F5F5F5",
             "C200": "#FFFFFF",
             "C300": "#D9D9D9",
-            "C400": "#8F8F8F",
-            "C600": "#4A4A4A",
-            "C700": "#4A4A4A",
-            "C800": "#636363",
+            "C400": "#B4B4B4",
+            "C600": "#797979",
+            "C700": "#797979",
+            "C800": "#2E2E2E",
             "C900": "#000000"
           }
         },
