@@ -105,3 +105,5 @@ properties:
     description: The price point ID of the line item's product
   custom_item:
     type: boolean
+  kind:
+    type: string

@@ -16903,7 +16903,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Proforma-Invoice-Preview.yaml"
+                $ref: "../components/schemas/Proforma-Invoice.yaml"
         "404":
           description: Not Found
         "422":
