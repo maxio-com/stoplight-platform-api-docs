@@ -11,7 +11,9 @@ Setup authentication credentials.
 Submit your Chargify API request
 Verify results
 “Next Steps”
+
 # SDK Quickstart
+
 Tutorials for each language that covers:
 Authentication credentials
 Client library install
@@ -19,7 +21,6 @@ Client instance initialization
 Product creation
 Result verification
 “Next Steps”
-
 
 ### Testing Guide
 
