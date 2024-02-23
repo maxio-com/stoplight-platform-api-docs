@@ -11,6 +11,9 @@ toc:
         file: introduction/client-libraries.md
       - page: API Guidelines
         file: introduction/api-guidelines.md
+      - page: Connected Sites
+        file: introduction/connected-sites.md
+
   - group: Basics
     dir: basics
   - generate: API Endpoints
