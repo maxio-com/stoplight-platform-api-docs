@@ -7,9 +7,15 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
+      - group: About the API
+        dir: introduction/about-the-api
+  - group: Core Concepts
+    dir: core-concepts
   - group: Development Tools
     dir: development-tools
-  - generate: API Endpoints
-    from: endpoints
-  - generate: Models
-    from: models
+  - group: Advanced Billing API
+    items:
+      - generate: API Endpoints
+        from: endpoints
+      - generate: Models
+        from: models

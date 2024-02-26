@@ -4,16 +4,6 @@ Welcome to the Maxio Advanced Billing Developer Portal. Maxio Advanced Billing i
 
 This documentation will help you get started. If you have any questions, please let us know.
 
-# SDK Quickstart
-
-Tutorials for each language that covers:
-Authentication credentials
-Client library install
-Client instance initialization
-Product creation
-Result verification
-“Next Steps”
-
 ### Testing Guide
 
 Maxio Advanced Billing has compiled a [testing guide](https://maxio-chargify.zendesk.com/hc/en-us/articles/23420740348429-Getting-Started-as-a-User) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
@@ -30,7 +20,7 @@ We strongly suggest exploring the developer portal and API guide, as well as the
 
 ### Engage Support
 
-We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” and/or ""support@maxio.com" so we can coordinate with you to ensure your import process goes smoothly.
+We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” and/or "support@maxio.com" so we can coordinate with you to ensure your import process goes smoothly.
 
 Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Advanced Billing API.
 

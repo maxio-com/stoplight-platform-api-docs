@@ -1,18 +1,7 @@
 toc:
   - group: Development Tools
     items:
-      - page: Signup
-        file: signup.md
-      - page: Product
-        file: product.md
-      - page: Components
-        file: components.md
-      - page: Subscription
-        file: subscriptions.md
       - page: Client Libraries
         file: client-libraries.md
-      - page: API Guidelines
-        file: api-guidelines.md
-      - page: Connected Sites
-        file: connected-sites.md
-        dir: Chargify JS
+      - group: Chargify JS
+        dir: chargify-js

@@ -1,5 +1,5 @@
 toc:
-  - group: Chargify JS
-    items:
-      - page: Overview
-        file: overview.md
+  - page: Overview
+    file: overview.md
+  - page: Configurations
+    file: configurations.md

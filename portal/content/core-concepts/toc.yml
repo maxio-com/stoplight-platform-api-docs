@@ -1,0 +1,13 @@
+toc:
+  - group: Core Concepts
+    items:
+      - page: Connected Sites
+        file: connected-sites.md
+      - page: Product
+        file: product.md
+      - page: Components
+        file: components.md
+      - page: Subscription
+        file: subscriptions.md
+      - page: Signup
+        file: signup.md

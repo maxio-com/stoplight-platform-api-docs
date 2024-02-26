@@ -1,4 +1,4 @@
-# API Guidelines
+# Overview
 
 Our many merchants all use our API for different purposes. API access is included on all plans at no charge because we believe that you are the owner of your data and you should never feel like your data is "locked up".
 
