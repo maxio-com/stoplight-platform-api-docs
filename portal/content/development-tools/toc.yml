@@ -1,5 +1,5 @@
 toc:
-  - group: Developement Tools
+  - group: Development Tools
     items:
       - page: Signup
         file: signup.md
@@ -9,3 +9,9 @@ toc:
         file: components.md
       - page: Subscription
         file: subscriptions.md
+      - page: Client Libraries
+        file: client-libraries.md
+      - page: API Guidelines
+        file: api-guidelines.md
+      - page: Connected Sites
+        file: connected-sites.md
