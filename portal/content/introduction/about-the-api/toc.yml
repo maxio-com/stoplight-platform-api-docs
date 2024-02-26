@@ -1,3 +1,11 @@
 toc:
   - page: Overview
     file: overview.md
+  - page: Error Handling & Rate Limiting
+    file: error-handling.md
+  - page: List Operations
+    file: list-operations.md
+  - page: Webhooks
+    file: webhooks.md
+  - page: Versioning
+    file: versioning.md
