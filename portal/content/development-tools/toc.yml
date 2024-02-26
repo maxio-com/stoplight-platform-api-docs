@@ -1,7 +1,5 @@
 toc:
   - group: Development Tools
     items:
-      - page: Client Libraries
-        file: client-libraries.md
       - group: Chargify JS
         dir: chargify-js

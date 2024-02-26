@@ -3,3 +3,9 @@ toc:
     file: overview.md
   - page: Configurations
     file: configurations.md
+  - page: Examples
+    file: examples.md
+  - page: Gateway Support
+    file: gateway-support.md
+  - page: Version History
+    file: version-history.md

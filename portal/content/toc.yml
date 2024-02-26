@@ -10,9 +10,23 @@ toc:
       - group: About the API
         dir: introduction/about-the-api
   - group: Core Concepts
-    dir: core-concepts
+    items:
+      - page: Connected Sites
+        file: core-concepts/connected-sites.md
+      - page: Product
+        file: core-concepts/product.md
+      - page: Components
+        file: core-concepts/components.md
+      - page: Subscription
+        file: core-concepts/subscriptions.md
+      - page: Signup
+        file: core-concepts/signup.md
   - group: Development Tools
-    dir: development-tools
+    items:
+      - page: Client Libraries
+        file: development-tools/client-libraries.md
+      - group: Chargify JS
+        dir: development-tools/chargify-js
   - group: Advanced Billing API
     items:
       - generate: API Endpoints
