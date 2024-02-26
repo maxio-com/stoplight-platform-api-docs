@@ -1,5 +1,6 @@
 toc:
-  - dir: Chargify JS
+  - group: Chargify JS
+    dir: chargify-js
     items:
       - page: Overview
         file: overview.md
