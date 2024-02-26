@@ -31,6 +31,8 @@
     "ErrorTemplates": {
       "404": "Not Found:'{$response.body}'",
       "0": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-    }
+    },
+
+    "EnableAdditionalModelProperties": true
   }
 }
