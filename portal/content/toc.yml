@@ -7,15 +7,19 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
+  - group: Developement Tools
+    dir: development-tools
+    items:
       - page: Client Libraries
         file: introduction/client-libraries.md
       - page: API Guidelines
         file: introduction/api-guidelines.md
       - page: Connected Sites
         file: introduction/connected-sites.md
-
-  - group: Basics
-    dir: basics
+        dir: Chargify JS
+        items:
+          - page: overview
+            file: development-tools/charigfy-js/overview.md
   - generate: API Endpoints
     from: endpoints
   - generate: Models

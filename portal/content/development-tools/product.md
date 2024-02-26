@@ -79,6 +79,6 @@ That data should be posted to the [Product Create](https://developers.chargify.c
 
 After you've created a product to use, you should check out the following articles:
 
-- [Create Components](../basics/Components.md)
-- [Create Coupons](../basics/Subscriptions.md#coupons-and-adjustments)
-- [Signup Customers](../basics/Signups.md)
+- [Create Components](../development-tools/Components.md)
+- [Create Coupons](../development-tools/Subscriptions.md#coupons-and-adjustments)
+- [Signup Customers](../development-tools/Signups.md)

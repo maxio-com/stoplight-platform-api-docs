@@ -69,4 +69,4 @@ For more information about the parameters for clearing your site data using the 
 After you've created a new site, you should check out the following articles:
 
 - [Products](./Products.md)
-- [Subscriptions](../basics/Signups.md)
+- [Subscriptions](../development-tools/Signups.md)

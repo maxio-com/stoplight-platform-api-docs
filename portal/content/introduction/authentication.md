@@ -47,4 +47,4 @@ After you've mastered authentication, you should check out the following article
 
 - Managing [sites](./SitesSubdomains.md)
 - Creating [products](./Products.md) and how they control what you bill customers
-- Creating [subscriptions](../basics/Subscriptions.md), (ie. signing up customers)
+- Creating [subscriptions](../development-tools/Subscriptions.md), (ie. signing up customers)

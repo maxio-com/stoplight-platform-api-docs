@@ -1,16 +1,8 @@
 # Overview
 
-Welcome to the Maxio Advanced Billing Developer Portal. Maxio Advanced Billing is powered by our Chargify technology stack. Our Chargify APIs and webhooks enable our customers to easily build automated sign-up, billing, and subscription workflows integrated with their applications.
+Welcome to the Maxio Advanced Billing Developer Portal. Maxio Advanced Billing is powered by the former Chargify technology stack. The Maxio Advanced Billing API and web development tools enable our customers to easily build automated sign-up, billing, and subscription workflows integrated with their applications.
 
 This documentation will help you get started. If you have any questions, please let us know.
-
-Tutorial: Steps on how to make your first Chargify API call.
-Sign-up for a sandbox account.
-Setup authentication credentials.
-…
-Submit your Chargify API request
-Verify results
-“Next Steps”
 
 # SDK Quickstart
 
@@ -24,17 +16,21 @@ Result verification
 
 ### Testing Guide
 
-Maxio Advanced Billing has compiled a [testing guide](https://chargify.zendesk.com/hc/en-us/articles/4407904658587) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
+Maxio Advanced Billing has compiled a [testing guide](https://maxio-chargify.zendesk.com/hc/en-us/articles/23420740348429-Getting-Started-as-a-User) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
 
-- Test site limits
-- Live mode versus test mode
-- Test Subscription Signups
+Steps to make your first Maxio Advanced Billing API call:
 
-We strongly suggest reading over the testing guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
+1. Sign-up for a sandbox account.
+2. Setup authentication credentials.
+3. Configure credentials on preferred Developer Tool (i.e Postman, Insomnia, Developer Portal)
+4. Submit your API request and Try It Out
+5. Verify results through response
+
+We strongly suggest exploring the developer portal and API guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
 
 ### Engage Support
 
-We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” so we can coordinate with you to ensure your import process goes smoothly.
+We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” and/or ""support@maxio.com" so we can coordinate with you to ensure your import process goes smoothly.
 
 Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Advanced Billing API.
 
@@ -50,7 +46,7 @@ But don’t worry! There are quite a few options to help you get the answers you
 
 - [Read our documentation for developers](https://developers.chargify.com/docs/developer-docs/ZG9jOjM0NjA3MQ-overview)
 - [Explore the endpoints of our API Documentation](api-reference)
-- [Watch our videos and tutorials](https://chargify.com/tutorials)
+- [Watch our videos and tutorials](https://youtube.com/playlist?list=PL1djQCO2mTMYRwGlm1tvUGzQtttKJFO41&si=PxF2Cv9am-ujY8c4)
 - [Stackoverflow](http://stackoverflow.com/questions/tagged/chargify)
 - [Contact our sales team](mailto:sales@maxio.com)
 - [Send an email to support](mailto:support@maxio.com)
