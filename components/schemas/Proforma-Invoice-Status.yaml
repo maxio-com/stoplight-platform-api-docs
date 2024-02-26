@@ -1,4 +1,4 @@
-title: Invoice Status
+title: Proforma Invoice Status
 type: string
 enum:
   - draft
