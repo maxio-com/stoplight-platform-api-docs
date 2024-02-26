@@ -10,7 +10,7 @@ properties:
       - string
       - "null"
   source_type:
-    type: string
+    $ref: "./Tax-Source-Type.yaml"
   source_id:
     type: integer
   percentage:

@@ -9,11 +9,9 @@ properties:
   code:
     type: string
   source_type:
-    type: string
-    minLength: 1
+    $ref: "./Proforma-Discount-Source-Type.yaml"
   discount_type:
-    type: string
-    minLength: 1
+    $ref: "./Invoice-Discount-Type.yaml"
   eligible_amount:
     type: string
     minLength: 1

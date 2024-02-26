@@ -8,8 +8,7 @@ properties:
     type: string
     minLength: 1
   source_type:
-    type: string
-    minLength: 1
+    $ref: "./Tax-Source-Type.yaml"
   percentage:
     type: string
     minLength: 1
@@ -24,4 +23,4 @@ properties:
     uniqueItems: true
     minItems: 1
     items:
-      $ref: "./Proforma-Tax-Breakout.yaml"
+      $ref: "./Invoice-Tax-Breakout.yaml"

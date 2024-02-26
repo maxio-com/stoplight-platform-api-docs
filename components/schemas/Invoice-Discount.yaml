@@ -12,11 +12,11 @@ properties:
   code:
     type: string
   source_type:
-    type: string
+    $ref: "./Invoice-Discount-Source-Type.yaml"
   source_id:
     type: integer
   discount_type:
-    type: string
+    $ref: "./Invoice-Discount-Type.yaml"
   percentage:
     type: string
   eligible_amount:
