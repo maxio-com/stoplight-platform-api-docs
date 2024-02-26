@@ -7,3 +7,5 @@ properties:
     type: string
   tax_amount:
     type: string
+  tax_exempt_amount:
+    type: string
