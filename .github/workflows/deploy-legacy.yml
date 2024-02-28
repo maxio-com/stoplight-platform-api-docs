@@ -1,0 +1,62 @@
+# This workflow deploys legacy portal to staging/prod
+name: Deploy legacy portal
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - prod
+env:
+  AWS_REGION: us-west-2
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+      - name: Build portal
+        shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
+        run: ./scripts/build_legacy_portal.sh
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy Staging
+        if: "${{ github.event.inputs.environment == 'staging' }}"
+        shell: bash
+        run: |
+          echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying legacy portal on staging" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/legacy --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch/legacy --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
+
+          echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Deploy Prod
+        if: "${{ github.event.inputs.environment == 'prod' }}"
+        shell: bash
+        run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying legacy portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET/legacy --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }}/legacy --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/legacy/*"
+
+          echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
