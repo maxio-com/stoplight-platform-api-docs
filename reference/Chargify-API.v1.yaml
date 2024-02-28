@@ -9941,7 +9941,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "../components/schemas/Bulk-Price-Point-Assignment.yaml"
+              $ref: "../components/schemas/Bulk-Components-Price-Point-Assignment.yaml"
             examples:
               Example:
                 value:
@@ -9962,7 +9962,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Bulk-Price-Point-Assignment.yaml"
+                $ref: "../components/schemas/Bulk-Components-Price-Point-Assignment.yaml"
               examples:
                 Example:
                   value:
@@ -9992,8 +9992,8 @@ paths:
       tags:
         - Subscription Components
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -10002,7 +10002,7 @@ paths:
                 Example:
                   value:
                     subscription:
-                      id: -80293620
+                      id: 80293620
                       state: active
                       trial_started_at: null
                       trial_ended_at: null
@@ -10192,14 +10192,28 @@ paths:
                 Example:
                   value:
                     - allocation:
-                        memo: moving to 7
-                        timestamp: "2012-11-20T22:00:37Z"
-                        quantity: 7
-                        previous_quantity: 3
-                        component_id: 11960
-                        subscription_id: 2585595
-                        proration_upgrade_scheme: no-prorate
-                        proration_downgrade_scheme: no-prorate
+                        allocation_id: 2370199
+                        component_id: 41028
+                        subscription_id: 352827
+                        quantity: 10
+                        previous_quantity: 0
+                        memo: "Recoding component allocation"
+                        timestamp: "2024-02-28T09:31:05Z"
+                        proration_upgrade_scheme: "full-price-attempt-capture"
+                        proration_downgrade_scheme: "no-prorate"
+                        price_point_id: 2957424
+                        price_point_handle: "uuid:03190e20-b84a-013c-ca77-0286551bb34f"
+                        price_point_name: "Original"
+                        previous_price_point_id: 2957424
+                        component_handle: "test-prepaid-component-4982065948"
+                        accrue_charge: false
+                        upgrade_charge: "full"
+                        downgrade_credit: "none"
+                        created_at: "2024-02-28T04:31:05-05:00"
+                        initiate_dunning: false
+                        expires_at: "2024-08-03T20:00:00-04:00"
+                        used_quantity: 5
+                        charge_id: 11586076
                     - allocation:
                         memo: null
                         timestamp: "2012-11-20T21:48:09Z"
@@ -10501,6 +10515,8 @@ paths:
       responses:
         "204":
           description: OK
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -10508,13 +10524,19 @@ paths:
               schema:
                 $ref: "../components/schemas/errors/Subscription-Component-Allocation-Error.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     errors:
                       - kind: base
-                        message: "Credit scheme must be one of credit, refund or none."
+                        message: "A valid expires_at date must be provided."
+                Example-2:
+                  value:
+                    errors:
+                      - kind: base
+                        message: "Expires at: must be greater than or equal to 2024-02-28"
       x-operation-settings:
         ErrorTemplates:
+          "404": "Not Found:'{$response.body}'"
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: updatePrepaidUsageAllocationExpirationDate
       description: |-
@@ -10546,6 +10568,8 @@ paths:
       responses:
         "200":
           description: OK
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity (WebDAV)
           content:
@@ -10560,6 +10584,7 @@ paths:
                         message: "Credit scheme must be one of credit, refund or none."
       x-operation-settings:
         ErrorTemplates:
+          "404": "Not Found:'{$response.body}'"
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: deletePrepaidUsageAllocation
       description: |-
