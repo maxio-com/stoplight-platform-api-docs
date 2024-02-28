@@ -7,20 +7,20 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
+      - page: Connected Sites
+        file: introduction/connected-sites.md
       - group: About the API
         dir: introduction/about-the-api
   - group: Core Concepts
     items:
-      - page: Connected Sites
-        file: core-concepts/connected-sites.md
-      - page: Product
-        file: core-concepts/product.md
-      - page: Components
-        file: core-concepts/components.md
+      - page: Product Catalog
+        file: core-concepts/product-catalog.md
       - page: Subscription
         file: core-concepts/subscriptions.md
       - page: Signup
         file: core-concepts/signup.md
+      - page: Invoicing
+        file: core-concepts/relationship-invoicing.md
   - group: Development Tools
     items:
       - page: Client Libraries

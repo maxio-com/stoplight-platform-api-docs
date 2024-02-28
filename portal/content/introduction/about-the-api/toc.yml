@@ -1,6 +1,10 @@
 toc:
-  - page: Overview
+  - page: Tips and Best Practices
     file: overview.md
+  - page: Data Types
+    file: data-types.md
+  - page: Request and Response Data
+    file: request-response-data.md
   - page: Error Handling & Rate Limiting
     file: error-handling.md
   - page: List Operations

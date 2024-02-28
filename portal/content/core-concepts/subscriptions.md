@@ -22,54 +22,6 @@ For example, if you wanted to add a charge of $1 - it would look like the follow
 
 For more information on the API details for creating charges, see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTc-create-charge).
 
-## Coupons and Adjustments
-
-In general, coupons and adjustments are other methods of changing the amount billed to a customer either on a recurring basis (as with repeat use coupons) or on a more singular basis (as with single use coupons or balance adjustments).
-
-### Coupons
-
-Are you looking to offer current or potential customers a discount? Advanced Billing handles all of your promotional codes, discounts, and coupons with ease. Simply name the promotion, set your desired promo code, and enter the discount. You even have the power to control the expiration date and how long the promotion runs for in conjunction with your products.
-
-Let's create a coupon that we can then use when creating our next subscription.
-
-```json
-// POST /coupons.json
-{
-  "coupon": {
-    "name": "15% off",
-    "code": "15OFF",
-    "description": "15% off for life",
-    "percentage": "15",
-    "allow_negative_balance": "false",
-    "recurring": "false",
-    "end_date": "2012-08-29T12:00:00-04:00",
-    "product_family_id": "2"
-  }
-}
-```
-
-To create a coupon, see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
-
-To use a coupon when creating a new subscription, please see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
-
-### Adjustments
-
-Adjustments are similar to coupons, but they are much more simple. They are one-time changes to the balance of a subscription.
-
-Let's say you wanted to increase the balance of a subscription by $4 (perhaps for some error in billing), you would perform the following:
-
-```json
-// POST /subscriptions/{subscription_id}/adjustments.json
-{
-  "adjustment": {
-    "amount": "4.00",
-    "memo": "This is the description of an adjustment on a subscription that increases the balance by a certain dollar amount."
-  }
-}
-```
-
-Please see the full API documentation for [adjustments](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTY-create-adjustment) for more detailed information.
-
 ## Billing Dates
 
 A common method of managing a subscription might be for the billing date to change (as in the date the subscription is next processed/assessed and charges may potentially be captured from the payment method of the subscription). This is generally done: as a common method of extending or shortening trials, or processing the subscription "immediately" or just changing the billing date for use in [calandar billing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404938778125#calendar-billing-0-0) scenarios.
@@ -86,12 +38,6 @@ A quick example of updating the billing date for a subscription would look like 
 ```
 
 Please see the full API documentation for [updating subscription assessment date](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDg0MDE-update-subscription) for more information.
-
-## Product Price Points
-
-Product price points allow you to charge customers different amounts and at different frequencies for the same product.
-
-Please see the full documentation on [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885)
 
 ## Updating Payment Details
 
