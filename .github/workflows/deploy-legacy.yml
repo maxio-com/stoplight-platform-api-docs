@@ -26,7 +26,15 @@ jobs:
         shell: bash
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
-        run: ./scripts/build_legacy_portal.sh
+        run: |
+          new_portal_url='N/A'
+          if [ "$INPUT_ENVIRONMENT"='staging' ]; then
+            new_portal_url='https://staging-developers.maxio.com/main/index.html'
+          fi
+          if [ "$INPUT_ENVIRONMENT"='prod' ]; then
+            new_portal_url='https://prod-developers.maxio.com/'
+          fi
+          ./scripts/build_legacy_portal.sh "$new_portal_url"
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
