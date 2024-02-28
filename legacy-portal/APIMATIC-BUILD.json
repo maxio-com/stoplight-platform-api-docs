@@ -1,0 +1,125 @@
+{
+  "$schema": "https://titan.apimatic.io/api/build/schema",
+  "buildFileVersion": "1",
+  "generatePortal": {
+    "debug": {
+      "publishReport": true
+    },
+    "pageTitle": "Maxio Legacy Advanced Billing Developer Portal",
+    "navTitle": "Legacy Advanced Billing Developer Portal",
+    "logoUrl": "static/images/maxio_logo.png",
+    "logoLink": "https://www.maxio.com/",
+    "logoAltText": "Maxio Logo",
+    "faviconUrl": "static/images/favicon.png",
+    "useHostedPortalScript": true,
+    "languageConfig": {
+      "http": {}
+    },
+    "portalSettings": {
+      "baseUrl": "./",
+      "enableExport": true,
+      "enableConsoleCalls": false,
+      "useProxyForConsoleCalls": false,
+      "initialPlatform": "http_curl_v1",
+      "languageSettings": {
+        "http_curl_v1": {}
+      },
+      "themeOverrides": {
+        "palette": {
+          "primaryColor": "#0046FF",
+          "linkColor": "#006EFE",
+          "colors": {
+            "C000": "#FFFFFF",
+            "C200": "#FFFFFF",
+            "C300": "#D9D9D9",
+            "C400": "#B4B4B4",
+            "C600": "#757575",
+            "C700": "#757575",
+            "C800": "#757575",
+            "C900": "#000000"
+          }
+        },
+        "fontSource": [
+          "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+        ],
+        "cssStyles": {
+          "headings": {
+            "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+            "h1": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "1.5rem",
+              "fontWeight": "600",
+              "lineHeight": "2rem"
+            },
+            "h2": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "1.25rem",
+              "fontWeight": "600",
+              "lineHeight": "1.75rem"
+            },
+            "h3": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": "600",
+              "lineHeight": "1.5rem"
+            },
+            "h4": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": "600",
+              "lineHeight": "1.25rem"
+            },
+            "h5": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": "600",
+              "lineHeight": "1.25rem"
+            },
+            "h6": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": "600",
+              "lineHeight": "1.25rem"
+            }
+          },
+          "body": {
+            "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+            "text1": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "1rem",
+              "fontWeight": "400",
+              "lineHeight": "1.5rem"
+            },
+            "text2": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "0.875rem",
+              "fontWeight": "400",
+              "lineHeight": "1.25rem"
+            },
+            "text3": {
+              "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif",
+              "fontSize": "0.75rem",
+              "fontWeight": "400",
+              "lineHeight": "1.125rem"
+            }
+          },
+          "code": {
+            "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
+            "inlineCode": {
+              "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
+              "fontSize": "0.875rem",
+              "fontWeight": "400",
+              "lineHeight": "1.25rem"
+            },
+            "blockCode": {
+              "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Consolas, Courier, monospace",
+              "fontSize": "0.875rem",
+              "fontWeight": "400",
+              "lineHeight": "1.25rem"
+            }
+          }
+        }
+      }
+    }
+  }
+}

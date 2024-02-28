@@ -1,0 +1,9 @@
+toc:
+  - group: Legacy API
+    items:
+      - generate: How to Get Started
+        from: getting-started
+  - generate: API Endpoints
+    from: endpoints
+  - generate: Models
+    from: models
