@@ -28,7 +28,7 @@ jobs:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: |
           new_portal_url='N/A'
-          echo "Environment is: $INPUT_ENVIRONMENT"
+          echo "Environment is: ${{ github.event.inputs.environment }}"
           if [ "${{ github.event.inputs.environment }}"="staging" ]; then
             new_portal_url='https://staging-developers.maxio.com/main/index.html'
           fi
