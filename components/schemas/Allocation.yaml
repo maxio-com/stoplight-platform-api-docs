@@ -77,3 +77,14 @@ properties:
     oneOf:
       - type: "null"
       - $ref: "Payment-For-Allocation.yaml"
+  expires_at:
+    type: string
+    format: date-time
+  used_quantity:
+    type: integer
+    format: int64
+    min: 0
+  charge_id:
+    type: integer
+    format: int64
+    min: 1
