@@ -39,4 +39,36 @@ jobs:
             new_portal_url='https://prod-developers.maxio.com/'
           fi
           ./scripts/build_legacy_portal.sh "$new_portal_url"
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT }}:role/GitHubAction-AssumeRoleWithActionInfo-Developer-Portal
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Deploy Staging
+        if: "${{ github.event.inputs.environment == 'staging' }}"
+        shell: bash
+        run: |
+          echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying legacy portal on staging" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/legacy --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/legacy --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/legacy/*\""  | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/legacy/*"
      
+          echo "You can access your portal at https://staging-developers.maxio.com/legacy/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Deploy Prod
+        if: "${{ github.event.inputs.environment == 'prod' }}"
+        shell: bash
+        run: |
+          echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Deploying legacy portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET/legacy --delete" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }}/legacy --delete
+
+          echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/legacy/*"
+
+          echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
