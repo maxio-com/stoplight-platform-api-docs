@@ -29,10 +29,10 @@ jobs:
         run: |
           new_portal_url='N/A'
           echo "Environment is: $INPUT_ENVIRONMENT"
-          if [ "$INPUT_ENVIRONMENT"='staging' ]; then
+          if [ "${{ github.event.inputs.environment }}"="staging" ]; then
             new_portal_url='https://staging-developers.maxio.com/main/index.html'
           fi
-          if [ "$INPUT_ENVIRONMENT"='prod' ]; then
+          if [ "${{ github.event.inputs.environment }}"="prod" ]; then
             new_portal_url='https://prod-developers.maxio.com/'
           fi
           ./scripts/build_legacy_portal.sh "$new_portal_url"
