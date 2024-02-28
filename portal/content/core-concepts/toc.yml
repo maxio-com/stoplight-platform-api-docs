@@ -3,9 +3,7 @@ toc:
     items:
       - page: Product Catalog
         file: product-catalog.md
-      - page: Subscription
-        file: subscriptions.md
-      - page: Signup
-        file: signup.md
+      - page: Subscription Signup
+        file: subscription-signup.md
       - page: Invoicing
         file: relationship-invoicing.md

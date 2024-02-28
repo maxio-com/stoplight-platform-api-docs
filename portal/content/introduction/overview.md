@@ -1,9 +1,5 @@
 # Overview
 
-Welcome to the Maxio Advanced Billing Developer Portal. Maxio Advanced Billing is powered by the former Chargify technology stack. The Maxio Advanced Billing API and web development tools enable our customers to easily build automated sign-up, billing, and subscription workflows integrated with their applications.
-
-This documentation will help you get started. If you have any questions, please let us know.
-
 ### Testing Guide
 
 Maxio Advanced Billing has compiled a [testing guide](https://maxio-chargify.zendesk.com/hc/en-us/articles/23420740348429-Getting-Started-as-a-User) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:

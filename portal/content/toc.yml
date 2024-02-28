@@ -1,8 +1,8 @@
 toc:
   - group: Getting Started
     items:
-      - page: Overview
-        file: introduction/overview.md
+      - page: Maxio Developer Portal
+        file: introduction/landing.html
       - generate: How to Get Started
         from: getting-started
       - page: Authentication
@@ -15,17 +15,15 @@ toc:
     items:
       - page: Product Catalog
         file: core-concepts/product-catalog.md
-      - page: Subscription
-        file: core-concepts/subscriptions.md
-      - page: Signup
-        file: core-concepts/signup.md
+      - page: Subscription Signup
+        file: core-concepts/subscription-signup.md
       - page: Invoicing
         file: core-concepts/relationship-invoicing.md
   - group: Development Tools
     items:
       - page: Client Libraries
         file: development-tools/client-libraries.md
-      - group: Chargify JS
+      - group: Chargify.js
         dir: development-tools/chargify-js
   - group: Advanced Billing API
     items:

@@ -1,5 +1,5 @@
 toc:
   - group: Development Tools
     items:
-      - group: Chargify JS
+      - group: Chargify.js
         dir: chargify-js
