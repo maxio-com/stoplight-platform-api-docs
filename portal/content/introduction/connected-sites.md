@@ -20,7 +20,7 @@ From here you can:
 
 To begin, create a site (make sure to put it in test mode) and pick a subdomain that you will remember for use in your API calls.
 
-For more information about sites, including: switching sites, clearing site data, cloning - please see [this help article on Sites Introduction](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction).
+For more information about sites, including: switching sites, clearing site data, cloning - please see this help article on [Sites](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction).
 
 ## Site API Subdomain
 
@@ -45,12 +45,12 @@ Clearing your site data is very useful in specific circumstances:
 
 Clearing your site data can be done in the following methods:
 
-1. Clearing site data via the [website](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction#creating-sites)
-2. Clearing site data via [API](https://developers.chargify.com/docs/api-docs/c912e634019c9-clear-site-data)
+1. Clearing site data [via the website](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction#creating-sites).
+2. Clearing site data [via the API](https://developers.chargify.com/docs/api-docs/c912e634019c9-clear-site-data).
 
 ### Clearing via Website
 
-To clear your site data via the website, please see the [help article, "Clearing Site Data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309).
+To clear your site data via the website, please see the [Clearing Site Data](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309) help article.
 
 ### Clearing via API
 
