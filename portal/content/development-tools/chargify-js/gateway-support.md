@@ -37,7 +37,7 @@ For more information on Advanced Billing gateways, please view the [current list
 
 When Multi-Gateway is enabled on a site, you can connect this site with multiple gateways. Please [contact support](mailto:support@maxio.com) to enable this feature, and feel free to read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404876665741-Gateway-Configuration#selecting-a-gateway).
 
-Once enabled, you must set up a gateway handle for each connected gateway. This gateway handle can be optionally used in the Chargify.js to directly select a gateway where a payment profile will be stored in. [An example may be found here](./Chargify.js-Configurations.md#multi-gateway-configuration).
+Once enabled, you must set up a gateway handle for each connected gateway. This gateway handle can be optionally used in the Chargify.js to directly select a gateway where a payment profile will be stored in. [An example may be found here](./configurations.md#multi-gateway-configuration).
 
 You can still save payment profiles in different gateways if `gatewayHandle` is not specified in the Chargify.js form. The target gateway is determined based on the type of data passed to Advanced Billing and the gateway that is set as the default for a given payment type. The Multi-Gateway feature allows for setting a given gateway to be the default for a given payment type (credit card, ACH, Direct Debit, PayPal, Apple Pay). To specify this on the Chargify.js form, `type` is required.
 
