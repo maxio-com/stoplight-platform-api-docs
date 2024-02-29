@@ -160,13 +160,6 @@ For deeper learning about how components function within Advanced Billing, we re
 - [Setting component allocations](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997)
 - [Building components in Advanced Billing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#creating-components)
 
----
-
-# Next Steps
-
-- Customizing your billing with [components](./Components.md)
-- API documentation for [subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription)
-
 # Subscriptions
 
 After creating subscriptions, either you or your customers will need to manage them to maintain them under a number of different scenarios.
@@ -366,10 +359,3 @@ As an example, here are a few examples of actions that can be performed via the 
 - Component purchase / allocation updates
 
 For more information on the Advanced Billing Portal, we encourage you to view our full documentation [here.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405529728141)
-
----
-
-# Next Steps
-
-- Keeping your application data [synchronized](./Sync.md) with Advanced Billing
-- Subscription API [documentation](https://developers..com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription)
