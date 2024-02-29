@@ -9,10 +9,10 @@ Chargify.js works with most Advanced Billing-supported gateways.
 Chargify.js cannot be used with the **Square** gateway. To create a Square payment profile,
 use the Square JavaScript library in your page, then either
 
-* supply the nonce it generates in the `payment_method_nonce` attribute, or
-* use the Square API to create the card in Square using the nonce, then supply both `customer_vault_token` and `vault_token`
+* Supply the nonce it generates in the `payment_method_nonce` attribute, or
+* Use the Square API to create the card in Square using the nonce, then supply both `customer_vault_token` and `vault_token`
 
-when
+When
 [creating a payment profile](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile)
 or
 [creating a subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription) in Advanced Billing.
@@ -47,7 +47,7 @@ You can still save payment profiles in different gateways if `gatewayHandle` is 
 
 The combination of a default gateway for a given payment type and the `type` configuration setting for Chargify.js lead to the following possibilities:
 
-* a payment profile will be saved in the default gateway for credit cards if the Chargify.js `type` is set to  `'card'`.
-* a payment profile will be stored in Braintree is the `type` is `'card`' and the `gatewayHandle` is Braintree, even if the default for credit cards is Authorize.Net.
-* a payment profile will be saved in the default gateway for ACH if the `type` is set to `'bank'` and `gatewayHandle` is not specified. If the default gateway is Stripe, the payment profile will be stored there.
-* a payment profile will be saved in the default gateway for Direct Debit if the `type` is set to `'direct_debit'`.
+* A payment profile will be saved in the default gateway for credit cards if the Chargify.js `type` is set to  `'card'`.
+* A payment profile will be stored in Braintree is the `type` is `'card`' and the `gatewayHandle` is Braintree, even if the default for credit cards is Authorize.Net.
+* A payment profile will be saved in the default gateway for ACH if the `type` is set to `'bank'` and `gatewayHandle` is not specified. If the default gateway is Stripe, the payment profile will be stored there.
+* A payment profile will be saved in the default gateway for Direct Debit if the `type` is set to `'direct_debit'`.
