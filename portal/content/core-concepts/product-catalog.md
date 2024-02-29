@@ -183,9 +183,9 @@ Let's create a coupon that we can then use when creating our next subscription.
 }
 ```
 
-To create a coupon, see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
+To create a coupon, see [this help article](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
 
-To use a coupon when creating a new subscription, please see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
+To use a coupon when creating a new subscription, please see [this help article](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
 
 ### Adjustments
 
