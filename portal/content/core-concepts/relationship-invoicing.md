@@ -13,8 +13,10 @@
 
 ## API Compatibility for Relationship Invoicing
 
-This section describes the API for the new, [Relationship Invoicing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253) style of invoices introduced in January 2018.
+This section describes the API for the Relationship Invoicing style of invoices introduced in January 2018.
 
 If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
 These new invoices provide a single representation of all of your billings with Advanced Billing, whether you collect automatically or via remittance.
+
+For more information, see the [Relationship Invoicing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253) help article.
