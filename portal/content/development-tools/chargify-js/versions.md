@@ -7,7 +7,7 @@ The latest version of `chargify.js` is available at the following url:
 ```
 
 We occasionally make updates to improve the functionality of Chargify.js in
-accordance with our [backwards compatibility policy.](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api#backwards-compatibility)
+accordance with our [backwards compatibility policy](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api#backwards-compatibility).
 
 With every release of Chargify.js, we also publish a static version.
 If needed, you can point to a specific version using a release date as shown below in the release history.
