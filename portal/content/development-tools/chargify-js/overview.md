@@ -6,7 +6,7 @@ Chargify.js is a powerful tool that can be used to streamline your existing API-
 
 ## How it Works
 
-Advanced Billing provides transparent `iframes` that allow you to customize a customer's payment form. This approach ensures the you meet the latest [PCI compliance requirements.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404889785869)
+Advanced Billing provides transparent `iframes` that allow you to customize a customer's payment form. This approach ensures the you meet the latest [PCI compliance requirements](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404889785869).
 
 When a customer submits your payment form, Chargify.js sends the customer payment information to be securely stored in your payment gateway. In return, a one-time token is generated for you to use to complete the subscription process using our API. The one-time-payment token references the payment information that is securely stored in your gateway.
 
@@ -118,7 +118,7 @@ In addition to creating new subscribers, use Chargify.js to create new payment m
 - An existing subscriber completes a payment-based form on your site, for the purpose of adding a new credit card to their account
 - Advanced Billing returns a one-time token to use for adding a new payment method to an existing subscription
 
-❗️ Chargify.js is not compatible with updating existing credit cards in Advanced Billing. You may only add new cards to existing subscriptions, or create new subscriptions with recently tokenized card.
+> ❗️ Chargify.js is not compatible with updating existing credit cards in Advanced Billing. You may only add new cards to existing subscriptions, or create new subscriptions with recently tokenized card.
 
 ## Getting Started
 
@@ -214,7 +214,7 @@ document
 
 7. After you get the token, you will submit it to your server and use it to [create a subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription) or [payment profile](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile) using our API.
 
-❗️ Tokens expire after 20 minutes.
+> ❗️ Tokens expire after 20 minutes.
 
 8. Now that the basic workflow of Chargify.js is working, add some styling to the form! [Here's an example of how it could look](./Examples.md#example-of-chargifyjs-form). Additional examples, both minimal and full, may be found at the bottom of that page.
 
@@ -253,7 +253,7 @@ Specific technical considerations to be aware of:
 - Supports HTTP/2, HTTP/1.1, HTTP/1.0
 - Through the use of AWS Cloudfront, `https://js.chargify.com` is designed for maximum reliability and speed, but is not covered by our SLA, uptime, or performance guarantees.
 
-❗️ When you use Chargify.js, your workflow is classified as SAQ-A. For more information, please see our documentation on [PCI compliance](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404889785869).
+> ❗️ When you use Chargify.js, your workflow is classified as SAQ-A. For more information, please see this help article on [PCI compliance](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404889785869).
 
 ## Passing Pre-Filled Customer Information
 
@@ -330,8 +330,7 @@ By its very nature, Chargify.js allows end-users to submit cardholder data direc
 
 ### Security Token
 
-| ❗️ As of 2023-05-16 the Security Token and all related settings are enabled by default for all new sellers. Managing those settings by hand will no longer be possible. However if you are sure you want to change them, please reach out to the support. Remember that you are doing so on your own responsibility. |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> ❗️ As of 2023-05-16 the Security Token and all related settings are enabled by default for all new sellers. Managing those settings by hand will no longer be possible. However if you are sure you want to change them, please reach out to the support. Remember that you are doing so on your own responsibility. 
 
 The generation of a security token requires your Chargify.js private key. You may generate or review your Chargify.js key pair from Integrations > Chargify.js. The private key is initially hidden, but you can click-to-reveal and then copy the value.
 
