@@ -18,8 +18,7 @@ integration, or implement a Content Security Policy (CSP).  Example:
 <script src="https://js.chargify.com/v/2021-01-29a/chargify.js"></script>
 ```
 
-| ❗️  We will support previous releases of Chargify.js for a maximum time frame of 6 months. If you use an explicitly versioned path of Chargify.js, you must commit to updating your integration regularly.  Versions older than 6 months will be unsupported and may be removed without notice.  |
-|-----------------------------------------------------------------------------|
+> ❗️  We will support previous releases of Chargify.js for a maximum time frame of 6 months. If you use an explicitly versioned path of Chargify.js, you must commit to updating your integration regularly.  Versions older than 6 months will be unsupported and may be removed without notice.  
 
 ## Release History
 * **2024-02-29** **latest**
