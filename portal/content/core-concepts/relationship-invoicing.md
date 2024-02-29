@@ -17,4 +17,4 @@ This section describes the API for the new, [Relationship Invoicing](https://max
 
 If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
-These new invoices provide a single representation of all of your Chargify billing, whether you collect automatically or via remittance.
+These new invoices provide a single representation of all of your billings with Advanced Billing, whether you collect automatically or via remittance.
