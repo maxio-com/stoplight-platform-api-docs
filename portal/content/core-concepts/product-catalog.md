@@ -79,16 +79,6 @@ Product price points allow you to charge customers different amounts and at diff
 
 Please see the full documentation on [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885)
 
----
-
-# Next Steps
-
-After you've created a product to use, you should check out the following articles:
-
-- [Create Components](../development-tools/Components.md)
-- [Create Coupons](../development-tools/Subscriptions.md#coupons-and-adjustments)
-- [Signup Customers](../development-tools/Signups.md)
-
 # Components
 
 Components are a great way to customize how your customers can use your products or services, and provide an excellent mechanism for increasing the [MRR](https://www.maxio.com/saaspedia#saaspedia_mrr-articles) per subscription through new features you might develop.
@@ -149,13 +139,6 @@ The following is an example that adds 5 text messages as "usage":
 ```
 
 Components can be used in a huge number of varying ways to cover your business model - it's just up to you on how you want it to work.
-
----
-
-# Next Steps
-
-- [Managing](./Subscriptions.md) your subscriptions
-- API documentation for [components](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMjA-create-component), [usage](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODQ-create-usage) or [allocations](https://developers.chargify.com/docs/api-docs/c2NoOjE0MTA4MjE4-create-allocation)
 
 ## Coupons and Adjustments
 
