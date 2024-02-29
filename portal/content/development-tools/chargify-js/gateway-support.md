@@ -7,15 +7,13 @@ Please be aware that in all cases, tokens expire after 20 minutes.
 Chargify.js works with most Advanced Billing-supported gateways.
 
 Chargify.js cannot be used with the **Square** gateway. To create a Square payment profile,
-use the Square JavaScript library in your page, then either
+use the Square JavaScript library in your page, then do either of the following when [creating a payment profile](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile) or [creating a subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription) in Advanced Billing:
 
-* Supply the nonce it generates in the `payment_method_nonce` attribute, or
+* Supply the nonce it generates in the `payment_method_nonce` attribute
+
+  OR
+  
 * Use the Square API to create the card in Square using the nonce, then supply both `customer_vault_token` and `vault_token`
-
-When
-[creating a payment profile](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile)
-or
-[creating a subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription) in Advanced Billing.
 
 ## Extra Support for Deletion
 
@@ -33,11 +31,11 @@ Advanced Billing does provide extra support for a handful of gateways listed bel
 * TrustCommerce
 * Adyen
 
-For more information on Advanced Billing gateways, please view the [current list of gateways we support.](https://www.maxio.com/payment-gateways)
+For more information on Advanced Billing gateways, please view the [current list of gateways we support](https://www.maxio.com/payment-gateways).
 
 ## Multiple Gateways on a Single Site
 
-When Multi-Gateway is enabled on a site, you can connect this site with multiple gateways. Please [contact support](mailto:support@maxio.com) to enable this feature, and feel free to peruse our [help documentation on the topic](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404876665741-Gateway-Configuration#selecting-a-gateway).
+When Multi-Gateway is enabled on a site, you can connect this site with multiple gateways. Please [contact support](mailto:support@maxio.com) to enable this feature, and feel free to read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404876665741-Gateway-Configuration#selecting-a-gateway).
 
 Once enabled, you must set up a gateway handle for each connected gateway. This gateway handle can be optionally used in the Chargify.js to directly select a gateway where a payment profile will be stored in. [An example may be found here](./Chargify.js-Configurations.md#multi-gateway-configuration).
 
