@@ -251,7 +251,7 @@ chargify.load({
 
 ## Direct Debit Configuration
 
-* when you use GoCardless as the gateway
+When you use GoCardless as the gateway:
 
 ```javascript
 chargify.load({
@@ -287,7 +287,7 @@ chargify.load({
 });
 ```
 
-* when you use Stripe as the gateway
+When you use Stripe as the gateway:
 
 ```javascript
 chargify.load({
