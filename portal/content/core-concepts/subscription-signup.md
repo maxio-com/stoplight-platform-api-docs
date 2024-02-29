@@ -23,7 +23,7 @@ Not all methods will be applicable to your unique business, but the methods we p
 
 ### Manually (within Advanced Billing)
 
-The first opportunity for you to create simple subscriptions is within your Advanced Billing account. Make sure you have at least one product that we can use in the following example. Please refer to this [help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/6418438887309-Create-Subscriptions-Inside-Advanced-Billing?method=standard) in order to create a simple subscription through the Advanced Billing application.
+The first opportunity for you to create simple subscriptions is within your Advanced Billing account. Make sure you have at least one product that we can use in the following example. Please refer to [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/6418438887309-Create-Subscriptions-Inside-Advanced-Billing?method=standard) in order to create a simple subscription through the Advanced Billing application.
 
 This form of signup is useful for businesses that are of low volume (low number of subscriptions), and it's the fastest to work with since you don't need to integrate a thing.
 
