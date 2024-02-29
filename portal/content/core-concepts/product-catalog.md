@@ -79,7 +79,7 @@ That data should be posted to the [Product Create](https://developers.chargify.c
 
 Product price points allow you to charge customers different amounts and at different frequencies for the same product.
 
-Please see the full documentation on [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885)
+Please see the help article on ["Product Price Points"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885).
 
 ## Components
 
@@ -92,7 +92,7 @@ Components allow you to introduce additional “line items” to your products t
 1.  [Creating](#creating-components) components
 2.  The [usage/allocation](#usageallocation) of components
 
-For more information about components, see our [component](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) documentation.
+For more information about components, see our ["Component"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article.
 
 ### Creating Components
 
@@ -116,7 +116,7 @@ If you need to display component pricing to your customers, we recommend caching
 
 For more information on components, please see the following:
 
-- About [components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677)
+- About [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article
 - Creating components [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMjA-create-component)
 
 ### Usage/Allocation
@@ -168,9 +168,9 @@ Let's create a coupon that we can then use when creating our next subscription.
 }
 ```
 
-To create a coupon, see [this help article](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
+To create a coupon [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
 
-To use a coupon when creating a new subscription, please see [this help article](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
+To use a coupon when creating a new subscription [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
 
 ### Adjustments
 
@@ -188,4 +188,4 @@ Let's say you wanted to increase the balance of a subscription by $4 (perhaps fo
 }
 ```
 
-Please see the full API documentation for [adjustments](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTY-create-adjustment) for more detailed information.
+Please see the full API documentation for [Adjustments](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTY-create-adjustment) for detailed information.
