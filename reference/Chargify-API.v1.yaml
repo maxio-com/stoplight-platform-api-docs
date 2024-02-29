@@ -18662,10 +18662,12 @@ paths:
         description: ""
       parameters:
         - schema:
-            type: string
+            $ref: "../components/schemas/Create-Signup-Proforma-Preview-Include.yaml"
           in: query
-          name: include=next_proforma_invoice
-          description: Choose to include a proforma invoice preview for the first renewal
+          name: include
+          description:
+            "Choose to include a proforma invoice preview for the first renewal.
+            Use in query `include=next_proforma_invoice`."
   "/api_exports/proforma_invoices/{batch_id}/rows.json":
     parameters:
       - $ref: "../components/parameters/batch-id-path.yaml"
