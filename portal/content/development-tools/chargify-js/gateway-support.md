@@ -43,8 +43,7 @@ Once enabled, you must set up a gateway handle for each connected gateway. This 
 
 You can still save payment profiles in different gateways if `gatewayHandle` is not specified in the Chargify.js form. The target gateway is determined based on the type of data passed to Advanced Billing and the gateway that is set as the default for a given payment type. The Multi-Gateway feature allows for setting a given gateway to be the default for a given payment type (credit card, ACH, Direct Debit, PayPal, Apple Pay). To specify this on the Chargify.js form, `type` is required.
 
-| ❗️  Even if you pass a `gatewayHandle`, the `type` must be still be valid for that gateway. For example, if Stripe is not configured to handle ACH profiles, combining `type: 'bank'` and `gatewayHandle: 'stripe'` will not work.  |
-|-----------------------------------------------------------------------------|
+> ❗️  Even if you pass a `gatewayHandle`, the `type` must be still be valid for that gateway. For example, if Stripe is not configured to handle ACH profiles, combining `type: 'bank'` and `gatewayHandle: 'stripe'` will not work. 
 
 The combination of a default gateway for a given payment type and the `type` configuration setting for Chargify.js lead to the following possibilities:
 
