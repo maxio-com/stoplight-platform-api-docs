@@ -212,7 +212,7 @@ Please see the full API documentation for [updating subscription assessment date
 
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
 
-❗️ If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](./Signups.md#taxes).
+❗️ *If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](./Signups.md#taxes).*
 
 You can update the payment details in a few different ways:
 
@@ -372,4 +372,4 @@ For more information on the Advanced Billing Portal, we encourage you to view ou
 # Next Steps
 
 - Keeping your application data [synchronized](./Sync.md) with Advanced Billing
-- Subscription API [documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription)
+- Subscription API [documentation](https://developers..com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription)
