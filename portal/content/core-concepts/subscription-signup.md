@@ -1,6 +1,6 @@
 # Subscription Signups
 
-Learn how to create signups (also called subscriptions) by signing up customers to products on your site. Before proceeding, we recommend familiarizing yourself with the basis of how subscriptions work. Please review our [subscription help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577172749) for further details.
+Learn how to create signups (also called subscriptions) by signing up customers to products on your site. Before proceeding, we recommend familiarizing yourself with the basis of how subscriptions work. Please review our ["Subscription" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577172749) for further details.
 
 ---
 
@@ -13,7 +13,7 @@ This guide on signups runs through the basics on creating subscriptions in Advan
 
 ## Signup Methods
 
-There are a number of methods of actually signing up customers to your business. Please explore the following and see how they might be used in your scenario:
+There are a number of methods of actually signing up customers to your business. Please explore the following help articles and see how they might be used in your scenario:
 
 - [Manually (within Advanced Billing)](https://maxio-chargify.zendesk.com/hc/en-us/articles/6418438887309-Create-Subscriptions-Inside-Advanced-Billing)
 - [Public Signup Pages (PSP)](https://maxio-chargify.zendesk.com/hc/en-us/articles/6427493725453-Accept-Signups-with-Public-Signup-Pages?method=themes)
@@ -23,11 +23,11 @@ Not all methods will be applicable to your unique business, but the methods we p
 
 ### Manually (within Advanced Billing)
 
-The first opportunity for you to create simple subscriptions is within your Advanced Billing account. Make sure you have at least one product that we can use in the following example. Please refer to this condensed [guide](https://maxio-chargify.zendesk.com/hc/en-us/articles/6418438887309-Create-Subscriptions-Inside-Advanced-Billing?method=standard) in order to create a simple subscription through the Advanced Billing application.
+The first opportunity for you to create simple subscriptions is within your Advanced Billing account. Make sure you have at least one product that we can use in the following example. Please refer to this [help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/6418438887309-Create-Subscriptions-Inside-Advanced-Billing?method=standard) in order to create a simple subscription through the Advanced Billing application.
 
 This form of signup is useful for businesses that are of low volume (low number of subscriptions), and it's the fastest to work with since you don't need to integrate a thing.
 
-For more information about subscriptions, please see the [Subscriptions help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577172749).
+For more information about subscriptions, please see the ["Subscriptions" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405577172749).
 
 You'll see just how simple this method is, but obviously you can't just sign up customers manually forever - there's a great solution for that!
 
@@ -83,7 +83,7 @@ For example, the following `POST` to the subscription create API endpoint would 
 }
 ```
 
-For more information, see [API Documentation for Creating a Subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription).
+For more information, see [API documentation for Creating a Subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription).
 
 For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](../advanced/Expert-Usage.md#advanced-signup-examples).
 
@@ -91,11 +91,11 @@ For more advanced subscription creation scenarios, please see [Advanced Subscrip
 
 The Payment Method for a subscriber can be either automatic or invoice Billing. As a reminder, with automatic billing, the customer is automatically charged when the subscription renews. With invoice billing, the customer is not automatically charged when the subscription is renewed. At the time of renewal, an invoice is created and optionally sent to the customer. You can then record the payments manually for the invoice when you receive them from the customer.
 
-For more information, see [Payment Methods](https://maxio-chargify.zendesk.com/hc/en-us/articles/8458453590797?method=paymenttype).
+For more information, see [Payment Methods](https://maxio-chargify.zendesk.com/hc/en-us/articles/8458453590797?method=paymenttype) help article.
 
 ## Taxes
 
-If your intent is to charge your subscribers tax via [Avalara taxes](hhttps://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#enable-avalara-sales-tax) or [custom taxes](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405069041549), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
+If your intent is to charge your subscribers tax via [Avalara taxes](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#enable-avalara-sales-tax) or [custom taxes](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405069041549), there are a few considerations to be made regarding collecting subscription data. For subscribers to be eligible to be taxed, the following information for the `customer` object or `payment_profile` object must by supplied:
 
 - A subscription to a [taxable product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405246782221#tax-settings)
 - [Full valid billing or shipping address](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405356114317#full-address-required-for-taxable-subscriptions) to identify the tax locale
@@ -155,7 +155,7 @@ One very common initial signup step is to allocate a quantity of one or more com
 
 For more information about components and how to use this great feature to customize your signup process - see [components](./Components.md).
 
-For deeper learning about how components function within Advanced Billing, we recommend the following resources:
+For deeper learning about how components function within Advanced Billing, we recommend the following help articles:
 
 - [Setting component allocations](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404527849997)
 - [Building components in Advanced Billing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677#creating-components)
@@ -182,7 +182,7 @@ For example, if you wanted to add a charge of $1 - it would look like the follow
 }
 ```
 
-For more information on the API details for creating charges, see [here](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTc-create-charge).
+For more information, see [the API details for creating charges](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTc-create-charge).
 
 ## Billing Dates
 
@@ -205,13 +205,13 @@ Please see the full API documentation for [updating subscription assessment date
 
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
 
-> ❗️  If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see our documentation [here](./Signups.md#taxes).
+> ❗️  If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see the section on [sign-up taxes](./Signups.md#taxes).
 
 You can update the payment details in a few different ways:
 
 - Update via [Self-Service Pages](#updating-via-self-service-pages)
 - Update via [API](#updating-via-api)
-- Update via [Chargify.js](../chargify.js/Overview.md#updating-existing-payment-methods)
+- Update via [Chargify.js](../development-tools/chargify-js/Overview.md#updating-existing-payment-methods)
 
 ### Updating via Self-Service Pages
 
@@ -232,9 +232,9 @@ message = "update_payment--{subscription_id}--{shared_key}"
 token = SHA1(message)[0..9]
 ```
 
-For more information about the self-service card update public page, please see [the following](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021#obtaining-the-self-service-page-url).
+For more information about the self-service card update public page, please see [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021#obtaining-the-self-service-page-url).
 
-Your users can also self-service update their payment method if using the Advanced Billing Portal feature, please see [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021#updating-payment-information-via-the-billing-portal) for more information.
+Your users can also self-service update their payment method if using the Advanced Billing Portal feature, please see [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404759627021#updating-payment-information-via-the-billing-portal) for more information.
 
 ### Updating via API
 
@@ -306,11 +306,11 @@ It is also possible to cancel a subscription at the end of the current billing p
 
 For information about cancelling using the API, please see [Cancelling via API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDg0MDI-cancel-subscription).
 
-For information about cancelling subscriptions in general, please see [cancellation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404968574605).
+For information about cancelling subscriptions in general, please see the ["Cancellation" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404968574605).
 
 ## Refunds
 
-When handing charging to any payment method, there are times when you will be required to refund. Refunds are only supported for the following gateways that are listed in our [help documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404572583693#refunds-0-0). Please refer to the previously linked document for up to the minute information on what gateways support refunds.
+When handing charging to any payment method, there are times when you will be required to refund. Refunds are only supported for the following gateways that are listed in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404572583693#refunds-0-0). Please refer to the previously linked document for up to the minute information on what gateways support refunds.
 
 For gateways like Bambora, you will need to perform a "manual refund" in that you record the refund as a transaction directly after you perform the actual refund in your gateway account.
 
@@ -358,4 +358,4 @@ As an example, here are a few examples of actions that can be performed via the 
 - Credit card updates
 - Component purchase / allocation updates
 
-For more information on the Advanced Billing Portal, we encourage you to view our full documentation [here.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405529728141)
+For more information on the Advanced Billing Portal, we encourage you to read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405529728141).
