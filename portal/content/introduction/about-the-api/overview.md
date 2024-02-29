@@ -54,7 +54,29 @@ For more information on reporting component usage or allocations, please see the
 
 Periodically exporting transaction, subscription, or customer data is a common use case. When possible, we recommend using the built-in [export](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404681593741) functions inside Advanced Billing to generate reports and download the data. This can often be much faster and can significantly lower your API usage.
 
-# Sync
+## Secure Applications
+
+Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
+
+Instead you will need to take care to tokenize sensitive information by using [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
+
+#### Troubleshooting
+
+If you attempt to make a Chargify API request directly from the customer's browser, you may see an error such as:
+
+```
+Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+or
+
+```
+Origin 'https://example.com' is therefore not allowed access.` `The response had HTTP status code 404.
+```
+
+This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
+
+## Sync
 
 After creating and managing subscriptions, you might need a way for your application to know about the state of a customers subscription. This can be done either directly through the API or by Advanced Billing notifying your application using the handy [webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction) feature.
 
@@ -65,8 +87,6 @@ There are three basic methods of either allowing or notifying your application a
 - Using the [API](#api) to retrieve subscription information
 - Recieving [webhooks](#receiving-a-webhook-notification)
 - Manually [export](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404681593741-Exporting-Data#locating-exports)
-
-## API
 
 One of the easiest methods is just to have your application request the current state (or history) of a subscription using the API. This will provide the current state of the subscription at the time of the request.
 
@@ -90,8 +110,3 @@ The following are some best practices that we would suggest regarding using API 
 
 1. Your application should try and not depend on another service to control access directly. Should your API call fail, for any reason, then your customer might not receive the best user experience depending on how you've implemented this.
 2. You should try and limit the direct calls to Advanced Billing if (and when) possible as there is a limit to how fast (and how often) the Advanced Billing API will respond to very quick and numerous API calls. For more information, see [limits and blocks](https://developers.chargify.com/docs/developer-docs/fb8406f1615d1-api-guidelines#about-limits--blocks).
-
-# Next Steps
-
-- [Managing](./Subscriptions.md) your subscriptions
-- API documentation for [webhooks](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgyNjU-create-endpoint)
