@@ -1,7 +1,6 @@
 # Examples
 
-| ❗️  The following collection of code is provided as a reference, and is provided as-is. You are responsible for ensuring it works properly on your page(s), as well as maintaining this code for the future. Any modifications you make to this code, or modifications you make to code in similar sections, are your responsibility.  |
-|-----------------------------------------------------------------------------|
+> ❗️  The following collection of code is provided as a reference, and is provided as-is. You are responsible for ensuring it works properly on your page(s), as well as maintaining this code for the future. Any modifications you make to this code, or modifications you make to code in similar sections, are your responsibility.  
 
 The following examples all include selectors named sequentially as chargify1, chargify2, etc. However, the selectors can be named anything.
 
