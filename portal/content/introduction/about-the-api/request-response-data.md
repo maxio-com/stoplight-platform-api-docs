@@ -1,12 +1,12 @@
 # Request and Response Data
 
-### URL
+## URL
 
 The URL for API requests includes the subdomain of the Site you are working with:
 
 `https://<subdomain>.chargify.com/<resource URI>`
 
-### Response Data
+## Response Data
 
 Response data is sent as either XML or JSON, depending on the type of data requested (`HTTP Content-Type` header) or the type specified as being accepted (HTTP `Accept` header).
 
@@ -20,7 +20,7 @@ For example:
 
 - `null` can define that there's no data available for that attribute
 
-### Request Data
+## Request Data
 
 POST and PUT request data may be formatted as either XML (`application/xml`) or JSON (`application/json`). For best results, you should set your HTTP `Content-Type` request header accordingly, although you may also specify your format by appending `.xml` or `.json` extensions on to the resource URI.
 
