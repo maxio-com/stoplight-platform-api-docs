@@ -212,8 +212,7 @@ If Chargify.js cannot get a 3D Secure config, or if Strong Customer Authenticati
 
 ## GoCardless Configuration
 
-| ❗️  This configuration has been deprecated in favor of [Direct Debit Configuration](#direct-debit-configuration)  |
-|-----------------------------------------------------------------------------|
+> ❗️  This configuration has been deprecated in favor of [Direct Debit Configuration](#direct-debit-configuration).  
 
 ```javascript
 chargify.load({
