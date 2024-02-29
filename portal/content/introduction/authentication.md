@@ -17,7 +17,7 @@ The first method of interaction is through the API. API Authentication is implem
 
 Your API login credentials are not the same as the credentials you use to log in to the web interface. You must obtain your API credentials separately, and you must connect to the API via TLS 1.2 (or better).
 
-❗️ *Advanced Billing no longer supports TLS 1.0 or TLS 1.1 over HTTPS on the chargify.com domain. Any older browsers or API clients that do not support TLS 1.2 will no longer work. This change is mandated by the PCI Security Council and affects all merchants and service providers processing or transmitting credit card data. For more information, please see our [help article on Security](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404986900493).*
+*Advanced Billing no longer supports TLS 1.0 or TLS 1.1 over HTTPS on the chargify.com domain. Any older browsers or API clients that do not support TLS 1.2 will no longer work. This change is mandated by the PCI Security Council and affects all merchants and service providers processing or transmitting credit card data. For more information, please see our [help article on Security](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404986900493).*
 
 One of the most common calls you will make via the API is to retrieve a list of subscriptions to retrieve additional information, such as the status of a specific subscription. A simple way to authenticate is to use the API Key as the _username_ and "X" as the _password_, like the following:
 
@@ -37,7 +37,7 @@ curl --request GET \
   --header 'content-type: application/json'
 ```
 
-❗️ ***Please note, the API is case-sensitive.***
+❗️ *Please note, the API is case-sensitive.*
 
 For more information about API authentication, please see our [API documentation/example](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api#authentication).
 
