@@ -2,18 +2,6 @@
 
 ### Testing Guide
 
-Maxio Advanced Billing has compiled a [testing guide](https://maxio-chargify.zendesk.com/hc/en-us/articles/23420740348429-Getting-Started-as-a-User) that covers a list of important factors to consider while in the testing phase. Here's a high-level overiew of what's covered in our testing guide:
-
-Steps to make your first Maxio Advanced Billing API call:
-
-1. Sign-up for a sandbox account.
-2. Setup authentication credentials.
-3. Configure credentials on preferred Developer Tool (i.e Postman, Insomnia, Developer Portal)
-4. Submit your API request and Try It Out
-5. Verify results through response
-
-We strongly suggest exploring the developer portal and API guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
-
 ### Engage Support
 
 We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@chargify.com” and/or "support@maxio.com" so we can coordinate with you to ensure your import process goes smoothly.
