@@ -81,7 +81,7 @@ Product price points allow you to charge customers different amounts and at diff
 
 Please see the full documentation on [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885)
 
-# Components
+## Components
 
 Components are a great way to customize how your customers can use your products or services, and provide an excellent mechanism for increasing the [MRR](https://www.maxio.com/saaspedia#saaspedia_mrr-articles) per subscription through new features you might develop.
 
@@ -94,7 +94,7 @@ Components allow you to introduce additional “line items” to your products t
 
 For more information about components, see our [component](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) documentation.
 
-## Creating Components
+### Creating Components
 
 To use components, you must first create them. You can do this in a number of ways: by creating them via the Advanced Billing user interface, or by creating them via the API. In the following example, let's create a component called "Text Messages" that costs $0.0075 per message:
 
@@ -119,7 +119,7 @@ For more information on components, please see the following:
 - About [components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677)
 - Creating components [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMjA-create-component)
 
-## Usage/Allocation
+### Usage/Allocation
 
 Associating components with a subscription is done by allocating (or adding usage, depending on the type of component).
 
@@ -142,7 +142,7 @@ The following is an example that adds 5 text messages as "usage":
 
 Components can be used in a huge number of varying ways to cover your business model - it's just up to you on how you want it to work.
 
-## Coupons and Adjustments
+### Coupons and Adjustments
 
 In general, coupons and adjustments are other methods of changing the amount billed to a customer either on a recurring basis (as with repeat use coupons) or on a more singular basis (as with single use coupons or balance adjustments).
 
