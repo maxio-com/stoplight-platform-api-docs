@@ -5,98 +5,29 @@ info:
   contact:
     email: support@chargify.com
   description: |-
-    ## API Reference
 
     Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST. One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples).
     The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
-    ### Getting Started
+    # Getting Started
 
     Steps to make your first Maxio Advanced Billing API call:
 
     1. [Sign-up](https://app.chargify.com/signup/maxio-billing-sandbox) or [log-in](https://app.chargify.com/login.html) to your [test site](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405553861773-Testing-Intro) account.
     2. [Setup and configure authentication](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405281550477-API-Keys#api) credentials.
-    3. Submit your API request and Try It Out
-    4. Verify results through response
-    5. Test our integrations
+    3. Submit your API request and try it out.
+    4. Verify results through response.
+    5. Test our integrations.
 
     We strongly suggest exploring the developer portal, our [integrations](https://www.maxio.com/integrations) and the API guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
 
-    ### Authentication
-
-    Authentication is implemented as HTTP Basic Authentication over TLS >= 1.2 (HTTPS), as described in [API Authentication](https://developers.chargify.com/docs/developer-docs/ZG9jOjE1NTUxNQ-authentication)
-
-
-    ### Security
-
-    **TLS/SSL**
-
-    Advanced Billing no longer supports TLS 1.0 or TLS 1.1 over HTTPS on the chargify.com domain. Any older browsers or API clients that do not support TLS 1.2 will no longer work. This change is mandated by the PCI Security Council and affects all merchants and service providers processing or transmitting credit card data.
-
-    For more information, please see our [help article on Security](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404986900493).
-
-    **Payment Card Industry (PCI)**
-
-    For more information about our PCI auditing and related updates, please see our blog post, [What You Need to Know About PCI](https://www.maxio.com/blog/what-you-need-to-know-about-pci).
-
-
-    ### Debugging
-
-    If you’re having difficulty executing a request via our API, try the simplest thing and attempt your request via the curl command-line tool, as shown in the below example. Add the `--verbose` flag to your request to receive even more debugging information.
-
-    Another handy tool is [Beeceptor](https://beeceptor.com/). You can use this to intercept your request to see exactly what is being sent.
-
-    If you are unable to connect at all, check that you are using TLS 1.2 or better.
-
-    If you see a "Could not resolve host" error, double check that the url is correct, including your subdomain. For example: `mysite.chargify.com`.  This error means your DNS server could not find an IP address for the domain you are trying to connect to.
-
-    ### Backwards Compatibility
-
-    We consider the following changes to be backwards compatible and may make them without advance notice:
-
-    + Adding new API endpoints, or adding new attributes in the responses of existing endpoints
-    + Adding new optional parameters to be sent to existing API endpoints
-    + Adding new fields to exported data
-    + Changing the type or length of any of the ID attributes
-      + For example, most IDs are currently integers, but you should not assume that this will always be the case.
-
-    In addition, you should not depend on the order of attributes within the API response as this may change.
-
-    Chargify does not provide notifications for additions that are clearly defined as backwards compatible.
-
-    ### Examples
+    ## Example
 
     The following examples use the curl command-line tool to execute API requests.
-
-    #### Subscription Listing
 
     **Request**
 
         curl -u <api_key>:x -H Accept:application/json -H Content-Type:application/json https://acme.chargify.com/subscriptions.json
-
-
-
-    ## Secure Applications
-
-    Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
-
-    Instead you will need to take care to tokenize sensitive information by using [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
-
-    #### Troubleshooting
-
-    If you attempt to make a Chargify API request directly from the customer's browser, you may see an error such as:
-
-    ```
-    Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-    ```
-
-    or
-
-    ```
-    Origin 'https://example.com' is therefore not allowed access.` `The response had HTTP status code 404.
-    ```
-
-    This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
 
 tags:
   - name: API Exports
