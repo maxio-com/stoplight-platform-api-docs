@@ -7,3 +7,5 @@ toc:
     from: endpoints
   - generate: Models
     from: models
+  - group: Chargify Direct
+    dir: chargify-direct
