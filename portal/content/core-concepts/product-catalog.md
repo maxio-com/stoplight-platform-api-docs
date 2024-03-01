@@ -2,7 +2,7 @@
 
 Learn how to setup products and components for use when creating subscriptions.
 
-Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](../announcements/Overview.md) so we can help and also improve this documentation.
+Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](../announcements/overview.md) so we can help and also improve this documentation.
 
 ---
 
