@@ -17,3 +17,8 @@ If you have any additional questions regarding our documentation please don't he
 - [Send an email to support](mailto:support@maxio.com)
 - [Open a support ticket](https://maxio-chargify.zendesk.com/hc/en-us/requests/new)
 - [Visit us on Twitter](https://twitter.com/WeAreMaxio)
+
+## Announcements
+
+Check back periodically for technical Advanced Billing announcements.
+
