@@ -2,7 +2,7 @@
 
 Learn how to setup products and components for use when creating subscriptions.
 
-Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](./Overview.md#support) so we can help and also improve this documentation.
+Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](../announcements/Overview.md) so we can help and also improve this documentation.
 
 ---
 
@@ -11,7 +11,7 @@ With regards to products, there are three important aspects that are required fo
 - Creating the [product family](#product-family)
 - Creating the [product](#product)
 
-Before delving into this section, we recommend reviewing our ["Products Introduction" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction).
+Before delving into this section, we recommend reviewing our [Products Introduction](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction) help article.
 
 ## Product Family
 
@@ -45,7 +45,7 @@ A simple curl example would be the following:
 curl -u <API_KEY>:X -H Accept:application/json -d @product_family.json -X POST https://<SUBDOMAIN>.chargify.com/product_families.json
 ```
 
-To create a product family using the application, refer to the ["Creating Product Families" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families) for more information.
+To create a product family using the application, refer to the [Creating Product Families](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families) help article for more information.
 
 Please see [API Documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMzY-create-product) for a complete listing of input/output schema, along with code examples in multiple programming languages.
 
@@ -79,7 +79,7 @@ That data should be posted to the [Product Create](https://developers.chargify.c
 
 Product price points allow you to charge customers different amounts and at different frequencies for the same product.
 
-Please see the help article on ["Product Price Points"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885).
+Please see the [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885) help article.
 
 ## Components
 
@@ -92,7 +92,7 @@ Components allow you to introduce additional “line items” to your products t
 1.  [Creating](#creating-components) components
 2.  The [usage/allocation](#usageallocation) of components
 
-For more information about components, see our ["Component"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article.
+For more information about components, see our [Component](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article.
 
 ### Creating Components
 
