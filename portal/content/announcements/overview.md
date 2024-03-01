@@ -21,4 +21,3 @@ If you have any additional questions regarding our documentation please don't he
 ## Announcements
 
 Each Advanced Billing announcement details an update or new feature, so check back periodically.
-
