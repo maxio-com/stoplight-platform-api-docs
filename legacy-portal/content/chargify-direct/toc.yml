@@ -1,0 +1,19 @@
+toc:
+  - group: Chargify Direct
+    items:
+      - page: Introduction
+        file: introduction.md
+      - page: Migrating to Chargify.js
+        file: chjs-migration.md
+      - page: Overview
+        file: overview.md
+      - page: Authentication
+        file: authentication.md
+      - page: Signups
+        file: signups.md
+      - page: Card Update
+        file: card-update.md
+      - page: Example
+        file: example.md
+      - page: API Call
+        file: api-call.md

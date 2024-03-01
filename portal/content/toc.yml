@@ -31,3 +31,6 @@ toc:
         from: endpoints
       - generate: Models
         from: models
+  - group: Announcements
+    dir: announcements
+
