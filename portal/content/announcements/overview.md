@@ -20,5 +20,5 @@ If you have any additional questions regarding our documentation please don't he
 
 ## Announcements
 
-Check back periodically for technical Advanced Billing announcements.
+Each Advanced Billing announcement details an update or new feature, so check back periodically.
 
