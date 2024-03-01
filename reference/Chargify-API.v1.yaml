@@ -16456,6 +16456,43 @@ paths:
       tags:
         - Proforma Invoices
       operationId: listSubscriptionGroupProformaInvoices
+      parameters:
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: line_items
+          description: Include line items data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: discounts
+          description: Include discounts data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: taxes
+          description: Include taxes data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: credits
+          description: Include credits data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: payments
+          description: Include payments data
+        - schema:
+            type: boolean
+            default: false
+          in: query
+          name: custom_fields
+          description: Include custom fields data
       responses:
         "200":
           description: OK
@@ -16466,6 +16503,7 @@ paths:
         "404":
           description: Not Found
       x-operation-settings:
+        collectParameters: true
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
       description: |
@@ -16810,7 +16848,7 @@ paths:
           name: end_date
           description: "The ending date range for the invoice's Due Date, in the YYYY-MM-DD format."
         - schema:
-            $ref: "../components/schemas/Invoice-Status.yaml"
+            $ref: "../components/schemas/Proforma-Invoice-Status.yaml"
           in: query
           name: status
           description: "The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided"
