@@ -330,7 +330,7 @@ By its very nature, Chargify.js allows end-users to submit cardholder data direc
 
 ### Security Token
 
-> ❗️ As of 2023-05-16 the Security Token and all related settings are enabled by default for all new sellers. Managing those settings by hand will no longer be possible. However if you are sure you want to change them, please reach out to the support. Remember that you are doing so on your own responsibility. 
+> ❗️ As of 2023-05-16 the Security Token and all related settings are enabled by default for all new sellers. Managing those settings by hand will no longer be possible. However if you are sure you want to change them, please reach out to the support. Remember that you are doing so on your own responsibility.
 
 The generation of a security token requires your Chargify.js private key. You may generate or review your Chargify.js key pair from Integrations > Chargify.js. The private key is initially hidden, but you can click-to-reveal and then copy the value.
 

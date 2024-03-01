@@ -205,7 +205,7 @@ Please see the full API documentation for [updating subscription assessment date
 
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
 
-> ❗️  If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see the section on [sign-up taxes](./Signups.md#taxes).
+> ❗️ If your subscriber pays taxes on their purchased product, and you are attempting to update the `payment_profile`, complete address information is required. For information on required address formatting to allow your subscriber to be taxed, please see the section on [sign-up taxes](./Signups.md#taxes).
 
 You can update the payment details in a few different ways:
 

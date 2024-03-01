@@ -56,7 +56,7 @@ Periodically exporting transaction, subscription, or customer data is a common u
 
 ## Secure Applications
 
-Please note that it is NOT possible to make API requests directly from the customer's browser or device.  Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
+Please note that it is NOT possible to make API requests directly from the customer's browser or device. Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
 
 Instead you will need to take care to tokenize sensitive information by using [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
 
