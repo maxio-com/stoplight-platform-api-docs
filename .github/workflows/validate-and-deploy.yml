@@ -104,8 +104,8 @@ jobs:
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete --exclude \"/legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
-          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete --exclude "/legacy/*"
+          echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete --exclude \"legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
+          aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete --exclude "legacy/*"
 
           echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
