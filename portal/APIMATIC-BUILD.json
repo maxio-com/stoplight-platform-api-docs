@@ -69,6 +69,7 @@
       "baseUrl": "./",
       "enableExport": true,
       "enableConsoleCalls": true,
+      "enabledAnalytics": true,
       "useProxyForConsoleCalls": false,
       "initialPlatform": "http_curl_v1",
       "languageSettings": {
