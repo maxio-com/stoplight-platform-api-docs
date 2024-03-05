@@ -1,0 +1,65 @@
+toc:
+  - page: 2024-02-05 SDK Release Announcement
+    file: 2024-02-05-sdk-release.md
+  - page: 2023-05-18 Change in the refund_success and refund_failure webhooks
+    file: 2023-05-18-change-in-the-refund-success-and-refund-failure-webhooks.md
+  - page: 2023-05-16 Enable Chargify.js Security Token by default
+    file: 2023-05-16-enable-chargify-js-security-token-by-default.md
+  - page: 2023-05-10 SSL Badge Removal
+    file: 2023-05-10-ssl-badge-removal.md
+  - page: 2023-03-09 Rate of Declined Requests for Stripe Gateway
+    file: 2023-03-09-rate-of-declined-requests-for-stripe-gateway.md
+  - page: 2023-02-28 Increase in Declines from Stripe Gateway
+    file: 2023-02-28-increase-in-declines-from-stripe-gateway.md
+  - page: 2023-02-03 Unintended Renewal Event After The First Dunning Attempt
+    file: 2023-02-03-unintended-renewal-event-after-the-first-dunning-attempt.md
+  - page: 2023-02-01 Limitations to custom fields
+    file: 2023-02-01-limitations-to-custom-fields.md
+  - page: 2023-01-30 "Access Denied" 401 HTTP responses in UI and API
+    file: 2023-01-30-access-denied-401-http-responses-in-ui-and-api.md
+  - page: 2023-01-24 Renewal Success and Renewal Failure events changes
+    file: 2023-01-24-renewal-success-and-renewal-failure-events-changes.md
+  - page: 2023-01-18 Ability to set custom settings for applying prepayments to invoices
+    file: 2023-01-18-ability-to-set-custom-settings-for-applying-prepayments-to-invoices.md
+  - page: 2023-01-16 Ability to sort results for List Metafields endpoint
+    file: 2023-01-16-ability-to-sort-results-for-list-metafields-endpoint.md
+  - page: 2023-01-10 Ability to sort results for List Metadata for Resource Type endpoint
+    file: 2023-01-10-ability-to-sort-results-for-list-metadata-for-resource-type-endpoint.md
+  - page: 2022-12-07 Preserve Period for Subscriptions with Allocated Components During Migration Preview
+    file: 2022-12-07-preserve-period-for-subscriptions-with-allocated-components-during-migration-preview.md
+  - page: 2022-12-07 "Cancel_at_end_of_period" Set To True Is No Longer Respected During Subscription Creation Via API When It Is Not Intended To Be.
+    file: 2022-12-07-cancel-at-end-of-period.md
+  - page: 2022-11-21 Create Successful And Failure Payment Events For Subscription Group Renewal
+    file: 2022-11-21-create-successful-and-failure-payment-events-for-subscription-group-renewal.md
+  - page: 2022-11-03 Prepayments No Longer Applied Automatically For Remittance Invoice with Net Terms
+    file: 2022-11-03-prepayments-no-longer-applied-automatically-for-remittance-invoice-with-net-terms.md
+  - page: 2022-05-19 Products Price Points Interval Validation Changes
+    file: 2022-05-19-products-price-points-interval-validation-changes.md
+  - page: 2022-02-09 Component Allocation Events Backfilled With Transaction Exchange Rate
+    file: 2022-02-09-component-allocation-events-backfilled-with-transaction-exchange-rate.md
+  - page: 2021-12-16 Current Vault Validation
+    file: 2021-12-16-current-vault-validation.md
+  - page: 2021-11-23 Issue Service Credit Response Body Change
+    file: 2021-11-23-issue-service-credit-response-body-change.md
+  - page: 2021-11-18 Renewal Preview Returns Free Non-Zero Components
+    file: 2021-11-18-renewal-preview-returns-free-non-zero-components.md
+  - page: 2021-11-05 Payment Collection Validation Changes
+    file: 2021-11-05-payment-collection-validation-changes.md
+  - page: 2021-10-01 Update Price Point Prices Error Response Code Change
+    file: 2021-10-01-update-price-point-prices-error-response-code-change.md
+  - page: 2021-09-13 Subscription Reactivation Payment Decline Error Change
+    file: 2021-09-13-subscription-reactivation-payment-decline-error-change.md
+  - page: 2021-02-12 Subscription Reactivation Behavior Change
+    file: 2021-02-12-subscription-reactivation-behavior-change.md
+  - page: 2020-12-18 Changes to date_field Validation
+    file: 2020-12-18-changes-to-date_field-validation.md
+  - page: 2020-07-13 API Subscriptions XML Response Change
+    file: 2020-07-13-api-subscriptions-xml-response-change.md
+  - page: 2020-04-20 New API Authentication
+    file: 2020-04-20-new-api-authentication.md
+  - page: 2020-04-01 Coupon Endpoint Change
+    file: 2020-04-01-coupon-endpoint-change.md
+  - page: 2020-01-27 Product Price Point Order
+    file: 2020-01-27-product-price-point-order.md
+  - page: 2020-01-16 Coupon Validation Changes
+    file: 2020-01-16-coupon-validation-changes.md

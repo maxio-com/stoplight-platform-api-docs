@@ -31,5 +31,9 @@ toc:
         from: endpoints
       - generate: Models
         from: models
-  - group: Announcements
-    dir: announcements
+  - group: Help
+    items:
+      - page: Getting Support
+        file: help/getting-support.md
+      - group: Announcements
+        dir: help/announcements
