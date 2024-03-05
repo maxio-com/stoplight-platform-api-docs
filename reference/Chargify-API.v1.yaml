@@ -6,7 +6,8 @@ info:
     email: support@chargify.com
   description: |-
 
-    Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST. One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples).
+    Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST. 
+    One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](page:development-tools/client-libraries).
     The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
     # Getting Started

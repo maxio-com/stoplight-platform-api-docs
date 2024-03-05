@@ -6,8 +6,8 @@ Learn how to use API authentication to communicate directly with Advanced Billin
 
 There are two methods of authentication, depending on what you are accessing:
 
-- [Chargify API](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api)
-- [Chargify.js](./ZG9jOjE0NjAzNDI0-overview)
+- [Chargify API]($e/Subscriptions)
+- [Chargify.js](page:development-tools/chargify-js/chargify-js-overview)
 
 Both methods of authentication assume you have previously generated API keys securely stored them for later use. For more information, see this help article on [Adding Users](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404829390349-Users#adding-users).
 
@@ -39,14 +39,12 @@ curl --request GET \
 
 > ❗️ Please note, the API is case-sensitive.
 
-For more information about API authentication, please see our [API documentation/example](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api#authentication).
-
 ---
 
 # Next Steps
 
 After you've mastered authentication, you should check out the following articles:
 
-- Managing [sites](./SitesSubdomains.md)
-- Creating [products](./Products.md) and how they control what you bill customers
-- Creating [subscriptions](../development-tools/Subscriptions.md), (ie. signing up customers)
+- Managing [sites](page:introduction/connected-sites)
+- Creating [products](page:core-concepts/product-catalog#product) and how they control what you bill customers
+- Creating [subscriptions](page:core-concepts/subscription-signup), (ie. signing up customers)

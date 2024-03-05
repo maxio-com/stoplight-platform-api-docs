@@ -1,6 +1,6 @@
 # Connected Site Subdomains
 
-Learn how to use sites to organize your business and provide the setup necessary to interact with Advanced Billing via the API. If you need help after reading this, please [let us know](./Overview.md#support) so we can help and also improve this documentation.
+Learn how to use sites to organize your business and provide the setup necessary to interact with Advanced Billing via the API. If you need help after reading this, please [let us know](page:help/getting-support) so we can help and also improve this documentation.
 
 ---
 
@@ -34,7 +34,7 @@ curl -u <API_KEY>:X -H Accept:application/json -X GET https://acme.chargify.com/
 
 The host is always in the form `https://<SUBDOMAIN>.chargify.com` followed by the URI for the API resource you are trying to access. In this last example, that would be `/subscriptions.json` as that is the URI of the resource to get a list of subscriptions in JSON.
 
-Please see our [API documentation](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api) for more information.
+Please see our [API documentation]($h/__intro) for more information.
 
 ## Clearing Site Data
 
@@ -46,7 +46,7 @@ Clearing your site data is very useful in specific circumstances:
 Clearing your site data can be done in the following methods:
 
 1. Clearing site data [via the website](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction#creating-sites).
-2. Clearing site data [via the API](https://developers.chargify.com/docs/api-docs/c912e634019c9-clear-site-data).
+2. Clearing site data [via the API]($e/Sites/clearSite).
 
 ### Clearing via Website
 
@@ -60,7 +60,7 @@ There are a few options for clearing your site data, which match the settings av
 curl -u <API_KEY>:X -H Accept:application/json -X POST https://acme.chargify.com/sites/clear_data.json
 ```
 
-For more information about the parameters for clearing your site data using the API, please see the [API documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgyNjk-clear-site-data).
+For more information about the parameters for clearing your site data using the API, please see the [API documentation]($e/Sites/clearSite).
 
 ---
 
@@ -68,5 +68,5 @@ For more information about the parameters for clearing your site data using the 
 
 After you've created a new site, you should check out the following articles:
 
-- [Products](./Products.md)
-- [Subscriptions](../development-tools/Signups.md)
+- [Products](page:core-concepts/product-catalog#product)
+- [Subscriptions](page:core-concepts/subscription-signup)
