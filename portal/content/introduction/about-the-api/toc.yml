@@ -1,6 +1,6 @@
 toc:
   - page: Tips and Best Practices
-    file: overview.md
+    file: tips.md
   - page: Data Types
     file: data-types.md
   - page: Request and Response Data

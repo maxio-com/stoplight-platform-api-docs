@@ -6,13 +6,13 @@ There are two different types of limits/blocks you may encounter: rate-based and
 
 Our rate limiting rules are primarily intended to prevent runaway scripts, infinite loops, or crushing amounts of concurrency. Working, good-hygiene code should not experience any blocks. The single most important guidelines are to write code that will properly handle 429 responses by slowing or pausing requests without crashing, and to not parallelize into simultaneous requests that will compete for resources and flood our systems.
 
-Advanced Billing uses a custom algorithmic slot-based limiting that isn't based on typical rate limit / seconds. Rather, we handle call limiting based on concurrency, and API calls can be requested at a max of 4 concurrent requests. This does not mean that only 4 requests are allowed per second -- rather, 4 server threads / workers can be running concurrently per subdomain at a time. Any concurrency that goes above 4 is at risk for being queued for processing after the concurrency once again drops to acceptable ranges. As such, we recommend when building out your API processes to focus on the number of concurrent calls rather than the actual rate of calls per hour.
+Advanced Billing uses a custom algorithmic slot-based limiting that isn't based on typical rate limit / seconds. Rather, we handle call limiting based on concurrency, and API calls can be requested at a max of 4 concurrent requests. This does not mean that only 4 requests are allowed per second - rather, 4 server threads / workers can be running concurrently per subdomain at a time. Any concurrency that goes above 4 is at risk for being queued for processing after the concurrency once again drops to acceptable ranges. As such, we recommend when building out your API processes to focus on the number of concurrent calls rather than the actual rate of calls per hour.
 
 To help illustrate this, we've provided a diagram below. Presume that each API call takes a full minute. While this will likely not be the case for your own processes, it does illustrate the limitations for calls.
 
-| ![Concurrency Graphic](../../assets/images/docs/getting-started/API-Guidelines.md/concurrency_graphic.jpg) |
-| ---------------------------------------------------------------------------------------------------------- |
-| **Diagram of concurrency-based rate limiting presuming a limit of 2 threads at a time**                    |
+| ![Concurrency Graphic](static/images/about-the-api/concurrency_graphic.jpg)             |
+| --------------------------------------------------------------------------------------- |
+| **Diagram of concurrency-based rate limiting presuming a limit of 2 threads at a time** |
 
 ### Rate-based Blocks
 
@@ -28,7 +28,7 @@ If you receive a `429 Too Many Requests` response, your code should be prepared 
 
 ### Account-based Blocks
 
-There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials. You can read about them [here](https://developers.chargify.com/docs/api-docs/YXBpOjE0MTA4MjYx-chargify-api#api-access-limitations). If you have a request blocked with a `422` status code and an error message, it may be due to this account-based blocking.
+There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials. You can read about them [here](#api-access-limitations). If you have a request blocked with a `422` status code and an error message, it may be due to this account-based blocking.
 
 ### Prioritization of Endpoints
 
@@ -47,7 +47,7 @@ Please keep in mind that if you encounter a timeout issue, it is worth inspectin
 ## API Access Limitations
 
 There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials.
-**Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDE3-introduction).
+**Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](https://prod-developers.maxio.com/legacy/index.html#/http/chargify-direct/chargify-direct/overview).
 
     Those scenarios are as follows:
 

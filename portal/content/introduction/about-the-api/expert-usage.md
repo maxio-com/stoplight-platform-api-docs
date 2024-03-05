@@ -36,7 +36,7 @@ The following are a few advanced/expert examples of new signups/subscriptions th
 }
 ```
 
-For complete details of this method, please see [API Subscription Import](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscriptions-import)
+For complete details of this method, please see [API Subscription Import]($e/Subscriptions/createSubscription)
 
 2. New Subscription with Coupon/Trial/Component
 
@@ -70,7 +70,7 @@ Signups can implement coupons, custom trial periods and components right from th
 }
 ```
 
-For complete details about subscription creation, please see [create subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription).
+For complete details about subscription creation, please see [create subscription]($e/Subscriptions/createSubscription).
 
 3. New Subscription with Existing Payment Profile
 
@@ -113,7 +113,7 @@ Second, you would then set the color for a particular cutomer:
 
 The particular customer would then have metadata for metafield "Color" set to "Blue".
 
-For more API information about "metafields" (the containers of your metadata), please see [custom fields: Metafields](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgyOTM-create-metafields).
+For more API information about "metafields" (the containers of your metadata), please see [custom fields: Metafields]($e/Custom%20Fields/createMetafields).
 
 ## Communication
 
@@ -163,7 +163,7 @@ For more information about referrals, please see the [Referrals help article](ht
 
 ## Notes
 
-You can also enter and manage notes on a subscription. Notes allow you to keep non-structured data associated with individual subscriptions. If you need structured data, please consider using [Metafields/Metadata](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgyOTM-create-metafields).
+You can also enter and manage notes on a subscription. Notes allow you to keep non-structured data associated with individual subscriptions. If you need structured data, please consider using [Metafields/Metadata]($e/Custom%20Fields/createMetafields).
 
 To create a simple note on a subscription, see the following:
 
@@ -179,4 +179,4 @@ To create a simple note on a subscription, see the following:
 
 Setting the value for `sticky` to `true` will show the note prominently when viewing the subscription.
 
-For complete API information about notes, please see [API Notes](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgyNzA-create-subscription-note).
+For complete API information about notes, please see [API Notes]($e/Subscription%20Notes/createSubscriptionNote).
