@@ -8,7 +8,7 @@ properties:
   subscription_id:
     type: integer
     minimum: 1
-  amount:
+  amount_in_cents:
     type: integer
     format: int64
     minimum: 0.01
