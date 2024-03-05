@@ -14638,6 +14638,26 @@ paths:
                       created_at: "2020-07-31T05:52:32-04:00"
                       starting_balance_in_cents: 0
                       ending_balance_in_cents: -10000
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Create-Prepayment-Error-Response.yaml"
+              examples:
+                Example-1:
+                  value:
+                    errors:
+                      prepayment: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      - "Method: can't be blank"
+                      - "Memo: can't be blank"
+                      - "Details: can't be blank"
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: createPrepayment
       description: |
         ## Create Prepayment

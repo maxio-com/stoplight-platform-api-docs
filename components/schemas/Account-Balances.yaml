@@ -5,6 +5,10 @@ properties:
     allOf:
       - $ref: "./Account-Balance.yaml"
     description: "The balance, in cents, of the sum of the subscription's  open, payable invoices."
+  pending_invoices:
+    allOf:
+      - $ref: "./Account-Balance.yaml"
+    description: "The balance, in cents, of the sum of the subscription's  pending, payable invoices."
   pending_discounts:
     allOf:
       - $ref: "./Account-Balance.yaml"

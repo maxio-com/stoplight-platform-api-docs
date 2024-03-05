@@ -30,6 +30,8 @@ properties:
     type: boolean
   apply_on_cancel_at_end_of_period:
     type: boolean
+  apply_on_subscription_expiration:
+    type: boolean
 required:
   - name
   - code
