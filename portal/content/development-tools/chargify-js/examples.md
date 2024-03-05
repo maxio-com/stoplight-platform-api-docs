@@ -6,9 +6,9 @@ The following examples all include selectors named sequentially as chargify1, ch
 
 ## Example of Chargify.js Form
 
-| ![Chargify.js Example Form](../../assets/images/docs/chargify.js/Examples.md/maxio-example.png) |
-| :---------------------------------------------------------------------------------------------: |
-|                           **Example of subscriber-facing HTML form**                            |
+| ![Chargify.js Example Form](static/images/chargify-js/examples/maxio-example.png) |
+| :-------------------------------------------------------------------------------: |
+|                    **Example of subscriber-facing HTML form**                     |
 
 ```html
 <!doctype html>
@@ -364,7 +364,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on GoCardless, please see the following resources:
 
 - [GoCardless help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677#gocardless-setup)
-- Using GoCardless via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-gocardless-bank-number) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#gocardless)
+- Using GoCardless via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 <script>
@@ -388,8 +388,8 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 - [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
-- Using Stripe SEPA Direct Debit via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#sepa-direct-debit)
-- Using Stripe BECS Direct Debit via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#stripe-becs-direct-debit)
+- Using Stripe SEPA Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
+- Using Stripe BECS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 <script>
@@ -1501,7 +1501,7 @@ The following is a full example of using Chargify.js with GoCardless.
 For more information on GoCardless, please see the following resources:
 
 - [GoCardless help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677#gocardless-setup)
-- Using GoCardless via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-gocardless-bank-number) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#gocardless)
+- Using GoCardless via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 var chargify = new Chargify();
@@ -1605,7 +1605,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 - [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
-- Using Stripe Direct Debit via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-stripe-sepa-direct-debit) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#sepa-direct-debit)
+- Using Stripe Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 var chargify = new Chargify();
@@ -1693,7 +1693,7 @@ The following example contains a minimalist approach to working with Chargify.js
 For more information on Stripe Direct Debit, please see the following resources:
 
 - [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
-- Using Stripe BECS Direct Debit via API for [creating subscriptions](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#subscription-using-stripe-becs-direct-debit) and/or [payment profiles](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile#stripe-becs-direct-debit)
+- Using Stripe BECS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 var chargify = new Chargify();

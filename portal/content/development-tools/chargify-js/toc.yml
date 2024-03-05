@@ -1,6 +1,6 @@
 toc:
   - page: Overview
-    file: overview.md
+    file: chargify-js-overview.md
   - page: Configurations
     file: configurations.md
   - page: Examples

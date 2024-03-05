@@ -2,7 +2,7 @@
 
 Learn how to setup products and components for use when creating subscriptions.
 
-Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](../announcements/overview.md) so we can help and also improve this documentation.
+Products control what is charged and how often charges are assessed/billed to a subscription. If you need help after reading this, please [let us know](page:help/getting-support) so we can help and also improve this documentation.
 
 ---
 
@@ -37,7 +37,7 @@ An example of our input attributes might look like the following:
 }
 ```
 
-That data should be posted to the [Product Family Create](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNDI-create-product-family) API Endpoint.
+That data should be posted to the [Product Family Create]($e/Product%20Families/createProductFamily) API Endpoint.
 
 A simple curl example would be the following:
 
@@ -47,7 +47,7 @@ curl -u <API_KEY>:X -H Accept:application/json -d @product_family.json -X POST h
 
 To create a product family using the application, refer to the [Creating Product Families](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families) help article for more information.
 
-Please see [API Documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMzY-create-product) for a complete listing of input/output schema, along with code examples in multiple programming languages.
+Please see [API Documentation]($e/Product%20Families/createProductFamily) for a complete listing of input/output schema, along with code examples in multiple programming languages.
 
 ## Product
 
@@ -73,7 +73,7 @@ You can create a product using the API, like so:
 }
 ```
 
-That data should be posted to the [Product Create](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMzY-create-product) API Endpoint.
+That data should be posted to the [Product Create]($e/Products/createProduct) API Endpoint.
 
 ## Product Price Points
 
@@ -90,7 +90,7 @@ Components are a great way to customize how your customers can use your products
 Components allow you to introduce additional “line items” to your products that are often expressed as “add-ons”, upsold features, or pay-per-use items. There are two basic concepts needed to use components that we will discuss:
 
 1.  [Creating](#creating-components) components
-2.  The [usage/allocation](#usageallocation) of components
+2.  The [usage/allocation](#usage-allocation) of components
 
 For more information about components, see our [Component](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article.
 
@@ -117,7 +117,7 @@ If you need to display component pricing to your customers, we recommend caching
 For more information on components, please see the following:
 
 - About [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article
-- Creating components [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMjA-create-component)
+- Creating components [via the API]($e/Components/createMeteredComponent)
 
 ### Usage/Allocation
 
@@ -168,9 +168,9 @@ Let's create a coupon that we can then use when creating our next subscription.
 }
 ```
 
-To create a coupon [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzMDI-create-coupon).
+To create a coupon [via the API]($e/Coupons/createCoupon) .
 
-To use a coupon when creating a new subscription [via the API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription#with-coupons).
+To use a coupon when creating a new subscription [via the API]($e/Subscriptions/createSubscription).
 
 ### Adjustments
 
@@ -188,4 +188,4 @@ Let's say you wanted to increase the balance of a subscription by $4 (perhaps fo
 }
 ```
 
-Please see the full API documentation for [Adjustments](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTY-create-adjustment) for detailed information.
+Please see the full API documentation for [Adjustments](https://prod-developers.maxio.com/legacy/index.html#/http/api-endpoints/legacy-subscription-balance/create-adjustment) for detailed information.

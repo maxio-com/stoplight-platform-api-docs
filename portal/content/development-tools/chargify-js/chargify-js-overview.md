@@ -10,7 +10,7 @@ Advanced Billing provides transparent `iframes` that allow you to customize a cu
 
 When a customer submits your payment form, Chargify.js sends the customer payment information to be securely stored in your payment gateway. In return, a one-time token is generated for you to use to complete the subscription process using our API. The one-time-payment token references the payment information that is securely stored in your gateway.
 
-![Chargify.js Flow](../../assets/images/docs/chargify.js/Overview.md/chargify_js_flow.jpg)
+![Chargify.js Flow](static/images/chargify-js/overview/chargify_js_flow.jpg)
 
 With this token you can create a subscription or payment profile assigned to the customer. Your PCI is significantly reduced, because of you don't pass any sensitive payment information. An example API call to the subscriptions endpoint would take the following form:
 
@@ -138,7 +138,7 @@ var chargify = new Chargify();
 
 3. [Generate a public key](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405281550477#key-pair-chargifyjs). This will be separate from your API key, which must be kept private.
 
-4. Load Advanced Billing with the authentication and customizations you desire. We have a [help article dedicated to this topic](./Chargify.js-Configurations.md).
+4. Load Advanced Billing with the authentication and customizations you desire. We have a [help article dedicated to this topic](./configurations.md).
 
 5. Based on the selectors you have configured within `Chargify.load`, add those to your main form. Here's an example with some basic configuration included inline with a single selector to pull in all iframes:
 
@@ -212,11 +212,12 @@ document
   });
 ```
 
-7. After you get the token, you will submit it to your server and use it to [create a subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription) or [payment profile](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile) using our API.
+7. After you get the token, you will submit it to your server and use it to [create a subscription]($e/Subscriptions/createSubscription)
+   or [payment profile]($e/Payment%20Profiles/createPaymentProfile) using our API.
 
 > ❗️ Tokens expire after 20 minutes.
 
-8. Now that the basic workflow of Chargify.js is working, add some styling to the form! [Here's an example of how it could look](./Examples.md#example-of-chargifyjs-form). Additional examples, both minimal and full, may be found at the bottom of that page.
+8. Now that the basic workflow of Chargify.js is working, add some styling to the form! [Here's an example of how it could look](./examples.md#example-of-chargify-js-form). Additional examples, both minimal and full, may be found at the bottom of that page.
 
 ## Handling Errors
 
@@ -334,7 +335,7 @@ By its very nature, Chargify.js allows end-users to submit cardholder data direc
 
 The generation of a security token requires your Chargify.js private key. You may generate or review your Chargify.js key pair from Integrations > Chargify.js. The private key is initially hidden, but you can click-to-reveal and then copy the value.
 
-![Chargify.js Integration Configuration](../../assets/images/docs/chargify.js/Overview.md/chargifyjs-integration-configuration.jpg)
+![Chargify.js Integration Configuration](static/images/chargify-js/overview/chargifyjs-integration-configuration.jpg)
 
 The private key is required to sign your security token. **Do not share your private key publicly!**. You will need to generate your security token on the server, and then share the resulting token (and not your private key) with your client-side Chargify.js config.
 

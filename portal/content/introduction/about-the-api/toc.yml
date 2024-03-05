@@ -13,3 +13,7 @@ toc:
     file: webhooks.md
   - page: Versioning
     file: versioning.md
+  - page: Duplicate Prevention
+    file: duplicate-prevention.md
+  - page: Expert Usage
+    file: expert-usage.md

@@ -83,9 +83,9 @@ For example, the following `POST` to the subscription create API endpoint would 
 }
 ```
 
-For more information, see [API documentation for Creating a Subscription](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription).
+For more information, see [API documentation for Creating a Subscription]($e/Subscriptions/createSubscription).
 
-For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](../advanced/Expert-Usage.md#advanced-signup-examples).
+For more advanced subscription creation scenarios, please see [Advanced Subscription Creation Examples](page:introduction/about-the-api/expert-usage#advanced-signup-examples).
 
 ## Payment Methods
 
@@ -122,7 +122,7 @@ In the following example, the existing customer with `reference` (shown as `cust
 }
 ```
 
-For more information about the `customer_reference` and `customer_id` values, please see the [API documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzODg-create-subscription).
+For more information about the `customer_reference` and `customer_id` values, please see the [API documentation]($e/Subscriptions/createSubscription).
 
 ## Components
 
@@ -153,7 +153,7 @@ One very common initial signup step is to allocate a quantity of one or more com
 }
 ```
 
-For more information about components and how to use this great feature to customize your signup process - see [components](./Components.md).
+For more information about components and how to use this great feature to customize your signup process - see [components](page:core-concepts/product-catalog#components).
 
 For deeper learning about how components function within Advanced Billing, we recommend the following help articles:
 
@@ -182,7 +182,7 @@ For example, if you wanted to add a charge of $1 - it would look like the follow
 }
 ```
 
-For more information, see [the API details for creating charges](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTc-create-charge).
+For more information, see [the API details for creating charges](https://prod-developers.maxio.com/legacy/index.html#/http/api-endpoints/legacy-subscription-balance/create-subscription-charge).
 
 ## Billing Dates
 
@@ -199,7 +199,7 @@ A quick example of updating the billing date for a subscription would look like 
 }
 ```
 
-Please see the full API documentation for [updating subscription assessment date](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDg0MDE-update-subscription) for more information.
+Please see the full API documentation for [updating subscription assessment date]($e/Subscriptions/updateSubscription) for more information.
 
 ## Updating Payment Details
 
@@ -211,7 +211,7 @@ You can update the payment details in a few different ways:
 
 - Update via [Self-Service Pages](#updating-via-self-service-pages)
 - Update via [API](#updating-via-api)
-- Update via [Chargify.js](../development-tools/chargify-js/Overview.md#updating-existing-payment-methods)
+- Update via [Chargify.js](page:development-tools/chargify-js/overview#updating-existing-payment-methods)
 
 ### Updating via Self-Service Pages
 
@@ -275,7 +275,7 @@ Updating the payment profile directly would look like the following:
 }
 ```
 
-Please see the full [API documentation](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDgzNTU-create-payment-profile) for more complete documentation about updating payment profiles via the API.
+Please see the full [API documentation]($e/Payment%20Profiles/updatePaymentProfile) for more complete documentation about updating payment profiles via the API.
 
 ## Cancelling
 
@@ -304,7 +304,7 @@ It is also possible to cancel a subscription at the end of the current billing p
 }
 ```
 
-For information about cancelling using the API, please see [Cancelling via API](https://developers.chargify.com/docs/api-docs/b3A6MTQxMDg0MDI-cancel-subscription).
+For information about cancelling using the API, please see [Cancelling via API]($e/Subscription%20Status/cancelSubscription).
 
 For information about cancelling subscriptions in general, please see the ["Cancellation" help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404968574605).
 
@@ -328,7 +328,7 @@ You can perform a non-manual refund using the API, like in the following example
 
 You will substitute values for `payment_id`, `amount` and `memo` in this example. The `payment_id` is the ID of the payment transaction that the credit will be applied to.
 
-For more information, see [API refunds](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTk-create-refund).
+For more information, see [API refunds](https://prod-developers.maxio.com/legacy/index.html#/http/api-endpoints/legacy-subscription-balance/create-refund).
 
 For a manual/external refund, the API call will be almost the exact same except you also supply a value for `external`:
 
@@ -345,7 +345,7 @@ For a manual/external refund, the API call will be almost the exact same except 
 
 In the case of a manual or external refund, there will be nothing which is passed through on to your gateway - it will simply be added to the subscription, modifying the balance and adding a transaction record.
 
-For more information, see [API Refunds (External)](https://developers.chargify.com/docs/api-docs/b3A6MTQxMTAzOTk-create-refund).
+For more information, see [API Refunds (External)](https://prod-developers.maxio.com/legacy/index.html#/http/api-endpoints/legacy-subscription-balance/create-refund).
 
 ## Subscription Updates via Billing Portal
 
