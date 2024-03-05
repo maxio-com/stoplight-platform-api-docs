@@ -5,3 +5,15 @@ properties:
     type: integer
     format: int64
     description: The balance in cents.
+  automatic_balance_in_cents:
+    type:
+      - integer
+      - "null"
+    format: int64
+    description: The automatic balance in cents.
+  remittance_balance_in_cents:
+    type:
+      - integer
+      - "null"
+    format: int64
+    description: The remittance balance in cents.
