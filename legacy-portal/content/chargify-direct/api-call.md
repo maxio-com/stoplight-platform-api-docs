@@ -26,7 +26,7 @@ All of the call attribute fields are returned from GET (read) operations, and al
 | `nonce`                 | The nonce (if used). Should match the submitted secure parameter (request → secure → timestamp)                                                                    |
 | `request`               | Details about the request submitted to the Chargify Direct endpoint                                                                                                |
 | `secure`                | The secure parameters                                                                                                                                              |
-| `api_id`                | `timestamp`, `nonce`, `data`, `signature` --> The response signature, used to validate this call. See [Response Signature](./Overview.md#response-signature) here. |
+| `api_id`                | `timestamp`, `nonce`, `data`, `signature` --> The response signature, used to validate this call. See [Response Signature](./overview.md#response-signature) here. |
 | `signup`                | The signup parameters                                                                                                                                              |
 | `response`              | Details the response to the call made to the Chargify Direct endpoint                                                                                              |
 | `result`                |                                                                                                                                                                    |
