@@ -117,7 +117,7 @@ For more API information about "metafields" (the containers of your metadata), p
 
 ## Communication
 
-Advanced Billing enables you to communicate with your subscribers through a variety of methods:
+Advanced Billing enables you to communicate with your subscribers through a variety of methods. For more information on these methods, read the given help article:
 
 - [Email templating](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405217029261)
 - The use of [Liquid Syntax](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405065579661) in your emails and communications
@@ -159,7 +159,7 @@ HTTP GET: `https://{subdomain}.chargify.com/referral_codes/validate.{format}?cod
 
 If the referral code is valid, the response will be `200 OK`. Otherwise, the response will be `404 NOT FOUND`.
 
-For more information about referrals, please see the [Referrals help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405548589581).
+For more information about referrals, please see the [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405548589581) help article.
 
 ## Notes
 
