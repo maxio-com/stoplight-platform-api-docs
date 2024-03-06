@@ -90,8 +90,6 @@ jobs:
           branch="${branch// /_}"
           echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "Add productions-only settings to the portal code"
-          ./scripts/prepare_production_portal.sh
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
 
