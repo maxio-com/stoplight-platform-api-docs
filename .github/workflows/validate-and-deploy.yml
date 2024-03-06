@@ -48,7 +48,7 @@ jobs:
         shell: bash
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
-        run: ./scripts/apimatic_validate.sh
+        run: ./scripts/apimatic_validate.sh ./portal
   deploy:
     needs: [validate-spec, apimatic-validation]
     runs-on: ubuntu-latest
