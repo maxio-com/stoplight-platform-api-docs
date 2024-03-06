@@ -42,7 +42,7 @@ Please see the [Configuring Webhooks](https://maxio-chargify.zendesk.com/hc/en-u
 
 For initial testing, there are a number of options that you can use.
 
-Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like https://webhook.site/. Webhook.site provides a temporary URL that Advanced Billing may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Advanced Billing will be sending.
+Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like [Webhook.site](https://webhook.site), which provides a temporary URL that Advanced Billing may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Advanced Billing will be sending.
 
 Advanced Billing webhooks provide a test method that will send a simple message to any single webhook URL you specify. This test message is useful for verifying connectivity between your URL and Advanced Billing.
 
@@ -88,5 +88,3 @@ The following are some best practices that we would suggest regarding webhooks:
 
 - Webhooks are **asynchronous events**. We do our best to always send them in a timely manner, but we **DO NOT** recommend on relying on webhooks for events that are time sensitive.
 - We **DO NOT** recommend that you block a user from moving forward with provisioning or signup on your side based on a webhook response. The appropriate method is to query the subscriptions API to verify a subscription.
-
----
