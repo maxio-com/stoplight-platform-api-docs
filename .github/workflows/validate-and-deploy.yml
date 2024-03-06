@@ -88,6 +88,8 @@ jobs:
         shell: bash
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Add productions-only settings to the portal code"
+          ./scripts/prepare_production_portal.sh
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete --exclude \"legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete --exclude "legacy/*"
