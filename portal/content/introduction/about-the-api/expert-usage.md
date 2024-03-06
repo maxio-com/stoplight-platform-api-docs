@@ -131,7 +131,7 @@ Dunning is the process of how you communicate with your customers in regards to 
 
 Advanced Billing helps manage the dunning process, or what we like to call the “unhappy path.” Or what happens when a credit card transaction fails. If you’re using Authorize.net, PayPal, or Google Checkout, you have to manually address each credit card issue as it arises. This is both tedious and time consuming and is certainly not the most efficient way to handle problems when executing a large number of transactions.
 
-For more information about dunning - including how to setup your dunning plans, please see the [help article on Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405505141005).
+For more information about dunning - including how to setup your dunning plans, please see the [Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405505141005) help article.
 
 ## Referrals
 
