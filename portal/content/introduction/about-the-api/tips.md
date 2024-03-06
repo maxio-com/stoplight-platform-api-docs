@@ -32,7 +32,7 @@ Avoid querying Advanced Billing in-line as part of a customer’s request to you
 
 ## Synchronizing Your Database
 
-Normally you should keep your local customer database in sync by using [webhooks]($e/Webhooks/createEndpoint). But if you think your database has become out of sync with Advanced Billing, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
+Normally you should keep your local customer database in sync by using [Webhooks]($e/Webhooks/createEndpoint). But if you think your database has become out of sync with Advanced Billing, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
 
 It’s perfectly okay to do this as needed. But it should generally only be relied upon in exceptional circumstances or for periodic reconciliation (usually no more than once a month).
 
@@ -80,7 +80,7 @@ This is an error message indicating that Cross-Origin Resource Sharing (CORS) is
 
 ## Sync
 
-After creating and managing subscriptions, you might need a way for your application to know about the state of a customers subscription. This can be done either directly through the API or by Advanced Billing notifying your application using the handy [webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction) feature.
+After creating and managing subscriptions, you might need a way for your application to know about the state of a customers subscription. This can be done either directly through the API or by Advanced Billing notifying your application using the handy [Webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction) feature.
 
 ---
 
