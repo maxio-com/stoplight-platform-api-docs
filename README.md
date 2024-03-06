@@ -49,7 +49,7 @@ npm install -g @stoplight/spectral-cli
 And then to run linting (execute in the main repo directory):
 
 ```shell
- spectral lint -v -F warn ./reference/Chargify-API.v1.yaml
+ spectral lint -v -F warn ./portal/spec/openapi.yaml
 ```
 
 You need to fix all Spectral warnings/errors before commit!
@@ -63,12 +63,12 @@ There are two Spectral profiles:
 
 This repository is used for SDK generation. It's important to keep specification compatible with our generators.
 You cannot merge your PR if SDK generation fails.
-Check output of `Validate specification and build SDKs` pipeline in GitHub Actions if your build fails.
+Check output of `Validate and deploy` pipeline in GitHub Actions if your build fails.
 Look at `Build SDKs` step, here is a sample error message:
 
 ```text
 > Task :validateSpec
-Validating spec ../reference/Chargify-API.v1.yaml
+Validating spec ../portal/spec/openapi.yaml
 
 Spec has issues or recommendations.
 
@@ -82,11 +82,3 @@ Issues:
 ```
 
 It's useful to look at the pipeline output even if it's green as it might contain some warnings which can influence generated code.
-
-### How it works
-
-We are using [OpenAPI Generator](https://openapi-generator.tech/) to generate our SDKs.
-Configuration of generators are stored in repository [sdk-generator](https://github.com/maxio-com/sdk-generator).
-When PR is opened in `stoplight-platform-api-docs` with target branch `main`/`staging` then `build-sdk` pipeline is run to validate specification.
-
-`publish-sdk` workflow is run manually - it generates code for specified languages, pushes generated code to respective SDK repositories and opens PR in GitHub.

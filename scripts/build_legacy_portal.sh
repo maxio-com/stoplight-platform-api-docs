@@ -25,8 +25,8 @@ mkdir -p build/tmp/download
 cp -r ./legacy-portal build/tmp/portal
 
 echo "Overriding new portal url with $new_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
-sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$new_portal_url,g" ./build/tmp/portal/spec/Chargify-Legacy-API.yaml
-rm ./build/tmp/portal/spec/Chargify-Legacy-API.yaml.backup
+sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$new_portal_url,g" ./build/tmp/portal/spec/openapi.yaml
+rm ./build/tmp/portal/spec/openapi.backup
 
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
