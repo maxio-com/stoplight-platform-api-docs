@@ -58,6 +58,7 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/legacy/*"
 
           echo "You can access your portal at https://staging-developers.maxio.com/legacy/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Deploy Prod
         if: "${{ github.event.inputs.environment == 'prod' }}"
         shell: bash

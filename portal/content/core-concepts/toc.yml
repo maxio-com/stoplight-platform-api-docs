@@ -1,0 +1,9 @@
+toc:
+  - group: Core Concepts
+    items:
+      - page: Product Catalog
+        file: product-catalog.md
+      - page: Subscription Signup
+        file: subscription-signup.md
+      - page: Invoicing
+        file: relationship-invoicing.md

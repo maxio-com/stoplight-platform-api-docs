@@ -93,7 +93,7 @@ paths:
                   value:
                     errors:
                       - "Amount: is not a number."
-      operationId: post-subscriptions-subscriptionId-adjustments.json
+      operationId: createAdjustment
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -195,7 +195,7 @@ paths:
                       - "Amount: is not a number."
                       - This subscription is not eligible to accept charges.
                       - "Bogus Gateway: Forced failure"
-      operationId: post-subscriptions-subscription_id-charges.json
+      operationId: createSubscriptionCharge
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -418,7 +418,7 @@ paths:
                     errors:
                       amount_in_cents:
                         - "Amount: is not a number."
-      operationId: post-subscriptions-subscription_id-payments.json
+      operationId: createPayment
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
@@ -584,7 +584,7 @@ paths:
                   value:
                     errors:
                       - "Memo: cannot be blank."
-      operationId: post-subscriptions-subscription_id-refunds.json
+      operationId: createRefund
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing |
         |---------------------------------------------------------------------------|
@@ -723,7 +723,7 @@ paths:
                       card_expiration: 01/2028
                       card_type: bogus
                       refunded_amount_in_cents: 0
-      operationId: get-transactions-transaction_id-.json
+      operationId: readTransaction
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -875,7 +875,7 @@ paths:
                         card_expiration: 10/2020
                         card_type: bogus
                         refunded_amount_in_cents: 0
-      operationId: get-transactions.json
+      operationId: listTransactions
       parameters:
         - schema:
             type: integer
@@ -1097,7 +1097,7 @@ paths:
                         taxations: []
         "404":
           description: Not Found
-      operationId: get-subscriptions-subscription_id-transactions.json
+      operationId: listSubscriptionTransactions
       parameters:
         - schema:
             type: integer
@@ -1177,7 +1177,7 @@ paths:
                 Example:
                   value:
                     count: 290
-      operationId: get-transactions-count.json
+      operationId: readTransactionsCount
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -1647,7 +1647,7 @@ paths:
                             event_specific_data:
                               product_id: 3861800
                               account_transaction_id: null
-      operationId: get-statements-statement_id-.json
+      operationId: readStatement
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -2743,7 +2743,7 @@ paths:
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
-      operationId: get-statements.json
+      operationId: listStatements
       parameters:
         - schema:
             type: integer
@@ -3863,7 +3863,7 @@ paths:
                               event_specific_data:
                                 product_id: 3792003
                                 account_transaction_id: 159424449
-      operationId: get-subscriptions-subscription_id-statements.json
+      operationId: listSubscriptionStatements
       parameters:
         - schema:
             type: integer
@@ -3928,7 +3928,7 @@ paths:
                       - 80499378
                       - 80499379
                       - 80500632
-      operationId: get-statements-ids.json
+      operationId: listStatementIds
       parameters:
         - schema:
             type: integer
@@ -4004,7 +4004,7 @@ paths:
                       - 79334531
                       - 79702531
                       - 79733833
-      operationId: get-subscriptions-subscription_id-statements-ids.json
+      operationId: listSubscriptionStatementIds
       parameters:
         - schema:
             type: integer
@@ -4065,7 +4065,7 @@ paths:
                 Example:
                   value:
                     count: 290
-      operationId: get-statements-count.json
+      operationId: readStatementsCount
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -4170,7 +4170,7 @@ paths:
                           card_type: bogus
         "404":
           description: Not Found
-      operationId: get-invoices-invoice_id-.json
+      operationId: readInvoice
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -4303,7 +4303,7 @@ paths:
                             tax_id: null
                             customer_id: 14300992
                         payments_and_credits: []
-      operationId: get-invoices.json
+      operationId: listInvoices
       parameters:
         - schema:
             type: integer
@@ -4414,7 +4414,7 @@ paths:
                       card_expiration: null
                       card_type: null
                       refunded_amount_in_cents: 0
-      operationId: post-invoices-invoice_id-payments.json
+      operationId: createInvoicePayment
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -4469,7 +4469,7 @@ paths:
                 properties:
                   charge:
                     $ref: "#/components/schemas/Legacy-Charge"
-      operationId: post-invoices-invoice_id-charges.json
+      operationId: createInvoiceCharge
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -4565,7 +4565,7 @@ paths:
                       component_id: null
                       statement_id: 79335006
                       customer_id: 14332342
-      operationId: post-invoices-invoice_id-adjustments.json
+      operationId: createInvoiceCredit
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
@@ -5022,7 +5022,7 @@ paths:
                       next_product_handle: null
                       on_hold_at: null
                       scheduled_cancellation_at: "2016-11-14T14:48:13-05:00"
-      operationId: put-subscriptions-subscription_id-reset_balance.json
+      operationId: resetSubscriptionBalance
       description: |-
         | ❗️  This endpoint is only for subscriptions using Legacy Statement Billing  |
         |-----------------------------------------------------------------------------|
