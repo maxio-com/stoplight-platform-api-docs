@@ -75,18 +75,14 @@ jobs:
           branch="${branch// /_}"
           echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "Add staging-only settings to the portal code"
-          ./scripts/prepare_staging_portal.sh
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.STAGING_S3_BUCKET }}/$branch --delete
-#          aws s3 sync scripts/google6ccce745638e3352.html s3://${{ secrets.STAGING_S3_BUCKET }}/$branch
           echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/$branch/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/$branch/*"
 
           echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Deploy Prod
-#        if: github.event_name == 'push' && github.ref_name == 'main' && github.ref_type == 'branch'
         shell: bash
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
