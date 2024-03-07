@@ -18,7 +18,7 @@ info:
     2. [Setup and configure authentication](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405281550477-API-Keys#api) credentials.
     3. Submit your API request and try it out.
     4. Verify results through response.
-    5. Test our integrations.
+    5. [Test](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405553861773-Testing-Intro) our integrations.
 
     We strongly suggest exploring the developer portal, our [integrations](https://www.maxio.com/integrations) and the API guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
 
