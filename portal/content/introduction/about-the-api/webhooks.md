@@ -2,7 +2,7 @@
 
 Webhooks offer a way to quickly find out about changes to your Subscriptions that happen within Advanced Billing. You can subscribe to events of interest, and we’ll post data to the URL you specify when one of those events occurs.
 
-For more general information, see the [help article on Webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction).
+For more general information, see the [Webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction) help article.
 
 ## Using Webhooks
 
@@ -23,7 +23,7 @@ In general, the normal process for using webhooks is:
 5. You perform some action using the validated event data, like sending a welcome email to the customer or provision your services.
 6. You respond `200 OK` to the initial request, thereby completing the webhook transaction with Advanced Billing.
 
-Please see the [help article on webhook events](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#events) for more information.
+Please see the [Webhook Events](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#events) help article for more information.
 
 ## Configuring Webhooks
 
@@ -36,13 +36,13 @@ Webhooks, as configured in your Advanced Billing account, are as simple as:
 
 You may enable/disable webhooks as you require them, they are not required to be used but they do have considerable benefit.
 
-Please see [configuring webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645#configuring-webhooks) documentation for more information.
+Please see the [Configuring Webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645#configuring-webhooks) help article for more information.
 
 ## Testing Webhooks
 
 For initial testing, there are a number of options that you can use.
 
-Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like https://webhook.site/. Webhook.site provides a temporary URL that Advanced Billing may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Advanced Billing will be sending.
+Before you have a publicly accessible endpoint available, or if you just are looking at webhook for troubleshooting - we suggest using a tool like [Webhook.site](https://webhook.site), which provides a temporary URL that Advanced Billing may send messages to, allowing you to view them easily within their application. The "bins" are temporary. This can provide quick insight into the content or headers Advanced Billing will be sending.
 
 Advanced Billing webhooks provide a test method that will send a simple message to any single webhook URL you specify. This test message is useful for verifying connectivity between your URL and Advanced Billing.
 
@@ -60,7 +60,7 @@ To enable the receipt of webhooks, simply enable them from within your site sett
 
 Upon receipt of a webhook, you should accept it by returning an HTTP `200 OK` response as quickly as possible. Sending any other response (i.e. `500 Internal Server Error`, `404 Not Found`, etc.) OR failing to return a response within approximately 15 seconds will result in automatic retries of the webhooks.
 
-For more details on the retry mechanism and webhook replay, see our [documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645#webhook-acknowledgement-and-automatic-retries).
+For more details on the retry mechanism and webhook replay, see this [Webhook](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645#webhook-acknowledgement-and-automatic-retries) help article.
 
 ## Verifying Events
 
@@ -80,7 +80,7 @@ You may either retrieve the signature value through the header `X-Chargify-Webho
 http://example.com/?signature={signature_hmac_sha_256}
 ```
 
-Please see the [webhook signature verification help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#webhook-verification) for more information.
+Please see the [Webhook Signature Verification](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405357509645-Webhooks-Reference#webhook-verification) help arcile for more information.
 
 ## Best Practices
 
@@ -88,5 +88,3 @@ The following are some best practices that we would suggest regarding webhooks:
 
 - Webhooks are **asynchronous events**. We do our best to always send them in a timely manner, but we **DO NOT** recommend on relying on webhooks for events that are time sensitive.
 - We **DO NOT** recommend that you block a user from moving forward with provisioning or signup on your side based on a webhook response. The appropriate method is to query the subscriptions API to verify a subscription.
-
----
