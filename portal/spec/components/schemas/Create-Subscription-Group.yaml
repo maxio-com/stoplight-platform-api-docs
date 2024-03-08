@@ -2,9 +2,7 @@ title: Create Subscription Group
 type: object
 properties:
   subscription_id:
-    type:
-      - string
-      - integer
+    type: integer
   member_ids:
     type: array
     items:

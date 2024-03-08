@@ -10,9 +10,7 @@ info:
     One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](page:development-tools/client-libraries).
     The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
-    # Getting Started
-
-    Steps to make your first Maxio Advanced Billing API call:
+    ## Steps to make your first Maxio Advanced Billing API call
 
     1. [Sign-up](https://app.chargify.com/signup/maxio-billing-sandbox) or [log-in](https://app.chargify.com/login.html) to your [test site](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405553861773-Testing-Intro) account.
     2. [Setup and configure authentication](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405281550477-API-Keys#api) credentials.
@@ -22,9 +20,9 @@ info:
 
     We strongly suggest exploring the developer portal, our [integrations](https://www.maxio.com/integrations) and the API guide, as well as the entire set of application-based documentation to aid in your discovery of the product.
 
-    ## Example
+    ### Example
 
-    The following examples use the curl command-line tool to execute API requests.
+    The following example uses the curl command-line tool to execute API requests.
 
     **Request**
 
@@ -14998,11 +14996,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./components/schemas/errors/Single-String-Error-Response.yaml"
+                $ref: "./components/schemas/errors/Subscription-Group-Create-Error-Response.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     errors: Subscription is already in group
+                Example-2:
+                  value:
+                    errors:
+                      members:
+                        - not_found
+                Example-3:
+                  value:
+                    errors:
+                      subscription_group: "can't be blank"
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
@@ -15070,10 +15077,16 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - schema:
-            type: string
+        - name: "include[]"
           in: query
-          name: include
+          schema:
+            type: array
+            items:
+              $ref: "./components/schemas/Subscription-Groups-List-Include.yaml"
+            example:
+              - account_balances
+          style: form
+          explode: true
           description: |-
             A list of additional information to include in the response. The following values are supported:
 
@@ -15085,6 +15098,18 @@ paths:
       summary: Read Subscription Group
       tags:
         - Subscription Groups
+      parameters:
+        - name: "include[]"
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: "./components/schemas/Subscription-Group-Include.yaml"
+            example:
+              - current_billing_amount_in_cents
+          style: form
+          explode: true
+          description: "Allows including additional data in the response. Use in query: `include[]=current_billing_amount_in_cents`."
       responses:
         "200":
           description: OK

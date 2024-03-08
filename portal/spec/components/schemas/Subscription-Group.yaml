@@ -6,7 +6,7 @@ properties:
   payment_profile:
     $ref: "./Group-Payment-Profile.yaml"
   payment_collection_method:
-    type: string
+    $ref: "./Collection-Method.yaml"
   subscription_ids:
     type: array
     items:

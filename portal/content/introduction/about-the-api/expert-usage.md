@@ -117,7 +117,7 @@ For more API information about "metafields" (the containers of your metadata), p
 
 ## Communication
 
-Advanced Billing enables you to communicate with your subscribers through a variety of methods:
+Advanced Billing enables you to communicate with your subscribers through a variety of methods. For more information on these methods, read the given help article:
 
 - [Email templating](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405217029261)
 - The use of [Liquid Syntax](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405065579661) in your emails and communications
@@ -131,7 +131,7 @@ Dunning is the process of how you communicate with your customers in regards to 
 
 Advanced Billing helps manage the dunning process, or what we like to call the “unhappy path.” Or what happens when a credit card transaction fails. If you’re using Authorize.net, PayPal, or Google Checkout, you have to manually address each credit card issue as it arises. This is both tedious and time consuming and is certainly not the most efficient way to handle problems when executing a large number of transactions.
 
-For more information about dunning - including how to setup your dunning plans, please see the [help article on Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405505141005).
+For more information about dunning - including how to setup your dunning plans, please see the [Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405505141005) help article.
 
 ## Referrals
 
@@ -159,7 +159,7 @@ HTTP GET: `https://{subdomain}.chargify.com/referral_codes/validate.{format}?cod
 
 If the referral code is valid, the response will be `200 OK`. Otherwise, the response will be `404 NOT FOUND`.
 
-For more information about referrals, please see the [Referrals help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405548589581).
+For more information about referrals, please see the [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405548589581) help article.
 
 ## Notes
 

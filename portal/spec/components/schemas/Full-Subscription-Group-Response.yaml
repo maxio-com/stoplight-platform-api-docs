@@ -19,7 +19,7 @@ properties:
     type: string
     format: date-time
   state:
-    type: string
+    $ref: "./Subscription-State.yaml"
   cancel_at_end_of_period:
     type: boolean
   current_billing_amount_in_cents:

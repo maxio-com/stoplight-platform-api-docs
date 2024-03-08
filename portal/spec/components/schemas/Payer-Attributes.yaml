@@ -32,7 +32,7 @@ properties:
   vat_number:
     type: string
   tax_exempt:
-    type: string
+    type: boolean
   tax_exempt_reason:
     type: string
   metafields:
