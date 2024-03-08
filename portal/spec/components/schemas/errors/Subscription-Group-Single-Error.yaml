@@ -3,3 +3,5 @@ type: object
 properties:
   subscription_group:
     type: string
+required:
+  - subscription_group

@@ -5,4 +5,6 @@ properties:
     oneOf:
       - $ref: "./Subscription-Group-Members-Array-Error.yaml"
       - $ref: "./Subscription-Group-Single-Error.yaml"
-      - $ref: "./Single-Error-Response.yaml"
+      - type: string
+required:
+  - errors
