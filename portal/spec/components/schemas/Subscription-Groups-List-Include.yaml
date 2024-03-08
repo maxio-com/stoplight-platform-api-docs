@@ -1,4 +1,4 @@
-title: Subscription Group Include
+title: Subscription Groups List Include
 type: string
 enum:
   - account_balances
