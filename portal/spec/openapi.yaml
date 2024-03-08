@@ -15077,14 +15077,6 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - schema:
-            type: string
-          in: query
-          name: include
-          description: |-
-            A list of additional information to include in the response. The following values are supported:
-
-            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
         - name: "include[]"
           in: query
           schema:
@@ -15095,7 +15087,10 @@ paths:
               - account_balances
           style: form
           explode: true
-          description: "Allows including additional data in the response. Use in query: `include[]=account_balances`."
+          description: |-
+            A list of additional information to include in the response. The following values are supported:
+
+            - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "./components/parameters/group-uid-path.yaml"
