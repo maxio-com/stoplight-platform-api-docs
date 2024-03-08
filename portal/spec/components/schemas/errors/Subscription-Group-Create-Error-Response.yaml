@@ -1,0 +1,8 @@
+title: Subscription Group Create Error Response
+type: object
+properties:
+  errors:
+    oneOf:
+      - $ref: "./Subscription-Group-Members-Array-Error.yaml"
+      - $ref: "./Subscription-Group-Single-Error.yaml"
+      - $ref: "./Single-Error-Response.yaml"

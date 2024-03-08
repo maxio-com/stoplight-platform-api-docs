@@ -14998,11 +14998,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./components/schemas/errors/Single-String-Error-Response.yaml"
+                $ref: "./components/schemas/errors/Subscription-Group-Create-Error-Response.yaml"
               examples:
-                Example:
+                Example-1:
                   value:
                     errors: Subscription is already in group
+                Example-2:
+                  value:
+                    errors:
+                      members:
+                        - not_found
+                Example-3:
+                  value:
+                    errors:
+                      subscription_group: "can't be blank"
       x-operation-settings:
         ErrorTemplates:
           "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
@@ -15078,6 +15087,17 @@ paths:
             A list of additional information to include in the response. The following values are supported:
 
             - `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances`
+        - name: "include[]"
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: "./components/schemas/Subscription-Groups-List-Include.yaml"
+            example:
+              - account_balances
+          style: form
+          explode: true
+          description: "Allows including additional data in the response. Use in query: `include[]=account_balances`."
   "/subscription_groups/{uid}.json":
     parameters:
       - $ref: "./components/parameters/group-uid-path.yaml"
@@ -15085,6 +15105,18 @@ paths:
       summary: Read Subscription Group
       tags:
         - Subscription Groups
+      parameters:
+        - name: "include[]"
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: "./components/schemas/Subscription-Group-Include.yaml"
+            example:
+              - current_billing_amount_in_cents
+          style: form
+          explode: true
+          description: "Allows including additional data in the response. Use in query: `include[]=current_billing_amount_in_cents`."
       responses:
         "200":
           description: OK
