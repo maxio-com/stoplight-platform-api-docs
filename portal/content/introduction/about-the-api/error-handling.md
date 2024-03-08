@@ -47,7 +47,8 @@ Please keep in mind that if you encounter a timeout issue, it is worth inspectin
 ## API Access Limitations
 
 There are a few scenarios that may end up in causing an API request to be blocked even with correct credentials.
-**Please note:** All relevant API requests will be blocked if any of the below conditions are true. These limitations also apply to [Chargify Direct](https://prod-developers.maxio.com/legacy/index.html#/http/chargify-direct/chargify-direct/overview).
+
+> ❗️ All relevant API requests will be blocked if any of the below conditions are true.
 
     Those scenarios are as follows:
 
