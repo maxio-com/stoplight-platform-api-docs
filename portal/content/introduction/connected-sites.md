@@ -45,8 +45,8 @@ Clearing your site data is very useful in specific circumstances:
 
 Clearing your site data can be done in the following methods:
 
-1. Clearing site data [via the website](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405551351693-Sites-Introduction#creating-sites).
-2. Clearing site data [via the API]($e/Sites/clearSite).
+1. Clearing site data via the website.
+2. Clearing site data via the API.
 
 ### Clearing via Website
 
