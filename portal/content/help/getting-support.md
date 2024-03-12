@@ -1,8 +1,6 @@
 # Getting Help and Support Access
 
-We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to support@chargify.com and/or support@maxio.com so we can coordinate with you to ensure your import process goes smoothly.
-
-Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Advanced Billing API.
+Our API, while considered stable, is continually being improved and polished. Please feel free to [email support](mailto:support@maxio.com) if you experience issues when integrating with the Maxio Advanced Billing API.
 
 If you have any additional questions regarding our documentation please don't hesitate in reaching out. We are available 12am-12am CT Monday - Friday, excluding holidays.
 
