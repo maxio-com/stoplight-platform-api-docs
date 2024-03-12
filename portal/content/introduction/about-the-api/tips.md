@@ -112,3 +112,7 @@ The following are some best practices that we would suggest regarding using API 
 
 1. Your application should not depend on another service to control access directly. Should your API call fail, for any reason, then your customer might not receive the best user experience depending on how you've implemented this.
 2. Limit the direct calls to Advanced Billing if (and when) possible as there is a limit to how fast (and how often) the Chargify API will respond to very quick and numerous API calls. For more information, see [rate limits and blocks](page:introduction/about-the-api/error-handling).
+
+## Large Imports
+
+We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to  [support@maxio.com](mailto:support@maxio.com) so we can coordinate with you to ensure your import process goes smoothly.
