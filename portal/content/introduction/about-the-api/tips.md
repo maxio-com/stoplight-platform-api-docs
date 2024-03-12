@@ -4,7 +4,7 @@
 > One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](page:development-tools/client-libraries).
 > The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
-Our many merchants all use our API for different purposes. API access is included on all plans at no charge because we believe that you are the owner of your data and you should never feel like your data is "locked up".
+Our merchants use our API for different purposes. API access is included on all plans at no charge because we believe that you are the owner of your data and you should never feel like your data is "locked up".
 
 However, because the API means there is little or no user-interaction, it can be very easy to create a program or routine that causes an unnecessarily high burden on our system. Even small accounts can generate huge numbers of expensive API requests by accident.
 
@@ -32,13 +32,13 @@ Avoid querying Advanced Billing in-line as part of a customer’s request to you
 
 ## Synchronizing Your Database
 
-Normally you should keep your local customer database in sync by using [Webhooks]($e/Webhooks/createEndpoint). But if you think your database has become out of sync with Advanced Billing, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
+Normally, you would keep your local customer database in sync by using [Webhooks]($e/Webhooks/createEndpoint). But if you think your database has become out of sync with Advanced Billing, then using the API to check the state of all subscriptions may be the only way to ensure consistency.
 
 It’s perfectly okay to do this as needed. But it should generally only be relied upon in exceptional circumstances or for periodic reconciliation (usually no more than once a month).
 
 ## Reporting Usage
 
-When reporting component usage, avoid sending lots of tiny usage amounts. If you charge by the minute for phone calls, for instance:
+When reporting component usage, avoid sending lots of tiny usage amounts. For example, if you charge by the minute for phone calls:
 
 - **Don’t** send in a usage for every minute or every phone call individually.
 - **Don’t** send all usage for all customers all at once. Spread it out or wait a short period of time between each request
@@ -58,9 +58,9 @@ Periodically exporting transaction, subscription, or customer data is a common u
 
 ## Secure Applications
 
-Please note that it is NOT possible to make API requests directly from the customer's browser or device. Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Chargify data.
+Please note that it is NOT possible to make API requests directly from the customer's browser or device. Doing so would expose your API key on the client side, and anyone who has that key has full access to all of your Advanced Billing data.
 
-Instead you will need to take care to tokenize sensitive information by using [Chargify.js](page:development-tools/chargify-js/chargify-js-overview) or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Chargify.
+Instead, take care to tokenize sensitive information by using [Chargify.js](page:development-tools/chargify-js/chargify-js-overview), or a similar JavaScript library provided by your gateway, and then post the token and other information to your own server, from which you can make the API call to Advanced Billing.
 
 #### Troubleshooting
 
@@ -76,7 +76,7 @@ or
 Origin 'https://example.com' is therefore not allowed access.` `The response had HTTP status code 404.
 ```
 
-This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Chargify server.
+This is an error message indicating that Cross-Origin Resource Sharing (CORS) is not enabled on the Advanced Billing server.
 
 ## Sync
 
@@ -110,5 +110,5 @@ For more detailed information, see API documentation on [reading the subscriptio
 
 The following are some best practices that we would suggest regarding using API and how you synchronize your application with your Advanced Billing data:
 
-1. Your application should try and not depend on another service to control access directly. Should your API call fail, for any reason, then your customer might not receive the best user experience depending on how you've implemented this.
-2. You should try and limit the direct calls to Advanced Billing if (and when) possible as there is a limit to how fast (and how often) the Advanced Billing API will respond to very quick and numerous API calls. For more information, see [limits and blocks](page:introduction/about-the-api/error-handling).
+1. Your application should not depend on another service to control access directly. Should your API call fail, for any reason, then your customer might not receive the best user experience depending on how you've implemented this.
+2. Limit the direct calls to Advanced Billing if (and when) possible as there is a limit to how fast (and how often) the Chargify API will respond to very quick and numerous API calls. For more information, see [rate limits and blocks](page:introduction/about-the-api/error-handling).
