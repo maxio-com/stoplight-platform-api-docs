@@ -2,6 +2,7 @@
   "$schema": "https://titan.apimatic.io/api/build/schema",
   "buildFileVersion": "1",
   "generatePortal": {
+    "tailIncludes": "<script defer src='./static/guided-walkthrough-scripts/SelfServiceBillingPortal.js'></script><script defer src='./static/guided-walkthrough-scripts/SiteActivityTracking.js'></script><script defer src='./static/guided-walkthrough-scripts/SubscriptionManagement.js'></script><script>document.addEventListener('DOMContentLoaded', (event) => {APIMaticDevPortal.ready(({ registerWorkflow }) => {registerWorkflow( 'page:walkthroughs/self-service-billing-portal/walkthrough-1', 'Billing Walkthrough',SelfServiceBillingPortal); registerWorkflow( 'page:walkthroughs/site-activity/walkthrough-1', 'Site Tracking Walkthrough',SiteActivityTracking); registerWorkflow( 'page:walkthroughs/subscription-management/walkthrough-1', 'Subscription Management Walkthrough',SubscriptionManagment); });});</script>",
     "debug": {
       "publishReport": true
     },
