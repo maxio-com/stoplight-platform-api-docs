@@ -33,13 +33,13 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
           auth: {
             ...defaultConfig.auth,
             BasicAuth: {
-              BasicAuthUserName: "Fdgh1XFV8awCP8ds1Pq5Y0ylx5E2QleILN7BQ8PBto",
+              BasicAuthUserName: "API_KEY",
               BasicAuthPassword: "x",
             },
           },
           config: {
             ...defaultConfig.config,
-            subdomain: "globo-billing",
+            subdomain: "your-site",
           },
         }));
         return workflowCtx.showEndpoint({
