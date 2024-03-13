@@ -56,7 +56,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -85,7 +85,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -127,7 +127,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -162,7 +162,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -202,7 +202,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -226,7 +226,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
@@ -254,7 +254,7 @@ In order to invoke the API, you will need an ‘BasicAuthUsername’ and ‘Basi
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid repsonse. Please try again.",
+              "API Call wasn't able to get a valid response. Please try again.",
             );
             return false;
           },
