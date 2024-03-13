@@ -115,4 +115,4 @@ The following are some best practices that we would suggest regarding using API 
 
 ## Large Imports
 
-We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to  [support@maxio.com](mailto:support@maxio.com) so we can coordinate with you to ensure your import process goes smoothly.
+We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to [support@maxio.com](mailto:support@maxio.com) so we can coordinate with you to ensure your import process goes smoothly.
