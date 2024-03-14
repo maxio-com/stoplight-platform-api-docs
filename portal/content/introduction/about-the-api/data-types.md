@@ -4,13 +4,13 @@
 
 API responses from Advanced Billing are sent with the timezone of the current Advanced Billing site.
 
-Alternately, webhooks sent from Advanced Billing globally utilize EST as the timezone for all content in the body of the payload.
+Alternately, webhooks sent from Advanced Billing globally uses EST (Eastern Standard Time) as the timezone for all content in the body of the payload.
 
 ## Decimal Numbers
 
 In order to prevent losing precision, we serialize decimal numbers as strings instead of as JSON numbers.
 
-We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (i.e. `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
+We recommend parsing these strings into their decimal equivalent using a decimal number library in your programming language (for example, `BigDecimal` in Ruby) instead of relying on floating point values or arithmetic.
 
 ## Amount Fields and Currency
 

@@ -10,7 +10,7 @@ The URL for API requests includes the subdomain of the Site you are working with
 
 Response data is sent as either XML or JSON, depending on the type of data requested (`HTTP Content-Type` header) or the type specified as being accepted (HTTP `Accept` header).
 
-GETs for individual statements & invoices may also be requested as PDF using `application/pdf` or appending `.pdf` to the resource URI.
+GETs for individual statements and invoices may also be requested as PDF using `application/pdf` or appending `.pdf` to the resource URI.
 
 Response codes are sent via the normal HTTP Response Code, and are documented separately for each resource.
 
