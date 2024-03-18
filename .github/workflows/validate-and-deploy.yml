@@ -58,11 +58,6 @@ jobs:
       - name: Set envs
         run: |
           echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-      - name: Build portal
-        shell: bash
-        env:
-          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
-        run: ./scripts/build_portal.sh
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -70,7 +65,10 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Deploy Staging
         shell: bash
+        env:
+          APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: |
+          ./scripts/build_portal.sh 'https://staging-developers.maxio.com/legacy/index.html'
           branch=${{ env.BRANCH }}
           branch="${branch// /_}"
           echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -89,6 +87,7 @@ jobs:
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Add productions-only settings to the portal code"
+          ./scripts/build_portal.sh 'https://prod-developers.maxio.com/legacy/index.html'
           ./scripts/prepare_production_portal.sh
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete --exclude \"legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"

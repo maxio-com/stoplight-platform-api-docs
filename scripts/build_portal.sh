@@ -11,6 +11,13 @@ if [ "$api_token" = "" ]; then
   exit 1
 fi
 
+if [ "$1" = "" ]; then
+  legacy_portal_url='https://prod-developers.maxio.com/legacy/index.html'
+else
+  legacy_portal_url=$1
+fi
+
+
 rm -rf build
 mkdir -p build/portal
 mkdir -p build/tmp/download
@@ -23,6 +30,10 @@ if [ "$BASE_URL" != "" ]; then
   sed -i '.backup' -e "s,\"baseUrl\": \"./\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
   rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 fi
+
+echo "Overriding legacy portal url with $legacy_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
+sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$legacy_portal_url,g" ./build/tmp/portal/content/help/legacy.md
+rm ./build/tmp/portal/content/help/legacy.md.backup
 
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 

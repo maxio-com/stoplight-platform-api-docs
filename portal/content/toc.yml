@@ -19,6 +19,14 @@ toc:
         file: core-concepts/subscription-signup.md
       - page: Invoicing
         file: core-concepts/relationship-invoicing.md
+  - group: Guided Walkthroughs
+    items:
+      - page: Access to Self Service Billing Portal
+        file: walkthroughs/self-service-billing-portal/walkthrough-1.md
+      - page: Site Activity Tracking
+        file: walkthroughs/site-activity/walkthrough-1.md
+      - page: Subscription Management
+        file: walkthroughs/subscription-management/walkthrough-1.md
   - group: Development Tools
     items:
       - page: Client Libraries
@@ -37,3 +45,5 @@ toc:
         file: help/getting-support.md
       - group: Announcements
         dir: help/announcements
+      - page: Legacy API
+        file: help/legacy.md
