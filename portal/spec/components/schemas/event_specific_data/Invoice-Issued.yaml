@@ -8,14 +8,16 @@ properties:
   role:
     type: string
   due_date:
-    type: string
+    type:
+      - string
+      - "null"
     format: date
   issue_date:
     type: string
-    format: date
+    description: Invoice issue date. Can be an empty string if value is missing.
   paid_date:
     type: string
-    format: date
+    description: Paid date. Can be an empty string if value is missing.
   due_amount:
     type: string
   paid_amount:
