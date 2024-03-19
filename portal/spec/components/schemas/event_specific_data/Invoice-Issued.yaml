@@ -14,8 +14,10 @@ properties:
     format: date
   issue_date:
     type: string
+    description: Invoice issue date. Can be an empty string if value is missing.
   paid_date:
     type: string
+    description: Paid date. Can be an empty string if value is missing.
   due_amount:
     type: string
   paid_amount:
