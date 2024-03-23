@@ -9,7 +9,7 @@ info:
 
     ### API Integration
 
-    Maxio Advanced Billing (formerly Chargify API) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
+    Maxio Advanced Billing (formerly Chargify) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
     ### Testing Guide
 
@@ -25,7 +25,7 @@ info:
 
     We always enjoy (and appreciate) hearing about larger integrations ahead of time. If you’re planning on importing a large amount of data into Maxio via our API, we suggest sending a “heads up” to “support@maxio.com” so we can coordinate with you to ensure your import process goes smoothly.
 
-    Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Advanced Billing API.
+    Our API, while considered stable, is continually being improved and polished. Please feel free to contact support if you experience issues when integrating with the Maxio Chargify API.
 
     If you have any additional questions regarding our documentation please don't hesitate in reaching out.
 
@@ -1019,7 +1019,7 @@ paths:
         Common use cases are:
 
         + Search by an email
-        + Search by a Advanced Billing ID
+        + Search by an Advanced Billing ID
         + Search by an organization
         + Search by a reference value from your application
         + Search by a first or last name
@@ -12120,7 +12120,7 @@ paths:
             type: string
           in: query
           name: store_uid
-          description: "If you've attached your own Keen project as a Advanced Billing event data-store, use this parameter to indicate the data-store."
+          description: "If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store."
       requestBody:
         content:
           application/json:
@@ -12177,7 +12177,7 @@ paths:
             type: string
           in: query
           name: store_uid
-          description: "If you've attached your own Keen project as a Advanced Billing event data-store, use this parameter to indicate the data-store."
+          description: "If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store."
       requestBody:
         content:
           application/json:
@@ -19013,7 +19013,7 @@ components:
     BasicAuth:
       type: http
       scheme: basic
-      description: The `username` is a Maxio Advanced Billing API key. The `password` is `x`.
+      description: The `username` is a Maxio Chargify API key. The `password` is `x`.
   schemas:
     Invoice-Event-Payment:
       title: Invoice Event Payment
