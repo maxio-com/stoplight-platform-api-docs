@@ -308,7 +308,7 @@ chargify.load({
 ## Braintree Advanced Fraud Protection Configuration
 
 In order to use Braintree Advanced Fraud Protection, you need to first set it up in Advanced Billing.
-See the [Advanced Billing help artile](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404819783309#braintree-advanced-fraud-protection) for details.
+See the [Advanced Billing help artile](https://maxio.zendesk.com/hc/en-us/articles/24176142616333-Gateway-Features#braintree-advanced-fraud-protection) for details.
 Once set up in Advanced Billing, you simply need to use the `deviceData` option in Chargify.js:
 
 ```javascript

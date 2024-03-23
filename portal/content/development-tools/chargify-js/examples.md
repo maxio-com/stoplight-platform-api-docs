@@ -363,7 +363,7 @@ The following example contains a minimalist approach to working with Chargify.js
 
 For more information on GoCardless, please see the following resources:
 
-- [GoCardless help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677#gocardless-setup)
+- [GoCardless help article](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-GoCardless#gocardless-setup)
 - Using GoCardless via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
@@ -387,7 +387,7 @@ The following example contains a minimalist approach to working with Chargify.js
 
 For more information on Stripe Direct Debit, please see the following resources:
 
-- [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
+- [Stripe Direct Debit help article](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
 - Using Stripe SEPA Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 - Using Stripe BECS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
@@ -820,7 +820,7 @@ chargify.load({
 
 ### Full Example with ACH
 
-The following is a full example of using Chargify.js with ACH. ACH is only available for certain gateways. To learn more about ACH and Advanced Billing, please read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404222613133).
+The following is a full example of using Chargify.js with ACH. ACH is only available for certain gateways. To learn more about ACH and Advanced Billing, please read [this help article](https://maxio.zendesk.com/hc/en-us/articles/24176182688141-eCheck-ACH-EFT).
 
 ```javascript
 var chargify = new Chargify();
@@ -1500,7 +1500,7 @@ The following is a full example of using Chargify.js with GoCardless.
 
 For more information on GoCardless, please see the following resources:
 
-- [GoCardless help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404501889677#gocardless-setup)
+- [GoCardless help article](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-GoCardless#gocardless-setup)
 - Using GoCardless via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
@@ -1604,7 +1604,7 @@ The following example contains a minimalist approach to working with Chargify.js
 
 For more information on Stripe Direct Debit, please see the following resources:
 
-- [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
+- [Stripe Direct Debit help article](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
 - Using Stripe Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
@@ -1692,7 +1692,7 @@ The following example contains a minimalist approach to working with Chargify.js
 
 For more information on Stripe Direct Debit, please see the following resources:
 
-- [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
+- [Stripe Direct Debit help article](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-and-BECS-Direct-Debit)
 - Using Stripe BECS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
