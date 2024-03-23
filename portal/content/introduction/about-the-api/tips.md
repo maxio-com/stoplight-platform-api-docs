@@ -54,7 +54,7 @@ For more information on reporting component usage or allocations, please see the
 
 ## Downloading Bulk Data
 
-Periodically exporting transaction, subscription, or customer data is a common use case. When possible, we recommend using the built-in [export](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404681593741) functions inside Advanced Billing to generate reports and download the data. This can often be much faster and can significantly lower your API usage.
+Periodically exporting transaction, subscription, or customer data is a common use case. When possible, we recommend using the built-in [export](https://maxio.zendesk.com/hc/en-us/articles/24285931839757-Exporting-Data) functions inside Advanced Billing to generate reports and download the data. This can often be much faster and can significantly lower your API usage.
 
 ## Secure Applications
 
@@ -80,7 +80,7 @@ This is an error message indicating that Cross-Origin Resource Sharing (CORS) is
 
 ## Sync
 
-After creating and managing subscriptions, you might need a way for your application to know about the state of a customers subscription. This can be done either directly through the API or by Advanced Billing notifying your application using the handy [Webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405568068365-Webhooks-Introduction) feature.
+After creating and managing subscriptions, you might need a way for your application to know about the state of a customers subscription. This can be done either directly through the API or by Advanced Billing notifying your application using the handy [Webhooks](https://maxio.zendesk.com/hc/en-us/articles/24266143173901-Webhooks-Overview) feature.
 
 ---
 
@@ -88,7 +88,7 @@ There are three basic methods of either allowing or notifying your application a
 
 - Using the [API]($e/Subscriptions/readSubscription) to retrieve subscription information
 - Recieving [webhooks](page:introduction/about-the-api/webhooks#receiving-a-webhook-notification)
-- Manually [export](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404681593741-Exporting-Data#locating-exports)
+- Manually [export](https://maxio.zendesk.com/hc/en-us/articles/24285931839757-Exporting-Data#locating-exports)
 
 One of the easiest methods is just to have your application request the current state (or history) of a subscription using the API. This will provide the current state of the subscription at the time of the request.
 

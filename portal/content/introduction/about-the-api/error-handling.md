@@ -42,7 +42,7 @@ Each endpoint is different within Advanced Billing. Expensive endpoints have low
 
 Advanced Billing imposes a cut-off time of 120 seconds for all requests to all endpoints. It's important to note that when you make requests for specific actions, Advanced Billing is also sending these requests off to your associated gateway. If a request is not processed by the combination of Advanced Billing and your gateway within the 120 second guideline, the request will time out.
 
-Please keep in mind that if you encounter a timeout issue, it is worth inspecting your gateway's [current status.](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404860594189) This is also important to do if you feel there is a processing issue, outside of Advanced Billing's control, that is affecting your requests.
+Please keep in mind that if you encounter a timeout issue, it is worth inspecting your gateway's [current status](https://maxio.zendesk.com/hc/en-us/articles/24286964853261-Gateway-Errors). This is also important to do if you feel there is a processing issue, outside of Advanced Billing's control, that is affecting your requests.
 
 ## API Access Limitations
 
@@ -52,30 +52,30 @@ There are a few scenarios that may end up in causing an API request to be blocke
 
     Those scenarios are as follows:
 
-    - Your Chargify subscription is canceled.
-    - Your Chargify trial has reached an end.
-    - The site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309)
+    - Your Advanced Billing subscription is canceled.
+    - Your Advanced Billing trial has reached an end.
+    - The site you're making a request for is in the process of ["clearing site data"](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site-Data)
       - _Note: any API request for another site that is in a good state will NOT be blocked_
     - The site you're making a request for has been deleted.
       - _Note: any API request for another site that is in a good state will NOT be blocked_
 
-    Read more about your Chargify subscription [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430043149-Advanced-Billing-Subscription#advanced-billing-subscription-0-0)
+    Read more about your Advanced Billing subscription [here](https://maxio.zendesk.com/hc/en-us/articles/24183861526541-Advanced-Billing-Subscription)
 
     ### What happens when an API request is blocked
 
     The request will fail with a `422` http status code. The response will also include a message explaining the reason for the request being blocked. For example:
 
-    - If your Chargify subscription is canceled:
+    - If your Advanced Billing subscription is canceled:
 
     ```json
     {
       "errors" => [
-        [0] "Your Chargify account has been canceled. Please contact support@chargify.com to reactivate."
+        [0] "Your Advanced Billing account has been canceled. Please contact support@maxio.com to reactivate."
       ]
     }
     ```
 
-    - If your Chargify trial has reached and end and you attempted to make an API request, the response body will look like:
+    - If your Advanced Billing trial has reached and end and you attempted to make an API request, the response body will look like:
 
     ```json
     {
@@ -85,7 +85,7 @@ There are a few scenarios that may end up in causing an API request to be blocke
     }
     ```
 
-    - If the site you're making a request for is in the process of ["clearing site data"](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405428327309):
+    - If the site you're making a request for is in the process of ["clearing site data"](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site-Data):
 
     ```json
     {

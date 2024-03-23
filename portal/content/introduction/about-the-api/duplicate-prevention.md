@@ -58,4 +58,4 @@ In other cases, human intervention will be necessary.
 
 We hope this feature will help you prevent duplicate transactions during error handling.
 
-That said, if you are experiencing repeated timeouts, please [open a support ticket](mailto:support@maxio.com) so we can investigate.
+That said, if you are experiencing repeated timeouts, please [email Maxio support](mailto:support@maxio.com) so we can investigate.
