@@ -8,7 +8,7 @@ If you have any additional questions regarding our documentation please don't he
 
 - [Read our documentation for developers](page:introduction/landing.html)
 - [Explore the endpoints of our API Documentation]($e/Subscriptions)
-- [Search our help documentation](https://maxio-chargify.zendesk.com/hc/en-us#availability)
+- [Search our help documentation](https://maxio.zendesk.com/hc/en-us#availability)
 - [Watch our videos and tutorials](https://youtube.com/playlist?list=PL1djQCO2mTMYRwGlm1tvUGzQtttKJFO41&si=PxF2Cv9am-ujY8c4)
 - [Stackoverflow](http://stackoverflow.com/questions/tagged/chargify)
 - [Contact our sales team](mailto:sales@maxio.com)
