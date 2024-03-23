@@ -19,4 +19,4 @@ If you are an existing customer from prior to January 2018 or have not otherwise
 
 These new invoices provide a single representation of all of your billings with Advanced Billing, whether you collect automatically or via remittance.
 
-For more information, see the [Relationship Invoicing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253) help article.
+For more information, see the [Relationship Invoicing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) help article.

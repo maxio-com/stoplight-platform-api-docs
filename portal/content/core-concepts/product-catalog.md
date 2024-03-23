@@ -11,7 +11,7 @@ With regards to products, there are three important aspects that are required fo
 - Creating the [product family](#product-family)
 - Creating the [product](#product)
 
-Before delving into this section, we recommend reviewing our [Products Introduction](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction) help article.
+Before delving into this section, we recommend reviewing our [Products Introduction](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview) help article.
 
 ## Product Family
 
@@ -45,7 +45,7 @@ A simple curl example would be the following:
 curl -u <API_KEY>:X -H Accept:application/json -d @product_family.json -X POST https://<SUBDOMAIN>.chargify.com/product_families.json
 ```
 
-To create a product family using the application, refer to the [Creating Product Families](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families) help article for more information.
+To create a product family using the application, refer to the [Creating Product Families](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families) help article for more information.
 
 Please see [API Documentation]($e/Product%20Families/createProductFamily) for a complete listing of input/output schema, along with code examples in multiple programming languages.
 
@@ -79,7 +79,7 @@ That data should be posted to the [Product Create]($e/Products/createProduct) AP
 
 Product price points allow you to charge customers different amounts and at different frequencies for the same product.
 
-Please see the [Product Price Points](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405141759885) help article.
+Please see the [Product Price Points](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Product-Price-Points) help article.
 
 ## Components
 
@@ -92,7 +92,7 @@ Components allow you to introduce additional “line items” to your products t
 1.  [Creating](#creating-components) components
 2.  The [usage/allocation](#usage-allocation) of components
 
-For more information about components, see our [Component](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article.
+For more information about components, see our [Component](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview) help article.
 
 ### Creating Components
 
@@ -116,7 +116,7 @@ If you need to display component pricing to your customers, we recommend caching
 
 For more information on components, please see the following:
 
-- About [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) help article
+- About [Components](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview) help article
 - Creating components [via the API]($e/Components/createMeteredComponent)
 
 ### Usage/Allocation
