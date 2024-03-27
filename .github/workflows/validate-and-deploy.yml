@@ -8,10 +8,13 @@ on:
     branches:
       - "main"
       - "staging"
+      - "v[0-9*]"
   pull_request:
     branches:
       - "main"
       - "staging"
+      - "v[0-9*]"
+  workflow_dispatch:
 env:
   AWS_REGION: us-west-2
 permissions:
@@ -82,7 +85,7 @@ jobs:
 
           echo "You can access your portal at https://staging-developers.maxio.com/$branch/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Deploy Prod
-        if: github.event_name == 'push' && github.ref_name == 'main' && github.ref_type == 'branch'
+        if: github.event_name == 'workflow_dispatch'
         shell: bash
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
@@ -101,9 +104,9 @@ jobs:
 
           echo "Deployment completed" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Skip deploy Prod
-        if: github.event_name != 'push' || github.ref_name != 'main' || github.ref_type != 'branch'
+        if: github.event_name != 'workflow_dispatch'
         shell: bash
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "### Skipped" | tee -a "$GITHUB_STEP_SUMMARY"
-          echo "Reason: Not a merge to main" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Reason: Not a manual trigger" | tee -a "$GITHUB_STEP_SUMMARY"
