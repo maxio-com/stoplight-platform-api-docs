@@ -3,15 +3,7 @@
 # Portal will be deployed to a /branch path on staging.
 # When PR is merged to the main it would be deployed to prod.
 name: Validate and deploy
-on:
-  push:
-    branches:
-      - "main"
-      - "staging"
-  pull_request:
-    branches:
-      - "main"
-      - "staging"
+on: workflow_dispatch
 env:
   AWS_REGION: us-west-2
 permissions:
@@ -23,6 +15,8 @@ jobs:
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
+        with:
+          ref: v2
       - name: Set up node
         uses: actions/setup-node@v3
         with:
@@ -44,6 +38,8 @@ jobs:
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
+        with:
+          ref: v2
       - name: Validate spec with APIMatic
         shell: bash
         env:
@@ -55,6 +51,8 @@ jobs:
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
+        with:
+          ref: v2
       - name: Set envs
         run: |
           echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV

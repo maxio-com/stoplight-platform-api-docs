@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout main repository
         uses: actions/checkout@v3
+        with:
+          ref: v2
       - name: Build portal
         shell: bash
         env:
