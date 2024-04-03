@@ -183,7 +183,7 @@ properties:
   current_billing_amount_in_cents:
     type: integer
     format: int64
-    description: The balance in cents plus the estimated renewal amount in cents.
+    description: The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation.
   product_price_point_id:
     type: integer
     description: The product price point currently subscribed to.

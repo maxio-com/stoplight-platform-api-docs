@@ -45,5 +45,5 @@ toc:
         file: help/getting-support.md
       - group: Announcements
         dir: help/announcements
-      - page: Legacy API
-        file: help/legacy.md
+      - link: Legacy API
+        url: --URL_PLACEHOLDER--
