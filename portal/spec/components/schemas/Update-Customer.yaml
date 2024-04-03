@@ -40,3 +40,8 @@ properties:
     type:
       - "null"
       - integer
+  verified:
+    type:
+      - boolean
+      - "null"
+    description: Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway

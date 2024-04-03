@@ -60,9 +60,10 @@
         }
       },
       "go": {
+        "packageRepository": "GoPackages",
         "packageSettings": {
           "PackageName": "github.com/maxio-com/ab-golang-sdk",
-          "Version": "v0.1.0"
+          "Version": "0.1.0"
         }
       }
     },
