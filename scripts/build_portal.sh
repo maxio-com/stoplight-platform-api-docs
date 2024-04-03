@@ -32,7 +32,7 @@ if [ "$BASE_URL" != "" ]; then
 fi
 
 echo "Overriding legacy portal url with $legacy_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
-sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$legacy_portal_url,g" ./build/tmp/portal/content/help/legacy.md
+sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$legacy_portal_url,g" ./build/tmp/portal/content/toc.yml
 rm ./build/tmp/portal/content/help/legacy.md.backup
 
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
