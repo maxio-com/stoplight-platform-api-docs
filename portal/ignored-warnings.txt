@@ -7,3 +7,4 @@ errors -> subscriptions -> 0
 messages, country, customer
 listAllProductPricePoints [GET, /products_price_points.json] > Parameters[8] > filter[type] > Default Value
 listAllComponentPricePoints [GET, /components_price_points.json] > Parameters[8] > filter[type] > Default Value
+List PricePoints Filter > Fields[5] > type > Default Value
