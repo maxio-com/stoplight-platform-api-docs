@@ -18,7 +18,7 @@ properties:
     example: "2011-12-15"
     description:
       "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.
-      Use in query `filter[date_field]=2011-12-15`."
+      Use in query `filter[end_date]=2011-12-15`."
   start_datetime:
     type: string
     format: date-time
@@ -70,7 +70,7 @@ examples:
     start_date: 2024-01-01
     end_date: 2024-12-31
   Updated-Between-Time:
-    date_field: created_at
+    date_field: updated_at
     start_datetime: 2024-01-01T10:15:30+01:00
     end_datetime: 2024-12-31T10:15:30+01:00
   With-Ids:
