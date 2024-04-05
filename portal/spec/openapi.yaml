@@ -841,7 +841,6 @@ paths:
                 $ref: "./components/schemas/Customer-Response.yaml"
       operationId: readCustomer
       description: This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
-      parameters: []
     put:
       summary: Update Customer
       tags:
@@ -1446,7 +1445,6 @@ paths:
                   value:
                     - name: Color
                       scope:
-                        hosted: []
                         csv: "0"
                         statements: "0"
                         invoices: "0"
@@ -1456,7 +1454,6 @@ paths:
                       enum: null
                     - name: Brand
                       scope:
-                        hosted: []
                         csv: "0"
                         statements: "0"
                         invoices: "0"
@@ -1525,7 +1522,6 @@ paths:
                   metafields:
                     - name: Color
                     - name: Brand
-      parameters: []
     get:
       summary: List Metafields
       tags:
@@ -1802,7 +1798,7 @@ paths:
               type: string
           in: query
           description: "Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`."
-          name: "names[]"
+          name: "names"
           style: form
           explode: true
   "/{resource_type}/metadata.json":
@@ -1877,7 +1873,7 @@ paths:
               type: integer
             maxItems: 50
           in: query
-          name: "resource_ids[]"
+          name: "resource_ids"
           style: form
           explode: true
           description: "Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`."
@@ -2017,7 +2013,6 @@ paths:
                         conversion_limit: "100"
                         stackable: false
                         compounding_strategy: compound
-                        coupon_restrictions: []
                         use_site_exchange_rate: true
                     - coupon:
                         id: 123456
@@ -2040,7 +2035,6 @@ paths:
                         conversion_limit: "100"
                         stackable: false
                         compounding_strategy: compound
-                        coupon_restrictions: []
                         use_site_exchange_rate: true
                     - coupon:
                         id: 888888
@@ -2078,79 +2072,7 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page-default-30.yaml"
-        - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          name: "filter[date_field]"
-          description:
-            "The type of filter you would like to apply to your search.
-            Use in query `filter[date_field]=created_at`."
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-15"
-          in: query
-          name: "filter[end_date]"
-          description:
-            "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.
-            Use in query `filter[date_field]=2011-12-15`."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[end_datetime]"
-          description:
-            "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date.
-            Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`."
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-17"
-          in: query
-          name: "filter[start_date]"
-          description:
-            "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.
-            Use in query `filter[start_date]=2011-12-17`."
-        - schema:
-            type: string
-            format: date-time
-            example: "2011-12-19T10:15:30+01:00"
-          in: query
-          description:
-            "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date.
-            Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`."
-          name: "filter[start_datetime]"
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-              - 3
-            minItems: 1
-          in: query
-          name: "filter[ids]"
-          description:
-            "Allows fetching coupons with matching id based on provided values.
-            Use in query `filter[ids]=1,2,3`."
-          style: form
-          explode: false
-        - schema:
-            type: array
-            items:
-              type: string
-            example:
-              - free
-              - free_trial
-          in: query
-          name: "filter[codes]"
-          description:
-            "Allows fetching coupons with matching codes based on provided values.
-            Use in query `filter[codes]=free,free_trial`."
-          style: form
-          explode: false
+        - $ref: "./components/parameters/list-coupons-filter.yaml"
         - schema:
             type: boolean
             example: true
@@ -2159,14 +2081,6 @@ paths:
           description:
             "When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
             Use in query `currency_prices=true`."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          description:
-            "Allows fetching coupons with matching use_site_exchange_rate based on provided value.
-            Use in query `filter[use_site_exchange_rate]=true`."
-          name: "filter[use_site_exchange_rate]"
       x-operation-settings:
         collectParameters: true
   /coupons/find.json:
@@ -2246,7 +2160,6 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
       operationId: readCoupon
       description: |-
         You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
@@ -2255,7 +2168,6 @@ paths:
         When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
 
         If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
-      parameters: []
     put:
       summary: Update Coupon
       tags:
@@ -2291,7 +2203,6 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
       operationId: updateCoupon
       description: |-
         ## Update Coupon
@@ -2360,7 +2271,6 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: compound
-                      coupon_restrictions: []
       operationId: archiveCoupon
       description: |-
         You can archive a Coupon via the API with the archive method.
@@ -2426,74 +2336,7 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page-default-30.yaml"
-        - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          description: "The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search."
-          name: date_field
-          deprecated: true
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-17"
-          in: query
-          name: start_date
-          description: "The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
-          deprecated: true
-        - schema:
-            type: string
-            format: date
-          in: query
-          description: "The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified."
-          name: end_date
-          deprecated: true
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          description: "The field was deprecated: on January 20, 2022. We recommend using filter[start_datetime] instead to achieve the same result. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
-          name: start_datetime
-          deprecated: true
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          description: "The field was deprecated: on January 20, 2022. We recommend using filter[end_datetime] instead to achieve the same result. The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
-          name: end_datetime
-          deprecated: true
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-              - 3
-            minItems: 1
-          in: query
-          name: "filter[ids]"
-          description:
-            "Allows fetching coupons with matching id based on provided values.
-            Use in query `filter[ids]=1,2,3`."
-          style: form
-          explode: false
-        - schema:
-            type: array
-            items:
-              type: string
-            minItems: 1
-            example:
-              - free
-              - free_trial
-          in: query
-          name: "filter[codes]"
-          description:
-            "Allows fetching coupons with matching code based on provided values.
-            Use in query `filter[ids]=1,2,3`."
-          style: form
-          explode: false
+        - $ref: "./components/parameters/list-coupons-filter.yaml"
         - schema:
             type: boolean
             example: true
@@ -2502,56 +2345,6 @@ paths:
           description:
             "When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
             Use in query `currency_prices=true`."
-        - schema:
-            type: string
-            format: date
-          in: query
-          name: "filter[end_date]"
-          description:
-            "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.
-            Use in query `filter[end_date]=2011-12-17`."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[end_datetime]"
-          description:
-            "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date.
-            Use in query `filter[end_datetime]=2011-12-19T10:15:30+01:00`."
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-17"
-          in: query
-          name: "filter[start_date]"
-          description:
-            "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.
-            Use in query `filter[start_date]=2011-12-19`."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[start_datetime]"
-          description:
-            "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date.
-            Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`."
-        - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          name: "filter[date_field]"
-          description:
-            "The type of filter you would like to apply to your search.
-            Use in query `filter[date_field]=updated_at`."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          description:
-            "Allows fetching coupons with matching use_site_exchange_rate based on provided value.
-            Use in query `filter[use_site_exchange_rate]=true`."
-          name: "filter[use_site_exchange_rate]"
       x-operation-settings:
         collectParameters: true
   "/product_families/{product_family_id}/coupons/{coupon_id}/usage.json":
@@ -2643,7 +2436,6 @@ paths:
                       conversion_limit: null
                       stackable: true
                       compounding_strategy: full-price
-                      coupon_restrictions: []
         "404":
           description: Not Found
           content:
@@ -2755,8 +2547,6 @@ paths:
                       - BALTIMOREFALL
                       - ORLANDOFALL
                       - DETROITFALL
-                    duplicate_codes: []
-                    invalid_codes: []
       operationId: createCouponSubcodes
       description: |-
         ## Coupon Subcodes Intro
@@ -3855,7 +3645,6 @@ paths:
                       taxable: false
                       description: null
                       default_price_point_id: null
-                      prices: []
                       price_point_count: 0
                       price_points_url: "https://staging.chargify.com/components/1489581/price_points"
                       default_price_point_name: Original
@@ -4262,29 +4051,7 @@ paths:
           description: Include archived items
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - schema:
-            type: array
-            items:
-              type: string
-            example:
-              - "1"
-              - "2"
-              - "3"
-          in: query
-          name: "filter[ids]"
-          description:
-            "Allows fetching components with matching id based on provided value.
-            Use in query `filter[ids]=1,2,3`."
-          style: form
-          explode: false
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          name: "filter[use_site_exchange_rate]"
-          description:
-            "Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
-            Use in query `filter[use_site_exchange_rate]=true`."
+        - $ref: "./components/parameters/list-components-filter.yaml"
       description: This request will return a list of components for a site.
   "/components/{component_id}.json":
     parameters:
@@ -4522,22 +4289,9 @@ paths:
           in: query
           name: include_archived
           description: Include archived items.
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-          style: form
-          explode: false
-          in: query
-          description:
-            "Allows fetching components with matching id based on provided value.
-            Use in query `filter[ids]=1,2`."
-          name: "filter[ids]"
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
+        - $ref: "./components/parameters/list-components-filter.yaml"
         - schema:
             $ref: "./components/schemas/Basic-Date-Field.yaml"
           in: query
@@ -4565,14 +4319,6 @@ paths:
           in: query
           name: start_datetime
           description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          description:
-            "Allows fetching components with matching use_site_exchange_rate based on provided value (refers to default price point).
-            Use in query `filter[use_site_exchange_rate]=true`."
-          name: "filter[use_site_exchange_rate]"
   "/components/{component_id}/price_points.json":
     parameters:
       - schema:
@@ -5396,6 +5142,7 @@ paths:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
         - $ref: "./components/parameters/basic-date-field.yaml"
+        - $ref: "./components/parameters/list-products-filter.yaml"
         - schema:
             type: string
           in: query
@@ -5427,21 +5174,6 @@ paths:
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=prepaid_product_price_point`."
-        - schema:
-            $ref: "./components/schemas/Include-Not-Null.yaml"
-          in: query
-          name: "filter[prepaid_product_price_point][product_price_point_id]"
-          description:
-            "Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
-            Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          name: "filter[use_site_exchange_rate]"
-          description:
-            "Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
-            Use in query `filter[use_site_exchange_rate]=true`."
       tags:
         - Product Families
   "/products/{product_id}.json":
@@ -5499,7 +5231,6 @@ paths:
                         description: ""
                         handle: acme-products
                         accounting_code: null
-                      public_signup_pages: []
                       product_price_point_name: Default
       operationId: readProduct
       description: This endpoint allows you to read the current details of a product that you've created in Chargify.
@@ -5631,7 +5362,6 @@ paths:
                         description: ""
                         handle: acme-products
                         accounting_code: null
-                      public_signup_pages: []
                       product_price_point_name: Default
         "422":
           description: Unprocessable Entity (WebDAV)
@@ -6302,7 +6032,6 @@ paths:
                         accounting_code: null
                         created_at: 2023-12-01T06:56:12-05:00
                         updated_at: 2023-12-01T06:56:12-05:00
-                      public_signup_pages: []
       operationId: promoteProductPricePointToDefault
       description: |-
         Use this endpoint to make a product price point the default for the product.
@@ -7930,9 +7659,6 @@ paths:
                         product_version: 1
                         component_id: null
                         price_point_id: null
-                    discounts: []
-                    taxes: []
-                    credits: []
                     payments:
                       - transaction_time: "2018-07-26T15:22:02Z"
                         memo: "Joe Example - Monthly Product: Renewal payment"
@@ -7946,8 +7672,6 @@ paths:
                           type: credit_card
                         transaction_id: 253028955
                         prepayment: false
-                    refunds: []
-                    custom_fields: []
                     public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: readInvoice
       description: Use this endpoint to retrieve the details for an invoice.
@@ -8030,7 +7754,6 @@ paths:
                             last_name: Canceled On Purpose
                             organization: null
                             email: evan4@example.com
-                          recipient_emails: []
                           net_terms: 0
                           memo: "Thanks for your business! If you have any questions, please contact your account manager."
                           billing_address:
@@ -8233,8 +7956,6 @@ paths:
                           total_amount: "168.61"
                           paid_amount: "168.61"
                           due_amount: "0.0"
-                          credits: []
-                          refunds: []
                           payments:
                             - memo: "Non-Resumable Canceled On Purpose - Standard Plan: Renewal payment"
                               original_amount: "168.61"
@@ -8248,7 +7969,6 @@ paths:
                                 type: credit_card
                               transaction_id: 126
                               prepayment: false
-                          custom_fields: []
                           display_settings:
                             hide_zero_subtotal_lines: false
                             include_discounts_on_lines: false
@@ -8525,8 +8245,6 @@ paths:
                         amount: "50.00"
                       - invoice_uid: inv_7bc6bwkct3lyt
                         amount: "50.00"
-      parameters: []
-    parameters: []
   /credit_notes.json:
     get:
       summary: List Credit Notes
@@ -9622,6 +9340,7 @@ paths:
           description: "The type of filter you'd like to apply to your search.
             Use in query `date_field=updated_at`."
         - $ref: "./components/parameters/sort-direction.yaml"
+        - $ref: "./components/parameters/list-subscription-components-filter.yaml"
         - schema:
             type: string
           in: query
@@ -9676,28 +9395,6 @@ paths:
           description: "Allows including additional data in the response.
             Use in query `include=subscription`."
           name: include
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          description:
-            "Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
-            Use in query `filter[use_site_exchange_rate]=true`."
-          name: "filter[use_site_exchange_rate]"
-        - schema:
-            type: array
-            items:
-              type: string
-            example:
-              - EUR
-              - USD
-          style: form
-          explode: false
-          in: query
-          description:
-            "Allows fetching components allocation with matching currency based on provided values.
-            Use in query `filter[currencies]=EUR,USD`."
-          name: "filter[currencies]"
   "/subscriptions/{subscription_id}/price_points.json":
     parameters:
       - $ref: "./components/parameters/subscription-id-path.yaml"
@@ -9866,7 +9563,6 @@ paths:
                           description: Duis
                           handle: ea dolore dolore sunt
                           accounting_code: null
-                        public_signup_pages: []
       operationId: bulkResetSubscriptionComponentsPricePoints
       description: |-
         Resets all of a subscription's components to use the current default.
@@ -11821,7 +11517,7 @@ paths:
           in: query
           name: sort
           description: The attribute by which to sort
-        - name: "include[]"
+        - name: "include"
           in: query
           schema:
             type: array
@@ -12078,7 +11774,6 @@ paths:
                             price_point_name: Auto-created
                             starting_quantity: "0.0"
                             editable: false
-                            currency_prices: []
                         offer_discounts:
                           - coupon_id: 234
                             coupon_code: GR8_CUSTOMER
@@ -12420,7 +12115,6 @@ paths:
                       coupon_uses_allowed: null
                       reason_code: null
                       automatically_resume_at: null
-                      coupon_codes: []
                       offer_id: null
                       credit_balance_in_cents: 0
                       prepayment_balance_in_cents: 0
@@ -13039,7 +12733,7 @@ paths:
 
         Self-Service Page token for the subscription is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
       parameters:
-        - name: "include[]"
+        - name: "include"
           in: query
           schema:
             type: array
@@ -13377,7 +13071,6 @@ paths:
                       coupon_uses_allowed: null
                       reason_code: null
                       automatically_resume_at: "2019-01-20T00:00:00-06:00"
-                      coupon_codes: []
                       customer:
                         id: 19948683
                         first_name: Vanessa
@@ -13433,7 +13126,6 @@ paths:
                           description: ""
                           handle: acme-products
                           accounting_code: null
-                        public_signup_pages: []
                       credit_card:
                         id: 13826563
                         first_name: Bomb 3
@@ -13774,7 +13466,6 @@ paths:
         + The subscription will transition to active
         + The next billing date should not have changed
         + Any product-related charges should have been collected
-      parameters: []
       requestBody:
         content:
           application/json:
@@ -14383,12 +14074,6 @@ paths:
                           product_price_point_id: null
                           component_id: null
                           price_point_id: null
-                      discounts: []
-                      taxes: []
-                      credits: []
-                      payments: []
-                      refunds: []
-                      custom_fields: []
                       public_url: "https://www.test-chargifypay.com/invoice/inv_98nbmb93gxjz8?token=rmfmwvbdy4xmyw5f29j5gc6x"
         "201":
           description: Created
@@ -14714,31 +14399,7 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          name: "filter[date_field]"
-          description:
-            "The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice.
-            Use in query `filter[date_field]=created_at`."
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-15"
-          in: query
-          name: "filter[start_date]"
-          description:
-            "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified.
-            Use in query `filter[start_date]=2011-12-15`."
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-15"
-          in: query
-          name: "filter[end_date]"
-          description:
-            "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified.
-            Use in query `filter[end_date]=2011-12-15`."
+        - $ref: "./components/parameters/list-prepayments-filter.yaml"
   "/subscriptions/{subscription_id}/service_credits.json":
     parameters:
       - $ref: "./components/parameters/subscription-id-path.yaml"
@@ -14963,7 +14624,6 @@ paths:
                                 - unit_price: "2"
                                   starting_quantity: "16"
                       - product_id: 13
-    parameters: []
   /subscription_groups.json:
     post:
       summary: Create Subscription Group
@@ -15077,7 +14737,7 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - name: "include[]"
+        - name: "include"
           in: query
           schema:
             type: array
@@ -15099,7 +14759,7 @@ paths:
       tags:
         - Subscription Groups
       parameters:
-        - name: "include[]"
+        - name: "include"
           in: query
           schema:
             type: array
@@ -15200,7 +14860,7 @@ paths:
       operationId: updateSubscriptionGroupMembers
       description: |-
         Use this endpoint to update subscription group members.
-        `"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
+        `"member_ids"` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
       requestBody:
         content:
           application/json:
@@ -15555,35 +15215,9 @@ paths:
           "404": "Not Found:'{$response.body}'"
         collectParameters: true
       parameters:
-        - schema:
-            $ref: "./components/schemas/List-Subscription-Group-Prepayment-Date-Field.yaml"
-          in: query
-          name: "filter[date_field]"
-          description: |-
-            The type of filter you would like to apply to your search.
-            Use in query: `filter[date_field]=created_at`.
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-15"
-          in: query
-          name: "filter[end_date]"
-          description: |-
-            The end date (format YYYY-MM-DD) with which to filter the date_field.
-            Returns prepayments with a timestamp up to and including 11:59:59PM in your site's time zone on the date specified.
-            Use in query: `filter[end_date]=2011-12-15`.
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-15"
-          in: query
-          name: "filter[start_date]"
-          description: |-
-            The start date (format YYYY-MM-DD) with which to filter the date_field.
-            Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site's time zone on the date specified.
-            Use in query: `filter[start_date]=2011-12-15`.
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
+        - $ref: "./components/parameters/list-prepayments-filter.yaml"
       description: This request will list a subscription group's prepayments.
   "/subscription_groups/{uid}/service_credits.json":
     parameters:
@@ -15860,7 +15494,7 @@ paths:
               - customer
               - payment_profile
           in: query
-          name: cascade[]
+          name: cascade
           style: form
           explode: true
           description: |-
@@ -17157,6 +16791,7 @@ paths:
           name: sort
           description: "The attribute by which to sort. Use in query: `sort=updated_at`."
         - $ref: "./components/parameters/sort-direction.yaml"
+        - $ref: "./components/parameters/list-subscription-components-for-site-filter.yaml"
         - schema:
             $ref: "./components/schemas/Subscription-List-Date-Field.yaml"
           in: query
@@ -17237,71 +16872,6 @@ paths:
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=subscription`."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          name: "filter[use_site_exchange_rate]"
-          description:
-            "Allows fetching components allocation with matching use_site_exchange_rate based on provided value.
-            Use in query `filter[use_site_exchange_rate]=true`."
-        - schema:
-            type: array
-            items:
-              type: string
-            example:
-              - EUR
-              - USD
-          in: query
-          name: "filter[currencies]"
-          description:
-            "Allows fetching components allocation with matching currency based on provided values.
-            Use in query `filter[currencies]=USD,EUR`."
-          style: form
-          explode: false
-        - schema:
-            type: array
-            items:
-              $ref: "./components/schemas/Subscription-State-Filter.yaml"
-            example:
-              - active
-              - canceled
-          in: query
-          name: "filter[subscription][states]"
-          style: form
-          explode: false
-          description:
-            "Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`.
-            Use in query `filter[subscription][states]=active,canceled&include=subscription`."
-        - schema:
-            $ref: "./components/schemas/Subscription-List-Date-Field.yaml"
-          in: query
-          name: "filter[subscription][date_field]"
-          description: The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`.
-        - schema:
-            type: string
-            format: date
-          in: query
-          name: "filter[subscription][start_date]"
-          description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`."
-        - schema:
-            type: string
-            format: date-time
-          in: query
-          name: "filter[subscription][start_datetime]"
-          description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`."
-        - schema:
-            type: string
-            format: date
-          in: query
-          name: "filter[subscription][end_date]"
-          description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`."
-        - schema:
-            type: string
-            format: date-time
-          in: query
-          name: "filter[subscription][end_datetime]"
-          description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. To use this filter you also have to include the following param in the request `include=subscription`."
   "/components/{component_id}/price_points/{price_point_id}/segments.json":
     post:
       summary: Create Single Segment
@@ -17394,29 +16964,7 @@ paths:
       parameters:
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page-default-30.yaml"
-        - schema:
-            type: string
-            example: EU
-          in: query
-          name: "filter[segment_property_1_value]"
-          description:
-            "The value passed here would be used to filter segments. Pass a value related to `segment_property_1` on attached Metric. If empty string is passed, this filter would be rejected.
-            Use in query `filter[segment_property_1_value]=EU`."
-        - schema:
-            type: string
-          in: query
-          name: "filter[segment_property_2_value]"
-          description: "The value passed here would be used to filter segments. Pass a value related to `segment_property_2` on attached Metric. If empty string is passed, this filter would be rejected."
-        - schema:
-            type: string
-          in: query
-          name: "filter[segment_property_3_value]"
-          description: "The value passed here would be used to filter segments. Pass a value related to `segment_property_3` on attached Metric. If empty string is passed, this filter would be rejected."
-        - schema:
-            type: string
-          in: query
-          name: "filter[segment_property_4_value]"
-          description: "The value passed here would be used to filter segments. Pass a value related to `segment_property_4` on attached Metric. If empty string is passed, this filter would be rejected."
+        - $ref: "./components/parameters/list-segments-filter.yaml"
       tags:
         - "Events-Based Billing: Segments"
   "/components/{component_id}/price_points/{price_point_id}/segments/{id}.json":
@@ -17752,20 +17300,7 @@ paths:
           "400": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
         collectParameters: true
       parameters:
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-              - 3
-            minLength: 1
-          in: query
-          name: "filter[subscription_ids]"
-          description: "Submit ids in order to limit results. Use in query: `filter[subscription_ids]=1,2,3`."
-          style: form
-          explode: false
+        - $ref: "./components/parameters/list-mrr-filter.yaml"
         - schema:
             type: string
             example: "at_time=2022-01-10T10:00:00-05:00"
@@ -17914,6 +17449,7 @@ paths:
         collectParameters: true
       parameters:
         - $ref: "./components/parameters/basic-date-field.yaml"
+        - $ref: "./components/parameters/list-products-filter.yaml"
         - schema:
             type: string
             format: date
@@ -17952,21 +17488,6 @@ paths:
           name: include
           description: "Allows including additional data in the response.
             Use in query `include=prepaid_product_price_point`."
-        - schema:
-            $ref: "./components/schemas/Include-Not-Null.yaml"
-          in: query
-          name: "filter[prepaid_product_price_point][product_price_point_id]"
-          description:
-            "Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`.
-            Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`."
-        - schema:
-            type: boolean
-            example: true
-          in: query
-          name: "filter[use_site_exchange_rate]"
-          description:
-            "Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point).
-            Use in query `filter[use_site_exchange_rate]=true`."
   "/invoices/{uid}/issue.json":
     parameters:
       - $ref: "./components/parameters/invoice-uid-path.yaml"
@@ -18065,79 +17586,14 @@ paths:
         collectParameters: true
       parameters:
         - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          name: "filter[date_field]"
-          description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
-        - schema:
-            type: string
-            format: date
-          in: query
-          name: "filter[end_date]"
-          description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[end_datetime]"
-          description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
-        - schema:
             $ref: "./components/schemas/List-Components-Price-Points-Include.yaml"
           in: query
           name: include
           description: "Allows including additional data in the response. Use in query: `include=currency_prices`."
         - $ref: "./components/parameters/page.yaml"
         - $ref: "./components/parameters/per-page.yaml"
-        - schema:
-            type: string
-            format: date
-            example: "2011-12-17"
-          in: query
-          name: "filter[start_date]"
-          description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[start_datetime]"
-          description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
-        - schema:
-            type: array
-            items:
-              $ref: "./components/schemas/Price-Point-Type.yaml"
-            example:
-              - catalog
-              - default
-              - custom
-            default:
-              - catalog
-              - default
-          style: form
-          explode: false
-          in: query
-          name: "filter[type]"
-          description: "Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`."
         - $ref: "./components/parameters/sort-direction.yaml"
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-              - 3
-          in: query
-          name: "filter[ids]"
-          description: "Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`."
-          style: form
-          explode: false
-        - schema:
-            $ref: "./components/schemas/Include-Not-Null.yaml"
-          in: query
-          name: "filter[archived_at]"
-          description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
+        - $ref: "./components/parameters/list-pricepoints-filter.yaml"
   /products_price_points.json:
     get:
       summary: List All Products Price Points
@@ -18193,73 +17649,7 @@ paths:
         collectParameters: true
       parameters:
         - $ref: "./components/parameters/sort-direction.yaml"
-        - schema:
-            $ref: "./components/schemas/Include-Not-Null.yaml"
-          in: query
-          name: "filter[archived_at]"
-          description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
-        - schema:
-            $ref: "./components/schemas/Basic-Date-Field.yaml"
-          in: query
-          description: "The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`."
-          name: "filter[date_field]"
-        - schema:
-            type: string
-            format: date
-            example: "2019-06-07"
-          in: query
-          name: "filter[end_date]"
-          description: "The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified."
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[end_datetime]"
-          description: "The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date."
-        - schema:
-            type: array
-            items:
-              type: integer
-            example:
-              - 1
-              - 2
-              - 3
-          in: query
-          name: "filter[ids]"
-          style: form
-          explode: false
-          description: "Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`."
-        - schema:
-            type: string
-            format: date
-            example: "2019-06-07"
-          in: query
-          description: "The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified."
-          name: "filter[start_date]"
-        - schema:
-            type: string
-            format: date-time
-            example: "2019-06-07T17:20:06Z"
-          in: query
-          name: "filter[start_datetime]"
-          description: "The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date."
-        - schema:
-            type: array
-            items:
-              $ref: "./components/schemas/Price-Point-Type.yaml"
-            default:
-              - catalog
-              - default
-            example:
-              - catalog
-              - default
-              - custom
-          style: form
-          explode: false
-          in: query
-          name: "filter[type]"
-          description: "Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`."
+        - $ref: "./components/parameters/list-pricepoints-filter.yaml"
         - schema:
             $ref: "./components/schemas/List-Products-Price-Points-Include.yaml"
           in: query
@@ -18424,7 +17814,6 @@ paths:
                   subscription:
                     product_handle: gold-product
                     customer_id: 12345
-    parameters: []
   /subscriptions/proforma_invoices/preview.json:
     post:
       summary: Create signup proforma preview
@@ -18658,7 +18047,6 @@ paths:
         ErrorTemplates:
           "404": "Not Found:'{$response.body}'"
           "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-    parameters: []
   /api_exports/subscriptions.json:
     post:
       summary: Create Subscriptions Export
@@ -18682,7 +18070,6 @@ paths:
       x-operation-settings:
         ErrorTemplates:
           "409": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
-    parameters: []
   "/api_exports/proforma_invoices/{batch_id}.json":
     parameters:
       - $ref: "./components/parameters/batch-id-path.yaml"

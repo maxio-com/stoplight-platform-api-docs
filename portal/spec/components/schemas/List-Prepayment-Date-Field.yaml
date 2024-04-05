@@ -1,4 +1,4 @@
-title: List Subscription Group Prepayment Date Field
+title: List Prepayment Date Field
 type: string
 enum:
   - created_at
