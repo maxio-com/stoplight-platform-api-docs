@@ -3,7 +3,8 @@
     "PreferJsonSchemaNameOverTitle": false,
     "AppendParentNameForClashes": false,
     "AllowModelTypesWithNoFields": false,
-    "AutoGenerateTestCases": false
+    "AutoGenerateTestCases": false,
+    "ImportTypeCombinatorsWithOnlyOneType": false
   },
   "CodeGenSettings": {
     "ValidateRequiredParameters": true,
