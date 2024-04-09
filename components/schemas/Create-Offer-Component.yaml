@@ -3,5 +3,7 @@ type: object
 properties:
   component_id:
     type: integer
+  price_point_id:
+    type: integer
   starting_quantity:
     type: integer
