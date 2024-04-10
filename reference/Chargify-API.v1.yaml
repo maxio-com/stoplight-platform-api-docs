@@ -9914,7 +9914,7 @@ paths:
             $ref: "../components/schemas/List-Subscription-Components-Include.yaml"
           in: query
           description: "Allows including additional data in the response.
-            Use in query `include=subscription`."
+            Use in query `include=subscription,historic_usages`."
           name: include
         - schema:
             type: boolean
@@ -17449,7 +17449,7 @@ paths:
           in: query
           name: include
           description: "Allows including additional data in the response.
-            Use in query `include=subscription`."
+            Use in query `include=subscription,historic_usages`."
         - schema:
             type: boolean
             example: true
