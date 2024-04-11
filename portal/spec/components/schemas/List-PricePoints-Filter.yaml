@@ -62,5 +62,5 @@ properties:
     description: "Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`."
   archived_at:
     allOf:
-      - $ref: "./Include-Not-Null.yaml"
+      - $ref: "./Include-Null-Or-Not-Null.yaml"
     description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
