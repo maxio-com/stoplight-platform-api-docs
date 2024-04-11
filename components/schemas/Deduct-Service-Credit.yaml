@@ -9,4 +9,3 @@ properties:
     type: string
 required:
   - amount
-  - memo

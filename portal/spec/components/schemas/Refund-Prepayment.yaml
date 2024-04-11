@@ -2,7 +2,9 @@ title: Refund Prepayment
 type: object
 properties:
   amount_in_cents:
-    type: number
+    type:
+      - number
+      - "null"
     format: int64
     description: "`amount` is not required if you pass `amount_in_cents`."
   amount:
