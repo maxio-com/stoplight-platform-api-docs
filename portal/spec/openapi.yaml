@@ -9396,8 +9396,8 @@ paths:
             example:
               - "subscription"
               - "historic_usages"
-            style: form
-            explode: false
+          style: form
+          explode: false
           in: query
           description: "Allows including additional data in the response.
             Use in query `include=subscription,historic_usages`."
