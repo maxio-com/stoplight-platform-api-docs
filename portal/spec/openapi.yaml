@@ -9393,7 +9393,7 @@ paths:
             $ref: "./components/schemas/List-Subscription-Components-Include.yaml"
           in: query
           description: "Allows including additional data in the response.
-            Use in query `include=subscription`."
+            Use in query `include=subscription,historic_usages`."
           name: include
   "/subscriptions/{subscription_id}/price_points.json":
     parameters:
@@ -16871,7 +16871,7 @@ paths:
           in: query
           name: include
           description: "Allows including additional data in the response.
-            Use in query `include=subscription`."
+            Use in query `include=subscription,historic_usages`."
   "/components/{component_id}/price_points/{price_point_id}/segments.json":
     post:
       summary: Create Single Segment
