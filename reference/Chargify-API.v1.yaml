@@ -18407,7 +18407,7 @@ paths:
       parameters:
         - $ref: "../components/parameters/sort-direction.yaml"
         - schema:
-            $ref: "../components/schemas/Include-Not-Null.yaml"
+            $ref: "../components/schemas/Include-Null-Or-Not-Null.yaml"
           in: query
           name: "filter[archived_at]"
           description: "Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`."
