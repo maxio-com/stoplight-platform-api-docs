@@ -15008,6 +15008,24 @@ paths:
                     ending_balance_in_cents: 2000
                     entry_type: Credit
                     memo: Credit to group account
+        "422":
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/errors/Issue-Service-Credit-Error-Response.yaml"
+              examples:
+                Example-1:
+                  value:
+                    errors:
+                      service_credit: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      - Amount must be greater than 0
+      x-operation-settings:
+        ErrorTemplates:
+          "422": "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$response.body}'."
       operationId: issueServiceCredit
       description: Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
       requestBody:
@@ -15036,9 +15054,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/errors/Error-List-Response.yaml"
+                $ref: "../components/schemas/errors/Deduct-Service-Credit-Error-Response.yaml"
               examples:
-                Example:
+                Example-1:
+                  value:
+                    errors:
+                      deduction: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      - Amount must be greater than 0.
+                Example-3:
                   value:
                     errors:
                       - Amount cannot exceed current service credit account balance.
@@ -18009,7 +18035,8 @@ paths:
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
       - schema:
-          type: string
+          type: integer
+          format: int64
         name: prepayment_id
         in: path
         required: true
@@ -18030,7 +18057,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Refund-Prepayment-Base-Errors-Response.yaml"
+                $ref: "../components/schemas/errors/Refund-Prepayment-Base-Errors-Response.yaml"
         "404":
           description: Not Found
           content:
@@ -18042,9 +18069,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../components/schemas/Refund-Prepayment-Aggregated-Errors-Response.yaml"
+                $ref: "../components/schemas/errors/Refund-Prepayment-Error-Response.yaml"
               examples:
-                Example:
+                Example-1:
+                  value:
+                    errors:
+                      refund: can't be blank
+                Example-2:
+                  value:
+                    errors:
+                      refund:
+                        base:
+                          - "Memo: cannot be blank."
+                Example-3:
+                  value:
+                    errors:
+                      refund:
+                        base:
+                          - "Amount: must be greater than 0."
+                Example-4:
                   value:
                     errors:
                       refund:
