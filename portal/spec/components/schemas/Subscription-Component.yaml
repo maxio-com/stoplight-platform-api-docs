@@ -83,6 +83,10 @@ properties:
     type: boolean
   subscription:
     $ref: "./Subscription-Component-Subscription.yaml"
+  historic_usages:
+    type: array
+    items:
+      $ref: "./Historic-Usage.yaml"
   display_on_hosted_page:
     type: boolean
   interval:
