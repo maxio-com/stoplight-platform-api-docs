@@ -21,6 +21,8 @@ toc:
         file: core-concepts/relationship-invoicing.md
   - group: Guided Walkthroughs
     items:
+      - page: Product Catalog
+        file: walkthroughs/product-catalog/walkthrough-1.md
       - page: Access to Self Service Billing Portal
         file: walkthroughs/self-service-billing-portal/walkthrough-1.md
       - page: Site Activity Tracking
