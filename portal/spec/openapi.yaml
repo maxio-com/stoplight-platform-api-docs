@@ -1893,8 +1893,8 @@ paths:
       tags:
         - Coupons
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -4946,8 +4946,8 @@ paths:
       tags:
         - Products
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               examples:
@@ -5461,8 +5461,8 @@ paths:
       tags:
         - Product Families
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -11656,8 +11656,8 @@ paths:
       tags:
         - Offers
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           content:
             application/json:
               schema:
@@ -14467,7 +14467,7 @@ paths:
       tags:
         - Subscription Invoice Account
       responses:
-        "200":
+        "201":
           description: OK
         "422":
           description: Unprocessable Entity (WebDAV)
