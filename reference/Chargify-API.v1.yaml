@@ -8190,7 +8190,21 @@ paths:
                     custom_fields: []
                     public_url: "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
       operationId: readInvoice
-      description: Use this endpoint to retrieve the details for an invoice.
+      description: |-
+        Use this endpoint to retrieve the details for an invoice.
+
+        ## PDF Invoice retrieval
+
+        Individual PDF Invoices can be retrieved by using the "Accept/Content-Type" header application/pdf or appending .pdf as the format portion of the URL:
+        ```curl -u <api_key>:x -H
+        Accept:application/pdf -H
+        Content-Type:application/pdf
+        https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf > output_file.pdf
+        URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
+        Method: GET
+        Required parameters: `uid`
+        Response: A single Invoice.
+        ```
   /invoices/events.json:
     get:
       summary: List Invoice Events
@@ -9913,7 +9927,7 @@ paths:
         - schema:
             type: array
             items:
-              $ref: "./components/schemas/List-Subscription-Components-Include.yaml"
+              $ref: "../components/schemas/List-Subscription-Components-Include.yaml"
             example:
               - "subscription"
               - "historic_usages"
