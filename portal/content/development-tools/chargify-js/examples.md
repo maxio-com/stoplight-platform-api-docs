@@ -381,7 +381,7 @@ For more information on GoCardless, please see the following resources:
 </script>
 ```
 
-### Minimal Example with SEPA or BECS Direct Debit (Stripe gateway)
+### Minimal Example with SEPA, BECS or BACS Direct Debit (Stripe gateway)
 
 The following example contains a minimalist approach to working with Chargify.js and Direct Debit through Stripe.
 
@@ -390,6 +390,7 @@ For more information on Stripe Direct Debit, please see the following resources:
 - [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
 - Using Stripe SEPA Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 - Using Stripe BECS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
+- Using Stripe BACS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
 
 ```javascript
 <script>
@@ -1767,6 +1768,94 @@ chargify.load({
     state: { selector: "#chargify7" },
     zip: { selector: "#chargify8" },
 
+    bankName: { selector: "#chargify9" },
+    branchCode: { selector: "#chargify10" },
+    accountNumber: { selector: "#chargify10" },
+    accountHolderType: { selector: "#chargify14" },
+  },
+});
+```
+
+### Full Example with BACS Direct Debit (Stripe gateway)
+
+The following example contains a minimalist approach to working with Chargify.js and BACS Direct Debit through Stripe.
+
+For more information on Stripe Direct Debit, please see the following resources:
+
+- [Stripe Direct Debit help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765)
+- Using Stripe BACS Direct Debit via API for [creating subscriptions]($e/Subscriptions/createSubscription) and/or [payment profiles]($e/Payment%20Profiles/createPaymentProfile)
+
+```javascript
+var chargify = new Chargify();
+
+chargify.load({
+  publicKey: "your-public-api-key",
+  type: "direct_debit",
+  serverHost: "https://acme.chargify.com",
+  optionalLabel: "(optional field)",
+  requiredLabel: "*",
+  style: {
+    "#chargify-form": { border: "1px dashed #ffc0cb57" },
+    field: {
+      backgroundColor: "orange",
+      paddingTop: "10px",
+      paddingBottom: "10px",
+      borderRadius: "5px",
+    },
+    input: {
+      backgroundColor: "#e6e6e6",
+      paddingTop: "2px",
+      paddingBottom: "1px",
+      placeholder: { color: "#eee" },
+    },
+    label: {
+      backgroundColor: "lightblue",
+      paddingTop: "2px",
+      paddingBottom: "1px",
+    },
+    message: {
+      backgroundColor: "red",
+      color: "white",
+      paddingTop: "2px",
+      paddingBottom: "1px",
+    },
+  },
+  fields: {
+    firstName: {
+      selector: "#chargify1",
+      label: "FIRST NAME",
+      placeholder: "John",
+      required: true,
+      message: "First name is not valid. Please update it.",
+      maxlength: "30",
+      style: {
+        field: {
+          backgroundColor: "#ffdfdf",
+          padding: "3px",
+          borderRadius: "5px",
+        },
+        input: {
+          backgroundColor: "#fdfde1",
+          paddingTop: "2px",
+          paddingBottom: "1px",
+          placeholder: { color: "green" },
+        },
+        label: {
+          paddingTop: "2px",
+          paddingBottom: "1px",
+          fontSize: "11px",
+        },
+        message: { paddingTop: "2px", paddingBottom: "1px" },
+      },
+    },
+    lastName: { selector: "#chargify2" },
+
+    country: { selector: "#chargify3" },
+    address: { selector: "#chargify4" },
+    address2: { selector: "#chargify5" },
+    city: { selector: "#chargify6" },
+    state: { selector: "#chargify7" },
+    zip: { selector: "#chargify8" },
     bankName: { selector: "#chargify9" },
     branchCode: { selector: "#chargify10" },
     accountNumber: { selector: "#chargify10" },
