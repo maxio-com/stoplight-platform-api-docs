@@ -9448,7 +9448,7 @@ paths:
             type: boolean
           in: query
           name: in_use
-          description: "If set to true, it returns components currently in use. If set to false, it returns components that aren't in use. Use in query `in_use=true` or `in_use=false`. If not provided, the API defaults to returning all components."
+          description: "If in_use is set to true, it returns only components that are currently in use. However, if it's set to false or not provided, it returns all components connected with the subscription. Use in query `in_use=true` or `in_use=false`"
           required: false
           allowEmptyValue: true
           example: true
