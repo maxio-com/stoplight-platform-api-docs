@@ -7064,9 +7064,6 @@ paths:
 
         + [Full documentation on Stripe BACS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
-        + [Using Chargify.js with Stripe BACS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
-
-        + [Using Chargify.js with Stripe BACS Direct Debit - full example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-sepa-direct-debit-stripe-gateway)
 
         ### Stripe BACS Direct Debit Payment Profiles
 
@@ -11413,12 +11410,12 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe BECS Direct Debit](https://developers.chargify.com/docs/api-docs/1f10a4f170405-create-payment-profile#stripe-becs-direct-debit)
+        + [Payment Profiles via API for Stripe BECS Direct Debit](https://developers.maxio.com/docs/api-docs/1f10a4f170405-create-payment-profile#stripe-becs-direct-debit)
         + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
-        + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe SEPA or BECS Direct Debit - minimal example](https://developers.maxio.com/docs/developer-docs/713cae4065228-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
 
-        + [Using Chargify.js with Stripe BECS Direct Debit - full example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe BECS Direct Debit - full example](https://developers.maxio.com/docs/developer-docs/713cae4065228-examples#full-example-with-becs-direct-debit-stripe-gateway)
 
 
         ```json
@@ -11444,13 +11441,7 @@ paths:
 
         For more information on Stripe Direct Debit, please view the following two resources:
 
-        + [Payment Profiles via API for Stripe BACS Direct Debit](https://developers.chargify.com/docs/api-docs/1f10a4f170405-create-payment-profile#stripe-becs-direct-debit)
         + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
-
-        + [Using Chargify.js with Stripe SEPA or BACS Direct Debit - minimal example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
-
-        + [Using Chargify.js with Stripe BACS Direct Debit - full example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-examples#full-example-with-becs-direct-debit-stripe-gateway)
-
 
         ```json
         {
