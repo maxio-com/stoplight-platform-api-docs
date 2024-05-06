@@ -10868,9 +10868,9 @@ paths:
         + [Payment Profiles via API for Stripe BECS Direct Debit]($e/Payment%20Profiles/createPaymentProfile)
         + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
-        + [Using Chargify.js with Stripe SEPA, BECS or BACS Direct Debit - minimal example](page:chargify-js/examples#minimal-example-with-sepa-becs-or-bacs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe SEPA, BECS or BACS Direct Debit - minimal example](page:development-tools/chargify-js/examples#minimal-example-with-sepa-becs-or-bacs-direct-debit-stripe-gateway)
 
-        + [Using Chargify.js with Stripe BECS Direct Debit - full example](page:chargify-js/examples#full-example-with-becs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe BECS Direct Debit - full example](page:development-tools/chargify-js/examples#full-example-with-becs-direct-debit-stripe-gateway)
 
 
         ```json
@@ -10899,9 +10899,9 @@ paths:
         + [Payment Profiles via API for Stripe BACS Direct Debit]($e/Payment%20Profiles/createPaymentProfile)
         + [Full documentation on Stripe Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
 
-        + [Using Chargify.js with Stripe SEPA, BECS or BACS Direct Debit - minimal example](page:chargify-js/examples#minimal-example-with-sepa-becs-or-bacs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe SEPA, BECS or BACS Direct Debit - minimal example](page:development-tools/chargify-js/examples#minimal-example-with-sepa-becs-or-bacs-direct-debit-stripe-gateway)
 
-        + [Using Chargify.js with Stripe BACS Direct Debit - full example](page:chargify-js/examples#full-example-with-bacs-direct-debit-stripe-gateway)
+        + [Using Chargify.js with Stripe BACS Direct Debit - full example](page:development-tools/chargify-js/examples#full-example-with-bacs-direct-debit-stripe-gateway)
 
         ```json
         {
