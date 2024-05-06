@@ -18,13 +18,19 @@ properties:
     type: integer
     format: int64
   start_date:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
   end_date:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
   period_type:
-    type: string
+    type:
+      - string
+      - "null"
   existing_balance_in_cents:
     type: integer
     format: int64

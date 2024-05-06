@@ -96,7 +96,9 @@ properties:
       - "null"
     description: The url to which a customer will be returned after a successful account update
   initial_charge_after_trial:
-    type: boolean
+    type:
+      - boolean
+      - "null"
   version_number:
     type: integer
     description: The version of the product

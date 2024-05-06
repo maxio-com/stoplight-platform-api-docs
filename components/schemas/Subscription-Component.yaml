@@ -54,8 +54,7 @@ properties:
       - "null"
   price_point_type:
     oneOf:
-      - type:
-          - "null"
+      - type: "null"
       - $ref: "./Price-Point-Type.yaml"
   price_point_name:
     type:
