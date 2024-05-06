@@ -695,8 +695,8 @@ This will add a 3px red border when you put your cursor in the input field (this
 | --------------------- | ----------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | firstName             | `Joe`                         | Required                                  | First name on bank account                                                                                              |
 | lastName              | `Doe`                         | Required                                  | Last name on bank account                                                                                               |
-| email                 | `joe@chargify.test`           | Required for Becs NZ scheme only          | The customer's email                                                                                                    |
-| phone                 | `+640800000000`               | Required for Becs NZ scheme only          | The customer's phone number                                                                                             |
+| email                 | `joe@chargify.test`           | Required for BECS NZ scheme only          | The customer's email                                                                                                    |
+| phone                 | `+640800000000`               | Required for BECS NZ scheme only          | The customer's phone number                                                                                             |
 | bankName              | `Test Bank`                   | Required                                  | The name of the bank where the customer’s account resides                                                               |
 | bankIban              | `FR1420041010050500013M02606` | Required                                  | The customer’s International Bank Account Number (IBAN). It needs to be passed if local bank details are empty          |
 | routingNumber         | `19043`                       | Required                                  | Bank code. Alternatively you can provide an iban.                                                                       |
@@ -718,7 +718,7 @@ This will add a 3px red border when you put your cursor in the input field (this
 | ----------------- | ----------------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | firstName         | `Joe`                         | Required                         | First name on bank account                                                                                              |
 | lastName          | `Doe`                         | Required                         | Last name on bank account                                                                                               |
-| email             | `joe@chargify.test`           | Required for Becs NZ scheme only | The customer's email                                                                                                    |
+| email             | `joe@chargify.test`           | Required for BECS NZ scheme only | The customer's email                                                                                                    |
 | bankName          | `Test Bank`                   | Required                         | The name of the bank where the customer’s account resides                                                               |
 | bankIban          | `FR1420041010050500013M02606` | Required                         | The customer’s International Bank Account Number (IBAN).                                                                |
 | accountHolderType | `personal`                    | Required                         | may be `personal` (default) or `business`                                                                               |
@@ -735,7 +735,7 @@ This will add a 3px red border when you put your cursor in the input field (this
 | ----------------- | ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | firstName         | `Joe`               | Required                         | First name on bank account                                                                                              |
 | lastName          | `Doe`               | Required                         | Last name on bank account                                                                                               |
-| email             | `joe@chargify.test` | Required for Becs NZ scheme only | The customer's email                                                                                                    |
+| email             | `joe@chargify.test` | Required for BECS NZ scheme only | The customer's email                                                                                                    |
 | bankName          | `Test Bank`         | Required                         | The name of the bank where the customer’s account resides                                                               |
 | branchCode        | `000000`            | Required                         | BSB                                                                                                                     |
 | accountNumber     | `000123456`         | Required                         | Account Number                                                                                                          |
@@ -753,7 +753,7 @@ This will add a 3px red border when you put your cursor in the input field (this
 | ----------------- | ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | firstName         | `Joe`               | Required                         | First name on bank account                                                                                              |
 | lastName          | `Doe`               | Required                         | Last name on bank account                                                                                               |
-| email             | `joe@chargify.test` | Required for Becs NZ scheme only | The customer's email                                                                                                    |
+| email             | `joe@chargify.test` | Required for BECS NZ scheme only | The customer's email                                                                                                    |
 | bankName          | `Test Bank`         | Required                         | The name of the bank where the customer’s account resides                                                               |
 | branchCode        | `108800`            | Required                         | Sort Code                                                                                                               |
 | accountNumber     | `00012345`          | Required                         | Account Number                                                                                                          |
