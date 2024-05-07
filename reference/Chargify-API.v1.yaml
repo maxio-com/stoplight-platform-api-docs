@@ -7060,6 +7060,7 @@ paths:
 
         ## Stripe BACS Direct Debit
 
+        Contact the support team to enable this payment method.
         For more information on Stripe BACS Direct Debit, please view the following resources:
 
         + [Full documentation on Stripe BACS Direct Debit](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405050826765-Stripe-SEPA-and-BECS-Direct-Debit)
