@@ -22,11 +22,15 @@ properties:
     type: integer
     description: The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility.
   current_period_ends_at:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
     description: "Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur)"
   next_assessment_at:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
     description: "Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases)"
   trial_started_at:
@@ -42,7 +46,9 @@ properties:
     format: date-time
     description: Timestamp for when the trial period (if any) ended
   activated_at:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
     description: "Timestamp for when the subscription began (i.e. when it came out of trial, or when it began in the case of no trial)"
   expires_at:
@@ -78,7 +84,9 @@ properties:
     format: date-time
     description: The timestamp of the most recent cancellation
   current_period_started_at:
-    type: string
+    type:
+      - string
+      - "null"
     format: date-time
     description: Timestamp relating to the start of the current (recurring) period
   previous_state:
@@ -256,7 +264,9 @@ properties:
     type: integer
     format: int64
   prepaid_configuration:
-    $ref: "./Prepaid-Configuration.yaml"
+    oneOf:
+      - $ref: "./Prepaid-Configuration.yaml"
+      - type: "null"
   self_service_page_token:
     type: string
     description: Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided.

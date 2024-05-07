@@ -16,7 +16,9 @@ properties:
   component_id:
     type: integer
   handle:
-    type: string
+    type:
+      - string
+      - "null"
   archived_at:
     format: date-time
     type:

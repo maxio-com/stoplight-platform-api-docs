@@ -6,7 +6,9 @@ properties:
     format: int64
     minimum: 0
   memo:
-    type: string
+    type:
+      - string
+      - "null"
   created_at:
     type: string
     format: date-time
