@@ -23,12 +23,12 @@ toc:
     items:
       - page: Product Catalog
         file: walkthroughs/product-catalog/walkthrough-1.md
+      - page: Create Subscription
+        file: walkthroughs/subscription-management/walkthrough-1.md
       - page: Access to Self Service Billing Portal
         file: walkthroughs/self-service-billing-portal/walkthrough-1.md
       - page: Site Activity Tracking
         file: walkthroughs/site-activity/walkthrough-1.md
-      - page: Subscription Management
-        file: walkthroughs/subscription-management/walkthrough-1.md
   - group: Development Tools
     items:
       - page: Client Libraries
