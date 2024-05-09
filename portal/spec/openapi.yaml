@@ -9448,9 +9448,8 @@ paths:
             type: boolean
           in: query
           name: in_use
-          description: "If in_use is set to true, it returns only components that are currently in use. However, if it's set to false or not provided, it returns all components connected with the subscription. Use in query `in_use=true` or `in_use=false`"
+          description: "If in_use is set to true, it returns only components that are currently in use. However, if it's set to false or not provided, it returns all components connected with the subscription."
           required: false
-          allowEmptyValue: true
           example: true
   "/subscriptions/{subscription_id}/price_points.json":
     parameters:
