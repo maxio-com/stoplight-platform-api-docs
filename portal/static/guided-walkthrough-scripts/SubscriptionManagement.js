@@ -241,11 +241,10 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           },
         }));
         return workflowCtx.showEndpoint({
-          description:
-            "This endpoint is used to preview a subscription order.",
+          description: "This endpoint is used to preview a subscription order.",
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
-           body: {
+            body: {
               customer_attributes: {
                 first_name: "John",
                 last_name: "Doe",
