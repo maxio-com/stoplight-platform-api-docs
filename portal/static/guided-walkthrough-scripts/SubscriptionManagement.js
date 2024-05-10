@@ -246,10 +246,13 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
             body: {
-              customer_attributes: {
-                first_name: "John",
-                last_name: "Doe",
-                email: "john.doe@example.com",
+              subscription: {
+                customer_attributes: {
+                  first_name: "John",
+                  last_name: "Doe",
+                  email: "john.doe@example.com",
+                },
+                offer_id: null,
               },
             },
           },
@@ -257,6 +260,17 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
             console.log("in verify");
             console.log(response);
             if (response.StatusCode == 200) {
+              if (
+                response.data?.subscription_preview?.current_billing_manifest
+                  ?.end_date == null &&
+                response.data?.subscription_preview?.current_billing_manifest
+                  ?.start_date == null
+              ) {
+                setError(
+                  "Provided parameters results with an empty subscription response. Please ensure you specify either `product_id`, or `product_handle`",
+                );
+                return false;
+              }
               return true;
             }
             setError(
@@ -276,7 +290,8 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: "This endpoint is used to create a subscription order.",
+          description:
+            "Now it's time to create a real subscription. Please fill in the details you've used to preview the subscription in a previous step. Remember you have to provide either `product_id`, or `product_handle`",
           endpointPermalink: "$e/Subscriptions/createSubscription",
           args: {
             body: {
@@ -305,7 +320,7 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
             },
           },
           verify: (response, setError) => {
-            if (response.StatusCode == 200) {
+            if (response.StatusCode == 201) {
               return true;
             }
             setError(
