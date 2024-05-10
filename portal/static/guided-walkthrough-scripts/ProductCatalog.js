@@ -77,6 +77,7 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       stepCallback: async (stepState) => {
         const step2State = stepState?.["Step 1"];
         console.log(step2State?.data?.["product_family"]?.id);
+        console.log(step2State);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
@@ -114,7 +115,7 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       },
     },
     "Step 3": {
-      name: "Create Metered Component",
+      name: "Pause Subscription ",
       stepCallback: async (stepState) => {
         const step3State = stepState?.["Step 1"];
         console.log(step3State?.data?.["product"]?.id);
@@ -155,7 +156,7 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       },
     },
     "Step 4": {
-      name: "Create Coupon",
+      name: "Resume Subscription",
       stepCallback: async (stepState) => {
         const stateAfterProductFamilyCreation = stepState?.["Step 1"];
         const stateAfterProductCreation = stepState?.["Step 2"];
@@ -188,49 +189,6 @@ In your app or business, you might call these Products your "Plans" or "Feature 
               },
               restricted_components: {
                 [stateAfterComponentCreation?.data?.["component"]?.id]: true,
-              },
-            },
-          },
-          verify: (response, setError) => {
-            if (response.StatusCode === 201) {
-              return true;
-            }
-            setError(
-              "API Call wasn't able to get a valid response. Please try again.",
-            );
-            return false;
-          },
-        });
-      },
-    },
-    "Step 5": {
-      name: "Create Offer",
-      stepCallback: async (stepState) => {
-        const stateAfterProductCreation = stepState?.["Step 2"];
-        const stateAfterComponentCreation = stepState?.["Step 3"];
-        const stateAfterCouponCreation = stepState?.["Step 4"];
-        await portal.setConfig((defaultConfig) => ({
-          ...defaultConfig,
-        }));
-        return workflowCtx.showEndpoint({
-          description:
-            "This endpoint is used to create an offer within your Chargify site by sending a POST request.",
-          endpointPermalink: "$e/Offers/createOffer",
-          args: {
-            body: {
-              offer: {
-                name: "Solo",
-                handle: "han_shot_first",
-                description: "A Star Wars Story",
-                product_id: stateAfterProductCreation?.data?.["product"]?.id,
-                components: [
-                  {
-                    component_id:
-                      stateAfterComponentCreation?.data?.["component"]?.id,
-                    starting_quantity: 1,
-                  },
-                ],
-                coupons: [stateAfterCouponCreation?.data?.["coupon"]?.code],
               },
             },
           },
