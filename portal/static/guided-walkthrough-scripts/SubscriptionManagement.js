@@ -241,7 +241,8 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           },
         }));
         return workflowCtx.showEndpoint({
-          description: "This endpoint is used to preview a subscription order.",
+          description: "At first, let's preview the subscription order. Please fill in either `product_id`, or `product_handle`"
+          it can be a product that was created in the `Product Catalog` walkthrough. ",
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
             body: {
@@ -253,6 +254,8 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
             },
           },
           verify: (response, setError) => {
+            console.log("in verify");
+            console.log(response);
             if (response.StatusCode == 200) {
               return true;
             }
