@@ -241,8 +241,8 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           },
         }));
         return workflowCtx.showEndpoint({
-          description: "At first, let's preview the subscription order. Please fill in either `product_id`, or `product_handle`"
-          it can be a product that was created in the `Product Catalog` walkthrough. ",
+          description:
+            "At first, let's preview the subscription order. Please fill in either `product_id`, or `product_handle` it can be a product that was created in the `Product Catalog` walkthrough. ",
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
             body: {
