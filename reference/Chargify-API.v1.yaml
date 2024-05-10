@@ -9988,6 +9988,13 @@ paths:
             "Allows fetching components allocation with matching currency based on provided values.
             Use in query `filter[currencies]=EUR,USD`."
           name: "filter[currencies]"
+        - schema:
+            type: boolean
+          in: query
+          name: in_use
+          description: "If in_use is set to true, it returns only components that are currently in use. However, if it's set to false or not provided, it returns all components connected with the subscription."
+          required: false
+          example: true
   "/subscriptions/{subscription_id}/price_points.json":
     parameters:
       - $ref: "../components/parameters/subscription-id-path.yaml"
