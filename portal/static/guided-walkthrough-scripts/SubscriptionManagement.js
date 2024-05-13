@@ -243,8 +243,7 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           description: `At first, let's preview the subscription order. This endpoint allows you to preview a
           subscription by POSTing the same JSON as used for subscription creation. A subscription will not be created by
           utilizing this endpoint; it is meant to serve as a prediction.
-
-          As a requirement, please fill in either \`product_id\` or \`product_handle\`; it can be a product that
+          \nAs a requirement, please fill in either \`product_id\` or \`product_handle\`; it can be a product that
           was created in the Product Catalog walkthrough. Feel free to experiment with other request parameters.
           For example, you can try including component, offer, or coupon created in a Product Catalog walkthrough.
           Once you're satisfied with the result, proceed to the next step.`,
@@ -294,10 +293,9 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           description: `Now it's time to create an actual Subscription. Please fill in the same data you used for the preview.
           Note that this time, payment information is mandatory. We'll be using mock data provided by a Bogus
           gateway or a Stripe gateway in test mode.
-
-             Additionally, a customer record will be created together with the subscription, as we're using the
-             \`customer_attribute\` parameter. Prefer to use an already existing customer? Fill in the \`customer_id\` or
-             \`customer_reference\` field instead.`,
+          \nAdditionally, a customer record will be created together with the subscription, as we're using the
+          \`customer_attribute\` parameter. Prefer to use an already existing customer? Fill in the \`customer_id\` or
+          \`customer_reference\` field instead.`,
           endpointPermalink: "$e/Subscriptions/createSubscription",
           args: {
             body: {
@@ -348,11 +346,9 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           description: `Now we're going to demonstrate some more capabilities for manipulating the subscription lifecycle.
           First, we will put the subscription on hold so it won't renew. There is a possibility to set an automatic
           resumption date to a specific timestamp.
-
-                        There are more possible state modifications - you can cancel, reactivate, migrate subscriptions, and more.
-
-                        After you successfully pause the subscription, notice the state changing to \`on_hold\`.
-                        When you're ready, proceed to the next step.`,
+          \nThere are more possible state modifications - you can cancel, reactivate, migrate subscriptions, and more.
+          \nAfter you successfully pause the subscription, notice the state changing to \`on_hold\`.
+          When you're ready, proceed to the next step.`,
           endpointPermalink: "$e/Subscription%20Status/pauseSubscription",
           args: {
             subscription_id: step2State?.data["subscription"]?.id,
