@@ -76,8 +76,6 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       name: "Create Product",
       stepCallback: async (stepState) => {
         const step2State = stepState?.["Step 1"];
-        console.log(step2State?.data?.["product_family"]?.id);
-        console.log(step2State);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
@@ -115,10 +113,9 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       },
     },
     "Step 3": {
-      name: "Pause Subscription ",
+      name: "Create Metered Component",
       stepCallback: async (stepState) => {
         const step3State = stepState?.["Step 1"];
-        console.log(step3State?.data?.["product"]?.id);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
@@ -156,7 +153,7 @@ In your app or business, you might call these Products your "Plans" or "Feature 
       },
     },
     "Step 4": {
-      name: "Resume Subscription",
+      name: "Create Coupon",
       stepCallback: async (stepState) => {
         const stateAfterProductFamilyCreation = stepState?.["Step 1"];
         const stateAfterProductCreation = stepState?.["Step 2"];

@@ -77,7 +77,6 @@ A common method of managing a subscription might be for the billing date to chan
 Please see the full API documentation for [updating subscription assessment date]($e/Subscriptions/updateSubscription) for more information.
 
 ## Updating Methods
-COPY
 
 ### Updating Payment Details
 Updating the payment details is how you would change the card that somebody uses for their subscription. You can also use this method to simply change the expiration date of the card.
@@ -241,8 +240,14 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           },
         }));
         return workflowCtx.showEndpoint({
-          description:
-            "At first, let's preview the subscription order. Please fill in either `product_id`, or `product_handle` it can be a product that was created in the `Product Catalog` walkthrough. ",
+          description: `At first, let's preview the subscription order. This endpoint allows you to preview a
+          subscription by POSTing the same JSON as used for subscription creation. A subscription will not be created by
+          utilizing this endpoint; it is meant to serve as a prediction.
+
+             As a requirement, please fill in either \`product_id\` or \`product_handle\`; it can be a product that
+             was created in the Product Catalog walkthrough. Feel free to experiment with other request parameters.
+             For example, you can try including component, offer, or coupon created in a Product Catalog walkthrough.
+             Once you're satisfied with the result, proceed to the next step.`,
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
             body: {
@@ -252,13 +257,10 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
                   last_name: "Doe",
                   email: "john.doe@example.com",
                 },
-                offer_id: null,
               },
             },
           },
           verify: (response, setError) => {
-            console.log("in verify");
-            console.log(response);
             if (response.StatusCode == 200) {
               if (
                 response.data?.subscription_preview?.current_billing_manifest
@@ -274,7 +276,7 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid response. Please try again.",
+              "API Call wasn't able to get a valid response. Please correct your request parameters and try again.",
             );
             return false;
           },
@@ -285,13 +287,17 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
       name: "Create Subscription",
       stepCallback: async (stepState) => {
         const step1State = stepState?.["Step 1"];
-        console.log(step1State?.data[0]?.["product"]?.id);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            "Now it's time to create a real subscription. Please fill in the details you've used to preview the subscription in a previous step. Remember you have to provide either `product_id`, or `product_handle`",
+          description: `Now it's time to create an actual Subscription. Please fill in the same data you used for the preview.
+          Note that this time, payment information is mandatory. We'll be using mock data provided by a Bogus
+          gateway or a Stripe gateway in test mode.
+
+             Additionally, a customer record will be created together with the subscription, as we're using the
+             \`customer_attribute\` parameter. Prefer to use an already existing customer? Fill in the \`customer_id\` or
+             \`customer_reference\` field instead.`,
           endpointPermalink: "$e/Subscriptions/createSubscription",
           args: {
             body: {
@@ -306,7 +312,7 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
                   last_name: "Smith",
                   first_name: "Joe",
                   full_number: "4111111111111111",
-                  expiration_year: "2027",
+                  expiration_year: (new Date().getFullYear() + 3).toString(),
                   expiration_month: "12",
                   card_type: "visa",
                   billing_zip: "02120",
@@ -324,7 +330,7 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid response. Please try again.",
+              "API Call wasn't able to get a valid response. Please correct your request parameters and try again.",
             );
             return false;
           },
@@ -335,27 +341,33 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
       name: "Pause Subscription",
       stepCallback: async (stepState) => {
         const step2State = stepState?.["Step 2"];
-        console.log(step2State?.data["subscription"]?.id);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: "This endpoint is used to pause a subscription order.",
+          description: `Now we're going to demonstrate some more capabilities for manipulating the subscription lifecycle.
+          First, we will put the subscription on hold so it won't renew. There is a possibility to set an automatic
+          resumption date to a specific timestamp.
+
+                        There are more possible state modifications - you can cancel, reactivate, migrate subscriptions, and more.
+
+                        After you successfully pause the subscription, notice the state changing to \`on_hold\`.
+                        When you're ready, proceed to the next step.`,
           endpointPermalink: "$e/Subscription%20Status/pauseSubscription",
           args: {
             subscription_id: step2State?.data["subscription"]?.id,
             body: {
               hold: {
-                automatically_resume_at: "2017-05-25T11:25:00Z",
+                automatically_resume_at: null,
               },
             },
           },
           verify: (response, setError) => {
-            if (response.StatusCode == 200) {
+            if (response.StatusCode == 200 || response.StatusCode == 422) {
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid response. Please try again.",
+              "API Call wasn't able to get a valid response. Please correct your request parameters and try again.",
             );
             return false;
           },
@@ -366,22 +378,23 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
       name: "Resume Subscription",
       stepCallback: async (stepState) => {
         const step2State = stepState?.["Step 2"];
-        console.log(step2State?.data["subscription"]?.id);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: "This endpoint is used to resume a subscription order.",
+          description: `In this final step, we're going to resume a previously canceled subscription. If the normal next
+          renewal date has not passed, the subscription will return to active and will renew on that date. Otherwise,
+          it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.`,
           endpointPermalink: "$e/Subscription%20Status/resumeSubscription",
           args: {
             subscription_id: step2State?.data["subscription"]?.id,
           },
           verify: (response, setError) => {
-            if (response.StatusCode == 200 || response.StatusCode == 201) {
+            if (response.StatusCode == 200) {
               return true;
             }
             setError(
-              "API Call wasn't able to get a valid response. Please try again.",
+              "API Call wasn't able to get a valid response. Please correct your request parameters and try again.",
             );
             return false;
           },
