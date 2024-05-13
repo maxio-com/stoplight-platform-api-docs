@@ -244,10 +244,10 @@ For more information, see [API Refunds (External)](https://prod-developers.maxio
           subscription by POSTing the same JSON as used for subscription creation. A subscription will not be created by
           utilizing this endpoint; it is meant to serve as a prediction.
 
-             As a requirement, please fill in either \`product_id\` or \`product_handle\`; it can be a product that
-             was created in the Product Catalog walkthrough. Feel free to experiment with other request parameters.
-             For example, you can try including component, offer, or coupon created in a Product Catalog walkthrough.
-             Once you're satisfied with the result, proceed to the next step.`,
+          As a requirement, please fill in either \`product_id\` or \`product_handle\`; it can be a product that
+          was created in the Product Catalog walkthrough. Feel free to experiment with other request parameters.
+          For example, you can try including component, offer, or coupon created in a Product Catalog walkthrough.
+          Once you're satisfied with the result, proceed to the next step.`,
           endpointPermalink: "$e/Subscriptions/previewSubscription",
           args: {
             body: {
