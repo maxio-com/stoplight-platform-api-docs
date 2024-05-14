@@ -27,8 +27,9 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            "This endpoint is used to enable billing portal for the customer.",
+          description: `Please fill in the ID of the customer you want to enable billing portal access for. If you've completed a
+            \`Create Subscription\` walkthrough, it can be a customer you created along with the subscription.
+            You can choose whether you want the invitation link to be automatically sent to the customer's email.`,
           endpointPermalink:
             "$e/Billing%20Portal/enableBillingPortalForCustomer",
           args: {},
@@ -52,8 +53,11 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            "This endpoint is used to read billing portal invitation link.",
+          description: `If your customer has been invited to the Billing Portal, they will receive a link to manage their
+            subscription automatically at the bottom of their statements, invoices, and receipts.
+            This link changes periodically for security reasons and is only valid for 65 days.
+             \nIf you need to provide your customer with their Management URL through other means, you can
+             retrieve it via the API using this endpoint.`,
           endpointPermalink: "$e/Billing%20Portal/readBillingPortalLink",
           args: {
             customer_id: step1State?.data["customer"]?.id,
@@ -79,7 +83,7 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
         }));
         return workflowCtx.showEndpoint({
           description:
-            "This endpoint is used to resend billing portal invitation.",
+            "If the portal invitation has been lost, you can use the following endpoint to resend the invitation.",
           endpointPermalink:
             "$e/Billing%20Portal/resendBillingPortalInvitation",
           args: {
@@ -105,7 +109,8 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: "This endpoint is used to revoke billing portal access.",
+          description:
+            "If you decide to no longer provide self-service access to your customer, you can revoke their access using the following endpoint.",
           endpointPermalink: "$e/Billing%20Portal/revokeBillingPortalAccess",
           args: {
             customer_id: step1State?.data["customer"]?.id,
