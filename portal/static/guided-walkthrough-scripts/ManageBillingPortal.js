@@ -25,6 +25,17 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
       stepCallback: async (stepState) => {
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
+          auth: {
+            ...defaultConfig.auth,
+            BasicAuth: {
+              BasicAuthUserName: "API_KEY",
+              BasicAuthPassword: "x",
+            },
+          },
+          config: {
+            ...defaultConfig.config,
+            subdomain: "your-site",
+          },
         }));
         return workflowCtx.showEndpoint({
           description: `Please fill in the ID of the customer you want to enable billing portal access for. If you've completed a
