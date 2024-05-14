@@ -11,6 +11,12 @@ toc:
         file: introduction/connected-sites.md
       - group: About the API
         dir: introduction/about-the-api
+  - group: Advanced Billing API
+    items:
+      - generate: API Endpoints
+        from: endpoints
+      - generate: Models
+        from: models
   - group: Core Concepts
     items:
       - page: Product Catalog
@@ -27,20 +33,12 @@ toc:
         file: walkthroughs/subscription-management/walkthrough-1.md
       - page: Manage Billing Portal
         file: walkthroughs/manage-billing-portal/walkthrough-1.md
-      - page: Site Activity Tracking
-        file: walkthroughs/site-activity/walkthrough-1.md
   - group: Development Tools
     items:
       - page: Client Libraries
         file: development-tools/client-libraries.md
       - group: Chargify.js
         dir: development-tools/chargify-js
-  - group: Advanced Billing API
-    items:
-      - generate: API Endpoints
-        from: endpoints
-      - generate: Models
-        from: models
   - group: Help
     items:
       - page: Getting Support
