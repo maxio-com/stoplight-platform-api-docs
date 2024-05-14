@@ -2,6 +2,8 @@ title: Apply Payment Event Data
 type: object
 description: Example schema for an `apply_payment` event
 properties:
+  consolidation_level:
+    $ref: "../Consolidation-Level.yaml"
   memo:
     type: string
     description: The payment memo
@@ -33,6 +35,7 @@ properties:
   external:
     type: boolean
 required:
+  - consolidation_level
   - memo
   - original_amount
   - applied_amount
