@@ -15,7 +15,9 @@ As an example, here are a few examples of actions that can be performed via the 
 - Credit card updates
 - Component purchase / allocation updates
 
-For more information on the Billing Portal, we encourage you to read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405529728141-Billing-Portal-Introduction).`);
+For more information on the Billing Portal, we encourage you to read [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405529728141-Billing-Portal-Introduction).
+
+As a prerequisite for this walkthrough, your site must have Billing Portal enabled. To do this, navigate to the settings of your Advanced Billing Site, then select Billing Portal. Check the box for Enabled for this site and fill in any additional settings as necessary.`);
       },
     },
     "Step 1": {
@@ -80,7 +82,6 @@ For more information on the Billing Portal, we encourage you to read [this help 
             "This endpoint is used to resend billing portal invitation.",
           endpointPermalink:
             "$e/Billing%20Portal/resendBillingPortalInvitation",
-
           args: {
             customer_id: step1State?.data["customer"]?.id,
           },
@@ -100,7 +101,6 @@ For more information on the Billing Portal, we encourage you to read [this help 
       name: "Revoke Billing Portal Invitation",
       stepCallback: async (stepState) => {
         const step1State = stepState?.["Step 1"];
-        console.log(step5State?.data["subscription"]?.["customer"]?.id);
         await portal.setConfig((defaultConfig) => ({
           ...defaultConfig,
         }));
