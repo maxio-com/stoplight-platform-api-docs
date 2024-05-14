@@ -11,13 +11,13 @@ properties:
   from_status:
     allOf:
       - $ref: "../Invoice-Status.yaml"
-    description: "The status of the invoice before any changes occurred. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
+    description: "The status of the invoice before any changes occurred."
   to_status:
     allOf:
       - $ref: "../Invoice-Status.yaml"
-    description: "The updated status of the invoice after changes have been made. See [Invoice Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line-item-breakdowns) for more."
+    description: "The updated status of the invoice after changes have been made."
   consolidation_level:
-    $ref: "./Consolidation-Level.yaml"
+    $ref: "../Consolidation-Level.yaml"
 required:
   - from_status
   - to_status

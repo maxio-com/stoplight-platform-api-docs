@@ -12,7 +12,7 @@ properties:
     type: string
     description: The memo passed when the payment was created.
   payment_method:
-    $ref: "./Invoice-Payment-Method-Type.yaml"
+    $ref: "../Invoice-Payment-Method-Type.yaml"
   transaction_id:
     type: integer
     description: The transaction ID of the failed payment.
