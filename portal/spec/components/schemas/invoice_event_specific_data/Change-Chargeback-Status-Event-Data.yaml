@@ -3,6 +3,7 @@ type: object
 description: Example schema for an `change_chargeback_status` event
 properties:
   chargeback_status:
-    $ref: "../Chargeback-Status.yaml"
+    allOf:
+      - $ref: "../Chargeback-Status.yaml"
 required:
   - chargeback_status

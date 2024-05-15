@@ -17,7 +17,8 @@ properties:
       - $ref: "../Invoice-Status.yaml"
     description: "The updated status of the invoice after changes have been made. See [Invoice Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253-Introduction-to-Invoices#invoice-statuses) for more."
   consolidation_level:
-    $ref: "../Consolidation-Level.yaml"
+    allOf:
+      - $ref: "../Consolidation-Level.yaml"
 required:
   - from_status
   - to_status

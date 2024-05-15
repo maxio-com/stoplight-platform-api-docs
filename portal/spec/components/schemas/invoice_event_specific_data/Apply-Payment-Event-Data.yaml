@@ -3,7 +3,8 @@ type: object
 description: Example schema for an `apply_payment` event
 properties:
   consolidation_level:
-    $ref: "../Consolidation-Level.yaml"
+    allOf:
+      - $ref: "../Consolidation-Level.yaml"
   memo:
     type: string
     description: The payment memo
