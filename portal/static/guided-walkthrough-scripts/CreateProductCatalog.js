@@ -45,6 +45,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
             body: {
               product_family: {
                 name: "Basic",
+                handle: "basic-" + Math.floor(Date.now() / 1000).toString(),
                 description: "Basic product family",
               },
             },
@@ -77,7 +78,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
             body: {
               product: {
                 name: "Gold Plan",
-                handle: "gold",
+                handle: "gold-" + Math.floor(Date.now() / 1000).toString(),
                 description: "This is our gold plan.",
                 accounting_code: "123",
                 require_credit_card: true,
