@@ -15,32 +15,6 @@ Before proceeding, please read the [How to Get Started](page:getting-started/how
 To gain a deeper understanding of the concepts presented in this walkthrough, we recommend reading the following resources:
 - [Product Catalog basic concepts](page:getting-started/basic-concepts/product-catalog)
 - [Products Introduction help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families)
-
-### Step 1
-`Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
-\nPlease provide your API key in the Authentication panel below and configure your subdomain in the right panel.
-\nFor further information on product families, refer to the [Product Family concepts](page:getting-started/basic-concepts/product-catalog/product-family)
-and [Product Family help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421-Product-Families).`
-
-
-### Step 2
-`Once you have a product family, you can create a Product with help of this endpoint.
-\nTo learn more about the product families, please see ['Product concepts'](page:getting-started/basic-concepts/product-catalog/product).`
-
-### Step 3
-`As the next step we're going to create a Component. Read more about components in ['Components concepts'](page:getting-started/basic-concepts/product-catalog/components)
-and [Components help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677-Components-Overview).
-\nIn this example we are creating a \`metered component\`.`
-
-### Step 4
-`Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
-Read more about the coupons in [Coupons concepts]() and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`
-
-### Step 5
-`The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
-Product, Component and Coupon. Read more about offers in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430384013-Offers-Introduction#offers-introduction-0-0)
-\nThat's it! Now that you've created a test Product Catalog using they API, you may try creating a Subscription that will use it.
-Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/create-subscription)`
 `);
       },
     },
@@ -62,8 +36,7 @@ Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/crea
           },
         }));
         return workflowCtx.showEndpoint({
-          description:
-            `Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
+          description: `Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
             \nPlease provide your API key in the Authentication panel below and configure your subdomain in the right panel.
             \nFor further information on product families, refer to the [Product Family concepts](page:getting-started/basic-concepts/product-catalog/product-family)
             and [Product Family help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421-Product-Families).`,
@@ -96,8 +69,7 @@ Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/crea
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            `Once you have a product family, you can create a Product with help of this endpoint.
+          description: `Once you have a product family, you can create a Product with help of this endpoint.
             \nTo learn more about the product families, please see ['Product concepts'](page:getting-started/basic-concepts/product-catalog/product).`,
           endpointPermalink: "$e/Products/createProduct",
           args: {
@@ -180,8 +152,7 @@ Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/crea
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            `Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
+          description: `Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
             Read more about the coupons in [Coupons concepts]() and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
           endpointPermalink: "$e/Coupons/createCoupon",
           args: {
@@ -230,8 +201,7 @@ Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/crea
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description:
-            `The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
+          description: `The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
             Product, Component and Coupon. Read more about offers in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430384013-Offers-Introduction#offers-introduction-0-0)
             \nThat's it! Now that you've created a test Product Catalog using they API, you may try creating a Subscription that will use it.
             Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/create-subscription)`,
