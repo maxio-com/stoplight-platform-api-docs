@@ -7,8 +7,8 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
-      - page: Connected Sites
-        file: introduction/connected-sites.md
+      - group: Basic Concepts
+        dir: introduction/basic-concepts
       - group: About the API
         dir: introduction/about-the-api
   - group: Advanced Billing API
@@ -17,17 +17,9 @@ toc:
         from: endpoints
       - generate: Models
         from: models
-  - group: Core Concepts
-    items:
-      - page: Product Catalog
-        file: core-concepts/product-catalog.md
-      - page: Subscription Signup
-        file: core-concepts/subscription-signup.md
-      - page: Invoicing
-        file: core-concepts/relationship-invoicing.md
   - group: Guided Walkthroughs
     items:
-      - page: Product Catalog
+      - page: Create Product Catalog
         file: walkthroughs/product-catalog/walkthrough-1.md
       - page: Create Subscription
         file: walkthroughs/subscription-management/walkthrough-1.md

@@ -8,26 +8,39 @@ This is a guided walkthrough that will showcase capabilities of Product Catalog 
 
 Learn how to set up products and components for use when creating subscriptions.
 
-Products control what is charged and how ofter charges are assessed/billed to a subscription. If you need help after reading
-this, please <u>let us know</u>, so we can help and also improve this documentation.
+### Prerequisite
+Before proceeding, please read the [How to Get Started](page:getting-started/how-to-get-started) guide and generate an API Key for your site.
 
-## Product Family
-Products have to belong to a product family. Think of them as a logical grouping of products. In our Acme, Inc. example - 
-one possible product family would be "Acme Projects". 
+### Additional Resources
+To gain a deeper understanding of the concepts presented in this walkthrough, we recommend reading the following resources:
+- [Product Catalog basic concepts](page:getting-started/basic-concepts/product-catalog)
+- [Products Introduction help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families)
 
-To create a product family using the API you need to do the following:
+### Step 1
+`Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
+\nPlease provide your API key in the Authentication panel below and configure your subdomain in the right panel.
+\nFor further information on product families, refer to the [Product Family concepts](page:getting-started/basic-concepts/product-catalog/product-family)
+and [Product Family help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421-Product-Families).`
 
-Input attributes:
-- name (required) - The product family name. For example, if your app had two levels of service, "Basic" and "Premium" then 
-these might be the product names.
-- handle (optional) - The handle of the product family. This is generated automatically if not specified.
-- description (optional) - A quick description of what the product family is.
-## Product
-In Advanced Billing, you sell Subscriptions to your Products. You must first create and configure a Product before you can 
-sell anything to a Customer. Products are administered on a Site-by-Site basis, on the main "Products" tab.
 
-In your app or business, you might call these Products your "Plans" or "Feature Levels". For example, if you have 
-"Basic", "Pro", and "Max" plans, each of these would be a separate Product within Advanced Billing.
+### Step 2
+`Once you have a product family, you can create a Product with help of this endpoint.
+\nTo learn more about the product families, please see ['Product concepts'](page:getting-started/basic-concepts/product-catalog/product).`
+
+### Step 3
+`As the next step we're going to create a Component. Read more about components in ['Components concepts'](page:getting-started/basic-concepts/product-catalog/components)
+and [Components help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677-Components-Overview).
+\nIn this example we are creating a \`metered component\`.`
+
+### Step 4
+`Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
+Read more about the coupons in [Coupons concepts]() and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`
+
+### Step 5
+`The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
+Product, Component and Coupon. Read more about offers in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430384013-Offers-Introduction#offers-introduction-0-0)
+\nThat's it! Now that you've created a test Product Catalog using they API, you may try creating a Subscription that will use it.
+Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/create-subscription)`
 `);
       },
     },
@@ -50,7 +63,10 @@ In your app or business, you might call these Products your "Plans" or "Feature 
         }));
         return workflowCtx.showEndpoint({
           description:
-            "This endpoint is used to create a Product Family within your Chargify site.",
+            `Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
+            \nPlease provide your API key in the Authentication panel below and configure your subdomain in the right panel.
+            \nFor further information on product families, refer to the [Product Family concepts](page:getting-started/basic-concepts/product-catalog/product-family)
+            and [Product Family help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421-Product-Families).`,
           endpointPermalink: "$e/Product%20Families/createProductFamily",
           args: {
             body: {
@@ -81,7 +97,8 @@ In your app or business, you might call these Products your "Plans" or "Feature 
         }));
         return workflowCtx.showEndpoint({
           description:
-            "This endpoint is used to create a product within your Chargify site.",
+            `Once you have a product family, you can create a Product with help of this endpoint.
+            \nTo learn more about the product families, please see ['Product concepts'](page:getting-started/basic-concepts/product-catalog/product).`,
           endpointPermalink: "$e/Products/createProduct",
           args: {
             product_family_id: step2State?.data?.["product_family"]?.id,
@@ -120,8 +137,9 @@ In your app or business, you might call these Products your "Plans" or "Feature 
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: `This endpoint is used to create a component definition of kind metered_component under the specified product family. 
-            Metered component can then be added and “allocated” for a subscription.`,
+          description: `As the next step we're going to create a Component. Read more about components in ['Components concepts'](page:getting-started/basic-concepts/product-catalog/components)
+                       and [Components help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677-Components-Overview).
+                       \nIn this example we are creating a \`metered component\`.`,
           endpointPermalink: "$e/Components/createMeteredComponent",
           args: {
             product_family_id: step3State?.data?.["product_family"]?.id,
@@ -163,7 +181,8 @@ In your app or business, you might call these Products your "Plans" or "Feature 
         }));
         return workflowCtx.showEndpoint({
           description:
-            "This endpoint is used to create a coupon, based on the provided information.",
+            `Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
+            Read more about the coupons in [Coupons concepts]() and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
           endpointPermalink: "$e/Coupons/createCoupon",
           args: {
             product_family_id:
@@ -212,7 +231,10 @@ In your app or business, you might call these Products your "Plans" or "Feature 
         }));
         return workflowCtx.showEndpoint({
           description:
-            "This endpoint is used to create an offer within your Chargify site by sending a POST request.",
+            `The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
+            Product, Component and Coupon. Read more about offers in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430384013-Offers-Introduction#offers-introduction-0-0)
+            \nThat's it! Now that you've created a test Product Catalog using they API, you may try creating a Subscription that will use it.
+            Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/create-subscription)`,
           endpointPermalink: "$e/Offers/createOffer",
           args: {
             body: {
