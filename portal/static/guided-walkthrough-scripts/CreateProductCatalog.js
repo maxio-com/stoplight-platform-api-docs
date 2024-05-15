@@ -211,7 +211,8 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
             body: {
               offer: {
                 name: "Solo",
-                handle: "han_shot_first",
+                handle:
+                  "han_shot_first-" + Math.floor(Date.now() / 1000).toString(),
                 description: "A Star Wars Story",
                 product_id: stateAfterProductCreation?.data?.["product"]?.id,
                 components: [
