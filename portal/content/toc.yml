@@ -25,8 +25,8 @@ toc:
         file: walkthroughs/product-catalog/walkthrough-1.md
       - page: Create Subscription
         file: walkthroughs/subscription-management/walkthrough-1.md
-      - page: Access to Self Service Billing Portal
-        file: walkthroughs/self-service-billing-portal/walkthrough-1.md
+      - page: Manage Billing Portal
+        file: walkthroughs/manage-billing-portal/walkthrough-1.md
       - page: Site Activity Tracking
         file: walkthroughs/site-activity/walkthrough-1.md
   - group: Development Tools
