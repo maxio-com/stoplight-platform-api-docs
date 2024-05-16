@@ -9,11 +9,13 @@ This is a guided walkthrough that will showcase capabilities of Product Catalog 
 Learn how to set up products and components for use when creating subscriptions.
 
 ### Prerequisite
-Before proceeding, please read the [How to Get Started](page:getting-started/how-to-get-started) guide and generate an API Key for your site.
+Before proceeding, please read the [How to Get Started]($h/__getting_started) guide and generate an API Key for your site.
+
+[walkk](page:walkthroughs/subscription-management/walkthrough-1)
 
 ### Additional Resources
 To gain a deeper understanding of the concepts presented in this walkthrough, we recommend reading the following resources:
-- [Product Catalog basic concepts](page:getting-started/basic-concepts/product-catalog)
+- [Product Catalog basic concepts](page:introduction/basic-concepts/product-catalog)
 - [Products Introduction help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709-Products-Introduction#product-families)
 `);
       },
@@ -38,7 +40,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
         return workflowCtx.showEndpoint({
           description: `Products must belong to a product family, which serves as a logical grouping. Use the following endpoint to create one.
             \nPlease provide your API key in the Authentication panel below and configure your subdomain in the right panel.
-            \nFor further information on product families, refer to the [Product Family concepts](page:getting-started/basic-concepts/product-catalog/product-family)
+            \nFor further information on product families, refer to the [Product Family concepts](page:introduction/basic-concepts/product-catalog#product-family)
             and [Product Family help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421-Product-Families).`,
           endpointPermalink: "$e/Product%20Families/createProductFamily",
           args: {
@@ -71,7 +73,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
         }));
         return workflowCtx.showEndpoint({
           description: `Once you have a product family, you can create a Product with help of this endpoint.
-            \nTo learn more about the product families, please see ['Product concepts'](page:getting-started/basic-concepts/product-catalog/product).`,
+            \nTo learn more about the product families, please see ['Product concepts'](page:introduction/basic-concepts/product).`,
           endpointPermalink: "$e/Products/createProduct",
           args: {
             product_family_id: step2State?.data?.["product_family"]?.id,
@@ -110,7 +112,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: `As the next step we're going to create a Component. Read more about components in ['Components concepts'](page:getting-started/basic-concepts/product-catalog/components)
+          description: `As the next step we're going to create a Component. Read more about components in [Components concepts](page:introduction/basic-concepts/components)
                        and [Components help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677-Components-Overview).
                        \nIn this example we are creating a \`metered component\`.`,
           endpointPermalink: "$e/Components/createMeteredComponent",
@@ -154,7 +156,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
         }));
         return workflowCtx.showEndpoint({
           description: `Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
-            Read more about the coupons in [Coupons concepts]() and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
+            Read more about the coupons in [Coupons concepts](page:introduction/basic-concepts#coupons) and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
           endpointPermalink: "$e/Coupons/createCoupon",
           args: {
             product_family_id:
