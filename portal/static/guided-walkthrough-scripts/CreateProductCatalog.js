@@ -26,13 +26,12 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
           auth: {
             ...defaultConfig.auth,
             BasicAuth: {
-              BasicAuthUserName: "API_KEY",
+              ...defaultConfig.auth.BasicAuth,
               BasicAuthPassword: "x",
             },
           },
           config: {
             ...defaultConfig.config,
-            subdomain: "your-site",
           },
         }));
         return workflowCtx.showEndpoint({
