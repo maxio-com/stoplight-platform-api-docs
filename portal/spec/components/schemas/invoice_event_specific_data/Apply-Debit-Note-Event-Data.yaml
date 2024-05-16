@@ -17,9 +17,9 @@ properties:
   memo:
     type: string
     description: The debit note memo.
-    transaction_time:
-      type: string
-      description: The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
+  transaction_time:
+    type: string
+    description: The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
 required:
   - debit_note_number
   - debit_note_uid
