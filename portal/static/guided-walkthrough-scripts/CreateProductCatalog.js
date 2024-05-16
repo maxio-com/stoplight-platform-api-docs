@@ -11,8 +11,6 @@ Learn how to set up products and components for use when creating subscriptions.
 ### Prerequisite
 Before proceeding, please read the [How to Get Started]($h/__getting_started) guide and generate an API Key for your site.
 
-[walkk](page:walkthroughs/subscription-management/walkthrough-1)
-
 ### Additional Resources
 To gain a deeper understanding of the concepts presented in this walkthrough, we recommend reading the following resources:
 - [Product Catalog basic concepts](page:introduction/basic-concepts/product-catalog)
@@ -73,7 +71,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
         }));
         return workflowCtx.showEndpoint({
           description: `Once you have a product family, you can create a Product with help of this endpoint.
-            \nTo learn more about the product families, please see ['Product concepts'](page:introduction/basic-concepts/product).`,
+            \nTo learn more about the product families, please see [Product concepts](page:introduction/basic-concepts/product-catalog#product).`,
           endpointPermalink: "$e/Products/createProduct",
           args: {
             product_family_id: step2State?.data?.["product_family"]?.id,
@@ -112,7 +110,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: `As the next step we're going to create a Component. Read more about components in [Components concepts](page:introduction/basic-concepts/components)
+          description: `As the next step we're going to create a Component. Read more about components in [Components concepts](page:introduction/basic-concepts/product-catalog#components)
                        and [Components help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677-Components-Overview).
                        \nIn this example we are creating a \`metered component\`.`,
           endpointPermalink: "$e/Components/createMeteredComponent",
@@ -156,7 +154,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
         }));
         return workflowCtx.showEndpoint({
           description: `Then we're going to next item provided by a product catalog, that is a coupon, enabling you to provide your customers some discount.
-            Read more about the coupons in [Coupons concepts](page:introduction/basic-concepts#coupons) and ['Coupons help article'](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
+            Read more about the coupons in [Coupons concepts](page:introduction/basic-concepts/product-catalog#coupons) and [Coupons help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/18239922347149-Coupons-Overview)`,
           endpointPermalink: "$e/Coupons/createCoupon",
           args: {
             product_family_id:
@@ -207,7 +205,7 @@ To gain a deeper understanding of the concepts presented in this walkthrough, we
           description: `The last thing we're going to create as part of this guide will be an offer, that is a package combining previously created
             Product, Component and Coupon. Read more about offers in [this help article](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430384013-Offers-Introduction#offers-introduction-0-0)
             \nThat's it! Now that you've created a test Product Catalog using they API, you may try creating a Subscription that will use it.
-            Check out [Create Subscription Guided Walkthrough](page:guided-walkthroughs/create-subscription)`,
+            Check out [Create Subscription Guided Walkthrough](page:walkthroughs/subscription-management/walkthrough-1)`,
           endpointPermalink: "$e/Offers/createOffer",
           args: {
             body: {

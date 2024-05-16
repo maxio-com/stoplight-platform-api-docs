@@ -13,7 +13,7 @@ This guide on signups runs through the basics on creating subscriptions in Advan
 1. Advanced Billing [signup methods](page:introduction/basic-concepts/subscription-signup#signup-methods)
 2. The [payment methods](page:introduction/basic-concepts/subscription-signup#payment-methods) available for subscriptions
 3. How to handle customers with [multiple subscriptions](page:introduction/basic-concepts/subscription-signup#multiple-subscriptions)
-4. Component [quantities](page:introduction/basic-concepts/subscription-signup#components) and how they can be used to customize billing
+4. [Component quantities](page:introduction/basic-concepts/subscription-signup#components) and how they can be used to customize billing
 `);
       },
     },
@@ -173,7 +173,7 @@ This guide on signups runs through the basics on creating subscriptions in Advan
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: `In this final step, we're going to resume a previously canceled subscription. If the normal next
+          description: `In this final step, we're going to resume a previously paused subscription. If the normal next
           renewal date has not passed, the subscription will return to active and will renew on that date. Otherwise,
           it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.`,
           endpointPermalink: "$e/Subscription%20Status/resumeSubscription",
