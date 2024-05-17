@@ -23,6 +23,7 @@ properties:
     type:
       - string
       - "null"
+    format: date-time
     description: The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
 required:
   - debit_note_number
