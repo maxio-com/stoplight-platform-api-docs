@@ -22,7 +22,9 @@ properties:
     format: date-time
     description: The time the credit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
   memo:
-    type: ["string", "null"]
+    type:
+      - string
+      - "null"
     description: The credit note memo.
   role:
     type: string
