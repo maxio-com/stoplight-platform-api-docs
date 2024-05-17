@@ -15,10 +15,10 @@ properties:
     type: string
     description: The amount of the debit note applied to invoice.
   memo:
-    type: string
+    type: ["string", "null"]
     description: The debit note memo.
   transaction_time:
-    type: string
+    type: ["string", "null"]
     description: The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
 required:
   - debit_note_number

@@ -9,7 +9,7 @@ properties:
     type: integer
     description: The monetary value of the payment, expressed in dollars.
   memo:
-    type: string
+    type: ["string", "null"]
     description: The memo passed when the payment was created.
   payment_method:
     allOf:
