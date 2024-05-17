@@ -84,7 +84,7 @@ This guide on signups runs through the basics on creating subscriptions in Advan
           ...defaultConfig,
         }));
         return workflowCtx.showEndpoint({
-          description: `Now it's time to create an actual Subscription. Please fill in the same data you used for the preview.
+          description: `Now it's time to create an actual Subscription.
           Note that this time, payment information is mandatory. We'll be using mock data provided by a Bogus
           gateway or a Stripe gateway in test mode.
           \nAdditionally, a customer record will be created together with the subscription, as we're using the
@@ -94,7 +94,7 @@ This guide on signups runs through the basics on creating subscriptions in Advan
           args: {
             body: {
               subscription: {
-                product_id: step1State?.data[0]?.["product"]?.id,
+                ...step1State.requestData?.args?.body?.subscription,
                 customer_attributes: {
                   first_name: "John",
                   last_name: "Doe",
