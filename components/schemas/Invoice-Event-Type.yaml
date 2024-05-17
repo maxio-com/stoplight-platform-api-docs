@@ -7,6 +7,7 @@ enum:
   - create_credit_note
   - apply_payment
   - apply_debit_note
+  - create_debit_note
   - refund_invoice
   - void_invoice
   - void_remainder
