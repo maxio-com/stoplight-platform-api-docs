@@ -7,40 +7,30 @@ toc:
         from: getting-started
       - page: Authentication
         file: introduction/authentication.md
-      - page: Connected Sites
-        file: introduction/connected-sites.md
+      - group: Basic Concepts
+        dir: introduction/basic-concepts
       - group: About the API
         dir: introduction/about-the-api
-  - group: Core Concepts
-    items:
-      - page: Product Catalog
-        file: core-concepts/product-catalog.md
-      - page: Subscription Signup
-        file: core-concepts/subscription-signup.md
-      - page: Invoicing
-        file: core-concepts/relationship-invoicing.md
-  - group: Guided Walkthroughs
-    items:
-      - page: Product Catalog
-        file: walkthroughs/product-catalog/walkthrough-1.md
-      - page: Create Subscription
-        file: walkthroughs/subscription-management/walkthrough-1.md
-      - page: Manage Billing Portal
-        file: walkthroughs/manage-billing-portal/walkthrough-1.md
-      - page: Site Activity Tracking
-        file: walkthroughs/site-activity/walkthrough-1.md
-  - group: Development Tools
-    items:
-      - page: Client Libraries
-        file: development-tools/client-libraries.md
-      - group: Chargify.js
-        dir: development-tools/chargify-js
   - group: Advanced Billing API
     items:
       - generate: API Endpoints
         from: endpoints
       - generate: Models
         from: models
+  - group: Guided Walkthroughs
+    items:
+      - page: Create Product Catalog
+        file: walkthroughs/product-catalog/walkthrough-1.md
+      - page: Create Subscription
+        file: walkthroughs/subscription-management/walkthrough-1.md
+      - page: Manage Billing Portal
+        file: walkthroughs/manage-billing-portal/walkthrough-1.md
+  - group: Development Tools
+    items:
+      - page: Client Libraries
+        file: development-tools/client-libraries.md
+      - group: Chargify.js
+        dir: development-tools/chargify-js
   - group: Help
     items:
       - page: Getting Support

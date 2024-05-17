@@ -142,10 +142,6 @@ The following is an example that adds 5 text messages as "usage":
 
 Components can be used in a huge number of varying ways to cover your business model - it's just up to you on how you want it to work.
 
-### Coupons and Adjustments
-
-In general, coupons and adjustments are other methods of changing the amount billed to a customer either on a recurring basis (as with repeat use coupons) or on a more singular basis (as with single use coupons or balance adjustments).
-
 ### Coupons
 
 Are you looking to offer current or potential customers a discount? Advanced Billing handles all of your promotional codes, discounts, and coupons with ease. Simply name the promotion, set your desired promo code, and enter the discount. You even have the power to control the expiration date and how long the promotion runs for in conjunction with your products.
@@ -171,21 +167,3 @@ Let's create a coupon that we can then use when creating our next subscription.
 To create a coupon [via the API]($e/Coupons/createCoupon) .
 
 To use a coupon when creating a new subscription [via the API]($e/Subscriptions/createSubscription).
-
-### Adjustments
-
-Adjustments are similar to coupons, but they are much more simple. They are one-time changes to the balance of a subscription.
-
-Let's say you wanted to increase the balance of a subscription by $4 (perhaps for some error in billing), you would perform the following:
-
-```json
-// POST /subscriptions/{subscription_id}/adjustments.json
-{
-  "adjustment": {
-    "amount": "4.00",
-    "memo": "This is the description of an adjustment on a subscription that increases the balance by a certain dollar amount."
-  }
-}
-```
-
-Please see the full API documentation for [Adjustments](https://prod-developers.maxio.com/legacy/index.html#/http/api-endpoints/legacy-subscription-balance/create-adjustment) for detailed information.

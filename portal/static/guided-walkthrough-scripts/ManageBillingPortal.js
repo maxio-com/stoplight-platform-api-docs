@@ -28,13 +28,12 @@ As a prerequisite for this walkthrough, your site must have Billing Portal enabl
           auth: {
             ...defaultConfig.auth,
             BasicAuth: {
-              BasicAuthUserName: "API_KEY",
+              ...defaultConfig.auth.BasicAuth,
               BasicAuthPassword: "x",
             },
           },
           config: {
             ...defaultConfig.config,
-            subdomain: "your-site",
           },
         }));
         return workflowCtx.showEndpoint({
