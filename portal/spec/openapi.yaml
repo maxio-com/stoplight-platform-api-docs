@@ -2896,11 +2896,13 @@ paths:
         - $ref: "./components/parameters/per-page.yaml"
         - schema:
             type: integer
+            format: int64
           in: query
           name: since_id
           description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
+            format: int64
           in: query
           name: max_id
           description: Returns events with an id less than or equal to the one specified
@@ -2996,11 +2998,13 @@ paths:
         - $ref: "./components/parameters/per-page.yaml"
         - schema:
             type: integer
+            format: int64
           in: query
           name: since_id
           description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
+            format: int64
           in: query
           name: max_id
           description: Returns events with an id less than or equal to the one specified
@@ -3038,11 +3042,13 @@ paths:
         - $ref: "./components/parameters/per-page.yaml"
         - schema:
             type: integer
+            format: int64
           in: query
           name: since_id
           description: Returns events with an id greater than or equal to the one specified
         - schema:
             type: integer
+            format: int64
           in: query
           name: max_id
           description: Returns events with an id less than or equal to the one specified
@@ -8053,6 +8059,7 @@ paths:
           description: The timestamp in a format `YYYY-MM-DD T HH:MM:SS Z`, or `YYYY-MM-DD`(in this case, it returns data from the beginning of the day). of the event from which you want to start the search. All the events before the `since_date` timestamp are not returned in the response.
         - schema:
             type: integer
+            format: int64
           in: query
           name: since_id
           description: The ID of the event from which you want to start the search(ID is not included. e.g. if ID is set to 2, then all events with ID 3 and more will be shown) This parameter is not used if since_date is defined.
@@ -10308,11 +10315,13 @@ paths:
       parameters:
         - schema:
             type: integer
+            format: int64
           in: query
           name: since_id
           description: Returns usages with an id greater than or equal to the one specified
         - schema:
             type: integer
+            format: int64
           in: query
           name: max_id
           description: Returns usages with an id less than or equal to the one specified
