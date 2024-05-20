@@ -6,4 +6,3 @@ enum:
   - remittance
   - prepaid
   - invoice
-default: automatic
