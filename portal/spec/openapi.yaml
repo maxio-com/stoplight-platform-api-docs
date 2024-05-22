@@ -7734,7 +7734,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./components/schemas/List-Invoice-Events-Response.yaml"
+                $ref: "#/components/schemas/List-Invoice-Events-Response"
               examples:
                 Example:
                   value:
@@ -18330,6 +18330,34 @@ components:
       scheme: basic
       description: The `username` is a Maxio Advanced Billing API key. The `password` is `x`.
   schemas:
+    Invoice-Event-Payment:
+      title: Invoice Event Payment
+      type: object
+      description: A nested data structure detailing the method of payment
+      anyOf:
+        - $ref: "#/components/schemas/Payment-Method-Apple-Pay"
+        - $ref: "#/components/schemas/Payment-Method-Bank-Account"
+        - $ref: "#/components/schemas/Payment-Method-Credit-Card"
+        - $ref: "#/components/schemas/Payment-Method-External"
+        - $ref: "#/components/schemas/Payment-Method-Paypal"
+      discriminator:
+        propertyName: type
+        mapping:
+          apple_pay: "#/components/schemas/Payment-Method-Apple-Pay"
+          bank_account: "#/components/schemas/Payment-Method-Bank-Account"
+          credit_card: "#/components/schemas/Payment-Method-Credit-Card"
+          external: "#/components/schemas/Payment-Method-External"
+          paypal_account: "#/components/schemas/Payment-Method-Paypal"
+    Payment-Method-Apple-Pay:
+      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Apple-Pay.yaml"
+    Payment-Method-Bank-Account:
+      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Bank-Account.yaml"
+    Payment-Method-Credit-Card:
+      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Credit-Card.yaml"
+    Payment-Method-External:
+      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-External.yaml"
+    Payment-Method-Paypal:
+      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Paypal.yaml"
     Invoice-Event:
       title: Invoice Event
       type: object
@@ -18397,31 +18425,17 @@ components:
       $ref: "./components/schemas/invoice_event/Void-Invoice-Event.yaml"
     Void-Remainder-Event:
       $ref: "./components/schemas/invoice_event/Void-Remainder-Event.yaml"
-    Invoice-Event-Payment:
-      title: Invoice Event Payment
+    List-Invoice-Events-Response:
+      title: List Invoice Events Response
       type: object
-      description: A nested data structure detailing the method of payment
-      anyOf:
-        - $ref: "#/components/schemas/Payment-Method-Apple-Pay"
-        - $ref: "#/components/schemas/Payment-Method-Bank-Account"
-        - $ref: "#/components/schemas/Payment-Method-Credit-Card"
-        - $ref: "#/components/schemas/Payment-Method-External"
-        - $ref: "#/components/schemas/Payment-Method-Paypal"
-      discriminator:
-        propertyName: type
-        mapping:
-          apple_pay: "#/components/schemas/Payment-Method-Apple-Pay"
-          bank_account: "#/components/schemas/Payment-Method-Bank-Account"
-          credit_card: "#/components/schemas/Payment-Method-Credit-Card"
-          external: "#/components/schemas/Payment-Method-External"
-          paypal_account: "#/components/schemas/Payment-Method-Paypal"
-    Payment-Method-Apple-Pay:
-      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Apple-Pay.yaml"
-    Payment-Method-Bank-Account:
-      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Bank-Account.yaml"
-    Payment-Method-Credit-Card:
-      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Credit-Card.yaml"
-    Payment-Method-External:
-      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-External.yaml"
-    Payment-Method-Paypal:
-      $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Paypal.yaml"
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/Invoice-Event"
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer

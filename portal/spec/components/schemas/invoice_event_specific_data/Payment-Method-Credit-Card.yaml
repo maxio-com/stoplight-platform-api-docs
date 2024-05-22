@@ -12,7 +12,8 @@ properties:
   masked_card_number:
     type: string
   type:
-    $ref: "./Invoice-Event-Payment-Method.yaml"
+    allOf:
+      - $ref: "./Invoice-Event-Payment-Method.yaml"
     example: "credit_card"
 required:
   - card_brand
