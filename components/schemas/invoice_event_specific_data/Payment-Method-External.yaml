@@ -12,7 +12,8 @@ properties:
       - string
       - "null"
   type:
-    $ref: "./Invoice-Event-Payment-Method.yaml"
+    allOf:
+      - $ref: "./Invoice-Event-Payment-Method.yaml"
     example: "external"
 required:
   - details

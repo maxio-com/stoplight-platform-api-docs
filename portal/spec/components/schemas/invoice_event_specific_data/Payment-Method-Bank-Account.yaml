@@ -6,7 +6,8 @@ properties:
   masked_routing_number:
     type: string
   type:
-    $ref: "./Invoice-Event-Payment-Method.yaml"
+    allOf:
+      - $ref: "./Invoice-Event-Payment-Method.yaml"
     example: "bank_account"
 required:
   - masked_account_number

@@ -5,7 +5,8 @@ properties:
     type: string
     format: email
   type:
-    $ref: "./Invoice-Event-Payment-Method.yaml"
+    allOf:
+      - $ref: "./Invoice-Event-Payment-Method.yaml"
     example: "paypal_account"
 required:
   - email

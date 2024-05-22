@@ -7734,7 +7734,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./components/schemas/List-Invoice-Events-Response.yaml"
+                $ref: "#/components/schemas/List-Invoice-Events-Response"
               examples:
                 Example:
                   value:
@@ -18358,3 +18358,84 @@ components:
       $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-External.yaml"
     Payment-Method-Paypal:
       $ref: "./components/schemas/invoice_event_specific_data/Payment-Method-Paypal.yaml"
+    Invoice-Event:
+      title: Invoice Event
+      type: object
+      anyOf:
+        - $ref: "#/components/schemas/Apply-Credit-Note-Event"
+        - $ref: "#/components/schemas/Apply-Debit-Note-Event"
+        - $ref: "#/components/schemas/Apply-Payment-Event"
+        - $ref: "#/components/schemas/Backport-Invoice-Event"
+        - $ref: "#/components/schemas/Change-Chargeback-Status-Event"
+        - $ref: "#/components/schemas/Change-Invoice-Collection-Method-Event"
+        - $ref: "#/components/schemas/Change-Invoice-Status-Event"
+        - $ref: "#/components/schemas/Create-Credit-Note-Event"
+        - $ref: "#/components/schemas/Create-Debit-Note-Event"
+        - $ref: "#/components/schemas/Failed-Payment-Event"
+        - $ref: "#/components/schemas/Issue-Invoice-Event"
+        - $ref: "#/components/schemas/Refund-Invoice-Event"
+        - $ref: "#/components/schemas/Remove-Payment-Event"
+        - $ref: "#/components/schemas/Void-Invoice-Event"
+        - $ref: "#/components/schemas/Void-Remainder-Event"
+      discriminator:
+        propertyName: event_type
+        mapping:
+          apply_credit_note: "#/components/schemas/Apply-Credit-Note-Event"
+          apply_debit_note: "#/components/schemas/Apply-Debit-Note-Event"
+          apply_payment: "#/components/schemas/Apply-Payment-Event"
+          backport_invoice: "#/components/schemas/Backport-Invoice-Event"
+          change_chargeback_status: "#/components/schemas/Change-Chargeback-Status-Event"
+          change_invoice_collection_method: "#/components/schemas/Change-Invoice-Collection-Method-Event"
+          change_invoice_status: "#/components/schemas/Change-Invoice-Status-Event"
+          create_credit_note: "#/components/schemas/Create-Credit-Note-Event"
+          create_debit_note: "#/components/schemas/Create-Debit-Note-Event"
+          failed_payment: "#/components/schemas/Failed-Payment-Event"
+          issue_invoice: "#/components/schemas/Issue-Invoice-Event"
+          refund_invoice: "#/components/schemas/Refund-Invoice-Event"
+          remove_payment: "#/components/schemas/Remove-Payment-Event"
+          void_invoice: "#/components/schemas/Void-Invoice-Event"
+          void_remainder: "#/components/schemas/Void-Remainder-Event"
+    Apply-Credit-Note-Event:
+      $ref: "./components/schemas/invoice_event/Apply-Credit-Note-Event.yaml"
+    Apply-Debit-Note-Event:
+      $ref: "./components/schemas/invoice_event/Apply-Debit-Note-Event.yaml"
+    Apply-Payment-Event:
+      $ref: "./components/schemas/invoice_event/Apply-Payment-Event.yaml"
+    Backport-Invoice-Event:
+      $ref: "./components/schemas/invoice_event/Backport-Invoice-Event.yaml"
+    Change-Chargeback-Status-Event:
+      $ref: "./components/schemas/invoice_event/Change-Chargeback-Status-Event.yaml"
+    Change-Invoice-Collection-Method-Event:
+      $ref: "./components/schemas/invoice_event/Change-Invoice-Collection-Method-Event.yaml"
+    Change-Invoice-Status-Event:
+      $ref: "./components/schemas/invoice_event/Change-Invoice-Status-Event.yaml"
+    Create-Credit-Note-Event:
+      $ref: "./components/schemas/invoice_event/Create-Credit-Note-Event.yaml"
+    Create-Debit-Note-Event:
+      $ref: "./components/schemas/invoice_event/Create-Debit-Note-Event.yaml"
+    Failed-Payment-Event:
+      $ref: "./components/schemas/invoice_event/Failed-Payment-Event.yaml"
+    Issue-Invoice-Event:
+      $ref: "./components/schemas/invoice_event/Issue-Invoice-Event.yaml"
+    Refund-Invoice-Event:
+      $ref: "./components/schemas/invoice_event/Refund-Invoice-Event.yaml"
+    Remove-Payment-Event:
+      $ref: "./components/schemas/invoice_event/Remove-Payment-Event.yaml"
+    Void-Invoice-Event:
+      $ref: "./components/schemas/invoice_event/Void-Invoice-Event.yaml"
+    Void-Remainder-Event:
+      $ref: "./components/schemas/invoice_event/Void-Remainder-Event.yaml"
+    List-Invoice-Events-Response:
+      title: List Invoice Events Response
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/Invoice-Event"
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
