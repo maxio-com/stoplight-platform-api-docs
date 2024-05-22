@@ -18333,7 +18333,7 @@ components:
     Invoice-Event:
       title: Invoice Event
       type: object
-      oneOf:
+      anyOf:
         - $ref: "#/components/schemas/Apply-Credit-Note-Event"
         - $ref: "#/components/schemas/Apply-Debit-Note-Event"
         - $ref: "#/components/schemas/Apply-Payment-Event"
