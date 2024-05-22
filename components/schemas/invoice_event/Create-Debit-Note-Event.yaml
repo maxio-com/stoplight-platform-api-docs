@@ -1,0 +1,16 @@
+title: Create Debit Note Event
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  event_type:
+    $ref: "../Invoice-Event-Type.yaml"
+    example: create_debit_note
+  timestamp:
+    type: string
+    format: date-time
+  invoice:
+    $ref: "../Invoice.yaml"
+  event_data:
+    $ref: "../invoice_event_specific_data/Create-Debit-Note-Event-Data.yaml"

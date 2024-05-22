@@ -1,0 +1,16 @@
+title: Refund Invoice Event
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  event_type:
+    $ref: "../Invoice-Event-Type.yaml"
+    example: refund_invoice
+  timestamp:
+    type: string
+    format: date-time
+  invoice:
+    $ref: "../Invoice.yaml"
+  event_data:
+    $ref: "../invoice_event_specific_data/Refund-Invoice-Event-Data.yaml"

@@ -4,7 +4,7 @@ properties:
   events:
     type: array
     items:
-      $ref: "./Invoice-Event.yaml"
+      $ref: "../../reference/Chargify-API.v1.yaml#/components/schemas/Invoice-Event"
   page:
     type: integer
   per_page:
