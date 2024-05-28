@@ -89,6 +89,28 @@ properties:
       - "null"
     format: date-time
     description: Timestamp relating to the start of the current (recurring) period
+  current_periods:
+    type:
+      - array
+    description: An array of items, each representing a product's or component's current period. This property is only available for sites with Multifrequency enabled.
+    items:
+      type: object
+      properties:
+        item_id:
+          type: integer
+        item_type:
+          type: string
+          enum:
+            - Product
+            - Component
+        started_at:
+          type: string
+          format: date-time
+          description: Timestamp relating to the start of the item's current period
+        ends_at:
+          type: string
+          format: date-time
+          description: Timestamp relating to the end of the item's current period
   previous_state:
     allOf:
       - $ref: "./Subscription-State.yaml"
