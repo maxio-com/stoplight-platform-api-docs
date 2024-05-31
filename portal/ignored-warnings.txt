@@ -8,3 +8,5 @@ messages, country, customer
 listAllProductPricePoints [GET, /products_price_points.json] > Parameters[8] > filter[type] > Default Value
 listAllComponentPricePoints [GET, /components_price_points.json] > Parameters[8] > filter[type] > Default Value
 List PricePoints Filter > Fields[5] > type > Default Value
+createComponentPricePoint [POST, /components/{component_id}/price_points.json] > Parameters[2] > body > Examples[1] > Example Value
+refundInvoice [POST, /invoices/{uid}/refunds.json] > Parameters[2] > body > Examples[1] > Example Value
