@@ -15,11 +15,11 @@ properties:
     type: string
     x-stoplight:
       id: 9ey70vny6dlu3
-    example: '2024-01-01T00:30:00-04:00'
+    example: "2024-01-01T00:30:00-04:00"
     format: date-time
   last_invite_accepted_at:
     type: string
     x-stoplight:
       id: ekq6c9fjx97r3
     format: date-time
-    example: '2024-01-01T00:35:00-04:00'
+    example: "2024-01-01T00:35:00-04:00"
