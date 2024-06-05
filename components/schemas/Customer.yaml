@@ -19,7 +19,7 @@ properties:
     type:
       - string
       - "null"
-    description: The organization of the customer
+    description: The organization of the customer. If `null` is provided, `organization` will be populated with the customer's first and last name, separated with a space.
   reference:
     type:
       - string
