@@ -71,9 +71,9 @@ jobs:
         env:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: |
-          ./scripts/build_portal.sh 'https://staging-developers.maxio.com/legacy/index.html'
           branch=${{ env.BRANCH }}
           branch="${branch// /_}"
+          BASE_URL=https://staging-developers.maxio.com/$branch ./scripts/build_portal.sh 'https://staging-developers.maxio.com/legacy/index.html'
           echo "## Staging deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying portal for branch $branch on staging" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://STAGING_S3_BUCKET/$branch --delete" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -92,7 +92,7 @@ jobs:
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Add productions-only settings to the portal code"
-          ./scripts/build_portal.sh 'https://prod-developers.maxio.com/legacy/index.html'
+          BASE_URL=https://prod-developers.maxio.com ./scripts/build_portal.sh 'https://prod-developers.maxio.com/legacy/index.html'
           ./scripts/prepare_production_portal.sh
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET --delete --exclude \"legacy/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
