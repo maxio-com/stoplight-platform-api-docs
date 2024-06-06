@@ -4145,7 +4145,7 @@ paths:
 
         Event-based components are similar to other component types, in that you define the component parameters (such as name and taxability) and the pricing. A key difference for the event-based component is that it must be attached to a metric. This is because the metric provides the component with the actual quantity used in computing what and how much will be billed each period for each subscription.
 
-        So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events. 
+        So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events.
 
         For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
       requestBody:
@@ -5440,7 +5440,7 @@ paths:
         name: product_family_id
         in: path
         required: true
-        description: The Chargify id of the product family to which the product belongs
+        description: "Either the product family's id or its handle prefixed with `handle:`"
     post:
       summary: Create Product
       tags:
