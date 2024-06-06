@@ -70,7 +70,7 @@
       }
     },
     "portalSettings": {
-      "baseUrl": "./",
+      "baseUrl": "",
       "enableExport": true,
       "enableConsoleCalls": true,
       "enableAnalytics": true,
