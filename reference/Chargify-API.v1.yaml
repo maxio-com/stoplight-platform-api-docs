@@ -5436,7 +5436,7 @@ paths:
   "/product_families/{product_family_id}/products.json":
     parameters:
       - schema:
-          type: integer
+          type: string
         name: product_family_id
         in: path
         required: true
