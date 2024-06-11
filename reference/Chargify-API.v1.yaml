@@ -274,6 +274,7 @@ tags:
   - name: Billing Portal
   - name: Coupons
   - name: Components
+  - name: "Component: Price Points"
   - name: Customers
   - name: Custom Fields
   - name: Events
@@ -4617,7 +4618,7 @@ paths:
     put:
       summary: Promote Price Point to Default
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4830,7 +4831,7 @@ paths:
     post:
       summary: Create Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4895,7 +4896,7 @@ paths:
     get:
       summary: List Component Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "201":
           description: Created
@@ -4968,7 +4969,7 @@ paths:
     post:
       summary: Bulk Create Component Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -5042,21 +5043,25 @@ paths:
   "/components/{component_id}/price_points/{price_point_id}.json":
     parameters:
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: component_id
         in: path
         required: true
-        description: The Chargify id of the component to which the price point belongs
+        description: "The id or handle of the component. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-component-handle` for a string handle."
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: price_point_id
         in: path
         required: true
-        description: The Chargify id of the price point
+        description: "The id or handle of the price point. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-price_point-handle` for a string handle."
     put:
       summary: Update Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -5131,10 +5136,23 @@ paths:
                         _destroy: true
                       - starting_quantity: 101
                         unit_price: 4
+    get:
+      summary: Read Component Price Point
+      tags:
+        - "Component: Price Points"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "../components/schemas/Component-Price-Point-Response.yaml"
+      operationId: readComponentPricePoint
+      description: Use this endpoint to retrieve details for a specific component price point. You can achieve this by using either the component price point ID or handle.
     delete:
       summary: Archive Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -5199,7 +5217,7 @@ paths:
     put:
       summary: Unarchive Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -5244,7 +5262,7 @@ paths:
     post:
       summary: Create Currency Prices
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -5300,7 +5318,7 @@ paths:
     put:
       summary: Update Currency Prices
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -18372,7 +18390,7 @@ paths:
     get:
       summary: List All Components Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
