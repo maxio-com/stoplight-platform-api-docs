@@ -28,18 +28,20 @@ jobs:
           APIMATIC_API_KEY: ${{ secrets.APIMATIC_API_KEY }}
         run: |
           new_portal_url='N/A'
+          base_url='N/A'
           echo "Environment is: ${{ github.event.inputs.environment }}"
           env="${{ github.event.inputs.environment }}"
           if [ "$env" = "staging" ]; then
             echo "Using staging URL"
             new_portal_url='https://staging-developers.maxio.com/main/http/getting-started/maxio-developer-portal'
+            base_url='https://staging-developers.maxio.com/legacy'
           fi
           if [ "$env" = "prod" ]; then
             echo "Using prod URL"
             new_portal_url='https://prod-developers.maxio.com/'
+            base_url='https://prod-developers.maxio.com/legacy'
           fi
-          base_url=$new_portal_url + '/legacy'
-          BASE_URL=base_url ./scripts/build_legacy_portal.sh "$new_portal_url"
+          BASE_URL=$base_url ./scripts/build_legacy_portal.sh "$new_portal_url"
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
