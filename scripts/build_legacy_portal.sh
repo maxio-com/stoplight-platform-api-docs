@@ -24,6 +24,13 @@ mkdir -p build/tmp/download
 
 cp -r ./legacy-portal build/tmp/portal
 
+# overwrite base url
+if [ "$BASE_URL" = "" ]; then
+  BASE_URL="http://localhost:8080/legacy"
+fi
+echo "Overriding base url with $BASE_URL" | tee -a "$GITHUB_STEP_SUMMARY"
+sed -i '.backup' -e "s,\"baseUrl\": \"\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
+
 echo "Overriding new portal url with $new_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
 sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$new_portal_url,g" ./build/tmp/portal/spec/openapi.yaml
 rm ./build/tmp/portal/spec/openapi.backup

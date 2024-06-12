@@ -32,13 +32,14 @@ jobs:
           env="${{ github.event.inputs.environment }}"
           if [ "$env" = "staging" ]; then
             echo "Using staging URL"
-            new_portal_url='https://staging-developers.maxio.com/main/index.html'
+            new_portal_url='https://staging-developers.maxio.com/main/http/getting-started/maxio-developer-portal'
           fi
           if [ "$env" = "prod" ]; then
             echo "Using prod URL"
             new_portal_url='https://prod-developers.maxio.com/'
           fi
-          ./scripts/build_legacy_portal.sh "$new_portal_url"
+          base_url=$new_portal_url + '/legacy'
+          BASE_URL=base_url ./scripts/build_legacy_portal.sh "$new_portal_url"
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -57,7 +58,7 @@ jobs:
           echo "aws cloudfront create-invalidation --distribution-id STAGING_DISTRIBUTION --paths \"/legacy/*\""  | tee -a "$GITHUB_STEP_SUMMARY"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.STAGING_DISTRIBUTION }} --paths "/legacy/*"
 
-          echo "You can access your portal at https://staging-developers.maxio.com/legacy/index.html" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "You can access your portal at https://staging-developers.maxio.com/legacy/" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy Prod
         if: "${{ github.event.inputs.environment == 'prod' }}"

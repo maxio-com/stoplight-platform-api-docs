@@ -4,7 +4,7 @@
   "generatePortal": {
     "indexable": {},
     "baseUrl": "",
-    "tailIncludes": "<script defer src='./static/guided-walkthrough-scripts/CreateProductCatalog.js'></script><script defer src='./static/guided-walkthrough-scripts/ManageBillingPortal.js'></script></script><script defer src='./static/guided-walkthrough-scripts/SubscriptionManagement.js'></script><script>document.addEventListener('DOMContentLoaded', (event) => {APIMaticDevPortal.ready(({ registerWorkflow }) => {registerWorkflow('page:walkthroughs/product-catalog/walkthrough-1', 'Product Catalog Walkthrough', ProductCatalog); registerWorkflow( 'page:walkthroughs/manage-billing-portal/walkthrough-1', 'Billing Portal Management Walkthrough',ManageBillingPortal); registerWorkflow( 'page:walkthroughs/subscription-management/walkthrough-1', 'Subscription Management Walkthrough',SubscriptionManagment); });});</script>",
+    "tailIncludes": "<script defer src='/static/guided-walkthrough-scripts/CreateProductCatalog.js'></script><script defer src='/static/guided-walkthrough-scripts/ManageBillingPortal.js'></script></script><script defer src='/static/guided-walkthrough-scripts/SubscriptionManagement.js'></script><script>document.addEventListener('DOMContentLoaded', (event) => {APIMaticDevPortal.ready(({ registerWorkflow }) => {registerWorkflow('page:walkthroughs/product-catalog/walkthrough-1', 'Product Catalog Walkthrough', ProductCatalog); registerWorkflow( 'page:walkthroughs/manage-billing-portal/walkthrough-1', 'Billing Portal Management Walkthrough',ManageBillingPortal); registerWorkflow( 'page:walkthroughs/subscription-management/walkthrough-1', 'Subscription Management Walkthrough',SubscriptionManagment); });});</script>",
     "debug": {
       "publishReport": true
     },

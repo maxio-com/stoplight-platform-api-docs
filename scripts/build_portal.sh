@@ -12,7 +12,7 @@ if [ "$api_token" = "" ]; then
 fi
 
 if [ "$1" = "" ]; then
-  legacy_portal_url='https://prod-developers.maxio.com/legacy/index.html'
+  legacy_portal_url='https://prod-developers.maxio.com/legacy/'
 else
   legacy_portal_url=$1
 fi
