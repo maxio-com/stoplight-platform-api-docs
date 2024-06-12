@@ -6,7 +6,7 @@ info:
     email: support@chargify.com
   description: |-
 
-    Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST. 
+    Maxio Advanced Billing (formerly Chargify) provides an HTTP-based API that conforms to the principles of REST.
     One of the many reasons to use Advanced Billing is the immense feature set and surrounding community [client libraries](page:development-tools/client-libraries).
     The Maxio API returns JSON responses as the primary and recommended format, but XML is also provided as a backwards compatible option for Merchants who require it.
 
@@ -34,6 +34,7 @@ tags:
   - name: Billing Portal
   - name: Coupons
   - name: Components
+  - name: "Component: Price Points"
   - name: Customers
   - name: Custom Fields
   - name: Events
@@ -3694,7 +3695,7 @@ paths:
 
         Event-based components are similar to other component types, in that you define the component parameters (such as name and taxability) and the pricing. A key difference for the event-based component is that it must be attached to a metric. This is because the metric provides the component with the actual quantity used in computing what and how much will be billed each period for each subscription.
 
-        So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events. 
+        So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events.
 
         For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
       requestBody:
@@ -4144,7 +4145,7 @@ paths:
     put:
       summary: Promote Price Point to Default
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4336,7 +4337,7 @@ paths:
     post:
       summary: Create Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4401,7 +4402,7 @@ paths:
     get:
       summary: List Component Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "201":
           description: Created
@@ -4474,7 +4475,7 @@ paths:
     post:
       summary: Bulk Create Component Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4548,21 +4549,25 @@ paths:
   "/components/{component_id}/price_points/{price_point_id}.json":
     parameters:
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: component_id
         in: path
         required: true
-        description: The Chargify id of the component to which the price point belongs
+        description: "The id or handle of the component. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-product-handle` for a string handle."
       - schema:
-          type: integer
+          type:
+            - integer
+            - string
         name: price_point_id
         in: path
         required: true
-        description: The Chargify id of the price point
+        description: "The id or handle of the price point. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-price_point-handle` for a string handle."
     put:
       summary: Update Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4637,10 +4642,23 @@ paths:
                         _destroy: true
                       - starting_quantity: 101
                         unit_price: 4
+    get:
+      summary: Read Component Price Point
+      tags:
+        - "Component: Price Points"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "./components/schemas/Component-Price-Point-Response.yaml"
+      operationId: readComponentPricePoint
+      description: Use this endpoint to retrieve details for a specific component price point. You can achieve this by using either the component price point ID or handle.
     delete:
       summary: Archive Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4705,7 +4723,7 @@ paths:
     put:
       summary: Unarchive Component Price Point
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4750,7 +4768,7 @@ paths:
     post:
       summary: Create Currency Prices
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4806,7 +4824,7 @@ paths:
     put:
       summary: Update Currency Prices
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
@@ -4942,11 +4960,11 @@ paths:
   "/product_families/{product_family_id}/products.json":
     parameters:
       - schema:
-          type: integer
+          type: string
         name: product_family_id
         in: path
         required: true
-        description: The Chargify id of the product family to which the product belongs
+        description: "Either the product family's id or its handle prefixed with `handle:`"
     post:
       summary: Create Product
       tags:
@@ -5769,7 +5787,7 @@ paths:
         name: product_id
         in: path
         required: true
-        description: "The id or handle of the product. When using the handle, it must be prefixed with `handle:`"
+        description: "The id or handle of the product. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-product-handle` for a string handle."
       - schema:
           type:
             - integer
@@ -5777,7 +5795,7 @@ paths:
         name: price_point_id
         in: path
         required: true
-        description: "The id or handle of the price point. When using the handle, it must be prefixed with `handle:`"
+        description: "The id or handle of the price point. When using the handle, it must be prefixed with `handle:`. Example: `123` for an integer ID, or `handle:example-product-price-point-handle` for a string handle."
     put:
       summary: Update Product Price Point
       tags:
@@ -5861,7 +5879,7 @@ paths:
                       created_at: 2023-11-27T06:37:20-05:00
                       updated_at: 2023-11-27T06:37:20-05:00
       operationId: readProductPricePoint
-      description: Use this endpoint to retrieve details for a specific product price point.
+      description: Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
       parameters:
         - schema:
             type: boolean
@@ -17678,7 +17696,7 @@ paths:
     get:
       summary: List All Components Price Points
       tags:
-        - Components
+        - "Component: Price Points"
       responses:
         "200":
           description: OK
