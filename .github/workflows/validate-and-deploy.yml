@@ -101,6 +101,8 @@ jobs:
           aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete --exclude "legacy/*"
 
           echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Sleeping 60s before cloudfront invalidation to let updated redirects propagate" | tee -a "$GITHUB_STEP_SUMMARY"
+          sleep 60
           echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/*"
 
