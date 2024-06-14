@@ -3,7 +3,7 @@
   "buildFileVersion": "1",
   "generatePortal": {
     "indexable": {},
-    "baseUrl": "",
+    "baseUrl": "--BASE-URL-PLACEHOLDER--",
     "debug": {
       "publishReport": true
     },
@@ -18,7 +18,7 @@
       "http": {}
     },
     "portalSettings": {
-      "baseUrl": "",
+      "baseUrl": "--BASE-URL-PLACEHOLDER--",
       "enableExport": true,
       "enableConsoleCalls": false,
       "useProxyForConsoleCalls": false,

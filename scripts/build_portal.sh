@@ -29,7 +29,7 @@ if [ "$BASE_URL" = "" ]; then
   BASE_URL="http://localhost:8080"
 fi
 echo "Overriding base url with $BASE_URL" | tee -a "$GITHUB_STEP_SUMMARY"
-sed -i '.backup' -e "s,\"baseUrl\": \"\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
+sed -i '.backup' -e "s,--BASE-URL-PLACEHOLDER--,$BASE_URL,g" ./build/tmp/portal/APIMATIC-BUILD.json
 rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 
 echo "Overriding legacy portal url with $legacy_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
