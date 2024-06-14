@@ -12,7 +12,7 @@ if [ "$api_token" = "" ]; then
 fi
 
 if [ "$1" = "" ]; then
-  legacy_portal_url='https://prod-developers.maxio.com/legacy/index.html'
+  legacy_portal_url='https://prod-developers.maxio.com/legacy/'
 else
   legacy_portal_url=$1
 fi
@@ -24,12 +24,13 @@ mkdir -p build/tmp/download
 
 cp -r ./portal build/tmp/portal
 
-# overwrite base url for staging
-if [ "$BASE_URL" != "" ]; then
-  echo "Overriding base url with $BASE_URL" | tee -a "$GITHUB_STEP_SUMMARY"
-  sed -i '.backup' -e "s,\"baseUrl\": \"./\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
-  rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
+# overwrite base url
+if [ "$BASE_URL" = "" ]; then
+  BASE_URL="http://localhost:8080"
 fi
+echo "Overriding base url with $BASE_URL" | tee -a "$GITHUB_STEP_SUMMARY"
+sed -i '.backup' -e "s,\"baseUrl\": \"\",\"baseUrl\": \"$BASE_URL\",g" ./build/tmp/portal/APIMATIC-BUILD.json
+rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 
 echo "Overriding legacy portal url with $legacy_portal_url" | tee -a "$GITHUB_STEP_SUMMARY"
 sed -i '.backup' -e "s,--URL_PLACEHOLDER--,$legacy_portal_url,g" ./build/tmp/portal/content/toc.yml

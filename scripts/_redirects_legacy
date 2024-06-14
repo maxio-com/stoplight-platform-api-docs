@@ -1,0 +1,15 @@
+/legacy/http /legacy/http/legacy-api
+/legacy/http/legacy-api /legacy/http/legacy-api/how-to-get-started
+/legacy/http/api-endpoints /legacy/http/api-endpoints/legacy-invoices
+/legacy/http/api-endpoints/legacy-invoices /legacy/http/api-endpoints/legacy-invoices/read-invoice
+/legacy/http/api-endpoints/legacy-statements /legacy/http/api-endpoints/legacy-statements/read-statement
+/legacy/http/api-endpoints/legacy-subscription-balance /legacy/http/api-endpoints/legacy-subscription-balance/create-adjustment
+/legacy/http/api-endpoints/legacy-transactions /legacy/http/api-endpoints/legacy-transactions/read-transaction
+/legacy/http/models /legacy/http/models/structures
+/legacy/http/models/structures /legacy/http/models/structures/create-legacy-payment
+/legacy/http/models/enumerations /legacy/http/models/enumerations/accrue-on-failure
+/legacy/http/models/exceptions /legacy/http/models/exceptions/subscriptions-adjustments-json-422-error
+/legacy/http/models/oneof-anyof-definitions /legacy/http/models/oneof-anyof-definitions/create-legacy-payment-amount-in-cents
+/legacy/http/chargify-direct /legacy/http/chargify-direct/chargify-direct
+/legacy/http/chargify-direct/chargify-direct /legacy/http/chargify-direct/chargify-direct/introduction
+/legacy/ /legacy/http
