@@ -34,9 +34,7 @@ else
 fi
 echo "Overriding head and tail includes" | tee -a "$GITHUB_STEP_SUMMARY"
 sed -i '.backup' -e "s,--HEAD-INCLUDES-PLACEHOLDER--,$HEAD_INCLUDE,g" ./build/tmp/portal/APIMATIC-BUILD.json
-rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 sed -i '.backup' -e "s,--TAIL-INCLUDES-PLACEHOLDER--,$TAIL_INCLUDE,g" ./build/tmp/portal/APIMATIC-BUILD.json
-rm ./build/tmp/portal/APIMATIC-BUILD.json.backup
 
 if [ "$BASE_URL" = "" ]; then
   BASE_URL="http://localhost:8080"
