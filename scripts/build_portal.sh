@@ -25,6 +25,17 @@ mkdir -p build/tmp/download
 cp -r ./portal build/tmp/portal
 
 # overwrite base url
+if [ "$INCLUDE_GOOGLE_ANALYTICS" = "true" ]; then
+  HEAD_INCLUDE=$(cat ./scripts/google_analytics_tag_head.txt)
+  TAIL_INCLUDE=$(cat ./scripts/google_analytics_tag_body.txt)
+else
+  HEAD_INCLUDE=""
+  TAIL_INCLUDE=""
+fi
+echo "Overriding head and tail includes" | tee -a "$GITHUB_STEP_SUMMARY"
+sed -i '.backup' -e "s,--HEAD-INCLUDES-PLACEHOLDER--,$HEAD_INCLUDE,g" ./build/tmp/portal/APIMATIC-BUILD.json
+sed -i '.backup' -e "s,--TAIL-INCLUDES-PLACEHOLDER--,$TAIL_INCLUDE,g" ./build/tmp/portal/APIMATIC-BUILD.json
+
 if [ "$BASE_URL" = "" ]; then
   BASE_URL="http://localhost:8080"
 fi

@@ -93,7 +93,7 @@ jobs:
         run: |
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Add productions-only settings to the portal code"
-          BASE_URL=https://prod-developers.maxio.com ./scripts/build_portal.sh 'https://prod-developers.maxio.com/legacy/'
+          BASE_URL=https://prod-developers.maxio.com INCLUDE_GOOGLE_ANALYTICS=true ./scripts/build_portal.sh 'https://prod-developers.maxio.com/legacy/'
           ./scripts/build_redirects.sh
           ./scripts/prepare_production_portal.sh
           echo "Deploying portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
@@ -101,6 +101,8 @@ jobs:
           aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }} --delete --exclude "legacy/*"
 
           echo "S3 upload completed" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "Sleeping 60s before cloudfront invalidation to let updated redirects propagate" | tee -a "$GITHUB_STEP_SUMMARY"
+          sleep 60
           echo "aws cloudfront create-invalidation --distribution-id PROD_DISTRIBUTION --paths \"/*\"" | tee -a "$GITHUB_STEP_SUMMARY"
           aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_DISTRIBUTION }} --paths "/*"
 
