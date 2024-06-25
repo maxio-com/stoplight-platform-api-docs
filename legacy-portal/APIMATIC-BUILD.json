@@ -13,7 +13,7 @@
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
     "faviconUrl": "static/images/favicon.png",
-    "useHostedPortalScript": true,
+    "useHostedPortalScript": false,
     "languageConfig": {
       "http": {}
     },

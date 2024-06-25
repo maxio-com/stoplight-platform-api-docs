@@ -69,7 +69,6 @@ jobs:
           echo "## Prod deployment" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Deploying legacy portal on prod" | tee -a "$GITHUB_STEP_SUMMARY"
           echo "Add productions-only settings to the portal code"
-          ./scripts/prepare_production_portal.sh
           echo "aws s3 sync build/static-portal s3://PROD_S3_BUCKET/legacy --delete" | tee -a "$GITHUB_STEP_SUMMARY"
           aws s3 sync build/static-portal s3://${{ secrets.PROD_S3_BUCKET }}/legacy --delete
 
