@@ -25,6 +25,8 @@
     "JavaGroupId": "com.maxio",
     "JavaArtifactId": "advanced-billing-sdk",
 
+    "EnableModelKeywordArgsInRuby": true,
+
     "EnableGlobalUserAgent": true,
     "UserAgent": "AB SDK {language}:{version} on OS {os-info}",
 
