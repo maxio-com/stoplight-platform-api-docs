@@ -15,7 +15,7 @@
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
     "faviconUrl": "static/images/favicon.png",
-    "useHostedPortalScript": false,
+    "useHostedPortalScript": true,
     "languageConfig": {
       "http": {},
       "csharp": {
