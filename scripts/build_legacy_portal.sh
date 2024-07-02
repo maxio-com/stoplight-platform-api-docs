@@ -38,11 +38,6 @@ rm ./build/tmp/portal/spec/openapi.backup
 (cd build/tmp/portal/ && zip -qq -r ../input.zip .)
 
 echo "Generating legacy portal" | tee -a "$GITHUB_STEP_SUMMARY"
-echo "Using APIMATIC-BUILD.json: " | tee -a "$GITHUB_STEP_SUMMARY"
-echo '```' >> "$GITHUB_STEP_SUMMARY"
-cat ./build/tmp/portal/APIMATIC-BUILD.json | tee -a "$GITHUB_STEP_SUMMARY"
-echo '```' >> "$GITHUB_STEP_SUMMARY"
-
 
 RESPONSE=$(curl -X POST -sSL \
   --write-out '%{http_code}:::%{content_type}' \
@@ -74,6 +69,8 @@ else
   rm -rf build/static-portal
   (cd build/tmp/download && unzip -qq portal.zip -d ../../static-portal)
   /bin/mv -f build/static-portal/apimatic-debug/ build/apimatic-debug
+  /bin/cp portal.v7-uber.js build/static-portal/static/js/portal.v7-uber.js
+  /bin/cp portal.v7-uber.js.LICENSE.txt build/static-portal/static/js/portal.v7-uber.js.LICENSE.txt
   echo "## Legacy Portal generated with success" >> "$GITHUB_STEP_SUMMARY"
   echo "Success. Go to build/static-portal and run 'http-server' (you need to install http-server first: 'npm install http-server -g')"
 fi
