@@ -15,14 +15,14 @@
     "logoLink": "https://www.maxio.com/",
     "logoAltText": "Maxio Logo",
     "faviconUrl": "static/images/favicon.png",
-    "useHostedPortalScript": true,
+    "useHostedPortalScript": false,
     "languageConfig": {
       "http": {},
       "csharp": {
         "packageRepository": "NuGet",
         "packageSettings": {
           "PackageName": "Maxio.AdvancedBillingSdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "java": {
@@ -30,7 +30,7 @@
         "packageSettings": {
           "GroupId": "com.maxio",
           "PackageName": "advanced-billing-sdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "php": {
@@ -38,35 +38,35 @@
         "packageSettings": {
           "VendorName": "maxio",
           "PackageName": "advanced-billing-sdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "python": {
         "packageRepository": "PyPI",
         "packageSettings": {
           "PackageName": "maxio-advanced-billing-sdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "ruby": {
         "packageRepository": "RubyGems",
         "packageSettings": {
           "PackageName": "maxio-advanced-billing-sdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "typescript": {
         "packageRepository": "Npm",
         "packageSettings": {
           "PackageName": "@maxio-com/advanced-billing-sdk",
-          "Version": "3.0.0"
+          "Version": "4.0.0"
         }
       },
       "go": {
         "packageRepository": "GoPackages",
         "packageSettings": {
           "PackageName": "github.com/maxio-com/ab-golang-sdk",
-          "Version": "0.2.0"
+          "Version": "0.3.0"
         }
       }
     },
