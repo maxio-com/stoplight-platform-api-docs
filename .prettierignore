@@ -1,2 +1,3 @@
 # Ignore all HTML files:
-*.html 
+*.html
+**/portal.v7-uber.js
